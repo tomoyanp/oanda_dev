@@ -2,4 +2,7 @@
 # create_order()
 {u'price': 103.178, u'tradeReduced': {}, u'instrument': u'USD_JPY', u'tradesClosed': [], u'time': u'2016-10-10T09:17:28.000000Z', u'tradeOpened': {u'stopLoss': 0, u'takeProfit': 0, u'side': u'buy', u'trailingStop': 0, u'units': 1000, u'id': 10463914476}}
 
+# get_trade()
+{u'trades': [{u'stopLoss': 0, u'takeProfit': 0, u'price': 103.178, u'side': u'buy', u'trailingStop': 0, u'instrument': u'USD_JPY', u'time': u'2016-10-10T09:17:28.000000Z', u'units': 1000, u'id': 10463914476, u'trailingAmount': 0}, {u'stopLoss': 0, u'takeProfit': 0, u'price': 103.196, u'side': u'buy', u'trailingStop': 0, u'instrument': u'USD_JPY', u'time': u'2016-10-10T08:46:50.000000Z', u'units': 1000, u'id': 10463885063, u'trailingAmount': 0}, {u'stopLoss': 100, u'takeProfit': 0, u'price': 103.196, u'side': u'buy', u'trailingStop': 0, u'instrument': u'USD_JPY', u'time': u'2016-10-10T08:44:56.000000Z', u'units': 1000, u'id': 10463883408, u'trailingAmount': 0}]}
+
 
