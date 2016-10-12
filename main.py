@@ -13,10 +13,10 @@ class orderObj():
         self.id = id
         self.price = price
 
-    def getId():
+    def getId(self):
         return self.id
 
-    def getPrice():
+    def getPrice(self):
         return self.price        
    
 def get_price(oanda):
@@ -51,17 +51,18 @@ def get_tradeid(oanda):
 
 
 def settlement(oanda, orderInstance):
-    price = get_price("sell")
-    buy_price = orderInstance.getPrice()
+    while True:
+        price = get_price(oanda)
+        buy_price = orderInstance.getPrice()
 # 損切り
-    if price - buy_price < -0.2:
-        close_trade(account, orderInstance.getId())
+        if price - buy_price < -0.2:
+            oanda.close_trade(account, orderInstance.getId())
 # 利確
-    elif price - buy_price > 0.2:
-        close_trade(account, orderInstance.getId())
+        elif price - buy_price > 0.2:
+            oanda.close_trade(account, orderInstance.getId())
 # 継続
-    else:
-        pass
+        else:
+            pass
 
 
 #response = oanda.get_orders(account_id)
@@ -79,6 +80,7 @@ def settlement(oanda, orderInstance):
 
 if __name__ == '__main__':
     while True:
+        price_list = []
         while True:
             price = get_price(oanda)
             price_list.append(price)
@@ -96,5 +98,4 @@ if __name__ == '__main__':
                 print "DO NOT ORDER!! "
      
             time.sleep(60)
-
         settlement(oanda, orderInstance)
