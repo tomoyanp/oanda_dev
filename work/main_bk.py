@@ -10,8 +10,8 @@ oanda = oandapy.API(environment="practice", access_token=token)
 price_list = []
 day_lower_threshold = 0.1
 day_upper_threshold = 0.02
-night_threshold = 0.2
-default_units = 10000
+night_threshold = 0.05
+default_units = 50000
 default_instrument = "USD_JPY"
 default_type = "market"
 lower_threshold_time = 7
