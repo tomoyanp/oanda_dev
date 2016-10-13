@@ -1,6 +1,7 @@
 # coding: utf-8
 from datetime import datetime, timedelta
 from order_info import orderInfo
+from mysql_connector import mysqlConnector
 import oandapy
 import time
 
@@ -18,15 +19,13 @@ lower_threshold_time = 7
 upper_threshold_time = 17
 mode = "buy"
 settlement_mode = "bid"
+db_connector = mysqlConnector()
  
-# 引数に買いか売りか指定出来る(ask or bid)
 def get_price(l_side):
     response = oanda.get_prices(instruments=default_instrument)
     prices = response.get("prices")
-    price_time = response.get("time")
     price = prices[0].get(l_side)
     return price
-
 
 # 引数に買いか売りか指定出来る(buy or sell)
 def order(l_side):    
@@ -72,7 +71,7 @@ def settlement(orderInstance):
         print "lower_threshold = %s" % lower_threshold
         print "upper_threshold = %s" % upper_threshold
 
-        time.sleep(30)
+        time.sleep(10)
         price = get_price(settlement_mode)
         print "current price = %s" % price
         buy_price = orderInstance.getPrice()
@@ -100,7 +99,7 @@ def settlement(orderInstance):
 
 if __name__ == '__main__':
     while True:
-        price_list = []
+        price_list = db_connector.select_price()
         while True:
             price = get_price("ask")
             price_list.append(price)
