@@ -16,9 +16,9 @@ class mysqlConnector:
         self.cursor.execute(sql)
         self.connector.commit()
 
-    def select_price(self):
+    def select_price(self, sql):
+        limit = time * 6
         results = []
-        sql = u"select instrument, ask_price, bid_price from price_table order by id desc limit 60;"
         self.cursor.execute(sql)
         responses = self.cursor.fetchall()
         for response in responses:

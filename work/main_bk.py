@@ -8,17 +8,16 @@ import time
 account_id = 2542764
 token = '85abe6d9c2646b9c56fbf01f0478a511-fe9cb897da06cd6219fde9b4c2052055'
 oanda = oandapy.API(environment="practice", access_token=token)
-price_list = []
-day_lower_threshold = 0.1
-day_upper_threshold = 0.02
-night_threshold = 0.05
+threshold = 0.02
 default_units = 50000
 default_instrument = "USD_JPY"
 default_type = "market"
-lower_threshold_time = 7
-upper_threshold_time = 17
 mode = "buy"
-settlement_mode = "bid"
+settlement_mode = "sell"
+
+get_price_mode = "ask"
+settle_price_mode = "bid"
+
 db_connector = mysqlConnector()
  
 def get_price(l_side):
@@ -49,73 +48,52 @@ def get_tradeid():
     for trade in response.get("trades"):
         print trade.get("id")
 
-
-def settlement(orderInstance):
-    if mode == 'buy':
-        settlement_mode = 'bid'
-    else:
-        settlement_mode = 'ask'
-
-    while True:
-        # デフォルトの損切り、利確の閾値は20pips
-        lower_threshold = night_threshold
-        upper_threshold = night_threshold
-        now = datetime.now().hour
-        print "current time = %s" % now
-        if lower_threshold_time < now and now < upper_threshold_time:
-            lower_threshold = day_lower_threshold
-            upper_threshold = day_upper_threshold
-        else:
-            lower_threshold = night_threshold
-            upper_threshold = night_threshold
-        print "lower_threshold = %s" % lower_threshold
-        print "upper_threshold = %s" % upper_threshold
-
-        time.sleep(10)
-        price = get_price(settlement_mode)
-        print "current price = %s" % price
-        buy_price = orderInstance.getPrice()
-        print "yakujou price = %s" % buy_price
-# 損切り
-        if (buy_price - price) > lower_threshold:
-            oanda.close_trade(account_id, orderInstance.getId())
-            print "#########################"
-            print "DO CLOSE TRADE BY SONGIRI"
-            print "#########################"
-            break
-# 利確
-        elif (price - buy_price) > upper_threshold:
-            oanda.close_trade(account_id, orderInstance.getId())
-            print "#########################"
-            print "DO CLOSE TRADE BY RIKAKU"
-            print "#########################"
-            break
-# 継続
-        else:
-            print "DO NOT CLOSE TRADE ... PASS"
-            pass
-
-            
-
 if __name__ == '__main__':
     while True:
-        price_list = db_connector.select_price()
-        while True:
-            price = get_price("ask")
-            price_list.append(price)
-            if len(price_list) > 5:
-                price_list.pop(0)
-        
-            print price_list
-            if len(price_list) < 5:
-                pass
-            elif price_list[0] - price < 0:
-                print "DO ORDER!!!"
-                print "initial price = %s" % price_list[0] 
-                print "asking price = %s" % price 
+        flag = False
+        while flag == False:    
+            time.sleep(30)
+            # 現在の価格をGET
+            current_price_ask = get_price("ask")
+            current_price_bid = get_price("bid")
+            algorithm = tradeAlgolithm()
+            # 過去6時間の最大値、最小値をSET
+            algorithm.set_range_limit()
+
+            order_flag = algorithm.trade_decision_at_day(current_price_ask, current_price_bid)
+            if order_flag is not None:
+                if order_flag == 'sell':
+                    mode = 'sell'
+                    settlement_mode = 'buy'
+                elif order_flag == 'buy':
+                    mode = 'buy'    
+                    settlement_mode = 'sell'    
+                else:
+                    print "--- MODE CHECK ERROR ---"    
+
                 orderInstance = order(mode)
+                flag = True
                 break
             else:
-                print "DO NOT ORDER!! "
-            time.sleep(60)
-        settlement(orderInstance)
+                pass    
+        flag = False:        
+        while flag == False:
+            time.sleep(15)
+            # 現在の価格をGET
+            current_price = get_price("bid")
+            yakujou_price = orderInstance.getPrice()
+            print "--- current price ---"
+            print current_price
+            print "--- yakujou price ---"
+            print yakujou_price
+            print "---------------------"
+            settle_flag = algorithm.settlement_decision_at_day(yakujou_price, current_price, threshold)
+            if settle_flag:
+                oanda.close_trade(account_id, orderInstance.getId())
+                flag = True
+                print "--- DO CLOSE ORDER ---"
+                print "--- current_price = %s" % current_price
+                print "--- yakujou_price = %s" % yakujou_price
+                print "----------------------"
+            else:
+                pass
