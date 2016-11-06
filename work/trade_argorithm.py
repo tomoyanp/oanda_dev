@@ -15,8 +15,11 @@ class tradeAlgorithm:
         # 過去6時間
         time = 360
         limit = time * 6
+        interval_time = "-5 MINUTE"
+        interval = "DATE_ADD(now(), %s)" % interval_time
         # 過去6時間の最大
-        sql = u"select instrument, MAX(ask_price), MAX(bid_price) from price_table order by id desc limit %s;" % limit 
+        sql = "select instrument, ask_price, bid_price from price_table where date_time > %s;" % interval
+#        sql = u"select instrument, MAX(ask_price), MAX(bid_price) from price_table order by id desc limit %s;" % limit 
         upper_price = self.db_connector.select_price(sql)
         # 過去6時間の最小
         sql = u"select instrument, MIN(ask_price), MIN(bid_price) from price_table order by id desc limit %s;" % limit 
