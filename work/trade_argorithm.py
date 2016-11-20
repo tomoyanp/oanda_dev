@@ -1,87 +1,85 @@
-# coding: utr-8
+# coding: utf-8
 
 from mysql_connector import mysqlConnector
+import datetime
+import numpy
+
 class tradeAlgorithm:
 
-	def __init__(self):
-		self.upper_ask = 0
-		self.lower_ask = 0
+    def __init__(self):
+        self.upper_ask = 0
+	self.lower_ask = 0
         self.upper_bid = 0
         self.lower_bid = 0
-		self.db_connector = mysqlConnector()
+	self.db_connector = mysqlConnector()
 
-    def set_range_limit(self):
+    def trade_decision(self):
     	sql = ""
-        # 過去6時間
-        time = 360
-        limit = time * 6
-        # 過去6時間の最大
-        sql = u"select instrument, MAX(ask_price), MAX(bid_price) from price_table order by id desc limit %s;" % limit 
-        upper_price = self.db_connector.select_price(sql)
-        # 過去6時間の最小
-        sql = u"select instrument, MIN(ask_price), MIN(bid_price) from price_table order by id desc limit %s;" % limit 
-        lower_price = self.db_connector.select_price(sql)
-    	self.upper_ask = upper_price[0][1]
-    	self.lower_ask = lower_price[0][1]
-        self.upper_bid = upper_price[0][2]
-        self.lower_bid = lower_price[0][2]
-        print "--- upper price ---"
-        print "--- upper_ask = %s" % self.upper_ask
-        print "--- upper_bid = %s" % self.upper_bid
-        print "--- lower price ---"
-        print "--- lower_ask = %s" % self.lower_ask
-        print "--- upper_bid = %s" % self.lower_bid
-        print "-------------------"
+        now = datetime.datetime.now()
+        year = now.year
+        month = now.month
+        day = now.day
+        hour = now.hour
+        minute = now.minute
+        second = now.second
 
-#### ここが微妙、セットしたレンジ幅を使っていない。トレンドもなんか微妙
-    def trade_decision_at_day(self, current_price):
-        # 過去15分
-    	time = 15 
-    	limit = time * 6
-        sql = u"select instrument, ask_price, bid_price from price_table order by id desc limit %s;" % limit 
-        price_list = self.db_connector.select_price(sql)
-        initial_price = price_list[0][1]
-        print " --- initial price ---"
-        print initial_price
-        print "----------------------" 
-        trand_low_flag = 0
-        trand_high_flag = 0
-        for i in range(1,limit):
-            print "--- price_list %s ---" % i
-            print price_list[i][1]
-            print "---------------------"
-            if initial_price > price_list[i][1]:
-                trand_low_flag = trand_low_flag + 1
-            else:
-                trand_high_flag = trand_high_flag + 1
-                    
-        # 初期値を2/3以上上回っていたら            
-        if trand_high_flag > ((limit/3) * 2):
-            order_flag =  "buy"           
-        elif trand_low_flag > ((limit/3) * 2):
-            order_flag = "sell"    
+        original_time = "%s-%s-%s %s:%s:%s" % (year, month, day, hour, minute-5, second)
+        sql = "select instrument, ask_price, bid_price, date_time from price_table where date_time > \'%s\';" % original_time
+        price_set = self.db_connector.select_price(sql)
+        y_list = []
+        x_list = []
+        tmp = 0
+        for price in price_set:
+            y_list.append(price[1])
+            x_list.append(tmp)
+            tmp = tmp + 1
+
+        print price_set
+        print y_list
+
+        x = numpy.array(x_list)
+        y = numpy.array(y_list)
+        z = numpy.polyfit(x, y, 1)
+        p = numpy.poly1d(z)
+        print p[0]
+        print p[1]
+        print p[2]
+
+        flag = None
+        if p[1] > 0:
+            flag = "buy"
+        elif p[1] < 0:
+            flag = "sell"
         else:
-            order_flag = False    
+            flag = None
 
-        print "--- order flas buy or sell oy False ---"
-        print order_flag
-        print "---------------------------------------"
+        return flag
 
-        return order_flag
-
-    def settlement_decision_at_day(yakujou_price, current_price, threshold):	
+    def settlement_decision(self, yakujou_price, current_price, songiri_threshold, rikaku_threshold, settlement_mode):	
         flag = False
-        # 約定価格と現在価格の差が閾値超えたら決済する
-        if (yakujou_price - current_price) > threshold:
-            print "--- SONGIRI ---"
-            flag = True 
-        elif(current_price - yakujou_price) > threshold:    
-            print "--- RIKAKU ---"
-            flag = True
-        else:
-            print "--- DO NOT ORDER ---"
-            flag = False    
+        if settlement_mode == "buy":
+            if (current_price - yakujou_price) > songiri_threshold:
+                print "--- SONGIRI ---"
+                flag = True 
+            elif(yakujou_price - current_price) > rikaku_threshold:    
+                print "--- RIKAKU ---"
+                flag = True
+            else:
+                print "--- SETTLEMENT MODE IS BUY DO NOT ORDER ---"
+                flag = False    
 
+        # 約定価格と現在価格の差が閾値超えたら決済する
+        else:
+            if (yakujou_price - current_price) > songiri_threshold:
+                print "--- SONGIRI ---"
+                flag = True 
+            elif(current_price - yakujou_price) > rikaku_threshold:    
+                print "--- RIKAKU ---"
+                flag = True
+            else:
+                print "--- SETTLEMENT MODE IS SELL DO NOT ORDER ---"
+                flag = False    
+    
     	return flag 
 
 

@@ -2,14 +2,16 @@
 from datetime import datetime, timedelta
 from order_info import orderInfo
 from mysql_connector import mysqlConnector
+from trade_argorithm import tradeAlgorithm
 import oandapy
 import time
 
 account_id = 2542764
 token = '85abe6d9c2646b9c56fbf01f0478a511-fe9cb897da06cd6219fde9b4c2052055'
 oanda = oandapy.API(environment="practice", access_token=token)
-threshold = 0.02
-default_units = 50000
+songiri_threshold = 0.05
+rikaku_threshold = 0.02
+default_units = 100000
 default_instrument = "USD_JPY"
 default_type = "market"
 mode = "buy"
@@ -53,41 +55,43 @@ if __name__ == '__main__':
         flag = False
         while flag == False:    
             time.sleep(30)
-            # 現在の価格をGET
-            current_price_ask = get_price("ask")
-            current_price_bid = get_price("bid")
-            algorithm = tradeAlgolithm()
-            # 過去6時間の最大値、最小値をSET
-            algorithm.set_range_limit()
-
-            order_flag = algorithm.trade_decision_at_day(current_price_ask, current_price_bid)
+            algorithm = tradeAlgorithm()
+            order_flag = algorithm.trade_decision()
             if order_flag is not None:
                 if order_flag == 'sell':
+                    print "flag match sell"
                     mode = 'sell'
                     settlement_mode = 'buy'
                 elif order_flag == 'buy':
+                    print "flag match buy"
                     mode = 'buy'    
                     settlement_mode = 'sell'    
                 else:
                     print "--- MODE CHECK ERROR ---"    
 
+                print mode
                 orderInstance = order(mode)
                 flag = True
                 break
             else:
                 pass    
-        flag = False:        
+        flag = False        
         while flag == False:
             time.sleep(15)
             # 現在の価格をGET
-            current_price = get_price("bid")
+            
+            current_price = 0
+            if settlement_mode == "sell":
+                current_price = get_price("bid")
+            else:
+                current_price = get_price("ask")
             yakujou_price = orderInstance.getPrice()
             print "--- current price ---"
             print current_price
             print "--- yakujou price ---"
             print yakujou_price
             print "---------------------"
-            settle_flag = algorithm.settlement_decision_at_day(yakujou_price, current_price, threshold)
+            settle_flag = algorithm.settlement_decision(yakujou_price, current_price, songiri_threshold, rikaku_threshold, settlement_mode)
             if settle_flag:
                 oanda.close_trade(account_id, orderInstance.getId())
                 flag = True

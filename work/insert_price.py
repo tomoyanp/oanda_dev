@@ -4,6 +4,7 @@ import oandapy
 import time
 import datetime
 import jholiday
+import os
 
 account_id = 2542764
 token = '85abe6d9c2646b9c56fbf01f0478a511-fe9cb897da06cd6219fde9b4c2052055'
@@ -14,18 +15,23 @@ buffer_time = 10
 
 
 def decide_holiday():
-	flag = False
-	today = datime.datetime.today()
-	year = today.year
-	month = today.month
-	day = today.day
-	target_date = datetime.date(year, month, day)
-	weekday = target_date.weekday
-	time = today.time()
-	hour = time.hour
+    flag = False
+    today = datetime.datetime.today()
+    year = today.year
+    month = today.month
+    day = today.day
+    target_date = datetime.date(year, month, day)
+    weekday = target_date.weekday
+    time = today.time()
+    hour = time.hour
     holiday = jholiday.holiday_name(date=target_date)
+    os.system('echo "today = %s"' % today)
+    os.system('echo "time = %s"' % time)
+    osdate = os.system("date")
+    os.system('echo "os.date = %s"' % osdate)
+    #os.system('echo "holiday = %s"' % holiday)
     # 祝日だったら
-    if holiday_name is not None:
+    if holiday is not None:
     	# 月曜祝日だったらパス
     	if weekday == 0:
     	    pass
@@ -33,28 +39,28 @@ def decide_holiday():
     	else:
     	    if hour < 5:
     	        flag = True
- 	        else:
- 	            pass    
-    # 火曜日～金曜日だったら更新
-	elif 0 < weekday or weekday < 5:
-		flag = True
+            else:
+                pass    
+        # 火曜日～金曜日だったら更新
+    elif 0 < weekday or weekday < 5:
+        flag = True
 
 	# 日曜日だったらパス	
-	elif weekday == 6:
-	    pass
+    elif weekday == 6:
+        pass
 
     # 月曜の朝5時以降だったら更新
-	elif weekday == 0:
-	    if hour < 5:
-	        pass
-	    else:
-	    	flag = True
-    #土曜の朝5時までだったら更新
-	elif weekday == 5
-	    if hour < 5:
-	    	flag = True
+    elif weekday == 0:
+        if hour < 5:
+            pass
         else:
-	        pass    	
+            flag = True
+    #土曜の朝5時までだったら更新
+    elif weekday == 5:
+        if hour < 5:
+            flag = True
+    else:
+        pass    	
 
     return flag
 
@@ -62,7 +68,12 @@ def decide_holiday():
 def get_insert_price():
     while True:
     	# 休みじゃなければ
-    	if decide_holiday():
+        os.system('echo "------------------------------"')
+        flag = decide_holiday()
+        os.system('echo "flag = %s"' % flag)
+        os.system('echo "------------------------------"')
+
+    	if flag:
             response = oanda.get_prices(instruments=default_instrument)
             prices = response.get("prices")
             ask_price = prices[0].get("ask")
