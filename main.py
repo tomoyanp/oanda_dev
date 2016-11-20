@@ -77,6 +77,8 @@ def settlement(oanda, orderInstance):
 #response = oanda.close_trade(account_id, 10463873762)
 #print response    
 
+def update_price():
+    price = get_price()
 
 if __name__ == '__main__':
     while True:
