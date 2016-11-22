@@ -1,0 +1,22 @@
+DBの名前 　oanda_db
+ユーザ   　 trader
+
+通貨価格　管理テーブル price_table
+-----------------------------------------------------------------------------------------------------------------------
+|col_name | id                              | instrument | ask_price | bid_price | date_time                          |
+-----------------------------------------------------------------------------------------------------------------------
+|type     | BIGINT                          | VARCHAR    | VARCHAR   | VARCHAR   | TIMESTAMP                          |
+|option   | not null default auto_increment |            |           |           | not null default current_timestamp |
+
+
+取引管理テーブル transaction_table
+ -> 決済したら、settlement_price、settlement_time、flagを更新する
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+|col_name | order_id | instrument | execution_price | settlment_price | regression_value | execution_time            | settlement_time | flag            | 
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+|type     | BIGINT   | VARCHAR    | VARCHAR         | VARCHAR         | VARCHAR          | TIMESTAMP                 | TIMESTAMP       | VARCHAR         | 
+|option   | not null |            |                 |                 |                  | default current_timestamp |                 | default 'FALSE' |
+
+
+

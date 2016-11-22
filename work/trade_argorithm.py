@@ -8,13 +8,13 @@ class tradeAlgorithm:
 
     def __init__(self):
         self.upper_ask = 0
-	self.lower_ask = 0
+    self.lower_ask = 0
         self.upper_bid = 0
         self.lower_bid = 0
-	self.db_connector = mysqlConnector()
+    self.db_connector = mysqlConnector()
 
     def trade_decision(self):
-    	sql = ""
+        sql = ""
         now = datetime.datetime.now()
         year = now.year
         month = now.month
@@ -34,16 +34,16 @@ class tradeAlgorithm:
             x_list.append(tmp)
             tmp = tmp + 1
 
-        print price_set
-        print y_list
+        logging.info(price_set)
+        logging.info(y_list)
 
         x = numpy.array(x_list)
         y = numpy.array(y_list)
         z = numpy.polyfit(x, y, 1)
         p = numpy.poly1d(z)
-        print p[0]
-        print p[1]
-        print p[2]
+        logging.info(p[0])
+        logging.info(p[1])
+        logging.info(p[2])
 
         flag = None
         if p[1] > 0:
@@ -55,32 +55,32 @@ class tradeAlgorithm:
 
         return flag
 
-    def settlement_decision(self, yakujou_price, current_price, songiri_threshold, rikaku_threshold, settlement_mode):	
+    def settlement_decision(self, yakujou_price, current_price, songiri_threshold, rikaku_threshold, settlement_mode):  
         flag = False
         if settlement_mode == "buy":
             if (current_price - yakujou_price) > songiri_threshold:
-                print "--- SONGIRI ---"
+                logging.info("--- SONGIRI ---")
                 flag = True 
             elif(yakujou_price - current_price) > rikaku_threshold:    
-                print "--- RIKAKU ---"
+                logging.info("--- RIKAKU ---")
                 flag = True
             else:
-                print "--- SETTLEMENT MODE IS BUY DO NOT ORDER ---"
+                logging.info("--- SETTLEMENT MODE IS BUY DO NOT ORDER ---")
                 flag = False    
 
         # 約定価格と現在価格の差が閾値超えたら決済する
         else:
             if (yakujou_price - current_price) > songiri_threshold:
-                print "--- SONGIRI ---"
+                logging.info("--- SONGIRI ---")
                 flag = True 
             elif(current_price - yakujou_price) > rikaku_threshold:    
-                print "--- RIKAKU ---"
+                logging.info("--- RIKAKU ---")
                 flag = True
             else:
-                print "--- SETTLEMENT MODE IS SELL DO NOT ORDER ---"
+                logging.info("--- SETTLEMENT MODE IS SELL DO NOT ORDER ---")
                 flag = False    
     
-    	return flag 
+        return flag 
 
 
 

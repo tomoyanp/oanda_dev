@@ -5,7 +5,10 @@ from mysql_connector import mysqlConnector
 from trade_argorithm import tradeAlgorithm
 import oandapy
 import time
+import logging
 
+
+logging.basicConfig(filename='out.log', level=logging.INFO)
 account_id = 2542764
 token = '85abe6d9c2646b9c56fbf01f0478a511-fe9cb897da06cd6219fde9b4c2052055'
 oanda = oandapy.API(environment="practice", access_token=token)
@@ -40,15 +43,15 @@ def order(l_side):
     id = trade_info.get("id")
     price = response.get("price")
     orderInstance = orderInfo(id, price)
-    print "orderInstance.id = %s" % orderInstance.getId()
-    print "orderInstance.price = %s" % orderInstance.getPrice()
-    print "yakujou price = %s" % price
+    logging.info("orderInstance.id = %s" % orderInstance.getId())
+    logging.info("orderInstance.price = %s" % orderInstance.getPrice())
+    logging.info("yakujou price = %s" % price)
     return orderInstance
     
 def get_tradeid():
     response = oanda.get_trades(account_id)
     for trade in response.get("trades"):
-        print trade.get("id")
+        logging.info(trade.get("id"))
 
 if __name__ == '__main__':
     while True:
@@ -59,17 +62,17 @@ if __name__ == '__main__':
             order_flag = algorithm.trade_decision()
             if order_flag is not None:
                 if order_flag == 'sell':
-                    print "flag match sell"
+                    logging.info("flag match sell")
                     mode = 'sell'
                     settlement_mode = 'buy'
                 elif order_flag == 'buy':
-                    print "flag match buy"
+                    logging.info("flag match buy")
                     mode = 'buy'    
                     settlement_mode = 'sell'    
                 else:
-                    print "--- MODE CHECK ERROR ---"    
+                    logging.info("--- MODE CHECK ERROR ---")    
 
-                print mode
+                logging.info(mode)
                 orderInstance = order(mode)
                 flag = True
                 break
@@ -86,18 +89,18 @@ if __name__ == '__main__':
             else:
                 current_price = get_price("ask")
             yakujou_price = orderInstance.getPrice()
-            print "--- current price ---"
-            print current_price
-            print "--- yakujou price ---"
-            print yakujou_price
-            print "---------------------"
+            logging.info("--- current price ---")
+            logging.info(current_price)
+            logging.info("--- yakujou price ---")
+            logging.info(yakujou_price)
+            logging.info("---------------------")
             settle_flag = algorithm.settlement_decision(yakujou_price, current_price, songiri_threshold, rikaku_threshold, settlement_mode)
             if settle_flag:
                 oanda.close_trade(account_id, orderInstance.getId())
                 flag = True
-                print "--- DO CLOSE ORDER ---"
-                print "--- current_price = %s" % current_price
-                print "--- yakujou_price = %s" % yakujou_price
-                print "----------------------"
+                logging.info("--- DO CLOSE ORDER ---")
+                logging.info("--- current_price = %s" % current_price)
+                logging.info("--- yakujou_price = %s" % yakujou_price)
+                logging.info("----------------------")
             else:
                 pass
