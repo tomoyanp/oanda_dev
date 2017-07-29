@@ -9,10 +9,15 @@ oanda = oandapy.API(environment="practice", access_token=token)
 price_list = []
 
 class PriceObj:
-    def __init__(self, price_time, asking_price, selling_price):
+    def __init__(self, instrument, price_time, asking_price, selling_price):
+        self.instrument = instrument
         self.price_time = price_time
         self.asking_price = asking_price
         self.selling_price = selling_price
+
+
+    def getInstrument(self):
+        return self.instrument
 
     def getPriceTime(self):
         return self.price_time
@@ -26,10 +31,11 @@ class PriceObj:
 def get_price(currency):
     response = oanda.get_prices(instruments=currency)
     prices = response.get("prices")
-    price_time = response.get("time")
+    price_time = prices[0].get("time")
+    instrument = prices[0].get("instrument")
     asking_price = prices[0].get("ask")
     selling_price = prices[0].get("bid")
-    price_obj = PriceObj(price_time, asking_price, selling_price)
+    price_obj = PriceObj(instrument, price_time, asking_price, selling_price)
     return price_obj
 
 
@@ -89,6 +95,7 @@ if __name__ == '__main__':
     currency = "USD_JPY"
     price_obj = get_price(currency)
 
+    print price_obj.getInstrument()
     print price_obj.getPriceTime()
     print price_obj.getAskingPrice()
     print price_obj.getSellingPrice()
