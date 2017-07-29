@@ -8,30 +8,35 @@ token = '85abe6d9c2646b9c56fbf01f0478a511-fe9cb897da06cd6219fde9b4c2052055'
 oanda = oandapy.API(environment="practice", access_token=token)
 price_list = []
 
-class orderObj():
-    def __init__(self, id, price):
-        self.id = id
-        self.price = price
+class PriceObj:
+    def __init__(self, price_time, asking_price, selling_price):
+        self.price_time = price_time
+        self.asking_price = asking_price
+        self.selling_price = selling_price
 
-    def getId(self):
-        return self.id
+    def getPriceTime(self):
+        return self.price_time
 
-    def getPrice(self):
-        return self.price        
-   
-def get_price(oanda):
-    response = oanda.get_prices(instruments="USD_JPY")
+    def getAskingPrice(self):
+        return self.asking_price
+
+    def getSellingPrice(self):
+        return self.selling_price
+
+def get_price(currency):
+    response = oanda.get_prices(instruments=currency)
     prices = response.get("prices")
     price_time = response.get("time")
     asking_price = prices[0].get("ask")
     selling_price = prices[0].get("bid")
-    return asking_price
+    price_obj = PriceObj(price_time, asking_price, selling_price)
+    return price_obj
 
 
 #trade_expire = datetime.utcnow() + timedelta(days=1)
 #trade_expire = trade_expire.isoformat("T") + "Z"
 
-def order(oanda, l_side):    
+def order(oanda, l_side):
     response = oanda.create_order(account_id,
         instrument="USD_JPY",
         units=1000,
@@ -42,8 +47,8 @@ def order(oanda, l_side):
     price = response.get("price")
     orderInstance = orderObj(id, price)
     return orderInstance
-    
-    
+
+
 def get_tradeid(oanda):
     response = oanda.get_trades(account_id)
     for trade in response.get("trades"):
@@ -75,29 +80,15 @@ def settlement(oanda, orderInstance):
 #response = oanda.get_positions(account_id)
 #response = oanda.get_trades(account_id)
 #response = oanda.close_trade(account_id, 10463873762)
-#print response    
+#print response
 
 def update_price():
     price = get_price()
 
 if __name__ == '__main__':
-    while True:
-        price_list = []
-        while True:
-            price = get_price(oanda)
-            price_list.append(price)
-            if len(price_list) > 5:
-                price_list.pop(0)
-        
-            print price_list
-            if len(price_list) < 5:
-                pass
-            elif price_list[0] - price < 0:
-                print "DO ORDER!!!"
-                orderInstance = order(oanda, "buy")
-                break
-            else:
-                print "DO NOT ORDER!! "
-     
-            time.sleep(60)
-        settlement(oanda, orderInstance)
+    currency = "USD_JPY"
+    price_obj = get_price(currency)
+
+    print price_obj.getPriceTime()
+    print price_obj.getAskingPrice()
+    print price_obj.getSellingPrice()
