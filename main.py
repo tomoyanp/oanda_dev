@@ -1,32 +1,23 @@
 # coding: utf-8
+
+import sys
+import os
+current_path = os.path.abspath(os.path.dirname(__file__))
+sys.path.append(current_path)
+sys.path.append(current_path + "/trade_algorithm")
+sys.path.append(current_path + "/obj")
+
 from datetime import datetime, timedelta
+from start_end_algo import StartEndAlgo
+from price_obj import PriceObj
 import oandapy
 import time
+
 
 account_id = 2542764
 token = '85abe6d9c2646b9c56fbf01f0478a511-fe9cb897da06cd6219fde9b4c2052055'
 oanda = oandapy.API(environment="practice", access_token=token)
 price_list = []
-
-class PriceObj:
-    def __init__(self, instrument, price_time, asking_price, selling_price):
-        self.instrument = instrument
-        self.price_time = price_time
-        self.asking_price = asking_price
-        self.selling_price = selling_price
-
-
-    def getInstrument(self):
-        return self.instrument
-
-    def getPriceTime(self):
-        return self.price_time
-
-    def getAskingPrice(self):
-        return self.asking_price
-
-    def getSellingPrice(self):
-        return self.selling_price
 
 def get_price(currency):
     response = oanda.get_prices(instruments=currency)
@@ -92,10 +83,16 @@ def update_price():
     price = get_price()
 
 if __name__ == '__main__':
-    currency = "USD_JPY"
-    price_obj = get_price(currency)
+    currency = "GBP_JPY"
+    st_algo = StartEndAlgo()
 
-    print price_obj.getInstrument()
-    print price_obj.getPriceTime()
-    print price_obj.getAskingPrice()
-    print price_obj.getSellingPrice()
+    while True:
+        price_obj = get_price(currency)
+        st_algo.setPriceList(price_obj)
+
+        ask_price_list = st_algo.getAskingPriceList()
+        bid_price_list = st_algo.getBidPriceList()
+
+        print ask_price_list
+        print bid_price_list
+        time.sleep(1)
