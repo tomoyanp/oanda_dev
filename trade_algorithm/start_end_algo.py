@@ -31,6 +31,9 @@ class StartEndAlgo:
     def getBidPriceList(self):
         return self.bid_price_list
 
+    def getOrderKind(self):
+        return self.order_kind
+
     def decideTrade(self):
         # trade_flag is pass or ask or bid
         if len(self.ask_price_list) != 60:

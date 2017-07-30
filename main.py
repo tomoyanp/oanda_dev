@@ -15,7 +15,11 @@ from price_obj import PriceObj
 from order_obj import OrderObj
 import oandapy
 import time
-
+import logging
+now = datetime.now()
+now = now.strftime("%Y%m%d%H%M%S")
+logfilename = "%s/log/exec_%s.log" %(current_path, now)
+logging.basicConfig(filename=logfilename, level=logging.DEBUG)
 
 account_id = 2542764
 token = '85abe6d9c2646b9c56fbf01f0478a511-fe9cb897da06cd6219fde9b4c2052055'
@@ -31,7 +35,6 @@ def get_price(currency):
     selling_price = prices[0].get("bid")
     price_obj = PriceObj(instrument, price_time, asking_price, selling_price)
     return price_obj
-
 
 #trade_expire = datetime.utcnow() + timedelta(days=1)
 #trade_expire = trade_expire.isoformat("T") + "Z"
@@ -50,7 +53,6 @@ def order(l_side):
     order_obj.setPrice(price)
 
     return order_obj
-
 
 def get_tradeid(oanda):
     response = oanda.get_trades(account_id)
@@ -82,46 +84,62 @@ if __name__ == '__main__':
     stl_threshold = 0.05
 
     while True:
-    order_obj = OrderObj()
-    st_algo = StartEndAlgo(trade_threshold, stl_threshold)
+        order_obj = OrderObj()
+        st_algo = StartEndAlgo(trade_threshold, stl_threshold)
 
-    # 一分間隔で値を取得
-    polling_time = 1
+        # 一分間隔で値を取得
+        polling_time = 1
 
-    #### get_priceは子スレッドとして動かさないと厳しそう
+        #### get_priceは子スレッドとして動かさないと厳しそう
 
-    order_flag = False
+        order_flag = False
 
-    while True:
+        while True:
 
-        # 現在価格の取得
-        price_obj = get_price(currency)
+            # 現在価格の取得
+            price_obj = get_price(currency)
 
-        # アルゴリズムに価格を渡す
-        st_algo.setPriceList(price_obj)
+            # アルゴリズムに価格を渡す
+            st_algo.setPriceList(price_obj)
 
-        # 今建玉があるかチェック
-        order_flag = st_algo.getOrderFlag()
+            # 今建玉があるかチェック
+            order_flag = st_algo.getOrderFlag()
 
-        # 建玉があれば、決済するかどうか判断
-        if order_flag:
-            stl_flag = st_algo.decideStl()
+            # 建玉があれば、決済するかどうか判断
+            if order_flag:
+                stl_flag = st_algo.decideStl()
 
-            if stl_flag:
-                oanda.close_order(account_id, order_obj.getOrderId())
-                break
+                if stl_flag:
+
+                    ask_price = st_algo.getAskingPriceList()[60]
+                    bid_price = st_algo.getBidPriceList()[60]
+                    now = datetime.now()
+                    now = now.strftime("%Y/%m/%d %H:%M:%S")
+                    logging.info("===== EXECUTE SETTLEMENT at %s ======" % now)
+                    logging.info("===== ORDER KIND is %s ======" % st_algo.getOrderKind())
+                    logging.info("===== ORDER PRICE is %s ======" % order_obj.getPrice())
+                    logging.info("===== CURRENT BID PRICE is %s ======" % bid_price)
+                    logging.info("===== CURRENT ASK PRICE is %s ======" % bid_price)
+                    oanda.close_order(account_id, order_obj.getOrderId())
+                    break
+                else:
+                    pass
+                # 建て玉がなければ、約定させるか判断
             else:
-                pass
+                trade_flag = st_algo.decideTrade()
+                if trade_flag == "pass":
+                    pass
+                else:
+                    order_obj = order(trade_flag)
 
-        # 建て玉がなければ、約定させるか判断
-        else:
-            trade_flag = st_algo.decideTrade()
-            if trade_flag == "pass":
-                pass
-            else:
-                order_obj = order(trade_flag)
-                # アルゴリズムに約定価格をセットしておく
-                order_price = order_obj.getPrice()
-                st_algo.setOrderPrice(order_price)
+                    now = datetime.now()
+                    now = now.strftime("%Y/%m/%d %H:%M:%S")
+                    logging.info("#### EXECUTE ORDER at %s ####" % now)
+                    logging.info("#### ORDER KIND is %s ####" % trade_flag)
+                    logging.info("#### ORDER PRICE is %s ####" % order_obj.getPrice())
 
-        time.sleep(polling_time)
+                    # アルゴリズムに約定価格をセットしておく
+                    order_price = order_obj.getPrice()
+                    st_algo.setOrderPrice(order_price)
+
+            time.sleep(polling_time)
