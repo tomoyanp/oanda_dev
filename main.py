@@ -124,14 +124,14 @@ if __name__ == '__main__':
                     break
                 else:
                     pass
-                # 建て玉がなければ、約定させるか判断
+   
+            # 建て玉がなければ、約定させるか判断
             else:
                 trade_flag = st_algo.decideTrade()
                 if trade_flag == "pass":
                     pass
                 else:
                     order_obj = order(trade_flag)
-
                     now = datetime.now()
                     now = now.strftime("%Y/%m/%d %H:%M:%S")
                     logging.info("#### EXECUTE ORDER at %s ####" % now)
