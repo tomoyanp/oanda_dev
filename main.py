@@ -12,6 +12,7 @@ sys.path.append(current_path + "/obj")
 from datetime import datetime, timedelta
 from start_end_algo import StartEndAlgo
 from price_obj import PriceObj
+from order_obj import OrderObj
 import oandapy
 import time
 
@@ -44,29 +45,17 @@ def order(l_side):
     )
     id = response.get("id")
     price = response.get("price")
-    orderInstance = orderObj(id, price)
-    return orderInstance
+    order_obj = orderObj()
+    order_obj.setOrderId(id)
+    order_obj.setPrice(price)
+
+    return order_obj
 
 
 def get_tradeid(oanda):
     response = oanda.get_trades(account_id)
     for trade in response.get("trades"):
         print trade.get("id")
-
-
-def settlement(oanda, orderInstance):
-    while True:
-        price = get_price(oanda)
-        buy_price = orderInstance.getPrice()
-# 損切り
-        if price - buy_price < -0.2:
-            oanda.close_trade(account, orderInstance.getId())
-# 利確
-        elif price - buy_price > 0.2:
-            oanda.close_trade(account, orderInstance.getId())
-# 継続
-        else:
-            pass
 
 
 #response = oanda.get_orders(account_id)
@@ -85,30 +74,54 @@ def update_price():
     price = get_price()
 
 if __name__ == '__main__':
+    # 通貨
     currency = "GBP_JPY"
 
     # 閾値（5pips）
     trade_threshold = 0.05
-    st_algo = StartEndAlgo(trade_threshold)
+    stl_threshold = 0.05
+
+    while True:
+    order_obj = OrderObj()
+    st_algo = StartEndAlgo(trade_threshold, stl_threshold)
 
     # 一分間隔で値を取得
     polling_time = 1
 
     #### get_priceは子スレッドとして動かさないと厳しそう
 
+    order_flag = False
+
     while True:
+
+        # 現在価格の取得
         price_obj = get_price(currency)
+
+        # アルゴリズムに価格を渡す
         st_algo.setPriceList(price_obj)
-        trade_flag = st_algo.decideTrade()
 
-        if trade_flag == "pass":
-            pass
+        # 今建玉があるかチェック
+        order_flag = st_algo.getOrderFlag()
+
+        # 建玉があれば、決済するかどうか判断
+        if order_flag:
+            stl_flag = st_algo.decideStl()
+
+            if stl_flag:
+                oanda.close_order(account_id, order_obj.getOrderId())
+                break
+            else:
+                pass
+
+        # 建て玉がなければ、約定させるか判断
         else:
-            order(trade_flag)
+            trade_flag = st_algo.decideTrade()
+            if trade_flag == "pass":
+                pass
+            else:
+                order_obj = order(trade_flag)
+                # アルゴリズムに約定価格をセットしておく
+                order_price = order_obj.getPrice()
+                st_algo.setOrderPrice(order_price)
 
-        ask_price_list = st_algo.getAskingPriceList()
-        bid_price_list = st_algo.getBidPriceList()
-
-        print ask_price_list
-        print bid_price_list
         time.sleep(polling_time)
