@@ -39,8 +39,8 @@ class StartEndAlgo:
         if len(self.ask_price_list) != 60:
             trade_flag = "pass"
         else:
-            ask_diff = self.ask_price_list[60] - self.ask_price_list[0]
-            bid_diff = self.bid_price_list[0] - self.bid_price_list[60]
+            ask_diff = self.ask_price_list[59] - self.ask_price_list[0]
+            bid_diff = self.bid_price_list[0] - self.bid_price_list[59]
             if ask_diff > threshold:
                 trade_flag = "ask"
                 self.order_kind = trade_flag
@@ -56,8 +56,8 @@ class StartEndAlgo:
 
     def decideStl(self):
         stl_flag = False
-        current_bid_price = self.bid_price_list[60]
-        current_ask_price = self.ask_price_list[60]
+        current_bid_price = self.bid_price_list[59]
+        current_ask_price = self.ask_price_list[59]
 
         # 買いか売りかで比較する価格の切り替え
         if self.order_kind == "ask":
