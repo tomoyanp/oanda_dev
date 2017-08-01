@@ -19,7 +19,7 @@ import logging
 now = datetime.now()
 now = now.strftime("%Y%m%d%H%M%S")
 logfilename = "%s/log/exec_%s.log" %(current_path, now)
-logging.basicConfig(filename=logfilename, level=logging.DEBUG)
+logging.basicConfig(filename=logfilename, level=logging.INFO)
 
 account_id = 2542764
 token = '85abe6d9c2646b9c56fbf01f0478a511-fe9cb897da06cd6219fde9b4c2052055'
@@ -39,19 +39,20 @@ def get_price(currency):
 #trade_expire = datetime.utcnow() + timedelta(days=1)
 #trade_expire = trade_expire.isoformat("T") + "Z"
 
-def order(l_side):
+def order(l_side, currency):
     response = oanda.create_order(account_id,
-        instrument="USD_JPY",
-        units=1000,
+        instrument=currency,
+        units=50000,
         side=l_side,
         type='market'
     )
     id = response.get("id")
+    print "ORDER ID === %s" % id
     price = response.get("price")
-    order_obj = orderObj()
+    order_obj = OrderObj()
     order_obj.setOrderId(id)
     order_obj.setPrice(price)
-
+    time.sleep(5)
     return order_obj
 
 def get_tradeid(oanda):
@@ -59,6 +60,11 @@ def get_tradeid(oanda):
     for trade in response.get("trades"):
         print trade.get("id")
 
+def close_trade():
+    response = oanda.get_trades(account_id)
+    print response
+    trade_id = response["trades"][0]["id"]
+    oanda.close_trade(account_id, trade_id)
 
 #response = oanda.get_orders(account_id)
 #約定していないものしか表示されない
@@ -80,8 +86,11 @@ if __name__ == '__main__':
     currency = "GBP_JPY"
 
     # 閾値（5pips）
-    trade_threshold = 0.05
-    stl_threshold = 0.05
+#    trade_threshold = 0.05
+#    stl_threshold = 0.05
+
+    trade_threshold = 0.1
+    stl_threshold = 0.2
 
     while True:
         order_obj = OrderObj()
@@ -111,8 +120,8 @@ if __name__ == '__main__':
 
                 if stl_flag:
 
-                    ask_price = st_algo.getAskingPriceList()[60]
-                    bid_price = st_algo.getBidPriceList()[60]
+                    ask_price = st_algo.getAskingPriceList()[59]
+                    bid_price = st_algo.getBidPriceList()[59]
                     now = datetime.now()
                     now = now.strftime("%Y/%m/%d %H:%M:%S")
                     logging.info("===== EXECUTE SETTLEMENT at %s ======" % now)
@@ -120,7 +129,7 @@ if __name__ == '__main__':
                     logging.info("===== ORDER PRICE is %s ======" % order_obj.getPrice())
                     logging.info("===== CURRENT BID PRICE is %s ======" % bid_price)
                     logging.info("===== CURRENT ASK PRICE is %s ======" % bid_price)
-                    oanda.close_order(account_id, order_obj.getOrderId())
+                    close_trade()
                     break
                 else:
                     pass
@@ -131,7 +140,7 @@ if __name__ == '__main__':
                 if trade_flag == "pass":
                     pass
                 else:
-                    order_obj = order(trade_flag)
+                    order_obj = order(trade_flag, currency)
                     now = datetime.now()
                     now = now.strftime("%Y/%m/%d %H:%M:%S")
                     logging.info("#### EXECUTE ORDER at %s ####" % now)
@@ -143,3 +152,4 @@ if __name__ == '__main__':
                     st_algo.setOrderPrice(order_price)
 
             time.sleep(polling_time)
+

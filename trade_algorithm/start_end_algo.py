@@ -5,7 +5,7 @@ class StartEndAlgo:
         self.ask_price_list = []
         self.bid_price_list = []
         self.threshold = threshold
-        self.stl_threshold = threshold
+        self.stl_threshold = stl_threshold
         self.order_flag = False
         self.order_price = 0
         self.order_kind = ""
@@ -41,12 +41,12 @@ class StartEndAlgo:
         else:
             ask_diff = self.ask_price_list[59] - self.ask_price_list[0]
             bid_diff = self.bid_price_list[0] - self.bid_price_list[59]
-            if ask_diff > threshold:
-                trade_flag = "ask"
+            if ask_diff > self.threshold:
+                trade_flag = "buy"
                 self.order_kind = trade_flag
                 self.order_flag = True
-            elif bid_diff > threshold:
-                trade_flag = "bid"
+            elif bid_diff > self.threshold:
+                trade_flag = "sell"
                 self.order_flag = True
                 self.order_kind = trade_flag
             else:
@@ -60,7 +60,7 @@ class StartEndAlgo:
         current_ask_price = self.ask_price_list[59]
 
         # 買いか売りかで比較する価格の切り替え
-        if self.order_kind == "ask":
+        if self.order_kind == "sell":
             if self.order_price < current_ask_price:
                 if current_ask_price - self.order_price > self.stl_threshold:
                     stl_flag = True
