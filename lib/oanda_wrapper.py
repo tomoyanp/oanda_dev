@@ -1,13 +1,13 @@
 # coding: utf-8
 
-import oandapy
+from oandapy import oandapy
 from price_obj import PriceObj
 
-Class OandaWrapper:
+class OandaWrapper:
     def __init__(self, env, account_id, token):
         self.oanda = oandapy.API(environment=env, access_token=token)
 
-    def get_price(currency):
+    def get_price(self, currency):
         response = self.oanda.get_prices(instruments=currency)
         prices = response.get("prices")
         price_time = prices[0].get("time")
