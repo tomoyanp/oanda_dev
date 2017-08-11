@@ -1,7 +1,5 @@
 # coding: utf-8
 
-from datetime import datetime
-
 class StartEndAlgo:
     def __init__(self, threshold, stl_threshold, price_list_size):
         self.ask_price_list = []
@@ -12,8 +10,6 @@ class StartEndAlgo:
         self.order_price = 0
         self.order_kind = ""
         self.price_list_size = price_list_size
-        self.start_follow_time = 150000
-        self.end_follow_time = 235959
 
     def setPriceList(self, price_obj):
 
@@ -44,25 +40,16 @@ class StartEndAlgo:
         if len(self.ask_price_list) != self.price_list_size:
             trade_flag = "pass"
         else:
-            now = datetime.now()
-            now = now.strftime("%H%M%S")
-            now = int(now)
             ask_diff = self.ask_price_list[self.price_list_size-1] - self.ask_price_list[0]
             bid_diff = self.bid_price_list[0] - self.bid_price_list[self.price_list_size-1]
-
-        # 15:00 ~ 235959の間は順張りとしてフラグに当てる
             if ask_diff > self.threshold:
-                if self.start_follow_time < now and now < self.end_follow_time:
-                    trade_flag = "buy"
-                else:
-                    trade_flag = "sell"
+#                trade_flag = "buy"
+                trade_flag = "sell"
                 self.order_kind = trade_flag
                 self.order_flag = True
             elif bid_diff > self.threshold:
-                if self.start_follow_time < now and now < self.end_follow_time:
-                    trade_flag = "sell"
-                else:
-                    trade_flag = "buy"
+#                trade_flag = "sell"
+                trade_flag = "buy"
                 self.order_flag = True
                 self.order_kind = trade_flag
             else:

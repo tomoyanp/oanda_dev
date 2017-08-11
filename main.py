@@ -89,15 +89,19 @@ if __name__ == '__main__':
 #    trade_threshold = 0.05
 #    stl_threshold = 0.05
 
-    trade_threshold = 0.1
-    stl_threshold = 0.2
+    trade_threshold = 0.05
+    stl_threshold = 0.1
+    price_list_size = 60
 
     while True:
         order_obj = OrderObj()
-        st_algo = StartEndAlgo(trade_threshold, stl_threshold)
+        st_algo = StartEndAlgo(trade_threshold, stl_threshold, price_list_size)
 
         # 一分間隔で値を取得
         polling_time = 1
+
+        # 約定後すぐに決済されちゃうので、ちょっと待つ
+        stl_sleeptime = 120
 
         #### get_priceは子スレッドとして動かさないと厳しそう
 
@@ -120,8 +124,8 @@ if __name__ == '__main__':
 
                 if stl_flag:
 
-                    ask_price = st_algo.getAskingPriceList()[59]
-                    bid_price = st_algo.getBidPriceList()[59]
+                    ask_price = st_algo.getAskingPriceList()[price_list_size-1]
+                    bid_price = st_algo.getBidPriceList()[price_list_size-1]
                     now = datetime.now()
                     now = now.strftime("%Y/%m/%d %H:%M:%S")
                     logging.info("===== EXECUTE SETTLEMENT at %s ======" % now)
@@ -140,6 +144,7 @@ if __name__ == '__main__':
                 if trade_flag == "pass":
                     pass
                 else:
+                    time.sleep(500)
                     order_obj = order(trade_flag, currency)
                     now = datetime.now()
                     now = now.strftime("%Y/%m/%d %H:%M:%S")
@@ -147,9 +152,20 @@ if __name__ == '__main__':
                     logging.info("#### ORDER KIND is %s ####" % trade_flag)
                     logging.info("#### ORDER PRICE is %s ####" % order_obj.getPrice())
 
+                    start_ask_price = st_algo.getAskingPriceList()[0]
+                    start_bid_price = st_algo.getBidPriceList()[0]
+                    ask_price = st_algo.getAskingPriceList()[price_list_size-1]
+                    bid_price = st_algo.getBidPriceList()[price_list_size-1]
+                    logging.info("#### START ASK PRICE is %s ####" % start_ask_price)
+                    logging.info("#### START BID PRICE is %s ####" % start_bid_price)
+                    logging.info("#### CURRENT ASK PRICE is %s ####" % ask_price)
+                    logging.info("#### CURRENT BID PRICE is %s ####" % bid_price)
+
                     # アルゴリズムに約定価格をセットしておく
                     order_price = order_obj.getPrice()
                     st_algo.setOrderPrice(order_price)
+                    # 約定後のスリープ
+                    time.sleep(120)
 
             time.sleep(polling_time)
 
