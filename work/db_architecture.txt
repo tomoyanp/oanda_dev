@@ -1,12 +1,12 @@
 DBの名前 　oanda_db
-ユーザ   　 trader
+ユーザ   　 tomoyan/tomoyan180
 
-通貨価格　管理テーブル price_table
------------------------------------------------------------------------------------------------------------------------
-|col_name | id                              | instrument | ask_price | bid_price | date_time                          |
------------------------------------------------------------------------------------------------------------------------
-|type     | BIGINT                          | VARCHAR    | VARCHAR   | VARCHAR   | TIMESTAMP                          |
-|option   | not null default auto_increment |            |           |           | not null default current_timestamp |
+通貨価格　管理テーブル GBP_JPY_TABLE
+----------------------------------------------------------------------------------------------------------
+|col_name | id                              | ask_price | bid_price | insert_time                        |
+----------------------------------------------------------------------------------------------------------
+|type     | BIGINT                          | double    | double    | TIMESTAMP                          |
+|option   | not null default auto_increment |           |           | not null default current_timestamp |
 
 
 取引管理テーブル transaction_table
