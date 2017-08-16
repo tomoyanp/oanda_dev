@@ -38,7 +38,7 @@ if __name__ == "__main__":
         target_file = open(filename, "w")
         target_file.write("time,ask_price,bid_price\n")
         for line in response:
-            target_file.write("%s,%s,%s\n" % (line[3], line[2], line[2]))
+            target_file.write("%s,%s,%s\n" % (line[3], line[2], line[1]))
     
         target_file.close()
     

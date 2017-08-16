@@ -3,7 +3,7 @@
 from datetime import datetime
 
 class StartEndAlgo:
-    def __init__(self, threshold, stl_threshold, price_list_size):
+    def __init__(self, threshold, stl_threshold, price_list_size, before_flag):
         self.ask_price_list = []
         self.bid_price_list = []
         self.threshold = threshold
@@ -12,8 +12,10 @@ class StartEndAlgo:
         self.order_price = 0
         self.order_kind = ""
         self.price_list_size = price_list_size
-        self.start_follow_time = 150000
+        self.start_follow_time = 000000
         self.end_follow_time = 235959
+        # 前日が陽線引けかどうかのフラグ
+        self.before_flag = before_flag
 
     def setPriceList(self, price_obj):
 
@@ -51,22 +53,30 @@ class StartEndAlgo:
             bid_diff = self.bid_price_list[0] - self.bid_price_list[self.price_list_size-1]
 
         # 15:00 ~ 235959の間は順張りとしてフラグに当てる
-            if ask_diff > self.threshold:
-                if self.start_follow_time < now and now < self.end_follow_time:
-                    trade_flag = "buy"
-                else:
-                    trade_flag = "sell"
-                self.order_kind = trade_flag
-                self.order_flag = True
-            elif bid_diff > self.threshold:
-                if self.start_follow_time < now and now < self.end_follow_time:
-                    trade_flag = "sell"
-                else:
-                    trade_flag = "buy"
-                self.order_flag = True
-                self.order_kind = trade_flag
+            if ask_diff > self.threhold and self.before_flag == "buy":
+                trade_flag = "buy"
+
+            elif bid_diff > self.threhold and self.before_flag == "bid":
+                trade_flag = "sell"
             else:
                 trade_flag = "pass"
+
+#            if ask_diff > self.threshold:
+#                if self.start_follow_time < now and now < self.end_follow_time:
+#                    trade_flag = "buy"
+#                else:
+#                    trade_flag = "sell"
+#                self.order_kind = trade_flag
+#                self.order_flag = True
+#            elif bid_diff > self.threshold:
+#                if self.start_follow_time < now and now < self.end_follow_time:
+#                    trade_flag = "sell"
+#                else:
+#                    trade_flag = "buy"
+#                self.order_flag = True
+#                self.order_kind = trade_flag
+#            else:
+#                trade_flag = "pass"
 
         return trade_flag
 
