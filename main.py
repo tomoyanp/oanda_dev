@@ -100,21 +100,10 @@ def close_trade():
 def update_price():
     price = get_price()
 
-if __name__ == '__main__':
-    # 通貨
-    currency = "GBP_JPY"
 
-    # 閾値（5pips）
-#    trade_threshold = 0.05
-#    stl_threshold = 0.05
 
-    trade_threshold = 0.1
-    stl_threshold = 0.2
-    price_list_size = 300
-
-    con = MysqlConnector()
+def decide_up_down_before_day(con):
     now = datetime.now()
-
     # 前日が陽線引けかどうかでbuy or sellを決める
     before_day = now - timedelta(days=1)
     before_day = before_day.strftime("%Y-%m-%d")
@@ -139,6 +128,21 @@ if __name__ == '__main__':
     print "before_start_price : %s" % before_start_price
     print "before_end_price : %s" % before_end_price
     print "before_flag : %s" % before_flag
+
+if __name__ == '__main__':
+    # 通貨
+    currency = "GBP_JPY"
+
+    # 閾値（5pips）
+#    trade_threshold = 0.05
+#    stl_threshold = 0.05
+
+    trade_threshold = 0.1
+    stl_threshold = 0.2
+    price_list_size = 300
+
+    con = MysqlConnector()
+    flag = decide_up_down_before_day(con)
 
     while True:
         order_obj = OrderObj()

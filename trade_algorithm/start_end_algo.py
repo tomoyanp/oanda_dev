@@ -17,14 +17,9 @@ class StartEndAlgo:
         # 前日が陽線引けかどうかのフラグ
         self.before_flag = before_flag
 
-    def setPriceList(self, price_obj):
-
-        if len(self.ask_price_list) == self.price_list_size:
-            self.ask_price_list.pop(0)
-            self.bid_price_list.pop(0)
-
-        self.ask_price_list.append(price_obj.getAskingPrice())
-        self.bid_price_list.append(price_obj.getSellingPrice())
+    def setPriceList(self, price_table):
+        self.ask_price_list = price_table.getAskingPriceList()
+        self.bid_price_list = price_table.getBidPriceList()
 
     def setOrderPrice(self, order_price):
         self.order_price = order_price

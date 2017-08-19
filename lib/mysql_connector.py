@@ -1,4 +1,6 @@
 import MySQLdb
+from datetime import datetime, timedelta
+from price_table_wrapper import PriceTableWrapper
 
 class MysqlConnector:
 
@@ -19,3 +21,13 @@ class MysqlConnector:
         self.cursor.execute(sql)
         response = self.cursor.fetchall()
         return response
+
+    def get_price(self, instruments, target_time):
+        now = datetime.now()
+        target_time = now - timedelta(seconds=target_time)
+        sql = u"select insert_time, ask_price, bid_price from %s_TABLE where insert_time > %s" % (instruments, target_time)
+        self.cursor.execute(sql)
+        response = self.cursor.fetchall()
+        priceTableWrapper = PriceTableWrapper()
+        priceTableWrapper.setResponse(response)
+        return priceTableWrapper
