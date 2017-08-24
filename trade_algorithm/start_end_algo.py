@@ -48,11 +48,14 @@ class StartEndAlgo:
             bid_diff = self.bid_price_list[0] - self.bid_price_list[self.price_list_size-1]
 
         # 15:00 ~ 235959の間は順張りとしてフラグに当てる
-            if ask_diff > self.threhold and self.before_flag == "buy":
+            if ask_diff > self.threshold and self.before_flag == "buy":
                 trade_flag = "buy"
-
-            elif bid_diff > self.threhold and self.before_flag == "bid":
+                self.order_kind = trade_flag
+                self.order_flag = True
+            elif bid_diff > self.threshold and self.before_flag == "bid":
                 trade_flag = "sell"
+                self.order_kind = trade_flag
+                self.order_flag = True
             else:
                 trade_flag = "pass"
 

@@ -40,7 +40,11 @@ def get_price(currency):
             price_obj = PriceObj(instrument, price_time, asking_price, selling_price)
             break
         except Exception as e:
-            print e.message
+            now = datetime.now()
+            now = now.strftime("%Y/%m/%d %H:%M:%S")
+            logging.error("========== %s ==========" % now)
+            logging.error("Could not Get Price")
+            logging.error(e.message)
  
     return price_obj
 
@@ -65,7 +69,11 @@ def order(l_side, currency):
             time.sleep(5)
             break
         except Exception as e:
-            print e.messages
+            now = datetime.now()
+            now = now.strftime("%Y/%m/%d %H:%M:%S")
+            logging.error("========== %s ==========" % now)
+            logging.error("Could not Order")
+            logging.error(e.message)
     
     return order_obj
 
@@ -83,7 +91,11 @@ def close_trade():
             oanda.close_trade(account_id, trade_id)
             break
         except Exception as e:
-            print e.message
+            now = datetime.now()
+            now = now.strftime("%Y/%m/%d %H:%M:%S")
+            logging.error("========== %s ==========" % now)
+            logging.error("Could not Close Trade")
+            logging.error(e.message)
 
 #response = oanda.get_orders(account_id)
 #約定していないものしか表示されない
@@ -101,18 +113,18 @@ def update_price():
     price = get_price()
 
 
-
 def decide_up_down_before_day(con):
     now = datetime.now()
     # 前日が陽線引けかどうかでbuy or sellを決める
     before_day = now - timedelta(days=1)
     before_day = before_day.strftime("%Y-%m-%d")
-    sql = u"select ask_price from %s_TABLE where insert_time = \'%s 00:00:00\'" % (currency, before_day)
+    before_end_day = now.strftime("%Y-%m-%d")
+    sql = u"select ask_price from %s_TABLE where insert_time > \'%s 06:00:00\' and insert_time < \'%s 06:00:10\'" % (currency, before_day, before_day)
     print sql
     response = con.select_sql(sql)
     before_start_price = response[0][0]
 
-    sql = u"select ask_price from %s_TABLE where insert_time = \'%s 23:59:59\'" % (currency, before_day)
+    sql = u"select ask_price from %s_TABLE where insert_time > \'%s 05:59:49\' and insert_time < \'%s 05:59:59\'" % (currency, before_end_day, before_end_day)
     print sql
     response = con.select_sql(sql)
     tmp_list = []
@@ -125,9 +137,12 @@ def decide_up_down_before_day(con):
     else:
         before_flag = "bid"
 
+    before_flag = "buy"
+
     print "before_start_price : %s" % before_start_price
     print "before_end_price : %s" % before_end_price
     print "before_flag : %s" % before_flag
+    return before_flag
 
 if __name__ == '__main__':
     # 通貨
@@ -151,8 +166,6 @@ if __name__ == '__main__':
         # 一分間隔で値を取得
         polling_time = 1
 
-        # 約定後すぐに決済されちゃうので、ちょっと待つ
-        stl_sleeptime = 300
 
         #### get_priceは子スレッドとして動かさないと厳しそう
 
@@ -162,6 +175,10 @@ if __name__ == '__main__':
 
             # 現在価格の取得
             price_obj = get_price(currency)
+            logging.info("======= GET PRICE OK ========")
+            logging.info("======= ASK PRICE IS %s ========" % price_obj.getAskingPrice())
+            logging.info("======= BID PRICE IS %s ========" % price_obj.getSellingPrice())
+
 
             # アルゴリズムに価格を渡す
             st_algo.setPriceList(price_obj)
