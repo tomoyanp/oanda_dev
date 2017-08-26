@@ -12,11 +12,12 @@ class DBWrapper:
 
 
 	def getPrice(self, base_seconds, instrument):
-		sql = "select ask_price, bid_price from %s_TABLE where insert_time > " % instrument
 		now = datetime.now()
 		base_time = now - timedelta(seconds=base_seconds)
 		base_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
-		sql = sql + "%s" % base_time
+                print base_time
+		sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\'" % (instrument, base_time)
+                print sql
 		response = self.con.select_sql(sql)
 		return response
 

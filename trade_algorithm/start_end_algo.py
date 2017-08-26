@@ -3,11 +3,12 @@
 from datetime import datetime
 
 class StartEndAlgo:
-    def __init__(self, threshold, stl_threshold, price_list_size, before_flag):
+    def __init__(self, threshold, stl_threshold, stop_threshold, price_list_size, before_flag):
         self.ask_price_list = []
         self.bid_price_list = []
         self.threshold = threshold
         self.stl_threshold = stl_threshold
+        self.stop_threshold = stop_threshold
         self.order_flag = False
         self.order_price = 0
         self.order_kind = ""
@@ -86,7 +87,7 @@ class StartEndAlgo:
         # 買いか売りかで比較する価格の切り替え
         if self.order_kind == "sell":
             if self.order_price < current_ask_price:
-                if current_ask_price - self.order_price > self.stl_threshold:
+                if current_ask_price - self.order_price > self.stop_threshold:
                     stl_flag = True
             else:
                 if self.order_price - current_ask_price > self.stl_threshold:
@@ -96,7 +97,7 @@ class StartEndAlgo:
                 if current_bid_price - self.order_price > self.stl_threshold:
                     stl_flag = True
             else:
-                if self.order_price - current_bid_price > self.stl_threshold:
+                if self.order_price - current_bid_price > self.stop_threshold:
                     stl_flag = True
 
         return stl_flag
