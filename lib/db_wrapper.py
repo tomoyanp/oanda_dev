@@ -22,5 +22,5 @@ class DBWrapper:
 		return response
 
 
-
-
+	def getTimeFormat(self, dtime):
+		return dtime.strftime("%Y-%m-%d %H:%M:%S")

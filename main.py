@@ -28,29 +28,6 @@ token = '85abe6d9c2646b9c56fbf01f0478a511-fe9cb897da06cd6219fde9b4c2052055'
 oanda = oandapy.API(environment="practice", access_token=token)
 price_list = []
 
-def get_price(currency):
-    while True:
-        try:
-            response = oanda.get_prices(instruments=currency)
-            prices = response.get("prices")
-            price_time = prices[0].get("time")
-            instrument = prices[0].get("instrument")
-            asking_price = prices[0].get("ask")
-            selling_price = prices[0].get("bid")
-            price_obj = PriceObj(instrument, price_time, asking_price, selling_price)
-            break
-        except Exception as e:
-            now = datetime.now()
-            now = now.strftime("%Y/%m/%d %H:%M:%S")
-            logging.error("========== %s ==========" % now)
-            logging.error("Could not Get Price")
-            logging.error(e.message)
- 
-    return price_obj
-
-#trade_expire = datetime.utcnow() + timedelta(days=1)
-#trade_expire = trade_expire.isoformat("T") + "Z"
-
 def order(l_side, currency):
     while True:
         try:
@@ -74,7 +51,7 @@ def order(l_side, currency):
             logging.error("========== %s ==========" % now)
             logging.error("Could not Order")
             logging.error(e.message)
-    
+
     return order_obj
 
 def get_tradeid(oanda):
@@ -146,94 +123,77 @@ def decide_up_down_before_day(con):
 
 if __name__ == '__main__':
     # 通貨
-    currency = "GBP_JPY"
+    instrument = "GBP_JPY"
+    polling_time = 1
 
     # 閾値（5pips）
-#    trade_threshold = 0.05
-#    stl_threshold = 0.05
-
     trade_threshold = 0.01
     stl_threshold = 0.01
     stop_threshold = 0.05
-    price_list_size = 5
+    time_width = 5
 
     con = MysqlConnector()
-    before_flag = decide_up_down_before_day(con)
+    db_wrapper = DBWrapper()
+    trade_algo = TradeAlgo(trade_threshold, stl_threshold, stop_threshold)
+#    flag = decide_up_down_before_day(con)
 
     while True:
-        order_obj = OrderObj()
-        st_algo = StartEndAlgo(trade_threshold, stl_threshold, stop_threshold, price_list_size, before_flag)
-
-        # 一分間隔で値を取得
-        polling_time = 1
-
-
-        #### get_priceは子スレッドとして動かさないと厳しそう
 
         order_flag = False
-
         while True:
+            response = db_wrapper.getPrice()
+            trade_algo.setResponse(response)
 
             # 現在価格の取得
-            price_obj = get_price(currency)
-            logging.info("======= GET PRICE OK ========")
-            logging.info("======= ASK PRICE IS %s ========" % price_obj.getAskingPrice())
-            logging.info("======= BID PRICE IS %s ========" % price_obj.getSellingPrice())
-
-
-            # アルゴリズムに価格を渡す
-            st_algo.setPriceList(price_obj)
+            logging.debug("======= GET PRICE OK ========")
 
             # 今建玉があるかチェック
-            order_flag = st_algo.getOrderFlag()
+            order_flag = trade_algo.getOrderFlag()
 
-            # 建玉があれば、決済するかどうか判断
-            if order_flag:
-                stl_flag = st_algo.decideStl()
-
-                if stl_flag:
-
-                    ask_price = st_algo.getAskingPriceList()[price_list_size-1]
-                    bid_price = st_algo.getBidPriceList()[price_list_size-1]
-                    now = datetime.now()
-                    now = now.strftime("%Y/%m/%d %H:%M:%S")
-                    logging.info("===== EXECUTE SETTLEMENT at %s ======" % now)
-                    logging.info("===== ORDER KIND is %s ======" % st_algo.getOrderKind())
-                    logging.info("===== ORDER PRICE is %s ======" % order_obj.getPrice())
-                    logging.info("===== CURRENT BID PRICE is %s ======" % bid_price)
-                    logging.info("===== CURRENT ASK PRICE is %s ======" % bid_price)
-                    close_trade()
-                    break
-                else:
-                    pass
-   
-            # 建て玉がなければ、約定させるか判断
-            else:
-                trade_flag = st_algo.decideTrade()
+            if order_flag == False:
+                trade_flag = trade_algo.decideTrade()
                 if trade_flag == "pass":
                     pass
                 else:
                     order_obj = order(trade_flag, currency)
                     now = datetime.now()
                     now = now.strftime("%Y/%m/%d %H:%M:%S")
+                    response = db_wrapper.getPrice(instrument, base_time)
+                    if trade_flag == "buy":
+                        order_price = response[len(response)-1][0]
+                    else:
+                        order_price = response[len(response)-1][0]
+
+                    trade_algo.setOrderPrice(order_price)
+
                     logging.info("#### EXECUTE ORDER at %s ####" % now)
                     logging.info("#### ORDER KIND is %s ####" % trade_flag)
-                    logging.info("#### ORDER PRICE is %s ####" % order_obj.getPrice())
-
-                    start_ask_price = st_algo.getAskingPriceList()[0]
-                    start_bid_price = st_algo.getBidPriceList()[0]
-                    ask_price = st_algo.getAskingPriceList()[price_list_size-1]
-                    bid_price = st_algo.getBidPriceList()[price_list_size-1]
-                    logging.info("#### START ASK PRICE is %s ####" % start_ask_price)
-                    logging.info("#### START BID PRICE is %s ####" % start_bid_price)
-                    logging.info("#### CURRENT ASK PRICE is %s ####" % ask_price)
-                    logging.info("#### CURRENT BID PRICE is %s ####" % bid_price)
-
-                    # アルゴリズムに約定価格をセットしておく
-                    order_price = order_obj.getPrice()
-                    st_algo.setOrderPrice(order_price)
+                    logging.info("#### ORDER_PRICE is %s ####" % order_price)
                     # 約定後のスリープ
                     time.sleep(stl_sleeptime)
 
-            time.sleep(polling_time)
+            # 建玉があれば、決済するかどうか判断
+            elif order_flag == True:
+                stl_flag = trade_algo.decideStl()
 
+                if stl_flag:
+
+                    now = datetime.now()
+                    now = now.strftime("%Y/%m/%d %H:%M:%S")
+                    logging.info("===== EXECUTE SETTLEMENT at %s ======" % now)
+                    logging.info("===== ORDER KIND is %s ======" % trade_algo.getOrderKind())
+                    response = db_wrapper.getPrice(instrument, base_time)
+                    if trade_flag == "buy":
+                        order_price = response[len(response)-1][0]
+                    else:
+                        order_price = response[len(response)-1][0]
+
+                    logging.info("===== CLOSE ORDER PRICE is %s ======" % order_price)
+                    close_trade()
+                    break
+                else:
+                    pass
+
+            # 建て玉がなければ、約定させるか判断
+            else:
+            time.sleep(polling_time)
