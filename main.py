@@ -152,16 +152,17 @@ if __name__ == '__main__':
 #    trade_threshold = 0.05
 #    stl_threshold = 0.05
 
-    trade_threshold = 0.1
-    stl_threshold = 0.2
-    price_list_size = 300
+    trade_threshold = 0.01
+    stl_threshold = 0.01
+    stop_threshold = 0.05
+    price_list_size = 5
 
     con = MysqlConnector()
-    flag = decide_up_down_before_day(con)
+    before_flag = decide_up_down_before_day(con)
 
     while True:
         order_obj = OrderObj()
-        st_algo = StartEndAlgo(trade_threshold, stl_threshold, price_list_size, before_flag)
+        st_algo = StartEndAlgo(trade_threshold, stl_threshold, stop_threshold, price_list_size, before_flag)
 
         # 一分間隔で値を取得
         polling_time = 1
