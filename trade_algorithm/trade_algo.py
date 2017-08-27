@@ -20,7 +20,7 @@ class TradeAlgo:
         # 前日が陽線引けかどうかのフラグ
 #        self.before_flag = before_flag
 
-    def setResponse(response):
+    def setResponse(self, response):
         for line in response:
             self.ask_price_list.append(line[0])
             self.bid_price_list.append(line[1])
@@ -51,17 +51,17 @@ class TradeAlgo:
 
         # 15:00 ~ 235959の間は順張りとしてフラグに当てる
 #            if ask_diff > self.trade_threshold and self.before_flag == "buy":
-            if ask_diff > self.trade_threshold:
-                trade_flag = "buy"
-                self.order_kind = trade_flag
-                self.order_flag = True
+        if ask_diff > self.trade_threshold:
+            trade_flag = "buy"
+            self.order_kind = trade_flag
+            self.order_flag = True
 #            elif bid_diff > self.trade_threshold and self.before_flag == "bid":
-            elif bid_diff > self.trade_threshold:
-                trade_flag = "sell"
-                self.order_kind = trade_flag
-                self.order_flag = True
-            else:
-                trade_flag = "pass"
+        elif bid_diff > self.trade_threshold:
+            trade_flag = "sell"
+            self.order_kind = trade_flag
+            self.order_flag = True
+        else:
+            trade_flag = "pass"
 
 #            if ask_diff > self.threshold:
 #                if self.start_follow_time < now and now < self.end_follow_time:
