@@ -3,14 +3,12 @@
 from datetime import datetime
 
 class TradeAlgo:
-    def __init__(self, trade_threshold, stl_threshold, stop_threshold):
+    def __init__(self, trade_threshold, optional_threshold):
         self.ask_price_list = []
         self.bid_price_list = []
         self.trade_threshold = trade_threshold
-        self.stl_threshold = stl_threshold
-        self.stop_threshold = stop_threshold
+        self.optional_threshold = optional_threshold
         self.order_price = 0
-
 
         self.order_flag = False
         self.order_kind = ""
@@ -54,34 +52,37 @@ class TradeAlgo:
         if ask_diff > self.trade_threshold:
             trade_flag = "buy"
             self.order_kind = trade_flag
-            self.order_flag = True
+#            self.order_flag = True
 #            elif bid_diff > self.trade_threshold and self.before_flag == "bid":
         elif bid_diff > self.trade_threshold:
             trade_flag = "sell"
             self.order_kind = trade_flag
-            self.order_flag = True
+#            self.order_flag = True
         else:
             trade_flag = "pass"
 
-#            if ask_diff > self.threshold:
-#                if self.start_follow_time < now and now < self.end_follow_time:
-#                    trade_flag = "buy"
-#                else:
-#                    trade_flag = "sell"
-#                self.order_kind = trade_flag
-#                self.order_flag = True
-#            elif bid_diff > self.threshold:
-#                if self.start_follow_time < now and now < self.end_follow_time:
-#                    trade_flag = "sell"
-#                else:
-#                    trade_flag = "buy"
-#                self.order_flag = True
-#                self.order_kind = trade_flag
-#            else:
-#                trade_flag = "pass"
-
         return trade_flag
 
+    # 損切り、利確はオーダー時に出している
+    # ここでは、急に逆方向に動いた時に決済出来るようにしている
+    def decideStl(self):
+        list_max = len(self.ask_price_list) - 1
+        ask_diff = self.ask_price_list[list_max] - self.ask_price_list[0]
+        bid_diff = self.bid_price_list[0] - self.bid_price_list[list_max]
+
+        stl_flag = False
+        if self.order_kind == "buy":
+            elif bid_diff > self.trade_threshold:
+                stl_flag = True
+ 
+        elif self.order_kind == "sell":
+            if ask_diff > self.optional_threshold:
+                stl_flag = True
+
+        return stl_flag
+
+
+'''
     def decideStl(self):
         stl_flag = False
         list_max = len(self.ask_price_list) - 1
@@ -109,3 +110,4 @@ class TradeAlgo:
                     self.order_flag = False
 
         return stl_flag
+'''

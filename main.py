@@ -16,72 +16,13 @@ from price_obj import PriceObj
 from order_obj import OrderObj
 from mysql_connector import MysqlConnector
 from db_wrapper import DBWrapper
-import oandapy
+from oanda_wrapper import OandaWrapper
 import time
 import logging
 now = datetime.now()
 now = now.strftime("%Y%m%d%H%M%S")
 logfilename = "%s/log/exec_%s.log" %(current_path, now)
 logging.basicConfig(filename=logfilename, level=logging.INFO)
-
-account_id = 2542764
-token = '85abe6d9c2646b9c56fbf01f0478a511-fe9cb897da06cd6219fde9b4c2052055'
-oanda = oandapy.API(environment="practice", access_token=token)
-price_list = []
-
-def order(l_side, currency):
-    while True:
-        try:
-            response = oanda.create_order(account_id,
-                instrument=currency,
-                units=50000,
-                side=l_side,
-                type='market'
-            )
-            id = response.get("id")
-            print "ORDER ID === %s" % id
-            price = response.get("price")
-            order_obj = OrderObj()
-            order_obj.setOrderId(id)
-            order_obj.setPrice(price)
-            time.sleep(5)
-            print "ordered"
-            break
-        except Exception as e:
-            now = datetime.now()
-            now = now.strftime("%Y/%m/%d %H:%M:%S")
-            logging.error("========== %s ==========" % now)
-            logging.error("Could not Order")
-            logging.error(e.message)
-
-    return order_obj
-
-def get_tradeid(oanda):
-    response = oanda.get_trades(account_id)
-    for trade in response.get("trades"):
-        print trade.get("id")
-
-def close_trade():
-    response = oanda.get_trades(account_id)
-    print response
-    trade_id = response["trades"][0]["id"]
-    oanda.close_trade(account_id, trade_id)
-    print "closed"
-
-#response = oanda.get_orders(account_id)
-#約定していないものしか表示されない
-
-#print response
-
-#response = oanda.close_order(account_id, 10463873762)
-#response = oanda.close_order(account_id, 10463873762)
-#response = oanda.get_positions(account_id)
-#response = oanda.get_trades(account_id)
-#response = oanda.close_trade(account_id, 10463873762)
-#print response
-
-def update_price():
-    price = get_price()
 
 
 def decide_up_down_before_day(con):
@@ -116,21 +57,33 @@ def decide_up_down_before_day(con):
     return before_flag
 
 if __name__ == '__main__':
+
+    account_id = 2542764
+    token = '85abe6d9c2646b9c56fbf01f0478a511-fe9cb897da06cd6219fde9b4c2052055'
+    env = 'practice'
+    oanda_wrapper = OandaWrapper(env, account_id, token)
+
     # 通貨
-#    instrument = "GBP_JPY"
     instrument = "USD_JPY"
     polling_time = 1
 
     # 閾値（5pips）
     trade_threshold = 0.1
+    optional_threshold = 0.1
+
+    stop_loss = 0.5
+    take_profit = 0.5
+
     stl_threshold = 0.5
     stop_threshold = 0.5
     time_width = 60
     stl_sleeptime = 5
 
+
+#    stopLoss 
     con = MysqlConnector()
     db_wrapper = DBWrapper()
-    trade_algo = TradeAlgo(trade_threshold, stl_threshold, stop_threshold)
+    trade_algo = TradeAlgo(trade_threshold, optional_threshold)
 #    flag = decide_up_down_before_day(con)
 
     order_flag = False
@@ -143,7 +96,9 @@ if __name__ == '__main__':
             logging.info("======= GET PRICE OK ========")
 
             # 今建玉があるかチェック
-            order_flag = trade_algo.getOrderFlag()
+#            order_flag = trade_algo.getOrderFlag()
+            # get_tradesして、0の場合は決済したものとみなす
+            order_flag = oanda_wrapper.get_trade_flag()
 
             # 建玉があれば、決済するかどうか判断
             if order_flag:
@@ -161,7 +116,7 @@ if __name__ == '__main__':
                         order_price = response[len(response)-1][0]
 
                     logging.info("===== CLOSE ORDER PRICE is %s ======" % order_price)
-                    close_trade()
+                    oanda_wrapper.close_trade()
                     break
                 else:
                     pass
@@ -171,7 +126,7 @@ if __name__ == '__main__':
                 if trade_flag == "pass":
                     pass
                 else:
-                    order_obj = order(trade_flag, instrument)
+                    order_obj = oanda_wrapper.order(trade_flag, instrument, stop_loss, take_profit)
                     now = datetime.now()
                     now = now.strftime("%Y/%m/%d %H:%M:%S")
                     response = db_wrapper.getPrice(instrument, time_width)
