@@ -49,7 +49,8 @@ class OandaWrapper:
 
     # positionがあるかチェック
     def get_trade_flag(self):
-        response = self.oanda.get_trades(account_id)
+        response = self.oanda.get_trades(self.account_id)
+        print response
         numbers = len(response.get("trades"))
         flag = False
         if numbers < 1:

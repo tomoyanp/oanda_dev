@@ -72,7 +72,7 @@ class TradeAlgo:
 
         stl_flag = False
         if self.order_kind == "buy":
-            elif bid_diff > self.trade_threshold:
+            if bid_diff > self.trade_threshold:
                 stl_flag = True
  
         elif self.order_kind == "sell":

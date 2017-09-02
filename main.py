@@ -102,6 +102,7 @@ if __name__ == '__main__':
 
             # 建玉があれば、決済するかどうか判断
             if order_flag:
+                print "#### DECIDE STL ###"
                 stl_flag = trade_algo.decideStl()
 
                 if stl_flag:
