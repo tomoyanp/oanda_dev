@@ -3,7 +3,7 @@
 import commands
 import time
 
-status = commands.getoutput("ps -ef | grep python | grep insert_price | grep -v check | wc -l")
+status = commands.getoutput("ps -ef | grep python | grep insert_price.py | grep -v check | wc -l")
 
 while True:
     if status == 1:

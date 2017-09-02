@@ -93,15 +93,19 @@ class TradeAlgo:
             if self.order_price < current_ask_price:
                 if current_ask_price - self.order_price > self.stop_threshold:
                     stl_flag = True
+                    self.order_flag = False
             else:
                 if self.order_price - current_ask_price > self.stl_threshold:
                     stl_flag = True
+                    self.order_flag = False
         else:
             if self.order_price < current_bid_price:
                 if current_bid_price - self.order_price > self.stl_threshold:
                     stl_flag = True
+                    self.order_flag = False
             else:
                 if self.order_price - current_bid_price > self.stop_threshold:
                     stl_flag = True
+                    self.order_flag = False
 
         return stl_flag
