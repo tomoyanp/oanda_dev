@@ -49,20 +49,26 @@ class OandaWrapper:
 
     # positionがあるかチェック
     def get_trade_flag(self):
-        response = self.oanda.get_trades(self.account_id)
-        print response
-        numbers = len(response.get("trades"))
-        flag = False
-        if numbers < 1:
+        try:
+            response = self.oanda.get_trades(self.account_id)
+            print response
+            numbers = len(response.get("trades"))
             flag = False
-        else:
-            flag = True
+            if numbers < 1:
+                flag = False
+            else:
+                flag = True
 
-        return flag
-
+            return flag
+        except:
+            raise
+            
     def close_trade(self):
-        response = self.oanda.get_trades(self.account_id)
-        print response
-        trade_id = response["trades"][0]["id"]
-        oanda.close_trade(self.account_id, trade_id)
-        print "closed"
+        try:
+            response = self.oanda.get_trades(self.account_id)
+            print response
+            trade_id = response["trades"][0]["id"]
+            oanda.close_trade(self.account_id, trade_id)
+            print "closed"
+        except:
+            raise

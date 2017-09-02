@@ -2,6 +2,7 @@
 
 import sys
 import os
+import traceback
 
 # 実行スクリプトのパスを取得して、追加
 current_path = os.path.abspath(os.path.dirname(__file__))
@@ -17,6 +18,7 @@ from order_obj import OrderObj
 from mysql_connector import MysqlConnector
 from db_wrapper import DBWrapper
 from oanda_wrapper import OandaWrapper
+from send_mail import SendMail
 import time
 import logging
 now = datetime.now()
@@ -87,61 +89,68 @@ if __name__ == '__main__':
 #    flag = decide_up_down_before_day(con)
 
     order_flag = False
-    while True:
-        while True:
-            response = db_wrapper.getPrice(instrument, time_width)
-            trade_algo.setResponse(response)
 
-            # 現在価格の取得
-            logging.info("======= GET PRICE OK ========")
-
-            # 今建玉があるかチェック
-#            order_flag = trade_algo.getOrderFlag()
-            # get_tradesして、0の場合は決済したものとみなす
-            order_flag = oanda_wrapper.get_trade_flag()
-
-            # 建玉があれば、決済するかどうか判断
-            if order_flag:
-                print "#### DECIDE STL ###"
-                stl_flag = trade_algo.decideStl()
-
-                if stl_flag:
-                    now = datetime.now()
-                    now = now.strftime("%Y/%m/%d %H:%M:%S")
-                    logging.info("===== EXECUTE SETTLEMENT at %s ======" % now)
-                    logging.info("===== ORDER KIND is %s ======" % trade_algo.getOrderKind())
-                    response = db_wrapper.getPrice(instrument, time_width)
-                    if trade_flag == "buy":
-                        order_price = response[len(response)-1][0]
-                    else:
-                        order_price = response[len(response)-1][0]
-
-                    logging.info("===== CLOSE ORDER PRICE is %s ======" % order_price)
-                    oanda_wrapper.close_trade()
-                    break
-                else:
-                    pass
-
-            else:
-                trade_flag = trade_algo.decideTrade()
-                if trade_flag == "pass":
-                    pass
-                else:
-                    order_obj = oanda_wrapper.order(trade_flag, instrument, stop_loss, take_profit)
-                    now = datetime.now()
-                    now = now.strftime("%Y/%m/%d %H:%M:%S")
-                    response = db_wrapper.getPrice(instrument, time_width)
-                    if trade_flag == "buy":
-                        order_price = response[len(response)-1][0]
-                    else:
-                        order_price = response[len(response)-1][0]
-
-                    trade_algo.setOrderPrice(order_price)
-
-                    logging.info("#### EXECUTE ORDER at %s ####" % now)
-                    logging.info("#### ORDER KIND is %s ####" % trade_flag)
-                    logging.info("#### ORDER_PRICE is %s ####" % order_price)
-                    # 約定後のスリープ
-                    time.sleep(stl_sleeptime)
-
-            time.sleep(polling_time)
+    try:
+      while True:
+          while True:
+              response = db_wrapper.getPrice(instrument, time_width)
+              trade_algo.setResponse(response)
+  
+              # 現在価格の取得
+              logging.info("======= GET PRICE OK ========")
+  
+              # 今建玉があるかチェック
+  #            order_flag = trade_algo.getOrderFlag()
+              # get_tradesして、0の場合は決済したものとみなす
+              order_flag = oanda_wrapper.get_trade_flag()
+  
+              # 建玉があれば、決済するかどうか判断
+              if order_flag:
+                  print "#### DECIDE STL ###"
+                  stl_flag = trade_algo.decideStl()
+  
+                  if stl_flag:
+                      now = datetime.now()
+                      now = now.strftime("%Y/%m/%d %H:%M:%S")
+                      logging.info("===== EXECUTE SETTLEMENT at %s ======" % now)
+                      logging.info("===== ORDER KIND is %s ======" % trade_algo.getOrderKind())
+                      response = db_wrapper.getPrice(instrument, time_width)
+                      if trade_flag == "buy":
+                          order_price = response[len(response)-1][0]
+                      else:
+                          order_price = response[len(response)-1][0]
+  
+                      logging.info("===== CLOSE ORDER PRICE is %s ======" % order_price)
+                      oanda_wrapper.close_trade()
+                      break
+                  else:
+                      pass
+  
+              else:
+                  trade_flag = trade_algo.decideTrade()
+                  if trade_flag == "pass":
+                      pass
+                  else:
+                      order_obj = oanda_wrapper.order(trade_flag, instrument, stop_loss, take_profit)
+                      now = datetime.now()
+                      now = now.strftime("%Y/%m/%d %H:%M:%S")
+                      response = db_wrapper.getPrice(instrument, time_width)
+                      if trade_flag == "buy":
+                          order_price = response[len(response)-1][0]
+                      else:
+                          order_price = response[len(response)-1][0]
+  
+                      trade_algo.setOrderPrice(order_price)
+  
+                      logging.info("#### EXECUTE ORDER at %s ####" % now)
+                      logging.info("#### ORDER KIND is %s ####" % trade_flag)
+                      logging.info("#### ORDER_PRICE is %s ####" % order_price)
+                      # 約定後のスリープ
+                      time.sleep(stl_sleeptime)
+  
+              time.sleep(polling_time)
+    except:
+        message = traceback.format_exc()
+        sendmail = SendMail("tomoyanpy@gmail.com", "tomoyanpy@softbank.ne.jp")
+        sendmail.set_msg(message)
+        sendmail.send_mail()
