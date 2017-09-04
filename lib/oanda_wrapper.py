@@ -2,6 +2,9 @@
 
 from oandapy import oandapy
 from price_obj import PriceObj
+from order_obj import OrderObj
+from datetime import datetime, timedelta
+import time
 
 class OandaWrapper:
     def __init__(self, env, account_id, token):
@@ -22,14 +25,21 @@ class OandaWrapper:
     def order(self, l_side, currency, stop_loss, take_profit):
         while True:
             try:
-                response = self.oanda.create_order(account_id,
+#                response = self.oanda.create_order(self.account_id,
+#                    instrument=currency,
+#                    units=50000,
+#                    side=l_side,
+#                    stopLoss=stop_loss,
+#                    takeProfit=take_profit,
+#                    type='market'
+#                )
+                response = self.oanda.create_order(self.account_id,
                     instrument=currency,
                     units=50000,
                     side=l_side,
-                    stopLoss=stop_loss,
-                    takeProfit=take_profit,
                     type='market'
                 )
+
                 order_id = response.get("tradeOpened").get("id")
                 price = response.get("price")
                 order_obj = OrderObj()
@@ -39,11 +49,12 @@ class OandaWrapper:
                 print "ordered"
                 break
             except Exception as e:
-                now = datetime.now()
-                now = now.strftime("%Y/%m/%d %H:%M:%S")
-                logging.error("========== %s ==========" % now)
-                logging.error("Could not Order")
-                logging.error(e.message)
+                raise
+                #now = datetime.now()
+                #now = now.strftime("%Y/%m/%d %H:%M:%S")
+                #logging.error("========== %s ==========" % now)
+                #logging.error("Could not Order")
+                #logging.error(e.message)
 
         return order_obj
 
@@ -68,7 +79,7 @@ class OandaWrapper:
             response = self.oanda.get_trades(self.account_id)
             print response
             trade_id = response["trades"][0]["id"]
-            oanda.close_trade(self.account_id, trade_id)
+            self.oanda.close_trade(self.account_id, trade_id)
             print "closed"
         except:
             raise

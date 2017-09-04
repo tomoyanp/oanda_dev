@@ -20,7 +20,7 @@ class SendMail:
     self.sender.starttls()
     self.sender.login('tomoyanpy@gmail.com', 'tomoyan180')
     send_msg = MIMEText(self.msg.encode(self.jp), 'plain', self.jp,)
-    send_msg['Subject'] = self.subject
+    #send_msg['Subject'] = self.subject
     send_msg['From'] = self.from_address
     send_msg['To'] = self.to_address
     self.sender.sendmail(self.from_address, self.to_address, send_msg.as_string())

@@ -71,7 +71,9 @@ if __name__ == '__main__':
 
     # 閾値（5pips）
     trade_threshold = 0.1
+#    trade_threshold = 0.005
     optional_threshold = 0.1
+#    optional_threshold = 0.005
 
     stop_loss = 0.5
     take_profit = 0.5
@@ -127,6 +129,7 @@ if __name__ == '__main__':
                       pass
   
               else:
+                  print "Decide stl"
                   trade_flag = trade_algo.decideTrade()
                   if trade_flag == "pass":
                       pass
