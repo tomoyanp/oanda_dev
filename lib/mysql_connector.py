@@ -31,3 +31,18 @@ class MysqlConnector:
         priceTableWrapper = PriceTableWrapper()
         priceTableWrapper.setResponse(response)
         return priceTableWrapper
+
+     def get_newest_price(self, instruments):
+        now = datetime.now()
+        before_seconds = 2
+        target_time = now - timedelta(seconds=before_seconds)
+        sql = u"select insert_time, ask_price, bid_price from %s_TABLE where insert_time > %s" % (instruments, target_time)
+        self.cursor.execute(sql)
+        response = self.cursor.fetchall()
+        priceTableWrapper = PriceTableWrapper()
+        priceTableWrapper.setResponse(response)
+        length = len(priceTableWrapper.getAskPriceList()-1)
+        price_list = {}
+        price_list["ask"] = priceTableWrapper.getAskPriceList(length)
+        price_list["bid"] = priceTableWrapper.getBidPriceList(length)
+        return price_list       

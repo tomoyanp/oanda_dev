@@ -72,7 +72,8 @@ if __name__ == '__main__':
     # 閾値（5pips）
     trade_threshold = 0.1
 #    trade_threshold = 0.005
-    optional_threshold = 0.1
+# 0.1だと全然決済されないので、0.05にしてみる
+    optional_threshold = 0.05
 #    optional_threshold = 0.005
 
     stop_loss = 0.5
@@ -134,7 +135,8 @@ if __name__ == '__main__':
                   if trade_flag == "pass":
                       pass
                   else:
-                      order_obj = oanda_wrapper.order(trade_flag, instrument, stop_loss, take_profit)
+                      threshold_list = trade_algo.calcThreshold(stop_loss, take_profit, trade_flag)
+                      order_obj = oanda_wrapper.order(trade_flag, instrument, threshold_list["stoploss"], threshold_list["takeprofit"])
                       now = datetime.now()
                       now = now.strftime("%Y/%m/%d %H:%M:%S")
                       response = db_wrapper.getPrice(instrument, time_width)

@@ -38,6 +38,20 @@ class TradeAlgo:
     def getOrderKind(self):
         return self.order_kind
 
+
+    def calcThreshold(self, stop_loss, take_prfit, trade_flag):
+        list_max = len(self.ask_price_list) - 1
+        threshold_list = {}
+        if trade_flag == "buy":
+            threshold_list["stoploss"] = self.ask_price_list[list_max] - stop_loss
+            threshold_list["takeprofit"] = self.ask_price_list[list_max] + take_profit
+        else:
+            threshold_list["stoploss"] = self.bid_price_list[list_max] + stop_loss
+            threshold_list["takeprofit"] = self.bid_price_list[list_max] - take_profit
+
+        return threshold_list
+
+
     def decideTrade(self):
         try:
             # trade_flag is pass or ask or bid
