@@ -25,20 +25,20 @@ class OandaWrapper:
     def order(self, l_side, currency, stop_loss, take_profit):
         while True:
             try:
-#                response = self.oanda.create_order(self.account_id,
-#                    instrument=currency,
-#                    units=50000,
-#                    side=l_side,
-#                    stopLoss=stop_loss,
-#                    takeProfit=take_profit,
-#                    type='market'
-#                )
                 response = self.oanda.create_order(self.account_id,
                     instrument=currency,
                     units=50000,
                     side=l_side,
+                    stopLoss=stop_loss,
+                    takeProfit=take_profit,
                     type='market'
                 )
+#                response = self.oanda.create_order(self.account_id,
+#                    instrument=currency,
+#                    units=50000,
+#                    side=l_side,
+#                    type='market'
+#                )
 
                 order_id = response.get("tradeOpened").get("id")
                 price = response.get("price")

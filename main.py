@@ -72,7 +72,8 @@ if __name__ == '__main__':
     # 閾値（5pips）
     trade_threshold = 0.1
 #    trade_threshold = 0.005
-# 0.1だと全然決済されないので、0.05にしてみる
+
+# 0.1だと全然決済されないので、0.07にしてみる
     optional_threshold = 0.05
 #    optional_threshold = 0.005
 
