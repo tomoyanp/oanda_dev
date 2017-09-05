@@ -75,8 +75,8 @@ class TradeAlgo:
                 self.log_file.write("====================================================================\n")
                 self.log_file.write("DECIDE TRADE\n")
                 self.log_file.write("TRADE FLAG=BUY\n")
-                self.log_file.write("ask_price_list[list_max]=%s, insert_time_list[list_max]=%s\n" %(self.ask_price_list[list_max], self.insert_time_list[list_max]))
-                self.log_file.write("ask_price_list[0]=%s, insert_time_list[0]=%s\n" %(self.ask_price_list[0], self.insert_time_list[0]))
+                self.log_file.write("TRADE:ask_price_list[list_max]=%s, insert_time_list[list_max]=%s\n" %(self.ask_price_list[list_max], self.insert_time_list[list_max]))
+                self.log_file.write("TRADE:ask_price_list[0]=%s, insert_time_list[0]=%s\n" %(self.ask_price_list[0], self.insert_time_list[0]))
                 self.order_kind = trade_flag
 #            self.order_flag = True
 #            elif bid_diff > self.trade_threshold and self.before_flag == "bid":
@@ -86,8 +86,8 @@ class TradeAlgo:
                 self.log_file.write("====================================================================\n")
                 self.log_file.write("DECIDE TRADE\n")
                 self.log_file.write("TRADE FLAG=BID\n")
-                self.log_file.write("bid_price_list[0]=%s, insert_time_list[0]=%s\n" %(self.bid_price_list[0], self.insert_time_list[0]))
-                self.log_file.write("bid_price_list[list_max]=%s, insert_time_list[list_max]=%s\n" %(self.bid_price_list[list_max], self.insert_time_list[list_max]))
+                self.log_file.write("TRADE:bid_price_list[0]=%s, insert_time_list[0]=%s\n" %(self.bid_price_list[0], self.insert_time_list[0]))
+                self.log_file.write("TRADE:bid_price_list[list_max]=%s, insert_time_list[list_max]=%s\n" %(self.bid_price_list[list_max], self.insert_time_list[list_max]))
 #            self.order_flag = True
             else:
                 trade_flag = "pass"
@@ -111,17 +111,17 @@ class TradeAlgo:
                     self.log_file.write("====================================================================\n")
                     self.log_file.write("DECIDE SETTLEMENT\n")
                     self.log_file.write("STL FLAG=BID\n")
-                    self.log_file.write("bid_price_list[0]=%s, insert_time_list[0]=%s\n" %(self.bid_price_list[0], self.insert_time_list[0]))
-                    self.log_file.write("bid_price_list[list_max]=%s, insert_time_list[list_max]=%s\n" %(self.bid_price_list[list_max], self.insert_time_list[list_max]))
+                    self.log_file.write("STL:bid_price_list[0]=%s, insert_time_list[0]=%s\n" %(self.bid_price_list[0], self.insert_time_list[0]))
+                    self.log_file.write("STL:bid_price_list[list_max]=%s, insert_time_list[list_max]=%s\n" %(self.bid_price_list[list_max], self.insert_time_list[list_max]))
                     stl_flag = True
  
             elif self.order_kind == "sell":
                 if ask_diff > self.optional_threshold:
                     self.log_file.write("====================================================================\n")
                     self.log_file.write("DECIDE SETTLEMENT\n")
-                    self.log_file.write("TRADE FLAG=BUY\n")
-                    self.log_file.write("ask_price_list[list_max]=%s, insert_time_list[list_max]=%s\n" %(self.ask_price_list[list_max], self.insert_time_list[list_max]))
-                    self.log_file.write("ask_price_list[0]=%s, insert_time_list[0]=%s\n" %(self.ask_price_list[0], self.insert_time_list[0]))
+                    self.log_file.write("STL FLAG=BUY\n")
+                    self.log_file.write("STL:ask_price_list[list_max]=%s, insert_time_list[list_max]=%s\n" %(self.ask_price_list[list_max], self.insert_time_list[list_max]))
+                    self.log_file.write("STL:ask_price_list[0]=%s, insert_time_list[0]=%s\n" %(self.ask_price_list[0], self.insert_time_list[0]))
                     stl_flag = True
 
             return stl_flag
