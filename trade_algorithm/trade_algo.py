@@ -25,6 +25,9 @@ class TradeAlgo:
 #        self.before_flag = before_flag
 
     def setResponse(self, response):
+        self.ask_price_list = []
+        self.bid_price_list = []
+        self.insert_time_list = []
         for line in response:
             self.ask_price_list.append(line[0])
             self.bid_price_list.append(line[1])
@@ -133,26 +136,21 @@ class TradeAlgo:
             bid_mx_index = self.bid_price_list.index(bid_mx)
             bid_min_index = self.bid_price_list.index(bid_min)
 
+            now = datetime.now()
+            now = now.strftime("%Y-%m-%d %H:%M:%S")
             self.stllog_file.write("====================================================================\n")
+            self.stllog_file.write("INFO:%s\n" % now)
             self.stllog_file.write("INFO:DECIDE SETTLEMENT\n")
             self.stllog_file.write("INFO:STL FLAG=BUY\n")
-            self.stllog_file.write("INFO:ask_price_list[list_max]=%s, insert_time_list[list_max]=%s\n" %(self.ask_price_list[list_max], self.insert_time_list[list_max]))
-            self.stllog_file.write("INFO:ask_price_list[0]=%s, insert_time_list[0]=%s\n" %(self.ask_price_list[0], self.insert_time_list[0]))
-            self.stllog_file.write("====================================================================\n")
-            self.stllog_file.write("INFO:DECIDE SETTLEMENT\n")
-            self.stllog_file.write("INFO:STL FLAG=BID\n")
-            self.stllog_file.write("INFO:bid_price_list[0]=%s, insert_time_list[0]=%s\n" %(self.bid_price_list[0], self.insert_time_list[0]))
-            self.stllog_file.write("INFO:bid_price_list[list_max]=%s, insert_time_list[list_max]=%s\n" %(self.bid_price_list[list_max], self.insert_time_list[list_max]))
+            self.stllog_file.write("INFO:ask_max=%s, index=%s\n" %(ask_mx, ask_mx_index))
+            self.stllog_file.write("INFO:ask_min=%s, index=%s\n" %(ask_min, ask_min_index))
 
             stl_flag = False
             if self.order_kind == "buy":
                 #if bid_diff > self.trade_threshold:
                 if (bid_mx - bid_min) > self.optional_threshold and bid_mx_index < bid_min_index:
-                    self.stllog_file.write("====================================================================\n")
                     self.stllog_file.write("EMERGENCY:DECIDE SETTLEMENT\n")
                     self.stllog_file.write("EMERGENCY:STL FLAG=BID\n")
-                    self.stllog_file.write("EMERGENCY:bid_price_list[0]=%s, insert_time_list[0]=%s\n" %(self.bid_price_list[0], self.insert_time_list[0]))
-                    self.stllog_file.write("EMERGENCY:bid_price_list[list_max]=%s, insert_time_list[list_max]=%s\n" %(self.bid_price_list[list_max], self.insert_time_list[list_max]))
                     stl_flag = True
  
             elif self.order_kind == "sell":
@@ -161,8 +159,6 @@ class TradeAlgo:
                     self.stllog_file.write("====================================================================\n")
                     self.stllog_file.write("EMERGENCY:DECIDE SETTLEMENT\n")
                     self.stllog_file.write("EMERGENCY:STL FLAG=BUY\n")
-                    self.stllog_file.write("EMERGENCY:ask_price_list[list_max]=%s, insert_time_list[list_max]=%s\n" %(self.ask_price_list[list_max], self.insert_time_list[list_max]))
-                    self.stllog_file.write("EMERGENCY:ask_price_list[0]=%s, insert_time_list[0]=%s\n" %(self.ask_price_list[0], self.insert_time_list[0]))
                     stl_flag = True
 
             return stl_flag
