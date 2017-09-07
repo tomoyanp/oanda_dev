@@ -27,37 +27,6 @@ logfilename = "%s/log/exec_%s.log" %(current_path, now)
 logging.basicConfig(filename=logfilename, level=logging.INFO)
 
 
-def decide_up_down_before_day(con):
-    now = datetime.now()
-    # 前日が陽線引けかどうかでbuy or sellを決める
-    before_day = now - timedelta(days=1)
-    before_day = before_day.strftime("%Y-%m-%d")
-    before_end_day = now.strftime("%Y-%m-%d")
-    sql = u"select ask_price from %s_TABLE where insert_time > \'%s 06:00:00\' and insert_time < \'%s 06:00:10\'" % (currency, before_day, before_day)
-    print sql
-    response = con.select_sql(sql)
-    before_start_price = response[0][0]
-
-    sql = u"select ask_price from %s_TABLE where insert_time > \'%s 05:59:49\' and insert_time < \'%s 05:59:59\'" % (currency, before_end_day, before_end_day)
-    print sql
-    response = con.select_sql(sql)
-    tmp_list = []
-    for line in response:
-        tmp_list.append(line)
-    before_end_price = response[0][0]
-
-    if before_end_price - before_start_price > 0:
-        before_flag = "buy"
-    else:
-        before_flag = "bid"
-
-    before_flag = "buy"
-
-    print "before_start_price : %s" % before_start_price
-    print "before_end_price : %s" % before_end_price
-    print "before_flag : %s" % before_flag
-    return before_flag
-
 if __name__ == '__main__':
 
     account_id = 2542764
@@ -80,18 +49,12 @@ if __name__ == '__main__':
     stop_loss = 0.5
     take_profit = 0.5
 
-    stl_threshold = 0.5
-    stop_threshold = 0.5
     time_width = 60
-    stl_sleeptime = 5
+    stl_sleeptime = 120
 
-
-#    stopLoss 
     con = MysqlConnector()
     db_wrapper = DBWrapper()
     trade_algo = TradeAlgo(trade_threshold, optional_threshold)
-#    flag = decide_up_down_before_day(con)
-
     order_flag = False
 
     try:
@@ -99,20 +62,15 @@ if __name__ == '__main__':
           while True:
               response = db_wrapper.getPrice(instrument, time_width)
               trade_algo.setResponse(response)
-  
-              # 現在価格の取得
-              logging.info("======= GET PRICE OK ========")
-  
+
               # 今建玉があるかチェック
-  #            order_flag = trade_algo.getOrderFlag()
               # get_tradesして、0の場合は決済したものとみなす
               order_flag = oanda_wrapper.get_trade_flag()
-  
+
               # 建玉があれば、決済するかどうか判断
               if order_flag:
-                  print "#### DECIDE STL ###"
                   stl_flag = trade_algo.decideStl()
-  
+
                   if stl_flag:
                       now = datetime.now()
                       now = now.strftime("%Y/%m/%d %H:%M:%S")
@@ -122,16 +80,14 @@ if __name__ == '__main__':
                       if trade_flag == "buy":
                           order_price = response[len(response)-1][0]
                       else:
-                          order_price = response[len(response)-1][0]
-  
+                          order_price = response[len(response)-1][1]
+
                       logging.info("===== CLOSE ORDER PRICE is %s ======" % order_price)
                       oanda_wrapper.close_trade()
                       break
                   else:
                       pass
-  
               else:
-                  print "Decide stl"
                   trade_flag = trade_algo.decideTrade()
                   if trade_flag == "pass":
                       pass
@@ -145,15 +101,15 @@ if __name__ == '__main__':
                           order_price = response[len(response)-1][0]
                       else:
                           order_price = response[len(response)-1][0]
-  
+
                       trade_algo.setOrderPrice(order_price)
-  
+
                       logging.info("#### EXECUTE ORDER at %s ####" % now)
                       logging.info("#### ORDER KIND is %s ####" % trade_flag)
                       logging.info("#### ORDER_PRICE is %s ####" % order_price)
                       # 約定後のスリープ
                       time.sleep(stl_sleeptime)
-  
+
               time.sleep(polling_time)
     except:
         message = traceback.format_exc()
