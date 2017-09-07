@@ -73,9 +73,9 @@ class TradeAlgo:
             now = datetime.now()
             now = now.strftime("%H%M%S")
             now = int(now)
-            list_max = len(self.ask_price_list) - 1
-            ask_diff = self.ask_price_list[list_max] - self.ask_price_list[0]
-            bid_diff = self.bid_price_list[0] - self.bid_price_list[list_max]
+            #list_max = len(self.ask_price_list) - 1
+            #ask_diff = self.ask_price_list[list_max] - self.ask_price_list[0]
+            #bid_diff = self.bid_price_list[0] - self.bid_price_list[list_max]
 
             ask_mx = max(self.ask_price_list)
             ask_min = min(self.ask_price_list)
@@ -101,22 +101,22 @@ class TradeAlgo:
             # 15:00 ~ 235959の間は順張りとしてフラグに当てる
 #            if ask_diff > self.trade_threshold and self.before_flag == "buy":
 #            if ask_diff > self.trade_threshold:
-            if (ask_mx - ask_min) > self.trade_threshold and ask_mx_index < ask_min_index:
+            if (ask_mx - ask_min) > self.trade_threshold and ask_mx_index > ask_min_index:
                 trade_flag = "buy"
                 self.stllog_file.write("====================================================================\n")
                 self.stllog_file.write("EMERGENCY:DECIDE TRADE\n")
                 self.stllog_file.write("EMERGENCY:TRADE FLAG=BUY\n")
                 self.order_kind = trade_flag
-#            self.order_flag = True
+                self.order_flag = True
 #            elif bid_diff > self.trade_threshold and self.before_flag == "bid":
 #            elif bid_diff > self.trade_threshold:
-            if (bid_mx - bid_min) > self.trade_threshold and bid_mx_index > bid_min_index:
+            if (bid_mx - bid_min) > self.trade_threshold and bid_mx_index < bid_min_index:
                 trade_flag = "sell"
                 self.order_kind = trade_flag
                 self.stllog_file.write("====================================================================\n")
                 self.stllog_file.write("EMERGENCY:DECIDE TRADE\n")
                 self.stllog_file.write("EMERGENCY:TRADE FLAG=BID\n")
-#            self.order_flag = True
+                self.order_flag = True
             else:
                 trade_flag = "pass"
 
@@ -129,9 +129,9 @@ class TradeAlgo:
     # ここでは、急に逆方向に動いた時に決済出来るようにしている
     def decideStl(self):
         try:
-            list_max = len(self.ask_price_list) - 1
-            ask_diff = self.ask_price_list[list_max] - self.ask_price_list[0]
-            bid_diff = self.bid_price_list[0] - self.bid_price_list[list_max]
+            #list_max = len(self.ask_price_list) - 1
+            #ask_diff = self.ask_price_list[list_max] - self.ask_price_list[0]
+            #bid_diff = self.bid_price_list[0] - self.bid_price_list[list_max]
 
             ask_mx = max(self.ask_price_list)
             ask_min = min(self.ask_price_list)
@@ -154,7 +154,7 @@ class TradeAlgo:
             stl_flag = False
             if self.order_kind == "buy":
                 #if bid_diff > self.trade_threshold:
-                if (bid_mx - bid_min) > self.optional_threshold and bid_mx_index > bid_min_index:
+                if (bid_mx - bid_min) > self.optional_threshold and bid_mx_index < bid_min_index:
                     self.stllog_file.write("====================================================================\n")
                     self.stllog_file.write("EMERGENCY:DECIDE SETTLEMENT\n")
                     self.stllog_file.write("EMERGENCY:STL FLAG=BID\n")
@@ -163,7 +163,7 @@ class TradeAlgo:
 
             elif self.order_kind == "sell":
                 #if ask_diff > self.optional_threshold:
-                if (ask_mx - ask_min) > self.optional_threshold and ask_mx_index < ask_min_index:
+                if (ask_mx - ask_min) > self.optional_threshold and ask_mx_index > ask_min_index:
                     self.stllog_file.write("====================================================================\n")
                     self.stllog_file.write("EMERGENCY:DECIDE SETTLEMENT\n")
                     self.stllog_file.write("EMERGENCY:STL FLAG=BUY\n")

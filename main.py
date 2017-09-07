@@ -51,7 +51,7 @@ if __name__ == '__main__':
     stl_threshold = 0.5
     stop_threshold = 0.5
     time_width = 60
-    stl_sleeptime = 5
+    stl_sleeptime = 300
 
 
 #    stopLoss
@@ -73,9 +73,9 @@ if __name__ == '__main__':
               logging.info("======= GET PRICE OK ========")
 
               # 今建玉があるかチェック
-  #            order_flag = trade_algo.getOrderFlag()
+              order_flag = trade_algo.getOrderFlag()
               # get_tradesして、0の場合は決済したものとみなす
-              order_flag = oanda_wrapper.get_trade_flag()
+              #order_flag = oanda_wrapper.get_trade_flag()
 
               # 建玉があれば、決済するかどうか判断
               if order_flag:
