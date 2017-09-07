@@ -62,10 +62,13 @@ if __name__ == '__main__':
 
     order_flag = False
 
+    base_time = datetime.now()
+    now = base_time - timedelta(weeks=2)
     try:
       while True:
           while True:
-              now = datetime.now()
+              #now = datetime.now()
+              now = now + timedelta(seconds=1)
               response = db_wrapper.getPrice(instrument, time_width, now)
               trade_algo.setResponse(response)
 
@@ -75,7 +78,8 @@ if __name__ == '__main__':
               # 今建玉があるかチェック
   #            order_flag = trade_algo.getOrderFlag()
               # get_tradesして、0の場合は決済したものとみなす
-              order_flag = oanda_wrapper.get_trade_flag()
+              #order_flag = oanda_wrapper.get_trade_flag()
+              order_flag = trade_algo.getOrderFlag()
 
               # 建玉があれば、決済するかどうか判断
               if order_flag:
@@ -92,7 +96,7 @@ if __name__ == '__main__':
                           order_price = response[len(response)-1][0]
 
                       logging.info("===== CLOSE ORDER PRICE is %s ======" % order_price)
-                      oanda_wrapper.close_trade()
+                      #oanda_wrapper.close_trade()
                       break
                   else:
                       pass
@@ -104,7 +108,7 @@ if __name__ == '__main__':
                       pass
                   else:
                       threshold_list = trade_algo.calcThreshold(stop_loss, take_profit, trade_flag)
-                      order_obj = oanda_wrapper.order(trade_flag, instrument, threshold_list["stoploss"], threshold_list["takeprofit"])
+                      #order_obj = oanda_wrapper.order(trade_flag, instrument, threshold_list["stoploss"], threshold_list["takeprofit"])
                       nowftime = now.strftime("%Y/%m/%d %H:%M:%S")
                       if trade_flag == "buy":
                           order_price = response[len(response)-1][0]

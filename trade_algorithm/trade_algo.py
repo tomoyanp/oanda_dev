@@ -158,14 +158,16 @@ class TradeAlgo:
                     self.stllog_file.write("====================================================================\n")
                     self.stllog_file.write("EMERGENCY:DECIDE SETTLEMENT\n")
                     self.stllog_file.write("EMERGENCY:STL FLAG=BID\n")
+                    self.order_flag = False
                     stl_flag = True
- 
+
             elif self.order_kind == "sell":
                 #if ask_diff > self.optional_threshold:
                 if (ask_mx - ask_min) > self.optional_threshold and ask_mx_index < ask_min_index:
                     self.stllog_file.write("====================================================================\n")
                     self.stllog_file.write("EMERGENCY:DECIDE SETTLEMENT\n")
                     self.stllog_file.write("EMERGENCY:STL FLAG=BUY\n")
+                    self.order_flag = False
                     stl_flag = True
 
             return stl_flag
