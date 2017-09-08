@@ -42,7 +42,8 @@ if __name__ == '__main__':
 #    trade_threshold = 0.005
 
 # 0.1だと全然決済されないので、0.07にしてみる
-    optional_threshold = 0.05
+    optional_threshold = 0.1
+
 #    optional_threshold = 0.005
 
     stop_loss = 0.5
@@ -50,7 +51,10 @@ if __name__ == '__main__':
 
     stl_threshold = 0.5
     stop_threshold = 0.5
-    time_width = 60
+#    time_width = 60
+    time_width = 180
+# 決済時の値幅
+    stl_time_width = 60
     stl_sleeptime = 300
 
 
@@ -66,7 +70,11 @@ if __name__ == '__main__':
       while True:
           while True:
               now = datetime.now()
-              response = db_wrapper.getPrice(instrument, time_width, now)
+              if trade_algo.getOrderFlag():
+                  response = db_wrapper.getPrice(instrument, stl_time_width, now)
+              else:
+                  response = db_wrapper.getPrice(instrument, time_width, now)
+
               trade_algo.setResponse(response)
 
               # 現在価格の取得
