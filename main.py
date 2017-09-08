@@ -92,7 +92,7 @@ if __name__ == '__main__':
 
                   trade_id = trade_algo.getTradeId()
                   response = oanda_wrapper.get_trade_response(trade_id)
-                  if len(response):
+                  if len(response) == 0:
                     trade_algo.resetFlag()
                     break
 
