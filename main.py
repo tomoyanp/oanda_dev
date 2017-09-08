@@ -38,13 +38,13 @@ if __name__ == '__main__':
     polling_time = 1
 
     # 閾値（5pips）
-    trade_threshold = 0.1
-#    trade_threshold = 0.005
+#    trade_threshold = 0.1
+    trade_threshold = 0.005
 
 # 0.1だと全然決済されないので、0.07にしてみる
-    optional_threshold = 0.1
+#    optional_threshold = 0.1
 
-#    optional_threshold = 0.005
+    optional_threshold = 0.005
 
     stop_loss = 0.5
     take_profit = 0.5
@@ -91,8 +91,11 @@ if __name__ == '__main__':
                   stl_flag = trade_algo.decideStl()
 
                   trade_id = trade_algo.getTradeId()
-                  response = oanda_wrapper.get_trade_response(trade_id)
-                  if len(response) == 0:
+                  print "-----------------------------"
+                  print trade_id
+                  trade_response = oanda_wrapper.get_trade_response(trade_id)
+                  print trade_response
+                  if len(trade_response) == 0:
                     trade_algo.resetFlag()
                     break
 
@@ -122,6 +125,7 @@ if __name__ == '__main__':
                   else:
                       threshold_list = trade_algo.calcThreshold(stop_loss, take_profit, trade_flag)
                       response = oanda_wrapper.order(trade_flag, instrument, threshold_list["stoploss"], threshold_list["takeprofit"])
+                      print response
                       trade_algo.setTradeId(response)
                       nowftime = now.strftime("%Y/%m/%d %H:%M:%S")
                       if trade_flag == "buy":

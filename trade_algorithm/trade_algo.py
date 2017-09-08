@@ -45,7 +45,9 @@ class TradeAlgo:
             self.insert_time_list.append(line[2])
 
     def setTradeId(self, response):
+        print response
         self.trade_id = response["tradeOpened"]["id"]
+        print self.trade_id
 
     def getTradeId(self):
         return self.trade_id
