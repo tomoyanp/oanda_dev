@@ -23,16 +23,15 @@ class OandaWrapper:
 
 
     def order(self, l_side, currency, stop_loss, take_profit):
-        while True:
-            try:
-                response = self.oanda.create_order(self.account_id,
-                    instrument=currency,
-                    units=50000,
-                    side=l_side,
-                    stopLoss=stop_loss,
-                    takeProfit=take_profit,
-                    type='market'
-                )
+        try:
+            response = self.oanda.create_order(self.account_id,
+                instrument=currency,
+                units=50000,
+                side=l_side,
+                stopLoss=stop_loss,
+                takeProfit=take_profit,
+                type='market'
+            )
 #                response = self.oanda.create_order(self.account_id,
 #                    instrument=currency,
 #                    units=50000,
@@ -40,45 +39,41 @@ class OandaWrapper:
 #                    type='market'
 #                )
 
-                order_id = response.get("tradeOpened").get("id")
-                price = response.get("price")
-                order_obj = OrderObj()
-                order_obj.setOrderId(order_id)
-                order_obj.setPrice(price)
-                time.sleep(5)
-                print "ordered"
-                break
-            except Exception as e:
-                raise
+#                order_id = response.get("tradeOpened").get("id")
+#                price = response.get("price")
+#                order_obj = OrderObj()
+#                order_obj.setOrderId(order_id)
+#                order_obj.setPrice(price)
+            time.sleep(5)
+            print "ordered"
+            break
+        except Exception as e:
+            raise
                 #now = datetime.now()
                 #now = now.strftime("%Y/%m/%d %H:%M:%S")
                 #logging.error("========== %s ==========" % now)
                 #logging.error("Could not Order")
                 #logging.error(e.message)
 
-        return order_obj
+    return response
 
     # positionがあるかチェック
-    def get_trade_flag(self):
+    def get_trade_response(self, trade_id):
         try:
-            response = self.oanda.get_trades(self.account_id)
-            print response
-            numbers = len(response.get("trades"))
-            flag = False
-            if numbers < 1:
-                flag = False
-            else:
-                flag = True
+            response = {}
+            for trade in response["trades"]:
+                if trade_id == trade["id"]:
+                    response = trade
+            return response
 
-            return flag
         except:
             raise
             
-    def close_trade(self):
+    def close_trade(self, trade_id):
         try:
-            response = self.oanda.get_trades(self.account_id)
-            print response
-            trade_id = response["trades"][0]["id"]
+            #response = self.oanda.get_trades(self.account_id)
+            #print response
+            #trade_id = response["trades"][0]["id"]
             self.oanda.close_trade(self.account_id, trade_id)
             print "closed"
         except:

@@ -17,6 +17,7 @@ class TradeAlgo:
         self.tradelog_file = open("%s/trade_%s.log" %(current_path, filename), "w")
         self.stllog_file = open("%s/settlement_%s.log" %(current_path, filename), "w")
         self.order_flag = False
+        self.trade_id = 0
         self.order_kind = ""
 #        self.price_list_size = price_list_size
         self.start_follow_time = 000000
@@ -29,6 +30,11 @@ class TradeAlgo:
 # 小さいほうが新しい
 ###############################################
 
+    def resetFlag(self):
+        self.order_flag = False
+        self.order_kind = ""
+        self.trade_id = 0
+
     def setResponse(self, response):
         self.ask_price_list = []
         self.bid_price_list = []
@@ -37,6 +43,12 @@ class TradeAlgo:
             self.ask_price_list.append(line[0])
             self.bid_price_list.append(line[1])
             self.insert_time_list.append(line[2])
+
+    def setTradeId(self, response):
+        self.trade_id = response["tradeOpened"]["id"]
+
+    def getTradeId(self):
+        return self.trade_id
 
     def getOrderFlag(self):
         return self.order_flag

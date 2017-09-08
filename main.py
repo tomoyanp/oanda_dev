@@ -90,6 +90,12 @@ if __name__ == '__main__':
                   print "#### DECIDE STL ###"
                   stl_flag = trade_algo.decideStl()
 
+                  trade_id = trade_algo.getTradeId()
+                  response = oanda_wrapper.get_trade_response(trade_id)
+                  if len(response):
+                    trade_algo.resetFlag()
+                    break
+
                   if stl_flag:
                       nowftime = now.strftime("%Y/%m/%d %H:%M:%S")
                       logging.info("===== EXECUTE SETTLEMENT at %s ======" % nowftime)
@@ -100,7 +106,10 @@ if __name__ == '__main__':
                           order_price = response[len(response)-1][0]
 
                       logging.info("===== CLOSE ORDER PRICE is %s ======" % order_price)
-                      oanda_wrapper.close_trade()
+                      trade_id = trade_algo.getTradeId()
+                      oanda_wrapper.close_trade(trade_id)
+                      # 決済後のスリープ
+                      time.sleep(stl_sleeptime)
                       break
                   else:
                       pass
@@ -112,7 +121,8 @@ if __name__ == '__main__':
                       pass
                   else:
                       threshold_list = trade_algo.calcThreshold(stop_loss, take_profit, trade_flag)
-                      order_obj = oanda_wrapper.order(trade_flag, instrument, threshold_list["stoploss"], threshold_list["takeprofit"])
+                      response = oanda_wrapper.order(trade_flag, instrument, threshold_list["stoploss"], threshold_list["takeprofit"])
+                      trade_algo.setTradeId(response)
                       nowftime = now.strftime("%Y/%m/%d %H:%M:%S")
                       if trade_flag == "buy":
                           order_price = response[len(response)-1][0]
