@@ -38,13 +38,13 @@ if __name__ == '__main__':
     polling_time = 1
 
     # 閾値（5pips）
-#    trade_threshold = 0.1
-    trade_threshold = 0.005
+    trade_threshold = 0.1
+#    trade_threshold = 0.005
 
 # 0.1だと全然決済されないので、0.07にしてみる
-#    optional_threshold = 0.1
+    optional_threshold = 0.1
 
-    optional_threshold = 0.005
+#    optional_threshold = 0.005
 
     stop_loss = 0.5
     take_profit = 0.5
@@ -55,6 +55,7 @@ if __name__ == '__main__':
     time_width = 180
 # 決済時の値幅
     stl_time_width = 60
+#    stl_sleeptime = 5
     stl_sleeptime = 300
 
 
@@ -120,18 +121,18 @@ if __name__ == '__main__':
               else:
                   print "Decide stl"
                   trade_flag = trade_algo.decideTrade()
+                  print trade_flag
                   if trade_flag == "pass":
                       pass
                   else:
                       threshold_list = trade_algo.calcThreshold(stop_loss, take_profit, trade_flag)
                       response = oanda_wrapper.order(trade_flag, instrument, threshold_list["stoploss"], threshold_list["takeprofit"])
+                      print "===== order ok ====="
                       print response
                       trade_algo.setTradeId(response)
                       nowftime = now.strftime("%Y/%m/%d %H:%M:%S")
-                      if trade_flag == "buy":
-                          order_price = response[len(response)-1][0]
-                      else:
-                          order_price = response[len(response)-1][1]
+                      #order_price = response[len(response)-1][0]
+                      order_price = 1234
 
                       trade_algo.setOrderPrice(order_price)
 

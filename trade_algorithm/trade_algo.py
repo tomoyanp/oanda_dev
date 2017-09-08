@@ -87,10 +87,6 @@ class TradeAlgo:
             now = datetime.now()
             now = now.strftime("%H%M%S")
             now = int(now)
-            #list_max = len(self.ask_price_list) - 1
-            #ask_diff = self.ask_price_list[list_max] - self.ask_price_list[0]
-            #bid_diff = self.bid_price_list[0] - self.bid_price_list[list_max]
-
             ask_mx = max(self.ask_price_list)
             ask_min = min(self.ask_price_list)
             ask_mx_index = self.ask_price_list.index(ask_mx)
@@ -107,14 +103,6 @@ class TradeAlgo:
             self.stllog_file.write("INFO:ask_max=%s, index=%s, insert_time=%s\n" %(ask_mx, ask_mx_index, self.insert_time_list[ask_mx_index]))
             self.stllog_file.write("INFO:ask_min=%s, index=%s, insert_time=%s\n" %(ask_min, ask_min_index, self.insert_time_list[ask_min_index]))
 
-#            self.tradelog_file.write("====================================================================\n")
-#            self.tradelog_file.write("INFO:DECIDE TRADE\n")
-#            self.tradelog_file.write("INFO:TRADE FLAG=BID\n")
-#            self.tradelog_file.write("INFO:bid_price_list[0]=%s, insert_time_list[0]=%s\n" %(self.bid_price_list[0], self.insert_time_list[0]))
-#            self.tradelog_file.write("INFO:bid_price_list[list_max]=%s, insert_time_list[list_max]=%s\n" %(self.bid_price_list[list_max], self.insert_time_list[list_max]))
-            # 15:00 ~ 235959の間は順張りとしてフラグに当てる
-#            if ask_diff > self.trade_threshold and self.before_flag == "buy":
-#            if ask_diff > self.trade_threshold:
             if (ask_mx - ask_min) > self.trade_threshold and ask_mx_index > ask_min_index:
                 trade_flag = "buy"
                 self.stllog_file.write("====================================================================\n")
@@ -122,8 +110,7 @@ class TradeAlgo:
                 self.stllog_file.write("EMERGENCY:TRADE FLAG=BUY\n")
                 self.order_kind = trade_flag
                 self.order_flag = True
-#            elif bid_diff > self.trade_threshold and self.before_flag == "bid":
-#            elif bid_diff > self.trade_threshold:
+
             if (bid_mx - bid_min) > self.trade_threshold and bid_mx_index < bid_min_index:
                 trade_flag = "sell"
                 self.order_kind = trade_flag
