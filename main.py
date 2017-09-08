@@ -58,7 +58,6 @@ if __name__ == '__main__':
 #    stl_sleeptime = 5
     stl_sleeptime = 300
 
-
 #    stopLoss
     con = MysqlConnector()
     db_wrapper = DBWrapper()
@@ -66,7 +65,6 @@ if __name__ == '__main__':
 #    flag = decide_up_down_before_day(con)
 
     order_flag = False
-
     try:
       while True:
           while True:
@@ -78,24 +76,15 @@ if __name__ == '__main__':
 
               trade_algo.setResponse(response)
 
-              # 現在価格の取得
-              logging.info("======= GET PRICE OK ========")
-
               # 今建玉があるかチェック
               order_flag = trade_algo.getOrderFlag()
-              # get_tradesして、0の場合は決済したものとみなす
-              #order_flag = oanda_wrapper.get_trade_flag()
 
               # 建玉があれば、決済するかどうか判断
               if order_flag:
-                  print "#### DECIDE STL ###"
                   stl_flag = trade_algo.decideStl()
-
                   trade_id = trade_algo.getTradeId()
-                  print "-----------------------------"
-                  print trade_id
                   trade_response = oanda_wrapper.get_trade_response(trade_id)
-                  print trade_response
+                  logging.info("trade_response=%s" % trade_response)
                   if len(trade_response) == 0:
                     trade_algo.resetFlag()
                     break
@@ -119,7 +108,6 @@ if __name__ == '__main__':
                       pass
 
               else:
-                  print "Decide stl"
                   trade_flag = trade_algo.decideTrade()
                   print trade_flag
                   if trade_flag == "pass":
@@ -127,11 +115,9 @@ if __name__ == '__main__':
                   else:
                       threshold_list = trade_algo.calcThreshold(stop_loss, take_profit, trade_flag)
                       response = oanda_wrapper.order(trade_flag, instrument, threshold_list["stoploss"], threshold_list["takeprofit"])
-                      print "===== order ok ====="
-                      print response
+                      logging.info("order_response=%s" % response)
                       trade_algo.setTradeId(response)
                       nowftime = now.strftime("%Y/%m/%d %H:%M:%S")
-                      #order_price = response[len(response)-1][0]
                       order_price = 1234
 
                       trade_algo.setOrderPrice(order_price)
