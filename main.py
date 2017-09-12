@@ -3,6 +3,7 @@
 import sys
 import os
 import traceback
+import json
 
 # 実行スクリプトのパスを取得して、追加
 current_path = os.path.abspath(os.path.dirname(__file__))
@@ -10,6 +11,7 @@ sys.path.append(current_path)
 sys.path.append(current_path + "/trade_algorithm")
 sys.path.append(current_path + "/obj")
 sys.path.append(current_path + "/lib")
+sys.path.append(current_path + "/property")
 
 from datetime import datetime, timedelta
 from trade_algo import TradeAlgo
@@ -26,11 +28,21 @@ now = now.strftime("%Y%m%d%H%M%S")
 logfilename = "%s/log/exec_%s.log" %(current_path, now)
 logging.basicConfig(filename=logfilename, level=logging.INFO)
 
+def account_init(mode):
+    property_file = open("account.properties", "r")
+    jsonData = json.load(property_file)
+    account_data = jsonData[mode]
+    return account_data
+
+
 if __name__ == '__main__':
 
-    account_id = 2542764
-    token = '85abe6d9c2646b9c56fbf01f0478a511-fe9cb897da06cd6219fde9b4c2052055'
-    env = 'practice'
+    mode = "production"
+    account_data = account_init(mode)
+    account_id = int(account_data["account_id"])
+    token = account_data["token"]
+    env = account_data["env"]
+
     oanda_wrapper = OandaWrapper(env, account_id, token)
 
     # 通貨
