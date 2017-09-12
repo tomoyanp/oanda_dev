@@ -1,6 +1,7 @@
 # coding: utf-8
 
 from datetime import datetime
+import logging
 import os
 current_path = os.path.abspath(os.path.dirname(__file__))
 
@@ -102,6 +103,7 @@ class TradeAlgo:
             self.stllog_file.write("INFO:DECIDE TRADE\n")
             self.stllog_file.write("INFO:ask_max=%s, index=%s, insert_time=%s\n" %(ask_mx, ask_mx_index, self.insert_time_list[ask_mx_index]))
             self.stllog_file.write("INFO:ask_min=%s, index=%s, insert_time=%s\n" %(ask_min, ask_min_index, self.insert_time_list[ask_min_index]))
+            self.order_flag = False
 
             if (ask_mx - ask_min) > self.trade_threshold and ask_mx_index > ask_min_index:
                 trade_flag = "buy"
@@ -111,7 +113,7 @@ class TradeAlgo:
                 self.order_kind = trade_flag
                 self.order_flag = True
 
-            if (bid_mx - bid_min) > self.trade_threshold and bid_mx_index < bid_min_index:
+            elif (bid_mx - bid_min) > self.trade_threshold and bid_mx_index < bid_min_index:
                 trade_flag = "sell"
                 self.order_kind = trade_flag
                 self.stllog_file.write("====================================================================\n")
@@ -120,7 +122,9 @@ class TradeAlgo:
                 self.order_flag = True
             else:
                 trade_flag = "pass"
+                self.order_flag = False
 
+            logging.info("THIS IS TOO ORDER FLAG=%s" % self.order_flag)
             return trade_flag
 
         except:

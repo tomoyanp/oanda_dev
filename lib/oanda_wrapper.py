@@ -25,14 +25,22 @@ class OandaWrapper:
     def order(self, l_side, currency, stop_loss, take_profit):
         try:
             while True:
+#                response = self.oanda.create_order(self.account_id,
+#                    instrument=currency,
+#                    units=50000,
+#                    side=l_side,
+#                    stopLoss=stop_loss,
+#                    takeProfit=take_profit,
+#                    type='market'
+#                )
                 response = self.oanda.create_order(self.account_id,
                     instrument=currency,
                     units=50000,
                     side=l_side,
                     stopLoss=stop_loss,
-                    takeProfit=take_profit,
                     type='market'
                 )
+
                 time.sleep(5)
                 print response
                 if len(response) > 0:
