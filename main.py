@@ -37,7 +37,7 @@ def account_init(mode):
 
 if __name__ == '__main__':
 
-    mode = "production"
+    mode = "demo"
     account_data = account_init(mode)
     account_id = int(account_data["account_id"])
     token = account_data["token"]
@@ -58,15 +58,16 @@ if __name__ == '__main__':
 
 #    optional_threshold = 0.005
 
-    stop_loss = 0.5
-    take_profit = 0.5
+    stop_loss = 0.3
+    take_profit = 0.3
 
     stl_threshold = 0.5
     stop_threshold = 0.5
-#    time_width = 60
-    time_width = 180
+    time_width = 60
+#    time_width = 180
 # 決済時の値幅
     stl_time_width = 60
+#    stl_time_width = 180
 #    stl_sleeptime = 5
     stl_sleeptime = 300
 
@@ -77,9 +78,18 @@ if __name__ == '__main__':
 #    flag = decide_up_down_before_day(con)
 
     order_flag = False
+
+
     try:
       while True:
           while True:
+              position_flag = oanda_wrapper.get_trade_position()
+
+              if position_flag == 0:
+                  trade_algo.resetFlag()
+                  logging.info("NOT POSITION and RESET FLAG")
+
+              logging.info("THIS IS ORDER FLAG=%s" %trade_algo.getOrderFlag())
               now = datetime.now()
               if trade_algo.getOrderFlag():
                   response = db_wrapper.getPrice(instrument, stl_time_width, now)
@@ -90,6 +100,7 @@ if __name__ == '__main__':
 
               # 今建玉があるかチェック
               order_flag = trade_algo.getOrderFlag()
+              logging.info("ORDER_FLAG=%s" % order_flag)
 
               # 建玉があれば、決済するかどうか判断
               if order_flag:
@@ -97,18 +108,12 @@ if __name__ == '__main__':
                   trade_id = trade_algo.getTradeId()
                   trade_response = oanda_wrapper.get_trade_response(trade_id)
                   logging.info("trade_response=%s" % trade_response)
-                  if len(trade_response) == 0:
-                    trade_algo.resetFlag()
-                    break
 
                   if stl_flag:
                       nowftime = now.strftime("%Y/%m/%d %H:%M:%S")
                       logging.info("===== EXECUTE SETTLEMENT at %s ======" % nowftime)
                       logging.info("===== ORDER KIND is %s ======" % trade_algo.getOrderKind())
-                      if trade_flag == "buy":
-                          order_price = response[len(response)-1][1]
-                      else:
-                          order_price = response[len(response)-1][0]
+                      order_price = 1234
 
                       logging.info("===== CLOSE ORDER PRICE is %s ======" % order_price)
                       trade_id = trade_algo.getTradeId()
@@ -121,7 +126,7 @@ if __name__ == '__main__':
 
               else:
                   trade_flag = trade_algo.decideTrade()
-                  print trade_flag
+                  logging.info("TRADE_FLAG=%s" % trade_flag)
                   if trade_flag == "pass":
                       pass
                   else:
