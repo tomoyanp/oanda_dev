@@ -37,13 +37,13 @@ def account_init(mode):
 
 if __name__ == '__main__':
 
-    mode = "demo"
+    mode = "production"
     account_data = account_init(mode)
     account_id = account_data["account_id"]
     token = account_data["token"]
     env = account_data["env"]
     # 通貨量
-    units = 40000
+    units = 50000
 
     print account_id
     print token
@@ -52,36 +52,24 @@ if __name__ == '__main__':
     oanda_wrapper = OandaWrapper(env, account_id, token, units)
 
     # 通貨
-    instrument = "GBP_JPY"
+    instrument = "USD_JPY"
     polling_time = 1
 
     # 閾値（5pips）
     trade_threshold = 0.1
-#    trade_threshold = 0.005
-
-# 0.1だと全然決済されないので、0.07にしてみる
     optional_threshold = 0.1
-
-#    optional_threshold = 0.005
 
     stop_loss = 0.3
     take_profit = 0.3
 
-    stl_threshold = 0.5
-    stop_threshold = 0.5
     time_width = 30
-#    time_width = 180
-# 決済時の値幅
     stl_time_width = 60
-#    stl_time_width = 180
-#    stl_sleeptime = 5
+
     stl_sleeptime = 300
 
-#    stopLoss
     con = MysqlConnector()
     db_wrapper = DBWrapper()
     trade_algo = TradeAlgo(trade_threshold, optional_threshold)
-#    flag = decide_up_down_before_day(con)
 
     order_flag = False
 
