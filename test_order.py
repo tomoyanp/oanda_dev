@@ -31,8 +31,12 @@ oanda_wrapper = OandaWrapper(env, account_id, token)
 instrument = "USD_JPY"
 
 oanda = oandapy.API(environment=env, access_token=token)
-response = oanda.get_positions(account_id)
-print len(response["positions"])
+#response = oanda.get_positions(account_id)
+#response = oanda.get_transaction_history(account_id)
+#print response
+
+#response = oanda.get_historical_position_ratios()
+response = oanda.get_history(instrument)
 #response = oanda.get_position(account_id, instrument)
 print response
 

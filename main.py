@@ -25,7 +25,7 @@ import time
 import logging
 now = datetime.now()
 now = now.strftime("%Y%m%d%H%M%S")
-logfilename = "%s/log/exec_%s.log" %(current_path, now)
+logfilename = "%s/log/exectest_%s.log" %(current_path, now)
 logging.basicConfig(filename=logfilename, level=logging.INFO)
 
 def account_init(mode):
@@ -46,7 +46,8 @@ if __name__ == '__main__':
     oanda_wrapper = OandaWrapper(env, account_id, token)
 
     # 通貨
-    instrument = "USD_JPY"
+#    instrument = "USD_JPY"
+    instrument = "GBP_JPY"
     polling_time = 1
 
     # 閾値（5pips）

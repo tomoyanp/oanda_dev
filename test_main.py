@@ -34,7 +34,7 @@ if __name__ == '__main__':
     oanda_wrapper = OandaWrapper(env, account_id, token)
 
     # 通貨
-    instrument = "USD_JPY"
+    instrument = "GBP_JPY"
     polling_time = 1
 
     # 閾値（5pips）
@@ -63,7 +63,7 @@ if __name__ == '__main__':
     order_flag = False
 
     base_time = datetime.now()
-    now = base_time - timedelta(weeks=2)
+    now = base_time - timedelta(days=10)
     try:
       while True:
           while True:
