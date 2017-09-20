@@ -13,6 +13,7 @@ sys.path.append(current_path + "/obj")
 sys.path.append(current_path + "/lib")
 sys.path.append(current_path + "/property")
 
+
 from datetime import datetime, timedelta
 from trade_algo import TradeAlgo
 from price_obj import PriceObj
