@@ -42,12 +42,14 @@ if __name__ == '__main__':
     account_id = account_data["account_id"]
     token = account_data["token"]
     env = account_data["env"]
+    # 通貨量
+    units = 40000
 
     print account_id
     print token
     print env
 
-    oanda_wrapper = OandaWrapper(env, account_id, token)
+    oanda_wrapper = OandaWrapper(env, account_id, token, units)
 
     # 通貨
     instrument = "GBP_JPY"
