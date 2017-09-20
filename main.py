@@ -45,20 +45,13 @@ def account_init(mode):
 if __name__ == '__main__':
 
     # argv["main.py, $1, $2, $3 ..."]
-    aygs = sys.argv
+    args = sys.argv
 
-    mode = "production"
+    mode = "demo"
     account_data = account_init(mode)
     account_id = account_data["account_id"]
     token = account_data["token"]
     env = account_data["env"]
-    # 通貨量
-
-    print account_id
-    print token
-    print env
-
-    oanda_wrapper = OandaWrapper(env, account_id, token, units)
 
     # 通貨
     #instrument = "USD_JPY"
@@ -75,6 +68,8 @@ if __name__ == '__main__':
     stl_time_width = config_data["stl_time_width"]
     stl_sleeptime = config_data["stl_sleeptime"]
     units = config_data["units"]
+
+    oanda_wrapper = OandaWrapper(env, account_id, token, units)
 
     con = MysqlConnector()
     db_wrapper = DBWrapper()
