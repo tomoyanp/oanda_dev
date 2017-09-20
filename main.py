@@ -13,6 +13,7 @@ sys.path.append(current_path + "/obj")
 sys.path.append(current_path + "/lib")
 
 property_path = current_path + "/property"
+config_path = current_path + "/config"
 
 from datetime import datetime, timedelta
 from trade_algo import TradeAlgo
@@ -29,6 +30,12 @@ now = now.strftime("%Y%m%d%H%M%S")
 logfilename = "%s/log/exec_%s.log" %(current_path, now)
 logging.basicConfig(filename=logfilename, level=logging.INFO)
 
+def instrument_init(instrument):
+    config_file = open("%s/instruments.config" % config_path, "r")
+    jsonData = json.load(config_file)
+    config_data = jsonData[instrument]
+    return config_data
+
 def account_init(mode):
     property_file = open("%s/account.properties" % property_path, "r")
     jsonData = json.load(property_file)
@@ -37,13 +44,15 @@ def account_init(mode):
 
 if __name__ == '__main__':
 
+    # argv["main.py, $1, $2, $3 ..."]
+    aygs = sys.argv
+
     mode = "production"
     account_data = account_init(mode)
     account_id = account_data["account_id"]
     token = account_data["token"]
     env = account_data["env"]
     # 通貨量
-    units = 50000
 
     print account_id
     print token
@@ -52,20 +61,20 @@ if __name__ == '__main__':
     oanda_wrapper = OandaWrapper(env, account_id, token, units)
 
     # 通貨
-    instrument = "USD_JPY"
+    #instrument = "USD_JPY"
+    instrument = args[1]
+    config_data = instrument_init(instrument)
     polling_time = 1
 
     # 閾値（5pips）
-    trade_threshold = 0.1
-    optional_threshold = 0.1
-
-    stop_loss = 0.3
-    take_profit = 0.3
-
-    time_width = 30
-    stl_time_width = 60
-
-    stl_sleeptime = 300
+    trade_threshold = config_data["trade_threshold"]
+    optional_threshold = config_data["optional_threshold"]
+    stop_loss = config_data["stop_loss"]
+    take_profit = config_data["take_profit"]
+    time_width = config_data["time_width"]
+    stl_time_width = config_data["stl_time_width"]
+    stl_sleeptime = config_data["stl_sleeptime"]
+    units = config_data["units"]
 
     con = MysqlConnector()
     db_wrapper = DBWrapper()
