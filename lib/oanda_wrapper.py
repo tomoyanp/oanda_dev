@@ -7,9 +7,10 @@ from datetime import datetime, timedelta
 import time
 
 class OandaWrapper:
-    def __init__(self, env, account_id, token):
+    def __init__(self, env, account_id, token, units):
         self.oanda = oandapy.API(environment=env, access_token=token)
         self.account_id = account_id
+        self.units = units
 
     def get_price(self, currency):
         response = self.oanda.get_prices(instruments=currency)
@@ -27,7 +28,7 @@ class OandaWrapper:
             while True:
                 response = self.oanda.create_order(self.account_id,
                     instrument=currency,
-                    units=50000,
+                    units=self.units,
                     side=l_side,
                     stopLoss=stop_loss,
                     takeProfit=take_profit,
