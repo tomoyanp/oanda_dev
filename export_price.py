@@ -20,7 +20,7 @@ env = "practice"
 
 if __name__ == "__main__":
     con = MysqlConnector()
-    currency = "GBP_JPY"
+    currency = "USD_JPY"
     days_ago = 7
 
     now = datetime.now()

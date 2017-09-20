@@ -1,4 +1,5 @@
 log/
 *.pyc
 *.log
+*.csv
 property
