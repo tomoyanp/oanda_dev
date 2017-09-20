@@ -11,7 +11,8 @@ sys.path.append(current_path)
 sys.path.append(current_path + "/trade_algorithm")
 sys.path.append(current_path + "/obj")
 sys.path.append(current_path + "/lib")
-sys.path.append(current_path + "/property")
+
+property_path = current_path + "/property"
 
 from datetime import datetime, timedelta
 from trade_algo import TradeAlgo
@@ -29,24 +30,27 @@ logfilename = "%s/log/exec_%s.log" %(current_path, now)
 logging.basicConfig(filename=logfilename, level=logging.INFO)
 
 def account_init(mode):
-    property_file = open("account.properties", "r")
+    property_file = open("%s/account.properties" % property_path, "r")
     jsonData = json.load(property_file)
     account_data = jsonData[mode]
     return account_data
-
 
 if __name__ == '__main__':
 
     mode = "demo"
     account_data = account_init(mode)
-    account_id = int(account_data["account_id"])
+    account_id = account_data["account_id"]
     token = account_data["token"]
     env = account_data["env"]
+
+    print account_id
+    print token
+    print env
 
     oanda_wrapper = OandaWrapper(env, account_id, token)
 
     # 通貨
-    instrument = "USD_JPY"
+    instrument = "GBP_JPY"
     polling_time = 1
 
     # 閾値（5pips）
@@ -63,7 +67,7 @@ if __name__ == '__main__':
 
     stl_threshold = 0.5
     stop_threshold = 0.5
-    time_width = 60
+    time_width = 30
 #    time_width = 180
 # 決済時の値幅
     stl_time_width = 60
@@ -148,6 +152,6 @@ if __name__ == '__main__':
               time.sleep(polling_time)
     except:
         message = traceback.format_exc()
-        sendmail = SendMail("tomoyanpy@gmail.com", "tomoyanpy@softbank.ne.jp")
+        sendmail = SendMail("tomoyanpy@gmail.com", "tomoyanpy@softbank.ne.jp", property_path)
         sendmail.set_msg(message)
         sendmail.send_mail()

@@ -5,10 +5,11 @@ from email.mime.text import MIMEText
 
 class SendMail:
 
-  def __init__(self, from_address, to_address):
+  def __init__(self, from_address, to_address, property_path):
     self.from_address = from_address
     self.to_address = to_address
     self.jp = 'iso-2022-jp'
+    self.property_path = property_path
     mail_properties = self.getMailProperty()
     smtp_server = mail_properties["smtp_server"]
     self.sender = smtplib.SMTP(smtp_server)
@@ -22,7 +23,7 @@ class SendMail:
     self.subject = subject
 
   def getMailProperty(self):
-      mail_properties = open("mail.property", "r")
+      mail_properties = open("%s/mail.property" % self.property_path, "r")
       jsonData = json.load(mail_properties)
       return jsonData
 
