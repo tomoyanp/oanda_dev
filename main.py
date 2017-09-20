@@ -81,6 +81,9 @@ if __name__ == '__main__':
               if position_flag == 0:
                   trade_algo.resetFlag()
                   logging.info("NOT POSITION and RESET FLAG")
+              else:
+                  trade_algo.setOrderFlag(True)
+                  logging.info("POSITION EXISTS and SET FLAG")
 
               logging.info("THIS IS ORDER FLAG=%s" %trade_algo.getOrderFlag())
               now = datetime.now()
