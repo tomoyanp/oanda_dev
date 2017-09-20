@@ -83,7 +83,6 @@ if __name__ == '__main__':
 
     order_flag = False
 
-
     try:
       while True:
           while True:
