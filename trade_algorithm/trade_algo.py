@@ -56,6 +56,9 @@ class TradeAlgo:
     def getOrderFlag(self):
         return self.order_flag
 
+    def setOrderFlag(self, flag):
+        self.order_flag = flag
+
     def setOrderPrice(self, price):
         self.order_price = price
 
