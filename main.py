@@ -14,7 +14,6 @@ sys.path.append(current_path + "/lib")
 
 property_path = current_path + "/property"
 
-
 from datetime import datetime, timedelta
 from trade_algo import TradeAlgo
 from price_obj import PriceObj
