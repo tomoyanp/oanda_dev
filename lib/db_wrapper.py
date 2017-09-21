@@ -24,3 +24,11 @@ class DBWrapper:
 
 	def getTimeFormat(self, dtime):
 		return dtime.strftime("%Y-%m-%d %H:%M:%S")
+
+	def insertOrderHistory(self):
+        sql = u"insert into ORDER_HISTORY_TABLE(trade_id, instrument, order_time, order_price, trade_flag, mode) values(%s, %s, %s, %s, %s, %s)" % (trade_id, instrument, order_time, order_price, trade_flag, mode)
+        self.con.insert_sql(sql)
+
+	def updateOrderHistory(self):
+		sql = u"update ORDER_HISTORY_TABLE set stl_flag = 0, stl_time = \'%s\', stl_price = %s where trade_id = %s" % (stl_time, stl_price)
+        self.con.insert_sql(sql)

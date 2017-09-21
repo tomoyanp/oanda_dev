@@ -44,37 +44,42 @@ def account_init(mode):
 
 if __name__ == '__main__':
 
-    # argv["main.py, $1, $2, $3 ..."]
+    # argv["main.py", "$1(GBP_JPY)","$2(demo)"]
     args = sys.argv
 
-    mode = "demo"
-    account_data = account_init(mode)
-    account_id = account_data["account_id"]
-    token = account_data["token"]
-    env = account_data["env"]
-
-    # 通貨
-    #instrument = "USD_JPY"
+    # コマンドライン引数から、通貨とモード取得
     instrument = args[1]
-    config_data = instrument_init(instrument)
+    mode       = args[2]
+
+    # デモもしくは本番
+    account_data = account_init(mode)
+    account_id   = account_data["account_id"]
+    token        = account_data["token"]
+    env          = account_data["env"]
+
+    # ポーリング時間
     polling_time = 1
 
-    # 閾値（5pips）
-    trade_threshold = config_data["trade_threshold"]
+    # パラメータセット
+    config_data        = instrument_init(instrument)
+    trade_threshold    = config_data["trade_threshold"]
     optional_threshold = config_data["optional_threshold"]
-    stop_loss = config_data["stop_loss"]
-    take_profit = config_data["take_profit"]
-    time_width = config_data["time_width"]
-    stl_time_width = config_data["stl_time_width"]
-    stl_sleeptime = config_data["stl_sleeptime"]
-    units = config_data["units"]
+    stop_loss          = config_data["stop_loss"]
+    take_profit        = config_data["take_profit"]
+    time_width         = config_data["time_width"]
+    stl_time_width     = config_data["stl_time_width"]
+    stl_sleeptime      = config_data["stl_sleeptime"]
+    units              = config_data["units"]
 
+
+
+    # 使うものインスタンス化
     oanda_wrapper = OandaWrapper(env, account_id, token, units)
+    con           = MysqlConnector()
+    db_wrapper    = DBWrapper()
+    trade_algo    = TradeAlgo(trade_threshold, optional_threshold)
 
-    con = MysqlConnector()
-    db_wrapper = DBWrapper()
-    trade_algo = TradeAlgo(trade_threshold, optional_threshold)
-
+    # 初期化
     order_flag = False
 
     try:
