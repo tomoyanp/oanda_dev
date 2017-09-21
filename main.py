@@ -97,10 +97,10 @@ if __name__ == '__main__':
               logging.info("THIS IS ORDER FLAG=%s" %trade_algo.getOrderFlag())
               now = datetime.now()
               if trade_algo.getOrderFlag():
-                  response = db_wrapper.getStartEndPrice(instrument, stl_time_width, now)
-                  #response = db_wrapper.getPrice(instrument, stl_time_width, now)
+                  response = db_wrapper.getPrice(instrument, stl_time_width, now)
               else:
-                  response = db_wrapper.getPrice(instrument, time_width, now)
+                  response = db_wrapper.getStartEndPrice(instrument, time_width, now)
+                  #response = db_wrapper.getPrice(instrument, time_width, now)
 
               trade_algo.setResponse(response)
 

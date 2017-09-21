@@ -10,13 +10,13 @@
     "units": 50000
   },
   "GBP_JPY": {
-    "trade_threshold":0.1,
-    "optional_threshold":0.15,
+    "trade_threshold":0.005,
+    "optional_threshold":0.005,
     "stop_loss": 0.5,
     "take_profit": 0,
     "time_width": 60,
     "stl_time_width": 60,
-    "stl_sleeptime": 1,
-    "units": 40000
+    "stl_sleeptime": 10,
+    "units": 1000
   }
 }
