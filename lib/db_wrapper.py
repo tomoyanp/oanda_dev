@@ -12,12 +12,22 @@ class DBWrapper:
 
 
 	def getPrice(self, instrument, time_width, now):
-                time_width = int(time_width)
+        time_width = int(time_width)
 		base_time = now - timedelta(seconds=time_width)
 		base_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
-                end_time = now.strftime("%Y-%m-%d %H:%M:%S")
+        end_time = now.strftime("%Y-%m-%d %H:%M:%S")
 		sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' order by insert_time" % (instrument, base_time, end_time)
-                print sql
+        print sql
+		response = self.con.select_sql(sql)
+		return response
+
+	def getStartEndPrice(self, instrument, time_width, now):
+        time_width = int(time_width)
+		base_time = now - timedelta(seconds=time_width)
+		base_time = base_time.strftime("%Y-%m-%d %H:%M:00")
+        end_time = now.strftime("%Y-%m-%d %H:%M:00")
+		sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' order by insert_time" % (instrument, base_time, end_time)
+        print sql
 		response = self.con.select_sql(sql)
 		return response
 

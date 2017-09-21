@@ -90,8 +90,52 @@ class TradeAlgo:
 
         return threshold_list
 
+    def decideStartEndTrade(self):
+        try:
+            # trade_flag is pass or ask or bid
+            now = datetime.now()
+            now = now.strftime("%H%M%S")
+            now = int(now)
+            ask_start = self.ask_price_list[0]
+            ask_end = self.ask_price_list[len(self.ask_price_list)-1]
 
-    def decideTrade(self):
+            bid_start = self.bid_price_list[0]
+            bid_end = self.bid_price_list[len(self.bid_price_list)-1]
+
+            self.stllog_file.write("====================================================================\n")
+            self.stllog_file.write("INFO:%s\n" % now)
+            self.stllog_file.write("INFO:DECIDE TRADE\n")
+            self.stllog_file.write("INFO:ask_start=%s, insert_time=%s\n" %(ask_start, self.insert_time_list[0]))
+            self.stllog_file.write("INFO:ask_end=%s, insert_time=%s\n" %(ask_end, self.insert_time_list[len(self.insert_time_list)-1]))
+            self.order_flag = False
+
+            if (ask_end - ask_start) > self.trade_threshold:
+                trade_flag = "buy"
+                self.stllog_file.write("====================================================================\n")
+                self.stllog_file.write("EMERGENCY:DECIDE TRADE\n")
+                self.stllog_file.write("EMERGENCY:TRADE FLAG=BUY\n")
+                self.order_kind = trade_flag
+                self.order_flag = True
+
+            elif (bid_start - bid_end) > self.trade_threshold:
+                trade_flag = "sell"
+                self.order_kind = trade_flag
+                self.stllog_file.write("====================================================================\n")
+                self.stllog_file.write("EMERGENCY:DECIDE TRADE\n")
+                self.stllog_file.write("EMERGENCY:TRADE FLAG=BID\n")
+                self.order_flag = True
+            else:
+                trade_flag = "pass"
+                self.order_flag = False
+
+            logging.info("THIS IS TOO ORDER FLAG=%s" % self.order_flag)
+            return trade_flag
+
+        except:
+            raise
+
+
+    def decideHiLowTrade(self):
         try:
             # trade_flag is pass or ask or bid
             now = datetime.now()

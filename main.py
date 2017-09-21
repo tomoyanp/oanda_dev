@@ -97,7 +97,8 @@ if __name__ == '__main__':
               logging.info("THIS IS ORDER FLAG=%s" %trade_algo.getOrderFlag())
               now = datetime.now()
               if trade_algo.getOrderFlag():
-                  response = db_wrapper.getPrice(instrument, stl_time_width, now)
+                  response = db_wrapper.getStartEndPrice(instrument, stl_time_width, now)
+                  #response = db_wrapper.getPrice(instrument, stl_time_width, now)
               else:
                   response = db_wrapper.getPrice(instrument, time_width, now)
 
@@ -130,7 +131,8 @@ if __name__ == '__main__':
                       pass
 
               else:
-                  trade_flag = trade_algo.decideTrade()
+#                  trade_flag = trade_algo.decideTrade()
+                  trade_flag = trade_algo.decideStartEndTrade()
                   logging.info("TRADE_FLAG=%s" % trade_flag)
                   if trade_flag == "pass":
                       pass
