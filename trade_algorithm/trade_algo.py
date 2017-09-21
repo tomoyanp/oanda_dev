@@ -83,10 +83,10 @@ class TradeAlgo:
             threshold_list["takeprofit"] = self.bid_price_list[list_max] - take_profit
 
         if take_profit == 0:
-            threshold_list["take_profit"] = 0
+            threshold_list["takeprofit"] = 0
 
         if stop_loss == 0:
-            threshold_list["stop_loss"] = 0
+            threshold_list["stoploss"] = 0
 
         return threshold_list
 
