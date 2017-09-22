@@ -3,6 +3,7 @@
 import sys
 import os
 import traceback
+import json
 
 # 実行スクリプトのパスを取得して、追加
 current_path = os.path.abspath(os.path.dirname(__file__))
@@ -11,13 +12,10 @@ sys.path.append(current_path + "/trade_algorithm")
 sys.path.append(current_path + "/obj")
 sys.path.append(current_path + "/lib")
 
+property_path = current_path + "/property"
+config_path = current_path + "/config"
+
 from datetime import datetime, timedelta
-from trade_algo import TradeAlgo
-from price_obj import PriceObj
-from order_obj import OrderObj
-from mysql_connector import MysqlConnector
-from db_wrapper import DBWrapper
-from oanda_wrapper import OandaWrapper
 from send_mail import SendMail
 import time
 import logging
@@ -28,104 +26,41 @@ logging.basicConfig(filename=logfilename, level=logging.INFO)
 
 if __name__ == '__main__':
 
-    account_id = 2542764
-    token = '85abe6d9c2646b9c56fbf01f0478a511-fe9cb897da06cd6219fde9b4c2052055'
-    env = 'practice'
-    oanda_wrapper = OandaWrapper(env, account_id, token)
+    # argv["main.py", "$1(GBP_JPY)","$2(demo)"]
+    args = sys.argv
 
-    # 通貨
-    instrument = "GBP_JPY"
+    # コマンドライン引数から、通貨とモード取得
+    instrument = args[1]
+    mode       = args[2]
+    test_args  = args[3]
+
+    if test_args == "test":
+        test_mode = True
+    else:
+        test_mode = False
+
+    # ポーリング時間
     polling_time = 1
-
-    # 閾値（5pips）
-    trade_threshold = 0.1
-#    trade_threshold = 0.005
-
-# 0.1だと全然決済されないので、0.07にしてみる
-    optional_threshold = 0.05
-#    optional_threshold = 0.005
-
-    stop_loss = 0.5
-    take_profit = 0.5
-
-    stl_threshold = 0.5
-    stop_threshold = 0.5
-    time_width = 60
-    stl_sleeptime = 5
-
-
-#    stopLoss
-    con = MysqlConnector()
-    db_wrapper = DBWrapper()
-    trade_algo = TradeAlgo(trade_threshold, optional_threshold)
-#    flag = decide_up_down_before_day(con)
-
-    order_flag = False
+    trade_wrapper = TradeWrapper(instrument, mode, test_mode, current_path)
 
     base_time = datetime.now()
-    now = base_time - timedelta(days=10)
+    base_time = base_time - timedelta(days=10)
+
     try:
       while True:
-          while True:
-              #now = datetime.now()
-              now = now + timedelta(seconds=1)
-              response = db_wrapper.getPrice(instrument, time_width, now)
-              trade_algo.setResponse(response)
+          trade_wrapper.checkPosition()
+          if test_mode:
+              base_time = base_time + timedelta(seconds=1)
+          else:
+              base_time = datetime.now()
 
-              # 現在価格の取得
-              logging.info("======= GET PRICE OK ========")
+          trade_wrapper.setInstrumentRespoonse(base_time)
+          trade_wrapper.tradeDecisionWrapper()
+          trade_wrapper.stlDecisionWrapper()
+          time.sleep(polling_time)
 
-              # 今建玉があるかチェック
-  #            order_flag = trade_algo.getOrderFlag()
-              # get_tradesして、0の場合は決済したものとみなす
-              #order_flag = oanda_wrapper.get_trade_flag()
-              order_flag = trade_algo.getOrderFlag()
-
-              # 建玉があれば、決済するかどうか判断
-              if order_flag:
-                  print "#### DECIDE STL ###"
-                  stl_flag = trade_algo.decideStl()
-
-                  if stl_flag:
-                      nowftime = now.strftime("%Y/%m/%d %H:%M:%S")
-                      logging.info("===== EXECUTE SETTLEMENT at %s ======" % nowftime)
-                      logging.info("===== ORDER KIND is %s ======" % trade_algo.getOrderKind())
-                      if trade_flag == "buy":
-                          order_price = response[len(response)-1][1]
-                      else:
-                          order_price = response[len(response)-1][0]
-
-                      logging.info("===== CLOSE ORDER PRICE is %s ======" % order_price)
-                      #oanda_wrapper.close_trade()
-                      break
-                  else:
-                      pass
-
-              else:
-                  print "Decide stl"
-                  trade_flag = trade_algo.decideTrade()
-                  if trade_flag == "pass":
-                      pass
-                  else:
-                      threshold_list = trade_algo.calcThreshold(stop_loss, take_profit, trade_flag)
-                      #order_obj = oanda_wrapper.order(trade_flag, instrument, threshold_list["stoploss"], threshold_list["takeprofit"])
-                      nowftime = now.strftime("%Y/%m/%d %H:%M:%S")
-                      if trade_flag == "buy":
-                          order_price = response[len(response)-1][0]
-                      else:
-                          order_price = response[len(response)-1][1]
-
-                      trade_algo.setOrderPrice(order_price)
-
-                      logging.info("#### EXECUTE ORDER at %s ####" % nowftime)
-                      logging.info("#### ORDER KIND is %s ####" % trade_flag)
-                      logging.info("#### ORDER_PRICE is %s ####" % order_price)
-                      # 約定後のスリープ
-                      time.sleep(stl_sleeptime)
-
-              time.sleep(polling_time)
     except:
         message = traceback.format_exc()
-        sendmail = SendMail("tomoyanpy@gmail.com", "tomoyanpy@softbank.ne.jp")
+        sendmail = SendMail("tomoyanpy@gmail.com", "tomoyanpy@softbank.ne.jp", property_path)
         sendmail.set_msg(message)
         sendmail.send_mail()

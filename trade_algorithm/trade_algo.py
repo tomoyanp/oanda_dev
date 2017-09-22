@@ -13,6 +13,7 @@ class TradeAlgo:
         self.trade_threshold = trade_threshold
         self.optional_threshold = optional_threshold
         self.order_price = 0
+        self.stl_price = 0
         now = datetime.now()
         filename = now.strftime("%Y%m%d%H%M%S")
         self.tradelog_file = open("%s/trade_%s.log" %(current_path, filename), "w")
@@ -62,8 +63,17 @@ class TradeAlgo:
     def setOrderPrice(self, price):
         self.order_price = price
 
+    def setStlPrice(self, price):
+        self.stl_price = price
+
     def getAskingPriceList(self):
         return self.ask_price_list
+
+    def getCurrentPrice(self):
+        return self.ask_price_list[len(self.ask_price_list)-1]
+
+    def getCurrentTime(self):
+        return self.insert_time_list[len(self.insert_time_list)-1]
 
     def getBidPriceList(self):
         return self.bid_price_list
@@ -90,6 +100,7 @@ class TradeAlgo:
 
         return threshold_list
 
+    # 始め値と終わり値でトレードする
     def decideStartEndTrade(self):
         try:
             # trade_flag is pass or ask or bid
@@ -135,6 +146,7 @@ class TradeAlgo:
             raise
 
 
+    # 高値と安値でトレードする
     def decideHiLowTrade(self):
         try:
             # trade_flag is pass or ask or bid
