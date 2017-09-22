@@ -33,6 +33,7 @@ class TradeWrapper:
 
         # パラメータセット
         config_data        = instrument_init(instrument, self.base_path)
+        self.instrument = instrument
         self.trade_threshold    = config_data["trade_threshold"]
         self.optional_threshold = config_data["optional_threshold"]
         self.stop_loss          = config_data["stop_loss"]
@@ -43,17 +44,17 @@ class TradeWrapper:
         self.units              = config_data["units"]
 
         # 使うものインスタンス化
-        self.oanda_wrapper = OandaWrapper(env, account_id, token, units)
+        self.oanda_wrapper = OandaWrapper(self.env, self.account_id, self.token, self.units)
         self.con           = MysqlConnector()
         self.db_wrapper    = DBWrapper()
-        self.trade_algo    = TradeAlgo(trade_threshold, optional_threshold)
+        self.trade_algo    = TradeAlgo(self.trade_threshold, self.optional_threshold)
 
         # 初期化
         self.order_flag = False
 
         now = datetime.now()
         base_time = now.strftime("%Y%m%d%H%M%S")
-        self.result_file = open("%s_result.log" % base_time)
+        self.result_file = open("%s/%s_result.log" % (self.base_path, base_time), "w")
 
     def checkPosition(self):
         if self.test_mode:
@@ -75,9 +76,9 @@ class TradeWrapper:
         logging.info("THIS IS ORDER FLAG=%s" % self.trade_algo.getOrderFlag())
         #now = datetime.now()
         if self.trade_algo.getOrderFlag():
-            response = self.db_wrapper.getPrice(self.instrument, self.stl_time_width, self.base_time)
+            response = self.db_wrapper.getPrice(self.instrument, self.stl_time_width, base_time)
         else:
-            response = self.db_wrapper.getStartEndPrice(self.instrument, self.time_width, self.base_time)
+            response = self.db_wrapper.getStartEndPrice(self.instrument, self.time_width, base_time)
             #response = db_wrapper.getPrice(instrument, time_width, now)
             self.trade_algo.setResponse(response)
 

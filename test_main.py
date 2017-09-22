@@ -15,6 +15,7 @@ sys.path.append(current_path + "/lib")
 property_path = current_path + "/property"
 config_path = current_path + "/config"
 
+from trade_wrapper import TradeWrapper
 from datetime import datetime, timedelta
 from send_mail import SendMail
 import time
@@ -32,7 +33,10 @@ if __name__ == '__main__':
     # コマンドライン引数から、通貨とモード取得
     instrument = args[1]
     mode       = args[2]
-    test_args  = args[3]
+    if len(args) > 3:
+        test_args  = args[3]
+    else:
+        test_args = "live"
 
     if test_args == "test":
         test_mode = True
@@ -52,12 +56,12 @@ if __name__ == '__main__':
           if test_mode:
               base_time = base_time + timedelta(seconds=1)
           else:
+              time.sleep(polling_time)
               base_time = datetime.now()
 
           trade_wrapper.setInstrumentRespoonse(base_time)
           trade_wrapper.tradeDecisionWrapper()
           trade_wrapper.stlDecisionWrapper()
-          time.sleep(polling_time)
 
     except:
         message = traceback.format_exc()
