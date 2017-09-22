@@ -63,6 +63,10 @@ class TradeAlgo:
     def setOrderPrice(self, price):
         self.order_price = price
 
+
+    def getOrderPrice(self):
+        return self.order_price
+
     def setStlPrice(self, price):
         self.stl_price = price
 
