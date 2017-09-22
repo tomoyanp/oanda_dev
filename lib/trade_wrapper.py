@@ -69,7 +69,7 @@ class TradeWrapper:
                 logging.info("POSITION EXISTS and SET FLAG")
 
         # 今建玉があるかチェック
-        self.order_flag = trade_algo.getOrderFlag()
+        self.order_flag = self.trade_algo.getOrderFlag()
         logging.info("ORDER_FLAG=%s" % self.order_flag)
 
     def setInstrumentRespoonse(self, base_time):
@@ -80,7 +80,7 @@ class TradeWrapper:
         else:
             response = self.db_wrapper.getStartEndPrice(self.instrument, self.time_width, base_time)
             #response = db_wrapper.getPrice(instrument, time_width, now)
-            self.trade_algo.setResponse(response)
+        self.trade_algo.setResponse(response)
 
 
 

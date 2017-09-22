@@ -45,7 +45,7 @@ class TradeAlgo:
             self.ask_price_list.append(line[0])
             self.bid_price_list.append(line[1])
             self.insert_time_list.append(line[2])
-
+        print self.insert_time_list[len(self.insert_time_list)-1]
     def setTradeId(self, response):
         print response
         self.trade_id = response["tradeOpened"]["id"]
@@ -102,6 +102,7 @@ class TradeAlgo:
 
     # 始め値と終わり値でトレードする
     def decideStartEndTrade(self):
+        print "********** Decide Trade **********"
         try:
             # trade_flag is pass or ask or bid
             now = datetime.now()
@@ -198,6 +199,7 @@ class TradeAlgo:
     # 損切り、利確はオーダー時に出している
     # ここでは、急に逆方向に動いた時に決済出来るようにしている
     def decideStl(self):
+        print "********** Decide Stl **********"
         try:
             #list_max = len(self.ask_price_list) - 1
             #ask_diff = self.ask_price_list[list_max] - self.ask_price_list[0]
