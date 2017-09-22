@@ -68,9 +68,9 @@ class TradeWrapper:
                 self.trade_algo.setOrderFlag(True)
                 logging.info("POSITION EXISTS and SET FLAG")
 
-                # 今建玉があるかチェック
-                self.order_flag = trade_algo.getOrderFlag()
-                logging.info("ORDER_FLAG=%s" % self.order_flag)
+        # 今建玉があるかチェック
+        self.order_flag = trade_algo.getOrderFlag()
+        logging.info("ORDER_FLAG=%s" % self.order_flag)
 
     def setInstrumentRespoonse(self, base_time):
         logging.info("THIS IS ORDER FLAG=%s" % self.trade_algo.getOrderFlag())
@@ -95,7 +95,7 @@ class TradeWrapper:
             if stl_flag:
                 #nowftime = now.strftime("%Y/%m/%d %H:%M:%S")
                 nowftime = self.trade_algo.getCurrentTime()
-                self.result_file.write("===== EXECUTE SETTLEMENT at %s ======" % nowftime)
+                self.result_file.write("===== EXECUTE SETTLEMENT at %s ======\n" % nowftime)
                 order_kind = self.trade_algo.getOrderKind()
                 order_price = self.trade_algo.getOrderPrice()
                 stl_price = self.trade_algo.getCurrentPrice()
@@ -105,7 +105,7 @@ class TradeWrapper:
                 else:
                     profit = order_price - stl_price
 
-                self.result_file.write("ORDER_PRICE=%s, STL_PRICE=%s, ORDER_KIND=%s, PROFIT=%s" % (order_price, stl_price, order_kind, profit))
+                self.result_file.write("ORDER_PRICE=%s, STL_PRICE=%s, ORDER_KIND=%s, PROFIT=%s\n" % (order_price, stl_price, order_kind, profit))
                 self.result_file.write("======================================================")
 
                 if self.test_mode:
@@ -134,8 +134,8 @@ class TradeWrapper:
                 nowftime = self.trade_algo.getCurrentTime()
                 order_price = self.trade_algo.getCurrentPrice()
                 self.trade_algo.setOrderPrice(order_price)
-                self.result_file.write("===== EXECUTE ORDER at %s ======" % nowftime)
-                self.result_file.write("ORDER_PRICE=%s, TRADE_FLAG=%s" % (order_price, trade_flag))
+                self.result_file.write("===== EXECUTE ORDER at %s ======\n" % nowftime)
+                self.result_file.write("ORDER_PRICE=%s, TRADE_FLAG=%s\n" % (order_price, trade_flag))
 
                 if self.test_mode:
                     pass
