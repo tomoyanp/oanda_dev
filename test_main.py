@@ -49,19 +49,25 @@ if __name__ == '__main__':
 
     base_time = datetime.now()
     base_time = base_time - timedelta(days=10)
+    test_return_index = polling_time
 
     try:
       while True:
           trade_wrapper.checkPosition()
           if test_mode:
-              base_time = base_time + timedelta(seconds=1)
+              base_time = base_time + timedelta(seconds=test_return_index)
           else:
               time.sleep(polling_time)
               base_time = datetime.now()
 
           trade_wrapper.setInstrumentRespoonse(base_time)
           trade_wrapper.tradeDecisionWrapper()
-          trade_wrapper.stlDecisionWrapper()
+          test_return_index = trade_wrapper.stlDecisionWrapper()
+
+          if test_mode:
+              now = datetime.now()
+              if base_time > now:
+                  raise ValueError("Complete Back Test")
 
     except:
         message = traceback.format_exc()

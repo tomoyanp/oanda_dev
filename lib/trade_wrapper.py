@@ -54,7 +54,17 @@ class TradeWrapper:
 
         now = datetime.now()
         base_time = now.strftime("%Y%m%d%H%M%S")
-        self.result_file = open("%s/%s_result.log" % (self.base_path, base_time), "w")
+        self.result_file = open("%s/result/%s_result.log" % (self.base_path, base_time), "w")
+        self.result_file.write("#########################\n")
+        self.result_file.write("# instrument = %s\n" % self.instrument)
+        self.result_file.write("# trade_threshold = %s\n" % self.trade_threshold)
+        self.result_file.write("# optional_threshold = %s\n" % self.optional_threshold)
+        self.result_file.write("# stop_loss = %s\n" % self.stop_loss)
+        self.result_file.write("# take_profit = %s\n" % self.take_profit)
+        self.result_file.write("# time_width = %s\n" % self.time_width)
+        self.result_file.write("# stl_time_width = %s\n" % self.stl_time_width)
+        self.result_file.write("# stl_sleep_time = %s\n" % self.stl_sleeptime)
+        self.result_file.flush()
 
     def checkPosition(self):
         if self.test_mode:
@@ -63,34 +73,41 @@ class TradeWrapper:
             position_flag = self.oanda_wrapper.get_trade_position()
             if position_flag == 0:
                 self.trade_algo.resetFlag()
-                logging.info("NOT POSITION and RESET FLAG")
+                #logging.info("NOT POSITION and RESET FLAG")
             else:
                 self.trade_algo.setOrderFlag(True)
-                logging.info("POSITION EXISTS and SET FLAG")
+                #logging.info("POSITION EXISTS and SET FLAG")
 
         # 今建玉があるかチェック
         self.order_flag = self.trade_algo.getOrderFlag()
-        logging.info("ORDER_FLAG=%s" % self.order_flag)
+        # logging.info("ORDER_FLAG=%s" % self.order_flag)
 
     def setInstrumentRespoonse(self, base_time):
-        logging.info("THIS IS ORDER FLAG=%s" % self.trade_algo.getOrderFlag())
+        # logging.info("THIS IS ORDER FLAG=%s" % self.trade_algo.getOrderFlag())
         #now = datetime.now()
         if self.trade_algo.getOrderFlag():
             response = self.db_wrapper.getPrice(self.instrument, self.stl_time_width, base_time)
         else:
-            response = self.db_wrapper.getStartEndPrice(self.instrument, self.time_width, base_time)
+            #response = self.db_wrapper.getStartEndPrice(self.instrument, self.time_width, base_time)
+            response = self.db_wrapper.getPrice(self.instrument, self.time_width, base_time)
             #response = db_wrapper.getPrice(instrument, time_width, now)
+        #print response
         self.trade_algo.setResponse(response)
 
 
 
     def stlDecisionWrapper(self):
+        test_return_index = 1
         # 建玉があれば、決済するかどうか判断
         if self.order_flag:
             stl_flag = self.trade_algo.decideStl()
             trade_id = self.trade_algo.getTradeId()
-            trade_response = self.oanda_wrapper.get_trade_response(trade_id)
-            logging.info("trade_response=%s" % trade_response)
+
+            if stl_flag == False and self.test_mode:
+                stl_flag = self.trade_algo.decideReverceStl()
+
+           # trade_response = self.oanda_wrapper.get_trade_response(trade_id)
+           #  logging.info("trade_response=%s" % trade_response)
 
             if stl_flag:
                 #nowftime = now.strftime("%Y/%m/%d %H:%M:%S")
@@ -106,7 +123,10 @@ class TradeWrapper:
                     profit = order_price - stl_price
 
                 self.result_file.write("ORDER_PRICE=%s, STL_PRICE=%s, ORDER_KIND=%s, PROFIT=%s\n" % (order_price, stl_price, order_kind, profit))
-                self.result_file.write("======================================================")
+                self.result_file.write("PROFIT=%s\n" % profit)
+                self.result_file.write("======================================================\n")
+                self.result_file.flush()
+                test_return_index = self.stl_sleeptime
 
                 if self.test_mode:
                     pass
@@ -114,19 +134,22 @@ class TradeWrapper:
                     trade_id = self.trade_algo.getTradeId()
                     self.oanda_wrapper.close_trade(trade_id)
                     # 決済後のスリープ
-                    time.sleep(stl_sleeptime)
+                    time.sleep(self.stl_sleeptime)
             else:
                 pass
         else:
             pass
+
+        return test_return_index
 
     def tradeDecisionWrapper(self):
         if self.order_flag:
             pass
         else:
             #trade_flag = trade_algo.decideTrade()
-            trade_flag = self.trade_algo.decideStartEndTrade()
-            logging.info("TRADE_FLAG=%s" % trade_flag)
+            #trade_flag = self.trade_algo.decideStartEndTrade()
+            trade_flag = self.trade_algo.decideHiLowTrade()
+            #logging.info("TRADE_FLAG=%s" % trade_flag)
             if trade_flag == "pass":
                 pass
             else:
@@ -136,13 +159,14 @@ class TradeWrapper:
                 self.trade_algo.setOrderPrice(order_price)
                 self.result_file.write("===== EXECUTE ORDER at %s ======\n" % nowftime)
                 self.result_file.write("ORDER_PRICE=%s, TRADE_FLAG=%s\n" % (order_price, trade_flag))
+                self.result_file.flush()
+                threshold_list = self.trade_algo.calcThreshold(self.stop_loss, self.take_profit, trade_flag)
 
                 if self.test_mode:
                     pass
                 else:
-                    threshold_list = self.trade_algo.calcThreshold(self.stop_loss, self.take_profit, self.trade_flag)
                     response = self.oanda_wrapper.order(trade_flag, self.instrument, threshold_list["stoploss"], threshold_list["takeprofit"])
-                    logging.info("order_response=%s" % response)
+                    #logging.info("order_response=%s" % response)
                     self.trade_algo.setTradeId(response)
                     # 約定後のスリープ
-                    time.sleep(stl_sleeptime)
+                    time.sleep(self.stl_sleeptime)

@@ -23,9 +23,10 @@ env = "practice"
 if __name__ == "__main__":
     con = MysqlConnector()
     currency = "USD_JPY"
-    polling_time = 1
+    polling_time = 0.5
     sleep_time = 3600
-    oanda_wrapper = OandaWrapper(env, account_id, token)
+    units = 1000
+    oanda_wrapper = OandaWrapper(env, account_id, token, units)
 
     old_today = datetime.now()
     old_today = old_today.strftime("%Y-%m-%d")
@@ -48,7 +49,7 @@ if __name__ == "__main__":
     #        if 1 == 1:
                 print "OK"
                 now = datetime.now()
-                week_ago = now - timedelta(days=14)
+                week_ago = now - timedelta(days=64)
                 week_ago = week_ago.strftime("%Y-%m-%d")
                 
                 sql = u"delete from USD_JPY_TABLE where insert_time < \'%s\'" % week_ago

@@ -1,0 +1,472 @@
+==== 20170922184734_result.log ====
+PROFIT=0
+==== 20170922184844_result.log ====
+PROFIT=0
+==== 20170922184947_result.log ====
+PROFIT=0
+==== 20170922185022_result.log ====
+PROFIT=0
+==== 20170922190929_result.log ====
+PROFIT=0
+==== 20170922191012_result.log ====
+PROFIT=0
+==== 20170922191257_result.log ====
+PROFIT=0
+==== 20170922192035_result.log ====
+PROFIT=0
+==== 20170922193929_result.log ====
+PROFIT=0
+==== 20170922195333_result.log ====
+PROFIT=0
+==== 20170922200601_result.log ====
+PROFIT=0
+==== 20170922200918_result.log ====
+PROFIT=0
+==== 20170922201802_result.log ====
+PROFIT=0
+==== 20170922211805_result.log ====
+PROFIT=0
+==== 20170923001211_result.log ====
+PROFIT=0
+==== 20170923004148_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.15
+# optional_threshold = 5
+# stop_loss = 0.3
+# take_profit = 0.3
+# time_width = 60
+# stl_time_width = 300
+# stl_sleep_time = 1
+PROFIT=0
+==== 20170923004243_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.15
+# optional_threshold = 5
+# stop_loss = 0.3
+# take_profit = 0.3
+# time_width = 60
+# stl_time_width = 300
+# stl_sleep_time = 1
+PROFIT=0
+==== 20170923004407_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.15
+# optional_threshold = 5
+# stop_loss = 0.3
+# take_profit = 0.3
+# time_width = 60
+# stl_time_width = 300
+# stl_sleep_time = 1
+PROFIT=0
+==== 20170923004848_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.05
+# optional_threshold = 5
+# stop_loss = 0.3
+# take_profit = 0.3
+# time_width = 60
+# stl_time_width = 300
+# stl_sleep_time = 1
+PROFIT=0
+==== 20170923005008_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.05
+# optional_threshold = 5
+# stop_loss = 0.3
+# take_profit = 0.3
+# time_width = 60
+# stl_time_width = 300
+# stl_sleep_time = 1
+PROFIT=0
+==== 20170923005054_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.05
+# optional_threshold = 5
+# stop_loss = 0.3
+# take_profit = 0.3
+# time_width = 60
+# stl_time_width = 300
+# stl_sleep_time = 1
+PROFIT=0
+==== 20170923005140_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.05
+# optional_threshold = 5
+# stop_loss = 0.3
+# take_profit = 0.3
+# time_width = 60
+# stl_time_width = 300
+# stl_sleep_time = 1
+PROFIT=0
+==== 20170923005248_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.05
+# optional_threshold = 5
+# stop_loss = 0.3
+# take_profit = 0.3
+# time_width = 60
+# stl_time_width = 300
+# stl_sleep_time = 1
+PROFIT=-1.63
+==== 20170923010629_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5
+# stop_loss = 0.3
+# take_profit = 0.3
+# time_width = 10
+# stl_time_width = 300
+# stl_sleep_time = 1
+PROFIT=0
+==== 20170923010906_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5
+# stop_loss = 0.3
+# take_profit = 0.3
+# time_width = 10
+# stl_time_width = 300
+# stl_sleep_time = 1
+PROFIT=0
+==== 20170923010934_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5
+# stop_loss = 0.3
+# take_profit = 0.3
+# time_width = 10
+# stl_time_width = 300
+# stl_sleep_time = 1
+PROFIT=0
+==== 20170923010938_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5
+# stop_loss = 0.3
+# take_profit = 0.3
+# time_width = 10
+# stl_time_width = 300
+# stl_sleep_time = 1
+PROFIT=0
+==== 20170923010949_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5
+# stop_loss = 0.3
+# take_profit = 0.3
+# time_width = 10
+# stl_time_width = 300
+# stl_sleep_time = 1
+PROFIT=0
+==== 20170923011025_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5
+# stop_loss = 0.3
+# take_profit = 0.3
+# time_width = 10
+# stl_time_width = 300
+# stl_sleep_time = 1
+PROFIT=0
+==== 20170923011325_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.05
+# optional_threshold = 5
+# stop_loss = 0.3
+# take_profit = 0.3
+# time_width = 60
+# stl_time_width = 300
+# stl_sleep_time = 1
+PROFIT=0
+==== 20170923012459_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.05
+# optional_threshold = 5
+# stop_loss = 0.3
+# take_profit = 0.3
+# time_width = 60
+# stl_time_width = 300
+# stl_sleep_time = 1
+# 逆張り
+PROFIT=-12.196
+==== 20170923015313_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.15
+# optional_threshold = 5
+# stop_loss = 0.5
+# take_profit = 0.5
+# time_width = 60
+# stl_time_width = 300
+# stl_sleep_time = 1
+# 逆張り
+PROFIT=-1.855
+==== 20170923022437_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.15
+# optional_threshold = 5
+# stop_loss = 0.5
+# take_profit = 0.5
+# time_width = 60
+# stl_time_width = 300
+# stl_sleep_time = 1
+PROFIT=2.479
+==== 20170923103920_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.15
+# optional_threshold = 5
+# stop_loss = 0.5
+# take_profit = 0.5
+# time_width = 60
+# stl_time_width = 300
+# stl_sleep_time = 1
+PROFIT=2.802
+==== 20170923112503_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.15
+# optional_threshold = 5
+# stop_loss = 0.5
+# take_profit = 0.5
+# time_width = 30
+# stl_time_width = 60
+# stl_sleep_time = 300
+PROFIT=2.369
+==== 20170923114217_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.15
+# optional_threshold = 0.15
+# stop_loss = 0.5
+# take_profit = 10
+# time_width = 30
+# stl_time_width = 60
+# stl_sleep_time = 300
+PROFIT=-0.771
+==== 20170923120111_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.15
+# optional_threshold = 0.15
+# stop_loss = 0.5
+# take_profit = 10
+# time_width = 30
+# stl_time_width = 10
+# stl_sleep_time = 300
+PROFIT=0.979
+==== 20170923125036_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.05
+# optional_threshold = 5.15
+# stop_loss = 0.5
+# take_profit = 0.5
+# time_width = 30
+# stl_time_width = 10
+# stl_sleep_time = 300
+PROFIT=0
+==== 20170923125118_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.05
+# optional_threshold = 5.15
+# stop_loss = 0.5
+# take_profit = 0.5
+# time_width = 30
+# stl_time_width = 10
+# stl_sleep_time = 300
+PROFIT=-4.541
+==== 20170923141944_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.2
+# optional_threshold = 5.15
+# stop_loss = 0.5
+# take_profit = 0.5
+# time_width = 30
+# stl_time_width = 60
+# stl_sleep_time = 300
+PROFIT=0
+==== 20170923142006_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.2
+# optional_threshold = 5.15
+# stop_loss = 0.5
+# take_profit = 0.5
+# time_width = 30
+# stl_time_width = 60
+# stl_sleep_time = 300
+PROFIT=-0.014
+==== 20170923213315_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.2
+# optional_threshold = 5.15
+# stop_loss = 0.2
+# take_profit = 0.2
+# time_width = 30
+# stl_time_width = 60
+# stl_sleep_time = 300
+PROFIT=-0.211
+==== 20170924103333_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.3
+# take_profit = 0.3
+# time_width = 30
+# stl_time_width = 60
+# stl_sleep_time = 300
+PROFIT=0
+==== 20170924103342_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.3
+# take_profit = 0.3
+# time_width = 30
+# stl_time_width = 60
+# stl_sleep_time = 300
+PROFIT=0
+==== 20170924103358_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.3
+# take_profit = 0.3
+# time_width = 30
+# stl_time_width = 60
+# stl_sleep_time = 300
+PROFIT=0
+==== 20170924103406_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.3
+# take_profit = 0.3
+# time_width = 30
+# stl_time_width = 60
+# stl_sleep_time = 300
+PROFIT=1.368
+==== 20170924195842_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.3
+# take_profit = 0.5
+# time_width = 30
+# stl_time_width = 60
+# stl_sleep_time = 300
+PROFIT=0
+==== 20170924200135_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.3
+# take_profit = 0.5
+# time_width = 60
+# stl_time_width = 60
+# stl_sleep_time = 300
+PROFIT=0
+==== 20170924200144_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.3
+# take_profit = 0.5
+# time_width = 60
+# stl_time_width = 60
+# stl_sleep_time = 300
+PROFIT=0.979
+==== 20170924200155_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.3
+# take_profit = 0.5
+# time_width = 60
+# stl_time_width = 60
+# stl_sleep_time = 300
+PROFIT=0
+==== 20170924203015_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.3
+# take_profit = 0.3
+# time_width = 60
+# stl_time_width = 60
+# stl_sleep_time = 300
+PROFIT=0.763
+==== 20170924210714_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.15
+# optional_threshold = 5.1
+# stop_loss = 0.3
+# take_profit = 0.3
+# time_width = 60
+# stl_time_width = 60
+# stl_sleep_time = 300
+PROFIT=-0.254
+==== 20170924213420_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.5
+# take_profit = 0.5
+# time_width = 60
+# stl_time_width = 60
+# stl_sleep_time = 300
+PROFIT=0.647
+==== 20170924213926_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.3
+# take_profit = 0.3
+# time_width = 30
+# stl_time_width = 60
+# stl_sleep_time = 300
+PROFIT=1.307
+==== 20170924225058_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.15
+# optional_threshold = 5.15
+# stop_loss = 0.5
+# take_profit = 0.5
+# time_width = 30
+# stl_time_width = 60
+# stl_sleep_time = 300
+PROFIT=-0.231
