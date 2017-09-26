@@ -1,29 +1,39 @@
 # coding: utf-8
 
-class StartEndAlgo(SuperAlgo):
+from datetime import datetime
+import logging
+import os
+current_path = os.path.abspath(os.path.dirname(__file__))
+
+class HiLowAlgo(SuperAlgo):
     def __init__(self, trade_threshold, optional_threshold, instrument, base_path):
         super(trade_threshold, optional_threshold, instrument, base_path)
 
-    # 始め値と終わり値でトレードする
+    # 高値と安値でトレードする
     def decideTrade(self):
         try:
             # trade_flag is pass or ask or bid
             now = datetime.now()
             now = now.strftime("%H%M%S")
             now = int(now)
-            ask_start = self.ask_price_list[0]
-            ask_end = self.ask_price_list[len(self.ask_price_list)-1]
-            bid_start = self.bid_price_list[0]
-            bid_end = self.bid_price_list[len(self.bid_price_list)-1]
+            ask_mx = max(self.ask_price_list)
+            ask_min = min(self.ask_price_list)
+            ask_mx_index = self.ask_price_list.index(ask_mx)
+            ask_min_index = self.ask_price_list.index(ask_min)
+
+            bid_mx = max(self.bid_price_list)
+            bid_min = min(self.bid_price_list)
+            bid_mx_index = self.bid_price_list.index(bid_mx)
+            bid_min_index = self.bid_price_list.index(bid_min)
 
             self.order_flag = False
 
-            if (ask_end - ask_start) > self.trade_threshold:
+            if (ask_mx - ask_min) > self.trade_threshold and ask_mx_index > ask_min_index:
                 trade_flag = "buy"
                 self.order_kind = trade_flag
                 self.order_flag = True
 
-            elif (bid_start - bid_end) > self.trade_threshold:
+            elif (bid_mx - bid_min) > self.trade_threshold and bid_mx_index < bid_min_index:
                 trade_flag = "sell"
                 self.order_kind = trade_flag
                 self.order_flag = True
@@ -40,6 +50,7 @@ class StartEndAlgo(SuperAlgo):
     # 損切り、利確はオーダー時に出している
     # ここでは、急に逆方向に動いた時に決済出来るようにしている
     def decideStl(self):
+        print "********** Decide Stl **********"
         try:
             ask_mx = max(self.ask_price_list)
             ask_min = min(self.ask_price_list)

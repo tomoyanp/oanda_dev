@@ -1,12 +1,22 @@
 # coding: utf-8
 
+####################################################
+#
+# 陽線 or 陰線が連続して発生しているかを検知するよう作成
+# 価格の配列を、何分割かにして、陽線引け、陰線引けの判定をする
+#
+####################################################
+
 from datetime import datetime
 import logging
 import os
+from common import instrument_init, account_init
+
+
 current_path = os.path.abspath(os.path.dirname(__file__))
 
-class TradeAlgo:
-    def __init__(self, trade_threshold, optional_threshold):
+class StepWiseAlgo:
+    def __init__(self, trade_threshold, optional_threshold, instrument, base_path):
         self.ask_price_list = []
         self.bid_price_list = []
         self.insert_time_list = []
@@ -28,6 +38,11 @@ class TradeAlgo:
         self.end_follow_time = 235959
         # 前日が陽線引けかどうかのフラグ
 #        self.before_flag = before_flag
+        self.base_path = base_path
+        self.instrument = instrument
+        config_data = instrument_init(self.instrument, self.base_path)
+        self.step_wise_unit = config_data["step_wise_unit"]
+        self.step_wise_coefficient_threshold = config_data["step_wise_coefficient_threshold"]
 
 ################################################
 # listは、要素数が大きいほうが古い。
@@ -112,49 +127,58 @@ class TradeAlgo:
 
         return threshold_list
 
-    # 始め値と終わり値でトレードする
-    def decideStartEndTrade(self):
-        print "********** Decide Trade **********"
+    def decideTrade(self):
         try:
             # trade_flag is pass or ask or bid
             now = datetime.now()
             now = now.strftime("%H%M%S")
             now = int(now)
-            ask_start = self.ask_price_list[0]
-            ask_end = self.ask_price_list[len(self.ask_price_list)-1]
+            list_size = len(self.ask_price_list)-1
+            # ローソクを何本判断に使うか => step_wise_unit
+            # 180秒を1分足3本にバラす場合、 step_wise_index = 180/3 == 60
+            step_wise_index = list_size / self.step_wise_unit
+            step_wise_threshold = self.trade_threshold / self.step_wise_unit
 
-            bid_start = self.bid_price_list[0]
-            bid_end = self.bid_price_list[len(self.bid_price_list)-1]
+            # buy_indexが2/3で以上の場合にトレードするよう計算するとする
+            # buy_index / step_wise_unit == 0.66666以上になればOKという理解
+            # step_wise_coefficient_threshold
+            # buyindexの割合と、比較する閾値
+            buy_index = 0
+            sell_index = 0
+            for i in range(0, self.step_wise_unit):
+                # 0, 60, 120になるはず
+                ask_start = self.ask_price_list[step_wise_index*i]
+                # 60, 120, 180になるはず
+                ask_end   = self.ask_price_list[step_wise_index*(i+1)]
 
-            #self.stllog_file.write("====================================================================\n")
-            #self.stllog_file.write("INFO:%s\n" % now)
-            #self.stllog_file.write("INFO:DECIDE TRADE\n")
-            #self.stllog_file.write("INFO:ask_start=%s, insert_time=%s\n" %(ask_start, self.insert_time_list[0]))
-            #self.stllog_file.write("INFO:ask_end=%s, insert_time=%s\n" %(ask_end, self.insert_time_list[len(self.insert_time_list)-1]))
+                if ask_end - ask_start > step_wise_threshold:
+                    buy_index = buy_index + 1
+
+                elif ask_start - ask_end > step_wise_threshold:
+                    sell_index = sell_index + 1
+
+            total_ask_start = self.ask_price_list[0]
+            total_ask_end = self.ask_price_list[len(self.ask_price_list)-1]
+
+            total_ask_difference = total_ask_end - total_ask_start
+            total_bid_diffrence = total_ask_start - total_ask_end
+            buy_index_ratio = buy_index / self.step_wise_unit
+            sell_index_ratio = sell_index / self.step_wise_unit
+
+            trade_flag = "pass"
             self.order_flag = False
 
-            if (ask_end - ask_start) > self.trade_threshold:
-                trade_flag = "buy"
-                #trade_flag = "sell"
-                #self.stllog_file.write("====================================================================\n")
-                #self.stllog_file.write("EMERGENCY:DECIDE TRADE\n")
-                #self.stllog_file.write("EMERGENCY:TRADE FLAG=BUY\n")
-                self.order_kind = trade_flag
-                self.order_flag = True
+            if total_ask_difference > self.trade_threshold:
+                if buy_index_ratio > step_wise_coefficient_threshold:
+                    trade_flag = "buy"
+                    self.order_kind = trade_flag
+                    self.order_flag = True
+            elif total_bid_diffrence > self.trade_threshold:
+                if sell_index / self.step_wise_unit > step_wise_coefficient_threshold:
+                    trade_flag = "sell"
+                    self.order_kind = trade_flag
+                    self.order_flag = True
 
-            elif (bid_start - bid_end) > self.trade_threshold:
-                trade_flag = "sell"
-                #trade_flag = "buy"
-                self.order_kind = trade_flag
-                #self.stllog_file.write("====================================================================\n")
-                #self.stllog_file.write("EMERGENCY:DECIDE TRADE\n")
-                #self.stllog_file.write("EMERGENCY:TRADE FLAG=BID\n")
-                self.order_flag = True
-            else:
-                trade_flag = "pass"
-                self.order_flag = False
-
-            logging.info("THIS IS TOO ORDER FLAG=%s" % self.order_flag)
             return trade_flag
 
         except:
@@ -178,33 +202,21 @@ class TradeAlgo:
             bid_mx_index = self.bid_price_list.index(bid_mx)
             bid_min_index = self.bid_price_list.index(bid_min)
 
-            #self.stllog_file.write("====================================================================\n")
-            #self.stllog_file.write("INFO:%s\n" % now)
-            #self.stllog_file.write("INFO:DECIDE TRADE\n")
-            #self.stllog_file.write("INFO:ask_max=%s, index=%s, insert_time=%s\n" %(ask_mx, ask_mx_index, self.insert_time_list[ask_mx_index]))
-            #self.stllog_file.write("INFO:ask_min=%s, index=%s, insert_time=%s\n" %(ask_min, ask_min_index, self.insert_time_list[ask_min_index]))
             self.order_flag = False
 
             if (ask_mx - ask_min) > self.trade_threshold and ask_mx_index > ask_min_index:
                 trade_flag = "buy"
-                #self.stllog_file.write("====================================================================\n")
-                #self.stllog_file.write("EMERGENCY:DECIDE TRADE\n")
-                #self.stllog_file.write("EMERGENCY:TRADE FLAG=BUY\n")
                 self.order_kind = trade_flag
                 self.order_flag = True
 
             elif (bid_mx - bid_min) > self.trade_threshold and bid_mx_index < bid_min_index:
                 trade_flag = "sell"
                 self.order_kind = trade_flag
-                #self.stllog_file.write("====================================================================\n")
-                #self.stllog_file.write("EMERGENCY:DECIDE TRADE\n")
-                #self.stllog_file.write("EMERGENCY:TRADE FLAG=BID\n")
                 self.order_flag = True
             else:
                 trade_flag = "pass"
                 self.order_flag = False
 
-            logging.info("THIS IS TOO ORDER FLAG=%s" % self.order_flag)
             return trade_flag
 
         except:
