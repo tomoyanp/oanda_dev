@@ -6,7 +6,9 @@ import traceback
 import json
 
 from datetime import datetime, timedelta
-from trade_algo import TradeAlgo
+from hi_low_algo import Hilowalgo
+from start_end_algo import StartEndAlgo
+from step_wise_algo import StepWiseAlgo
 from mysql_connector import MysqlConnector
 from db_wrapper import DBWrapper
 from oanda_wrapper import OandaWrapper
@@ -127,7 +129,7 @@ class TradeWrapper:
             pass
         else:
             #trade_flag = trade_algo.decideTrade()
-            trade_flag = self.trade_algo.decideStartEndTrade()
+            trade_flag = self.trade_algo.decideTrade()
             logging.info("TRADE_FLAG=%s" % trade_flag)
             if trade_flag == "pass":
                 pass
