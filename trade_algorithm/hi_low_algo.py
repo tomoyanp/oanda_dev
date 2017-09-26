@@ -5,6 +5,8 @@ import logging
 import os
 current_path = os.path.abspath(os.path.dirname(__file__))
 
+from super_algo import SuperAlgo
+
 class HiLowAlgo(SuperAlgo):
     def __init__(self, trade_threshold, optional_threshold, instrument, base_path):
         super(trade_threshold, optional_threshold, instrument, base_path)

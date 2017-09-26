@@ -7,6 +7,8 @@
 #
 ####################################################
 
+from super_algo import SuperAlgo
+
 class StepWiseAlgo(SuperAlgo):
     def __init__(self, trade_threshold, optional_threshold, instrument, base_path):
         super(trade_threshold, optional_threshold, instrument, base_path)
