@@ -1,8 +1,10 @@
 # coding: utf-8
 
+from super_algo import SuperAlgo
+
 class StartEndAlgo(SuperAlgo):
     def __init__(self, trade_threshold, optional_threshold, instrument, base_path):
-        super(trade_threshold, optional_threshold, instrument, base_path)
+        super(self, trade_threshold, optional_threshold, instrument, base_path)
 
     # 始め値と終わり値でトレードする
     def decideTrade(self):

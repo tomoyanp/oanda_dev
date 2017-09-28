@@ -12,8 +12,9 @@ import os
 from common import instrument_init, account_init
 from abc import ABCMeta, abstractmethod
 
+#class SuperAlgo(metaclass=ABCMeta):
+class SuperAlgo(object):
 
-class SuperAlgo(metaclass=ABCMeta):
     def __init__(self, trade_threshold, optional_threshold, instrument, base_path):
         self.ask_price_list = []
         self.bid_price_list = []

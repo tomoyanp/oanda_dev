@@ -6,7 +6,7 @@ import traceback
 import json
 
 from datetime import datetime, timedelta
-from hi_low_algo import Hilowalgo
+from hi_low_algo import HiLowAlgo
 from start_end_algo import StartEndAlgo
 from step_wise_algo import StepWiseAlgo
 from mysql_connector import MysqlConnector
@@ -72,7 +72,7 @@ class TradeWrapper:
                 logging.info("POSITION EXISTS and SET FLAG")
 
         # 今建玉があるかチェック
-        self.order_flag = trade_algo.getOrderFlag()
+        self.order_flag = self.trade_algo.getOrderFlag()
         logging.info("ORDER_FLAG=%s" % self.order_flag)
 
     def setInstrumentRespoonse(self, base_time):
@@ -89,6 +89,7 @@ class TradeWrapper:
 
 
     def stlDecisionWrapper(self):
+        test_return_index = 1
         # 建玉があれば、決済するかどうか判断
         if self.order_flag:
             stl_flag = self.trade_algo.decideStl()
@@ -111,6 +112,7 @@ class TradeWrapper:
 
                 self.result_file.write("ORDER_PRICE=%s, STL_PRICE=%s, ORDER_KIND=%s, PROFIT=%s\n" % (order_price, stl_price, order_kind, profit))
                 self.result_file.write("======================================================")
+                test_return_index = self.stl_sleeptime
 
                 if self.test_mode:
                     pass
@@ -123,6 +125,7 @@ class TradeWrapper:
                 pass
         else:
             pass
+        return test_return_index
 
     def tradeDecisionWrapper(self):
         if self.order_flag:

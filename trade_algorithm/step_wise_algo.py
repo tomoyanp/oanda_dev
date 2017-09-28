@@ -8,10 +8,12 @@
 ####################################################
 
 from super_algo import SuperAlgo
+from common import instrument_init, account_init
+from datetime import datetime, timedelta
 
 class StepWiseAlgo(SuperAlgo):
     def __init__(self, trade_threshold, optional_threshold, instrument, base_path):
-        super(trade_threshold, optional_threshold, instrument, base_path)
+        super(StepWiseAlgo, self).__init__(trade_threshold, optional_threshold, instrument, base_path)
         self.base_path = base_path
         self.instrument = instrument
         config_data = instrument_init(self.instrument, self.base_path)
@@ -38,6 +40,8 @@ class StepWiseAlgo(SuperAlgo):
             sell_index = 0
             for i in range(0, self.step_wise_unit):
                 # 0, 60, 120になるはず
+                print step_wise_index * i
+                print len(self.ask_price_list) - 1
                 ask_start = self.ask_price_list[step_wise_index*i]
                 # 60, 120, 180になるはず
                 ask_end   = self.ask_price_list[step_wise_index*(i+1)]
@@ -60,12 +64,12 @@ class StepWiseAlgo(SuperAlgo):
             self.order_flag = False
 
             if total_ask_difference > self.trade_threshold:
-                if buy_index_ratio > step_wise_coefficient_threshold:
+                if buy_index_ratio > self.step_wise_coefficient_threshold:
                     trade_flag = "buy"
                     self.order_kind = trade_flag
                     self.order_flag = True
             elif total_bid_diffrence > self.trade_threshold:
-                if sell_index / self.step_wise_unit > step_wise_coefficient_threshold:
+                if sell_index / self.step_wise_unit > self.step_wise_coefficient_threshold:
                     trade_flag = "sell"
                     self.order_kind = trade_flag
                     self.order_flag = True
