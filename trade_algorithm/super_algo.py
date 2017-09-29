@@ -117,6 +117,27 @@ class SuperAlgo(object):
 
         return threshold_list
 
+    # testmodeでstoploss, takdeprofitに引っかかった場合
+    def decideReverceStl(self):
+        try:
+            ask_price = self.ask_price_list[len(self.ask_price_list)-1]
+            bid_price = self.bid_price_list[len(self.bid_price_list)-1]
+
+            stl_flag = False
+            if self.order_kind == "buy":
+                if bid_price > self.takeprofit or bid_price < self.stoploss:
+                    self.order_flag = False
+                    stl_flag = True
+
+            elif self.order_kind == "sell":
+                if ask_price < self.takeprofit or ask_price > self.stoploss:
+                    self.order_flag = False
+                    stl_flag = True
+
+            return stl_flag
+        except:
+            raise
+
     @abstractmethod
     def decideTrade(self):
         pass

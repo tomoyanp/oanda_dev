@@ -62,7 +62,7 @@ if __name__ == '__main__':
               base_time = datetime.now()
 
           trade_wrapper.setInstrumentRespoonse(base_time)
-          trade_wrapper.tradeDecisionWrapper()
+          trade_wrapper.tradeDecisionWrapper(base_time)
           test_return_index = trade_wrapper.stlDecisionWrapper()
 
           if test_mode:

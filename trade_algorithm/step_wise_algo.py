@@ -10,6 +10,7 @@
 from super_algo import SuperAlgo
 from common import instrument_init, account_init
 from datetime import datetime, timedelta
+import logging
 
 class StepWiseAlgo(SuperAlgo):
     def __init__(self, trade_threshold, optional_threshold, instrument, base_path):
@@ -22,6 +23,10 @@ class StepWiseAlgo(SuperAlgo):
 
     def decideTrade(self):
         try:
+            start_price_list = []
+            end_price_list = []
+            start_time_list = []
+            end_time_list = []
             # trade_flag is pass or ask or bid
             now = datetime.now()
             now = now.strftime("%H%M%S")
@@ -43,13 +48,24 @@ class StepWiseAlgo(SuperAlgo):
                 print step_wise_index * i
                 print len(self.ask_price_list) - 1
                 ask_start = self.ask_price_list[step_wise_index*i]
+                insert_time_start = self.insert_time_list[step_wise_index*i]
                 # 60, 120, 180になるはず
                 ask_end   = self.ask_price_list[step_wise_index*(i+1)]
+                insert_time_end = self.insert_time_list[step_wise_index*(i*1)]
 
                 if ask_end - ask_start > step_wise_threshold:
+                    start_price_list.append(ask_start)
+                    end_price_list.append(ask_end)
+                    start_time_list.append(insert_time_start)
+                    end_time_list.append(insert_time_start)
                     buy_index = buy_index + 1
 
                 elif ask_start - ask_end > step_wise_threshold:
+                    start_price_list.append(ask_start)
+                    end_price_list.append(ask_end)
+                    start_time_list.append(insert_time_start)
+                    end_time_list.append(insert_time_start)
+
                     sell_index = sell_index + 1
 
             total_ask_start = self.ask_price_list[0]
@@ -68,11 +84,28 @@ class StepWiseAlgo(SuperAlgo):
                     trade_flag = "buy"
                     self.order_kind = trade_flag
                     self.order_flag = True
+
+                    logging.info("===========================================")
+                    logging.info("ORDER_FLAG=%s" % self.order_flag)
+                    logging.info("START_PRICE_LIST=%s" % start_price_list)
+                    logging.info("START_TIME_LIST=%s" % start_time_list)
+                    logging.info("END_PRICE_LIST=%s" % end_price_list)
+                    logging.info("END_TIME_LIST=%s" % end_time_list)
+                    logging.info("===========================================")
+
             elif total_bid_diffrence > self.trade_threshold:
                 if sell_index / self.step_wise_unit > self.step_wise_coefficient_threshold:
                     trade_flag = "sell"
                     self.order_kind = trade_flag
                     self.order_flag = True
+
+                    logging.info("===========================================")
+                    logging.info("ORDER_FLAG=%s" % self.order_flag)
+                    logging.info("START_PRICE_LIST=%s" % start_price_list)
+                    logging.info("START_TIME_LIST=%s" % start_time_list)
+                    logging.info("END_PRICE_LIST=%s" % end_price_list)
+                    logging.info("END_TIME_LIST=%s" % end_time_list)
+                    logging.info("===========================================")
 
             return trade_flag
 
@@ -107,6 +140,7 @@ class StepWiseAlgo(SuperAlgo):
                     self.order_flag = False
                     stl_flag = True
 
+            logging.info("stl_flag=%s" % stl_flag)
             return stl_flag
         except:
             raise
