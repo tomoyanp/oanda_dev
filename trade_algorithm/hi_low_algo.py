@@ -1,11 +1,14 @@
 # coding: utf-8
 
-from datetime import datetime
-import logging
-import os
-current_path = os.path.abspath(os.path.dirname(__file__))
+###########################################################
+#
+# time_widthの高値、安値が閾値超えしているかどうか
+#
+###########################################################
 
 from super_algo import SuperAlgo
+from datetime import datetime
+import logging
 
 class HiLowAlgo(SuperAlgo):
     def __init__(self, trade_threshold, optional_threshold, instrument, base_path):

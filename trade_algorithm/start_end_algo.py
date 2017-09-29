@@ -1,6 +1,14 @@
 # coding: utf-8
 
+#################################################
+#
+# time_widthの始め値と終わり値が閾値超えしているかどうか
+#
+#################################################
+
 from super_algo import SuperAlgo
+from datetime import datetime, timedelta
+import logging
 
 class StartEndAlgo(SuperAlgo):
     def __init__(self, trade_threshold, optional_threshold, instrument, base_path):
