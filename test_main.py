@@ -55,7 +55,6 @@ if __name__ == '__main__':
       while True:
           trade_wrapper.checkPosition()
           if test_mode:
-              print test_return_index
               base_time = base_time + timedelta(seconds=test_return_index)
           else:
               time.sleep(polling_time)
