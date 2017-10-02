@@ -1,0 +1,6 @@
+getposition
+{u'positions': [{u'units': 40000, u'instrument': u'GBP_JPY', u'side': u'sell', u'avgPrice': 150.492}]}
+
+{u'positions': []}
+
+{u'positions': [{u'units': 20000, u'instrument': u'GBP_JPY', u'side': u'buy', u'avgPrice': 150.577}, {u'units': 30000, u'instrument': u'USD_JPY', u'side': u'buy', u'avgPrice': 112.579}]}

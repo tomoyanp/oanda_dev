@@ -51,7 +51,7 @@ if __name__ == '__main__':
     trade_wrapper.setTradeAlgo(algo)
 
     base_time = datetime.now()
-    base_time = base_time - timedelta(days=10)
+    base_time = base_time - timedelta(days=20)
     test_return_index = polling_time
 
     try:

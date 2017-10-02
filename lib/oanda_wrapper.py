@@ -51,10 +51,17 @@ class OandaWrapper:
         except Exception as e:
             raise
 
-    def get_trade_position(self):
+    def get_trade_position(self, instrument):
         response = self.oanda.get_positions(self.account_id)
-        flag = len(response["positions"])
-        return flag
+        order_flag = False
+        length = len(response["positions"])
+        if length > 0:
+            for i in range(len(response["positions"])-1):
+                position_inst = response["positions"][i]["instrument"]
+                if inst == instrument:
+                    order_flag = True
+
+        return order_flag
 
     # positionがあるかチェック
     def get_trade_response(self, trade_id):

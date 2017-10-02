@@ -12,7 +12,7 @@ sys.path.append(current_path + "/obj")
 sys.path.append(current_path + "/lib")
 
 from datetime import datetime, timedelta
-from trade_algo import TradeAlgo
+#from trade_algo import TradeAlgo
 from price_obj import PriceObj
 from order_obj import OrderObj
 from mysql_connector import MysqlConnector
@@ -25,18 +25,18 @@ import time
 account_id = 2542764
 token = '85abe6d9c2646b9c56fbf01f0478a511-fe9cb897da06cd6219fde9b4c2052055'
 env = 'practice'
-oanda_wrapper = OandaWrapper(env, account_id, token)
+#oanda_wrapper = OandaWrapper(env, account_id, token)
 
 # 通貨
 instrument = "USD_JPY"
 
 oanda = oandapy.API(environment=env, access_token=token)
-#response = oanda.get_positions(account_id)
+response = oanda.get_positions(account_id)
 #response = oanda.get_transaction_history(account_id)
 #print response
 
 #response = oanda.get_historical_position_ratios()
-response = oanda.get_history(instrument)
+#response = oanda.get_history(instrument)
 #response = oanda.get_position(account_id, instrument)
 print response
 

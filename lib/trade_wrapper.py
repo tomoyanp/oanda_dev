@@ -7,6 +7,7 @@ import json
 
 from datetime import datetime, timedelta
 from step_wise_algo import StepWiseAlgo
+from start_end_algo import StartEndAlgo
 from mysql_connector import MysqlConnector
 from db_wrapper import DBWrapper
 from oanda_wrapper import OandaWrapper
@@ -53,6 +54,9 @@ class TradeWrapper:
         # 初期化
         self.order_flag = False
 
+        # 指値でいつの間にか決済されてしまったときはこれでスリープさせる
+        self.stl_sleep_flag = False
+
         now = datetime.now()
         base_time = now.strftime("%Y%m%d%H%M%S")
         self.result_file = open("%s/result/%s_result.log" % (self.base_path, base_time), "w")
@@ -81,11 +85,16 @@ class TradeWrapper:
         if self.test_mode:
             pass
         else:
-            position_flag = self.oanda_wrapper.get_trade_position()
-            if position_flag == 0:
+            position_flag = self.oanda_wrapper.get_trade_position(self.instrument)
+            if position_flag == False:
                 self.trade_algo.resetFlag()
+                # 決済した直後であればスリープする
+                if self.stl_sleep_flag:
+                    time.sleep(self.stl_sleeptime)
+                    self.stl_sleep_flag = False
             else:
                 self.trade_algo.setOrderFlag(True)
+                self.stl_sleep_flag = True
 
         # 今建玉があるかチェック
         self.order_flag = self.trade_algo.getOrderFlag()
