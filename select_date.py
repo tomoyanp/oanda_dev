@@ -24,8 +24,10 @@ for tm in list_file:
     end_time = base_time
     start_time = base_time - timedelta(hours=trace_time)
 
-    sql = "select ask_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' order by insert_time" % (instrument, start_time, end_time)
+    sql = "select ask_price from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' order by insert_time" % (instrument, start_time, end_time)
     print sql
     response = con.select_sql(sql)
-    print len(response)
+    start_price = response[0][0]
+    end_price = response[len(response)-1][0]
+    print "%s %s" % (base_time, (end_price - start_price))
     break
