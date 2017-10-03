@@ -16,6 +16,7 @@ con = MysqlConnector()
 trace_time = 3
 list_file = open("result_time.lst")
 instrument = "GBP_JPY"
+write_file = open("trend_trace.lst", "w")
 
 for tm in list_file:
     tm = tm.strip()
@@ -29,5 +30,4 @@ for tm in list_file:
     response = con.select_sql(sql)
     start_price = response[0][0]
     end_price = response[len(response)-1][0]
-    print "%s %s" % (base_time, (end_price - start_price))
-    break
+    write_file.write("%s %s\n" % (base_time, (end_price - start_price)))
