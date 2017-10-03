@@ -4,13 +4,13 @@
 # 
 
 from datetime import datetime, timedelta
-from mysql_connector import MysqlConnector
 from datetime import datetime, timedelta
 import os, sys
 
 current_path = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(current_path)
 sys.path.append(current_path + "/lib")
+from mysql_connector import MysqlConnector
 
 con = MysqlConnector()
 trace_time = 3
@@ -27,5 +27,5 @@ for tm in list_file:
     sql = "select ask_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' order by insert_time" % (instrument, start_time, end_time)
     print sql
     response = con.select_sql(sql)
-    print response
+    print len(response)
     break
