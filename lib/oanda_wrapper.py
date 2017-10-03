@@ -55,10 +55,13 @@ class OandaWrapper:
         response = self.oanda.get_positions(self.account_id)
         order_flag = False
         length = len(response["positions"])
+        print length
         if length > 0:
-            for i in range(len(response["positions"])-1):
+            for i in range(0, len(response["positions"])):
                 position_inst = response["positions"][i]["instrument"]
-                if inst == instrument:
+                print position_inst
+                if position_inst == instrument:
+                    print "Order exists"
                     order_flag = True
 
         return order_flag
