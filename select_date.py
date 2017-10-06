@@ -13,7 +13,7 @@ sys.path.append(current_path + "/lib")
 from mysql_connector import MysqlConnector
 
 con = MysqlConnector()
-trace_time = 3
+trace_time = 24
 list_file = open("result_time.lst")
 instrument = "GBP_JPY"
 write_file = open("trend_trace.lst", "w")
