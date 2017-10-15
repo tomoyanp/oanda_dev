@@ -2,8 +2,9 @@
 
 ####################################################
 #
-# 陽線 or 陰線が連続して発生しているかを検知するよう作成
-# 価格の配列を、何分割かにして、陽線引け、陰線引けの判定をする
+# 過去3日の昼間の平均値幅を算出
+# 値幅の高値に到達しそうになったら売り
+# 値幅の安値に到達しそうになったら買い
 #
 ####################################################
 
@@ -12,7 +13,7 @@ from common import instrument_init, account_init
 from datetime import datetime, timedelta
 import logging
 
-class StepWiseAlgo(SuperAlgo):
+class RangeAlgo(SuperAlgo):
     def __init__(self, trade_threshold, optional_threshold, instrument, base_path):
         super(StepWiseAlgo, self).__init__(trade_threshold, optional_threshold, instrument, base_path)
         self.base_path = base_path
@@ -21,10 +22,10 @@ class StepWiseAlgo(SuperAlgo):
         self.step_wise_unit = config_data["step_wise_unit"]
         self.step_wise_coefficient_threshold = config_data["step_wise_coefficient_threshold"]
 
-    def decideTrade(self, base_time):
-        try:
-            trend_flag = self.checkTrend(base_time)
+    def initPriceRange(self):
 
+    def decideTrade(self):
+        try:
             start_price_list = []
             end_price_list = []
             start_time_list = []
@@ -108,12 +109,6 @@ class StepWiseAlgo(SuperAlgo):
                     logging.info("END_PRICE_LIST=%s" % end_price_list)
                     logging.info("END_TIME_LIST=%s" % end_time_list)
                     logging.info("===========================================")
-
-
-            if trend_flag == trade_flag:
-                pass
-            else:
-                trade_flag = "pass"
 
             return trade_flag
 
