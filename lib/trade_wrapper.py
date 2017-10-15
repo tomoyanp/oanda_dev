@@ -166,19 +166,14 @@ class TradeWrapper:
             elif trend_flag == trade_flag:
                 # ここのbefore_flag次第で、前日のトレンドを有効にするかどうか
                 #before_flag = decide_up_down_before_day(self.con, base_time, self.instrument)
-                before_flag = trade_flag
-                if before_flag == trade_flag:
-                    nowftime = self.trade_algo.getCurrentTime()
-                    order_price = self.trade_algo.getCurrentPrice()
-                    self.trade_algo.setOrderPrice(order_price)
-                    self.result_file.write("===== EXECUTE ORDER at %s ======\n" % nowftime)
-                    self.result_file.write("===== BEFORE_FLAG = %s ====\n" % before_flag)
-                    self.result_file.write("ORDER_PRICE=%s, TRADE_FLAG=%s\n" % (order_price, trade_flag))
-                    self.result_file.flush()
-                    threshold_list = self.trade_algo.calcThreshold(self.stop_loss, self.take_profit, trade_flag)
-                else:
-                    self.trade_algo.resetFlag()
-                    trade_flag == "pass"
+                nowftime = self.trade_algo.getCurrentTime()
+                order_price = self.trade_algo.getCurrentPrice()
+                self.trade_algo.setOrderPrice(order_price)
+                self.result_file.write("===== EXECUTE ORDER at %s ======\n" % nowftime)
+                self.result_file.write("===== BEFORE_FLAG = %s ====\n" % before_flag)
+                self.result_file.write("ORDER_PRICE=%s, TRADE_FLAG=%s\n" % (order_price, trade_flag))
+                self.result_file.flush()
+                threshold_list = self.trade_algo.calcThreshold(self.stop_loss, self.take_profit, trade_flag)
 
                 if self.test_mode or trade_flag == "pass":
                     pass
@@ -188,4 +183,5 @@ class TradeWrapper:
                     # 約定後のスリープ
                     time.sleep(self.stl_sleeptime)
             else:
-                pass
+                self.trade_algo.resetFlag()
+                trade_flag == "pass"
