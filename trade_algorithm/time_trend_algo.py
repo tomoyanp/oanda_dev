@@ -13,7 +13,7 @@ import logging
 
 class TimeTrendAlgo(SuperAlgo):
     def __init__(self, trade_threshold, optional_threshold, instrument, base_path):
-        super(StepWiseAlgo, self).__init__(trade_threshold, optional_threshold, instrument, base_path)
+        super(TimeTrendAlgo, self).__init__(trade_threshold, optional_threshold, instrument, base_path)
         self.base_path = base_path
         self.instrument = instrument
         self.config_data = instrument_init(self.instrument, self.base_path)
@@ -34,11 +34,12 @@ class TimeTrendAlgo(SuperAlgo):
                 timetrend_aft = datetime.strptime(timetrend_bef, "%Y-%m-%d %H:%M:%S")
                 timetrend_aft = timetrend_aft + timedelta(hours=self.timetrend_width)
                 timetrend_bef = datetime.strptime(timetrend_bef, "%Y-%m-%d %H:%M:%S")
-                if timetrend_bef < base_time and timetrend_aft > cmp_time:
+                if timetrend_bef < base_time and timetrend_aft > base_time:
+                    timetrend_bef = timetrend_bef - timedelta(seconds=60)
                     timetrend_bef = timetrend_bef.strftime("%Y-%m-%d %H:%M:%S")
-                    basetime = basetime.strftime("%Y-%m-%d %H:%M:%S")
-                    sql = "select ask_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, timetrend_bef)
-                    response = self.mysql_connector.select_sql(sql)
+                    base_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
+                    sql = "select ask_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, timetrend_bef, base_time)
+                    response = self.mysqlConnector.select_sql(sql)
                     for res in response:
                         price_list.append(res[0])
                         time_list.append(res[1])
