@@ -40,6 +40,7 @@ class SuperAlgo(object):
         self.instrument = instrument
         self.mysqlConnector = MysqlConnector()
         self.trend_index = 0
+        self.trend_flag = ""
 
 ################################################
 # listは、要素数が大きいほうが古い。
@@ -142,6 +143,7 @@ class SuperAlgo(object):
             raise
 
     def checkTrend(self, target_time):
+        print self.trend_flag
         cmp_time = target_time.strftime("%M%S")
         if self.trend_index == 0 or cmp_time == "0000":
             config_data = instrument_init(self.instrument, self.base_path)
