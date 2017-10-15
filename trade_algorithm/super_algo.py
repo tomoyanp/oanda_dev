@@ -11,6 +11,7 @@ import logging
 import os
 from common import instrument_init, account_init
 from abc import ABCMeta, abstractmethod
+from mysql_connector import MysqlConnector
 
 #class SuperAlgo(metaclass=ABCMeta):
 class SuperAlgo(object):
@@ -37,7 +38,7 @@ class SuperAlgo(object):
 
         self.base_path = base_path
         self.instrument = instrument
-        self.mysqlConnector = mysqlConnector()
+        self.mysqlConnector = MysqlConnector()
 
 ################################################
 # listは、要素数が大きいほうが古い。
