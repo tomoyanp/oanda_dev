@@ -159,10 +159,11 @@ class TradeWrapper:
         if self.order_flag:
             pass
         else:
+            trend_flag = self.trade_algo.checkTrend(base_time)
             trade_flag = self.trade_algo.decideTrade()
             if trade_flag == "pass":
                 pass
-            else:
+            elif trend_flag == trade_flag:
                 # ここのbefore_flag次第で、前日のトレンドを有効にするかどうか
                 #before_flag = decide_up_down_before_day(self.con, base_time, self.instrument)
                 before_flag = trade_flag
@@ -186,3 +187,5 @@ class TradeWrapper:
                     self.trade_algo.setTradeId(response)
                     # 約定後のスリープ
                     time.sleep(self.stl_sleeptime)
+            else:
+                pass

@@ -37,6 +37,7 @@ class SuperAlgo(object):
 
         self.base_path = base_path
         self.instrument = instrument
+        self.mysqlConnector = mysqlConnector()
 
 ################################################
 # listは、要素数が大きいほうが古い。
@@ -137,6 +138,26 @@ class SuperAlgo(object):
             return stl_flag
         except:
             raise
+
+    def checkTrend(self, target_time):
+        config_data = instrument_init(self.instrument, self.base_path)
+        trend_time_width = config_data["trend_time_width"]
+        target_time = target_time - timedelta(hours=trend_time_width)
+        sql = "select ask_price from %s_TABLE where insert_time > %s" (self.instrument, target_time)
+        result_set = self.mysqlConnector.select_sql(sql)
+
+        price_list = []
+        for result in result_set:
+            price_list.append(result[0])
+
+        if price_list[0] > price_list[len(price_list)-1]:
+            trend_flag = "sell"
+
+        else:
+            trand_flag = "buy"
+
+        return trend_flag
+
 
     @abstractmethod
     def decideTrade(self):
