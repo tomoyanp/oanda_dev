@@ -6,7 +6,7 @@
 #
 ####################################################
 
-from datetime import datetime
+from datetime import datetime,timedelta
 import logging
 import os
 from common import instrument_init, account_init
@@ -144,13 +144,16 @@ class SuperAlgo(object):
         config_data = instrument_init(self.instrument, self.base_path)
         trend_time_width = config_data["trend_time_width"]
         target_time = target_time - timedelta(hours=trend_time_width)
-        sql = "select ask_price from %s_TABLE where insert_time > %s" (self.instrument, target_time)
+        target_time = target_time.strftime("%Y-%m-%d %H:%M:%S")
+        print target_time
+        sql = "select ask_price from %s_TABLE where insert_time > \'%s\'" % (self.instrument, target_time)
         result_set = self.mysqlConnector.select_sql(sql)
 
         price_list = []
         for result in result_set:
             price_list.append(result[0])
 
+        trend_flag = ""
         if price_list[0] > price_list[len(price_list)-1]:
             trend_flag = "sell"
 
