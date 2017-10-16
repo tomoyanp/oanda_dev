@@ -8,6 +8,7 @@ import json
 from datetime import datetime, timedelta
 from step_wise_algo import StepWiseAlgo
 from start_end_algo import StartEndAlgo
+from time_trend_algo import TimeTrendAlgo
 from mysql_connector import MysqlConnector
 from db_wrapper import DBWrapper
 from oanda_wrapper import OandaWrapper
@@ -76,6 +77,8 @@ class TradeWrapper:
             self.trade_algo = StepWiseAlgo(self.trade_threshold, self.optional_threshold, self.instrument, self.base_path)
         elif algo == "startend":
             self.trade_algo = StartEndAlgo(self.trade_threshold, self.optional_threshold, self.instrument, self.base_path)
+        elif algo == "timetrend":
+            self.trade_algo = TimeTrendAlgo(self.trade_threshold, self.optional_threshold, self.instrument, self.base_path)
         else:
             self.trade_algo = HiLowAlgo(self.trade_threshold, self.optional_threshold, self.instrument, self.base_path)
 
@@ -159,18 +162,17 @@ class TradeWrapper:
         if self.order_flag:
             pass
         else:
-            trend_flag = self.trade_algo.checkTrend(base_time)
-            trade_flag = self.trade_algo.decideTrade()
+            trade_flag = self.trade_algo.decideTrade(base_time)
             if trade_flag == "pass":
                 pass
-            elif trend_flag == trade_flag:
+            else:
                 # ここのbefore_flag次第で、前日のトレンドを有効にするかどうか
                 #before_flag = decide_up_down_before_day(self.con, base_time, self.instrument)
                 nowftime = self.trade_algo.getCurrentTime()
                 order_price = self.trade_algo.getCurrentPrice()
                 self.trade_algo.setOrderPrice(order_price)
                 self.result_file.write("===== EXECUTE ORDER at %s ======\n" % nowftime)
-                self.result_file.write("===== BEFORE_FLAG = %s ====\n" % before_flag)
+                #self.result_file.write("===== BEFORE_FLAG = %s ====\n" % before_flag)
                 self.result_file.write("ORDER_PRICE=%s, TRADE_FLAG=%s\n" % (order_price, trade_flag))
                 self.result_file.flush()
                 threshold_list = self.trade_algo.calcThreshold(self.stop_loss, self.take_profit, trade_flag)
@@ -182,6 +184,3 @@ class TradeWrapper:
                     self.trade_algo.setTradeId(response)
                     # 約定後のスリープ
                     time.sleep(self.stl_sleeptime)
-            else:
-                self.trade_algo.resetFlag()
-                trade_flag == "pass"

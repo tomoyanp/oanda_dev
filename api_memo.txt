@@ -1,0 +1,4 @@
+# get_account
+{u'accountCurrency': u'JPY', u'marginUsed': 220720.5, u'marginAvail': 58826.0604, u'unrealizedPl': -630, u'realizedPl': -615160.4755, u'marginRate': 0.04, u'accountName': u'Primary', u'openTrades': 1, u'openOrders': 0, u'balance': 280176.5604, u'accountId': 4093685}
+
+
