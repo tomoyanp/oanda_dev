@@ -3,7 +3,7 @@
 ###########################################################
 #
 # time_widthの高値、安値が閾値超えしているかどうか
-#
+# 時間指定が出来る
 ###########################################################
 
 from super_algo import SuperAlgo
@@ -12,11 +12,25 @@ import logging
 
 class HiLowAlgo(SuperAlgo):
     def __init__(self, trade_threshold, optional_threshold, instrument, base_path):
-        super(trade_threshold, optional_threshold, instrument, base_path)
+        super(HiLowAlgo, self).__init__(trade_threshold, optional_threshold, instrument, base_path)
+        self.base_path = base_path
+        self.instrument = instrument
+        config_data = instrument.init(self.instrument, self.base_path)
+        self.enable_start_time = config_data["starttime"]
+        self.enable_end_time = config_data["endtime"]
+
 
     # 高値と安値でトレードする
-    def decideTrade(self):
+    def decideTrade(self, base_time):
         try:
+            tmp_time = base_time.strftime("%Y-%m-%d")
+            strenable_start_time = "%s %s" % (tmp_time, enable_start_time)
+            strenable_end_time = "%s %s" % (tmp_time, enable_end_time)
+            penable_start_time = datetime.strptime(strenable_start_time)
+            penable_end_time = datetime.strptime(strenable_end_time)
+
+            if penable_start_time > base_time and base_time < penable_end_time:
+                sql = ""
             # trade_flag is pass or ask or bid
             now = datetime.now()
             now = now.strftime("%H%M%S")
