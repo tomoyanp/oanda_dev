@@ -25,11 +25,11 @@ class TimeTrendAlgo(SuperAlgo):
             #cmp_time = int(cmp_time)
             #cmp_time_aft = base_time + timedelta(hours=self.timetrend_width)
             cmp_time = base_time.strftime("%Y-%m-%d")
-            price_list = []
-            time_list = []
             trade_flag = "pass"
 
             for timetrend in self.timetrend_list:
+                price_list = []
+                time_list = []
                 timetrend_bef = "%s %s" % (cmp_time, timetrend)
                 timetrend_aft = datetime.strptime(timetrend_bef, "%Y-%m-%d %H:%M:%S")
                 timetrend_aft = timetrend_aft + timedelta(hours=self.timetrend_width)
@@ -37,19 +37,26 @@ class TimeTrendAlgo(SuperAlgo):
                 if timetrend_bef < base_time and timetrend_aft > base_time:
                     timetrend_bef = timetrend_bef - timedelta(seconds=60)
                     timetrend_bef = timetrend_bef.strftime("%Y-%m-%d %H:%M:%S")
-                    base_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
-                    sql = "select ask_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, timetrend_bef, base_time)
+                    target_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
+                    sql = "select ask_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, timetrend_bef, target_time)
+                    logging.info(sql)
                     response = self.mysqlConnector.select_sql(sql)
                     for res in response:
                         price_list.append(res[0])
                         time_list.append(res[1])
 
+                    logging.info(price_list)
+                    logging.info(time_list)
 
                     if (price_list[len(price_list)-1] - price_list[0]) > self.trade_threshold:
                         trade_flag = "buy"
+                        self.order_kind = trade_flag
+                        self.order_flag = True
 
                     elif (price_list[0] - price_list[len(price_list)-1]) > self.trade_threshold:
                         trade_flag = "sell"
+                        self.order_kind = trade_flag
+                        self.order_flag = True
                         
             return trade_flag
 

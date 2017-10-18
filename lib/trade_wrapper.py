@@ -115,6 +115,7 @@ class TradeWrapper:
 
         self.trade_algo.setResponse(response)
 
+
     def stlDecisionWrapper(self):
         test_return_index = 1
         # 建玉があれば、決済するかどうか判断
