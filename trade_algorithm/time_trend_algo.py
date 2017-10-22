@@ -50,7 +50,7 @@ class TimeTrendAlgo(SuperAlgo):
 #                    logging.info(price_list)
 #                    logging.info(time_list)
 
-                    if (self.ask_price_list[len(self.aks_price_list)-1] - self.ask_price_list[0]) > self.trade_threshold:
+                    if (self.ask_price_list[len(self.ask_price_list)-1] - self.ask_price_list[0]) > self.trade_threshold:
                         trade_flag = "buy"
                         self.order_kind = trade_flag
                         self.order_flag = True
