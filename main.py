@@ -52,7 +52,7 @@ if __name__ == '__main__':
 
     base_time = datetime.now()
     #base_time = base_time - timedelta(days=20)
-    base_time = base_time - timedelta(days=32)
+    base_time = base_time - timedelta(days=2)
     test_return_index = polling_time
 
     try:
@@ -78,3 +78,4 @@ if __name__ == '__main__':
         sendmail = SendMail("tomoyanpy@gmail.com", "tomoyanpy@softbank.ne.jp", property_path)
         sendmail.set_msg(message)
         sendmail.send_mail()
+        print message

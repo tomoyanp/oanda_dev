@@ -35,15 +35,15 @@ class TradeWrapper:
 
         # パラメータセット
         config_data        = instrument_init(instrument, self.base_path)
-        #self.instrument = instrument
-        #self.trade_threshold    = config_data["trade_threshold"]
-        #self.optional_threshold = config_data["optional_threshold"]
-        #self.stop_loss          = config_data["stop_loss"]
-        #self.take_profit        = config_data["take_profit"]
-        #self.time_width         = config_data["time_width"]
-        #self.stl_time_width     = config_data["stl_time_width"]
-        #self.stl_sleeptime      = config_data["stl_sleeptime"]
-        #self.units              = config_data["units"]
+        self.units              = config_data["units"]
+        self.instrument = instrument
+        self.trade_threshold    = config_data["trade_threshold"]
+        self.optional_threshold = config_data["optional_threshold"]
+        self.stop_loss          = config_data["stop_loss"]
+        self.take_profit        = config_data["take_profit"]
+        self.time_width         = config_data["time_width"]
+        self.stl_time_width     = config_data["stl_time_width"]
+        self.stl_sleeptime      = config_data["stl_sleeptime"]
 
         # 使うものインスタンス化
         self.oanda_wrapper = OandaWrapper(self.env, self.account_id, self.token, self.units)
@@ -73,18 +73,25 @@ class TradeWrapper:
         self.result_file.flush()
 
     def setTradeAlgo(self, algo):
-        if algo == "step":
-            self.trade_algo = StepWiseAlgo(self.trade_threshold, self.optional_threshold, self.instrument, self.base_path)
-        elif algo == "startend":
-            self.trade_algo = StartEndAlgo(self.trade_threshold, self.optional_threshold, self.instrument, self.base_path)
-        elif algo == "timetrend":
-            self.trade_algo = TimeTrendAlgo(self.trade_threshold, self.optional_threshold, self.instrument, self.base_path)
-        else:
-            self.trade_algo = HiLowAlgo(self.trade_threshold, self.optional_threshold, self.instrument, self.base_path)
+#        if algo == "step":
+#            self.trade_algo = StepWiseAlgo(self.trade_threshold, self.optional_threshold, self.instrument, self.base_path)
+#        elif algo == "startend":
+#            self.trade_algo = StartEndAlgo(self.trade_threshold, self.optional_threshold, self.instrument, self.base_path)
+#        elif algo == "timetrend":
+#            self.trade_algo = TimeTrendAlgo(self.trade_threshold, self.optional_threshold, self.instrument, self.base_path)
+#        else:
+#            self.trade_algo = HiLowAlgo(self.trade_threshold, self.optional_threshold, self.instrument, self.base_path)
 
-        # 初期値の挿入
-        response = self.trade_algo.getInitialPrice(base_time)
-        self.trade_algo.setResponse(response)
+
+        if algo == "step":
+            self.trade_algo = StepWiseAlgo(self.instrument, self.base_path)
+        elif algo == "startend":
+            self.trade_algo = StartEndAlgo(self.instrument, self.base_path)
+        elif algo == "timetrend":
+            self.trade_algo = TimeTrendAlgo(self.instrument, self.base_path)
+        else:
+            self.trade_algo = HiLowAlgo(self.instrument, self.base_path)
+
 
     # 今ポジションを持っているか確認
     # なければ、フラグをリセットする
@@ -174,7 +181,7 @@ class TradeWrapper:
                 #self.result_file.write("===== BEFORE_FLAG = %s ====\n" % before_flag)
                 self.result_file.write("ORDER_PRICE=%s, TRADE_FLAG=%s\n" % (order_price, trade_flag))
                 self.result_file.flush()
-                threshold_list = self.trade_algo.calcThreshold(self.stop_loss, self.take_profit, trade_flag)
+                threshold_list = self.trade_algo.calcThreshold(trade_flag)
 
                 if self.test_mode or trade_flag == "pass":
                     pass

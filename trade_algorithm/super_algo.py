@@ -17,15 +17,19 @@ from mysql_connector import MysqlConnector
 class SuperAlgo(object):
 
     def __init__(self, instrument, base_path):
+        self.base_path = base_path
+        self.instrument = instrument
+        self.config_data = instrument_init(self.instrument, self.base_path)
+        self.trade_threshold = self.config_data["trade_threshold"]
+        self.optional_threshold = self.config_data["optional_threshold"]
+
         self.ask_price_list = []
         self.bid_price_list = []
         self.insert_time_list = []
-        self.trade_threshold = trade_threshold
-        self.optional_threshold = optional_threshold
         self.order_price = 0
         self.stl_price = 0
-        self.stoploss = 0
-        self.takeprofit = 0
+        self.stoploss_rate_rate = 0
+        self.takeprofit_rate_rate = 0
         now = datetime.now()
         filename = now.strftime("%Y%m%d%H%M%S")
         self.order_flag = False
@@ -35,10 +39,6 @@ class SuperAlgo(object):
 #        self.end_follow_time = 235959
         # 前日が陽線引けかどうかのフラグ
 #        self.before_flag = before_flag
-
-        self.base_path = base_path
-        self.instrument = instrument
-        self.config_data = instrument_init(instrument, self.base_path)
 
         self.mysqlConnector = MysqlConnector()
         self.trend_index = 0
@@ -54,18 +54,19 @@ class SuperAlgo(object):
         self.order_kind = ""
         self.trade_id = 0
 
-    def getInitialSql(base_time):
+    def getInitialSql(self, base_time):
+        time_width = self.config_data["time_width"]
         start_time = base_time - timedelta(seconds=time_width)
         start_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
         end_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
-        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' order by insert_time" % (instrument, start_time, end_time)
+        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' order by insert_time" % (self.instrument, start_time, end_time)
         print sql
         return sql
 
-    def getAddSql(base_time):
+    def getAddSql(self, base_time):
         base_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
-        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time = \'%s\' limit 1" % (instrument, base_time)
-
+        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time = \'%s\' limit 1" % (self.instrument, base_time)
+        return sql
 
 
     def setResponse(self, response):
@@ -85,35 +86,36 @@ class SuperAlgo(object):
             pass
         else:
             self.ask_price_list.pop(0)
-            self.ask_bid_list.pop(0)
+            self.bid_price_list.pop(0)
             self.insert_time_list.pop(0)
 
         for line in response:
             self.ask_price_list.append(line[0])
             self.bid_price_list.append(line[1])
-            self.insert_time_list.append(line[1])
-
-
+            self.insert_time_list.append(line[2])
 
     def setPriceTable(self, base_time):
-        time_width = self.config_data["time_width"]
-        time_width = int(time_width)
 
         if len(self.ask_price_list) < 1:
             sql = self.getInitialSql(base_time)
-            response = self.con.select_sql(sql)
+            print sql
+            response = self.mysqlConnector.select_sql(sql)
             self.setResponse(response)
         else:
-            cmp_time = self.insert_time_list[len(insert_time_list)-1]
-            cmp_time = datetime.strptime(cmp_time, "%Y-%m-%d %H:%M:%S")
+            cmp_time = self.insert_time_list[len(self.insert_time_list)-1]
+            print cmp_time
+            print type(cmp_time)
+            #cmp_time = datetime.strptime(cmp_time, "%Y-%m-%d %H:%M:%S")
             cmp_time = cmp_time + timedelta(seconds=300)
             if cmp_time < base_time:
                 sql = self.getInitialSql(base_time)
-                response = self.con.select_sql(sql)
+                print sql
+                response = self.mysqlConnector.select_sql(sql)
                 self.setResponse(response)
             else:
                 sql = self.getAddSql(base_time)
-                response = self.con.select_sql(sql)
+                print sql
+                response = self.mysqlConnector.select_sql(sql)
                 self.addResponse(response)
 
     def setTradeId(self, response):
@@ -152,7 +154,9 @@ class SuperAlgo(object):
         return self.order_kind
 
 
-    def calcThreshold(self, stop_loss, take_profit, trade_flag):
+    def calcThreshold(self, trade_flag):
+        stop_loss = self.config_data["stop_loss"]
+        take_profit = self.config_data["take_profit"]
         list_max = len(self.ask_price_list) - 1
         threshold_list = {}
         if trade_flag == "buy":
@@ -168,8 +172,8 @@ class SuperAlgo(object):
         if stop_loss == 0:
             threshold_list["stoploss"] = 0
 
-        self.stoploss = threshold_list["stoploss"]
-        self.takeprofit = threshold_list["takeprofit"]
+        self.stoploss_rate = threshold_list["stoploss"]
+        self.takeprofit_rate = threshold_list["takeprofit"]
 
         return threshold_list
 
@@ -181,12 +185,12 @@ class SuperAlgo(object):
 
             stl_flag = False
             if self.order_kind == "buy":
-                if bid_price > self.takeprofit or bid_price < self.stoploss:
+                if bid_price > self.takeprofit_rate or bid_price < self.stoploss_rate:
                     self.order_flag = False
                     stl_flag = True
 
             elif self.order_kind == "sell":
-                if ask_price < self.takeprofit or ask_price > self.stoploss:
+                if ask_price < self.takeprofit_rate or ask_price > self.stoploss_rate:
                     self.order_flag = False
                     stl_flag = True
 
