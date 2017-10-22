@@ -37,25 +37,24 @@ class TimeTrendAlgo(SuperAlgo):
                 timetrend_aft = timetrend_aft + timedelta(hours=timetrend_width)
                 timetrend_bef = datetime.strptime(timetrend_bef, "%Y-%m-%d %H:%M:%S")
                 if timetrend_bef < base_time and timetrend_aft > base_time:
-#                    timetrend_bef = timetrend_bef - timedelta(seconds=60)
-#                    timetrend_bef = timetrend_bef.strftime("%Y-%m-%d %H:%M:%S")
-#                    target_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
-#                    sql = "select ask_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, timetrend_bef, target_time)
-#                    logging.info(sql)
-#                    response = self.mysqlConnector.select_sql(sql)
-#                    for res in response:
-#                        price_list.append(res[0])
-#                        time_list.append(res[1])
+                    cmp_ask_bef = self.ask_price_list[0]
+                    cmp_bid_bef = self.ask_price_list[0]
+                    cmp_ask_aft = self.ask_price_list[len(self.ask_price_list)-1]
+                    cmp_bid_aft = self.bid_price_list[len(self.bid_price_list)-1]
 
-#                    logging.info(price_list)
-#                    logging.info(time_list)
+                    # 累計にしたくないときはここをコメントアウトする
+                    for i in range(0, len(self.insert_time_list))
+                        if self.insert_time_list[i] > timetrend_bef:
+                            cmp_ask_bef = self.ask_price_list[i]
+                            cmp_bid_bef = self.bid_price_list[i]
+                            break
 
-                    if (self.ask_price_list[len(self.ask_price_list)-1] - self.ask_price_list[0]) > self.trade_threshold:
+                    if cmp_ask_aft - cmp_ask_bef > self.trade_threshold:
                         trade_flag = "buy"
                         self.order_kind = trade_flag
                         self.order_flag = True
 
-                    elif (self.bid_price_list[0] - self.bid_price_list[len(self.bid_price_list)-1]) > self.trade_threshold:
+                    elif cmp_bid_bef - cmp_bid_aft > self.trade_threshold:
                         trade_flag = "sell"
                         self.order_kind = trade_flag
                         self.order_flag = True
