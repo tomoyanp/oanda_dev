@@ -37,27 +37,45 @@ class TimeTrendAlgo(SuperAlgo):
                 timetrend_aft = timetrend_aft + timedelta(hours=timetrend_width)
                 timetrend_bef = datetime.strptime(timetrend_bef, "%Y-%m-%d %H:%M:%S")
                 if timetrend_bef < base_time and timetrend_aft > base_time:
+                    timetrend_bef = timetrend_bef - timedelta(seconds=300)
                     cmp_ask_bef = self.ask_price_list[0]
-                    cmp_bid_bef = self.ask_price_list[0]
+                    cmp_bid_bef = self.bid_price_list[0]
+                    cmp_insert_time_bef = self.insert_time_list[0]
                     cmp_ask_aft = self.ask_price_list[len(self.ask_price_list)-1]
                     cmp_bid_aft = self.bid_price_list[len(self.bid_price_list)-1]
+                    cmp_insert_time_aft = self.insert_time_list[len(self.insert_time_list)-1]
 
                     # 累計にしたくないときはここをコメントアウトする
-                    for i in range(0, len(self.insert_time_list))
+                    for i in range(0, len(self.insert_time_list)):
                         if self.insert_time_list[i] > timetrend_bef:
                             cmp_ask_bef = self.ask_price_list[i]
                             cmp_bid_bef = self.bid_price_list[i]
+                            cmp_insert_time_bef = self.insert_time_list[i]
                             break
 
                     if cmp_ask_aft - cmp_ask_bef > self.trade_threshold:
                         trade_flag = "buy"
                         self.order_kind = trade_flag
                         self.order_flag = True
+                        logging.info("=======================")
+                        logging.info("EXECUTE ORDER BUY")
+                        logging.info("ASK_PRICE_BEFORE=%s" % cmp_ask_bef)
+                        logging.info("INSERT_TIME=%s" % cmp_insert_time_bef)
+                        logging.info("ASK_PRICE_AFTER=%s" % cmp_ask_aft)
+                        logging.info("BASE_TIME=%s" % base_time)
+                        logging.info("=======================")
 
                     elif cmp_bid_bef - cmp_bid_aft > self.trade_threshold:
                         trade_flag = "sell"
                         self.order_kind = trade_flag
                         self.order_flag = True
+                        logging.info("=======================")
+                        logging.info("EXECUTE ORDER SELL")
+                        logging.info("BID_PRICE_BEFORE=%s" % cmp_bid_bef)
+                        logging.info("INSERT_TIME=%s" % cmp_insert_time_bef)
+                        logging.info("BID_PRICE_AFTER=%s" % cmp_bid_aft)
+                        logging.info("BASE_TIME=%s" % base_time)
+                        logging.info("=======================")
 
             return trade_flag
 
