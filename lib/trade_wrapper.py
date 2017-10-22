@@ -9,8 +9,8 @@ from datetime import datetime, timedelta
 from step_wise_algo import StepWiseAlgo
 from start_end_algo import StartEndAlgo
 from time_trend_algo import TimeTrendAlgo
-from mysql_connector import MysqlConnector
-from db_wrapper import DBWrapper
+#from mysql_connector import MysqlConnector
+#from db_wrapper import DBWrapper
 from oanda_wrapper import OandaWrapper
 from common import instrument_init, account_init, decide_up_down_before_day
 import time
@@ -35,22 +35,22 @@ class TradeWrapper:
 
         # パラメータセット
         config_data        = instrument_init(instrument, self.base_path)
-        self.instrument = instrument
-        self.trade_threshold    = config_data["trade_threshold"]
-        self.optional_threshold = config_data["optional_threshold"]
-        self.stop_loss          = config_data["stop_loss"]
-        self.take_profit        = config_data["take_profit"]
-        self.time_width         = config_data["time_width"]
-        self.stl_time_width     = config_data["stl_time_width"]
-        self.stl_sleeptime      = config_data["stl_sleeptime"]
-        self.units              = config_data["units"]
+        #self.instrument = instrument
+        #self.trade_threshold    = config_data["trade_threshold"]
+        #self.optional_threshold = config_data["optional_threshold"]
+        #self.stop_loss          = config_data["stop_loss"]
+        #self.take_profit        = config_data["take_profit"]
+        #self.time_width         = config_data["time_width"]
+        #self.stl_time_width     = config_data["stl_time_width"]
+        #self.stl_sleeptime      = config_data["stl_sleeptime"]
+        #self.units              = config_data["units"]
 
         # 使うものインスタンス化
         self.oanda_wrapper = OandaWrapper(self.env, self.account_id, self.token, self.units)
-        self.con           = MysqlConnector()
-        self.db_wrapper    = DBWrapper()
+        #self.con           = MysqlConnector()
+        #self.db_wrapper    = DBWrapper()
         #self.trade_algo    = TradeAlgo(self.trade_threshold, self.optional_threshold)
-        self.trade_algo    = StepWiseAlgo(self.trade_threshold, self.optional_threshold, self.instrument, self.base_path)
+        #self.trade_algo    = StepWiseAlgo(self.trade_threshold, self.optional_threshold, self.instrument, self.base_path)
 
         # 初期化
         self.order_flag = False
@@ -82,6 +82,10 @@ class TradeWrapper:
         else:
             self.trade_algo = HiLowAlgo(self.trade_threshold, self.optional_threshold, self.instrument, self.base_path)
 
+        # 初期値の挿入
+        response = self.trade_algo.getInitialPrice(base_time)
+        self.trade_algo.setResponse(response)
+
     # 今ポジションを持っているか確認
     # なければ、フラグをリセットする
     def checkPosition(self):
@@ -108,13 +112,7 @@ class TradeWrapper:
         self.order_flag = self.trade_algo.getOrderFlag()
 
     def setInstrumentRespoonse(self, base_time):
-        if self.trade_algo.getOrderFlag():
-            response = self.db_wrapper.getPrice(self.instrument, self.stl_time_width, base_time)
-        else:
-            response = self.db_wrapper.getPrice(self.instrument, self.time_width, base_time)
-
-        self.trade_algo.setResponse(response)
-
+        self.trade_algo.setPriceTable(base_time)
 
     def stlDecisionWrapper(self):
         test_return_index = 1

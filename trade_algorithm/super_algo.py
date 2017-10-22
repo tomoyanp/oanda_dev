@@ -16,7 +16,7 @@ from mysql_connector import MysqlConnector
 #class SuperAlgo(metaclass=ABCMeta):
 class SuperAlgo(object):
 
-    def __init__(self, trade_threshold, optional_threshold, instrument, base_path):
+    def __init__(self, instrument, base_path):
         self.ask_price_list = []
         self.bid_price_list = []
         self.insert_time_list = []
@@ -38,6 +38,8 @@ class SuperAlgo(object):
 
         self.base_path = base_path
         self.instrument = instrument
+        self.config_data = instrument_init(instrument, self.base_path)
+
         self.mysqlConnector = MysqlConnector()
         self.trend_index = 0
         self.trend_flag = ""
@@ -52,6 +54,20 @@ class SuperAlgo(object):
         self.order_kind = ""
         self.trade_id = 0
 
+    def getInitialSql(base_time):
+        start_time = base_time - timedelta(seconds=time_width)
+        start_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
+        end_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
+        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' order by insert_time" % (instrument, start_time, end_time)
+        print sql
+        return sql
+
+    def getAddSql(base_time):
+        base_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
+        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time = \'%s\' limit 1" % (instrument, base_time)
+
+
+
     def setResponse(self, response):
         if len(response) < 1:
             pass
@@ -63,6 +79,42 @@ class SuperAlgo(object):
                 self.ask_price_list.append(line[0])
                 self.bid_price_list.append(line[1])
                 self.insert_time_list.append(line[2])
+
+    def addResponse(self, response):
+        if len(response) < 1:
+            pass
+        else:
+            self.ask_price_list.pop(0)
+            self.ask_bid_list.pop(0)
+            self.insert_time_list.pop(0)
+
+        for line in response:
+            self.ask_price_list.append(line[0])
+            self.bid_price_list.append(line[1])
+            self.insert_time_list.append(line[1])
+
+
+
+    def setPriceTable(self, base_time):
+        time_width = self.config_data["time_width"]
+        time_width = int(time_width)
+
+        if len(self.ask_price_list) < 1:
+            sql = self.getInitialSql(base_time)
+            response = self.con.select_sql(sql)
+            self.setResponse(response)
+        else:
+            cmp_time = self.insert_time_list[len(insert_time_list)-1]
+            cmp_time = datetime.strptime(cmp_time, "%Y-%m-%d %H:%M:%S")
+            cmp_time = cmp_time + timedelta(seconds=300)
+            if cmp_time < base_time:
+                sql = self.getInitialSql(base_time)
+                response = self.con.select_sql(sql)
+                self.setResponse(response)
+            else:
+                sql = self.getAddSql(base_time)
+                response = self.con.select_sql(sql)
+                self.addResponse(response)
 
     def setTradeId(self, response):
         print response
