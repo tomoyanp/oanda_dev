@@ -68,7 +68,6 @@ class SuperAlgo(object):
         sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time = \'%s\' limit 1" % (self.instrument, base_time)
         return sql
 
-
     def setResponse(self, response):
         if len(response) < 1:
             pass
@@ -117,6 +116,7 @@ class SuperAlgo(object):
                 print sql
                 response = self.mysqlConnector.select_sql(sql)
                 self.addResponse(response)
+        logging.info(sql)
 
     def setTradeId(self, response):
         print response

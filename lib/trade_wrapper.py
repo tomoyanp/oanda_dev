@@ -101,19 +101,19 @@ class TradeWrapper:
         else:
             position_flag = self.oanda_wrapper.get_trade_position(self.instrument)
             if position_flag == False:
-                logging.info("POSITION FLAG FFFFFFFFFFFFFFFFFFALSE!!!!!!!")
-                logging.info("stl_sleep_flag=%s!!!!" % self.stl_sleep_flag)
+                #logging.info("POSITION FLAG FFFFFFFFFFFFFFFFFFALSE!!!!!!!")
+                #logging.info("stl_sleep_flag=%s!!!!" % self.stl_sleep_flag)
                 self.trade_algo.resetFlag()
                 # 決済した直後であればスリープする
                 if self.stl_sleep_flag:
-                    logging.info("SLEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEP!!!!!!!")
+                    #logging.info("SLEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEP!!!!!!!")
                     time.sleep(self.stl_sleeptime)
                     self.stl_sleep_flag = False
             else:
-                logging.info("POSITION FLAG TTTTTTTTTTTTTTTTTTTTTTTTRUUUE!!!!!!!")
+                #logging.info("POSITION FLAG TTTTTTTTTTTTTTTTTTTTTTTTRUUUE!!!!!!!")
                 self.trade_algo.setOrderFlag(True)
                 self.stl_sleep_flag = True
-                logging.info("stl_sleep_flag=%s!!!!" % self.stl_sleep_flag)
+                #logging.info("stl_sleep_flag=%s!!!!" % self.stl_sleep_flag)
 
         # 今建玉があるかチェック
         self.order_flag = self.trade_algo.getOrderFlag()
