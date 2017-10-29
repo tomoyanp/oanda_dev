@@ -9,6 +9,7 @@ from datetime import datetime, timedelta
 from step_wise_algo import StepWiseAlgo
 from start_end_algo import StartEndAlgo
 from time_trend_algo import TimeTrendAlgo
+from bollinger_algo import BollingerAlgo
 #from mysql_connector import MysqlConnector
 #from db_wrapper import DBWrapper
 from oanda_wrapper import OandaWrapper
@@ -89,6 +90,8 @@ class TradeWrapper:
             self.trade_algo = StartEndAlgo(self.instrument, self.base_path)
         elif algo == "timetrend":
             self.trade_algo = TimeTrendAlgo(self.instrument, self.base_path)
+        elif algo == "bollinger":
+            self.trade_algo = BollingerAlgo(self.instrument, self.base_path)
         else:
             self.trade_algo = HiLowAlgo(self.instrument, self.base_path)
 

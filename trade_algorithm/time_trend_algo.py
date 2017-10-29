@@ -53,6 +53,15 @@ class TimeTrendAlgo(SuperAlgo):
                             cmp_insert_time_bef = self.insert_time_list[i]
                             break
 
+                    logging.info("=======================")
+                    logging.info("DECIDE ORDER")
+                    logging.info("ASK_PRICE_BEFORE=%s" % cmp_ask_bef)
+                    logging.info("INSERT_TIME=%s" % cmp_insert_time_bef)
+                    logging.info("ASK_PRICE_AFTER=%s" % cmp_ask_aft)
+                    logging.info("BASE_TIME=%s" % base_time)
+                    logging.info("=======================")
+
+
                     if cmp_ask_aft - cmp_ask_bef > self.trade_threshold:
                         trade_flag = "buy"
                         self.order_kind = trade_flag

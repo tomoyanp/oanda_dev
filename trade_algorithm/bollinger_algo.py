@@ -15,7 +15,7 @@ import pandas as pd
 
 class BollingerAlgo(SuperAlgo):
     def __init__(self, instrument, base_path):
-        super(TimeTrendAlgo, self).__init__(instrument, base_path)
+        super(BollingerAlgo, self).__init__(instrument, base_path)
         #self.base_path = base_path
         #self.instrument = instrument
         #self.config_data = instrument_init(self.instrument, self.base_path)
@@ -34,8 +34,8 @@ class BollingerAlgo(SuperAlgo):
             sigma = lst.rolling(window=window_size).std(ddof=0)
 
             # ±2σの計算
-            upper2_sigmas = base + (sigma*2)
-            lower2_sigmas = base - (sigma*2)
+            upper2_sigmas = base + (sigma*3)
+            lower2_sigmas = base - (sigma*3)
 
             upper2_sigma = upper2_sigmas[len(upper2_sigmas)-1]
             lower2_sigma = lower2_sigmas[len(lower2_sigmas)-1]
@@ -60,9 +60,9 @@ class BollingerAlgo(SuperAlgo):
 
 
             if cmp_price > upper2_sigma:
+                trade_flag = "sell"
                 self.order_flag = True
                 self.order_kind = trade_flag
-                trade_flag = "sell"
                 logging.info("=======================")
                 logging.info("EXECUTE ORDER SELL")
                 logging.info("ASK_PRICE=%s" % cmp_price)
@@ -71,9 +71,9 @@ class BollingerAlgo(SuperAlgo):
                 logging.info("=======================")
 
             elif cmp_price < lower2_sigma:
+                trade_flag = "buy"
                 self.order_flag = True
                 self.order_kind = trade_flag
-                trade_flag = "buy"
                 logging.info("=======================")
                 logging.info("EXECUTE ORDER BUY")
                 logging.info("ASK_PRICE=%s" % cmp_price)
