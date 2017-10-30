@@ -31,6 +31,8 @@ class BollingerAlgo(SuperAlgo):
     def decideTrade(self, base_time):
         try: 
 
+            trade_flag = "pass"
+
             # enable_timeの中でトレードするようにする
             enable_time_mode = self.config_data["enable_time_mode"]
             if enable_time_mode == "on":
@@ -99,8 +101,7 @@ class BollingerAlgo(SuperAlgo):
                     trade_flag = "pass"
 
                 trend_follow_mode = self.config_data["trend_follow_mode"]
-
-                if trend_follow_mode = "on":
+                if trend_follow_mode == "on":
                     trend_flag = self.checkTrend(base_time)
                 else:
                     trend_flag = trade_flag
@@ -110,13 +111,13 @@ class BollingerAlgo(SuperAlgo):
                 else:
                     trade_flag = "pass"
 
-
-                return trade_flag
             else:
                 pass
 
-            except:
-                raise
+            return trade_flag
+
+        except:
+            raise
 
     # 損切り、利確はオーダー時に出している
     # ここでは、急に逆方向に動いた時に決済出来るようにしている
