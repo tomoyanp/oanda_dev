@@ -16,6 +16,7 @@ import pandas as pd
 class BollingerAlgo(SuperAlgo):
     def __init__(self, instrument, base_path):
         super(BollingerAlgo, self).__init__(instrument, base_path)
+        self.base_price = 0
         #self.base_path = base_path
         #self.instrument = instrument
         #self.config_data = instrument_init(self.instrument, self.base_path)
@@ -23,9 +24,32 @@ class BollingerAlgo(SuperAlgo):
         #self.timetrend_width = self.config_data["timetrend_width"]
 
     # オーバーライドする
-    #def calcThreshold(self, trade_flag):
+    def calcThreshold(self, trade_flag):
+        window_size = self.config_data["window_size"]
+        window_size = int(window_size) * -1
+        ask_price_list = self.ask_price_list[window_size:]
+        low_price = min(ask_price_list) - 0.05
+        high_price = max(ask_price_list) + 0.05
 
+        threshold_list = {}
+        if trade_flag == "sell":
+            threshold_list["stoploss"] = high_price
+            threshold_list["takeprofit"] = self.base_price
 
+        elif trade_flag == "buy":
+            threshold_list["stoploss"] = low_price
+            threshold_list["takeprofit"] = self.base_price
+        else:
+            pass
+
+        logging.info("===========================================")
+        logging.info("STOP LOSS RATE = %s" % threshold_list["stoploss"])
+        logging.info("TAKE PROFIT RATE = %s" % threshold_list["takeprofit"])
+        
+        self.stoploss_rate = threshold_list["stoploss"]
+        self.takeprofit_rate = threshold_list["takeprofit"]
+
+        return threshold_list
 
 
     def decideTrade(self, base_time):
@@ -66,6 +90,7 @@ class BollingerAlgo(SuperAlgo):
 
                 cmp_price = lst[len(lst)-1]
 
+                self.base_price = base[len(base)-1]
 
                 logging.info("=======================")
                 logging.info("DECIDE ORDER")
@@ -110,6 +135,7 @@ class BollingerAlgo(SuperAlgo):
                     pass
                 else:
                     trade_flag = "pass"
+                    self.resetFlag()
 
             else:
                 pass

@@ -217,12 +217,14 @@ class SuperAlgo(object):
     def checkTrend(self, target_time):
         trend_time_width = self.config_data["trend_time_width"]
         before_time = target_time - timedelta(hours=trend_time_width)
-        sql = "select ask_price from %s_TABLE where insert_time > \'%s\'" % (self.instrument, before_time)
-        result_set = self.mysqlConnector.select_sql(sql)
+        #sql = "select ask_price from %s_TABLE where insert_time > \'%s\'" % (self.instrument, before_time)
+        #result_set = self.mysqlConnector.select_sql(sql)
 
-        price_list = []
-        for result in result_set:
-            price_list.append(result[0])
+        #price_list = []
+        #for result in result_set:
+        #    price_list.append(result[0])
+
+        price_list = self.ask_price_list
 
         if price_list[0] > price_list[len(price_list)-1]:
             trend_flag = "sell"
