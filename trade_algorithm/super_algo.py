@@ -153,6 +153,22 @@ class SuperAlgo(object):
     def getOrderKind(self):
         return self.order_kind
 
+    def decideTradeTime(self, base_time):
+        enable_times = self.config_data["enable_time"]
+        enable_flag = False
+
+        cmp_time = base_time.strftime("%Y-%m-%d")
+
+        for ent in enable_times:
+            ent = "%s %s" % (cmp_time, ent)
+            before_time = datetime.strptime(ent, "%Y-%m-%d %H:%M:%S")
+            after_time = before_time + timedelta(hours=1)
+
+            if base_time > before_time and base_time < after_time:
+                enable_flag = True
+
+
+        return enable_flag
 
     def calcThreshold(self, trade_flag):
         stop_loss = self.config_data["stop_loss"]
@@ -199,30 +215,21 @@ class SuperAlgo(object):
             raise
 
     def checkTrend(self, target_time):
-        print self.trend_flag
-        cmp_time = target_time.strftime("%M%S")
-        if self.trend_index == 0 or cmp_time == "0000":
-            config_data = instrument_init(self.instrument, self.base_path)
-            trend_time_width = config_data["trend_time_width"]
-            target_time = target_time - timedelta(hours=trend_time_width)
-            target_time = target_time.strftime("%Y-%m-%d %H:%M:%S")
-            sql = "select ask_price from %s_TABLE where insert_time > \'%s\'" % (self.instrument, target_time)
-            print sql
-            result_set = self.mysqlConnector.select_sql(sql)
+        trend_time_width = self.config_data["trend_time_width"]
+        before_time = target_time - timedelta(hours=trend_time_width)
+        sql = "select ask_price from %s_TABLE where insert_time > \'%s\'" % (self.instrument, before_time)
+        result_set = self.mysqlConnector.select_sql(sql)
 
-            price_list = []
-            for result in result_set:
-                price_list.append(result[0])
+        price_list = []
+        for result in result_set:
+            price_list.append(result[0])
 
-            if price_list[0] > price_list[len(price_list)-1]:
-                self.trend_flag = "sell"
+        if price_list[0] > price_list[len(price_list)-1]:
+            trend_flag = "sell"
+        else:
+            trend_flag = "buy"
 
-            else:
-                self.trend_flag = "buy"
-
-            self.trend_index = self.trend_index + 1
-
-        return self.trend_flag
+        return trend_flag
 
 
     @abstractmethod

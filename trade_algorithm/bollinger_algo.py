@@ -22,70 +22,101 @@ class BollingerAlgo(SuperAlgo):
         #self.timetrend_list = self.config_data["timetrend"]
         #self.timetrend_width = self.config_data["timetrend_width"]
 
+    # オーバーライドする
+    #def calcThreshold(self, trade_flag):
+
+
+
+
     def decideTrade(self, base_time):
         try: 
-            lst = pd.Series(self.ask_price_list)
-            window_size = self.config_data["window_size"]
-            window_size = window_size * 60
-            # 28分の移動平均線
-            base = lst.rolling(window=window_size).mean()
 
-            # 28本分の標準偏差
-            sigma = lst.rolling(window=window_size).std(ddof=0)
+            # enable_timeの中でトレードするようにする
+            enable_time_mode = self.config_data["enable_time_mode"]
+            if enable_time_mode == "on":
+                trade_time_flag = self.decideTradeTime(base_time)
+            else:
+                trade_time_flag = True
 
-            # ±2σの計算
-            upper2_sigmas = base + (sigma*3)
-            lower2_sigmas = base - (sigma*3)
+            if trade_time_flag:
+                lst = pd.Series(self.ask_price_list)
+                window_size = self.config_data["window_size"]
+                window_size = window_size * 60
+                # 28分の移動平均線
+                base = lst.rolling(window=window_size).mean()
 
-            upper2_sigma = upper2_sigmas[len(upper2_sigmas)-1]
-            lower2_sigma = lower2_sigmas[len(lower2_sigmas)-1]
+                # 28本分の標準偏差
+                sigma = lst.rolling(window=window_size).std(ddof=0)
 
-            # ±3σの計算
-            upper3_sigmas = base + (sigma*3)
-            lower3_sigmas = base - (sigma*3)
+                # ±2σの計算
+                upper2_sigmas = base + (sigma*3)
+                lower2_sigmas = base - (sigma*3)
 
-            upper3_sigma = upper3_sigmas[len(upper3_sigmas)-1]
-            lower3_sigma = lower3_sigmas[len(lower3_sigmas)-1]
+                upper2_sigma = upper2_sigmas[len(upper2_sigmas)-1]
+                lower2_sigma = lower2_sigmas[len(lower2_sigmas)-1]
 
-            cmp_price = lst[len(lst)-1]
+                # ±3σの計算
+                upper3_sigmas = base + (sigma*3)
+                lower3_sigmas = base - (sigma*3)
 
+                upper3_sigma = upper3_sigmas[len(upper3_sigmas)-1]
+                lower3_sigma = lower3_sigmas[len(lower3_sigmas)-1]
 
-            logging.info("=======================")
-            logging.info("DECIDE ORDER")
-            logging.info("ASK_PRICE=%s" % cmp_price)
-            logging.info("UPPER_SIGMA=%s" % upper2_sigma)
-            logging.info("lower_SIGMA=%s" % lower2_sigma)
-            logging.info("BASE_TIME=%s" % base_time)
-            logging.info("=======================")
+                cmp_price = lst[len(lst)-1]
 
 
-            if cmp_price > upper2_sigma:
-                trade_flag = "sell"
-                self.order_flag = True
-                self.order_kind = trade_flag
                 logging.info("=======================")
-                logging.info("EXECUTE ORDER SELL")
+                logging.info("DECIDE ORDER")
                 logging.info("ASK_PRICE=%s" % cmp_price)
                 logging.info("UPPER_SIGMA=%s" % upper2_sigma)
+                logging.info("lower_SIGMA=%s" % lower2_sigma)
                 logging.info("BASE_TIME=%s" % base_time)
                 logging.info("=======================")
 
-            elif cmp_price < lower2_sigma:
-                trade_flag = "buy"
-                self.order_flag = True
-                self.order_kind = trade_flag
-                logging.info("=======================")
-                logging.info("EXECUTE ORDER BUY")
-                logging.info("ASK_PRICE=%s" % cmp_price)
-                logging.info("LOWER_SIGMA=%s" % lower2_sigma)
-                logging.info("BASE_TIME=%s" % base_time)
-                logging.info("=======================")
+
+                if cmp_price > upper2_sigma:
+                    trade_flag = "sell"
+                    self.order_flag = True
+                    self.order_kind = trade_flag
+                    logging.info("=======================")
+                    logging.info("EXECUTE ORDER SELL")
+                    logging.info("ASK_PRICE=%s" % cmp_price)
+                    logging.info("UPPER_SIGMA=%s" % upper2_sigma)
+                    logging.info("BASE_TIME=%s" % base_time)
+                    logging.info("=======================")
+
+                elif cmp_price < lower2_sigma:
+                    trade_flag = "buy"
+                    self.order_flag = True
+                    self.order_kind = trade_flag
+                    logging.info("=======================")
+                    logging.info("EXECUTE ORDER BUY")
+                    logging.info("ASK_PRICE=%s" % cmp_price)
+                    logging.info("LOWER_SIGMA=%s" % lower2_sigma)
+                    logging.info("BASE_TIME=%s" % base_time)
+                    logging.info("=======================")
+                else:
+                    trade_flag = "pass"
+
+                trend_follow_mode = self.config_data["trend_follow_mode"]
+
+                if trend_follow_mode = "on":
+                    trend_flag = self.checkTrend(base_time)
+                else:
+                    trend_flag = trade_flag
+
+                if trend_flag == trade_flag:
+                    pass
+                else:
+                    trade_flag = "pass"
+
+
+                return trade_flag
             else:
-                trade_flag = "pass"
+                pass
 
-            return trade_flag
-        except:
-            raise
+            except:
+                raise
 
     # 損切り、利確はオーダー時に出している
     # ここでは、急に逆方向に動いた時に決済出来るようにしている
