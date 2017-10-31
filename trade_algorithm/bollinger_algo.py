@@ -57,13 +57,6 @@ class BollingerAlgo(SuperAlgo):
 
             trade_flag = "pass"
 
-            # enable_timeの中でトレードするようにする
-            enable_time_mode = self.config_data["enable_time_mode"]
-            if enable_time_mode == "on":
-                trade_time_flag = self.decideTradeTime(base_time)
-            else:
-                trade_time_flag = True
-
             if trade_time_flag:
                 lst = pd.Series(self.ask_price_list)
                 window_size = self.config_data["window_size"]
@@ -124,18 +117,6 @@ class BollingerAlgo(SuperAlgo):
                     logging.info("=======================")
                 else:
                     trade_flag = "pass"
-
-                trend_follow_mode = self.config_data["trend_follow_mode"]
-                if trend_follow_mode == "on":
-                    trend_flag = self.checkTrend(base_time)
-                else:
-                    trend_flag = trade_flag
-
-                if trend_flag == trade_flag:
-                    pass
-                else:
-                    trade_flag = "pass"
-                    self.resetFlag()
 
             else:
                 pass

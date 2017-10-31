@@ -153,22 +153,33 @@ class SuperAlgo(object):
     def getOrderKind(self):
         return self.order_kind
 
-    def decideTradeTime(self, base_time):
-        enable_times = self.config_data["enable_time"]
-        enable_flag = False
+    def decideTradeTime(self, base_time, trade_flag):
+        enable_time_mode = self.config_data["enable_time_mode"]
 
-        cmp_time = base_time.strftime("%Y-%m-%d")
+        if enable_time_mode == "on":
+            enable_times = self.config_data["enable_time"]
+            enable_flag = False
 
-        for ent in enable_times:
+            cmp_time = base_time.strftime("%Y-%m-%d")
+
+            for ent in enable_times:
             ent = "%s %s" % (cmp_time, ent)
             before_time = datetime.strptime(ent, "%Y-%m-%d %H:%M:%S")
             after_time = before_time + timedelta(hours=1)
 
             if base_time > before_time and base_time < after_time:
                 enable_flag = True
+        else:
+            enable_flag = True
 
 
-        return enable_flag
+        if enable_flag:
+            pass
+        else:
+            trade_flag = "pass"
+            self.resetFlag()
+
+        return trade_flag
 
     def calcThreshold(self, trade_flag):
         stop_loss = self.config_data["stop_loss"]
@@ -214,24 +225,42 @@ class SuperAlgo(object):
         except:
             raise
 
-    def checkTrend(self, target_time):
-        trend_time_width = self.config_data["trend_time_width"]
-        before_time = target_time - timedelta(hours=trend_time_width)
-        #sql = "select ask_price from %s_TABLE where insert_time > \'%s\'" % (self.instrument, before_time)
-        #result_set = self.mysqlConnector.select_sql(sql)
+    def checkTrend(self, target_time, trade_flag):
+        trend_mode = self.config_data["trend_follow_mode"]
 
-        #price_list = []
-        #for result in result_set:
-        #    price_list.append(result[0])
+        if trend_mode == "on":
+            trend_time_width = self.config_data["trend_time_width"]
+            before_time = target_time - timedelta(hours=trend_time_width)
+            start_sql = "select ask_price from %s_TABLE where insert_time > \'%s\' limit 1" % (self.instrument, before_time)
+            current_sql = "select ask_price from %s_TABLE where insert_time > \'%s\' limit 1" % (self.instrument, target_time)
+            start_result = self.mysqlConnector.select_sql(start_sql)
+            current_result = self.mysqlConnector.select_sql(current_sql)
 
-        price_list = self.ask_price_list
+            start_price_list = []
+            for result in start_result:
+                start_price_list.append(result[0])
 
-        if price_list[0] > price_list[len(price_list)-1]:
-            trend_flag = "sell"
+
+            current_price_list = []
+            for result in current_result:
+                current_price_list.append(result[0])
+
+            start_price = start_price_list[-1]
+            current_price = current_price_list[-1]
+
+
+            if start_price > current_price and trade_flag == "sell":
+                pass
+            elif start_price < current_price and trade_flag == "buy":
+                pass
+            else:
+                self.resetFlag()
+                trade_flag = "pass"
+
+            return trade_flag
+
         else:
-            trend_flag = "buy"
-
-        return trend_flag
+            return trade_flag
 
 
     @abstractmethod
