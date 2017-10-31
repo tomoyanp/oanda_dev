@@ -28,16 +28,19 @@ class BollingerAlgo(SuperAlgo):
         window_size = self.config_data["window_size"]
         window_size = int(window_size) * -1
         ask_price_list = self.ask_price_list[window_size:]
-        low_price = min(ask_price_list) - 0.05
-        high_price = max(ask_price_list) + 0.05
+        #low_price = min(ask_price_list) - 0.05
+        #high_price = max(ask_price_list) + 0.05
+
+        stop_loss_val = self.config_data["stop_loss"]
+        current_price = self.ask_price_list[-1]
 
         threshold_list = {}
         if trade_flag == "sell":
-            threshold_list["stoploss"] = high_price
+            threshold_list["stoploss"] = current_price + stop_loss_val
             threshold_list["takeprofit"] = self.base_price
 
         elif trade_flag == "buy":
-            threshold_list["stoploss"] = low_price
+            threshold_list["stoploss"] = current_price - stop_loss_val
             threshold_list["takeprofit"] = self.base_price
         else:
             pass
