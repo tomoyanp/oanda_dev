@@ -163,12 +163,12 @@ class SuperAlgo(object):
             cmp_time = base_time.strftime("%Y-%m-%d")
 
             for ent in enable_times:
-            ent = "%s %s" % (cmp_time, ent)
-            before_time = datetime.strptime(ent, "%Y-%m-%d %H:%M:%S")
-            after_time = before_time + timedelta(hours=1)
+                ent = "%s %s" % (cmp_time, ent)
+                before_time = datetime.strptime(ent, "%Y-%m-%d %H:%M:%S")
+                after_time = before_time + timedelta(hours=1)
 
-            if base_time > before_time and base_time < after_time:
-                enable_flag = True
+                if base_time > before_time and base_time < after_time:
+                    enable_flag = True
         else:
             enable_flag = True
 

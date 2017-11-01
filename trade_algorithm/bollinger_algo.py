@@ -12,6 +12,7 @@ from common import instrument_init, account_init
 from datetime import datetime, timedelta
 import logging
 import pandas as pd
+import decimal
 
 class BollingerAlgo(SuperAlgo):
     def __init__(self, instrument, base_path):
@@ -28,8 +29,6 @@ class BollingerAlgo(SuperAlgo):
         window_size = self.config_data["window_size"]
         window_size = int(window_size) * -1
         ask_price_list = self.ask_price_list[window_size:]
-        #low_price = min(ask_price_list) - 0.05
-        #high_price = max(ask_price_list) + 0.05
 
         stop_loss_val = self.config_data["stop_loss"]
         current_price = self.ask_price_list[-1]
@@ -44,6 +43,9 @@ class BollingerAlgo(SuperAlgo):
             threshold_list["takeprofit"] = self.base_price
         else:
             pass
+
+        threshold_list["stoploss"] = '{:.3f}'.format(threshold_list["stoploss"])
+        threshold_list["takeprofit"] = '{:.3f}'.format(threshold_list["takeprofit"])
 
         logging.info("===========================================")
         logging.info("STOP LOSS RATE = %s" % threshold_list["stoploss"])
@@ -60,69 +62,65 @@ class BollingerAlgo(SuperAlgo):
 
             trade_flag = "pass"
 
-            if trade_time_flag:
-                lst = pd.Series(self.ask_price_list)
-                window_size = self.config_data["window_size"]
-                window_size = window_size * 60
-                # 28分の移動平均線
-                base = lst.rolling(window=window_size).mean()
+            lst = pd.Series(self.ask_price_list)
+            window_size = self.config_data["window_size"]
+            window_size = window_size * 60
+            # 28分の移動平均線
+            base = lst.rolling(window=window_size).mean()
 
-                # 28本分の標準偏差
-                sigma = lst.rolling(window=window_size).std(ddof=0)
+            # 28本分の標準偏差
+            sigma = lst.rolling(window=window_size).std(ddof=0)
 
-                # ±2σの計算
-                upper2_sigmas = base + (sigma*3)
-                lower2_sigmas = base - (sigma*3)
+            # ±2σの計算
+            upper2_sigmas = base + (sigma*3)
+            lower2_sigmas = base - (sigma*3)
 
-                upper2_sigma = upper2_sigmas[len(upper2_sigmas)-1]
-                lower2_sigma = lower2_sigmas[len(lower2_sigmas)-1]
+            upper2_sigma = upper2_sigmas[len(upper2_sigmas)-1]
+            lower2_sigma = lower2_sigmas[len(lower2_sigmas)-1]
 
-                # ±3σの計算
-                upper3_sigmas = base + (sigma*3)
-                lower3_sigmas = base - (sigma*3)
+            # ±3σの計算
+            upper3_sigmas = base + (sigma*3)
+            lower3_sigmas = base - (sigma*3)
 
-                upper3_sigma = upper3_sigmas[len(upper3_sigmas)-1]
-                lower3_sigma = lower3_sigmas[len(lower3_sigmas)-1]
+            upper3_sigma = upper3_sigmas[len(upper3_sigmas)-1]
+            lower3_sigma = lower3_sigmas[len(lower3_sigmas)-1]
 
-                cmp_price = lst[len(lst)-1]
+            cmp_price = lst[len(lst)-1]
 
-                self.base_price = base[len(base)-1]
+            self.base_price = base[len(base)-1]
 
+            logging.info("=======================")
+            logging.info("DECIDE ORDER")
+            logging.info("ASK_PRICE=%s" % cmp_price)
+            logging.info("UPPER_SIGMA=%s" % upper2_sigma)
+            logging.info("lower_SIGMA=%s" % lower2_sigma)
+            logging.info("BASE_TIME=%s" % base_time)
+            logging.info("=======================")
+
+
+            if cmp_price > upper2_sigma:
+                trade_flag = "sell"
+                self.order_flag = True
+                self.order_kind = trade_flag
                 logging.info("=======================")
-                logging.info("DECIDE ORDER")
+                logging.info("EXECUTE ORDER SELL")
                 logging.info("ASK_PRICE=%s" % cmp_price)
                 logging.info("UPPER_SIGMA=%s" % upper2_sigma)
-                logging.info("lower_SIGMA=%s" % lower2_sigma)
                 logging.info("BASE_TIME=%s" % base_time)
                 logging.info("=======================")
 
-
-                if cmp_price > upper2_sigma:
-                    trade_flag = "sell"
-                    self.order_flag = True
-                    self.order_kind = trade_flag
-                    logging.info("=======================")
-                    logging.info("EXECUTE ORDER SELL")
-                    logging.info("ASK_PRICE=%s" % cmp_price)
-                    logging.info("UPPER_SIGMA=%s" % upper2_sigma)
-                    logging.info("BASE_TIME=%s" % base_time)
-                    logging.info("=======================")
-
-                elif cmp_price < lower2_sigma:
-                    trade_flag = "buy"
-                    self.order_flag = True
-                    self.order_kind = trade_flag
-                    logging.info("=======================")
-                    logging.info("EXECUTE ORDER BUY")
-                    logging.info("ASK_PRICE=%s" % cmp_price)
-                    logging.info("LOWER_SIGMA=%s" % lower2_sigma)
-                    logging.info("BASE_TIME=%s" % base_time)
-                    logging.info("=======================")
-                else:
-                    trade_flag = "pass"
-
+            elif cmp_price < lower2_sigma:
+                trade_flag = "buy"
+                self.order_flag = True
+                self.order_kind = trade_flag
+                logging.info("=======================")
+                logging.info("EXECUTE ORDER BUY")
+                logging.info("ASK_PRICE=%s" % cmp_price)
+                logging.info("LOWER_SIGMA=%s" % lower2_sigma)
+                logging.info("BASE_TIME=%s" % base_time)
+                logging.info("=======================")
             else:
-                pass
+                trade_flag = "pass"
 
             return trade_flag
 
