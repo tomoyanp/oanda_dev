@@ -57,17 +57,18 @@ if __name__ == '__main__':
 
     try:
       while True:
-          trade_wrapper.checkPosition()
+          
           if test_mode:
               base_time = base_time + timedelta(seconds=test_return_index)
           else:
               time.sleep(polling_time)
               base_time = datetime.now()
-
+                 
           week = base_time.weekday()
           if week == 5 or week == 6:
               pass
           else:
+          	  trade_wrapper.checkPosition()
               trade_wrapper.setInstrumentRespoonse(base_time)
               trade_wrapper.tradeDecisionWrapper(base_time)
               test_return_index = trade_wrapper.stlDecisionWrapper()
