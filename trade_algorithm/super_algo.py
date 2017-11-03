@@ -28,8 +28,8 @@ class SuperAlgo(object):
         self.insert_time_list = []
         self.order_price = 0
         self.stl_price = 0
-        self.stoploss_rate_rate = 0
-        self.takeprofit_rate_rate = 0
+        self.stoploss_rate = 0
+        self.takeprofit_rate = 0
         now = datetime.now()
         filename = now.strftime("%Y%m%d%H%M%S")
         self.order_flag = False
@@ -105,7 +105,7 @@ class SuperAlgo(object):
             print cmp_time
             print type(cmp_time)
             #cmp_time = datetime.strptime(cmp_time, "%Y-%m-%d %H:%M:%S")
-            cmp_time = cmp_time + timedelta(seconds=300)
+            cmp_time = cmp_time + timedelta(seconds=5)
             if cmp_time < base_time:
                 sql = self.getInitialSql(base_time)
                 print sql
@@ -209,18 +209,40 @@ class SuperAlgo(object):
         try:
             ask_price = self.ask_price_list[len(self.ask_price_list)-1]
             bid_price = self.bid_price_list[len(self.bid_price_list)-1]
+            self.takeprofit_rate = float(self.takeprofit_rate)
+            self.stoploss_rate = float(self.stoploss_rate)
+            ask_price = float(ask_price)
+            bid_price = float(bid_price)
+            logging.info("TAKE PROFIT RATE = %s" % self.takeprofit_rate)
+            logging.info("STOP LOSS RATE = %s" % self.stoploss_rate)
+            logging.info("ASK PRICE = %s" % ask_price)
+            logging.info("BID PRICE = %s" % bid_price)
 
             stl_flag = False
             if self.order_kind == "buy":
                 if bid_price > self.takeprofit_rate or bid_price < self.stoploss_rate:
                     self.order_flag = False
+                    logging.info("SETTLE TRUEEEEEEEEEEEEEEEEEE(BUY)")
                     stl_flag = True
 
             elif self.order_kind == "sell":
                 if ask_price < self.takeprofit_rate or ask_price > self.stoploss_rate:
+                    logging.info("%s < %s" % (ask_price, self.takeprofit_rate))
+                    logging.info("%s > %s" % (ask_price, self.stoploss_rate))
+                    logging.info("SETTLE TRUEEEEEEEEEEEEEEEEEE(SELL)")
+                    logging.info("TAKE PROFIT RATE = %s" % self.takeprofit_rate)
+                    logging.info(type(self.takeprofit_rate))
+                    logging.info("STOP LOSS RATE = %s" % self.stoploss_rate)
+                    logging.info(type(self.stoploss_rate))
+                    logging.info("ASK PRICE = %s" % ask_price)
+                    logging.info(type(ask_price))
+                    logging.info("BID PRICE = %s" % bid_price)
+                    logging.info(type(bid_price))
+ 
                     self.order_flag = False
                     stl_flag = True
 
+            logging.info("SETTLE FLAG = %s" % stl_flag)
             return stl_flag
         except:
             raise

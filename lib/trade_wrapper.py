@@ -120,6 +120,7 @@ class TradeWrapper:
 
         # 今建玉があるかチェック
         self.order_flag = self.trade_algo.getOrderFlag()
+        logging.info("AFTER CHECK POSITION ORDER FLAG = %s" % self.order_flag)
 
     def setInstrumentRespoonse(self, base_time):
         self.trade_algo.setPriceTable(base_time)
@@ -127,6 +128,7 @@ class TradeWrapper:
     def stlDecisionWrapper(self):
         test_return_index = 1
         # 建玉があれば、決済するかどうか判断
+        logging.info("STL DECISION WRAPPER ORDER FLAG = %s" % self.order_flag)
         if self.order_flag:
             stl_flag = self.trade_algo.decideStl()
             trade_id = self.trade_algo.getTradeId()
@@ -168,12 +170,16 @@ class TradeWrapper:
         return test_return_index
 
     def tradeDecisionWrapper(self, base_time):
+        logging.info("TRADE DECISION WRAPPER ORDER FLAG = %s" % self.order_flag)
         if self.order_flag:
             pass
         else:
             trade_flag = self.trade_algo.decideTrade(base_time)
+            logging.info("AFTER DECIDE TRADE ORDER_FLAG = %s" % self.trade_algo.getOrderFlag())
             trade_flag = self.trade_algo.decideTradeTime(base_time, trade_flag)
+            logging.info("AFTER TRADE TIME ORDER_FLAG = %s" % self.trade_algo.getOrderFlag())
             trade_flag = self.trade_algo.checkTrend(base_time, trade_flag)
+            logging.info("AFTER CHECK TREND ORDER_FLAG = %s" % self.trade_algo.getOrderFlag())
 
             if trade_flag == "pass":
                 self.trade_algo.resetFlag()
