@@ -51,7 +51,7 @@ class BollingerAlgo(SuperAlgo):
         logging.info("===========================================")
         logging.info("STOP LOSS RATE = %s" % threshold_list["stoploss"])
         logging.info("TAKE PROFIT RATE = %s" % threshold_list["takeprofit"])
-        
+
         self.stoploss_rate = threshold_list["stoploss"]
         self.takeprofit_rate = threshold_list["takeprofit"]
 
@@ -59,7 +59,7 @@ class BollingerAlgo(SuperAlgo):
 
 
     def decideTrade(self, base_time):
-        try: 
+        try:
 
             trade_flag = "pass"
 
@@ -132,28 +132,33 @@ class BollingerAlgo(SuperAlgo):
     # ここでは、急に逆方向に動いた時に決済出来るようにしている
     def decideStl(self):
         try:
-            ask_mx = max(self.ask_price_list)
-            ask_min = min(self.ask_price_list)
-            ask_mx_index = self.ask_price_list.index(ask_mx)
-            ask_min_index = self.ask_price_list.index(ask_min)
 
-            bid_mx = max(self.bid_price_list)
-            bid_min = min(self.bid_price_list)
-            bid_mx_index = self.bid_price_list.index(bid_mx)
-            bid_min_index = self.bid_price_list.index(bid_min)
+            ask_lst = pd.Series(self.ask_price_list)
+            bid_lst = pd.Series(self.bid_price_list)
 
-            now = datetime.now()
-            now = now.strftime("%Y-%m-%d %H:%M:%S")
+            window_size = self.config_data["window_size"]
+            window_size = window_size * 60
+            # 28分の移動平均線
+            ask_base_list = ask_lst.rolling(window=window_size).mean()
+            bid_base_list = bid_lst.rolling(window=window_size).mean()
+
+            current_ask_price = self.ask_price_list[-1]
+            current_bid_price = self.bid_price_list[-1]
+
+            ask_base = ask_base_list[-1]
+            bid_base = bid_base_list[-1]
 
             stl_flag = False
             if self.order_kind == "buy":
-                if (bid_mx - bid_min) > self.optional_threshold and bid_mx_index < bid_min_index:
+                if current_bid_price > bid_base:
                     self.order_flag = False
+                    self.order_kind = ""
                     stl_flag = True
 
             elif self.order_kind == "sell":
-                if (ask_mx - ask_min) > self.optional_threshold and ask_mx_index > ask_min_index:
+                if current_ask_price < ask_base:
                     self.order_flag = False
+                    self.order_kind = ""
                     stl_flag = True
 
             #logging.info("stl_flag=%s" % stl_flag)
