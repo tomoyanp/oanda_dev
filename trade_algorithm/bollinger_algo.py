@@ -145,8 +145,13 @@ class BollingerAlgo(SuperAlgo):
             current_ask_price = self.ask_price_list[-1]
             current_bid_price = self.bid_price_list[-1]
 
-            ask_base = ask_base_list[-1]
-            bid_base = bid_base_list[-1]
+            ask_base = ask_base_list[len(ask_base_list)-1]
+            bid_base = bid_base_list[len(ask_base_list)-1]
+
+            current_ask_price = float(current_ask_price)
+            current_bid_price = float(current_bid_price)
+            ask_base = float(ask_base)
+            bid_base = float(bid_base)
 
             stl_flag = False
             if self.order_kind == "buy":
