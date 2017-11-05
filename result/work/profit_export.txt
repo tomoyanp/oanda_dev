@@ -86,3 +86,604 @@ PROFIT=0.075
 # stl_sleep_time = 60
 # stoploss 0.2 で、全時間帯で実施
 PROFIT=-0.102
+==== 20171104111145_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.05
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# stop_lossを0.5にすると、負けは少ないが、負けたときがでかい
+# 時間帯は昼間のみ
+# 過去3日間で実施
+PROFIT=0.123
+==== 20171104124623_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# stop_lossを2pipsにしてみた
+# 時間帯は昼間のみ
+# 過去3日間で実施
+PROFIT=0.075
+==== 20171104131800_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# stoploss 0.2 で、全時間帯で実施
+# 過去3日間で実施
+PROFIT=-0.102
+==== 20171104134510_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# 40日分で実施。時間帯をもう少し絞ってよいのでは
+PROFIT=-1.441
+==== 20171104111145_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.05
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# stop_lossを0.5にすると、負けは少ないが、負けたときがでかい
+# 時間帯は昼間のみ
+# 過去3日間で実施
+PROFIT=0.123
+==== 20171104124623_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# stop_lossを2pipsにしてみた
+# 時間帯は昼間のみ
+# 過去3日間で実施
+PROFIT=0.075
+==== 20171104131800_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# stoploss 0.2 で、全時間帯で実施
+# 過去3日間で実施
+PROFIT=-0.102
+==== 20171104134510_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# 40日分で実施。時間帯をもう少し絞ってよいのでは
+PROFIT=-1.441
+==== 20171104181849_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+PROFIT=-0.039
+==== 20171104111145_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.05
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# stop_lossを0.5にすると、負けは少ないが、負けたときがでかい
+# 時間帯は昼間のみ
+# 過去3日間で実施
+PROFIT=0.123
+==== 20171104124623_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# stop_lossを2pipsにしてみた
+# 時間帯は昼間のみ
+# 過去3日間で実施
+PROFIT=0.075
+==== 20171104131800_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# stoploss 0.2 で、全時間帯で実施
+# 過去3日間で実施
+PROFIT=-0.102
+==== 20171104134510_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# 40日分で実施。時間帯をもう少し絞ってよいのでは
+PROFIT=-1.441
+==== 20171104181849_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# 一時間でトレンドフォローしてみたけど、あまり意味なく。。。
+PROFIT=-0.039
+==== 20171104201635_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+PROFIT=0.024
+==== 20171104111145_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.05
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# stop_lossを0.5にすると、負けは少ないが、負けたときがでかい
+# 時間帯は昼間のみ
+# 過去3日間で実施
+PROFIT=0.123
+==== 20171104124623_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# stop_lossを2pipsにしてみた
+# 時間帯は昼間のみ
+# 過去3日間で実施
+PROFIT=0.075
+==== 20171104131800_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# stoploss 0.2 で、全時間帯で実施
+# 過去3日間で実施
+PROFIT=-0.102
+==== 20171104134510_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# 40日分で実施。時間帯をもう少し絞ってよいのでは
+PROFIT=-1.441
+==== 20171104181849_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# 一時間でトレンドフォローしてみたけど、あまり意味なく。。。
+PROFIT=-0.039
+==== 20171104201635_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# trend follow 3hors
+# 10nichi bun 
+PROFIT=0.024
+==== 20171104215253_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# trend follow 3hors 40nichibun
+#
+PROFIT=-0.144
+==== 20171104111145_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.05
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# stop_lossを0.5にすると、負けは少ないが、負けたときがでかい
+# 時間帯は昼間のみ
+# 過去3日間で実施
+PROFIT=0.123
+==== 20171104124623_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# stop_lossを2pipsにしてみた
+# 時間帯は昼間のみ
+# 過去3日間で実施
+PROFIT=0.075
+==== 20171104131800_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# stoploss 0.2 で、全時間帯で実施
+# 過去3日間で実施
+PROFIT=-0.102
+==== 20171104134510_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# 40日分で実施。時間帯をもう少し絞ってよいのでは
+PROFIT=-1.441
+==== 20171104181849_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# 一時間でトレンドフォローしてみたけど、あまり意味なく。。。
+PROFIT=-0.039
+==== 20171104201635_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# trend follow 3hors
+# 10nichi bun 
+PROFIT=0.024
+==== 20171104215253_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# trend follow 3hors 40nichibun
+#
+PROFIT=-0.144
+==== 20171105194703_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+PROFIT=-1.168
+==== 20171104111145_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.05
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# stop_lossを0.5にすると、負けは少ないが、負けたときがでかい
+# 時間帯は昼間のみ
+# 過去3日間で実施
+PROFIT=0.123
+==== 20171104124623_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# stop_lossを2pipsにしてみた
+# 時間帯は昼間のみ
+# 過去3日間で実施
+PROFIT=0.075
+==== 20171104131800_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# stoploss 0.2 で、全時間帯で実施
+# 過去3日間で実施
+PROFIT=-0.102
+==== 20171104134510_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# 40日分で実施。時間帯をもう少し絞ってよいのでは
+PROFIT=-1.441
+==== 20171104181849_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# 一時間でトレンドフォローしてみたけど、あまり意味なく。。。
+PROFIT=-0.039
+==== 20171104201635_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# trend follow 3hors
+# 10nichi bun 
+PROFIT=0.024
+==== 20171104215253_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# trend follow 3hors 40nichibun
+#
+PROFIT=-0.144
+==== 20171105062414_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.15
+# stop_loss = 0.05
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 5
+PROFIT=-0.509
+==== 20171104111145_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.05
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# stop_lossを0.5にすると、負けは少ないが、負けたときがでかい
+# 時間帯は昼間のみ
+# 過去3日間で実施
+PROFIT=0.123
+==== 20171104124623_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# stop_lossを2pipsにしてみた
+# 時間帯は昼間のみ
+# 過去3日間で実施
+PROFIT=0.075
+==== 20171104131800_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# stoploss 0.2 で、全時間帯で実施
+# 過去3日間で実施
+PROFIT=-0.102
+==== 20171104134510_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# 40日分で実施。時間帯をもう少し絞ってよいのでは
+PROFIT=-1.441
+==== 20171104181849_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# 一時間でトレンドフォローしてみたけど、あまり意味なく。。。
+PROFIT=-0.039
+==== 20171104201635_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# trend follow 3hors
+# 10nichi bun 
+PROFIT=0.024
+==== 20171104215253_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+# trend follow 3hors 40nichibun
+#
+PROFIT=-0.144
+==== 20171105062414_result.log ====
+#########################
+# instrument = GBP_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.15
+# stop_loss = 0.05
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 5
+PROFIT=-0.509
+==== 20171105225803_result.log ====
+#########################
+# instrument = USD_JPY
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.02
+# take_profit = 0.1
+# time_width = 3600
+# stl_time_width = 60
+# stl_sleep_time = 60
+PROFIT=0.099

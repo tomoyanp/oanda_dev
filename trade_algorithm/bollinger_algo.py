@@ -157,24 +157,25 @@ class BollingerAlgo(SuperAlgo):
 
             stl_flag = False
             current_time = self.insert_time_list[len(self.insert_time_list)-1]
-            cmp_time = self.order_time + timedelta(minutes=5)
-            if self.order_time > cmp_time:
+            cmp_time = self.order_time + timedelta(minutes=10)
+            logging.info("CURRENT TIME = %s" % current_time)
+            logging.info("CMP TIME = %s" % cmp_time)
+            if current_time > cmp_time:
                 self.order_flag = False
                 self.order_kind = ""
                 stl_flag = True
 
+            elif self.order_kind == "buy":
+                if current_bid_price > bid_base:
+                    self.order_flag = False
+                    self.order_kind = ""
+                    stl_flag = True
 
-#            if self.order_kind == "buy":
-#                if current_bid_price > bid_base:
-#                    self.order_flag = False
-#                    self.order_kind = ""
-#                    stl_flag = True
-#
-#            elif self.order_kind == "sell":
-#                if current_ask_price < ask_base:
-#                    self.order_flag = False
-#                    self.order_kind = ""
-#                    stl_flag = True
+            elif self.order_kind == "sell":
+                if current_ask_price < ask_base:
+                    self.order_flag = False
+                    self.order_kind = ""
+                    stl_flag = True
 
             #logging.info("stl_flag=%s" % stl_flag)
             return stl_flag
