@@ -156,7 +156,7 @@ class BollingerAlgo(SuperAlgo):
             bid_base = float(bid_base)
 
             stl_flag = False
-            current_time = self.insert_time_list(len(self.insert_time_list)-1)
+            current_time = self.insert_time_list[len(self.insert_time_list)-1]
             cmp_time = self.order_time + timedelta(minutes=5)
             if self.order_time > cmp_time:
                 self.order_flag = False
