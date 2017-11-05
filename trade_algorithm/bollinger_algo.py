@@ -109,6 +109,7 @@ class BollingerAlgo(SuperAlgo):
                 logging.info("UPPER_SIGMA=%s" % upper2_sigma)
                 logging.info("BASE_TIME=%s" % base_time)
                 logging.info("=======================")
+                self.order_time = self.insert_time_list[len(self.insert_time_list)-1]
 
             elif cmp_price < lower2_sigma:
                 trade_flag = "buy"
@@ -120,6 +121,7 @@ class BollingerAlgo(SuperAlgo):
                 logging.info("LOWER_SIGMA=%s" % lower2_sigma)
                 logging.info("BASE_TIME=%s" % base_time)
                 logging.info("=======================")
+                self.order_time = self.insert_time_list[len(self.insert_time_list)-1]
             else:
                 trade_flag = "pass"
 
@@ -154,17 +156,25 @@ class BollingerAlgo(SuperAlgo):
             bid_base = float(bid_base)
 
             stl_flag = False
-            if self.order_kind == "buy":
-                if current_bid_price > bid_base:
-                    self.order_flag = False
-                    self.order_kind = ""
-                    stl_flag = True
+            current_time = self.insert_time_list(len(self.insert_time_list)-1)
+            cmp_time = self.order_time + timedelta(minutes=5)
+            if self.order_time > cmp_time:
+                self.order_flag = False
+                self.order_kind = ""
+                stl_flag = True
 
-            elif self.order_kind == "sell":
-                if current_ask_price < ask_base:
-                    self.order_flag = False
-                    self.order_kind = ""
-                    stl_flag = True
+
+#            if self.order_kind == "buy":
+#                if current_bid_price > bid_base:
+#                    self.order_flag = False
+#                    self.order_kind = ""
+#                    stl_flag = True
+#
+#            elif self.order_kind == "sell":
+#                if current_ask_price < ask_base:
+#                    self.order_flag = False
+#                    self.order_kind = ""
+#                    stl_flag = True
 
             #logging.info("stl_flag=%s" % stl_flag)
             return stl_flag
