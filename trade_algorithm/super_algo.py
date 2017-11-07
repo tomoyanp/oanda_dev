@@ -59,13 +59,13 @@ class SuperAlgo(object):
         start_time = base_time - timedelta(seconds=time_width)
         start_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
         end_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
-        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' order by insert_time" % (self.instrument, start_time, end_time)
+        sql = "select ask_price, bid_price, insert_time from %s_TABLE group by insert_time having insert_time > \'%s\' and insert_time < \'%s\' order by insert_time" % (self.instrument, start_time, end_time)
         print sql
         return sql
 
     def getAddSql(self, base_time):
         base_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
-        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time = \'%s\' limit 1" % (self.instrument, base_time)
+        sql = "select distinct ask_price, bid_price, insert_time from %s_TABLE where insert_time = \'%s\' limit 1" % (self.instrument, base_time)
         return sql
 
     def setResponse(self, response):

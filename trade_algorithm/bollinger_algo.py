@@ -86,6 +86,13 @@ class BollingerAlgo(SuperAlgo):
             upper3_sigma = upper3_sigmas[len(upper3_sigmas)-1]
             lower3_sigma = lower3_sigmas[len(lower3_sigmas)-1]
 
+#            for i in self.insert_time_list:
+#                logging.info(i)
+#
+#            logging.info(window_size)
+#            tmp = window_size * -1
+#            logging.info(self.insert_time_list[tmp])
+
             cmp_price = lst[len(lst)-1]
 
             self.base_price = base[len(base)-1]
@@ -158,21 +165,35 @@ class BollingerAlgo(SuperAlgo):
             stl_flag = False
             current_time = self.insert_time_list[len(self.insert_time_list)-1]
             cmp_time = self.order_time + timedelta(minutes=10)
+            logging.info("DECIDE TIME COMP= %s" % current_time)
             logging.info("CURRENT TIME = %s" % current_time)
             logging.info("CMP TIME = %s" % cmp_time)
-            if current_time > cmp_time:
-                self.order_flag = False
-                self.order_kind = ""
-                stl_flag = True
+            logging.info(type(cmp_time))
+            logging.info(type(current_time))
+            logging.info("=============================================")
+#            if current_time > cmp_time:
+#                logging.info("****************EXECUTE TIME COMP= %s" % current_time)
+#                logging.info("CURRENT TIME = %s" % current_time)
+#                logging.info("CMP TIME = %s" % cmp_time)
+#                self.order_flag = False
+#                self.order_kind = ""
+#                stl_flag = True
 
-            elif self.order_kind == "buy":
+#            elif self.order_kind == "buy":
+            if self.order_kind == "buy":
                 if current_bid_price > bid_base:
+                    logging.info("***************EXECUTE BASE")
+                    logging.info("CURRENT BID PRICE = %s" % current_bid_price)
+                    logging.info("CURRENT BID BASE = %s" % bid_base)
                     self.order_flag = False
                     self.order_kind = ""
                     stl_flag = True
 
             elif self.order_kind == "sell":
                 if current_ask_price < ask_base:
+                    logging.info("***************EXECUTE BASE")
+                    logging.info("CURRENT ASK PRICE = %s" % current_ask_price)
+                    logging.info("CURRENT ASK BASE = %s" % ask_base)
                     self.order_flag = False
                     self.order_kind = ""
                     stl_flag = True

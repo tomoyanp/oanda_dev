@@ -175,11 +175,11 @@ class TradeWrapper:
             pass
         else:
             trade_flag = self.trade_algo.decideTrade(base_time)
-            logging.info("AFTER DECIDE TRADE ORDER_FLAG = %s" % self.trade_algo.getOrderFlag())
+            #logging.info("AFTER DECIDE TRADE ORDER_FLAG = %s" % self.trade_algo.getOrderFlag())
             trade_flag = self.trade_algo.decideTradeTime(base_time, trade_flag)
-            logging.info("AFTER TRADE TIME ORDER_FLAG = %s" % self.trade_algo.getOrderFlag())
+            #logging.info("AFTER TRADE TIME ORDER_FLAG = %s" % self.trade_algo.getOrderFlag())
             trade_flag = self.trade_algo.checkTrend(base_time, trade_flag)
-            logging.info("AFTER CHECK TREND ORDER_FLAG = %s" % self.trade_algo.getOrderFlag())
+            #logging.info("AFTER CHECK TREND ORDER_FLAG = %s" % self.trade_algo.getOrderFlag())
 
             if trade_flag == "pass":
                 self.trade_algo.resetFlag()
