@@ -25,38 +25,38 @@ class BollingerAlgo(SuperAlgo):
         #self.timetrend_width = self.config_data["timetrend_width"]
 
     # オーバーライドする
-    def calcThreshold(self, trade_flag):
-        window_size = self.config_data["window_size"]
-        window_size = int(window_size) * -1
-        ask_price_list = self.ask_price_list[window_size:]
-
-        stop_loss_val = self.config_data["stop_loss"]
-        current_ask_price = self.ask_price_list[-1]
-        current_bid_price = self.bid_price_list[-1]
-
-        threshold_list = {}
-        if trade_flag == "sell":
-            threshold_list["stoploss"] = current_ask_price + stop_loss_val
-            threshold_list["takeprofit"] = self.base_price
-
-        elif trade_flag == "buy":
-            threshold_list["stoploss"] = current_bid_price - stop_loss_val
-            threshold_list["takeprofit"] = self.base_price
-        else:
-            pass
-
-        threshold_list["stoploss"] = '{:.3f}'.format(threshold_list["stoploss"])
-        threshold_list["takeprofit"] = '{:.3f}'.format(threshold_list["takeprofit"])
-
-        logging.info("===========================================")
-        logging.info("STOP LOSS RATE = %s" % threshold_list["stoploss"])
-        logging.info("TAKE PROFIT RATE = %s" % threshold_list["takeprofit"])
-
-        self.stoploss_rate = threshold_list["stoploss"]
-        self.takeprofit_rate = threshold_list["takeprofit"]
-
-        return threshold_list
-
+#    def calcThreshold(self, trade_flag):
+#        window_size = self.config_data["window_size"]
+#        window_size = int(window_size) * -1
+#        ask_price_list = self.ask_price_list[window_size:]
+#
+#        stop_loss_val = self.config_data["stop_loss"]
+#        current_ask_price = self.ask_price_list[-1]
+#        current_bid_price = self.bid_price_list[-1]
+#
+#        threshold_list = {}
+#        if trade_flag == "sell":
+#            threshold_list["stoploss"] = current_ask_price + stop_loss_val
+#            threshold_list["takeprofit"] = self.base_price
+#
+#        elif trade_flag == "buy":
+#            threshold_list["stoploss"] = current_bid_price - stop_loss_val
+#            threshold_list["takeprofit"] = self.base_price
+#        else:
+#            pass
+#
+#        threshold_list["stoploss"] = '{:.3f}'.format(threshold_list["stoploss"])
+#        threshold_list["takeprofit"] = '{:.3f}'.format(threshold_list["takeprofit"])
+#
+#        logging.info("===========================================")
+#        logging.info("STOP LOSS RATE = %s" % threshold_list["stoploss"])
+#        logging.info("TAKE PROFIT RATE = %s" % threshold_list["takeprofit"])
+#
+#        self.stoploss_rate = threshold_list["stoploss"]
+#        self.takeprofit_rate = threshold_list["takeprofit"]
+#
+#        return threshold_list
+#
 
     def decideTrade(self, base_time):
         try:
@@ -142,63 +142,63 @@ class BollingerAlgo(SuperAlgo):
     def decideStl(self):
         try:
 
-            ask_lst = pd.Series(self.ask_price_list)
-            bid_lst = pd.Series(self.bid_price_list)
-
-            window_size = self.config_data["window_size"]
-            window_size = window_size * 60
-            # 28分の移動平均線
-            ask_base_list = ask_lst.rolling(window=window_size).mean()
-            bid_base_list = bid_lst.rolling(window=window_size).mean()
-
-            current_ask_price = self.ask_price_list[-1]
-            current_bid_price = self.bid_price_list[-1]
-
-            ask_base = ask_base_list[len(ask_base_list)-1]
-            bid_base = bid_base_list[len(ask_base_list)-1]
-
-            current_ask_price = float(current_ask_price)
-            current_bid_price = float(current_bid_price)
-            ask_base = float(ask_base)
-            bid_base = float(bid_base)
-
+#            ask_lst = pd.Series(self.ask_price_list)
+#            bid_lst = pd.Series(self.bid_price_list)
+#
+#            window_size = self.config_data["window_size"]
+#            window_size = window_size * 60
+#            # 28分の移動平均線
+#            ask_base_list = ask_lst.rolling(window=window_size).mean()
+#            bid_base_list = bid_lst.rolling(window=window_size).mean()
+#
+#            current_ask_price = self.ask_price_list[-1]
+#            current_bid_price = self.bid_price_list[-1]
+#
+#            ask_base = ask_base_list[len(ask_base_list)-1]
+#            bid_base = bid_base_list[len(ask_base_list)-1]
+#
+#            current_ask_price = float(current_ask_price)
+#            current_bid_price = float(current_bid_price)
+#            ask_base = float(ask_base)
+#            bid_base = float(bid_base)
+#
             stl_flag = False
-            current_time = self.insert_time_list[len(self.insert_time_list)-1]
-            cmp_time = self.order_time + timedelta(minutes=10)
-            logging.info("DECIDE TIME COMP= %s" % current_time)
-            logging.info("CURRENT TIME = %s" % current_time)
-            logging.info("CMP TIME = %s" % cmp_time)
-            logging.info(type(cmp_time))
-            logging.info(type(current_time))
-            logging.info("=============================================")
-#            if current_time > cmp_time:
-#                logging.info("****************EXECUTE TIME COMP= %s" % current_time)
-#                logging.info("CURRENT TIME = %s" % current_time)
-#                logging.info("CMP TIME = %s" % cmp_time)
-#                self.order_flag = False
-#                self.order_kind = ""
-#                stl_flag = True
-
-#            elif self.order_kind == "buy":
-            if self.order_kind == "buy":
-                if current_bid_price > bid_base:
-                    logging.info("***************EXECUTE BASE")
-                    logging.info("CURRENT BID PRICE = %s" % current_bid_price)
-                    logging.info("CURRENT BID BASE = %s" % bid_base)
-                    self.order_flag = False
-                    self.order_kind = ""
-                    stl_flag = True
-
-            elif self.order_kind == "sell":
-                if current_ask_price < ask_base:
-                    logging.info("***************EXECUTE BASE")
-                    logging.info("CURRENT ASK PRICE = %s" % current_ask_price)
-                    logging.info("CURRENT ASK BASE = %s" % ask_base)
-                    self.order_flag = False
-                    self.order_kind = ""
-                    stl_flag = True
-
-            #logging.info("stl_flag=%s" % stl_flag)
+#            current_time = self.insert_time_list[len(self.insert_time_list)-1]
+#            cmp_time = self.order_time + timedelta(minutes=10)
+#            logging.info("DECIDE TIME COMP= %s" % current_time)
+#            logging.info("CURRENT TIME = %s" % current_time)
+#            logging.info("CMP TIME = %s" % cmp_time)
+#            logging.info(type(cmp_time))
+#            logging.info(type(current_time))
+#            logging.info("=============================================")
+##            if current_time > cmp_time:
+##                logging.info("****************EXECUTE TIME COMP= %s" % current_time)
+##                logging.info("CURRENT TIME = %s" % current_time)
+##                logging.info("CMP TIME = %s" % cmp_time)
+##                self.order_flag = False
+##                self.order_kind = ""
+##                stl_flag = True
+#
+##            elif self.order_kind == "buy":
+#            if self.order_kind == "buy":
+#                if current_bid_price > bid_base:
+#                    logging.info("***************EXECUTE BASE")
+#                    logging.info("CURRENT BID PRICE = %s" % current_bid_price)
+#                    logging.info("CURRENT BID BASE = %s" % bid_base)
+#                    self.order_flag = False
+#                    self.order_kind = ""
+#                    stl_flag = True
+#
+#            elif self.order_kind == "sell":
+#                if current_ask_price < ask_base:
+#                    logging.info("***************EXECUTE BASE")
+#                    logging.info("CURRENT ASK PRICE = %s" % current_ask_price)
+#                    logging.info("CURRENT ASK BASE = %s" % ask_base)
+#                    self.order_flag = False
+#                    self.order_kind = ""
+#                    stl_flag = True
+#
+#            #logging.info("stl_flag=%s" % stl_flag)
             return stl_flag
         except:
             raise

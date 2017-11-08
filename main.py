@@ -65,8 +65,19 @@ if __name__ == '__main__':
               base_time = datetime.now()
                  
           week = base_time.weekday()
-          if week == 5 or week == 6:
+
+          # 土曜の朝５時から
+          if week == 5 and base_time.hour > 5:
               pass
+
+          # 日曜の場合
+          elif week == 6:
+              pass
+
+          # 月曜の朝６時まで
+          elif week == 0 and base_time.hour < 6:
+              pass
+
           else:
               trade_wrapper.checkPosition()
               trade_wrapper.setInstrumentRespoonse(base_time)
