@@ -73,8 +73,11 @@ class BollingerAlgo(SuperAlgo):
             sigma = lst.rolling(window=window_size).std(ddof=0)
 
             # ±2σの計算
-            upper2_sigmas = base + (sigma*3)
-            lower2_sigmas = base - (sigma*3)
+            upper2_sigmas = base + (sigma*2)
+            lower2_sigmas = base - (sigma*2)
+
+#            upper2_sigmas = base + (sigma*3)
+#            lower2_sigmas = base - (sigma*3)
 
             upper2_sigma = upper2_sigmas[len(upper2_sigmas)-1]
             lower2_sigma = lower2_sigmas[len(lower2_sigmas)-1]
