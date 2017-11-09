@@ -56,8 +56,7 @@ if __name__ == '__main__':
     test_return_index = polling_time
 
     try:
-      while True:
-          
+      while True: 
           if test_mode:
               base_time = base_time + timedelta(seconds=test_return_index)
           else:
@@ -91,6 +90,7 @@ if __name__ == '__main__':
 
     except:
         message = traceback.format_exc()
+        print message
         sendmail = SendMail("tomoyanpy@gmail.com", "tomoyanpy@softbank.ne.jp", property_path)
         sendmail.set_msg(message)
         sendmail.send_mail()
