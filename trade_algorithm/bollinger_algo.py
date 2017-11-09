@@ -145,61 +145,61 @@ class BollingerAlgo(SuperAlgo):
     def decideStl(self):
         try:
 
-            ask_lst = pd.Series(self.ask_price_list)
-            bid_lst = pd.Series(self.bid_price_list)
-
-            window_size = self.config_data["window_size"]
-            window_size = window_size * 60
-            # 28分の移動平均線
-            ask_base_list = ask_lst.rolling(window=window_size).mean()
-            bid_base_list = bid_lst.rolling(window=window_size).mean()
-
-            current_ask_price = self.ask_price_list[-1]
-            current_bid_price = self.bid_price_list[-1]
-
-            ask_base = ask_base_list[len(ask_base_list)-1]
-            bid_base = bid_base_list[len(ask_base_list)-1]
-
-            current_ask_price = float(current_ask_price)
-            current_bid_price = float(current_bid_price)
-            ask_base = float(ask_base)
-            bid_base = float(bid_base)
-
+#            ask_lst = pd.Series(self.ask_price_list)
+#            bid_lst = pd.Series(self.bid_price_list)
+#
+#            window_size = self.config_data["window_size"]
+#            window_size = window_size * 60
+#            # 28分の移動平均線
+#            ask_base_list = ask_lst.rolling(window=window_size).mean()
+#            bid_base_list = bid_lst.rolling(window=window_size).mean()
+#
+#            current_ask_price = self.ask_price_list[-1]
+#            current_bid_price = self.bid_price_list[-1]
+#
+#            ask_base = ask_base_list[len(ask_base_list)-1]
+#            bid_base = bid_base_list[len(ask_base_list)-1]
+#
+#            current_ask_price = float(current_ask_price)
+#            current_bid_price = float(current_bid_price)
+#            ask_base = float(ask_base)
+#            bid_base = float(bid_base)
+#
             stl_flag = False
-            current_time = self.insert_time_list[len(self.insert_time_list)-1]
-            cmp_time = self.order_time + timedelta(minutes=10)
-            logging.info("DECIDE TIME COMP= %s" % current_time)
-            logging.info("CURRENT TIME = %s" % current_time)
-            logging.info("CMP TIME = %s" % cmp_time)
-            logging.info(type(cmp_time))
-            logging.info(type(current_time))
-            logging.info("=============================================")
-#            if current_time > cmp_time:
-#                logging.info("****************EXECUTE TIME COMP= %s" % current_time)
-#                logging.info("CURRENT TIME = %s" % current_time)
-#                logging.info("CMP TIME = %s" % cmp_time)
-#                self.order_flag = False
-#                self.order_kind = ""
-#                stl_flag = True
-
-#            elif self.order_kind == "buy":
-            if self.order_kind == "buy":
-                if current_bid_price > bid_base:
-                    logging.info("***************EXECUTE BASE")
-                    logging.info("CURRENT BID PRICE = %s" % current_bid_price)
-                    logging.info("CURRENT BID BASE = %s" % bid_base)
-                    self.order_flag = False
-                    self.order_kind = ""
-                    stl_flag = True
-
-            elif self.order_kind == "sell":
-                if current_ask_price < ask_base:
-                    logging.info("***************EXECUTE BASE")
-                    logging.info("CURRENT ASK PRICE = %s" % current_ask_price)
-                    logging.info("CURRENT ASK BASE = %s" % ask_base)
-                    self.order_flag = False
-                    self.order_kind = ""
-                    stl_flag = True
+#            current_time = self.insert_time_list[len(self.insert_time_list)-1]
+#            cmp_time = self.order_time + timedelta(minutes=10)
+#            logging.info("DECIDE TIME COMP= %s" % current_time)
+#            logging.info("CURRENT TIME = %s" % current_time)
+#            logging.info("CMP TIME = %s" % cmp_time)
+#            logging.info(type(cmp_time))
+#            logging.info(type(current_time))
+#            logging.info("=============================================")
+##            if current_time > cmp_time:
+##                logging.info("****************EXECUTE TIME COMP= %s" % current_time)
+##                logging.info("CURRENT TIME = %s" % current_time)
+##                logging.info("CMP TIME = %s" % cmp_time)
+##                self.order_flag = False
+##                self.order_kind = ""
+##                stl_flag = True
+#
+##            elif self.order_kind == "buy":
+#            if self.order_kind == "buy":
+#                if current_bid_price > bid_base:
+#                    logging.info("***************EXECUTE BASE")
+#                    logging.info("CURRENT BID PRICE = %s" % current_bid_price)
+#                    logging.info("CURRENT BID BASE = %s" % bid_base)
+#                    self.order_flag = False
+#                    self.order_kind = ""
+#                    stl_flag = True
+#
+#            elif self.order_kind == "sell":
+#                if current_ask_price < ask_base:
+#                    logging.info("***************EXECUTE BASE")
+#                    logging.info("CURRENT ASK PRICE = %s" % current_ask_price)
+#                    logging.info("CURRENT ASK BASE = %s" % ask_base)
+#                    self.order_flag = False
+#                    self.order_kind = ""
+#                    stl_flag = True
 
             #logging.info("stl_flag=%s" % stl_flag)
             return stl_flag
