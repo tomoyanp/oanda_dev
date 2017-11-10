@@ -134,6 +134,9 @@ class SuperAlgo(object):
     def setOrderFlag(self, flag):
         self.order_flag = flag
 
+    def setOrderKind(self, kind):
+        self.order_kind = kind
+
     def setOrderPrice(self, price):
         self.order_price = price
 

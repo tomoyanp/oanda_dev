@@ -189,7 +189,7 @@ class BollingerAlgo(SuperAlgo):
                     logging.info("CURRENT BID PRICE = %s" % current_bid_price)
                     logging.info("CURRENT BID BASE = %s" % bid_base)
                     self.order_flag = False
-                    self.order_kind = ""
+                    #self.order_kind = ""
                     stl_flag = True
 
             elif self.order_kind == "sell":
@@ -198,7 +198,7 @@ class BollingerAlgo(SuperAlgo):
                     logging.info("CURRENT ASK PRICE = %s" % current_ask_price)
                     logging.info("CURRENT ASK BASE = %s" % ask_base)
                     self.order_flag = False
-                    self.order_kind = ""
+                    #self.order_kind = ""
                     stl_flag = True
 
             #logging.info("stl_flag=%s" % stl_flag)

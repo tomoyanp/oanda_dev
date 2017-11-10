@@ -153,6 +153,7 @@ class TradeWrapper:
                 self.result_file.write("PROFIT=%s\n" % profit)
                 self.result_file.write("======================================================\n")
                 self.result_file.flush()
+                self.trade_algo.setOrderKind("")
                 test_return_index = self.stl_sleeptime
 
                 if self.test_mode:
