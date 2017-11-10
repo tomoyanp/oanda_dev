@@ -51,7 +51,7 @@ class SuperAlgo(object):
 
     def resetFlag(self):
         self.order_flag = False
-        self.order_kind = ""
+        #self.order_kind = ""
         self.trade_id = 0
 
     def getInitialSql(self, base_time):
