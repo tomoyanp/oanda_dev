@@ -226,7 +226,7 @@ class SuperAlgo(object):
                     self.order_flag = False
                     logging.info("SETTLE TRUEEEEEEEEEEEEEEEEEE(BUY)")
                     stl_flag = True
-                    self.order_kind = ""
+#                    self.order_kind = ""
 
             elif self.order_kind == "sell":
                 if ask_price < self.takeprofit_rate or ask_price > self.stoploss_rate:
@@ -242,7 +242,7 @@ class SuperAlgo(object):
                     logging.info("BID PRICE = %s" % bid_price)
                     logging.info(type(bid_price))
 
-                    self.order_kind = ""
+#                    self.order_kind = ""
                     self.order_flag = False
                     stl_flag = True
 
