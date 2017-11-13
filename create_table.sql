@@ -7,3 +7,49 @@ use oanda_db
 
 create user tomoyan@'localhost' identified by 'tomoyan180';
 grant all privileges on 'oanda_db'.* to tomoyan@'localhost';
+
+  mysql> select * from TEST_TABLE
+      -> ;
+  +---------+----------+
+  | test_id | test_val |
+  +---------+----------+
+  |       1 | aaa      |
+  |       1 | aaa      |
+  |       2 | bbb      |
+  |       2 | bbb      |
+  |       3 | ccc      |
+  |       3 | ccc      |
+  +---------+----------+
+  6 rows in set (0.00 sec)
+
+
+  create table TEST_TABLE(test_id int, test_val char(5));
+  mysqldump -u user -t DB名 テーブル名A テーブル名B > dump.sql
+  mysqldump -u root -t oanda_db TEST_TABLE > dump.sql
+  テーブルドロップ
+  再作成（ユニークキー付与）
+
+  mysqldump -u root -p oanda_db -t -c --skip-extended-insert TEST_TABLE > dump.sqlmysql -u root oanda_db < dump.sql
+  create table TEST_TABLE(test_id int unique key, test_val char(5));
+
+
+  create table TEST_TABLE(id int auto_increment not null primary key, test_id int, test_val char(5));
+  insert into TEST_TABLE(test_id, test_val) values(1, 'aaa');
+  insert into TEST_TABLE(test_id, test_val) values(2, 'bbb');
+  insert into TEST_TABLE(test_id, test_val) values(3, 'ccc');
+
+  重複しているレコードを抽出する
+  select * from TEST_TABLE group by test_id having count(*) >= 2;
+
+  mysql> alter table TEST_TABLE add unique unique_index(test_id);
+  ERROR 1062 (23000): Duplicate entry '1' for key 'unique_index'
+
+
+  delete TEST_TABLE where id=(select id from TEST_TABLE group by test_id having count(*) >= 2);
+
+  delete TEST_TABLE where id in (select id from TEST_TABLE group by test_id having count(*) >= 2);
+
+
+  ↓で重複したデータ消せた
+  delete from TEST_TABLE where id in (select id from (select id from TEST_TABLE group by test_id having count(*) >= 2) as tmp);
+  alter table TEST_TABLE add unique(test_id);
