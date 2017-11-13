@@ -123,7 +123,8 @@ class TradeWrapper:
         logging.info("AFTER CHECK POSITION ORDER FLAG = %s" % self.order_flag)
 
     def setInstrumentRespoonse(self, base_time):
-        self.trade_algo.setPriceTable(base_time)
+        #self.trade_algo.setPriceTable(base_time)
+        self.trade_algo.setNewPriceTable(base_time)
 
     def stlDecisionWrapper(self):
         test_return_index = 1

@@ -64,6 +64,38 @@ class SuperAlgo(object):
         print sql
         return sql
 
+
+    def getSql(self, base_time):
+        time_width = self.config_data["time_width"]
+        chart_pollong = self.config_data["chart_polling"]
+        start_time = base_time - timedelta(seconds=time_width)
+        day = start_time.day
+        hour = start_time.hour
+        if day == 5 and hour > 6:
+            start_time = start_time - timedelta(hours=48)
+        	
+        elif day == 6:
+            start_time = start_time - timedelta(hours=48)
+        	
+        elif day == 0 and hour < 6:
+            start_time = start_time - timedelta(hours=48)
+        	
+        
+        start_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
+        end_time = base_time.strftime("%Y-%m-%d %H:%M:%M:%S")
+        
+        if chart_polling == "hour":
+            sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' and insert_time like \'%00:00\' order by insert_time " % (self.instrument, start_time, end_time)
+        elif chart_pollong == "minute":
+            sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' and insert_time like \'%00\' order by insert_time " % (self.instrument, start_time, end_time)
+            
+        else:
+            sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' order by insert_time " % (self.instrument, start_time, end_time)
+        logging.info(sql)
+        return sql
+
+
+
     def getAddSql(self, base_time):
         base_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
         #sql = "select distinct ask_price, bid_price, insert_time from %s_TABLE where insert_time = \'%s\' limit 1" % (self.instrument, base_time)
@@ -119,6 +151,11 @@ class SuperAlgo(object):
                 response = self.mysqlConnector.select_sql(sql)
                 self.addResponse(response)
         logging.info(sql)
+
+    def setNewPricetable(self, base_time):
+        sql = self.getSql(base_time)
+        response = self.mysqlConnector.select_sql(sql)
+        self.setResponse(response)
 
     def setTradeId(self, response):
         print response
