@@ -53,16 +53,16 @@ if __name__ == '__main__':
     base_time = datetime.now()
     #base_time = base_time - timedelta(days=20)
     base_time = base_time - timedelta(days=40)
-    test_return_index = polling_time
+    #test_return_index = polling_time
 
     try:
-      while True: 
+      while True:
           if test_mode:
-              base_time = base_time + timedelta(seconds=test_return_index)
+              base_time = base_time + timedelta(seconds=polling_time)
           else:
               time.sleep(polling_time)
               base_time = datetime.now()
-                 
+
           week = base_time.weekday()
 
           # 土曜の朝５時から
@@ -87,7 +87,7 @@ if __name__ == '__main__':
               trade_wrapper.checkPosition()
               trade_wrapper.setInstrumentRespoonse(base_time)
               trade_wrapper.tradeDecisionWrapper(base_time)
-              test_return_index = trade_wrapper.stlDecisionWrapper()
+              polling_time = trade_wrapper.stlDecisionWrapper()
 
           if test_mode:
               now = datetime.now()

@@ -127,7 +127,9 @@ class TradeWrapper:
         self.trade_algo.setNewPriceTable(base_time)
 
     def stlDecisionWrapper(self):
-        test_return_index = 1
+        sleep_time = self.config_data["sleep_time"]
+        stl_sleep_time = self.config_data["stl_sleep_time"]
+
         # 建玉があれば、決済するかどうか判断
         logging.info("STL DECISION WRAPPER ORDER FLAG = %s" % self.order_flag)
         if self.order_flag:
@@ -155,21 +157,22 @@ class TradeWrapper:
                 self.result_file.write("======================================================\n")
                 self.result_file.flush()
                 self.trade_algo.setOrderKind("")
-                test_return_index = self.stl_sleeptime
 
                 if self.test_mode:
                     pass
                 else:
                     trade_id = self.trade_algo.getTradeId()
                     self.oanda_wrapper.close_trade(trade_id)
-                    # 決済後のスリープ
-                    time.sleep(self.stl_sleeptime)
-            else:
-                pass
-        else:
-            pass
+#                    # 決済後のスリープ
+#                    time.sleep(self.stl_sleeptime)
 
-        return test_return_index
+                polling_time = stl_sleep_time
+            else:
+                polling_time = sleep_time
+        else:
+            polling_time = sleep_time
+
+        return polling_time
 
     def tradeDecisionWrapper(self, base_time):
         logging.info("TRADE DECISION WRAPPER ORDER FLAG = %s" % self.order_flag)

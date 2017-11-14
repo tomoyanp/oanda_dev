@@ -77,3 +77,13 @@
 　・テーブルのtrancate
 　・ユニークキー付与
 　・SQLインポート
+
+polling_timeについて
+　・stlDecisionのところで、常にpolling_timeをreturnするようにしたほうがわかりやすい
+　　⇒stl_flag = True ⇒ stl_sleep_timeを返す
+　　⇒stl_flag = False ⇒ sleep_timeを返す
+
+稼働確認するもの
+　・hour, minute, secondについて、insert_timeがきちんと取れてること
+　・polling_timeとadd_responseの値できちんと整合性取れていること
+　・週またぎ処理できちんと値が取れていること
