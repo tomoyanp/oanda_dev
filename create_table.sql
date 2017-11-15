@@ -51,5 +51,6 @@ grant all privileges on 'oanda_db'.* to tomoyan@'localhost';
 
 
   ↓で重複したデータ消せた
+  delete from USD_JPY_TABLE where id in (select id from (select id from USD_JPY_TABLE group by insert_time having count(*) >= 2 and insert_time > '2017-11-11 18:00:00' and insert_time < '2017-11-11 20:00:00') as tmp);
   delete from TEST_TABLE where id in (select id from (select id from TEST_TABLE group by test_id having count(*) >= 2) as tmp);
   alter table TEST_TABLE add unique(test_id);

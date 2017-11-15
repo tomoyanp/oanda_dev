@@ -66,6 +66,7 @@ class BollingerAlgo(SuperAlgo):
             lst = pd.Series(self.ask_price_list)
             window_size = self.config_data["window_size"]
             window_size = window_size * 60
+            window_size = len(self.ask_price_list)
             # 28分の移動平均線
             base = lst.rolling(window=window_size).mean()
 
@@ -104,6 +105,7 @@ class BollingerAlgo(SuperAlgo):
             logging.info("DECIDE ORDER")
             logging.info("ASK_PRICE=%s" % cmp_price)
             logging.info("UPPER_SIGMA=%s" % upper2_sigma)
+            logging.info("BASE_SIGMA=%s" % self.base_price)
             logging.info("lower_SIGMA=%s" % lower2_sigma)
             logging.info("BASE_TIME=%s" % base_time)
             logging.info("=======================")
@@ -150,6 +152,7 @@ class BollingerAlgo(SuperAlgo):
 
             window_size = self.config_data["window_size"]
             window_size = window_size * 60
+            window_size = len(self.ask_price_list)
             # 28分の移動平均線
             ask_base_list = ask_lst.rolling(window=window_size).mean()
             bid_base_list = bid_lst.rolling(window=window_size).mean()

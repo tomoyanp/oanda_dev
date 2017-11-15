@@ -1,1 +1,1 @@
-nohup python main.py "USD_JPY" "demo" "bollinger" "test" > /dev/null &
+nohup python main.py "USD_JPY" "production" "bollinger" > /dev/null &
