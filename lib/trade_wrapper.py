@@ -123,12 +123,11 @@ class TradeWrapper:
         logging.info("AFTER CHECK POSITION ORDER FLAG = %s" % self.order_flag)
 
     def setInstrumentRespoonse(self, base_time):
-        #self.trade_algo.setPriceTable(base_time)
-        self.trade_algo.setNewPriceTable(base_time)
+        self.trade_algo.setPriceTable(base_time)
+        #self.trade_algo.setNewPriceTable(base_time)
 
     def stlDecisionWrapper(self):
         sleep_time = self.config_data["sleep_time"]
-        stl_sleep_time = self.config_data["stl_sleep_time"]
 
         # 建玉があれば、決済するかどうか判断
         logging.info("STL DECISION WRAPPER ORDER FLAG = %s" % self.order_flag)
@@ -152,6 +151,11 @@ class TradeWrapper:
                 else:
                     profit = order_price - stl_price
 
+                if profit > 0:
+                    sleep_time = self.config_data["stl_sleep_vtime"]
+                else:
+                    sleep_time = self.config_data["stl_sleep_ltime"]
+
                 self.result_file.write("ORDER_PRICE=%s, STL_PRICE=%s, ORDER_KIND=%s, PROFIT=%s\n" % (order_price, stl_price, order_kind, profit))
                 self.result_file.write("PROFIT=%s\n" % profit)
                 self.result_file.write("======================================================\n")
@@ -166,12 +170,13 @@ class TradeWrapper:
 #                    # 決済後のスリープ
 #                    time.sleep(self.stl_sleeptime)
 
-                polling_time = stl_sleep_time
             else:
-                polling_time = sleep_time
+                pass
         else:
-            polling_time = sleep_time
+            pass
 
+        polling_time = sleep_time
+        logging.info("POLLING_TIME%s" % polling_time)
         return polling_time
 
     def tradeDecisionWrapper(self, base_time):

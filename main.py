@@ -52,13 +52,7 @@ if __name__ == '__main__':
 
     base_time = datetime.now()
     #base_time = base_time - timedelta(days=20)
-<<<<<<< Updated upstream
-    base_time = base_time - timedelta(days=40)
-    #test_return_index = polling_time
-=======
     base_time = base_time - timedelta(days=10)
-    test_return_index = polling_time
->>>>>>> Stashed changes
 
     try:
       while True:

@@ -87,3 +87,6 @@ polling_timeについて
 　・hour, minute, secondについて、insert_timeがきちんと取れてること
 　・polling_timeとadd_responseの値できちんと整合性取れていること
 　・週またぎ処理できちんと値が取れていること
+
+20171115
+　・一回負けた場合は少しスリープしたほうが良さそう（トレンドが続きそうなため）

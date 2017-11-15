@@ -64,8 +64,8 @@ class BollingerAlgo(SuperAlgo):
             trade_flag = "pass"
 
             lst = pd.Series(self.ask_price_list)
-            window_size = self.config_data["window_size"]
-            window_size = window_size * 60
+            #window_size = self.config_data["window_size"]
+            #window_size = window_size * 60
             window_size = len(self.ask_price_list)
             # 28分の移動平均線
             base = lst.rolling(window=window_size).mean()
@@ -150,8 +150,8 @@ class BollingerAlgo(SuperAlgo):
             ask_lst = pd.Series(self.ask_price_list)
             bid_lst = pd.Series(self.bid_price_list)
 
-            window_size = self.config_data["window_size"]
-            window_size = window_size * 60
+            #window_size = self.config_data["window_size"]
+            #window_size = window_size * 60
             window_size = len(self.ask_price_list)
             # 28分の移動平均線
             ask_base_list = ask_lst.rolling(window=window_size).mean()
