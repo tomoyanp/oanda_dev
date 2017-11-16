@@ -109,8 +109,31 @@ class TradeWrapper:
                 self.trade_algo.resetFlag()
                 # 決済した直後であればスリープする
                 if self.stl_sleep_flag:
+
+                    nowftime = self.trade_algo.getCurrentTime()
+                    self.result_file.write("===== EXECUTE SETTLEMENT STOP OR LIMIT ORDER at %s ======\n" % nowftime)
+                    order_kind = self.trade_algo.getOrderKind()
+                    order_price = self.trade_algo.getOrderPrice()
+                    stl_price = self.trade_algo.getCurrentPrice()
+                    self.trade_algo.setStlPrice(order_price)
+                    if order_kind == "buy":
+                        profit = stl_price - order_price
+                    else:
+                        profit = order_price - stl_price
+
+                    if profit > 0:
+                        sleep_time = self.config_data["stl_sleep_vtime"]
+                    else:
+                        sleep_time = self.config_data["stl_sleep_ltime"]
+
+                    self.result_file.write("ORDER_PRICE=%s, STL_PRICE=%s, ORDER_KIND=%s, PROFIT=%s\n" % (order_price, stl_price, order_kind, profit))
+                    self.result_file.write("PROFIT=%s\n" % profit)
+                    self.result_file.write("======================================================\n")
+                    self.result_file.flush()
+                    self.trade_algo.setOrderKind("")
                     #logging.info("SLEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEP!!!!!!!")
-                    time.sleep(self.stl_sleeptime)
+
+                    time.sleep(sleep_time)
                     self.stl_sleep_flag = False
             else:
                 #logging.info("POSITION FLAG TTTTTTTTTTTTTTTTTTTTTTTTRUUUE!!!!!!!")
@@ -211,4 +234,4 @@ class TradeWrapper:
                     response = self.oanda_wrapper.order(trade_flag, self.instrument, threshold_list["stoploss"], threshold_list["takeprofit"])
                     self.trade_algo.setTradeId(response)
                     # 約定後のスリープ
-                    #time.sleep(self.stl_sleeptime)
+                    #time.sleep(self.sleeptime)
