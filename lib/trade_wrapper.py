@@ -70,7 +70,7 @@ class TradeWrapper:
         self.result_file.write("# take_profit = %s\n" % self.take_profit)
         self.result_file.write("# time_width = %s\n" % self.time_width)
         self.result_file.write("# stl_time_width = %s\n" % self.stl_time_width)
-        self.result_file.write("# stl_sleep_time = %s\n" % self.stl_sleeptime)
+        #self.result_file.write("# stl_sleep_time = %s\n" % self.stl_sleeptime)
         self.result_file.flush()
 
     def setTradeAlgo(self, algo):
