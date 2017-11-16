@@ -35,15 +35,15 @@ class TradeWrapper:
         #polling_time = 1
 
         # パラメータセット
-        config_data        = instrument_init(instrument, self.base_path)
-        self.units              = config_data["units"]
+        self.config_data        = instrument_init(instrument, self.base_path)
+        self.units              = self.config_data["units"]
         self.instrument = instrument
-        self.trade_threshold    = config_data["trade_threshold"]
-        self.optional_threshold = config_data["optional_threshold"]
-        self.stop_loss          = config_data["stop_loss"]
-        self.take_profit        = config_data["take_profit"]
-        self.time_width         = config_data["time_width"]
-        self.stl_time_width     = config_data["stl_time_width"]
+        self.trade_threshold    = self.config_data["trade_threshold"]
+        self.optional_threshold = self.config_data["optional_threshold"]
+        self.stop_loss          = self.config_data["stop_loss"]
+        self.take_profit        = self.config_data["take_profit"]
+        self.time_width         = self.config_data["time_width"]
+        self.stl_time_width     = self.config_data["stl_time_width"]
 #        self.stl_sleeptime      = config_data["stl_sleeptime"]
 
         # 使うものインスタンス化
