@@ -44,7 +44,7 @@ class TradeWrapper:
         self.take_profit        = config_data["take_profit"]
         self.time_width         = config_data["time_width"]
         self.stl_time_width     = config_data["stl_time_width"]
-        self.stl_sleeptime      = config_data["stl_sleeptime"]
+#        self.stl_sleeptime      = config_data["stl_sleeptime"]
 
         # 使うものインスタンス化
         self.oanda_wrapper = OandaWrapper(self.env, self.account_id, self.token, self.units)
@@ -211,4 +211,4 @@ class TradeWrapper:
                     response = self.oanda_wrapper.order(trade_flag, self.instrument, threshold_list["stoploss"], threshold_list["takeprofit"])
                     self.trade_algo.setTradeId(response)
                     # 約定後のスリープ
-                    time.sleep(self.stl_sleeptime)
+                    #time.sleep(self.stl_sleeptime)
