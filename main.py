@@ -56,6 +56,7 @@ if __name__ == '__main__':
 
     try:
       while True:
+          polling_time = int(polling_time)
           if test_mode:
               base_time = base_time + timedelta(seconds=polling_time)
           else:
