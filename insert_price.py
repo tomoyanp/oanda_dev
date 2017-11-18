@@ -50,7 +50,7 @@ def decideMarket(now):
 
 if __name__ == "__main__":
     args = sys.argv
-    currency = args[1].trim()
+    currency = args[1].strip()
     con = MysqlConnector()
     polling_time = 0.5
     sleep_time = 3600
