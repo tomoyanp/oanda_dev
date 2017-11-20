@@ -9,7 +9,7 @@
 from datetime import datetime,timedelta
 import logging
 import os
-from common import instrument_init, account_init
+from common import instrument_init, account_init, decideMarket
 from abc import ABCMeta, abstractmethod
 from mysql_connector import MysqlConnector
 
@@ -57,13 +57,18 @@ class SuperAlgo(object):
     def getInitialSql(self, base_time):
         time_width = self.config_data["time_width"]
         start_time = base_time - timedelta(seconds=time_width)
+
+        # マーケットが休みの場合、48時間さかのぼってSQLを実行する
+        flag = decideMarket(start_time)
+        if flag == False:
+            start_time = start_time - timedelta(hours=48)
+
         start_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
         end_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
+
         #sql = "select ask_price, bid_price, insert_time from %s_TABLE group by insert_time having insert_time > \'%s\' and insert_time < \'%s\' order by insert_time" % (self.instrument, start_time, end_time)
         sql = "select ask_price, bid_price, insert_time from %s_TABLE group by insert_time having insert_time > \'%s\' and insert_time < \'%s\' order by insert_time" % (self.instrument, start_time, end_time)
-        print sql
         return sql
-
 
     def getSql(self, base_time):
         time_width = self.config_data["time_width"]

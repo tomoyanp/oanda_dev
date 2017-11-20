@@ -18,6 +18,7 @@ config_path = current_path + "/config"
 from trade_wrapper import TradeWrapper
 from datetime import datetime, timedelta
 from send_mail import SendMail
+from common import decideMarket
 import time
 import logging
 now = datetime.now()
@@ -63,24 +64,8 @@ if __name__ == '__main__':
               time.sleep(polling_time)
               base_time = datetime.now()
 
-          week = base_time.weekday()
-
-          # 土曜の朝５時から
-          if week == 5 and base_time.hour > 5:
-              pass
-
-          # 日曜の場合
-          elif week == 6:
-              pass
-
-          # 月曜の朝６時まで
-#          elif week == 0 and base_time.hour < 6:
-          # 週またぎでボリンジャーバンドの計算ができないため、暫定で
-#          elif week == 0:
-#              pass
-
-          # 週またぎでボリンジャーバンドの計算ができないため、暫定で
-          elif week == 0 and base_time.hour <= 12:
+          flag = decideMarket(base_time)
+          if flag == False:
               pass
 
           else:

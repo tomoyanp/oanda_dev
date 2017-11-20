@@ -15,6 +15,34 @@ def account_init(mode, base_path):
     account_data = jsonData[mode]
     return account_data
 
+# マーケットが休みであればfalseを返す
+def decideMarket(base_time):
+    flag = True
+    month = base_time.month
+    week = base_time.weekday()
+    hour = base_time.hour
+
+    # 冬時間の場合
+    if month == 11 or month == 12 or month == 1 or month == 2 or month == 3:
+        if week == 5 and hour > 6:
+            flag = False
+
+        elif week == 0 and  hour < 7:
+            flag = False
+
+    # 夏時間の場合
+    else:
+        if week == 5 and hour > 5:
+            flag = False
+
+        elif week == 0 and  hour < 6:
+            flag = False
+
+    # 日曜日の場合
+    if week == 6:
+        flag = False
+
+    return flag
 
 def decide_up_down_before_day(con, base_time, instrument):
     comp_time = base_time.strftime("%H:%M:%S")

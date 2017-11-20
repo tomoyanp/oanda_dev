@@ -54,3 +54,10 @@ grant all privileges on 'oanda_db'.* to tomoyan@'localhost';
   delete from USD_JPY_TABLE where id in (select id from (select id from USD_JPY_TABLE group by insert_time having count(*) >= 2 and insert_time > '2017-11-11 18:00:00' and insert_time < '2017-11-11 20:00:00') as tmp);
   delete from TEST_TABLE where id in (select id from (select id from TEST_TABLE group by test_id having count(*) >= 2) as tmp);
   alter table TEST_TABLE add unique(test_id);
+
+ALTER TABLE GBP_JPY RENAME to GBP_JPY_TABLE;
+ALTER TABLE USD_JPY RENAME to USD_JPY_TABLE;
+grant all privileges on 'oanda_db'.GBP_JPY_TABLE to 'tomoyan';
+grant all privileges on 'oanda_db'.USD_JPY_TABLE to 'tomoyan';
+ALTER TABLE GBP_JPY_TABLE ADD INDEX time_index(insert_time)
+ALTER TABLE USD_JPY_TABLE ADD INDEX time_index(insert_time)

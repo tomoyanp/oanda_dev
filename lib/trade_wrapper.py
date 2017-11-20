@@ -10,8 +10,6 @@ from step_wise_algo import StepWiseAlgo
 from start_end_algo import StartEndAlgo
 from time_trend_algo import TimeTrendAlgo
 from bollinger_algo import BollingerAlgo
-#from mysql_connector import MysqlConnector
-#from db_wrapper import DBWrapper
 from oanda_wrapper import OandaWrapper
 from common import instrument_init, account_init, decide_up_down_before_day
 import time
@@ -31,27 +29,12 @@ class TradeWrapper:
         self.token        = account_data["token"]
         self.env          = account_data["env"]
 
-        # ポーリング時間
-        #polling_time = 1
-
         # パラメータセット
         self.config_data        = instrument_init(instrument, self.base_path)
-        self.units              = self.config_data["units"]
-        self.instrument = instrument
-        self.trade_threshold    = self.config_data["trade_threshold"]
-        self.optional_threshold = self.config_data["optional_threshold"]
-        self.stop_loss          = self.config_data["stop_loss"]
-        self.take_profit        = self.config_data["take_profit"]
-        self.time_width         = self.config_data["time_width"]
-        self.stl_time_width     = self.config_data["stl_time_width"]
-#        self.stl_sleeptime      = config_data["stl_sleeptime"]
-
+        units                   = self.config_data["units"]
+        self.instrument         = instrument
         # 使うものインスタンス化
-        self.oanda_wrapper = OandaWrapper(self.env, self.account_id, self.token, self.units)
-        #self.con           = MysqlConnector()
-        #self.db_wrapper    = DBWrapper()
-        #self.trade_algo    = TradeAlgo(self.trade_threshold, self.optional_threshold)
-        #self.trade_algo    = StepWiseAlgo(self.trade_threshold, self.optional_threshold, self.instrument, self.base_path)
+        self.oanda_wrapper      = OandaWrapper(self.env, self.account_id, self.token, units)
 
         # 初期化
         self.order_flag = False
@@ -63,27 +46,11 @@ class TradeWrapper:
         base_time = now.strftime("%Y%m%d%H%M%S")
         self.result_file = open("%s/result/%s_result.log" % (self.base_path, base_time), "w")
         self.result_file.write("#########################\n")
-        self.result_file.write("# instrument = %s\n" % self.instrument)
-        self.result_file.write("# trade_threshold = %s\n" % self.trade_threshold)
-        self.result_file.write("# optional_threshold = %s\n" % self.optional_threshold)
-        self.result_file.write("# stop_loss = %s\n" % self.stop_loss)
-        self.result_file.write("# take_profit = %s\n" % self.take_profit)
-        self.result_file.write("# time_width = %s\n" % self.time_width)
-        self.result_file.write("# stl_time_width = %s\n" % self.stl_time_width)
-        #self.result_file.write("# stl_sleep_time = %s\n" % self.stl_sleeptime)
+        for elm in self.config_data:
+            self.result_file.write("# %s = %s\n" % (elm, self.config_data[elm]))
         self.result_file.flush()
 
     def setTradeAlgo(self, algo):
-#        if algo == "step":
-#            self.trade_algo = StepWiseAlgo(self.trade_threshold, self.optional_threshold, self.instrument, self.base_path)
-#        elif algo == "startend":
-#            self.trade_algo = StartEndAlgo(self.trade_threshold, self.optional_threshold, self.instrument, self.base_path)
-#        elif algo == "timetrend":
-#            self.trade_algo = TimeTrendAlgo(self.trade_threshold, self.optional_threshold, self.instrument, self.base_path)
-#        else:
-#            self.trade_algo = HiLowAlgo(self.trade_threshold, self.optional_threshold, self.instrument, self.base_path)
-
-
         if algo == "step":
             self.trade_algo = StepWiseAlgo(self.instrument, self.base_path)
         elif algo == "startend":
