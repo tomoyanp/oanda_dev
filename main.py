@@ -76,11 +76,11 @@ if __name__ == '__main__':
           # 月曜の朝６時まで
 #          elif week == 0 and base_time.hour < 6:
           # 週またぎでボリンジャーバンドの計算ができないため、暫定で
-          elif week == 0:
-              pass
+#          elif week == 0:
+#              pass
 
           # 週またぎでボリンジャーバンドの計算ができないため、暫定で
-          elif week == 1 and base_time.hour < 11:
+          elif week == 0 and base_time.hour <= 12:
               pass
 
           else:
