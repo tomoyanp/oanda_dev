@@ -5,6 +5,7 @@ import os
 import traceback
 import json
 import commands
+from datetime import datetime
 
 # 実行スクリプトのパスを取得して、追加
 current_path = os.path.abspath(os.path.dirname(__file__))
@@ -29,7 +30,7 @@ def exec_cmd(cmd):
 # processが起動状態かどうか確認
 # プロセスが存在しなければtrueを返す
 def check_process(process):
-    cmd = "ps -ef | grep %s | grep -v grep |wc -l"
+    cmd = "ps -ef | grep %s | grep -v grep |wc -l" % process
     out = exec_cmd(cmd)
     process_numbers = int(out)
     flag = False
@@ -41,35 +42,42 @@ def check_process(process):
 def stop_service(process):
     cmd = "ps -ef |grep %s |grep -v grep" % process
     process_list = exec_cmd(cmd)
+    process_list = process_list.split("\n")
 
-    for process in process_list:
+    pid_list = []
+    for proc in process_list:
+        proc = proc.split(" ")
         flag = True
         while flag:
             flag = False
-            for i in range(0, len(process)):
-                if pslist[i] == "":
+            for i in range(0, len(proc)):
+                if proc[i] == "":
                     flag = True
-                    process.pop(i)
+                    proc.pop(i)
                     break
 
-    pid_list = []
-    for pid in process_list:
-        pid_list.append(pid[1].strip())
+        pid_list.append(proc[1].strip())
 
+    print pid_list
+
+#    for pid in pid_list:
+#        pid_list.append(pid[1].strip())
+#
+#    pid_list = []
     for pid in pid_list:
         cmd = "kill -9 %s" % pid
         exec_cmd(cmd)
 
     time.sleep(5)
 
-    if checkprocess(process):
+    if check_process(process):
         pass
     else:
         raise ValueError("Cannot Stop Service at %s" % process)
 
 
 def stop_daemon(daemon):
-    cmd = "service %s stop"
+    cmd = "service %s stop" % daemon
     exec_cmd(cmd)
     time.sleep(5)
 
@@ -109,6 +117,7 @@ if __name__ == '__main__':
         exec_cmd(cmd)
 
     except:
+        print traceback.format_exc()
         message = traceback.format_exc()
         sendmail.set_msg(message)
         sendmail.send_mail()
