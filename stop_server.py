@@ -17,74 +17,98 @@ now = now.strftime("%Y%m%d%H%M%S")
 logfilename = "/var/log/oanda_dev/stop_service_%s.log" %(now)
 logging.basicConfig(filename=logfilename, level=logging.INFO)
 
+def exec_cmd(cmd):
+    now = datetime.now()
+    now = now.strftime("%Y%m%d%H%M%S")
+    logging.info("### %s ===> %s" % (now, cmd))
+    out = commands.getoutput(cmd)
+    logging.info("%s" % (out))
+    logging.info("==========================================")
+    return out
+
+# processが起動状態かどうか確認
+# プロセスが存在しなければtrueを返す
+def check_process(process):
+    cmd = "ps -ef | grep %s | grep -v grep |wc -l"
+    out = exec_cmd(cmd)
+    process_numbers = int(out)
+    flag = False
+    if process_numbers == 0:
+        flag = True
+
+    return flag
+
+def stop_service(process):
+    cmd = "ps -ef |grep %s |grep -v grep" % process
+    process_list = exec_cmd(cmd)
+
+    for process in process_list:
+        flag = True
+        while flag:
+            flag = False
+            for i in range(0, len(process)):
+                if pslist[i] == "":
+                    flag = True
+                    process.pop(i)
+                    break
+
+    pid_list = []
+    for pid in process_list:
+        pid_list.append(pid[1].strip())
+
+    for pid in pid_list:
+        cmd = "kill -9 %s" % pid
+        exec_cmd(cmd)
+
+    time.sleep(5)
+
+    if checkprocess(process):
+        pass
+    else:
+        raise ValueError("Cannot Stop Service at %s" % process)
+
+
+def stop_daemon(daemon):
+    cmd = "service %s stop"
+    exec_cmd(cmd)
+    time.sleep(5)
+
+    if check_process(daemon):
+        pass
+    else:
+        raise ValueError("Cannot Stop Service at %s" % process)
+
+
+# python stop_service.py main.py
+# python stop_sevice.py insert_price.py
+
 if __name__ == '__main__':
-    cmd = "ps -ef |grep main.py |grep -v grep”
-    process_list = commands.getoutput(cmd)
-    
-    >>> flag = True
->>> while flag:
-...   flag = False
-...   for i in range(0, len(pslist)):
-...     if pslist[i] == "":
-...       flag = True
-...       pslist.pop(i)
-...       break
-
-    # argv["main.py", "$1(GBP_JPY)","$2(demo)", "step", "test"]
-    # argv[3] is "step" or "startend" or "hilow"
-    args = sys.argv
-
-    # コマンドライン引数から、通貨とモード取得
-    instrument = args[1]
-    mode       = args[2]
-    algo       = args[3]
-    if len(args) > 4:
-        test_args  = args[4]
-    else:
-        test_args = "live"
-
-    if test_args == "test":
-        test_mode = True
-    else:
-        test_mode = False
-
-    # ポーリング時間
-    polling_time = 1
-    trade_wrapper = TradeWrapper(instrument, mode, test_mode, current_path)
-    trade_wrapper.setTradeAlgo(algo)
-
-    base_time = datetime.now()
-    #base_time = base_time - timedelta(days=20)
-    base_time = base_time - timedelta(days=10)
+    sendmail = SendMail("tomoyanpy@gmail.com", "tomoyanpy@softbank.ne.jp", property_path)
 
     try:
-      while True:
-          polling_time = int(polling_time)
-          if test_mode:
-              base_time = base_time + timedelta(seconds=polling_time)
-          else:
-              time.sleep(polling_time)
-              base_time = datetime.now()
+        # コマンドライン引数から、停止対象のプロセスを受け取る
+        #args = sys.argv
+        #process = args[1]
+        #process = process.strip()
 
-          flag = decideMarket(base_time)
-          if flag == False:
-              pass
+        process = "main.py"
+        stop_service(process)
 
-          else:
-              trade_wrapper.checkPosition()
-              trade_wrapper.setInstrumentRespoonse(base_time)
-              trade_wrapper.tradeDecisionWrapper(base_time)
-              polling_time = trade_wrapper.stlDecisionWrapper()
+        process = "insert_price.py"
+        stop_service(process)
 
-          if test_mode:
-              now = datetime.now()
-              if base_time > now:
-                  raise ValueError("Complete Back Test")
+        daemon = "mysqld"
+        stop_daemon(daemon)
+
+        # 一応、リブート前にメール通知
+        message = "Complete Stop Service & daemon"
+        sendmail.set_msg(message)
+        sendmail.send_mail()
+
+        cmd = "reboot"
+        exec_cmd(cmd)
 
     except:
         message = traceback.format_exc()
-        print message
-        sendmail = SendMail("tomoyanpy@gmail.com", "tomoyanpy@softbank.ne.jp", property_path)
         sendmail.set_msg(message)
         sendmail.send_mail()
-        print message
