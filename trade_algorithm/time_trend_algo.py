@@ -27,8 +27,11 @@ class TimeTrendAlgo(SuperAlgo):
             cmp_time = base_time.strftime("%Y-%m-%d")
             trade_flag = "pass"
 
-            timetrend_list = self.config_data["timetrend"]
-            timetrend_width = self.config_data["timetrend_width"]
+#            timetrend_list = self.config_data["timetrend"]
+            timetrend_list = self.config_data["enable_time"]
+            #timetrend_width = self.config_data["timetrend_width"]
+            # これ、多分一時間分取得するってことだな
+            timetrend_width = 1
             for timetrend in timetrend_list:
 #                price_list = []
 #                time_list = []
