@@ -28,16 +28,21 @@ logging.basicConfig(filename=logfilename, level=logging.INFO)
 
 if __name__ == '__main__':
 
-    # argv["main.py", "$1(GBP_JPY)","$2(demo)", "step", "test"]
-    # argv[3] is "step" or "startend" or "hilow"
+    # argv["main.py", "$1(GBP_JPY)","$2(demo)", "step", "timetrend", "test"]
+    # argv[3] is "step" or "startend" or "hilow" or "timetrend"
+    # argv[4] is config_filename. when "instrument.config_timetrend" it's "timetrend"
+    # argv[4] is config_filename. when "instrument.config_2" it's "2"
+
     args = sys.argv
 
     # コマンドライン引数から、通貨とモード取得
     instrument = args[1]
     mode       = args[2]
     algo       = args[3]
-    if len(args) > 4:
-        test_args  = args[4]
+    config_name     = args[4]
+
+    if len(args) > 5:
+        test_args  = args[5]
     else:
         test_args = "live"
 
@@ -48,7 +53,7 @@ if __name__ == '__main__':
 
     # ポーリング時間
     polling_time = 1
-    trade_wrapper = TradeWrapper(instrument, mode, test_mode, current_path)
+    trade_wrapper = TradeWrapper(instrument, mode, test_mode, current_path, config_name)
     trade_wrapper.setTradeAlgo(algo)
 
     base_time = datetime.now()

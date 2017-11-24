@@ -2,9 +2,9 @@
 import json
 from datetime import datetime, timedelta
 
-def instrument_init(instrument, base_path):
+def instrument_init(instrument, base_path, config_name):
     config_path = "%s/config" % base_path
-    config_file = open("%s/instruments.config" % config_path, "r")
+    config_file = open("%s/instruments.config_%s" % (config_path, config_name), "r")
     jsonData = json.load(config_file)
     config_data = jsonData[instrument]
     return config_data

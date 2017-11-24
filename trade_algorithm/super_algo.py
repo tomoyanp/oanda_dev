@@ -16,10 +16,10 @@ from mysql_connector import MysqlConnector
 #class SuperAlgo(metaclass=ABCMeta):
 class SuperAlgo(object):
 
-    def __init__(self, instrument, base_path):
+    def __init__(self, instrument, base_path, config_name):
         self.base_path = base_path
         self.instrument = instrument
-        self.config_data = instrument_init(self.instrument, self.base_path)
+        self.config_data = instrument_init(self.instrument, self.base_path, config_name)
         self.trade_threshold = self.config_data["trade_threshold"]
         self.optional_threshold = self.config_data["optional_threshold"]
 

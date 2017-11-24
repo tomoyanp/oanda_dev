@@ -16,7 +16,7 @@ import time
 import logging
 
 class TradeWrapper:
-    def __init__(self, instrument, mode, test_mode, base_path):
+    def __init__(self, instrument, mode, test_mode, base_path, config_name):
         # trueであれば、テストモードにする
         self.test_mode = test_mode
 
@@ -30,7 +30,9 @@ class TradeWrapper:
         self.env          = account_data["env"]
 
         # パラメータセット
-        self.config_data        = instrument_init(instrument, self.base_path)
+        # configが一つだと、わかりづらいのでネーミングを変える instrument.config_timetrend, instrument.config_bollingerとかで使い分け
+        self.config_name        = config_name
+        self.config_data        = instrument_init(instrument, self.base_path, self.config_name)
         units                   = self.config_data["units"]
         self.instrument         = instrument
         # 使うものインスタンス化
@@ -52,15 +54,15 @@ class TradeWrapper:
 
     def setTradeAlgo(self, algo):
         if algo == "step":
-            self.trade_algo = StepWiseAlgo(self.instrument, self.base_path)
+            self.trade_algo = StepWiseAlgo(self.instrument, self.base_path, self.config_name)
         elif algo == "startend":
-            self.trade_algo = StartEndAlgo(self.instrument, self.base_path)
+            self.trade_algo = StartEndAlgo(self.instrument, self.base_path, self.config_name)
         elif algo == "timetrend":
-            self.trade_algo = TimeTrendAlgo(self.instrument, self.base_path)
+            self.trade_algo = TimeTrendAlgo(self.instrument, self.base_path, self.config_name)
         elif algo == "bollinger":
-            self.trade_algo = BollingerAlgo(self.instrument, self.base_path)
+            self.trade_algo = BollingerAlgo(self.instrument, self.base_path, self.config_name)
         else:
-            self.trade_algo = HiLowAlgo(self.instrument, self.base_path)
+            self.trade_algo = HiLowAlgo(self.instrument, self.base_path, self.config_name)
 
 
     # 今ポジションを持っているか確認
