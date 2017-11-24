@@ -15,8 +15,8 @@ import pandas as pd
 import decimal
 
 class BollingerAlgo(SuperAlgo):
-    def __init__(self, instrument, base_path):
-        super(BollingerAlgo, self).__init__(instrument, base_path)
+    def __init__(self, instrument, base_path, config_name):
+        super(BollingerAlgo, self).__init__(instrument, base_path, config_name)
         self.base_price = 0
 
         # オーバーライドする

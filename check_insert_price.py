@@ -20,10 +20,10 @@ if __name__ == "__main__":
     args = sys.argv
     currency = args[1].strip()
     con = MysqlConnector()
-    polling_time = 10
+    polling_time = 60
 
-    while True:
-        try:
+    try:
+        while True:
             now = datetime.now()
             flag = decideMarket(now)
 
@@ -34,8 +34,13 @@ if __name__ == "__main__":
                 start_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
                 end_time   = now.strftime("%Y-%m-%d %H:%M:%S")
 
-                sql = u"select insert_time from %s_TABLE() where insert_time > \'%s\' and insert_time < \'%s\'" % (currency, start_time, end_time)
+                sql = u"select insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (currency, start_time, end_time)
+                print sql
                 response = con.select_sql(sql)
+                print "==============================================="
+                for res in response:
+                    tm = res[0].strftime("%Y-%m-%d %H:%M:%S")
+                    print tm
 
                 if len(response) < 50:
                     raise ValueError("%s_TABLE CHECK FAIL. LIST LENGTH=%s" %(currency, len(response)))
@@ -44,5 +49,5 @@ if __name__ == "__main__":
 
                 time.sleep(polling_time)
 
-        except Exception as e:
-            print e.args
+    except Exception as e:
+        print e.args

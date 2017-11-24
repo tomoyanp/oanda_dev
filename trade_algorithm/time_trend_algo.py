@@ -12,13 +12,8 @@ from datetime import datetime, timedelta
 import logging
 
 class TimeTrendAlgo(SuperAlgo):
-    def __init__(self, instrument, base_path):
-        super(TimeTrendAlgo, self).__init__(instrument, base_path)
-        #self.base_path = base_path
-        #self.instrument = instrument
-        #self.config_data = instrument_init(self.instrument, self.base_path)
-        #self.timetrend_list = self.config_data["timetrend"]
-        #self.timetrend_width = self.config_data["timetrend_width"]
+    def __init__(self, instrument, base_path, config_name):
+        super(TimeTrendAlgo, self).__init__(instrument, base_path, config_name)
 
     def decideTrade(self, base_time):
         try:
