@@ -67,7 +67,7 @@ class SuperAlgo(object):
         end_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
 
         #sql = "select ask_price, bid_price, insert_time from %s_TABLE group by insert_time having insert_time > \'%s\' and insert_time < \'%s\' order by insert_time" % (self.instrument, start_time, end_time)
-        sql = "select ask_price, bid_price, insert_time from %s_TABLE group by insert_time having insert_time > \'%s\' and insert_time < \'%s\' order by insert_time" % (self.instrument, start_time, end_time)
+        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' order by insert_time" % (self.instrument, start_time, end_time)
         return sql
 
     def getSql(self, base_time):
@@ -93,13 +93,10 @@ class SuperAlgo(object):
             sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' and insert_time like \'%00:00\' order by insert_time " % (self.instrument, start_time, end_time)
         elif chart_pollong == "minute":
             sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' and insert_time like \'%00\' order by insert_time " % (self.instrument, start_time, end_time)
-
         else:
             sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' order by insert_time " % (self.instrument, start_time, end_time)
         logging.info(sql)
         return sql
-
-
 
     def getAddSql(self, base_time):
         base_time = base_time.strftime("%Y-%m-%d %H:%M:%S")

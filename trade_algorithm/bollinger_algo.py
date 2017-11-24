@@ -18,13 +18,8 @@ class BollingerAlgo(SuperAlgo):
     def __init__(self, instrument, base_path):
         super(BollingerAlgo, self).__init__(instrument, base_path)
         self.base_price = 0
-        #self.base_path = base_path
-        #self.instrument = instrument
-        #self.config_data = instrument_init(self.instrument, self.base_path)
-        #self.timetrend_list = self.config_data["timetrend"]
-        #self.timetrend_width = self.config_data["timetrend_width"]
 
-    # オーバーライドする
+        # オーバーライドする
 #    def calcThreshold(self, trade_flag):
 #        window_size = self.config_data["window_size"]
 #        window_size = int(window_size) * -1
@@ -56,7 +51,6 @@ class BollingerAlgo(SuperAlgo):
 #        self.takeprofit_rate = threshold_list["takeprofit"]
 #
 #        return threshold_list
-#
 
     def decideTrade(self, base_time):
         try:
@@ -64,8 +58,6 @@ class BollingerAlgo(SuperAlgo):
             trade_flag = "pass"
 
             lst = pd.Series(self.ask_price_list)
-            #window_size = self.config_data["window_size"]
-            #window_size = window_size * 60
             window_size = len(self.ask_price_list)
             # 28分の移動平均線
             base = lst.rolling(window=window_size).mean()
@@ -149,29 +141,29 @@ class BollingerAlgo(SuperAlgo):
 
             stl_flag = False
             ex_stlmode = self.config_data["ex_stlmode"]
-        
+
             if ex_stlmode == "on":
                 ask_lst = pd.Series(self.ask_price_list)
                 bid_lst = pd.Series(self.bid_price_list)
-    
+
                 #window_size = self.config_data["window_size"]
                 #window_size = window_size * 60
                 window_size = len(self.ask_price_list)
                 # 28分の移動平均線
                 ask_base_list = ask_lst.rolling(window=window_size).mean()
                 bid_base_list = bid_lst.rolling(window=window_size).mean()
-    
+
                 current_ask_price = self.ask_price_list[-1]
                 current_bid_price = self.bid_price_list[-1]
-    
+
                 ask_base = ask_base_list[len(ask_base_list)-1]
                 bid_base = bid_base_list[len(ask_base_list)-1]
-    
+
                 current_ask_price = float(current_ask_price)
                 current_bid_price = float(current_bid_price)
                 ask_base = float(ask_base)
                 bid_base = float(bid_base)
-    
+
                 current_time = self.insert_time_list[len(self.insert_time_list)-1]
                 cmp_time = self.order_time + timedelta(minutes=10)
                 logging.info("DECIDE TIME COMP= %s" % current_time)
@@ -187,7 +179,7 @@ class BollingerAlgo(SuperAlgo):
     #                self.order_flag = False
     #                self.order_kind = ""
     #                stl_flag = True
-    
+
     #            elif self.order_kind == "buy":
                 if self.order_kind == "buy":
                     if current_bid_price > bid_base:
@@ -197,7 +189,7 @@ class BollingerAlgo(SuperAlgo):
                         self.order_flag = False
                         #self.order_kind = ""
                         stl_flag = True
-    
+
                 elif self.order_kind == "sell":
                     if current_ask_price < ask_base:
                         logging.info("***************EXECUTE BASE")
@@ -206,7 +198,7 @@ class BollingerAlgo(SuperAlgo):
                         self.order_flag = False
                         #self.order_kind = ""
                         stl_flag = True
-    
+
                 #logging.info("stl_flag=%s" % stl_flag)
             else:
                 pass
