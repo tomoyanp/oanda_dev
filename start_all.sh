@@ -1,3 +1,6 @@
-insert_price.sh
-bollinger.sh
-timetrend.sh
+./insert_price.sh
+sleep 10
+./bollinger.sh
+sleep 10
+./timetrend.sh
+

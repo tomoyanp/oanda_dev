@@ -24,7 +24,7 @@ from send_mail import SendMail
 
 now = datetime.now()
 now = now.strftime("%Y%m%d%H%M%S")
-logfilename = "/var/log/oanda_dev/stop_service_%s.log" %(now)
+logfilename = "%s/log/stop_service_%s.log" %(current_path, now)
 logging.basicConfig(filename=logfilename, level=logging.INFO)
 
 def exec_cmd(cmd):
@@ -107,8 +107,6 @@ def stop_daemon(daemon):
 # python stop_sevice.py insert_price.py
 
 if __name__ == '__main__':
-    sendmail = SendMail("tomoyanpy@gmail.com", "tomoyanpy@softbank.ne.jp", property_path)
-
     try:
         # コマンドライン引数から、停止対象のプロセスを受け取る
         #args = sys.argv
@@ -121,19 +119,5 @@ if __name__ == '__main__':
         process = "insert_price.py"
         stop_service(process)
 
-        daemon = "mysqld"
-        stop_daemon(daemon)
-
-        # 一応、リブート前にメール通知
-        message = "Complete Stop Service & daemon"
-        sendmail.set_msg(message)
-        sendmail.send_mail()
-
-        cmd = "reboot"
-        exec_cmd(cmd)
-
     except:
         print traceback.format_exc()
-        message = traceback.format_exc()
-        sendmail.set_msg(message)
-        sendmail.send_mail()
