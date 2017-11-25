@@ -18,7 +18,7 @@
     "trend_threshold": 0.5,
     "trend_time_width": 3,
     "chart_polling": "minute",
-    "ex_stlmode": "on"
+    "ex_stlmode": "off"
   },
   "GBP_JPY": {
     "trade_threshold":0.1,
