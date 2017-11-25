@@ -10,9 +10,18 @@ from datetime import datetime
 # 実行スクリプトのパスを取得して、追加
 current_path = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(current_path)
+sys.path.append(current_path)
+sys.path.append(current_path + "/trade_algorithm")
+sys.path.append(current_path + "/obj")
+sys.path.append(current_path + "/lib")
+
+property_path = current_path + "/property"
+config_path = current_path + "/config"
 
 import time
 import logging
+from send_mail import SendMail
+
 now = datetime.now()
 now = now.strftime("%Y%m%d%H%M%S")
 logfilename = "/var/log/oanda_dev/stop_service_%s.log" %(now)
@@ -79,7 +88,7 @@ def stop_service(process):
 def stop_daemon(daemon):
     cmd = "service %s stop" % daemon
     exec_cmd(cmd)
-    time.sleep(5)
+    time.sleep(30)
 
     if check_process(daemon):
         pass
