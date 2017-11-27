@@ -6,7 +6,7 @@
     "take_profit": 0.1,
     "time_width": 16800,
     "stl_time_width": 60,
-    "sleep_time": "60",
+    "sleep_time": "5",
     "stl_sleep_vtime": 5,
     "stl_sleep_ltime": 21600,
     "units": 40000,
@@ -18,7 +18,7 @@
     "trend_threshold": 0.5,
     "trend_time_width": 3,
     "chart_polling": "minute",
-    "ex_stlmode": "off"
+    "ex_stlmode": "on"
   },
   "GBP_JPY": {
     "trade_threshold":0.1,

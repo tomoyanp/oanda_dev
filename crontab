@@ -1,0 +1,4 @@
+10 7 * * 1 root /bin/bash /home/tomoyan/production/oanda_dev/insert_price.sh
+12 7 * * 1 root /bin/bash /home/tomoyan/production/oanda_dev/insert_price.sh
+10 7 * * 1 root /bin/bash /home/tomoyan/production/oanda_dev/timetrend_master.sh
+15 7 * * 1 root /bin/bash /home/tomoyan/production/oanda_dev/bollinger_master.sh
