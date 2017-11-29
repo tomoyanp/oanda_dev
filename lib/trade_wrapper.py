@@ -132,12 +132,16 @@ class TradeWrapper:
                 stl_flag = self.trade_algo.decideReverceStl()
 
             if stl_flag:
+                logging.info("================= STL SLEEP LOGICK START =======================")
                 nowftime = self.trade_algo.getCurrentTime()
                 self.result_file.write("===== EXECUTE SETTLEMENT at %s ======\n" % nowftime)
                 order_kind = self.trade_algo.getOrderKind()
                 order_price = self.trade_algo.getOrderPrice()
                 stl_price = self.trade_algo.getCurrentPrice()
                 self.trade_algo.setStlPrice(order_price)
+                logging.info("order_kind=%s" % order_kind)
+                logging.info("order_price=%s" % order_price)
+                logging.info("stl_price=%s" % stl_price)
                 if order_kind == "buy":
                     profit = stl_price - order_price
                 else:
@@ -147,6 +151,8 @@ class TradeWrapper:
                     sleep_time = self.config_data["stl_sleep_vtime"]
                 else:
                     sleep_time = self.config_data["stl_sleep_ltime"]
+
+                logging.inf("sleep_time=%s" % sleep_time)
 
                 self.result_file.write("ORDER_PRICE=%s, STL_PRICE=%s, ORDER_KIND=%s, PROFIT=%s\n" % (order_price, stl_price, order_kind, profit))
                 self.result_file.write("PROFIT=%s\n" % profit)
