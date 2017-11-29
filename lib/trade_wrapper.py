@@ -152,7 +152,7 @@ class TradeWrapper:
                 else:
                     sleep_time = self.config_data["stl_sleep_ltime"]
 
-                logging.inf("sleep_time=%s" % sleep_time)
+                logging.info("sleep_time=%s" % sleep_time)
 
                 self.result_file.write("ORDER_PRICE=%s, STL_PRICE=%s, ORDER_KIND=%s, PROFIT=%s\n" % (order_price, stl_price, order_kind, profit))
                 self.result_file.write("PROFIT=%s\n" % profit)
