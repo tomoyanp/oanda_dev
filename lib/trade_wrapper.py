@@ -68,15 +68,17 @@ class TradeWrapper:
     # 今ポジションを持っているか確認
     # なければ、フラグをリセットする
     def checkPosition(self):
+        logging.info("=== Start TradeWrapper.checkPosition Logic ===")
+        logging.info("test_mode flag=%s" % self.test_mode)
         if self.test_mode:
             pass
         else:
             position_flag = self.oanda_wrapper.get_trade_position(self.instrument)
+            logging.info("trade_position flag=%s" % position_flag)
             if position_flag == False:
-                #logging.info("POSITION FLAG FFFFFFFFFFFFFFFFFFALSE!!!!!!!")
-                #logging.info("stl_sleep_flag=%s!!!!" % self.stl_sleep_flag)
                 self.trade_algo.resetFlag()
                 # 決済した直後であればスリープする
+                logging.info("stl_sleep_flag=%s" % self.stl_sleep_flag)
                 if self.stl_sleep_flag:
 
                     nowftime = self.trade_algo.getCurrentTime()
@@ -90,6 +92,10 @@ class TradeWrapper:
                     else:
                         profit = order_price - stl_price
 
+                    logging.info("order_kind=%s" % order_kind)
+                    logging.info("order_price=%s" % order_price)
+                    logging.info("stl_price=%s" % stl_price)
+                    logging.info("profit=%s" % profit)
                     if profit > 0:
                         sleep_time = self.config_data["stl_sleep_vtime"]
                     else:
@@ -100,24 +106,22 @@ class TradeWrapper:
                     self.result_file.write("======================================================\n")
                     self.result_file.flush()
                     self.trade_algo.setOrderKind("")
-                    #logging.info("SLEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEP!!!!!!!")
-
                     time.sleep(sleep_time)
                     self.stl_sleep_flag = False
             else:
-                #logging.info("POSITION FLAG TTTTTTTTTTTTTTTTTTTTTTTTRUUUE!!!!!!!")
                 self.trade_algo.setOrderFlag(True)
                 self.stl_sleep_flag = True
-                #logging.info("stl_sleep_flag=%s!!!!" % self.stl_sleep_flag)
 
-        # 今建玉があるかチェック
-        self.order_flag = self.trade_algo.getOrderFlag()
-        logging.info("AFTER CHECK POSITION ORDER FLAG = %s" % self.order_flag)
-
+            logging.info("=== End TradeWrapper.checkPosition Logic ===")
+             
     def setInstrumentRespoonse(self, base_time):
+        logging.info("=== Start TradeWrapper.setInstrumentRespoonse Logic ===")
+        logging.info("base_time=%s" % base_time)
         self.trade_algo.setPriceTable(base_time)
         #self.trade_algo.setNewPriceTable(base_time)
 
+        logging.info("=== End TradeWrapper.setInstrumentRespoonse Logic ===")
+        
     def stlDecisionWrapper(self):
         sleep_time = self.config_data["sleep_time"]
 

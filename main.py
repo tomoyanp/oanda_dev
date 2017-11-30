@@ -34,13 +34,13 @@ if __name__ == '__main__':
     # argv[4] is config_filename. when "instrument.config_2" it's "2"
 
     args = sys.argv
+    
 
     # コマンドライン引数から、通貨とモード取得
     instrument = args[1]
     mode       = args[2]
     algo       = args[3]
     config_name     = args[4]
-
     if len(args) > 5:
         test_args  = args[5]
     else:
@@ -50,6 +50,8 @@ if __name__ == '__main__':
         test_mode = True
     else:
         test_mode = False
+    logging.info("=== Starty Main Logic ===")
+    logging.info(args)
 
     # ポーリング時間
     polling_time = 1
@@ -57,7 +59,6 @@ if __name__ == '__main__':
     trade_wrapper.setTradeAlgo(algo)
 
     base_time = datetime.now()
-    #base_time = base_time - timedelta(days=20)
     base_time = base_time - timedelta(days=4)
 
     try:
@@ -68,8 +69,10 @@ if __name__ == '__main__':
           else:
               time.sleep(polling_time)
               base_time = datetime.now()
-
+          logging.info("base_time=%s" % base_time)
+          
           flag = decideMarket(base_time)
+          logging.info("decideMarket flag=%s" % flag)
           if flag == False:
               pass
 
