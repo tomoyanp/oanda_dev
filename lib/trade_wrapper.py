@@ -123,8 +123,10 @@ class TradeWrapper:
         logging.info("=== End TradeWrapper.setInstrumentRespoonse Logic ===")
         
     def stlDecisionWrapper(self):
+        logging.info("=== Start TradeWrapper.stlDecisionWrapper Logic ===")
         sleep_time = self.config_data["sleep_time"]
 
+        logging.info("sleep_time=%s" % sleep_time)
         # 建玉があれば、決済するかどうか判断
         logging.info("STL DECISION WRAPPER ORDER FLAG = %s" % self.order_flag)
         if self.order_flag:
