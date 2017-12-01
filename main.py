@@ -34,7 +34,7 @@ if __name__ == '__main__':
     # argv[4] is config_filename. when "instrument.config_2" it's "2"
 
     args = sys.argv
-    
+
 
     # コマンドライン引数から、通貨とモード取得
     instrument = args[1]
@@ -50,7 +50,7 @@ if __name__ == '__main__':
         test_mode = True
     else:
         test_mode = False
-    logging.info("=== Starty Main Logic ===")
+    logging.info("=== Start Main Logic ===")
     logging.info(args)
 
     # ポーリング時間
@@ -63,6 +63,7 @@ if __name__ == '__main__':
 
     try:
       while True:
+          logging.info("=== Start Main.Loop Logic ===")
           polling_time = int(polling_time)
           if test_mode:
               base_time = base_time + timedelta(seconds=polling_time)
@@ -70,7 +71,7 @@ if __name__ == '__main__':
               time.sleep(polling_time)
               base_time = datetime.now()
           logging.info("base_time=%s" % base_time)
-          
+
           flag = decideMarket(base_time)
           logging.info("decideMarket flag=%s" % flag)
           if flag == False:
@@ -81,11 +82,14 @@ if __name__ == '__main__':
               trade_wrapper.setInstrumentRespoonse(base_time)
               trade_wrapper.tradeDecisionWrapper(base_time)
               polling_time = trade_wrapper.stlDecisionWrapper()
+              logging.info("main.polling_time=%s" % polling_time)
 
           if test_mode:
               now = datetime.now()
               if base_time > now:
                   raise ValueError("Complete Back Test")
+
+          logging.info("=== End Main.Loop Logic ===")
 
     except:
         message = traceback.format_exc()

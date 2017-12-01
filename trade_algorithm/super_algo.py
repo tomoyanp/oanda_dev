@@ -35,10 +35,6 @@ class SuperAlgo(object):
         self.order_flag = False
         self.trade_id = 0
         self.order_kind = ""
-#        self.start_follow_time = 000000
-#        self.end_follow_time = 235959
-        # 前日が陽線引けかどうかのフラグ
-#        self.before_flag = before_flag
 
         self.mysqlConnector = MysqlConnector()
         self.trend_index = 0
@@ -51,7 +47,7 @@ class SuperAlgo(object):
 
     def resetFlag(self):
         self.order_flag = False
-        #self.order_kind = ""
+        self.order_kind = ""
         self.trade_id = 0
 
     def getInitialSql(self, base_time):
@@ -161,6 +157,11 @@ class SuperAlgo(object):
         response = self.mysqlConnector.select_sql(sql)
         self.setResponse(response)
 
+    def setOrderData(self, trade_flag, order_price, order_flag):
+        self.order_kind = trade_flag
+        self.order_price = order_price
+        self.order_flag = order_flag
+
     def setTradeId(self, response):
         print response
         self.trade_id = response["tradeOpened"]["id"]
@@ -223,7 +224,6 @@ class SuperAlgo(object):
             pass
         else:
             trade_flag = "pass"
-            self.resetFlag()
 
         return trade_flag
 
@@ -267,10 +267,8 @@ class SuperAlgo(object):
             stl_flag = False
             if self.order_kind == "buy":
                 if bid_price > self.takeprofit_rate or bid_price < self.stoploss_rate:
-                    self.order_flag = False
                     logging.info("SETTLE TRUEEEEEEEEEEEEEEEEEE(BUY)")
                     stl_flag = True
-#                    self.order_kind = ""
 
             elif self.order_kind == "sell":
                 if ask_price < self.takeprofit_rate or ask_price > self.stoploss_rate:
@@ -286,8 +284,6 @@ class SuperAlgo(object):
                     logging.info("BID PRICE = %s" % bid_price)
                     logging.info(type(bid_price))
 
-#                    self.order_kind = ""
-                    self.order_flag = False
                     stl_flag = True
 
             logging.info("SETTLE FLAG = %s" % stl_flag)
@@ -324,7 +320,6 @@ class SuperAlgo(object):
             elif start_price < current_price and trade_flag == "buy":
                 pass
             else:
-                self.resetFlag()
                 trade_flag = "pass"
 
             return trade_flag

@@ -5,4 +5,38 @@
 # get_trade()
 {u'trades': [{u'stopLoss': 0, u'takeProfit': 0, u'price': 103.178, u'side': u'buy', u'trailingStop': 0, u'instrument': u'USD_JPY', u'time': u'2016-10-10T09:17:28.000000Z', u'units': 1000, u'id': 10463914476, u'trailingAmount': 0}, {u'stopLoss': 0, u'takeProfit': 0, u'price': 103.196, u'side': u'buy', u'trailingStop': 0, u'instrument': u'USD_JPY', u'time': u'2016-10-10T08:46:50.000000Z', u'units': 1000, u'id': 10463885063, u'trailingAmount': 0}, {u'stopLoss': 100, u'takeProfit': 0, u'price': 103.196, u'side': u'buy', u'trailingStop': 0, u'instrument': u'USD_JPY', u'time': u'2016-10-10T08:44:56.000000Z', u'units': 1000, u'id': 10463883408, u'trailingAmount': 0}]}
 
+# close_order()
+{
+  "id" : 54332,                   // The ID of the close order transaction
+  "instrument" : "EUR_USD",       // The symbol of the instrument of the order
+  "units" : 2,
+  "side" : "sell",
+  "price" : 1.30601,              // The price at which the order executed
+  "time" : "2013-01-01T00:00:00Z" // The time at which the order executed
+}
 
+GET /v1/accounts/:account_id/transactions
+$curl -X GET "https://api-fxtrade.oanda.com/v1/accounts/12345/transactions?instrument=EUR_USD&count=1"
+
+{
+  "transactions" : [
+    {
+      "id" : 175427739,
+      "accountId" : 6531071,
+      "time" : "2014-02-12T21:16:46Z",
+      "type" : "ORDER_CANCEL",
+      "orderId" : 175427728,
+      "reason" : "CLIENT_REQUEST"
+    }
+  ]
+}
+
+１）create_orderする
+２）DBにprice, id, 時間を書き込む
+３）close_orderする
+４）DBにprice, id, 時間を書き込む
+
+１）DBから、algorithmとstatusをキーに今yetなものを取得
+２）get_tradeと突合せ
+３）DBに存在し、get_tradeに存在しない場合
+４）transaction_historyからがんばって取得する（レスポンスの中身は要確認）

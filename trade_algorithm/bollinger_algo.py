@@ -105,8 +105,8 @@ class BollingerAlgo(SuperAlgo):
 
             if cmp_price > upper2_sigma:
                 trade_flag = "sell"
-                self.order_flag = True
-                self.order_kind = trade_flag
+                #self.order_flag = True
+                #self.order_kind = trade_flag
                 logging.info("=======================")
                 logging.info("EXECUTE ORDER SELL")
                 logging.info("ASK_PRICE=%s" % cmp_price)
@@ -117,8 +117,6 @@ class BollingerAlgo(SuperAlgo):
 
             elif cmp_price < lower2_sigma:
                 trade_flag = "buy"
-                self.order_flag = True
-                self.order_kind = trade_flag
                 logging.info("=======================")
                 logging.info("EXECUTE ORDER BUY")
                 logging.info("ASK_PRICE=%s" % cmp_price)
@@ -146,8 +144,6 @@ class BollingerAlgo(SuperAlgo):
                 ask_lst = pd.Series(self.ask_price_list)
                 bid_lst = pd.Series(self.bid_price_list)
 
-                #window_size = self.config_data["window_size"]
-                #window_size = window_size * 60
                 window_size = len(self.ask_price_list)
                 # 28分の移動平均線
                 ask_base_list = ask_lst.rolling(window=window_size).mean()
@@ -186,8 +182,6 @@ class BollingerAlgo(SuperAlgo):
                         logging.info("***************EXECUTE BASE")
                         logging.info("CURRENT BID PRICE = %s" % current_bid_price)
                         logging.info("CURRENT BID BASE = %s" % bid_base)
-                        self.order_flag = False
-                        #self.order_kind = ""
                         stl_flag = True
 
                 elif self.order_kind == "sell":
@@ -195,11 +189,8 @@ class BollingerAlgo(SuperAlgo):
                         logging.info("***************EXECUTE BASE")
                         logging.info("CURRENT ASK PRICE = %s" % current_ask_price)
                         logging.info("CURRENT ASK BASE = %s" % ask_base)
-                        self.order_flag = False
-                        #self.order_kind = ""
                         stl_flag = True
 
-                #logging.info("stl_flag=%s" % stl_flag)
             else:
                 pass
 
