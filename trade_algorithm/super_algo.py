@@ -51,11 +51,13 @@ class SuperAlgo(object):
         self.trade_id = 0
 
     def getInitialSql(self, base_time):
+        logging.info("=== Start SuperAlgo.getInitialSql Logic ===")
         time_width = self.config_data["time_width"]
         start_time = base_time - timedelta(seconds=time_width)
-
+        logging.info("start_time=%s" % start_time)
         # マーケットが休みの場合、48時間さかのぼってSQLを実行する
         flag = decideMarket(start_time)
+        logging.info("decideMarket.flag=%s" % flag)
         if flag == False:
             start_time = start_time - timedelta(hours=48)
 
@@ -64,6 +66,8 @@ class SuperAlgo(object):
 
         #sql = "select ask_price, bid_price, insert_time from %s_TABLE group by insert_time having insert_time > \'%s\' and insert_time < \'%s\' order by insert_time" % (self.instrument, start_time, end_time)
         sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' order by insert_time" % (self.instrument, start_time, end_time)
+        logging.info("sql=%s" % sql)
+        logging.info("=== End SuperAlgo.getInitialSql Logic ===")
         return sql
 
     def getSql(self, base_time):
@@ -201,12 +205,15 @@ class SuperAlgo(object):
         return self.order_kind
 
     def decideTradeTime(self, base_time, trade_flag):
+        logging.info("=== Start SuperAlgo.decideTradeTime Logic ===")
+        
         enable_time_mode = self.config_data["enable_time_mode"]
-
+        logging.info("enable_time_mode=%s" % enable_time_mode)
         if enable_time_mode == "on":
             enable_times = self.config_data["enable_time"]
             enable_flag = False
-
+            logging.info("base_time=%s" % base_time)
+            logging.info("enable_times=%s" % enable_times)
             cmp_time = base_time.strftime("%Y-%m-%d")
 
             for ent in enable_times:
@@ -219,11 +226,14 @@ class SuperAlgo(object):
         else:
             enable_flag = True
 
+        logging.info("enable_flag=%s" % enable_flag)
 
         if enable_flag:
             pass
         else:
             trade_flag = "pass"
+            
+        logging.info("=== End SuperAlho.decideTradeTime Logic ===")
 
         return trade_flag
 
