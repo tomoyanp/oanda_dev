@@ -7,6 +7,7 @@ import json
 
 from datetime import datetime, timedelta
 from step_wise_algo import StepWiseAlgo
+from hi_low_algo import HiLowAlgo
 from start_end_algo import StartEndAlgo
 from time_trend_algo import TimeTrendAlgo
 from bollinger_algo import BollingerAlgo

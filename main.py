@@ -59,7 +59,7 @@ if __name__ == '__main__':
     trade_wrapper.setTradeAlgo(algo)
 
     base_time = datetime.now()
-    base_time = base_time - timedelta(days=4)
+    base_time = base_time - timedelta(days=9)
 
     try:
       while True:
