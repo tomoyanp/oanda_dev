@@ -164,7 +164,8 @@ class TradeWrapper:
                     else:
                         trade_id = self.trade_algo.getTradeId()
                         response = self.oanda_wrapper.close_trade(trade_id)
-                        stl_price = response["price"]
+                        logging.info(response)
+                        #stl_price = response["price"]
                         logging.info("response.stl_price=%s" % stl_price)
 
                     # 利益計算
