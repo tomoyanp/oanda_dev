@@ -60,7 +60,7 @@ class BollingerAlgo(SuperAlgo):
             ask_lst = pd.Series(self.ask_price_list)
             bid_lst = pd.Series(self.bid_price_list)
             lst = (ask_lst+bid_lst) / 2
-            window_size = len(self.ask_price_list)
+            window_size = len(lst)
             # 28分の移動平均線
             base = lst.rolling(window=window_size).mean()
 
@@ -83,13 +83,6 @@ class BollingerAlgo(SuperAlgo):
 
             upper3_sigma = upper3_sigmas[len(upper3_sigmas)-1]
             lower3_sigma = lower3_sigmas[len(lower3_sigmas)-1]
-
-#            for i in self.insert_time_list:
-#                logging.info(i)
-#
-#            logging.info(window_size)
-#            tmp = window_size * -1
-#            logging.info(self.insert_time_list[tmp])
 
             cmp_price = lst[len(lst)-1]
 
@@ -138,7 +131,6 @@ class BollingerAlgo(SuperAlgo):
     # ここでは、急に逆方向に動いた時に決済出来るようにしている
     def decideStl(self):
         try:
-
             stl_flag = False
             ex_stlmode = self.config_data["ex_stlmode"]
 
@@ -147,51 +139,31 @@ class BollingerAlgo(SuperAlgo):
                 bid_lst = pd.Series(self.bid_price_list)
                 lst = (ask_lst+bid_lst) / 2
 
-                window_size = len(self.ask_price_list)
+                window_size = len(lst)
                 # 28分の移動平均線
-                ask_base_list = ask_lst.rolling(window=window_size).mean()
-                bid_base_list = bid_lst.rolling(window=window_size).mean()
+
+                base_list = lst.rolling(window=window_size).mean()
 
                 current_ask_price = self.ask_price_list[-1]
                 current_bid_price = self.bid_price_list[-1]
-
-                ask_base = ask_base_list[len(ask_base_list)-1]
-                bid_base = bid_base_list[len(ask_base_list)-1]
-
                 current_ask_price = float(current_ask_price)
                 current_bid_price = float(current_bid_price)
-                ask_base = float(ask_base)
-                bid_base = float(bid_base)
 
-                current_time = self.insert_time_list[len(self.insert_time_list)-1]
-                cmp_time = self.order_time + timedelta(minutes=10)
-                logging.info("DECIDE TIME COMP= %s" % current_time)
-                logging.info("CURRENT TIME = %s" % current_time)
-                logging.info("CMP TIME = %s" % cmp_time)
-                logging.info(type(cmp_time))
-                logging.info(type(current_time))
-                logging.info("=============================================")
-    #            if current_time > cmp_time:
-    #                logging.info("****************EXECUTE TIME COMP= %s" % current_time)
-    #                logging.info("CURRENT TIME = %s" % current_time)
-    #                logging.info("CMP TIME = %s" % cmp_time)
-    #                self.order_flag = False
-    #                self.order_kind = ""
-    #                stl_flag = True
+                base = base_list[len(base_list)-1]
+                base = float(base)
 
-    #            elif self.order_kind == "buy":
                 if self.order_kind == "buy":
-                    if current_bid_price > bid_base:
-                        logging.info("***************EXECUTE BASE")
+                    if current_bid_price > base:
+                        logging.info("EXECUTE SETTLEMENT")
                         logging.info("CURRENT BID PRICE = %s" % current_bid_price)
-                        logging.info("CURRENT BID BASE = %s" % bid_base)
+                        logging.info("CURRENT BASE = %s" % base)
                         stl_flag = True
 
                 elif self.order_kind == "sell":
-                    if current_ask_price < ask_base:
-                        logging.info("***************EXECUTE BASE")
+                    if current_ask_price < base:
+                        logging.info("EXECUTE SETTLEMENT")
                         logging.info("CURRENT ASK PRICE = %s" % current_ask_price)
-                        logging.info("CURRENT ASK BASE = %s" % ask_base)
+                        logging.info("CURRENT BASE = %s" % ask_base)
                         stl_flag = True
 
             else:
