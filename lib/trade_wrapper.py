@@ -192,6 +192,7 @@ class TradeWrapper:
 
                     # flagの初期化
                     self.trade_algo.resetFlag()
+                    self.stl_sleep_flag = False
 
                 else:
                     pass
