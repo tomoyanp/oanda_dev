@@ -5,3 +5,8 @@ bollingerは、sigma*1.9 < price < sigma*2.1の間とかがちょうど良いか
 pollingは1分で
  =>全然だめだった...
 
+
+20171205
+ 今だと、stoploss、takeprofitを計算ー＞create_orderしている
+ それをcreate_orderで返ってきたpriceを元に計算してmodify_tradeする
+ 　⇒ただ、何も指値逆指値なしでorderするのは怖いので、大きい値を一応セットしておく
