@@ -163,7 +163,7 @@ class BollingerAlgo(SuperAlgo):
                     if current_ask_price < base:
                         logging.info("EXECUTE SETTLEMENT")
                         logging.info("CURRENT ASK PRICE = %s" % current_ask_price)
-                        logging.info("CURRENT BASE = %s" % ask_base)
+                        logging.info("CURRENT BASE = %s" % base)
                         stl_flag = True
 
             else:
