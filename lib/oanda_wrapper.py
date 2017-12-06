@@ -84,7 +84,8 @@ class OandaWrapper:
             #response = self.oanda.get_trades(self.account_id)
             #print response
             #trade_id = response["trades"][0]["id"]
-            self.oanda.close_trade(self.account_id, trade_id)
-            print "closed"
+            response = self.oanda.close_trade(self.account_id, trade_id)
+            return response
+
         except:
             raise
