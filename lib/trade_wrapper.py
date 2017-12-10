@@ -77,7 +77,8 @@ class TradeWrapper:
             if position_flag == False:
                 # 決済した直後であればスリープする
                 logging.info("stl_sleep_flag=%s" % self.stl_sleep_flag)
-                if self.stl_sleep_flag:
+                trade_id = self.trade_algo.getTradeId()
+                if self.stl_sleep_flag and trade_id != 0:
 
                     nowftime = self.trade_algo.getCurrentTime()
                     self.result_file.write("===== EXECUTE SETTLEMENT STOP OR LIMIT ORDER at %s ======\n" % nowftime)
