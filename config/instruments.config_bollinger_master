@@ -6,7 +6,7 @@
     "take_profit": 0.2,
     "time_width": 16800,
     "stl_time_width": 60,
-    "sleep_time": "60",
+    "sleep_time": "1",
     "stl_sleep_vtime": 5,
     "stl_sleep_ltime": 10800,
     "units": 40000,
