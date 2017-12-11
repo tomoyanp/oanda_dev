@@ -80,7 +80,7 @@ if __name__ == '__main__':
           else:
               trade_wrapper.setInstrumentRespoonse(base_time)
               trade_wrapper.tradeDecisionWrapper(base_time)
-              polling_time = trade_wrapper.stlDecisionWrapper()
+              polling_time = trade_wrapper.stlDecisionWrapper(base_time)
               logging.info("main.polling_time=%s" % polling_time)
               trade_wrapper.checkPosition()
 

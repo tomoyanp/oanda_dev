@@ -123,7 +123,7 @@ class TradeWrapper:
 
         logging.info("=== End TradeWrapper.setInstrumentRespoonse Logic ===")
 
-    def stlDecisionWrapper(self):
+    def stlDecisionWrapper(self, base_time):
         logging.info("=== Start TradeWrapper.stlDecisionWrapper Logic ===")
 
         sleep_time = self.config_data["sleep_time"]
@@ -133,7 +133,7 @@ class TradeWrapper:
 
         # 建玉があれば、決済するかどうか判断
         if order_flag:
-            stl_flag = self.trade_algo.decideStl()
+            stl_flag = self.trade_algo.decideStl(base_time)
             trade_id = self.trade_algo.getTradeId()
             logging.info("stl_flag=%s" % stl_flag)
             logging.info("trade_id=%s" % trade_id)

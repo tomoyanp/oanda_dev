@@ -130,7 +130,7 @@ class BollingerAlgo(SuperAlgo):
 
     # 損切り、利確はオーダー時に出している
     # ここでは、急に逆方向に動いた時に決済出来るようにしている
-    def decideStl(self):
+    def decideStl(self, base_time):
         try:
             stl_flag = False
             ex_stlmode = self.config_data["ex_stlmode"]
