@@ -34,13 +34,6 @@ class OandaWrapper:
                     takeProfit=take_profit,
                     type='market'
                 )
-#                response = self.oanda.create_order(self.account_id,
-#                    instrument=currency,
-#                    units=50000,
-#                    side=l_side,
-#                    stopLoss=stop_loss,
-#                    type='market'
-#                )
 
                 time.sleep(5)
                 print response
@@ -48,6 +41,24 @@ class OandaWrapper:
                     print "ordered"
                     break
             return response
+        except Exception as e:
+            raise
+
+    def updateTrade(self, trade_id, stop_loss, take_profit):
+        try:
+            while True:
+                response = self.oanda.modify_trade(self.account_id, trade_id
+                    stopLoss=stop_loss,
+                    takeProfit=take_profit
+                )
+
+                time.sleep(5)
+                print response
+                if len(response) > 0:
+                    print "ordered"
+                    break
+            return response
+
         except Exception as e:
             raise
 
@@ -78,7 +89,7 @@ class OandaWrapper:
 
         except:
             raise
-            
+
     def close_trade(self, trade_id):
         try:
             #response = self.oanda.get_trades(self.account_id)

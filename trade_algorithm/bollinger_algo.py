@@ -55,6 +55,7 @@ class BollingerAlgo(SuperAlgo):
     def decideTrade(self, base_time):
         try:
 
+            sigma_valiable = self.config_data["bollinger_sigma"]
             trade_flag = "pass"
 
             ask_lst = pd.Series(self.ask_price_list)
@@ -68,59 +69,59 @@ class BollingerAlgo(SuperAlgo):
             sigma = lst.rolling(window=window_size).std(ddof=0)
 
             # ±2σの計算
-            upper2_sigmas = base + (sigma*2)
-            lower2_sigmas = base - (sigma*2)
+            upper_sigmas = base + (sigma*sigma_valiable)
+            lower_sigmas = base - (sigma*sigma_valiable)
 
-#            upper2_sigmas = base + (sigma*3)
-#            lower2_sigmas = base - (sigma*3)
 
-            upper2_sigma = upper2_sigmas[len(upper2_sigmas)-1]
-            lower2_sigma = lower2_sigmas[len(lower2_sigmas)-1]
-
-            # ±3σの計算
-            upper3_sigmas = base + (sigma*3)
-            lower3_sigmas = base - (sigma*3)
-
-            upper3_sigma = upper3_sigmas[len(upper3_sigmas)-1]
-            lower3_sigma = lower3_sigmas[len(lower3_sigmas)-1]
+            upper_sigma = upper_sigmas[len(upper_sigmas)-1]
+            lower_sigma = lower_sigmas[len(lower_sigmas)-1]
 
             cmp_price = lst[len(lst)-1]
-
             self.base_price = base[len(base)-1]
 
             logging.info("=======================")
             logging.info("DECIDE ORDER")
             logging.info("ASK_PRICE=%s" % cmp_price)
-            logging.info("UPPER_SIGMA=%s" % upper2_sigma)
+            logging.info("UPPER_SIGMA=%s" % upper_sigma)
             logging.info("BASE_SIGMA=%s" % self.base_price)
-            logging.info("lower_SIGMA=%s" % lower2_sigma)
+            logging.info("lower_SIGMA=%s" % lower_sigma)
             logging.info("BASE_TIME=%s" % base_time)
             logging.info("=======================")
 
 
-            if cmp_price > upper2_sigma:
+            if cmp_price > upper_sigma:
                 trade_flag = "sell"
-                #self.order_flag = True
-                #self.order_kind = trade_flag
                 logging.info("=======================")
                 logging.info("EXECUTE ORDER SELL")
                 logging.info("ASK_PRICE=%s" % cmp_price)
-                logging.info("UPPER_SIGMA=%s" % upper2_sigma)
+                logging.info("UPPER_SIGMA=%s" % upper_sigma)
                 logging.info("BASE_TIME=%s" % base_time)
                 logging.info("=======================")
                 self.order_time = self.insert_time_list[len(self.insert_time_list)-1]
 
-            elif cmp_price < lower2_sigma:
+            elif cmp_price < lower_sigma:
                 trade_flag = "buy"
                 logging.info("=======================")
                 logging.info("EXECUTE ORDER BUY")
                 logging.info("ASK_PRICE=%s" % cmp_price)
-                logging.info("LOWER_SIGMA=%s" % lower2_sigma)
+                logging.info("LOWER_SIGMA=%s" % lower_sigma)
                 logging.info("BASE_TIME=%s" % base_time)
                 logging.info("=======================")
                 self.order_time = self.insert_time_list[len(self.insert_time_list)-1]
             else:
                 trade_flag = "pass"
+
+            # ex_trade_modeがonであれば、upper_sigmaとlower_sigmaの値幅が落ち着いているときだけトレードする
+            # もしかしたら逆のほうが良いかもしれない
+            ex_trade_mode = self.config_data["ex_trade_mode"]
+            if ex_trade_mode == "on":
+                ex_trade_threshold = self.config_data["ex_trade_threshold"]
+                if upper_sigma - lower_sigma < ex_trade_threshold:
+                    pass
+                else:
+                    trade_flag = "pass"
+            else:
+                pass
 
             return trade_flag
 

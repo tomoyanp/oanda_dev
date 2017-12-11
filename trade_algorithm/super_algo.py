@@ -7,6 +7,7 @@
 ####################################################
 
 from datetime import datetime,timedelta
+import numpy as np
 import logging
 import os
 from common import instrument_init, account_init, decideMarket
@@ -206,7 +207,7 @@ class SuperAlgo(object):
 
     def decideTradeTime(self, base_time, trade_flag):
         logging.info("=== Start SuperAlgo.decideTradeTime Logic ===")
-        
+
         enable_time_mode = self.config_data["enable_time_mode"]
         logging.info("enable_time_mode=%s" % enable_time_mode)
         if enable_time_mode == "on":
@@ -232,7 +233,7 @@ class SuperAlgo(object):
             pass
         else:
             trade_flag = "pass"
-            
+
         logging.info("=== End SuperAlho.decideTradeTime Logic ===")
 
         return trade_flag
@@ -325,9 +326,49 @@ class SuperAlgo(object):
             current_price = current_price_list[-1]
 
 
-            if start_price > current_price and trade_flag == "sell":
+            trend_threshold = self.config_data["trend_threshold"]
+            if (start_price - current_price) > trend_threshold and trade_flag == "sell":
                 pass
-            elif start_price < current_price and trade_flag == "buy":
+            elif (current_price - start_price) > trend_threshold and trade_flag == "buy":
+                pass
+            else:
+                trade_flag = "pass"
+
+            return trade_flag
+
+        else:
+            return trade_flag
+
+
+    def newCheckTrend(self, target_time, trade_flag):
+        trend_mode = self.config_data["trend_follow_mode"]
+
+        if trend_mode == "on":
+            trend_time_width = self.config_data["trend_time_width"]
+            before_time = target_time - timedelta(hours=trend_time_width)
+            sql = "select ask_price from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, before_time, target_time)
+            response = self.mysqlConnector.select_sql(sql)
+
+            price_list = []
+            index_list = []
+            index = 0
+            for price in result:
+                price_list.append(price_list)
+                index_list.append(index)
+                index = index + 1
+
+            price_list = np.array(price_list)
+            index_list = np.array(index_list)
+            z = np.polyfix(index_list, price_list, 1)
+            p = np.poly1d(z)
+            # p[0] 切片, p[1] 傾き
+
+            slope = p[1]
+
+            trend_threshold = self.config_data["trend_threshold"]
+            if slope < (trend_threshold*-1) and trade_flag == "sell":
+                pass
+            elif slope > trend_threshold and trade_flag == "buy":
                 pass
             else:
                 trade_flag = "pass"
