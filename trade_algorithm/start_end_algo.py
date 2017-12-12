@@ -23,20 +23,28 @@ class StartEndAlgo(SuperAlgo):
             bid_start = self.bid_price_list[0]
             bid_end = self.bid_price_list[len(self.bid_price_list)-1]
 
+            reverce_flag = self.config_data["reverce_decide_flag"]
             if (ask_end - ask_start) > self.trade_threshold:
                 logging.info("ask_start=%s" % ask_start)
                 logging.info("ask_end=%s" % ask_end)
                 logging.info("start_time=%s" % self.insert_time_list[0])
                 logging.info("end_time=%s" % self.insert_time_list[len(self.insert_time_list)-1])
 
-                trade_flag = "buy"
+                if reverce_flag == "on":
+                    trade_flag = "sell"
+                else:
+                    trade_flag = "buy"
 
             elif (bid_start - bid_end) > self.trade_threshold:
                 logging.info("bid_start=%s" % bid_start)
                 logging.info("bid_end=%s" % bid_end)
                 logging.info("start_time=%s" % self.insert_time_list[0])
                 logging.info("end_time=%s" % self.insert_time_list[len(self.insert_time_list)-1])
-                trade_flag = "sell"
+
+                if reverce_flag == "on":
+                    trade_flag = "buy"
+                else:
+                    trade_flag = "sell"
             else:
                 trade_flag = "pass"
 
@@ -64,4 +72,3 @@ class StartEndAlgo(SuperAlgo):
             return stl_flag
         except:
             raise
-
