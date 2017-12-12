@@ -177,10 +177,12 @@ class TradeWrapper:
                     else:
                         raise ValueError("order_kind is invalid. value=%s" % order_kind)
 
-                    if profit > 0:
-                        sleep_time = self.config_data["stl_sleep_vtime"]
-                    else:
-                        sleep_time = self.config_data["stl_sleep_ltime"]
+                    # stl_sleep_ltimeはストップオーダーした時だけ使うようにしてみる
+                    sleep_time = self.config_data["stl_sleep_vtime"]
+#                    if profit > 0:
+#                        sleep_time = self.config_data["stl_sleep_vtime"]
+#                    else:
+#                        sleep_time = self.config_data["stl_sleep_ltime"]
 
                     logging.info("sleep_time=%s" % sleep_time)
 
