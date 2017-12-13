@@ -1,5 +1,7 @@
 {
   "USD_JPY": {
+    "bollinger_sigma":2,
+    "ex_trade_mode":"off",
     "trade_threshold":0.1,
     "optional_threshold":5.1,
     "stop_loss": 0.1,
