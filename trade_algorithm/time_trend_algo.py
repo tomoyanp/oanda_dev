@@ -89,35 +89,22 @@ class TimeTrendAlgo(SuperAlgo):
         except:
             raise
 
-    # 損切り、利確はオーダー時に出している
-    # ここでは、急に逆方向に動いた時に決済出来るようにしている
-    def decideStl(self):
+    # 時間切りで決済できるようにしておく
+    def decideStl(self, base_time):
         try:
-            ask_mx = max(self.ask_price_list)
-            ask_min = min(self.ask_price_list)
-            ask_mx_index = self.ask_price_list.index(ask_mx)
-            ask_min_index = self.ask_price_list.index(ask_min)
-
-            bid_mx = max(self.bid_price_list)
-            bid_min = min(self.bid_price_list)
-            bid_mx_index = self.bid_price_list.index(bid_mx)
-            bid_min_index = self.bid_price_list.index(bid_min)
-
-            now = datetime.now()
-            now = now.strftime("%Y-%m-%d %H:%M:%S")
-
             stl_flag = False
-            if self.order_kind == "buy":
-                if (bid_mx - bid_min) > self.optional_threshold and bid_mx_index < bid_min_index:
-                    self.order_flag = False
-                    stl_flag = True
+            ex_stlmode = self.config_data["ex_stlmode"]
 
-            elif self.order_kind == "sell":
-                if (ask_mx - ask_min) > self.optional_threshold and ask_mx_index > ask_min_index:
-                    self.order_flag = False
+            if ex_stlmode == "on":
+                startend_stl_time = self.config_data["ex_stl_time"]
+                hour = base_time.hour
+                if hour == startend_stl_time:
                     stl_flag = True
+                else:
+                    pass
+            else:
+                pass
 
-            #logging.info("stl_flag=%s" % stl_flag)
             return stl_flag
         except:
             raise

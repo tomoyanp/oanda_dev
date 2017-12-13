@@ -60,7 +60,7 @@ class StartEndAlgo(SuperAlgo):
             ex_stlmode = self.config_data["ex_stlmode"]
 
             if ex_stlmode == "on":
-                startend_stl_time = self.config_data["startend_stl_time"]
+                startend_stl_time = self.config_data["ex_stl_time"]
                 hour = base_time.hour
                 if hour == startend_stl_time:
                     stl_flag = True
