@@ -1,0 +1,19 @@
+#########################
+# time_width = 4000
+# trend_time_width = 3
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.3
+# enable_time = [u'21:00:00', u'22:00:00', u'23:00:00']
+# take_profit = 0.3
+# trend_threshold = 0.5
+# stl_sleep_vtime = 10800
+# ex_stlmode = on
+# chart_polling = minute
+# ex_stl_time = 5
+# stl_sleep_ltime = 10800
+# enable_time_mode = on
+# stl_time_width = 60
+# units = 40000
+# trend_follow_mode = off
+# sleep_time = 5

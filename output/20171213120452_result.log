@@ -1,0 +1,910 @@
+#########################
+# time_width = 16800
+# trend_time_width = 3
+# trend_threshold = 0.5
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.1
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# take_profit = 0.1
+# step_wise_unit = 1
+# stl_sleep_vtime = 5
+# ex_stlmode = off
+# ex_trade_mode = off
+# step_wise_coefficient_threshold = 0.9
+# stl_sleep_ltime = 10800
+# enable_time_mode = off
+# bollinger_sigma = 2
+# stl_time_width = 60
+# units = 40000
+# chart_polling = minute
+# trend_follow_mode = off
+# sleep_time = 60
+===== EXECUTE ORDER at 2017-11-23 12:09:52 ======
+ORDER_PRICE=111.343, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-23 15:35:52 ======
+ORDER_PRICE=111.343, STL_PRICE=111.231, ORDER_KIND=sell, PROFIT=0.112
+PROFIT=0.112
+======================================================
+===== EXECUTE ORDER at 2017-11-23 16:10:57 ======
+ORDER_PRICE=111.21, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-11-24 09:05:57 ======
+ORDER_PRICE=111.21, STL_PRICE=111.329, ORDER_KIND=buy, PROFIT=0.119
+PROFIT=0.119
+======================================================
+===== EXECUTE ORDER at 2017-11-24 09:06:02 ======
+ORDER_PRICE=111.315, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-24 09:51:02 ======
+ORDER_PRICE=111.315, STL_PRICE=111.43, ORDER_KIND=sell, PROFIT=-0.115
+PROFIT=-0.115
+======================================================
+===== EXECUTE ORDER at 2017-11-24 09:51:07 ======
+ORDER_PRICE=111.43, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-24 10:31:07 ======
+ORDER_PRICE=111.43, STL_PRICE=111.323, ORDER_KIND=sell, PROFIT=0.107
+PROFIT=0.107
+======================================================
+===== EXECUTE ORDER at 2017-11-24 12:50:12 ======
+ORDER_PRICE=111.447, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-24 15:35:12 ======
+ORDER_PRICE=111.447, STL_PRICE=111.557, ORDER_KIND=sell, PROFIT=-0.11
+PROFIT=-0.11
+======================================================
+===== EXECUTE ORDER at 2017-11-24 17:19:17 ======
+ORDER_PRICE=111.378, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-11-24 20:14:17 ======
+ORDER_PRICE=111.378, STL_PRICE=111.501, ORDER_KIND=buy, PROFIT=0.123
+PROFIT=0.123
+======================================================
+===== EXECUTE ORDER at 2017-11-24 22:02:22 ======
+ORDER_PRICE=111.347, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-11-25 00:19:22 ======
+ORDER_PRICE=111.347, STL_PRICE=111.453, ORDER_KIND=buy, PROFIT=0.106
+PROFIT=0.106
+======================================================
+===== EXECUTE ORDER at 2017-11-25 01:07:27 ======
+ORDER_PRICE=111.532, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-27 08:24:27 ======
+ORDER_PRICE=111.532, STL_PRICE=111.65, ORDER_KIND=sell, PROFIT=-0.118
+PROFIT=-0.118
+======================================================
+===== EXECUTE ORDER at 2017-11-27 08:24:32 ======
+ORDER_PRICE=111.655, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-27 09:35:32 ======
+ORDER_PRICE=111.655, STL_PRICE=111.549, ORDER_KIND=sell, PROFIT=0.106
+PROFIT=0.106
+======================================================
+===== EXECUTE ORDER at 2017-11-27 10:26:37 ======
+ORDER_PRICE=111.52, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-11-27 10:44:37 ======
+ORDER_PRICE=111.52, STL_PRICE=111.417, ORDER_KIND=buy, PROFIT=-0.103
+PROFIT=-0.103
+======================================================
+===== EXECUTE ORDER at 2017-11-27 10:44:42 ======
+ORDER_PRICE=111.419, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-11-27 17:03:42 ======
+ORDER_PRICE=111.419, STL_PRICE=111.27, ORDER_KIND=buy, PROFIT=-0.149
+PROFIT=-0.149
+======================================================
+===== EXECUTE ORDER at 2017-11-27 17:03:47 ======
+ORDER_PRICE=111.27, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-11-27 17:27:47 ======
+ORDER_PRICE=111.27, STL_PRICE=111.173, ORDER_KIND=buy, PROFIT=-0.097
+PROFIT=-0.097
+======================================================
+===== EXECUTE ORDER at 2017-11-27 17:27:52 ======
+ORDER_PRICE=111.17, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-11-27 18:04:52 ======
+ORDER_PRICE=111.17, STL_PRICE=111.29, ORDER_KIND=buy, PROFIT=0.12
+PROFIT=0.12
+======================================================
+===== EXECUTE ORDER at 2017-11-27 21:10:57 ======
+ORDER_PRICE=111.161, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-11-27 21:43:57 ======
+ORDER_PRICE=111.161, STL_PRICE=111.06, ORDER_KIND=buy, PROFIT=-0.101
+PROFIT=-0.101
+======================================================
+===== EXECUTE ORDER at 2017-11-27 21:44:02 ======
+ORDER_PRICE=111.06, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-11-27 22:50:02 ======
+ORDER_PRICE=111.06, STL_PRICE=110.957, ORDER_KIND=buy, PROFIT=-0.103
+PROFIT=-0.103
+======================================================
+===== EXECUTE ORDER at 2017-11-27 22:50:07 ======
+ORDER_PRICE=110.957, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-11-27 23:44:07 ======
+ORDER_PRICE=110.957, STL_PRICE=111.105, ORDER_KIND=buy, PROFIT=0.148
+PROFIT=0.148
+======================================================
+===== EXECUTE ORDER at 2017-11-28 01:38:12 ======
+ORDER_PRICE=110.863, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-11-28 01:56:12 ======
+ORDER_PRICE=110.863, STL_PRICE=111.012, ORDER_KIND=buy, PROFIT=0.149
+PROFIT=0.149
+======================================================
+===== EXECUTE ORDER at 2017-11-28 05:53:17 ======
+ORDER_PRICE=111.127, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-28 09:20:17 ======
+ORDER_PRICE=111.127, STL_PRICE=111.016, ORDER_KIND=sell, PROFIT=0.111
+PROFIT=0.111
+======================================================
+===== EXECUTE ORDER at 2017-11-28 09:20:22 ======
+ORDER_PRICE=111.011, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-11-28 10:11:22 ======
+ORDER_PRICE=111.011, STL_PRICE=111.129, ORDER_KIND=buy, PROFIT=0.118
+PROFIT=0.118
+======================================================
+===== EXECUTE ORDER at 2017-11-28 10:51:27 ======
+ORDER_PRICE=111.208, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-28 10:59:27 ======
+ORDER_PRICE=111.208, STL_PRICE=111.316, ORDER_KIND=sell, PROFIT=-0.108
+PROFIT=-0.108
+======================================================
+===== EXECUTE ORDER at 2017-11-28 10:59:32 ======
+ORDER_PRICE=111.318, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-28 12:39:32 ======
+ORDER_PRICE=111.318, STL_PRICE=111.208, ORDER_KIND=sell, PROFIT=0.11
+PROFIT=0.11
+======================================================
+===== EXECUTE ORDER at 2017-11-28 16:05:37 ======
+ORDER_PRICE=111.268, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-28 21:04:37 ======
+ORDER_PRICE=111.268, STL_PRICE=111.369, ORDER_KIND=sell, PROFIT=-0.101
+PROFIT=-0.101
+======================================================
+===== EXECUTE ORDER at 2017-11-28 21:04:42 ======
+ORDER_PRICE=111.371, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-28 22:02:42 ======
+ORDER_PRICE=111.371, STL_PRICE=111.267, ORDER_KIND=sell, PROFIT=0.104
+PROFIT=0.104
+======================================================
+===== EXECUTE ORDER at 2017-11-28 22:10:47 ======
+ORDER_PRICE=111.225, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-11-28 23:42:47 ======
+ORDER_PRICE=111.225, STL_PRICE=111.362, ORDER_KIND=buy, PROFIT=0.137
+PROFIT=0.137
+======================================================
+===== EXECUTE ORDER at 2017-11-29 00:00:52 ======
+ORDER_PRICE=111.427, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-29 00:29:52 ======
+ORDER_PRICE=111.427, STL_PRICE=111.323, ORDER_KIND=sell, PROFIT=0.104
+PROFIT=0.104
+======================================================
+===== EXECUTE ORDER at 2017-11-29 01:42:57 ======
+ORDER_PRICE=111.15, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-11-29 02:52:57 ======
+ORDER_PRICE=111.15, STL_PRICE=111.256, ORDER_KIND=buy, PROFIT=0.106
+PROFIT=0.106
+======================================================
+===== EXECUTE ORDER at 2017-11-29 04:46:02 ======
+ORDER_PRICE=111.482, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-29 04:51:02 ======
+ORDER_PRICE=111.482, STL_PRICE=111.582, ORDER_KIND=sell, PROFIT=-0.1
+PROFIT=-0.1
+======================================================
+===== EXECUTE ORDER at 2017-11-29 04:51:07 ======
+ORDER_PRICE=111.583, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-29 05:32:07 ======
+ORDER_PRICE=111.583, STL_PRICE=111.473, ORDER_KIND=sell, PROFIT=0.11
+PROFIT=0.11
+======================================================
+===== EXECUTE ORDER at 2017-11-29 08:55:12 ======
+ORDER_PRICE=111.651, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-29 11:41:12 ======
+ORDER_PRICE=111.651, STL_PRICE=111.527, ORDER_KIND=sell, PROFIT=0.124
+PROFIT=0.124
+======================================================
+===== EXECUTE ORDER at 2017-11-29 12:04:17 ======
+ORDER_PRICE=111.432, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-11-29 12:33:17 ======
+ORDER_PRICE=111.432, STL_PRICE=111.54, ORDER_KIND=buy, PROFIT=0.108
+PROFIT=0.108
+======================================================
+===== EXECUTE ORDER at 2017-11-29 16:08:22 ======
+ORDER_PRICE=111.412, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-11-29 16:45:22 ======
+ORDER_PRICE=111.412, STL_PRICE=111.53, ORDER_KIND=buy, PROFIT=0.118
+PROFIT=0.118
+======================================================
+===== EXECUTE ORDER at 2017-11-29 17:27:27 ======
+ORDER_PRICE=111.411, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-11-29 19:24:27 ======
+ORDER_PRICE=111.411, STL_PRICE=111.516, ORDER_KIND=buy, PROFIT=0.105
+PROFIT=0.105
+======================================================
+===== EXECUTE ORDER at 2017-11-29 19:51:32 ======
+ORDER_PRICE=111.533, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-29 21:07:32 ======
+ORDER_PRICE=111.533, STL_PRICE=111.631, ORDER_KIND=sell, PROFIT=-0.098
+PROFIT=-0.098
+======================================================
+===== EXECUTE ORDER at 2017-11-29 21:07:37 ======
+ORDER_PRICE=111.631, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-29 22:01:37 ======
+ORDER_PRICE=111.631, STL_PRICE=111.759, ORDER_KIND=sell, PROFIT=-0.128
+PROFIT=-0.128
+======================================================
+===== EXECUTE ORDER at 2017-11-29 22:01:42 ======
+ORDER_PRICE=111.766, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-29 22:20:42 ======
+ORDER_PRICE=111.766, STL_PRICE=111.887, ORDER_KIND=sell, PROFIT=-0.121
+PROFIT=-0.121
+======================================================
+===== EXECUTE ORDER at 2017-11-29 22:20:47 ======
+ORDER_PRICE=111.899, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-29 22:27:47 ======
+ORDER_PRICE=111.899, STL_PRICE=111.995, ORDER_KIND=sell, PROFIT=-0.096
+PROFIT=-0.096
+======================================================
+===== EXECUTE ORDER at 2017-11-29 22:27:52 ======
+ORDER_PRICE=111.995, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-29 23:36:52 ======
+ORDER_PRICE=111.995, STL_PRICE=111.881, ORDER_KIND=sell, PROFIT=0.114
+PROFIT=0.114
+======================================================
+===== EXECUTE ORDER at 2017-11-30 00:02:57 ======
+ORDER_PRICE=112.143, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-30 00:15:57 ======
+ORDER_PRICE=112.143, STL_PRICE=112.013, ORDER_KIND=sell, PROFIT=0.13
+PROFIT=0.13
+======================================================
+===== EXECUTE ORDER at 2017-11-30 06:48:02 ======
+ORDER_PRICE=111.98, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-30 08:24:02 ======
+ORDER_PRICE=111.98, STL_PRICE=112.078, ORDER_KIND=sell, PROFIT=-0.098
+PROFIT=-0.098
+======================================================
+===== EXECUTE ORDER at 2017-11-30 08:24:07 ======
+ORDER_PRICE=112.078, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-30 11:40:07 ======
+ORDER_PRICE=112.078, STL_PRICE=111.962, ORDER_KIND=sell, PROFIT=0.116
+PROFIT=0.116
+======================================================
+===== EXECUTE ORDER at 2017-11-30 14:35:12 ======
+ORDER_PRICE=112.069, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-30 15:10:12 ======
+ORDER_PRICE=112.069, STL_PRICE=112.177, ORDER_KIND=sell, PROFIT=-0.108
+PROFIT=-0.108
+======================================================
+===== EXECUTE ORDER at 2017-11-30 15:10:17 ======
+ORDER_PRICE=112.178, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-30 16:32:17 ======
+ORDER_PRICE=112.178, STL_PRICE=112.275, ORDER_KIND=sell, PROFIT=-0.097
+PROFIT=-0.097
+======================================================
+===== EXECUTE ORDER at 2017-11-30 16:32:22 ======
+ORDER_PRICE=112.275, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-30 17:35:22 ======
+ORDER_PRICE=112.275, STL_PRICE=112.374, ORDER_KIND=sell, PROFIT=-0.099
+PROFIT=-0.099
+======================================================
+===== EXECUTE ORDER at 2017-11-30 17:35:27 ======
+ORDER_PRICE=112.374, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-30 18:15:27 ======
+ORDER_PRICE=112.374, STL_PRICE=112.482, ORDER_KIND=sell, PROFIT=-0.108
+PROFIT=-0.108
+======================================================
+===== EXECUTE ORDER at 2017-11-30 18:15:32 ======
+ORDER_PRICE=112.482, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-30 18:53:32 ======
+ORDER_PRICE=112.482, STL_PRICE=112.374, ORDER_KIND=sell, PROFIT=0.108
+PROFIT=0.108
+======================================================
+===== EXECUTE ORDER at 2017-11-30 21:36:37 ======
+ORDER_PRICE=112.268, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-11-30 22:30:37 ======
+ORDER_PRICE=112.268, STL_PRICE=112.374, ORDER_KIND=buy, PROFIT=0.106
+PROFIT=0.106
+======================================================
+===== EXECUTE ORDER at 2017-11-30 23:03:42 ======
+ORDER_PRICE=112.228, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-11-30 23:27:42 ======
+ORDER_PRICE=112.228, STL_PRICE=112.115, ORDER_KIND=buy, PROFIT=-0.113
+PROFIT=-0.113
+======================================================
+===== EXECUTE ORDER at 2017-11-30 23:27:47 ======
+ORDER_PRICE=112.115, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-11-30 23:43:47 ======
+ORDER_PRICE=112.115, STL_PRICE=112.016, ORDER_KIND=buy, PROFIT=-0.099
+PROFIT=-0.099
+======================================================
+===== EXECUTE ORDER at 2017-11-30 23:43:52 ======
+ORDER_PRICE=112.019, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-01 00:03:52 ======
+ORDER_PRICE=112.019, STL_PRICE=111.917, ORDER_KIND=buy, PROFIT=-0.102
+PROFIT=-0.102
+======================================================
+===== EXECUTE ORDER at 2017-12-01 00:03:57 ======
+ORDER_PRICE=111.917, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-01 00:33:57 ======
+ORDER_PRICE=111.917, STL_PRICE=111.804, ORDER_KIND=buy, PROFIT=-0.113
+PROFIT=-0.113
+======================================================
+===== EXECUTE ORDER at 2017-12-01 00:34:02 ======
+ORDER_PRICE=111.802, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-01 00:55:02 ======
+ORDER_PRICE=111.802, STL_PRICE=111.913, ORDER_KIND=buy, PROFIT=0.111
+PROFIT=0.111
+======================================================
+===== EXECUTE ORDER at 2017-12-01 07:40:07 ======
+ORDER_PRICE=112.643, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-01 09:12:07 ======
+ORDER_PRICE=112.643, STL_PRICE=112.528, ORDER_KIND=sell, PROFIT=0.115
+PROFIT=0.115
+======================================================
+===== EXECUTE ORDER at 2017-12-01 09:47:12 ======
+ORDER_PRICE=112.466, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-01 09:51:12 ======
+ORDER_PRICE=112.466, STL_PRICE=112.358, ORDER_KIND=buy, PROFIT=-0.108
+PROFIT=-0.108
+======================================================
+===== EXECUTE ORDER at 2017-12-01 09:51:17 ======
+ORDER_PRICE=112.357, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-01 10:34:17 ======
+ORDER_PRICE=112.357, STL_PRICE=112.465, ORDER_KIND=buy, PROFIT=0.108
+PROFIT=0.108
+======================================================
+===== EXECUTE ORDER at 2017-12-01 10:53:22 ======
+ORDER_PRICE=112.401, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-01 11:35:22 ======
+ORDER_PRICE=112.401, STL_PRICE=112.51, ORDER_KIND=buy, PROFIT=0.109
+PROFIT=0.109
+======================================================
+===== EXECUTE ORDER at 2017-12-01 13:52:27 ======
+ORDER_PRICE=112.64, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-01 15:06:27 ======
+ORDER_PRICE=112.64, STL_PRICE=112.516, ORDER_KIND=sell, PROFIT=0.124
+PROFIT=0.124
+======================================================
+===== EXECUTE ORDER at 2017-12-01 16:06:32 ======
+ORDER_PRICE=112.643, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-01 17:30:32 ======
+ORDER_PRICE=112.643, STL_PRICE=112.538, ORDER_KIND=sell, PROFIT=0.105
+PROFIT=0.105
+======================================================
+===== EXECUTE ORDER at 2017-12-01 17:33:37 ======
+ORDER_PRICE=112.496, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-01 17:44:37 ======
+ORDER_PRICE=112.496, STL_PRICE=112.398, ORDER_KIND=buy, PROFIT=-0.098
+PROFIT=-0.098
+======================================================
+===== EXECUTE ORDER at 2017-12-01 17:44:42 ======
+ORDER_PRICE=112.395, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-01 19:54:42 ======
+ORDER_PRICE=112.395, STL_PRICE=112.287, ORDER_KIND=buy, PROFIT=-0.108
+PROFIT=-0.108
+======================================================
+===== EXECUTE ORDER at 2017-12-01 19:54:47 ======
+ORDER_PRICE=112.289, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-01 20:43:47 ======
+ORDER_PRICE=112.289, STL_PRICE=112.397, ORDER_KIND=buy, PROFIT=0.108
+PROFIT=0.108
+======================================================
+===== EXECUTE ORDER at 2017-12-01 22:14:52 ======
+ORDER_PRICE=112.502, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-01 22:37:52 ======
+ORDER_PRICE=112.502, STL_PRICE=112.644, ORDER_KIND=sell, PROFIT=-0.142
+PROFIT=-0.142
+======================================================
+===== EXECUTE ORDER at 2017-12-01 22:37:57 ======
+ORDER_PRICE=112.631, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-01 22:56:57 ======
+ORDER_PRICE=112.631, STL_PRICE=112.739, ORDER_KIND=sell, PROFIT=-0.108
+PROFIT=-0.108
+======================================================
+===== EXECUTE ORDER at 2017-12-01 22:57:02 ======
+ORDER_PRICE=112.731, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-01 23:48:02 ======
+ORDER_PRICE=112.731, STL_PRICE=112.626, ORDER_KIND=sell, PROFIT=0.105
+PROFIT=0.105
+======================================================
+===== EXECUTE ORDER at 2017-12-02 00:14:07 ======
+ORDER_PRICE=112.78, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-02 01:08:07 ======
+ORDER_PRICE=112.78, STL_PRICE=112.577, ORDER_KIND=sell, PROFIT=0.203
+PROFIT=0.203
+======================================================
+===== EXECUTE ORDER at 2017-12-02 01:11:12 ======
+ORDER_PRICE=112.196, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-02 01:12:12 ======
+ORDER_PRICE=112.196, STL_PRICE=112.047, ORDER_KIND=buy, PROFIT=-0.149
+PROFIT=-0.149
+======================================================
+===== EXECUTE ORDER at 2017-12-02 01:12:17 ======
+ORDER_PRICE=112.024, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-02 01:13:17 ======
+ORDER_PRICE=112.024, STL_PRICE=111.802, ORDER_KIND=buy, PROFIT=-0.222
+PROFIT=-0.222
+======================================================
+===== EXECUTE ORDER at 2017-12-02 01:13:22 ======
+ORDER_PRICE=111.811, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-02 01:14:22 ======
+ORDER_PRICE=111.811, STL_PRICE=112.005, ORDER_KIND=buy, PROFIT=0.194
+PROFIT=0.194
+======================================================
+===== EXECUTE ORDER at 2017-12-02 01:14:27 ======
+ORDER_PRICE=112.03, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-02 01:20:27 ======
+ORDER_PRICE=112.03, STL_PRICE=111.901, ORDER_KIND=buy, PROFIT=-0.129
+PROFIT=-0.129
+======================================================
+===== EXECUTE ORDER at 2017-12-02 01:20:32 ======
+ORDER_PRICE=111.85, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-02 01:22:32 ======
+ORDER_PRICE=111.85, STL_PRICE=111.966, ORDER_KIND=buy, PROFIT=0.116
+PROFIT=0.116
+======================================================
+===== EXECUTE ORDER at 2017-12-02 01:22:37 ======
+ORDER_PRICE=111.99, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-02 01:25:37 ======
+ORDER_PRICE=111.99, STL_PRICE=111.719, ORDER_KIND=buy, PROFIT=-0.271
+PROFIT=-0.271
+======================================================
+===== EXECUTE ORDER at 2017-12-02 01:25:42 ======
+ORDER_PRICE=111.737, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-02 01:27:42 ======
+ORDER_PRICE=111.737, STL_PRICE=111.543, ORDER_KIND=buy, PROFIT=-0.194
+PROFIT=-0.194
+======================================================
+===== EXECUTE ORDER at 2017-12-02 01:27:47 ======
+ORDER_PRICE=111.522, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-02 01:35:47 ======
+ORDER_PRICE=111.522, STL_PRICE=111.637, ORDER_KIND=buy, PROFIT=0.115
+PROFIT=0.115
+======================================================
+===== EXECUTE ORDER at 2017-12-02 01:35:52 ======
+ORDER_PRICE=111.636, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-02 01:36:52 ======
+ORDER_PRICE=111.636, STL_PRICE=111.747, ORDER_KIND=buy, PROFIT=0.111
+PROFIT=0.111
+======================================================
+===== EXECUTE ORDER at 2017-12-02 01:36:57 ======
+ORDER_PRICE=111.749, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-02 01:41:57 ======
+ORDER_PRICE=111.749, STL_PRICE=111.904, ORDER_KIND=buy, PROFIT=0.155
+PROFIT=0.155
+======================================================
+===== EXECUTE ORDER at 2017-12-02 01:42:02 ======
+ORDER_PRICE=111.885, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-02 01:45:02 ======
+ORDER_PRICE=111.885, STL_PRICE=111.747, ORDER_KIND=buy, PROFIT=-0.138
+PROFIT=-0.138
+======================================================
+===== EXECUTE ORDER at 2017-12-02 01:45:07 ======
+ORDER_PRICE=111.759, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-02 01:47:07 ======
+ORDER_PRICE=111.759, STL_PRICE=111.661, ORDER_KIND=buy, PROFIT=-0.098
+PROFIT=-0.098
+======================================================
+===== EXECUTE ORDER at 2017-12-02 01:47:12 ======
+ORDER_PRICE=111.652, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-02 01:57:12 ======
+ORDER_PRICE=111.652, STL_PRICE=111.825, ORDER_KIND=buy, PROFIT=0.173
+PROFIT=0.173
+======================================================
+===== EXECUTE ORDER at 2017-12-04 07:00:17 ======
+ORDER_PRICE=112.833, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-04 07:00:17 ======
+ORDER_PRICE=112.833, STL_PRICE=112.833, ORDER_KIND=sell, PROFIT=0.0
+PROFIT=0.0
+======================================================
+===== EXECUTE ORDER at 2017-12-04 07:00:22 ======
+ORDER_PRICE=112.833, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-04 07:00:22 ======
+ORDER_PRICE=112.833, STL_PRICE=112.833, ORDER_KIND=sell, PROFIT=0.0
+PROFIT=0.0
+======================================================
+===== EXECUTE ORDER at 2017-12-04 07:00:27 ======
+ORDER_PRICE=112.817, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-04 08:11:27 ======
+ORDER_PRICE=112.817, STL_PRICE=112.851, ORDER_KIND=sell, PROFIT=-0.034
+PROFIT=-0.034
+======================================================
+===== EXECUTE ORDER at 2017-12-04 08:11:32 ======
+ORDER_PRICE=112.845, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-04 09:21:32 ======
+ORDER_PRICE=112.845, STL_PRICE=112.718, ORDER_KIND=sell, PROFIT=0.127
+PROFIT=0.127
+======================================================
+===== EXECUTE ORDER at 2017-12-04 14:00:37 ======
+ORDER_PRICE=112.823, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-04 16:05:37 ======
+ORDER_PRICE=112.823, STL_PRICE=112.924, ORDER_KIND=sell, PROFIT=-0.101
+PROFIT=-0.101
+======================================================
+===== EXECUTE ORDER at 2017-12-04 16:05:42 ======
+ORDER_PRICE=112.925, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-04 16:23:42 ======
+ORDER_PRICE=112.925, STL_PRICE=113.023, ORDER_KIND=sell, PROFIT=-0.098
+PROFIT=-0.098
+======================================================
+===== EXECUTE ORDER at 2017-12-04 16:23:47 ======
+ORDER_PRICE=113.023, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-04 17:17:47 ======
+ORDER_PRICE=113.023, STL_PRICE=112.918, ORDER_KIND=sell, PROFIT=0.105
+PROFIT=0.105
+======================================================
+===== EXECUTE ORDER at 2017-12-04 21:30:52 ======
+ORDER_PRICE=113.01, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-04 22:02:52 ======
+ORDER_PRICE=113.01, STL_PRICE=112.902, ORDER_KIND=sell, PROFIT=0.108
+PROFIT=0.108
+======================================================
+===== EXECUTE ORDER at 2017-12-04 23:11:57 ======
+ORDER_PRICE=113.019, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-05 00:04:57 ======
+ORDER_PRICE=113.019, STL_PRICE=112.891, ORDER_KIND=sell, PROFIT=0.128
+PROFIT=0.128
+======================================================
+===== EXECUTE ORDER at 2017-12-05 00:13:02 ======
+ORDER_PRICE=112.816, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-05 00:57:02 ======
+ORDER_PRICE=112.816, STL_PRICE=112.709, ORDER_KIND=buy, PROFIT=-0.107
+PROFIT=-0.107
+======================================================
+===== EXECUTE ORDER at 2017-12-05 00:57:07 ======
+ORDER_PRICE=112.704, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-05 01:21:07 ======
+ORDER_PRICE=112.704, STL_PRICE=112.817, ORDER_KIND=buy, PROFIT=0.113
+PROFIT=0.113
+======================================================
+===== EXECUTE ORDER at 2017-12-05 01:28:12 ======
+ORDER_PRICE=112.73, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-05 02:53:12 ======
+ORDER_PRICE=112.73, STL_PRICE=112.838, ORDER_KIND=buy, PROFIT=0.108
+PROFIT=0.108
+======================================================
+===== EXECUTE ORDER at 2017-12-05 04:20:17 ======
+ORDER_PRICE=112.65, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-05 05:48:17 ======
+ORDER_PRICE=112.65, STL_PRICE=112.554, ORDER_KIND=buy, PROFIT=-0.096
+PROFIT=-0.096
+======================================================
+===== EXECUTE ORDER at 2017-12-05 05:49:22 ======
+ORDER_PRICE=112.535, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-05 06:14:22 ======
+ORDER_PRICE=112.535, STL_PRICE=112.396, ORDER_KIND=buy, PROFIT=-0.139
+PROFIT=-0.139
+======================================================
+===== EXECUTE ORDER at 2017-12-05 06:14:27 ======
+ORDER_PRICE=112.399, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-05 08:22:27 ======
+ORDER_PRICE=112.399, STL_PRICE=112.504, ORDER_KIND=buy, PROFIT=0.105
+PROFIT=0.105
+======================================================
+===== EXECUTE ORDER at 2017-12-05 10:23:32 ======
+ORDER_PRICE=112.387, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-05 10:38:32 ======
+ORDER_PRICE=112.387, STL_PRICE=112.499, ORDER_KIND=buy, PROFIT=0.112
+PROFIT=0.112
+======================================================
+===== EXECUTE ORDER at 2017-12-05 13:59:37 ======
+ORDER_PRICE=112.572, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-05 15:55:37 ======
+ORDER_PRICE=112.572, STL_PRICE=112.67, ORDER_KIND=sell, PROFIT=-0.098
+PROFIT=-0.098
+======================================================
+===== EXECUTE ORDER at 2017-12-05 16:30:42 ======
+ORDER_PRICE=112.692, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-05 17:26:42 ======
+ORDER_PRICE=112.692, STL_PRICE=112.578, ORDER_KIND=sell, PROFIT=0.114
+PROFIT=0.114
+======================================================
+===== EXECUTE ORDER at 2017-12-05 18:12:47 ======
+ORDER_PRICE=112.518, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-05 20:19:47 ======
+ORDER_PRICE=112.518, STL_PRICE=112.419, ORDER_KIND=buy, PROFIT=-0.099
+PROFIT=-0.099
+======================================================
+===== EXECUTE ORDER at 2017-12-05 20:19:52 ======
+ORDER_PRICE=112.421, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-05 20:51:52 ======
+ORDER_PRICE=112.421, STL_PRICE=112.534, ORDER_KIND=buy, PROFIT=0.113
+PROFIT=0.113
+======================================================
+===== EXECUTE ORDER at 2017-12-05 22:00:57 ======
+ORDER_PRICE=112.659, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-05 23:08:57 ======
+ORDER_PRICE=112.659, STL_PRICE=112.766, ORDER_KIND=sell, PROFIT=-0.107
+PROFIT=-0.107
+======================================================
+===== EXECUTE ORDER at 2017-12-05 23:09:02 ======
+ORDER_PRICE=112.773, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-06 00:00:02 ======
+ORDER_PRICE=112.773, STL_PRICE=112.662, ORDER_KIND=sell, PROFIT=0.111
+PROFIT=0.111
+======================================================
+===== EXECUTE ORDER at 2017-12-06 00:05:07 ======
+ORDER_PRICE=112.838, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-06 00:10:07 ======
+ORDER_PRICE=112.838, STL_PRICE=112.725, ORDER_KIND=sell, PROFIT=0.113
+PROFIT=0.113
+======================================================
+===== EXECUTE ORDER at 2017-12-06 01:16:12 ======
+ORDER_PRICE=112.856, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-06 01:59:12 ======
+ORDER_PRICE=112.856, STL_PRICE=112.744, ORDER_KIND=sell, PROFIT=0.112
+PROFIT=0.112
+======================================================
+===== EXECUTE ORDER at 2017-12-06 04:38:17 ======
+ORDER_PRICE=112.608, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-06 08:51:17 ======
+ORDER_PRICE=112.608, STL_PRICE=112.496, ORDER_KIND=buy, PROFIT=-0.112
+PROFIT=-0.112
+======================================================
+===== EXECUTE ORDER at 2017-12-06 08:51:22 ======
+ORDER_PRICE=112.501, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-06 10:45:22 ======
+ORDER_PRICE=112.501, STL_PRICE=112.389, ORDER_KIND=buy, PROFIT=-0.112
+PROFIT=-0.112
+======================================================
+===== EXECUTE ORDER at 2017-12-06 10:45:27 ======
+ORDER_PRICE=112.399, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-06 11:41:27 ======
+ORDER_PRICE=112.399, STL_PRICE=112.274, ORDER_KIND=buy, PROFIT=-0.125
+PROFIT=-0.125
+======================================================
+===== EXECUTE ORDER at 2017-12-06 11:41:32 ======
+ORDER_PRICE=112.272, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-06 13:28:32 ======
+ORDER_PRICE=112.272, STL_PRICE=112.164, ORDER_KIND=buy, PROFIT=-0.108
+PROFIT=-0.108
+======================================================
+===== EXECUTE ORDER at 2017-12-06 13:28:37 ======
+ORDER_PRICE=112.148, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-06 15:46:37 ======
+ORDER_PRICE=112.148, STL_PRICE=112.253, ORDER_KIND=buy, PROFIT=0.105
+PROFIT=0.105
+======================================================
+===== EXECUTE ORDER at 2017-12-06 16:24:42 ======
+ORDER_PRICE=112.041, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-06 17:07:42 ======
+ORDER_PRICE=112.041, STL_PRICE=112.159, ORDER_KIND=buy, PROFIT=0.118
+PROFIT=0.118
+======================================================
+===== EXECUTE ORDER at 2017-12-06 22:30:47 ======
+ORDER_PRICE=112.061, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-06 22:49:47 ======
+ORDER_PRICE=112.061, STL_PRICE=112.171, ORDER_KIND=buy, PROFIT=0.11
+PROFIT=0.11
+======================================================
+===== EXECUTE ORDER at 2017-12-06 23:02:52 ======
+ORDER_PRICE=112.268, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-07 01:46:52 ======
+ORDER_PRICE=112.268, STL_PRICE=112.375, ORDER_KIND=sell, PROFIT=-0.107
+PROFIT=-0.107
+======================================================
+===== EXECUTE ORDER at 2017-12-07 01:46:57 ======
+ORDER_PRICE=112.372, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-07 02:46:57 ======
+ORDER_PRICE=112.372, STL_PRICE=112.262, ORDER_KIND=sell, PROFIT=0.11
+PROFIT=0.11
+======================================================
+===== EXECUTE ORDER at 2017-12-07 03:42:02 ======
+ORDER_PRICE=112.187, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-07 04:37:02 ======
+ORDER_PRICE=112.187, STL_PRICE=112.293, ORDER_KIND=buy, PROFIT=0.106
+PROFIT=0.106
+======================================================
+===== EXECUTE ORDER at 2017-12-07 08:34:07 ======
+ORDER_PRICE=112.314, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-07 09:34:07 ======
+ORDER_PRICE=112.314, STL_PRICE=112.429, ORDER_KIND=sell, PROFIT=-0.115
+PROFIT=-0.115
+======================================================
+===== EXECUTE ORDER at 2017-12-07 09:34:12 ======
+ORDER_PRICE=112.441, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-07 15:03:12 ======
+ORDER_PRICE=112.441, STL_PRICE=112.54, ORDER_KIND=sell, PROFIT=-0.099
+PROFIT=-0.099
+======================================================
+===== EXECUTE ORDER at 2017-12-07 15:03:17 ======
+ORDER_PRICE=112.538, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-07 17:37:17 ======
+ORDER_PRICE=112.538, STL_PRICE=112.638, ORDER_KIND=sell, PROFIT=-0.1
+PROFIT=-0.1
+======================================================
+===== EXECUTE ORDER at 2017-12-07 17:52:22 ======
+ORDER_PRICE=112.671, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-07 20:58:22 ======
+ORDER_PRICE=112.671, STL_PRICE=112.776, ORDER_KIND=sell, PROFIT=-0.105
+PROFIT=-0.105
+======================================================
+===== EXECUTE ORDER at 2017-12-07 20:58:27 ======
+ORDER_PRICE=112.771, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-07 22:50:27 ======
+ORDER_PRICE=112.771, STL_PRICE=112.656, ORDER_KIND=sell, PROFIT=0.115
+PROFIT=0.115
+======================================================
+===== EXECUTE ORDER at 2017-12-07 22:58:32 ======
+ORDER_PRICE=112.618, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-08 00:59:32 ======
+ORDER_PRICE=112.618, STL_PRICE=112.739, ORDER_KIND=buy, PROFIT=0.121
+PROFIT=0.121
+======================================================
+===== EXECUTE ORDER at 2017-12-08 02:57:37 ======
+ORDER_PRICE=112.76, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-08 03:28:37 ======
+ORDER_PRICE=112.76, STL_PRICE=112.889, ORDER_KIND=sell, PROFIT=-0.129
+PROFIT=-0.129
+======================================================
+===== EXECUTE ORDER at 2017-12-08 03:28:42 ======
+ORDER_PRICE=112.898, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-08 04:15:42 ======
+ORDER_PRICE=112.898, STL_PRICE=112.998, ORDER_KIND=sell, PROFIT=-0.1
+PROFIT=-0.1
+======================================================
+===== EXECUTE ORDER at 2017-12-08 04:15:47 ======
+ORDER_PRICE=113.0, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-08 04:59:47 ======
+ORDER_PRICE=113.0, STL_PRICE=113.13, ORDER_KIND=sell, PROFIT=-0.13
+PROFIT=-0.13
+======================================================
+===== EXECUTE ORDER at 2017-12-08 04:59:52 ======
+ORDER_PRICE=113.138, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-08 09:54:52 ======
+ORDER_PRICE=113.138, STL_PRICE=113.25, ORDER_KIND=sell, PROFIT=-0.112
+PROFIT=-0.112
+======================================================
+===== EXECUTE ORDER at 2017-12-08 09:54:57 ======
+ORDER_PRICE=113.25, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-08 10:52:57 ======
+ORDER_PRICE=113.25, STL_PRICE=113.346, ORDER_KIND=sell, PROFIT=-0.096
+PROFIT=-0.096
+======================================================
+===== EXECUTE ORDER at 2017-12-08 10:53:02 ======
+ORDER_PRICE=113.348, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-08 15:46:02 ======
+ORDER_PRICE=113.348, STL_PRICE=113.445, ORDER_KIND=sell, PROFIT=-0.097
+PROFIT=-0.097
+======================================================
+===== EXECUTE ORDER at 2017-12-08 15:46:07 ======
+ORDER_PRICE=113.445, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-08 17:17:07 ======
+ORDER_PRICE=113.445, STL_PRICE=113.545, ORDER_KIND=sell, PROFIT=-0.1
+PROFIT=-0.1
+======================================================
+===== EXECUTE ORDER at 2017-12-08 17:17:12 ======
+ORDER_PRICE=113.544, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-08 22:31:12 ======
+ORDER_PRICE=113.544, STL_PRICE=113.313, ORDER_KIND=sell, PROFIT=0.231
+PROFIT=0.231
+======================================================
+===== EXECUTE ORDER at 2017-12-08 22:31:17 ======
+ORDER_PRICE=113.302, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-08 22:32:17 ======
+ORDER_PRICE=113.302, STL_PRICE=113.411, ORDER_KIND=buy, PROFIT=0.109
+PROFIT=0.109
+======================================================
+===== EXECUTE ORDER at 2017-12-08 22:32:22 ======
+ORDER_PRICE=113.427, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-08 22:35:22 ======
+ORDER_PRICE=113.427, STL_PRICE=113.532, ORDER_KIND=buy, PROFIT=0.105
+PROFIT=0.105
+======================================================
+===== EXECUTE ORDER at 2017-12-08 22:41:27 ======
+ORDER_PRICE=113.393, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-08 22:55:27 ======
+ORDER_PRICE=113.393, STL_PRICE=113.279, ORDER_KIND=buy, PROFIT=-0.114
+PROFIT=-0.114
+======================================================
+===== EXECUTE ORDER at 2017-12-08 22:55:32 ======
+ORDER_PRICE=113.272, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-08 23:38:32 ======
+ORDER_PRICE=113.272, STL_PRICE=113.173, ORDER_KIND=buy, PROFIT=-0.099
+PROFIT=-0.099
+======================================================
+===== EXECUTE ORDER at 2017-12-08 23:38:37 ======
+ORDER_PRICE=113.173, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-08 23:52:37 ======
+ORDER_PRICE=113.173, STL_PRICE=113.287, ORDER_KIND=buy, PROFIT=0.114
+PROFIT=0.114
+======================================================
+===== EXECUTE ORDER at 2017-12-09 05:10:42 ======
+ORDER_PRICE=113.477, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-11 07:46:42 ======
+ORDER_PRICE=113.477, STL_PRICE=113.583, ORDER_KIND=buy, PROFIT=0.106
+PROFIT=0.106
+======================================================
+===== EXECUTE ORDER at 2017-12-11 07:46:47 ======
+ORDER_PRICE=113.583, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-11 09:21:47 ======
+ORDER_PRICE=113.583, STL_PRICE=113.461, ORDER_KIND=sell, PROFIT=0.122
+PROFIT=0.122
+======================================================
+===== EXECUTE ORDER at 2017-12-11 09:54:52 ======
+ORDER_PRICE=113.625, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-11 14:29:52 ======
+ORDER_PRICE=113.625, STL_PRICE=113.502, ORDER_KIND=sell, PROFIT=0.123
+PROFIT=0.123
+======================================================
+===== EXECUTE ORDER at 2017-12-11 14:29:57 ======
+ORDER_PRICE=113.502, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-11 16:23:57 ======
+ORDER_PRICE=113.502, STL_PRICE=113.405, ORDER_KIND=buy, PROFIT=-0.097
+PROFIT=-0.097
+======================================================
+===== EXECUTE ORDER at 2017-12-11 16:24:02 ======
+ORDER_PRICE=113.405, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-11 21:45:02 ======
+ORDER_PRICE=113.405, STL_PRICE=113.279, ORDER_KIND=buy, PROFIT=-0.126
+PROFIT=-0.126
+======================================================
+===== EXECUTE ORDER at 2017-12-11 21:45:07 ======
+ORDER_PRICE=113.279, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-11 22:42:07 ======
+ORDER_PRICE=113.279, STL_PRICE=113.411, ORDER_KIND=buy, PROFIT=0.132
+PROFIT=0.132
+======================================================
+===== EXECUTE ORDER at 2017-12-12 00:17:12 ======
+ORDER_PRICE=113.282, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-12 00:35:12 ======
+ORDER_PRICE=113.282, STL_PRICE=113.389, ORDER_KIND=buy, PROFIT=0.107
+PROFIT=0.107
+======================================================
+===== EXECUTE ORDER at 2017-12-12 03:00:17 ======
+ORDER_PRICE=113.443, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-12 05:16:17 ======
+ORDER_PRICE=113.443, STL_PRICE=113.543, ORDER_KIND=sell, PROFIT=-0.1
+PROFIT=-0.1
+======================================================
+===== EXECUTE ORDER at 2017-12-12 10:16:22 ======
+ORDER_PRICE=113.496, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-12 16:06:22 ======
+ORDER_PRICE=113.496, STL_PRICE=113.395, ORDER_KIND=buy, PROFIT=-0.101
+PROFIT=-0.101
+======================================================
+===== EXECUTE ORDER at 2017-12-12 16:06:27 ======
+ORDER_PRICE=113.395, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-12 17:07:27 ======
+ORDER_PRICE=113.395, STL_PRICE=113.499, ORDER_KIND=buy, PROFIT=0.104
+PROFIT=0.104
+======================================================
+===== EXECUTE ORDER at 2017-12-12 19:39:32 ======
+ORDER_PRICE=113.491, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-12 23:24:32 ======
+ORDER_PRICE=113.491, STL_PRICE=113.594, ORDER_KIND=sell, PROFIT=-0.103
+PROFIT=-0.103
+======================================================
+===== EXECUTE ORDER at 2017-12-12 23:24:37 ======
+ORDER_PRICE=113.596, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-13 00:34:37 ======
+ORDER_PRICE=113.596, STL_PRICE=113.734, ORDER_KIND=sell, PROFIT=-0.138
+PROFIT=-0.138
+======================================================
+===== EXECUTE ORDER at 2017-12-13 00:34:42 ======
+ORDER_PRICE=113.733, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-13 01:23:42 ======
+ORDER_PRICE=113.733, STL_PRICE=113.625, ORDER_KIND=sell, PROFIT=0.108
+PROFIT=0.108
+======================================================
+===== EXECUTE ORDER at 2017-12-13 02:28:47 ======
+ORDER_PRICE=113.432, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-13 02:37:47 ======
+ORDER_PRICE=113.432, STL_PRICE=113.546, ORDER_KIND=buy, PROFIT=0.114
+PROFIT=0.114
+======================================================
+===== EXECUTE ORDER at 2017-12-13 09:09:52 ======
+ORDER_PRICE=113.503, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-13 12:19:52 ======
+ORDER_PRICE=113.503, STL_PRICE=113.403, ORDER_KIND=buy, PROFIT=-0.1
+PROFIT=-0.1
+======================================================
+===== EXECUTE ORDER at 2017-12-13 12:19:57 ======
+ORDER_PRICE=113.403, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-13 12:23:57 ======
+ORDER_PRICE=113.403, STL_PRICE=113.301, ORDER_KIND=buy, PROFIT=-0.102
+PROFIT=-0.102
+======================================================
+===== EXECUTE ORDER at 2017-12-13 12:24:02 ======
+ORDER_PRICE=113.289, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-13 12:35:02 ======
+ORDER_PRICE=113.289, STL_PRICE=113.187, ORDER_KIND=buy, PROFIT=-0.102
+PROFIT=-0.102
+======================================================
+===== EXECUTE ORDER at 2017-12-13 12:35:07 ======
+ORDER_PRICE=113.179, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-13 12:59:07 ======
+ORDER_PRICE=113.179, STL_PRICE=113.288, ORDER_KIND=buy, PROFIT=0.109
+PROFIT=0.109
+======================================================

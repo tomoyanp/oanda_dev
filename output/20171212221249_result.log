@@ -1,0 +1,46 @@
+#########################
+# time_width = 60
+# trend_time_width = 3
+# trend_threshold = 0.5
+# trade_threshold = 0.1
+# optional_threshold = 5.1
+# stop_loss = 0.1
+# enable_time = [u'21:00:00', u'22:00:00', u'23:00:00']
+# take_profit = 0.1
+# step_wise_unit = 1
+# stl_sleep_vtime = 21600
+# ex_stlmode = on
+# chart_polling = minute
+# step_wise_coefficient_threshold = 0.9
+# stl_sleep_ltime = 21600
+# enable_time_mode = on
+# startend_stl_time = 4
+# stl_time_width = 60
+# reverce_decide_flag = on
+# units = 40000
+# trend_follow_mode = off
+# sleep_time = 1
+===== EXECUTE ORDER at 2017-11-27 23:40:39 ======
+ORDER_PRICE=111.033, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-27 23:44:29 ======
+ORDER_PRICE=111.033, STL_PRICE=111.131, ORDER_KIND=sell, PROFIT=-0.098
+PROFIT=-0.098
+======================================================
+===== EXECUTE ORDER at 2017-11-29 22:00:53 ======
+ORDER_PRICE=111.736, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-11-29 22:15:28 ======
+ORDER_PRICE=111.736, STL_PRICE=111.834, ORDER_KIND=sell, PROFIT=-0.098
+PROFIT=-0.098
+======================================================
+===== EXECUTE ORDER at 2017-12-05 23:06:44 ======
+ORDER_PRICE=112.694, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-05 23:20:45 ======
+ORDER_PRICE=112.694, STL_PRICE=112.79, ORDER_KIND=sell, PROFIT=-0.096
+PROFIT=-0.096
+======================================================
+===== EXECUTE ORDER at 2017-12-08 22:30:02 ======
+ORDER_PRICE=113.343, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-08 22:30:04 ======
+ORDER_PRICE=113.343, STL_PRICE=113.311, ORDER_KIND=buy, PROFIT=-0.032
+PROFIT=-0.032
+======================================================
