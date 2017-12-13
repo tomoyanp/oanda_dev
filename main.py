@@ -55,11 +55,11 @@ if __name__ == '__main__':
 
     # ポーリング時間
     polling_time = 1
-    trade_wrapper = TradeWrapper(instrument, mode, test_mode, current_path, config_name)
+    trade_wrapper = TradeWrapper(instrument, mode, test_mode, current_path, config_name, args)
     trade_wrapper.setTradeAlgo(algo)
 
     base_time = datetime.now()
-    base_time = base_time - timedelta(days=5)
+    base_time = base_time - timedelta(days=20)
 
     try:
       while True:

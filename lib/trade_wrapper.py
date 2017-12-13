@@ -17,7 +17,7 @@ import time
 import logging
 
 class TradeWrapper:
-    def __init__(self, instrument, mode, test_mode, base_path, config_name):
+    def __init__(self, instrument, mode, test_mode, base_path, config_name, args):
         # trueであれば、テストモードにする
         self.test_mode = test_mode
 
@@ -45,9 +45,14 @@ class TradeWrapper:
 
         now = datetime.now()
         base_time = now.strftime("%Y%m%d%H%M%S")
-        self.result_file = open("%s/result/%s_result.log" % (self.base_path, base_time), "w")
+        self.result_file = open("%s/result/%s.result" % (self.base_path, base_time), "w")
         self.result_file.write("#########################\n")
-        for elm in self.config_data:
+        tmp = ""
+        for arg in args:
+            tmp = tmp + arg + " "
+        self.result_file.write("# %s\n" % tmp)
+        lst = sorted(self.config_data)
+        for elm in lst:
             self.result_file.write("# %s = %s\n" % (elm, self.config_data[elm]))
         self.result_file.flush()
 

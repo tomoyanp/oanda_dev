@@ -2,7 +2,7 @@ import re
 import commands
 
 
-file_list = commands.getoutput("ls *.log")
+file_list = commands.getoutput("ls *.result")
 file_list = file_list.split("\n")
 
 for rf in file_list:
