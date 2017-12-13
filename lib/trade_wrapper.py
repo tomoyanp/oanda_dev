@@ -143,8 +143,10 @@ class TradeWrapper:
             if self.test_mode == True or trade_id != 0:
 
                 # テストモードであれば、指値のチェックをフォローしてあげる
+                test_stl_flag = False
                 if stl_flag == False and self.test_mode:
-                    stl_flag = self.trade_algo.decideReverceStl()
+                    test_stl_flag = self.trade_algo.decideReverceStl()
+                    stl_flag = test_stl_flag
 
                 logging.info("stl_flag=%s" % stl_flag)
                 # stl_flagが立ってたら決済する
@@ -179,10 +181,13 @@ class TradeWrapper:
 
                     # stl_sleep_ltimeはストップオーダーした時だけ使うようにしてみる
                     sleep_time = self.config_data["stl_sleep_vtime"]
-#                    if profit > 0:
-#                        sleep_time = self.config_data["stl_sleep_vtime"]
-#                    else:
-#                        sleep_time = self.config_data["stl_sleep_ltime"]
+
+                    # testモードの時はちゃんとsleepしないとダメ
+                    if self.test_mode and test_stl_flag:
+                        if profit > 0:
+                            sleep_time = self.config_data["stl_sleep_vtime"]
+                        else:
+                            sleep_time = self.config_data["stl_sleep_ltime"]
 
                     logging.info("sleep_time=%s" % sleep_time)
 
