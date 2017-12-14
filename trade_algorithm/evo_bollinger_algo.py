@@ -175,7 +175,7 @@ class EvoBollingerAlgo(SuperAlgo):
         end_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
 
         # 10分ごとにする
-        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' and insert_time like \'%0:00\' order by insert_time " % (self.instrument, start_time, end_time)
+        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' and insert_time like \'\%0:00\' order by insert_time " % (self.instrument, start_time, end_time)
         logging.info("sql=%s" % sql)
         logging.info("=== End SuperAlgo.getInitialSql Logic ===")
         print sql
