@@ -68,8 +68,8 @@ class TradeWrapper:
             self.trade_algo = BollingerAlgo(self.instrument, self.base_path, self.config_name)
         elif algo == "evo_bollinger":
             self.trade_algo = EvoBollingerAlgo(self.instrument, self.base_path, self.config_name)
-        else:
-            self.trade_algo = HiLowAlgo(self.instrument, self.base_path, self.config_name)
+#        else:
+#            self.trade_algo = HiLowAlgo(self.instrument, self.base_path, self.config_name)
 
 
     # 今ポジションを持っているか確認
