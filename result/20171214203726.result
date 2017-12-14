@@ -1,0 +1,135 @@
+#########################
+# main.py USD_JPY demo evo_bollinger evo_bollinger_master test 
+# bollinger_sigma = 2
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# enable_time_mode = off
+# ex_stlmode = off
+# ex_trade_mode = off
+# optional_threshold = 5.1
+# sigma_length = 10
+# sleep_time = 600
+# stl_sleep_ltime = 5
+# stl_sleep_vtime = 5
+# stl_time_width = 60
+# stop_loss = 0.1
+# take_profit = 0.1
+# time_width = 25000
+# trade_sigma_length = 3
+# trade_threshold = 0.1
+# trend_follow_mode = off
+# units = 40000
+# window_size = 28
+===== EXECUTE ORDER at 2017-12-09 07:00:00 ======
+ORDER_PRICE=113.512, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-11 07:40:00 ======
+ORDER_PRICE=113.512, STL_PRICE=113.567, ORDER_KIND=sell, PROFIT=-0.055
+PROFIT=-0.055
+======================================================
+===== EXECUTE ORDER at 2017-12-11 08:40:00 ======
+ORDER_PRICE=113.566, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-11 10:00:00 ======
+ORDER_PRICE=113.566, STL_PRICE=113.673, ORDER_KIND=buy, PROFIT=0.107
+PROFIT=0.107
+======================================================
+===== EXECUTE ORDER at 2017-12-11 10:50:00 ======
+ORDER_PRICE=113.632, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-11 14:20:00 ======
+ORDER_PRICE=113.632, STL_PRICE=113.529, ORDER_KIND=buy, PROFIT=-0.103
+PROFIT=-0.103
+======================================================
+===== EXECUTE ORDER at 2017-12-11 15:00:00 ======
+ORDER_PRICE=113.554, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-11 16:10:00 ======
+ORDER_PRICE=113.554, STL_PRICE=113.43, ORDER_KIND=sell, PROFIT=0.124
+PROFIT=0.124
+======================================================
+===== EXECUTE ORDER at 2017-12-11 17:00:00 ======
+ORDER_PRICE=113.445, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-11 18:50:00 ======
+ORDER_PRICE=113.445, STL_PRICE=113.334, ORDER_KIND=sell, PROFIT=0.111
+PROFIT=0.111
+======================================================
+===== EXECUTE ORDER at 2017-12-11 18:50:00 ======
+ORDER_PRICE=113.334, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-12 03:00:00 ======
+ORDER_PRICE=113.334, STL_PRICE=113.439, ORDER_KIND=sell, PROFIT=-0.105
+PROFIT=-0.105
+======================================================
+===== EXECUTE ORDER at 2017-12-12 04:00:00 ======
+ORDER_PRICE=113.467, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-12 06:40:00 ======
+ORDER_PRICE=113.467, STL_PRICE=113.578, ORDER_KIND=buy, PROFIT=0.111
+PROFIT=0.111
+======================================================
+===== EXECUTE ORDER at 2017-12-12 11:30:00 ======
+ORDER_PRICE=113.487, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-12 16:10:00 ======
+ORDER_PRICE=113.487, STL_PRICE=113.381, ORDER_KIND=sell, PROFIT=0.106
+PROFIT=0.106
+======================================================
+===== EXECUTE ORDER at 2017-12-12 16:50:00 ======
+ORDER_PRICE=113.447, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-12 23:30:00 ======
+ORDER_PRICE=113.447, STL_PRICE=113.637, ORDER_KIND=sell, PROFIT=-0.19
+PROFIT=-0.19
+======================================================
+===== EXECUTE ORDER at 2017-12-13 01:10:00 ======
+ORDER_PRICE=113.69, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-13 02:30:00 ======
+ORDER_PRICE=113.69, STL_PRICE=113.397, ORDER_KIND=buy, PROFIT=-0.293
+PROFIT=-0.293
+======================================================
+===== EXECUTE ORDER at 2017-12-13 03:00:00 ======
+ORDER_PRICE=113.629, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-13 05:50:00 ======
+ORDER_PRICE=113.629, STL_PRICE=113.521, ORDER_KIND=sell, PROFIT=0.108
+PROFIT=0.108
+======================================================
+===== EXECUTE ORDER at 2017-12-13 11:10:00 ======
+ORDER_PRICE=113.505, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-13 12:30:00 ======
+ORDER_PRICE=113.505, STL_PRICE=113.23, ORDER_KIND=sell, PROFIT=0.275
+PROFIT=0.275
+======================================================
+===== EXECUTE ORDER at 2017-12-13 13:20:00 ======
+ORDER_PRICE=113.305, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-13 16:10:00 ======
+ORDER_PRICE=113.305, STL_PRICE=113.406, ORDER_KIND=sell, PROFIT=-0.101
+PROFIT=-0.101
+======================================================
+===== EXECUTE ORDER at 2017-12-13 21:50:00 ======
+ORDER_PRICE=113.312, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-13 22:40:00 ======
+ORDER_PRICE=113.312, STL_PRICE=113.032, ORDER_KIND=sell, PROFIT=0.28
+PROFIT=0.28
+======================================================
+===== EXECUTE ORDER at 2017-12-13 23:30:00 ======
+ORDER_PRICE=113.055, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-14 00:20:00 ======
+ORDER_PRICE=113.055, STL_PRICE=113.158, ORDER_KIND=sell, PROFIT=-0.103
+PROFIT=-0.103
+======================================================
+===== EXECUTE ORDER at 2017-12-14 00:20:00 ======
+ORDER_PRICE=113.158, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-14 01:00:00 ======
+ORDER_PRICE=113.158, STL_PRICE=113.044, ORDER_KIND=sell, PROFIT=0.114
+PROFIT=0.114
+======================================================
+===== EXECUTE ORDER at 2017-12-14 06:00:00 ======
+ORDER_PRICE=112.494, TRADE_FLAG=sell
+===== EXECUTE SETTLEMENT at 2017-12-14 07:20:00 ======
+ORDER_PRICE=112.494, STL_PRICE=112.622, ORDER_KIND=sell, PROFIT=-0.128
+PROFIT=-0.128
+======================================================
+===== EXECUTE ORDER at 2017-12-14 16:00:00 ======
+ORDER_PRICE=112.692, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-14 18:10:00 ======
+ORDER_PRICE=112.692, STL_PRICE=112.871, ORDER_KIND=buy, PROFIT=0.179
+PROFIT=0.179
+======================================================
+===== EXECUTE ORDER at 2017-12-14 18:40:00 ======
+ORDER_PRICE=112.796, TRADE_FLAG=buy
+===== EXECUTE SETTLEMENT at 2017-12-14 20:30:00 ======
+ORDER_PRICE=112.796, STL_PRICE=112.697, ORDER_KIND=buy, PROFIT=-0.099
+PROFIT=-0.099
+======================================================

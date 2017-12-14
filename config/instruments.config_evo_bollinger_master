@@ -17,6 +17,7 @@
     "sigma_length":10,
     "trade_sigma_length":3,
     "ex_trade_mode":"off",
+    "window_size":28,
     "ex_stlmode": "off"
   },
   "GBP_JPY": {

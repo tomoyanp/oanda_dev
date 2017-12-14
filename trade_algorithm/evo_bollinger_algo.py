@@ -62,7 +62,8 @@ class EvoBollingerAlgo(SuperAlgo):
             ask_lst = pd.Series(self.ask_price_list)
             bid_lst = pd.Series(self.bid_price_list)
             lst = (ask_lst+bid_lst) / 2
-            window_size = len(lst)
+            #window_size = len(lst)
+            window_size = self.config_data["window_size"]
             # 28分の移動平均線
             base = lst.rolling(window=window_size).mean()
 
@@ -79,6 +80,14 @@ class EvoBollingerAlgo(SuperAlgo):
             upper_sigmas = upper_sigmas[sigma_length:]
             lower_sigmas = lower_sigmas[sigma_length:]
             lst = lst[sigma_length:]
+
+            # 普通の配列型にキャストしないと無理だった
+            upper_sigmas = upper_sigmas.values.tolist()
+            lower_sigmas = lower_sigmas.values.tolist()
+            lst = lst.values.tolist()
+            print upper_sigmas
+            print lower_sigmas
+            print lst
 
             sigma_flag = False
             # 過去10本で2シグマ超えているか確認する
