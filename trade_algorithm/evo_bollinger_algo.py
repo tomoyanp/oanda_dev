@@ -85,6 +85,7 @@ class EvoBollingerAlgo(SuperAlgo):
             upper_sigmas = upper_sigmas.values.tolist()
             lower_sigmas = lower_sigmas.values.tolist()
             lst = lst.values.tolist()
+            base = base.values.tolist()
             print upper_sigmas
             print lower_sigmas
             print lst
@@ -114,6 +115,19 @@ class EvoBollingerAlgo(SuperAlgo):
                         trade_flag = "pass"
                     elif lst[i] < lower_sigmas[i]:
                         trade_flag = "pass"
+
+
+            current_price = lst[-1]
+            base_price = base[-1]
+
+            if trade_flag == "buy":
+                if current_price > base_price:
+                    trade_flag = "pass"
+            elif trade_flag == "sell":
+                if current_price < base_price:
+                    trade_flag = "pass"
+            else:
+                pass
 
             self.base_price = base[len(base)-1]
 
