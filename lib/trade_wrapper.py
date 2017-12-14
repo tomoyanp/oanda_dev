@@ -11,6 +11,7 @@ from hi_low_algo import HiLowAlgo
 from start_end_algo import StartEndAlgo
 from time_trend_algo import TimeTrendAlgo
 from bollinger_algo import BollingerAlgo
+from evo_bollinger_algo import EvoBollingerAlgo
 from oanda_wrapper import OandaWrapper
 from common import instrument_init, account_init, decide_up_down_before_day
 import time
