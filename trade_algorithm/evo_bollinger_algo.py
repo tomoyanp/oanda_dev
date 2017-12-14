@@ -9,7 +9,7 @@
 ####################################################
 
 from super_algo import SuperAlgo
-from common import instrument_init, account_init
+from common import instrument_init, account_init, decideMarket
 from datetime import datetime, timedelta
 import logging
 import pandas as pd
