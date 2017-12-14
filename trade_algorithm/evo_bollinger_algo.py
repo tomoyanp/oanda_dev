@@ -17,7 +17,7 @@ import decimal
 
 class EvoBollingerAlgo(SuperAlgo):
     def __init__(self, instrument, base_path, config_name):
-        super(BollingerAlgo, self).__init__(instrument, base_path, config_name)
+        super(EvoBollingerAlgo, self).__init__(instrument, base_path, config_name)
         self.base_price = 0
 
         # オーバーライドする
