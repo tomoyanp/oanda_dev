@@ -94,10 +94,10 @@ class EvoBollingerAlgo(SuperAlgo):
             for i in range(0, len(upper_sigmas)):
                 if lst[i] > upper_sigmas[i]:
                     sigma_flag = True
-                    trade_flag = "buy"
+                    trade_flag = "sell"
                 elif lst[i] < lower_sigmas[i]:
                     sigma_flag = True
-                    trade_flag = "sell"
+                    trade_flag = "buy"
 
             # 過去3本だけ抽出してシグマを超えていないことを確認する
             trade_sigma_length = self.config_data["trade_sigma_length"]
