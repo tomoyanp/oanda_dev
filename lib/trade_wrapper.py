@@ -65,6 +65,28 @@ class TradeWrapper:
             self.trade_algo = TimeTrendAlgo(self.instrument, self.base_path, self.config_name)
         elif algo == "bollinger":
             self.trade_algo = BollingerAlgo(self.instrument, self.base_path, self.config_name)
+        elif algo == "evo_bollinger":
+            self.trade_algo = EvoBollingerAlgo(self.instrument, self.base_path, self.config_name)
+        else:
+            self.trade_algo = HiLowAlgo(self.instrument, self.base_path, self.config_name)
+
+
+    # 今ポジションを持っているか確認
+    # なければ、フラグをリセットする
+    def checkPosition(self):
+        logging.info("=== Start TradeWrapper.checkPosition Logic ===")
+        logging.info("test_mode flag=%s" % self.test_mode)
+        if self.test_mode:
+            pass
+        else:
+            position_flag = self.oanda_wrapper.get_trade_position(self.instrument)
+            logging.info("trade_position flag=%s" % position_flag)
+            if position_flag == False:
+                # 決済した直後であればスリープする
+                logging.info("stl_sleep_flag=%s" % self.stl_sleep_flag)
+                trade_id = self.trade_algo.getTradeId()
+                if self.stl_sleep_flag and trade_id != 0:
+
         else:
             self.trade_algo = HiLowAlgo(self.instrument, self.base_path, self.config_name)
 
