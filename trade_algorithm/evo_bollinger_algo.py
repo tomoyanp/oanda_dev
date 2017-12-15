@@ -85,6 +85,7 @@ class EvoBollingerAlgo(SuperAlgo):
             upper_sigmas = upper_sigmas.values.tolist()
             lower_sigmas = lower_sigmas.values.tolist()
             lst = lst.values.tolist()
+            base = base.values.tolist()
             print upper_sigmas
             print lower_sigmas
             print lst
@@ -94,10 +95,10 @@ class EvoBollingerAlgo(SuperAlgo):
             for i in range(0, len(upper_sigmas)):
                 if lst[i] > upper_sigmas[i]:
                     sigma_flag = True
-                    trade_flag = "buy"
+                    trade_flag = "sell"
                 elif lst[i] < lower_sigmas[i]:
                     sigma_flag = True
-                    trade_flag = "sell"
+                    trade_flag = "buy"
 
             # 過去3本だけ抽出してシグマを超えていないことを確認する
             trade_sigma_length = self.config_data["trade_sigma_length"]
@@ -114,6 +115,19 @@ class EvoBollingerAlgo(SuperAlgo):
                         trade_flag = "pass"
                     elif lst[i] < lower_sigmas[i]:
                         trade_flag = "pass"
+
+
+            current_price = lst[-1]
+            base_price = base[-1]
+
+            if trade_flag == "buy":
+                if current_price > base_price:
+                    trade_flag = "pass"
+            elif trade_flag == "sell":
+                if current_price < base_price:
+                    trade_flag = "pass"
+            else:
+                pass
 
             self.base_price = base[len(base)-1]
 
