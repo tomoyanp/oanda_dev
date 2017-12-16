@@ -140,6 +140,7 @@ class TradeWrapper:
 
         # 建玉があれば、決済するかどうか判断
         if order_flag:
+            sleep_time = self.config_data["stl_sleep_time"]
             stl_flag = self.trade_algo.decideStl(base_time)
             trade_id = self.trade_algo.getTradeId()
             logging.info("stl_flag=%s" % stl_flag)
@@ -158,6 +159,7 @@ class TradeWrapper:
                 logging.info("stl_flag=%s" % stl_flag)
                 # stl_flagが立ってたら決済する
                 if stl_flag:
+                    
                     nowftime = self.trade_algo.getCurrentTime()
                     order_kind = self.trade_algo.getOrderKind()
                     order_price = self.trade_algo.getOrderPrice()

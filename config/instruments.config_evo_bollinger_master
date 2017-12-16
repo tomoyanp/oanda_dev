@@ -18,6 +18,7 @@
     "candle_width":600,
     "trade_sigma_length":3,
     "ex_trade_mode":"off",
+    "stl_sleep_time": 5,
     "window_size":28,
     "ex_stlmode": "off"
   },
