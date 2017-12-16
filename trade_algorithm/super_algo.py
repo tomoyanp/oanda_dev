@@ -261,27 +261,27 @@ class SuperAlgo(object):
 
         return threshold_list
 
-    def calcThreshold(self, trade_flag, order_price):
-        stop_loss = self.config_data["stop_loss"]
-        take_profit = self.config_data["take_profit"]
-        threshold_list = {}
-        if trade_flag == "buy":
-            threshold_list["stoploss"] = order_price - stop_loss
-            threshold_list["takeprofit"] = order_price + take_profit
-        else:
-            threshold_list["stoploss"] = order_price + stop_loss
-            threshold_list["takeprofit"] = order_price - take_profit
-
-        if take_profit == 0:
-            threshold_list["takeprofit"] = 0
-
-        if stop_loss == 0:
-            threshold_list["stoploss"] = 0
-
-        self.stoploss_rate = threshold_list["stoploss"]
-        self.takeprofit_rate = threshold_list["takeprofit"]
-
-        return threshold_list
+#    def calcThreshold(self, trade_flag, order_price):
+#        stop_loss = self.config_data["stop_loss"]
+#        take_profit = self.config_data["take_profit"]
+#        threshold_list = {}
+#        if trade_flag == "buy":
+#            threshold_list["stoploss"] = order_price - stop_loss
+#            threshold_list["takeprofit"] = order_price + take_profit
+#        else:
+#            threshold_list["stoploss"] = order_price + stop_loss
+#            threshold_list["takeprofit"] = order_price - take_profit
+#
+#        if take_profit == 0:
+#            threshold_list["takeprofit"] = 0
+#
+#        if stop_loss == 0:
+#            threshold_list["stoploss"] = 0
+#
+#        self.stoploss_rate = threshold_list["stoploss"]
+#        self.takeprofit_rate = threshold_list["takeprofit"]
+#
+#        return threshold_list
 
     # testmodeでstoploss, takdeprofitに引っかかった場合
     def decideReverceStl(self):
