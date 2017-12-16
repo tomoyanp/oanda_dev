@@ -190,23 +190,23 @@ class EvoBollingerAlgo(SuperAlgo):
             raise
 
 
-    def getInitialSql(self, base_time):
-        logging.info("=== Start SuperAlgo.getInitialSql Logic ===")
-        time_width = self.config_data["time_width"]
-        start_time = base_time - timedelta(seconds=time_width)
-        logging.info("start_time=%s" % start_time)
-        # マーケットが休みの場合、48時間さかのぼってSQLを実行する
-        flag = decideMarket(start_time)
-        logging.info("decideMarket.flag=%s" % flag)
-        if flag == False:
-            start_time = start_time - timedelta(hours=48)
-
-        start_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
-        end_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
-
-        # 10分ごとにする
-        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' and insert_time like \'%%0:00\' order by insert_time " % (self.instrument, start_time, end_time)
-        logging.info("sql=%s" % sql)
-        logging.info("=== End SuperAlgo.getInitialSql Logic ===")
-        print sql
-        return sql
+#    def getInitialSql(self, base_time):
+#        logging.info("=== Start SuperAlgo.getInitialSql Logic ===")
+#        time_width = self.config_data["time_width"]
+#        start_time = base_time - timedelta(seconds=time_width)
+#        logging.info("start_time=%s" % start_time)
+#        # マーケットが休みの場合、48時間さかのぼってSQLを実行する
+#        flag = decideMarket(start_time)
+#        logging.info("decideMarket.flag=%s" % flag)
+#        if flag == False:
+#            start_time = start_time - timedelta(hours=48)
+#
+#        start_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
+#        end_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
+#
+#        # 10分ごとにする
+#        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' and insert_time like \'%%0:00\' order by insert_time " % (self.instrument, start_time, end_time)
+#        logging.info("sql=%s" % sql)
+#        logging.info("=== End SuperAlgo.getInitialSql Logic ===")
+#        print sql
+#        return sql
