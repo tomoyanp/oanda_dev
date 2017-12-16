@@ -15,6 +15,7 @@
     "trend_follow_mode": "off",
     "bollinger_sigma":2,
     "sigma_length":10,
+    "candle_width":600,
     "trade_sigma_length":3,
     "ex_trade_mode":"off",
     "window_size":28,

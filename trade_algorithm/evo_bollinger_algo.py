@@ -63,7 +63,10 @@ class EvoBollingerAlgo(SuperAlgo):
             bid_lst = pd.Series(self.bid_price_list)
             lst = (ask_lst+bid_lst) / 2
             #window_size = len(lst)
-            window_size = self.config_data["window_size"]
+            window_size = self.config_data["windows_size"] 
+            candle_width = self.config_data["candle_width"]
+            window_size = window_size * candle_width
+            
             # 28分の移動平均線
             base = lst.rolling(window=window_size).mean()
 
@@ -76,6 +79,8 @@ class EvoBollingerAlgo(SuperAlgo):
 
             # 過去10本分（100分）のsigmaだけ抽出
             sigma_length = self.config_data["sigma_length"]
+            sigma_length = sigma_length * candle_width
+            
             sigma_length = sigma_length * -1
             upper_sigmas = upper_sigmas[sigma_length:]
             lower_sigmas = lower_sigmas[sigma_length:]
@@ -102,6 +107,7 @@ class EvoBollingerAlgo(SuperAlgo):
 
             # 過去3本だけ抽出してシグマを超えていないことを確認する
             trade_sigma_length = self.config_data["trade_sigma_length"]
+            trade_sigma_length = trade_sigma_length * candle_width
             trade_sigma_length = trade_sigma_length * -1
             upper_sigmas = upper_sigmas[trade_sigma_length:]
             lower_sigmas = lower_sigmas[trade_sigma_length:]
@@ -117,6 +123,7 @@ class EvoBollingerAlgo(SuperAlgo):
                         trade_flag = "pass"
 
 
+            # 移動平均線と比べてトレード有無を決める
             current_price = lst[-1]
             base_price = base[-1]
 
