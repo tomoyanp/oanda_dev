@@ -63,7 +63,7 @@ class EvoBollingerAlgo(SuperAlgo):
             bid_lst = pd.Series(self.bid_price_list)
             lst = (ask_lst+bid_lst) / 2
             #window_size = len(lst)
-            window_size = self.config_data["windows_size"] 
+            window_size = self.config_data["window_size"] 
             candle_width = self.config_data["candle_width"]
             window_size = window_size * candle_width
             
