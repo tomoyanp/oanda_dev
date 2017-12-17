@@ -258,8 +258,8 @@ class TradeWrapper:
                     self.trade_algo.setTradeId(response)
                     # 約定後はちょっとスリープしないとおかしなことになる
                     time.sleep(10)
-                    threshold_list = self.trade_algo.calcThreshold(order_price, trade_flag)
-                    response = self.oanda_wrapper.modify_trade(trade_flag, trade_flag, threshold_list["stoploss"], threshold_list["takeprofit"])
+                    #threshold_list = self.trade_algo.calcThreshold(order_price, trade_flag)
+                    #response = self.oanda_wrapper.modify_trade(trade_flag, trade_flag, threshold_list["stoploss"], threshold_list["takeprofit"])
 
                 self.result_file.write("===== EXECUTE ORDER at %s ======\n" % nowftime)
                 self.result_file.write("ORDER_PRICE=%s, TRADE_FLAG=%s\n" % (order_price, trade_flag))

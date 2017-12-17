@@ -2,13 +2,14 @@
   "USD_JPY": {
     "trade_threshold":0.1,
     "optional_threshold":5.1,
-    "stop_loss": 0.3,
-    "take_profit": 0.3,
+    "stop_loss": 0.1,
+    "take_profit": 0.1,
     "time_width": 300,
     "stl_time_width": 60,
     "sleep_time": "1",
-    "stl_sleep_vtime": 21600,
-    "stl_sleep_ltime": 21600,
+    "stl_sleep_time": "1",
+    "stl_sleep_vtime": 1800,
+    "stl_sleep_ltime": 1800,
     "units": 40000,
     "step_wise_unit": 1,
     "step_wise_coefficient_threshold": 0.9,
@@ -18,9 +19,9 @@
     "trend_threshold": 0.5,
     "trend_time_width": 3,
     "chart_polling": "minute",
-    "reverce_decide_flag": "off",
     "ex_stlmode": "on",
-    "startend_stl_time": 4
+    "reverce_decide_flag": "off",
+    "ex_stl_time": 4
   },
   "GBP_JPY": {
     "trade_threshold":0.1,
