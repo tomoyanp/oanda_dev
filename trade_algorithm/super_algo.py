@@ -362,43 +362,30 @@ class SuperAlgo(object):
             return trade_flag
 
 
-    def newCheckTrend(self, target_time, trade_flag):
-        trend_mode = self.config_data["trend_follow_mode"]
+    def newCheckTrend(self, target_time):
+       trend_time_width = self.config_data["trend_time_width"]
+       trend_time_width = int(trend_time_width)
+       before_time = target_time - timedelta(hours=trend_time_width)
+       sql = "select ask_price from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, before_time, target_time)
+       response = self.mysqlConnector.select_sql(sql)
 
-        if trend_mode == "on":
-            trend_time_width = self.config_data["trend_time_width"]
-            before_time = target_time - timedelta(hours=trend_time_width)
-            sql = "select ask_price from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, before_time, target_time)
-            response = self.mysqlConnector.select_sql(sql)
+       price_list = []
+       index_list = []
+       index = 0
+       for price in response:
+           price_list.append(price_list)
+           index_list.append(index)
+           index = index + 1
 
-            price_list = []
-            index_list = []
-            index = 0
-            for price in result:
-                price_list.append(price_list)
-                index_list.append(index)
-                index = index + 1
+       price_list = np.array(price_list)
+       index_list = np.array(index_list)
+       z = np.polyfix(index_list, price_list, 1)
+       p = np.poly1d(z)
+       # p[0] 切片, p[1] 傾き
 
-            price_list = np.array(price_list)
-            index_list = np.array(index_list)
-            z = np.polyfix(index_list, price_list, 1)
-            p = np.poly1d(z)
-            # p[0] 切片, p[1] 傾き
+       slope = p[1]
 
-            slope = p[1]
-
-            trend_threshold = self.config_data["trend_threshold"]
-            if slope < (trend_threshold*-1) and trade_flag == "sell":
-                pass
-            elif slope > trend_threshold and trade_flag == "buy":
-                pass
-            else:
-                trade_flag = "pass"
-
-            return trade_flag
-
-        else:
-            return trade_flag
+       return slope 
 
 
     @abstractmethod

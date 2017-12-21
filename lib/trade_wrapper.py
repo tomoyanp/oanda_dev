@@ -12,6 +12,7 @@ from start_end_algo import StartEndAlgo
 from time_trend_algo import TimeTrendAlgo
 from bollinger_algo import BollingerAlgo
 from evo_bollinger_algo import EvoBollingerAlgo
+from evo2_bollinger_algo import Evo2BollingerAlgo
 from oanda_wrapper import OandaWrapper
 from common import instrument_init, account_init, decide_up_down_before_day
 import time
@@ -68,6 +69,8 @@ class TradeWrapper:
             self.trade_algo = BollingerAlgo(self.instrument, self.base_path, self.config_name)
         elif algo == "evo_bollinger":
             self.trade_algo = EvoBollingerAlgo(self.instrument, self.base_path, self.config_name)
+        elif algo == "evo2_bollinger":
+            self.trade_algo = Evo2BollingerAlgo(self.instrument, self.base_path, self.config_name)
         else:
             self.trade_algo = HiLowAlgo(self.instrument, self.base_path, self.config_name)
 
