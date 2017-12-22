@@ -382,7 +382,6 @@ class SuperAlgo(object):
         start_price = start_price_list[-1]
         current_price = current_price_list[-1]
 
-        trend_threshold = self.config_data["trend_threshold"]
 
         slope = current_price - start_price
         return slope

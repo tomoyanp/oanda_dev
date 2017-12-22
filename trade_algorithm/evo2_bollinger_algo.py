@@ -88,7 +88,7 @@ class Evo2BollingerAlgo(SuperAlgo):
 
                 sigma_flag = False
                 # 過去10本で2シグマ超えているか確認する
-                for i in range(0, len(upper_sigmas)):
+                for i in range(0, len(lst)):
                     if lst[i] - base[i] < 0.05 and lst[i] - base[i] > -0.05:
                         sigma_flag = True
 
@@ -126,6 +126,7 @@ class Evo2BollingerAlgo(SuperAlgo):
 
                     sigma = lst.rolling(window=window_size).std(ddof=0)
 
+                    base = lst.rolling(window=window_size).mean()
                     # ±2σの計算
                     upper_sigmas = base + (sigma*sigma_valiable)
                     lower_sigmas = base - (sigma*sigma_valiable)
