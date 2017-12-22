@@ -379,13 +379,12 @@ class SuperAlgo(object):
 
        price_list = np.array(price_list)
        index_list = np.array(index_list)
-       z = np.polyfix(index_list, price_list, 1)
+       z = np.polyfit(index_list, price_list, 1)
        p = np.poly1d(z)
        # p[0] 切片, p[1] 傾き
 
        slope = p[1]
-
-       return slope 
+       return slope
 
 
     @abstractmethod
