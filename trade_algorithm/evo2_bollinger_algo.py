@@ -58,39 +58,40 @@ class Evo2BollingerAlgo(SuperAlgo):
             if self.order_flag:
                 pass
             else:
-                slope = self.newCheckTrend(base_time)
+                #slope = self.newCheckTrend(base_time)
+                slope = self.tmpCheckTrend(base_time)
                 print slope
                 #window_size = len(lst)
                 ask_lst = pd.Series(self.ask_price_list)
                 bid_lst = pd.Series(self.bid_price_list)
                 lst = (ask_lst+bid_lst) / 2
- 
-                window_size = self.config_data["window_size"] 
+
+                window_size = self.config_data["window_size"]
                 candle_width = self.config_data["candle_width"]
                 window_size = window_size * candle_width
-                
+
                 # 28分の移動平均線
                 base = lst.rolling(window=window_size).mean()
-    
+
                 # 過去10本分（100分）のsigmaだけ抽出
                 sigma_length = self.config_data["sigma_length"]
                 sigma_length = sigma_length * candle_width
-                
+
                 sigma_length = sigma_length * -1
                 base = base[sigma_length:]
                 lst = lst[sigma_length:]
-    
+
                 # 普通の配列型にキャストしないと無理だった
                 lst = lst.values.tolist()
                 base = base.values.tolist()
                 print lst
-    
+
                 sigma_flag = False
                 # 過去10本で2シグマ超えているか確認する
                 for i in range(0, len(upper_sigmas)):
                     if lst[i] - base[i] < 0.05 and lst[i] - base[i] > -0.05:
                         sigma_flag = True
-    
+
                 # 過去3本のうち、全てシグマを超えていなければ、注文をだす
                 if sigma_flag and slope < 0:
                     trade_flag = "sell"
@@ -98,9 +99,9 @@ class Evo2BollingerAlgo(SuperAlgo):
                     trade_flag = "buy"
                 else:
                     trade_flag = "pass"
-                    
+
                 self.base_price = base[len(base)-1]
-    
+                
                 return trade_flag
 
         except:
@@ -118,49 +119,48 @@ class Evo2BollingerAlgo(SuperAlgo):
                     ask_lst = pd.Series(self.ask_price_list)
                     bid_lst = pd.Series(self.bid_price_list)
                     lst = (ask_lst+bid_lst) / 2
-     
-                    window_size = self.config_data["window_size"] 
+
+                    window_size = self.config_data["window_size"]
                     candle_width = self.config_data["candle_width"]
                     window_size = window_size * candle_width
-     
+
                     sigma = lst.rolling(window=window_size).std(ddof=0)
-        
+
                     # ±2σの計算
                     upper_sigmas = base + (sigma*sigma_valiable)
                     lower_sigmas = base - (sigma*sigma_valiable)
-        
+
                     # 過去10本分（100分）のsigmaだけ抽出
                     sigma_length = self.config_data["sigma_length"]
                     sigma_length = sigma_length * candle_width
-                    
+
                     sigma_length = sigma_length * -1
                     upper_sigmas = upper_sigmas[sigma_length:]
                     lower_sigmas = lower_sigmas[sigma_length:]
                     lst = lst[sigma_length:]
-        
+
                     # 普通の配列型にキャストしないと無理だった
                     upper_sigmas = upper_sigmas.values.tolist()
                     lower_sigmas = lower_sigmas.values.tolist()
                     lst = lst.values.tolist()
                     base = base.values.tolist()
-         
+
                     current_ask_price = self.ask_price_list[-1]
                     current_bid_price = self.bid_price_list[-1]
                     current_ask_price = float(current_ask_price)
                     current_bid_price = float(current_bid_price)
-    
+
                     stl_flag = False
                     if self.order_kind == "buy":
                         for i in range(0, len(upper_sigmas)):
                             if lst[i] < lower_sigmas[i] or lst[i] > upper_sigmas[i]:
                                 stl_flag = True
-    
+
                     elif self.order_kind == "sell":
                         for i in range(0, len(upper_sigmas)):
                             if lst[i] < lower_sigmas[i] or lst[i] > upper_sigmas[i]:
                                 stl_flag = True
-    
-                 
+
             else:
                 pass
 

@@ -362,6 +362,32 @@ class SuperAlgo(object):
             return trade_flag
 
 
+    def tmpCheckTrend(self, target_time):
+        trend_time_width = self.config_data["trend_time_width"]
+        before_time = target_time - timedelta(hours=trend_time_width)
+        start_sql = "select ask_price from %s_TABLE where insert_time > \'%s\' limit 1" % (self.instrument, before_time)
+        current_sql = "select ask_price from %s_TABLE where insert_time > \'%s\' limit 1" % (self.instrument, target_time)
+        start_result = self.mysqlConnector.select_sql(start_sql)
+        current_result = self.mysqlConnector.select_sql(current_sql)
+
+        start_price_list = []
+        for result in start_result:
+            start_price_list.append(result[0])
+
+
+        current_price_list = []
+        for result in current_result:
+            current_price_list.append(result[0])
+
+        start_price = start_price_list[-1]
+        current_price = current_price_list[-1]
+
+        trend_threshold = self.config_data["trend_threshold"]
+
+        slope = current_price - start_price
+        return slope
+
+
     def newCheckTrend(self, target_time):
        trend_time_width = self.config_data["trend_time_width"]
        trend_time_width = int(trend_time_width)
