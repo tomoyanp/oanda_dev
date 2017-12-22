@@ -58,25 +58,25 @@ class Evo2BollingerAlgo(SuperAlgo):
             if self.order_flag:
                 pass
             else:
-                #slope = self.newCheckTrend(base_time)
+                # トレンドのチェック
                 slope = self.tmpCheckTrend(base_time)
-                print slope
-                #window_size = len(lst)
+
+                # pandasの形式に変換
                 ask_lst = pd.Series(self.ask_price_list)
                 bid_lst = pd.Series(self.bid_price_list)
                 lst = (ask_lst+bid_lst) / 2
 
+                # window_size 28 * candle_width 600 （10分足で28本分）
                 window_size = self.config_data["window_size"]
                 candle_width = self.config_data["candle_width"]
                 window_size = window_size * candle_width
 
-                # 28分の移動平均線
+                # 28本分の移動平均線
                 base = lst.rolling(window=window_size).mean()
 
-                # 過去10本分（100分）のsigmaだけ抽出
+                # 過去5本分の移動平均と価格リストを取得
                 sigma_length = self.config_data["sigma_length"]
                 sigma_length = sigma_length * candle_width
-
                 sigma_length = sigma_length * -1
                 base = base[sigma_length:]
                 lst = lst[sigma_length:]
@@ -87,12 +87,13 @@ class Evo2BollingerAlgo(SuperAlgo):
                 print lst
 
                 sigma_flag = False
-                # 過去10本で2シグマ超えているか確認する
+                # 過去5本で移動平均線付近にいるか確認する
                 for i in range(0, len(lst)):
                     if lst[i] - base[i] < 0.05 and lst[i] - base[i] > -0.05:
                         sigma_flag = True
 
-                # 過去3本のうち、全てシグマを超えていなければ、注文をだす
+                # トレンドが上向きであれば、買い
+                # トレンドが下向きであれば、売り
                 if sigma_flag and slope < 0:
                     trade_flag = "sell"
                 elif sigma_flag and slope > 0:
@@ -100,8 +101,7 @@ class Evo2BollingerAlgo(SuperAlgo):
                 else:
                     trade_flag = "pass"
 
-                self.base_price = base[len(base)-1]
-                
+#                self.base_price = base[len(base)-1]
                 return trade_flag
 
         except:
@@ -121,20 +121,19 @@ class Evo2BollingerAlgo(SuperAlgo):
                     lst = (ask_lst+bid_lst) / 2
 
                     window_size = self.config_data["window_size"]
+                    sigma_valiable = self.config_data["bollinger_sigma"]
                     candle_width = self.config_data["candle_width"]
                     window_size = window_size * candle_width
 
                     sigma = lst.rolling(window=window_size).std(ddof=0)
-
                     base = lst.rolling(window=window_size).mean()
                     # ±2σの計算
                     upper_sigmas = base + (sigma*sigma_valiable)
                     lower_sigmas = base - (sigma*sigma_valiable)
 
-                    # 過去10本分（100分）のsigmaだけ抽出
+                    # 過去5本分（50分）のsigmaだけ抽出
                     sigma_length = self.config_data["sigma_length"]
                     sigma_length = sigma_length * candle_width
-
                     sigma_length = sigma_length * -1
                     upper_sigmas = upper_sigmas[sigma_length:]
                     lower_sigmas = lower_sigmas[sigma_length:]
@@ -146,11 +145,14 @@ class Evo2BollingerAlgo(SuperAlgo):
                     lst = lst.values.tolist()
                     base = base.values.tolist()
 
+                    # 現在価格の取得
                     current_ask_price = self.ask_price_list[-1]
                     current_bid_price = self.bid_price_list[-1]
                     current_ask_price = float(current_ask_price)
                     current_bid_price = float(current_bid_price)
 
+                    # 上下どちらかのシグマにぶつかったら決済してしまう
+                    # 利確、損切り兼任
                     stl_flag = False
                     if self.order_kind == "buy":
                         for i in range(0, len(upper_sigmas)):
