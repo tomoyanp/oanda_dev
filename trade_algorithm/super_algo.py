@@ -391,7 +391,7 @@ class SuperAlgo(object):
        trend_time_width = self.config_data["trend_time_width"]
        trend_time_width = int(trend_time_width)
        before_time = target_time - timedelta(hours=trend_time_width)
-       sql = "select ask_price from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (instrument, before_time, target_time)
+       sql = "select ask_price from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, before_time, target_time)
        print sql
        response = self.mysqlConnector.select_sql(sql)
        price_list = []
