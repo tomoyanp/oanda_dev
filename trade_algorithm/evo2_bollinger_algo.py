@@ -116,34 +116,23 @@ class Evo2BollingerAlgo(SuperAlgo):
 
             if self.order_flag:
                 if ex_stlmode == "on":
-                    ask_lst = pd.Series(self.ask_price_list)
-                    bid_lst = pd.Series(self.bid_price_list)
-                    lst = (ask_lst+bid_lst) / 2
-
                     window_size = self.config_data["window_size"]
                     sigma_valiable = self.config_data["bollinger_sigma"]
                     candle_width = self.config_data["candle_width"]
-                    window_size = window_size * candle_width
-
-                    sigma = lst.rolling(window=window_size).std(ddof=0)
-                    base = lst.rolling(window=window_size).mean()
-                    # ±2σの計算
-                    upper_sigmas = base + (sigma*sigma_valiable)
-                    lower_sigmas = base - (sigma*sigma_valiable)
+                    data_set = getBollingerDataSet(self.ask_price_list,
+                                                   self.bid_price_list,
+                                                   window_size,
+                                                   sigma_valiable,
+                                                   candle_width)
 
                     # 過去5本分（50分）のsigmaだけ抽出
                     sigma_length = self.config_data["sigma_length"]
-                    sigma_length = sigma_length * candle_width
-                    sigma_length = sigma_length * -1
-                    upper_sigmas = upper_sigmas[sigma_length:]
-                    lower_sigmas = lower_sigmas[sigma_length:]
-                    lst = lst[sigma_length:]
 
-                    # 普通の配列型にキャストしないと無理だった
-                    upper_sigmas = upper_sigmas.values.tolist()
-                    lower_sigmas = lower_sigmas.values.tolist()
-                    lst = lst.values.tolist()
-                    base = base.values.tolist()
+                    data_set = extraBollingerDataSet(data_set, sigma_length, candle_width)
+                    upper_sigmas = data_set["upper_sigmas"]
+                    lower_sigmas = data_set["lower_sigmas"]
+                    price_list   = data_set["price_list"]
+                    base_lines   = data_set["base_lines"]
 
                     # 現在価格の取得
                     current_ask_price = self.ask_price_list[-1]
@@ -156,12 +145,12 @@ class Evo2BollingerAlgo(SuperAlgo):
                     stl_flag = False
                     if self.order_kind == "buy":
                         for i in range(0, len(upper_sigmas)):
-                            if lst[i] < lower_sigmas[i] or lst[i] > upper_sigmas[i]:
+                            if price_list[i] < lower_sigmas[i] or price_list[i] > upper_sigmas[i]:
                                 stl_flag = True
 
                     elif self.order_kind == "sell":
                         for i in range(0, len(upper_sigmas)):
-                            if lst[i] < lower_sigmas[i] or lst[i] > upper_sigmas[i]:
+                            if price_list[i] < lower_sigmas[i] or price_list[i] > upper_sigmas[i]:
                                 stl_flag = True
 
             else:

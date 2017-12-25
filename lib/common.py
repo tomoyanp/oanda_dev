@@ -45,6 +45,7 @@ def decideMarket(base_time):
 
     return flag
 
+
 def decide_up_down_before_day(con, base_time, instrument):
     comp_time = base_time.strftime("%H:%M:%S")
     now = base_time
@@ -78,3 +79,56 @@ def decide_up_down_before_day(con, base_time, instrument):
     print "before_end_price : %s" % before_end_price
     print "before_flag : %s" % before_flag
     return before_flag
+
+def getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, cangle_width):
+    # pandasの形式に変換
+    ask_lst = pd.Series(ask_price_list)
+    bid_lst = pd.Series(bid_price_list)
+
+    # 売値と買値の平均算出
+    lst = (ask_lst+bid_lst) / 2
+
+    # window_size × ローソク足
+    window_size = window_size * candle_width
+
+    # シグマと移動平均の計算
+    sigma = lst.rolling(window=window_size).std(ddof=0)
+    base = lst.rolling(window=window_size).mean()
+
+    # ボリンジャーバンドの計算
+    upper_sigmas = base + (sigma*sigma_valiable)
+    lower_sigmas = base - (sigma*sigma_valiable)
+
+    # 普通の配列型にキャストして返す
+    upper_sigmas = upper_sigmas.values.tolist()
+    lower_sigmas = lower_sigmas.values.tolist()
+    lst = lst.values.tolist()
+    base = base.values.tolist()
+
+    data_set = { "upper_sigmas": upper_sigmas,
+                 "lower_sigmas": lower_sigmas,
+                 "price_list": lst,
+                 "base_lines": base }
+    return data_set
+
+def extraBollingerDataSet(data_set, sigma_length, candle_width):
+    # 過去5本分（50分）のsigmaだけ抽出
+    sigma_length = sigma_length * candle_width
+    sigma_length = sigma_length * -1
+
+    upper_sigmas = data_set["upper_sigmas"]
+    lower_sigmas = data_set["lower_sigmas"]
+    price_list   = data_set["price_list"]
+    base_lines   = data_set["base_lines"]
+
+    upper_sigmas = upper_sigmas[sigma_length:]
+    lower_sigmas = lower_sigmas[sigma_length:]
+    price_list = price_lst[sigma_length:]
+    base_lines = base_lines[sigma_length:]
+
+    data_set = { "upper_sigmas": upper_sigmas,
+                 "lower_sigmas": lower_sigmas,
+                 "price_list": price_list,
+                 "base_lines": base_lines}
+
+    return data_set
