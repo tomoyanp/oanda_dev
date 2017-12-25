@@ -1,6 +1,8 @@
 # coding: utf-8
 import json
 from datetime import datetime, timedelta
+import pandas as pd
+import numpy as np
 
 def instrument_init(instrument, base_path, config_name):
     config_path = "%s/config" % base_path
@@ -80,7 +82,7 @@ def decide_up_down_before_day(con, base_time, instrument):
     print "before_flag : %s" % before_flag
     return before_flag
 
-def getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, cangle_width):
+def getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width):
     # pandasの形式に変換
     ask_lst = pd.Series(ask_price_list)
     bid_lst = pd.Series(bid_price_list)
@@ -123,7 +125,7 @@ def extraBollingerDataSet(data_set, sigma_length, candle_width):
 
     upper_sigmas = upper_sigmas[sigma_length:]
     lower_sigmas = lower_sigmas[sigma_length:]
-    price_list = price_lst[sigma_length:]
+    price_list = price_list[sigma_length:]
     base_lines = base_lines[sigma_length:]
 
     data_set = { "upper_sigmas": upper_sigmas,

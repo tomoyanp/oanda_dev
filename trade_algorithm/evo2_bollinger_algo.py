@@ -37,10 +37,17 @@ class Evo2BollingerAlgo(SuperAlgo):
                 # window_size 28 * candle_width 600 （10分足で28本分）
                 window_size = self.config_data["window_size"]
                 candle_width = self.config_data["candle_width"]
+                sigma_valiable = self.config_data["bollinger_sigma"]
                 window_size = window_size * candle_width
 
                 # 28本分の移動平均線
                 base = lst.rolling(window=window_size).mean()
+                sigma = lst.rolling(window=window_size).std(ddof=0)
+
+                upper_sigmas = base + sigma*sigma_valiable
+                lower_sigmas = base - sigma*sigma_valiable
+                upper_sigmas = upper_sigmas.values.tolist()
+                lower_sigmas = lower_sigmas.values.tolist()
 
                 # 過去5本分の移動平均と価格リストを取得
                 sigma_length = self.config_data["sigma_length"]
@@ -69,6 +76,10 @@ class Evo2BollingerAlgo(SuperAlgo):
                 else:
                     trade_flag = "pass"
 
+                if upper_sigmas[-1] - lower_sigmas[-1] < 0.1:
+                    trade_flag = "pass"
+
+ 
                 return trade_flag
 
         except:
