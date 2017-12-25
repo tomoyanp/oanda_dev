@@ -391,24 +391,23 @@ class SuperAlgo(object):
        trend_time_width = self.config_data["trend_time_width"]
        trend_time_width = int(trend_time_width)
        before_time = target_time - timedelta(hours=trend_time_width)
-       sql = "select ask_price from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, before_time, target_time)
+       sql = "select ask_price from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (instrument, before_time, target_time)
+       print sql
        response = self.mysqlConnector.select_sql(sql)
-
        price_list = []
        index_list = []
-       index = 0
+       index = 1
        for price in response:
-           price_list.append(price_list)
+           price_list.append(price[0])
            index_list.append(index)
            index = index + 1
 
        price_list = np.array(price_list)
        index_list = np.array(index_list)
+       print price_list
        z = np.polyfit(index_list, price_list, 1)
-       p = np.poly1d(z)
-       # p[0] 切片, p[1] 傾き
+       slope, intercept = np.poly1d(z)
 
-       slope = p[1]
        return slope
 
 

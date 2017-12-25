@@ -2,9 +2,9 @@
 
 ####################################################
 #
-# bollinger algo改良版
-# 1.8シグマ、2.0シグマを推移しているものをキャッチする
-# 2.0シグマ、3.0シグマを推移しているトレンドの終わりをキャッチする
+# bollinger algo改良版2
+# トレンドを確認して、移動平均にぶつかったタイミングでトレード
+# 上下の2シグマにぶつかったら決済する
 #
 ####################################################
 
@@ -20,46 +20,14 @@ class Evo2BollingerAlgo(SuperAlgo):
         super(Evo2BollingerAlgo, self).__init__(instrument, base_path, config_name)
         self.base_price = 0
 
-        # オーバーライドする
-#    def calcThreshold(self, trade_flag):
-#        window_size = self.config_data["window_size"]
-#        window_size = int(window_size) * -1
-#        ask_price_list = self.ask_price_list[window_size:]
-#
-#        stop_loss_val = self.config_data["stop_loss"]
-#        current_ask_price = self.ask_price_list[-1]
-#        current_bid_price = self.bid_price_list[-1]
-#
-#        threshold_list = {}
-#        if trade_flag == "sell":
-#            threshold_list["stoploss"] = current_ask_price + stop_loss_val
-#            threshold_list["takeprofit"] = self.base_price
-#
-#        elif trade_flag == "buy":
-#            threshold_list["stoploss"] = current_bid_price - stop_loss_val
-#            threshold_list["takeprofit"] = self.base_price
-#        else:
-#            pass
-#
-#        threshold_list["stoploss"] = '{:.3f}'.format(threshold_list["stoploss"])
-#        threshold_list["takeprofit"] = '{:.3f}'.format(threshold_list["takeprofit"])
-#
-#        logging.info("===========================================")
-#        logging.info("STOP LOSS RATE = %s" % threshold_list["stoploss"])
-#        logging.info("TAKE PROFIT RATE = %s" % threshold_list["takeprofit"])
-#
-#        self.stoploss_rate = threshold_list["stoploss"]
-#        self.takeprofit_rate = threshold_list["takeprofit"]
-#
-#        return threshold_list
-
     def decideTrade(self, base_time):
         try:
             if self.order_flag:
                 pass
             else:
                 # トレンドのチェック
-                slope = self.tmpCheckTrend(base_time)
+                slope = self.newCheckTrend(base_time)
+                logging.info("time = %s, slope = %s" % (base_time, slope))
 
                 # pandasの形式に変換
                 ask_lst = pd.Series(self.ask_price_list)
@@ -89,7 +57,7 @@ class Evo2BollingerAlgo(SuperAlgo):
                 sigma_flag = False
                 # 過去5本で移動平均線付近にいるか確認する
                 for i in range(0, len(lst)):
-                    if lst[i] - base[i] < 0.05 and lst[i] - base[i] > -0.05:
+                    if lst[i] - base[i] < 0.01 and lst[i] - base[i] > -0.01:
                         sigma_flag = True
 
                 # トレンドが上向きであれば、買い
@@ -101,7 +69,6 @@ class Evo2BollingerAlgo(SuperAlgo):
                 else:
                     trade_flag = "pass"
 
-#                self.base_price = base[len(base)-1]
                 return trade_flag
 
         except:
@@ -159,25 +126,3 @@ class Evo2BollingerAlgo(SuperAlgo):
             return stl_flag
         except:
             raise
-
-
-#    def getInitialSql(self, base_time):
-#        logging.info("=== Start SuperAlgo.getInitialSql Logic ===")
-#        time_width = self.config_data["time_width"]
-#        start_time = base_time - timedelta(seconds=time_width)
-#        logging.info("start_time=%s" % start_time)
-#        # マーケットが休みの場合、48時間さかのぼってSQLを実行する
-#        flag = decideMarket(start_time)
-#        logging.info("decideMarket.flag=%s" % flag)
-#        if flag == False:
-#            start_time = start_time - timedelta(hours=48)
-#
-#        start_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
-#        end_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
-#
-#        # 10分ごとにする
-#        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' and insert_time like \'%%0:00\' order by insert_time " % (self.instrument, start_time, end_time)
-#        logging.info("sql=%s" % sql)
-#        logging.info("=== End SuperAlgo.getInitialSql Logic ===")
-#        print sql
-#        return sql
