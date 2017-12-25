@@ -71,8 +71,12 @@ class Evo2BollingerAlgo(SuperAlgo):
                 # トレンドが下向きであれば、売り
                 if sigma_flag and slope < 0:
                     trade_flag = "sell"
+                    logging.info("DECIDE ORDER")
+                    logging.info("base = %s, price = %s, trade_flag = %s" %(base[0], lst[0], trade_flag))
                 elif sigma_flag and slope > 0:
                     trade_flag = "buy"
+                    logging.info("DECIDE ORDER")
+                    logging.info("base = %s, price = %s, trade_flag = %s" %(base[0], lst[0], trade_flag))
                 else:
                     trade_flag = "pass"
 
@@ -103,10 +107,10 @@ class Evo2BollingerAlgo(SuperAlgo):
                                                    sigma_valiable,
                                                    candle_width)
 
-                    # 過去5本分（50分）のsigmaだけ抽出
-                    sigma_length = self.config_data["sigma_length"]
-
-                    data_set = extraBollingerDataSet(data_set, sigma_length, candle_width)
+#                    # 過去5本分（50分）のsigmaだけ抽出
+#                    sigma_length = self.config_data["sigma_length"]
+#
+#                    data_set = extraBollingerDataSet(data_set, sigma_length, candle_width)
                     upper_sigmas = data_set["upper_sigmas"]
                     lower_sigmas = data_set["lower_sigmas"]
                     price_list   = data_set["price_list"]
@@ -118,18 +122,39 @@ class Evo2BollingerAlgo(SuperAlgo):
                     current_ask_price = float(current_ask_price)
                     current_bid_price = float(current_bid_price)
 
+                    lower_sigma = lower_sigmas[-1]
+                    upper_sigma = upper_sigmas[-1]
+
                     # 上下どちらかのシグマにぶつかったら決済してしまう
                     # 利確、損切り兼任
                     stl_flag = False
                     if self.order_kind == "buy":
-                        for i in range(0, len(upper_sigmas)):
-                            if price_list[i] < lower_sigmas[i] or price_list[i] > upper_sigmas[i]:
-                                stl_flag = True
+                        if current_bid_price < lower_sigma or current_bid_price > upper_sigma:
+                           logging.info("DECIDE STL")
+                           logging.info("upper_sigma = %s, price = %s, lower_sigma = %s" %(upper_sigma, current_bid_price, lower_sigma))
+                           stl_flag = True
 
                     elif self.order_kind == "sell":
-                        for i in range(0, len(upper_sigmas)):
-                            if price_list[i] < lower_sigmas[i] or price_list[i] > upper_sigmas[i]:
-                                stl_flag = True
+                        if current_ask_price < lower_sigma or current_ask_price > upper_sigma:
+                           logging.info("DECIDE STL")
+                           logging.info("upper_sigma = %s, price = %s, lower_sigma = %s" %(upper_sigma, current_ask_price, lower_sigma))
+                           stl_flag = True
+
+
+#                    stl_flag = False
+#                    if self.order_kind == "buy":
+#                        for i in range(0, len(upper_sigmas)):
+#                            if price_list[i] < lower_sigmas[i] or price_list[i] > upper_sigmas[i]:
+#                                logging.info("DECIDE STL")
+#                                logging.info("upper_sigma = %s, price = %s, lower_sigma = %s" %(upper_sigmas[i], price_list[i], lower_sigmas[i]))
+#                                stl_flag = True
+#
+#                    elif self.order_kind == "sell":
+#                        for i in range(0, len(upper_sigmas)):
+#                            if price_list[i] < lower_sigmas[i] or price_list[i] > upper_sigmas[i]:
+#                                logging.info("DECIDE STL")
+#                                logging.info("upper_sigma = %s, price = %s, lower_sigma = %s" %(upper_sigmas[i], price_list[i], lower_sigmas[i]))
+#                                stl_flag = True
 
             else:
                 pass
