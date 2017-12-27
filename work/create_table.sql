@@ -34,7 +34,7 @@ grant all privileges on 'oanda_db'.* to tomoyan@'localhost';
 
 
   create table TEST_TABLE(id int auto_increment not null primary key, test_id int, test_val char(5));
-  insert into TEST_TABLE(test_id, test_val) values(1, 'aaa');
+  insert into USD_JPY_TABLE(ask_price, bid_price) values(123.001, 123.002);
   insert into TEST_TABLE(test_id, test_val) values(2, 'bbb');
   insert into TEST_TABLE(test_id, test_val) values(3, 'ccc');
 

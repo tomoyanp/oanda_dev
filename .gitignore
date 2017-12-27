@@ -1,6 +1,9 @@
 log/
+config/
+*.txt
 *.pyc
 *.log
 *.csv
 *.out
+*.result
 property

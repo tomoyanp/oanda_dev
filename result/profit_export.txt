@@ -1,205 +1,26 @@
-==== 20171211232611_result.log ====
+==== 20171226100800.result ====
 #########################
-# time_width = 300
-# trend_time_width = 3
-# trend_threshold = 0.5
-# trade_threshold = 0.1
-# optional_threshold = 5.1
-# stop_loss = 0.3
-# enable_time = [u'21:00:00', u'22:00:00', u'23:00:00']
-# take_profit = 0.3
-# step_wise_unit = 1
-# stl_sleep_vtime = 21600
-# ex_stlmode = off
-# chart_polling = minute
-# step_wise_coefficient_threshold = 0.9
-# stl_sleep_ltime = 21600
-# enable_time_mode = on
-# startend_stl_time = 4
-# stl_time_width = 60
-# units = 40000
-# trend_follow_mode = off
-# sleep_time = 1
-PROFIT=1.038
-==== 20171211232626_result.log ====
-#########################
-# time_width = 300
-# trend_time_width = 3
-# trend_threshold = 0.5
-# trade_threshold = 0.1
-# optional_threshold = 5.1
-# stop_loss = 0.3
-# enable_time = [u'21:00:00', u'22:00:00', u'23:00:00']
-# take_profit = 0.3
-# step_wise_unit = 1
-# stl_sleep_vtime = 21600
-# ex_stlmode = on
-# chart_polling = minute
-# step_wise_coefficient_threshold = 0.9
-# stl_sleep_ltime = 21600
-# enable_time_mode = on
-# startend_stl_time = 4
-# stl_time_width = 60
-# units = 40000
-# trend_follow_mode = off
-# sleep_time = 1
-PROFIT=0.516
-==== 20171213214026_result.log ====
-#########################
-# time_width = 16800
-# trend_time_width = 3
-# trend_threshold = 0.5
-# trade_threshold = 0.1
-# optional_threshold = 5.1
-# stop_loss = 0.1
-# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
-# take_profit = 0.2
-# step_wise_unit = 1
-# stl_sleep_vtime = 5
-# ex_stlmode = off
-# ex_trade_mode = off
-# step_wise_coefficient_threshold = 0.9
-# stl_sleep_ltime = 10800
-# enable_time_mode = on
-# bollinger_sigma = 3
-# stl_time_width = 60
-# units = 40000
-# chart_polling = minute
-# trend_follow_mode = off
-# sleep_time = 60
-PROFIT=0
-==== 20171213215858.result ====
-#########################
-PROFIT=0
-==== 20171213215908.result ====
-#########################
-PROFIT=0
-==== 20171213215918.result ====
-#########################
-PROFIT=0
-==== 20171213215928.result ====
-#########################
-PROFIT=0
-==== 20171213215938.result ====
-#########################
-PROFIT=0
-==== 20171213220132.result ====
-#########################
+# main.py USD_JPY demo evo2_bollinger evo2_bollinger_master test 
 # bollinger_sigma = 2
-# chart_polling = minute
-# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
-# enable_time_mode = on
-# ex_stlmode = on
-# ex_trade_mode = off
-# optional_threshold = 5.1
-# sleep_time = 60
-# step_wise_coefficient_threshold = 0.9
-# step_wise_unit = 1
-# stl_sleep_ltime = 10800
-# stl_sleep_vtime = 5
-# stl_time_width = 60
-# stop_loss = 0.1
-# take_profit = 0.2
-# time_width = 16800
-# trade_threshold = 0.1
-# trend_follow_mode = off
-# trend_threshold = 0.5
-# trend_time_width = 3
-# units = 40000
-PROFIT=0.505
-==== 20171213220142.result ====
-#########################
-# bollinger_sigma = 2
-# chart_polling = minute
+# candle_width = 600
 # enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
 # enable_time_mode = off
 # ex_stlmode = on
 # ex_trade_mode = off
 # optional_threshold = 5.1
+# sigma_length = 1
 # sleep_time = 60
-# step_wise_coefficient_threshold = 0.9
-# step_wise_unit = 1
-# stl_sleep_ltime = 10800
-# stl_sleep_vtime = 5
-# stl_time_width = 60
-# stop_loss = 0.1
+# stl_sleep_ltime = 600
+# stl_sleep_time = 60
+# stl_sleep_vtime = 60
+# stl_time_width = 20000
+# stop_loss = 0.2
 # take_profit = 0.2
-# time_width = 16800
+# time_width = 20000
+# trade_sigma_length = 1
 # trade_threshold = 0.1
 # trend_follow_mode = off
-# trend_threshold = 0.5
-# trend_time_width = 3
+# trend_time_width = 12
 # units = 40000
-PROFIT=1.002
-==== 20171213220152.result ====
-#########################
-# bollinger_sigma = 2
-# chart_polling = minute
-# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
-# enable_time_mode = on
-# ex_stlmode = off
-# ex_trade_mode = off
-# optional_threshold = 5.1
-# sleep_time = 60
-# step_wise_coefficient_threshold = 0.9
-# step_wise_unit = 1
-# stl_sleep_ltime = 10800
-# stl_sleep_vtime = 5
-# stl_time_width = 60
-# stop_loss = 0.1
-# take_profit = 0.1
-# time_width = 16800
-# trade_threshold = 0.1
-# trend_follow_mode = off
-# trend_threshold = 0.5
-# trend_time_width = 3
-# units = 40000
-PROFIT=0.777
-==== 20171213220202.result ====
-#########################
-# bollinger_sigma = 2
-# chart_polling = minute
-# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
-# enable_time_mode = off
-# ex_stlmode = off
-# ex_trade_mode = off
-# optional_threshold = 5.1
-# sleep_time = 60
-# step_wise_coefficient_threshold = 0.9
-# step_wise_unit = 1
-# stl_sleep_ltime = 10800
-# stl_sleep_vtime = 5
-# stl_time_width = 60
-# stop_loss = 0.1
-# take_profit = 0.1
-# time_width = 16800
-# trade_threshold = 0.1
-# trend_follow_mode = off
-# trend_threshold = 0.5
-# trend_time_width = 3
-# units = 40000
-PROFIT=0.001
-==== 20171213220212.result ====
-#########################
-# bollinger_sigma = 2
-# chart_polling = minute
-# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
-# enable_time_mode = off
-# ex_stlmode = off
-# ex_trade_mode = off
-# optional_threshold = 5.1
-# sleep_time = 60
-# step_wise_coefficient_threshold = 0.9
-# step_wise_unit = 1
-# stl_sleep_ltime = 10800
-# stl_sleep_vtime = 5
-# stl_time_width = 60
-# stop_loss = 0.1
-# take_profit = 0.2
-# time_width = 16800
-# trade_threshold = 0.1
-# trend_follow_mode = off
-# trend_threshold = 0.5
-# trend_time_width = 3
-# units = 40000
-PROFIT=1.069
+# window_size = 28
+PROFIT=0.037
