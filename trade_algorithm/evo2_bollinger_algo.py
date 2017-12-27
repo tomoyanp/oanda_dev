@@ -9,7 +9,7 @@
 ####################################################
 
 from super_algo import SuperAlgo
-from common import instrument_init, account_init, decideMarket, getBollingerDataSet, extraBollingerDataSet, getWMA
+from common import instrument_init, account_init, decideMarket, getBollingerDataSet, extraBollingerDataSet, getWMA, countIndex
 from datetime import datetime, timedelta
 import logging
 import pandas as pd
@@ -58,7 +58,12 @@ class Evo2BollingerAlgo(SuperAlgo):
                 # 現在価格が移動平均より上であれば、買い
                 # 現在価格が移動平均より下であれば、売り
                 wma_length = 200
-                wma_value = getWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
+                
+                flag, self.wma_index = countIndex(self.wma_index, candle_width)
+                if flag:
+                    wma_value = getWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
+                
+                
                 current_price = (self.ask_price_list[-1] + self.bid_price_list[-1]) / 2
                 if sigma_flag and wma_value < current_price:
                     trade_flag = "buy"
@@ -88,8 +93,12 @@ class Evo2BollingerAlgo(SuperAlgo):
                 if upper_sigmas[-1] - lower_sigmas[-1] < 0.1:
                     trade_flag = "pass"
 
-
-                return trade_flag
+                if trade_flag != "pass":
+                    trade_sleep_time = self.config_data["trade_sleep_time"]
+                else:
+                    trade_sleep_time = 0
+                
+                return trade_flag, trade_sleep_time
 
         except:
             raise

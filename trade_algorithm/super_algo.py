@@ -23,7 +23,7 @@ class SuperAlgo(object):
         self.config_data = instrument_init(self.instrument, self.base_path, config_name)
         self.trade_threshold = self.config_data["trade_threshold"]
         self.optional_threshold = self.config_data["optional_threshold"]
-
+        self.wma_index = self.config_data["candle_width"]
         self.ask_price_list = []
         self.bid_price_list = []
         self.insert_time_list = []

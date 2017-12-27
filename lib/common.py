@@ -159,3 +159,16 @@ def getWMA(ask_price_list, bid_price_list, wma_length, candle_width):
     wma_value = tmp_value / denominator
 
     return wma_value
+    
+# trendcheckとかの補助的な計算は毎回やる必要ないので
+# ここでindex形式でスリープさせる
+def countIndex(index, candle_width):
+    flag = False
+    if index != candle_width:
+        index = index + 1
+        flag = False
+    else:
+        index = 0
+        flag = True
+        
+    return flag, index
