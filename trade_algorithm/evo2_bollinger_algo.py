@@ -26,64 +26,68 @@ class Evo2BollingerAlgo(SuperAlgo):
                 pass
             else:
                 # トレンドのチェック
-                slope = self.newCheckTrend(base_time)
-                logging.info("time = %s, slope = %s" % (base_time, slope))
-
-                # pandasの形式に変換
-                ask_lst = pd.Series(self.ask_price_list)
-                bid_lst = pd.Series(self.bid_price_list)
-                lst = (ask_lst+bid_lst) / 2
+#                slope = self.newCheckTrend(base_time)
+#                logging.info("time = %s, slope = %s" % (base_time, slope))
 
                 # window_size 28 * candle_width 600 （10分足で28本分）
                 window_size = self.config_data["window_size"]
                 candle_width = self.config_data["candle_width"]
                 sigma_valiable = self.config_data["bollinger_sigma"]
-                window_size = window_size * candle_width
 
-                # 28本分の移動平均線
-                base = lst.rolling(window=window_size).mean()
-                sigma = lst.rolling(window=window_size).std(ddof=0)
+                data_set = getBollingerDataSet(self.ask_price_list,
+                                               self.bid_price_list,
+                                               window_size,
+                                               sigma_valiable,
+                                               candle_width)
 
-                upper_sigmas = base + sigma*sigma_valiable
-                lower_sigmas = base - sigma*sigma_valiable
-                upper_sigmas = upper_sigmas.values.tolist()
-                lower_sigmas = lower_sigmas.values.tolist()
-
-                # 過去5本分の移動平均と価格リストを取得
+                # 過去5本分（50分）のsigmaだけ抽出
                 sigma_length = self.config_data["sigma_length"]
-                sigma_length = sigma_length * candle_width
-                sigma_length = sigma_length * -1
-                base = base[sigma_length:]
-                lst = lst[sigma_length:]
+                data_set = extraBollingerDataSet(data_set, sigma_length, candle_width)
 
-                # 普通の配列型にキャストしないと無理だった
-                lst = lst.values.tolist()
-                base = base.values.tolist()
-                print lst
+                upper_sigmas = data_set["upper_sigmas"]
+                lower_sigmas = data_set["lower_sigmas"]
+                price_list   = data_set["price_list"]
+                base_lines   = data_set["base_lines"]
 
                 sigma_flag = False
                 # 過去5本で移動平均線付近にいるか確認する
-                for i in range(0, len(lst)):
-                    if lst[i] - base[i] < 0.01 and lst[i] - base[i] > -0.01:
+                for i in range(0, len(price_list)):
+                    if price_list[i] - base_lines[i] < 0.01 and price_list[i] - base_lines[i] > -0.01:
                         sigma_flag = True
+
+                # 現在価格が移動平均より上であれば、買い
+                # 現在価格が移動平均より下であれば、売り
+                wma_value = getWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
+                current_price = (self.ask_price_list[-1] + self.bid_price_list[-1]) / 2
+                if sigma_flag and wma_value < current_price:
+                    trade_flag = "buy"
+                    logging.info("DECIDE ORDER")
+                    logging.info("wma_value = %s, price = %s, trade_flag = %s" %(wma_value, current_price, trade_flag))
+                if sigma_flag and wma_value > current_price:
+                    trade_flag = "sell"
+                    logging.info("DECIDE ORDER")
+                    logging.info("wma_value = %s, price = %s, trade_flag = %s" %(wma_value, current_price, trade_flag))
+                else:
+                    trade_flag = "pass"
 
                 # トレンドが上向きであれば、買い
                 # トレンドが下向きであれば、売り
-                if sigma_flag and slope < 0:
-                    trade_flag = "sell"
-                    logging.info("DECIDE ORDER")
-                    logging.info("base = %s, price = %s, trade_flag = %s" %(base[0], lst[0], trade_flag))
-                elif sigma_flag and slope > 0:
-                    trade_flag = "buy"
-                    logging.info("DECIDE ORDER")
-                    logging.info("base = %s, price = %s, trade_flag = %s" %(base[0], lst[0], trade_flag))
-                else:
-                    trade_flag = "pass"
+                # 回帰分析を使ったパターンの方
+#                if sigma_flag and slope < 0:
+#                    trade_flag = "sell"
+#                    logging.info("DECIDE ORDER")
+#                    logging.info("base = %s, price = %s, trade_flag = %s" %(base[0], lst[0], trade_flag))
+#                elif sigma_flag and slope > 0:
+#                    trade_flag = "buy"
+#                    logging.info("DECIDE ORDER")
+#                    logging.info("base = %s, price = %s, trade_flag = %s" %(base[0], lst[0], trade_flag))
+#                else:
+#                    trade_flag = "pass"
 
                 if upper_sigmas[-1] - lower_sigmas[-1] < 0.1:
                     trade_flag = "pass"
 
- 
+
                 return trade_flag
 
         except:
