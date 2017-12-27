@@ -60,6 +60,7 @@ if __name__ == '__main__':
 
     base_time = datetime.now()
     base_time = base_time - timedelta(days=7)
+    end_time = base_time - timedelta(days=3)
 
     try:
       while True:
@@ -86,7 +87,7 @@ if __name__ == '__main__':
 
           if test_mode:
               now = datetime.now()
-              if base_time > now:
+              if base_time > now or base_time > end_time:
                   raise ValueError("Complete Back Test")
 
           logging.info("=== End Main.Loop Logic ===")
