@@ -149,11 +149,13 @@ def getWMA(ask_price_list, bid_price_list, wma_length, candle_width):
 
     # wma_lengthの分だけ、重みの積を積み上げる
     tmp_value = 0
+    denominator = 0
     for i in range(0, len(average_price_list)):
         weight = i + 1
+        denominator = denominator + weight
         tmp_value = tmp_value + (average_price_list[i]*weight)
 
-   # 総数を重みの長さで割る⇒ 移動平均点
-    wma_value = tmp_value / wma_length
+   # 総数をwma_lengthの総和（シグマ）で割る⇒ 移動平均点
+    wma_value = tmp_value / denominator
 
     return wma_value
