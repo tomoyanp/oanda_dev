@@ -137,12 +137,12 @@ def extraBollingerDataSet(data_set, sigma_length, candle_width):
 
 # 加重移動平均を計算
 # wma_length = 期間（200日移動平均、など）
-def getWMA(ask_price_list, bid_price_list, wma_length):
+def getWMA(ask_price_list, bid_price_list, wma_length, candle_width):
     ask_price_list = np.array(ask_price_list)
     bid_price_list = np.array(bid_price_list)
     average_price_list = (ask_price_list + bid_price_list) / 2
     average_price_list = average_price_list.values.tolist()
-    wma_length = wma_length * -1
+    wma_length = (candle_width * wma_length) * -1
 
     # wma_lengthの分だけ抽出
     average_price_list = average_price_list[wma_length:]

@@ -57,6 +57,7 @@ class Evo2BollingerAlgo(SuperAlgo):
 
                 # 現在価格が移動平均より上であれば、買い
                 # 現在価格が移動平均より下であれば、売り
+                wma_length = 200
                 wma_value = getWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
                 current_price = (self.ask_price_list[-1] + self.bid_price_list[-1]) / 2
                 if sigma_flag and wma_value < current_price:
