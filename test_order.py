@@ -37,12 +37,20 @@ oanda = oandapy.API(environment=env, access_token=token)
 #response = oanda.get_positions(account_id)
 #response = oanda.get_account(account_id)
 #response = oanda.get_transaction_history(account_id)
-response = oanda.get_history(account_id,
+#response = oanda.get_history(
+#    instrument="USD_JPY",
+#    granularity="S",
+#    candleFormat="midpoint",
+#    count="5"
+#)
+response = oanda.get_history(
     instrument="USD_JPY",
-    granularity="S1",
-    candleFormat="midpoint",
-    count="5"
+    start="2017-12-25T00:00:00.000000Z",
+    end="2017-12-25T24:00:00.000000Z",
+    granularity="H1",
+    candleFormat="midpoint"
 )
+
 #print response
 
 #response = oanda.get_historical_position_ratios()
