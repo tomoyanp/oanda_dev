@@ -36,7 +36,13 @@ instrument = "USD_JPY"
 oanda = oandapy.API(environment=env, access_token=token)
 #response = oanda.get_positions(account_id)
 #response = oanda.get_account(account_id)
-response = oanda.get_transaction_history(account_id)
+#response = oanda.get_transaction_history(account_id)
+response = oanda.get_history(account_id,
+    instrument="USD_JPY",
+    granularity="S1",
+    candleFormat="midpoint",
+    count="5"
+)
 #print response
 
 #response = oanda.get_historical_position_ratios()

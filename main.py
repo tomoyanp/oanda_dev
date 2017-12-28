@@ -79,11 +79,17 @@ if __name__ == '__main__':
               pass
 
           else:
-              trade_wrapper.setInstrumentRespoonse(base_time)
-              trade_wrapper.tradeDecisionWrapper(base_time)
-              polling_time = trade_wrapper.stlDecisionWrapper(base_time)
-              logging.info("main.polling_time=%s" % polling_time)
-              trade_wrapper.checkPosition()
+              sleep_time = trade_wrapper.setInstrumentRespoonse(base_time)
+              base_time = sleepPolling(sleep_time, test_mode, base_time)
+
+              sleep_time = trade_wrapper.tradeDecisionWrapper(base_time)
+              base_time = sleepPolling(sleep_time, test_mode, base_time)
+
+              sleep_time = trade_wrapper.stlDecisionWrapper(base_time)
+              base_time = sleepPolling(sleep_time, test_mode, base_time)
+
+              sleep_time = trade_wrapper.checkPosition()
+              base_time = sleepPolling(sleep_time, test_mode, base_time)
 
           if test_mode:
               now = datetime.now()
