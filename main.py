@@ -50,11 +50,11 @@ if __name__ == '__main__':
         test_mode = True
     else:
         test_mode = False
+
     logging.info("=== Start Main Logic ===")
     logging.info(args)
 
     # ポーリング時間
-    polling_time = 1
     trade_wrapper = TradeWrapper(instrument, mode, test_mode, current_path, config_name, args)
     trade_wrapper.setTradeAlgo(algo)
 
@@ -65,31 +65,33 @@ if __name__ == '__main__':
     try:
       while True:
           logging.info("=== Start Main.Loop Logic ===")
-          polling_time = int(polling_time)
-          if test_mode:
-              base_time = base_time + timedelta(seconds=polling_time)
-          else:
-              time.sleep(polling_time)
-              base_time = datetime.now()
-          logging.info("base_time=%s" % base_time)
-
           flag = decideMarket(base_time)
           logging.info("decideMarket flag=%s" % flag)
+
           if flag == False:
               pass
 
           else:
+              # 基本sleep_time = 0を返す
               sleep_time = trade_wrapper.setInstrumentRespoonse(base_time)
-              base_time = sleepPolling(sleep_time, test_mode, base_time)
+              base_time = sleepTransaction(sleep_time, test_mode, base_time)
 
+              # order_flagがない時は、sleep_timeを返す
+              # 約定した時は、trade_sleep_timeを返す
               sleep_time = trade_wrapper.tradeDecisionWrapper(base_time)
-              base_time = sleepPolling(sleep_time, test_mode, base_time)
+              base_time = sleepTransaction(sleep_time, test_mode, base_time)
 
+              # order_flagがある時は、stl_sleep_timeを返す
+              # 決済した時は、stl_sleep_ltime or stl_sleep_vtimeを返す
+              # その他はsleep_time = 0を返す
               sleep_time = trade_wrapper.stlDecisionWrapper(base_time)
-              base_time = sleepPolling(sleep_time, test_mode, base_time)
+              base_time = sleepTransaction(sleep_time, test_mode, base_time)
 
+              # StopLossの時はstl_sleep_ltimeを返す
+              # LimitOrderの時はstl_sleep_vtimeを返す
+              # その他はsleep_time = 0を返す
               sleep_time = trade_wrapper.checkPosition()
-              base_time = sleepPolling(sleep_time, test_mode, base_time)
+              base_time = sleepTransaction(sleep_time, test_mode, base_time)
 
           if test_mode:
               now = datetime.now()

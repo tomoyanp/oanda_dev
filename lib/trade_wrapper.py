@@ -88,24 +88,35 @@ class TradeWrapper:
         logging.info("order_price=%s" % order_price)
         logging.info("stl_price=%s" % stl_price)
         logging.info("profit=%s" % profit)
-        
+
         return profit
 
-    def settlementLogWrite(self, profit):
+    def settlementLogWrite(self, profit, msg):
         nowftime = self.trade_algo.getCurrentTime()
         order_kind = self.trade_algo.getOrderKind()
         order_price = self.trade_algo.getOrderPrice()
         stl_price = self.trade_algo.getCurrentPrice()
-        self.result_file.write("===== EXECUTE SETTLEMENT STOP OR LIMIT ORDER at %s ======\n" % nowftime)
+        footer = "at %s ======\n" % nowftime
+        self.result_file.write(msg + nowftime)
         self.result_file.write("ORDER_PRICE=%s, STL_PRICE=%s, ORDER_KIND=%s, PROFIT=%s\n" % (order_price, stl_price, order_kind, profit))
         self.result_file.write("PROFIT=%s\n" % profit)
         self.result_file.write("======================================================\n")
+        self.result_file.flush()
+
+    def tradeLogWrite(self, trade_flag):
+        nowftime = self.trade_algo.getCurrentTime()
+        order_price = self.trade_algo.getCurrentPrice()
+        threshold_list = self.trade_algo.calcThreshold(trade_flag)
+        self.result_file.write("===== EXECUTE ORDER at %s ======\n" % nowftime)
+        self.result_file.write("ORDER_PRICE=%s, TRADE_FLAG=%s\n" % (order_price, trade_flag))
         self.result_file.flush()
 
     # 今ポジションを持っているか確認
     # なければ、フラグをリセットする
     def checkPosition(self):
         logging.info("=== Start TradeWrapper.checkPosition Logic ===")
+        sleep_time = 0
+
         # test modeの場合は考慮不要
         if self.test_mode:
             pass
@@ -119,50 +130,41 @@ class TradeWrapper:
                 if self.stl_sleep_flag and trade_id != 0:
 
                     profit = self.calcProfit()
-
-
                     if profit > 0:
                         sleep_time = self.config_data["stl_sleep_vtime"]
                     else:
                         sleep_time = self.config_data["stl_sleep_ltime"]
 
-                    self.settlementLogWrite(profit)
+                    msg = "===== EXECUTE SETTLEMENT STOP OR LIMIT ORDER "
+                    self.settlmentLogWrite(profit, msg)
                     self.stl_sleep_flag = False
 
                 self.trade_algo.resetFlag()
             else:
-                sleep_time = 0
                 self.trade_algo.setOrderFlag(True)
                 self.stl_sleep_flag = True
 
             logging.info("=== End TradeWrapper.checkPosition Logic ===")
-
             return sleep_time
 
     def setInstrumentRespoonse(self, base_time):
+        sleep_time = 0
         logging.info("=== Start TradeWrapper.setInstrumentRespoonse Logic ===")
         logging.info("base_time=%s" % base_time)
         self.trade_algo.setPriceTable(base_time)
-        #self.trade_algo.setNewPriceTable(base_time)
-
         logging.info("=== End TradeWrapper.setInstrumentRespoonse Logic ===")
+        return sleep_time
 
     def stlDecisionWrapper(self, base_time):
         logging.info("=== Start TradeWrapper.stlDecisionWrapper Logic ===")
-
-        sleep_time = self.config_data["sleep_time"]
+        sleep_time = 0
         order_flag = self.trade_algo.getOrderFlag()
-        logging.info("sleep_time=%s" % sleep_time)
-        logging.info("order_flag=%s" % order_flag)
 
         # 建玉があれば、決済するかどうか判断
         if order_flag:
             sleep_time = self.config_data["stl_sleep_time"]
             stl_flag = self.trade_algo.decideStl(base_time)
             trade_id = self.trade_algo.getTradeId()
-            logging.info("stl_flag=%s" % stl_flag)
-            logging.info("trade_id=%s" % trade_id)
-            logging.info("test_mode=%s" % self.test_mode)
 
             #trade_idがある場合もしくはテストモードであれば
             if self.test_mode == True or trade_id != 0:
@@ -173,19 +175,10 @@ class TradeWrapper:
                     test_stl_flag = self.trade_algo.decideReverceStl()
                     stl_flag = test_stl_flag
 
-                logging.info("stl_flag=%s" % stl_flag)
                 # stl_flagが立ってたら決済する
                 if stl_flag:
 
-                    nowftime = self.trade_algo.getCurrentTime()
-                    order_kind = self.trade_algo.getOrderKind()
-                    order_price = self.trade_algo.getOrderPrice()
-                    stl_price = self.trade_algo.getCurrentPrice()
-                    self.trade_algo.setStlPrice(order_price)
-                    logging.info("nowftime=%s" % nowftime)
-                    logging.info("order_kind=%s" % order_kind)
-                    logging.info("order_price=%s" % order_price)
-                    logging.info("stl_price=%s" % stl_price)
+                    self.trade_algo.setStlPrice(self.trade_algo.getCurrentPrice)
 
                     # 決済注文
                     if self.test_mode:
@@ -193,41 +186,25 @@ class TradeWrapper:
                     else:
                         trade_id = self.trade_algo.getTradeId()
                         response = self.oanda_wrapper.close_trade(trade_id)
-                        logging.info("close_trade_response=%s" % response)
                         stl_price = response["price"]
-                        logging.info("response.stl_price=%s" % stl_price)
+                        self.trade_algo.setStlPrice(stl_price)
 
-                    # 利益計算
-                    if order_kind == "buy":
-                        profit = stl_price - order_price
-                    elif order_kind == "sell":
-                        profit = order_price - stl_price
+                    profit = self.calcProfit()
+
+                    if profit > 0:
+                        sleep_time = self.config_data["stl_sleep_vtime"]
                     else:
-                        raise ValueError("order_kind is invalid. value=%s" % order_kind)
-
-                    # stl_sleep_ltimeはストップオーダーした時だけ使うようにしてみる
-                    sleep_time = self.config_data["stl_sleep_vtime"]
-
-                    # testモードの時はちゃんとsleepしないとダメ
-                    if self.test_mode and test_stl_flag:
-                        if profit > 0:
-                            sleep_time = self.config_data["stl_sleep_vtime"]
-                        else:
-                            sleep_time = self.config_data["stl_sleep_ltime"]
+                        sleep_time = self.config_data["stl_sleep_ltime"]
 
                     logging.info("sleep_time=%s" % sleep_time)
 
                     # 計算した利益を結果ファイルに出力
-                    self.result_file.write("===== EXECUTE SETTLEMENT at %s ======\n" % nowftime)
-                    self.result_file.write("ORDER_PRICE=%s, STL_PRICE=%s, ORDER_KIND=%s, PROFIT=%s\n" % (order_price, stl_price, order_kind, profit))
-                    self.result_file.write("PROFIT=%s\n" % profit)
-                    self.result_file.write("======================================================\n")
-                    self.result_file.flush()
+                    msg = "===== EXECUTE SETTLEMENT "
+                    self.settlementLogWrite(profit, msg)
 
                     # flagの初期化
                     self.trade_algo.resetFlag()
                     self.stl_sleep_flag = False
-
                 else:
                     pass
             else:
@@ -235,53 +212,42 @@ class TradeWrapper:
         else:
             pass
 
-        polling_time = sleep_time
         logging.info("=== End TradeWrapper.stlDecisionWrapper Logic ===")
-        return polling_time
+        return sleep_time
 
     def tradeDecisionWrapper(self, base_time):
+        sleep_time = 0
         logging.info("=== Start TradeWrapper.tradeDecisionWrapper Logic ===")
         order_flag = self.trade_algo.getOrderFlag()
-        logging.info("order_flag=%s" % order_flag)
 
         if order_flag:
             pass
         else:
+            sleep_time = self.config_data["sleep_time"]
             trade_flag = self.trade_algo.decideTrade(base_time)
-            logging.info("decideTrade.trade_flag=%s" % trade_flag)
-            trade_flag = self.trade_algo.decideTradeTime(base_time, trade_flag)
-            logging.info("decideTradeTime.trade_flag=%s" % trade_flag)
-            trade_flag = self.trade_algo.checkTrend(base_time, trade_flag)
-            logging.info("checkTrend.trade_flag=%s" % trade_flag)
+             # 以下は, decideTradeの中で実装する
+#            trade_flag = self.trade_algo.decideTradeTime(base_time, trade_flag)
+#            trade_flag = self.trade_algo.checkTrend(base_time, trade_flag)
 
             if trade_flag == "pass":
                 self.trade_algo.resetFlag()
             else:
-                nowftime = self.trade_algo.getCurrentTime()
-                logging.info("nowftime=%s" % nowftime)
-                order_price = self.trade_algo.getCurrentPrice()
-                logging.info("order_price=%s" % order_price)
-                threshold_list = self.trade_algo.calcThreshold(trade_flag)
-                logging.info("threshold_list=%s" % threshold_list)
-
-                logging.info("test_mode=%s" % self.test_mode)
-                if self.test_mode or trade_flag == "pass":
+                sleep_time = self.config_data["trade_sleep_time"]
+                if self.test_mode:
                     pass
                 else:
                     response = self.oanda_wrapper.order(trade_flag, self.instrument, threshold_list["stoploss"], threshold_list["takeprofit"])
-                    logging.info("order_response=%s" % response)
                     order_price = response["price"]
-                    logging.info("response.order_price=%s" % order_price)
                     self.trade_algo.setTradeId(response)
-                    # 約定後はちょっとスリープしないとおかしなことになる
-                    time.sleep(10)
+                    self.trade_algo.setOrderPrice(order_price)
+
                     #threshold_list = self.trade_algo.calcThreshold(order_price, trade_flag)
                     #response = self.oanda_wrapper.modify_trade(trade_flag, trade_flag, threshold_list["stoploss"], threshold_list["takeprofit"])
 
-                self.result_file.write("===== EXECUTE ORDER at %s ======\n" % nowftime)
-                self.result_file.write("ORDER_PRICE=%s, TRADE_FLAG=%s\n" % (order_price, trade_flag))
-                self.result_file.flush()
+                self.tradeLogWrite(trade_flag)
                 order_flag = True
                 self.trade_algo.setOrderData(trade_flag, order_price, order_flag)
 
             logging.info("=== End TradeWrapper.stlDecisionWrapper Logic ===")
+
+        return sleep_time
