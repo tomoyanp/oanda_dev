@@ -197,7 +197,8 @@ class SuperAlgo(object):
         return self.stl_price
 
     def getCurrentPrice(self):
-        return self.ask_price_list[len(self.ask_price_list)-1]
+        price = (self.ask_price_list[-1] + self.bid_price_list[-1]) / 2
+        return price 
 
     def getCurrentTime(self):
         return self.insert_time_list[len(self.insert_time_list)-1]

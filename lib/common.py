@@ -3,6 +3,7 @@ import json
 from datetime import datetime, timedelta
 import pandas as pd
 import numpy as np
+import logging
 
 def instrument_init(instrument, base_path, config_name):
     config_path = "%s/config" % base_path
@@ -139,11 +140,11 @@ def countIndex(index, candle_width):
     return flag, index
 
 def sleepTransaction(sleep_time, test_mode, base_time):
-    polling_time = int(polling_time)
+    sleep_time = int(sleep_time)
     if test_mode:
-        base_time = base_time + timedelta(seconds=polling_time)
+        base_time = base_time + timedelta(seconds=sleep_time)
     else:
-        time.sleep(polling_time)
+        time.sleep(sleep_time)
         base_time = datetime.now()
     logging.info("base_time=%s" % base_time)
 

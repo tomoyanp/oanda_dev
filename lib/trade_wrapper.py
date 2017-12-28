@@ -14,7 +14,7 @@ from bollinger_algo import BollingerAlgo
 from evo_bollinger_algo import EvoBollingerAlgo
 from evo2_bollinger_algo import Evo2BollingerAlgo
 from oanda_wrapper import OandaWrapper
-from common import instrument_init, account_init, decide_up_down_before_day
+from common import instrument_init, account_init
 import time
 import logging
 
@@ -145,7 +145,7 @@ class TradeWrapper:
                 self.stl_sleep_flag = True
 
             logging.info("=== End TradeWrapper.checkPosition Logic ===")
-            return sleep_time
+        return sleep_time
 
     def setInstrumentRespoonse(self, base_time):
         sleep_time = 0
@@ -233,13 +233,12 @@ class TradeWrapper:
                 self.trade_algo.resetFlag()
             else:
                 sleep_time = self.config_data["trade_sleep_time"]
+                order_price = self.trade_algo.getCurrentPrice()
                 if self.test_mode:
                     pass
                 else:
                     response = self.oanda_wrapper.order(trade_flag, self.instrument, threshold_list["stoploss"], threshold_list["takeprofit"])
                     order_price = response["price"]
-                    self.trade_algo.setTradeId(response)
-                    self.trade_algo.setOrderPrice(order_price)
 
                     #threshold_list = self.trade_algo.calcThreshold(order_price, trade_flag)
                     #response = self.oanda_wrapper.modify_trade(trade_flag, trade_flag, threshold_list["stoploss"], threshold_list["takeprofit"])

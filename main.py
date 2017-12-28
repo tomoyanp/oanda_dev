@@ -18,7 +18,7 @@ config_path = current_path + "/config"
 from trade_wrapper import TradeWrapper
 from datetime import datetime, timedelta
 from send_mail import SendMail
-from common import decideMarket
+from common import decideMarket, sleepTransaction
 import time
 import logging
 now = datetime.now()
