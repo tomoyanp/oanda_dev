@@ -41,8 +41,12 @@ if __name__ == "__main__":
             insert_time = price_obj.getPriceTime()
             insert_time = insert_time.split(".")[0]
             insert_time = datetime.strptime(insert_time, "%Y-%m-%dT%H:%M:%S")
+            print ask_price
+            print bid_price
+            print insert_time
+            print "===================================="
 
-            sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, %s)" % (currency, ask_price, bid_price, insert_time)
+            sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\')" % (currency, ask_price, bid_price, insert_time)
             con.insert_sql(sql)
 
             time.sleep(polling_time)

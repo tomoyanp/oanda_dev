@@ -46,8 +46,8 @@ oanda = oandapy.API(environment=env, access_token=token)
 #)
 response = oanda.get_history(
     instrument="USD_JPY",
-    start="2017-12-01T00:00:00.000000Z",
-    end="2017-12-01T01:00:00.000000Z",
+    start="2017-12-01T00:00:00",
+    end="2017-12-01T01:00:00",
     granularity="S5",
     candleFormat="midpoint"
 )
