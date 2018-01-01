@@ -45,17 +45,17 @@ while start_time < now:
     response = {}
     try :
         response = oanda.get_history(
-            instrument="USD_JPY",
+            instrument=instrument,
             start=start_time,
             end=end_time,
             granularity="S5",
             candleFormat="midpoint"
         )
-     except ValueError as e:
+    except ValueError as e:
         print e       
 
 
-    if len(response) < 1:
+    if len(response) > 0:
         instrument = response["instrument"]
         candles = response["candles"]
         insert_time_list = []
