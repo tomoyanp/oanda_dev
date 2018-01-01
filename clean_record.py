@@ -32,15 +32,17 @@ start_time = datetime.strptime(start_time, "%Y-%m-%dT%H:%M:%S")
 now = datetime.now()
 
 while start_time < now:
-        # 通貨
-        instrument = "USD_JPY"
-        end_time = start_time + timedelta(minutes=60)
-        end_time = end_time.strftime("%Y-%m-%dT%H:%M:%S")
-        start_time = start_time.strftime("%Y-%m-%dT%H:%M:%S")
-        
-        print start_time
-        print end_time
-        oanda = oandapy.API(environment=env, access_token=token)
+    # 通貨
+    instrument = "USD_JPY"
+    end_time = start_time + timedelta(minutes=60)
+    end_time = end_time.strftime("%Y-%m-%dT%H:%M:%S")
+    start_time = start_time.strftime("%Y-%m-%dT%H:%M:%S")
+    
+    print start_time
+    print end_time
+    oanda = oandapy.API(environment=env, access_token=token)
+
+    response = {}
     try :
         response = oanda.get_history(
             instrument="USD_JPY",
@@ -51,7 +53,9 @@ while start_time < now:
         )
      except ValueError as e:
         print e       
-        
+
+
+    if len(response) < 1:
         instrument = response["instrument"]
         candles = response["candles"]
         insert_time_list = []
@@ -65,10 +69,13 @@ while start_time < now:
             for i in range(0, 5):
                 insert_time = insert_time.strftime("%Y-%m-%d %H:%M:%S")
                 sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\')" % (instrument, ask_price, bid_price, insert_time)
-#                mysql_connector.insert_sql(sql)
+    #            mysql_connector.insert_sql(sql)
                 print sql
                 insert_time = datetime.strptime(insert_time, "%Y-%m-%d %H:%M:%S")
                 insert_time = insert_time + timedelta(seconds=1) 
                 start_time = insert_time 
-
+    else:
+        start_time = datetime.strptime(start_time, "%Y-%m-%dT%H:%M:%S")
+        start_time = start_time + timedelta(minutes=60)
+    
 
