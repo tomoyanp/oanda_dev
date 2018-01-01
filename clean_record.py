@@ -32,7 +32,6 @@ start_time = datetime.strptime(start_time, "%Y-%m-%dT%H:%M:%S")
 now = datetime.now()
 
 while start_time < now:
-    try :
         # 通貨
         instrument = "USD_JPY"
         end_time = start_time + timedelta(minutes=60)
@@ -42,6 +41,7 @@ while start_time < now:
         print start_time
         print end_time
         oanda = oandapy.API(environment=env, access_token=token)
+    try :
         response = oanda.get_history(
             instrument="USD_JPY",
             start=start_time,
@@ -49,7 +49,8 @@ while start_time < now:
             granularity="S5",
             candleFormat="midpoint"
         )
-        
+     except ValueError as e:
+        print e       
         
         instrument = response["instrument"]
         candles = response["candles"]
@@ -70,5 +71,4 @@ while start_time < now:
                 insert_time = insert_time + timedelta(seconds=1) 
                 start_time = insert_time 
 
-    except Exception as e:
-        print e
+
