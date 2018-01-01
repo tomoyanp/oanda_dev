@@ -27,7 +27,7 @@ token = 'e93bdc312be2c3e0a4a18f5718db237a-32ca3b9b94401fca447d4049ab046fad'
 env = 'live'
 
 mysql_connector = MysqlConnector()
-start_time = "2017-12-01T00:00:00"
+start_time = "2017-12-28T00:00:00"
 start_time = datetime.strptime(start_time, "%Y-%m-%dT%H:%M:%S")
 now = datetime.now()
 
@@ -38,14 +38,16 @@ while start_time < now:
     end_time = end_time.strftime("%Y-%m-%dT%H:%M:%S")
     start_time = start_time.strftime("%Y-%m-%dT%H:%M:%S")
     
+    print start_time
+    print end_time
     oanda = oandapy.API(environment=env, access_token=token)
-#    response = oanda.get_history(
-#        instrument="USD_JPY",
-#        start=start_time,
-#        end="2017-12-01T01:00:00",
-#        granularity="S5",
-#        candleFormat="midpoint"
-#    )
+    response = oanda.get_history(
+        instrument="USD_JPY",
+        start=start_time,
+        end=end_time,
+        granularity="S5",
+        candleFormat="midpoint"
+    )
     
     
     instrument = response["instrument"]
@@ -59,8 +61,10 @@ while start_time < now:
         bid_price = (candle["openMid"])
         insert_time = candle["time"].split(".")[0]
         for i in range(0, 5):
-            start_time = start_time + timedelta(seconds=i) 
             start_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
             sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, %s)" % (instrument, ask_price, bid_price, start_time)
+            mysql_connector.insert_sql(sql)
             print sql
+            start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
+            start_time = start_time + timedelta(seconds=1) 
       
