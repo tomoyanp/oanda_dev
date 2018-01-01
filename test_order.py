@@ -3,6 +3,7 @@
 import sys
 import os
 import traceback
+import json
 
 # 実行スクリプトのパスを取得して、追加
 current_path = os.path.abspath(os.path.dirname(__file__))
@@ -45,11 +46,26 @@ oanda = oandapy.API(environment=env, access_token=token)
 #)
 response = oanda.get_history(
     instrument="USD_JPY",
-    start="2017-12-25T00:00:00.000000Z",
-    end="2017-12-25T24:00:00.000000Z",
-    granularity="H1",
+    start="2017-12-01T00:00:00.000000Z",
+    end="2017-12-01T01:00:00.000000Z",
+    granularity="S5",
     candleFormat="midpoint"
 )
+
+
+#response = json.load(response)
+instrument = response["instrument"]
+candles = response["candles"]
+insert_time_list = []
+price_list = []
+
+for candle in candles:
+  price_list.append(candle["openMid"])
+  insert_time = candle["time"].split(".")[0]
+  insert_time_list.append(insert_time)
+  
+print price_list
+print insert_time_list
 
 #print response
 

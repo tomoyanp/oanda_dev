@@ -41,9 +41,11 @@ if __name__ == "__main__":
                 price_obj = oanda_wrapper.get_price(currency)
                 ask_price = price_obj.getAskingPrice()
                 bid_price = price_obj.getSellingPrice()
+                insert_time = price_obj.getPriceTime()
+                print insert_time
 
-                sql = u"insert into %s_TABLE(ask_price, bid_price) values(%s, %s)" % (currency, ask_price, bid_price)
-                con.insert_sql(sql)
+#                sql = u"insert into %s_TABLE(ask_price, bid_price) values(%s, %s)" % (currency, ask_price, bid_price)
+#                con.insert_sql(sql)
 
                 time.sleep(polling_time)
 
