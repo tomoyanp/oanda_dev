@@ -35,7 +35,7 @@ while start_time < now:
     try :
         # 通貨
         instrument = "USD_JPY"
-        end_time = start_time + timedelta(seconds=5)
+        end_time = start_time + timedelta(minutes=60)
         end_time = end_time.strftime("%Y-%m-%dT%H:%M:%S")
         start_time = start_time.strftime("%Y-%m-%dT%H:%M:%S")
         
@@ -69,6 +69,5 @@ while start_time < now:
                 start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
                 start_time = start_time + timedelta(seconds=1) 
           
-    except e:
-        start_time = datetime.strptime(start_time, "%Y-%m-%dT%H:%M:%S")
-        start_time = start_time + timedelta(minutes=1)
+    except Exception as e:
+        print e
