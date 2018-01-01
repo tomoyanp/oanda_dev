@@ -35,27 +35,17 @@ if __name__ == "__main__":
             now = datetime.now()
             flag = decideMarket(now)
 
-            if flag == False:
-                pass
-            else:
-                price_obj = oanda_wrapper.get_price(currency)
-                ask_price = price_obj.getAskingPrice()
-                bid_price = price_obj.getSellingPrice()
-                insert_time = price_obj.getPriceTime()
-                print insert_time
+            price_obj = oanda_wrapper.get_price(currency)
+            ask_price = price_obj.getAskingPrice()
+            bid_price = price_obj.getSellingPrice()
+            insert_time = price_obj.getPriceTime()
+            insert_time = insert_time.split(".")[0]
+            insert_time = datetime.strptime(insert_time, "%Y-%m-%dT%H:%M:%S")
 
-#                sql = u"insert into %s_TABLE(ask_price, bid_price) values(%s, %s)" % (currency, ask_price, bid_price)
-#                con.insert_sql(sql)
+            sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, %s)" % (currency, ask_price, bid_price, insert_time)
+            con.insert_sql(sql)
 
-                time.sleep(polling_time)
+            time.sleep(polling_time)
 
         except Exception as e:
             print e.args
-
-
-#        sql = u"select * from GBP_JPY_TABLE"
-#        response = con.select_sql(sql)
-#        for line in response:
-#            print type(line)
-#            for obj in line:
-#                print obj
