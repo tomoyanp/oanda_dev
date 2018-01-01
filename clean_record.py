@@ -62,7 +62,7 @@ while start_time < now:
         insert_time = candle["time"].split(".")[0]
         for i in range(0, 5):
             start_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
-            sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, %s)" % (instrument, ask_price, bid_price, start_time)
+            sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\')" % (instrument, ask_price, bid_price, start_time)
             mysql_connector.insert_sql(sql)
             print sql
             start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
