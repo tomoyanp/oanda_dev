@@ -63,6 +63,7 @@ for candle in candles:
   price_list.append(candle["openMid"])
   insert_time = candle["time"].split(".")[0]
   insert_time_list.append(insert_time)
+  sql = 
   
 print price_list
 print insert_time_list
