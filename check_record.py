@@ -23,7 +23,7 @@ if __name__ == "__main__":
     base_time = "2017-12-27 00:00:00"
     end_time = "2017-12-28 00:00:00"
     #base_time = "2017-12-31 00:00:00"
-    end_time = basetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
+    end_time = datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
     base_time = datetime.strptime(base_time, "%Y-%m-%d %H:%M:%S")
 
     try:
@@ -50,10 +50,11 @@ if __name__ == "__main__":
                     base_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
                     print base_time
                     sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\')" % (currency, ask_price, bid_price, base_time)
+                    con.insert_sql(sql)
+                    base_time = datetime.strptime(base_time, "%Y-%m-%d %H:%M:%S")
                 else:
                     pass
 
-            base_time = datetime.strptime(base_time, "%Y-%m-%d %H:%M:%S")
             base_time = base_time + timedelta(seconds=1)
 
             if base_time > now or base_time > end_time:
