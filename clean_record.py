@@ -32,39 +32,43 @@ start_time = datetime.strptime(start_time, "%Y-%m-%dT%H:%M:%S")
 now = datetime.now()
 
 while start_time < now:
-    # 通貨
-    instrument = "USD_JPY"
-    end_time = start_time + timedelta(seconds=5)
-    end_time = end_time.strftime("%Y-%m-%dT%H:%M:%S")
-    start_time = start_time.strftime("%Y-%m-%dT%H:%M:%S")
-    
-    print start_time
-    print end_time
-    oanda = oandapy.API(environment=env, access_token=token)
-    response = oanda.get_history(
-        instrument="USD_JPY",
-        start=start_time,
-        end=end_time,
-        granularity="S5",
-        candleFormat="midpoint"
-    )
-    
-    
-    instrument = response["instrument"]
-    candles = response["candles"]
-    insert_time_list = []
-    price_list = []
-    
-    start_time = datetime.strptime(start_time, "%Y-%m-%dT%H:%M:%S")
-    for candle in candles:
-        ask_price = (candle["openMid"])
-        bid_price = (candle["openMid"])
-        insert_time = candle["time"].split(".")[0]
-        for i in range(0, 5):
-            start_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
-            sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\')" % (instrument, ask_price, bid_price, start_time)
-            mysql_connector.insert_sql(sql)
-            print sql
-            start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
-            start_time = start_time + timedelta(seconds=1) 
-      
+    try :
+        # 通貨
+        instrument = "USD_JPY"
+        end_time = start_time + timedelta(seconds=5)
+        end_time = end_time.strftime("%Y-%m-%dT%H:%M:%S")
+        start_time = start_time.strftime("%Y-%m-%dT%H:%M:%S")
+        
+        print start_time
+        print end_time
+        oanda = oandapy.API(environment=env, access_token=token)
+        response = oanda.get_history(
+            instrument="USD_JPY",
+            start=start_time,
+            end=end_time,
+            granularity="S5",
+            candleFormat="midpoint"
+        )
+        
+        
+        instrument = response["instrument"]
+        candles = response["candles"]
+        insert_time_list = []
+        price_list = []
+        
+        start_time = datetime.strptime(start_time, "%Y-%m-%dT%H:%M:%S")
+        for candle in candles:
+            ask_price = (candle["openMid"])
+            bid_price = (candle["openMid"])
+            insert_time = candle["time"].split(".")[0]
+            for i in range(0, 5):
+                start_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
+                sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\')" % (instrument, ask_price, bid_price, start_time)
+                mysql_connector.insert_sql(sql)
+                print sql
+                start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
+                start_time = start_time + timedelta(seconds=1) 
+          
+    except e:
+        start_time = datetime.strptime(start_time, "%Y-%m-%dT%H:%M:%S")
+        start_time = start_time + timedelta(minutes=1)
