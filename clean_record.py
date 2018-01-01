@@ -27,7 +27,7 @@ token = 'e93bdc312be2c3e0a4a18f5718db237a-32ca3b9b94401fca447d4049ab046fad'
 env = 'live'
 
 mysql_connector = MysqlConnector()
-start_time = "2017-12-28T00:00:00"
+start_time = "2017-12-27T00:00:00"
 start_time = datetime.strptime(start_time, "%Y-%m-%dT%H:%M:%S")
 now = datetime.now()
 
@@ -69,13 +69,13 @@ while start_time < now:
             for i in range(0, 5):
                 insert_time = insert_time.strftime("%Y-%m-%d %H:%M:%S")
                 sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\')" % (instrument, ask_price, bid_price, insert_time)
-    #            mysql_connector.insert_sql(sql)
+                mysql_connector.insert_sql(sql)
                 print sql
                 insert_time = datetime.strptime(insert_time, "%Y-%m-%d %H:%M:%S")
                 insert_time = insert_time + timedelta(seconds=1) 
                 start_time = insert_time 
     else:
         start_time = datetime.strptime(start_time, "%Y-%m-%dT%H:%M:%S")
-        start_time = start_time + timedelta(minutes=60)
+        start_time = start_time + timedelta(minutes=1)
     
 

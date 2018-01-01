@@ -21,6 +21,7 @@ if __name__ == "__main__":
     currency = args[1].strip()
     con = MysqlConnector()
     base_time = "2017-12-01 00:00:00"
+    #base_time = "2017-12-31 00:00:00"
     base_time = datetime.strptime(base_time, "%Y-%m-%d %H:%M:%S")
 
     try:
@@ -40,6 +41,6 @@ if __name__ == "__main__":
                 else:
                     pass
 
-        base_time = base_time + timedelta(seconds=1)
+            base_time = base_time + timedelta(seconds=1)
     except Exception as e:
         print e.args
