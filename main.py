@@ -66,6 +66,11 @@ if __name__ == '__main__':
     try:
       while True:
           logging.info("=== Start Main.Loop Logic ===")
+
+          if test_mode:
+              pass
+          else:
+              base_time = datetime.now()
           flag = decideMarket(base_time)
           logging.info("decideMarket flag=%s" % flag)
 

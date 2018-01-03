@@ -235,6 +235,7 @@ class TradeWrapper:
                     logging.info("takeprofit = %s, stoploss = %s" % (threshold_list["takeprofit"], threshold_list["stoploss"]))
                     response = self.oanda_wrapper.order(trade_flag, self.instrument, threshold_list["stoploss"], threshold_list["takeprofit"])
                     order_price = response["price"]
+                    self.trade_algo.setTradeId(response)
 
                     #response = self.oanda_wrapper.modify_trade(trade_flag, trade_flag, threshold_list["stoploss"], threshold_list["takeprofit"])
 
