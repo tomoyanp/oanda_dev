@@ -57,10 +57,11 @@ if __name__ == '__main__':
     # ポーリング時間
     trade_wrapper = TradeWrapper(instrument, mode, test_mode, current_path, config_name, args)
     trade_wrapper.setTradeAlgo(algo)
+    sleep_time = 10
 
     base_time = datetime.now()
     end_time = base_time - timedelta(days=3)
-    base_time = base_time - timedelta(days=7)
+    base_time = base_time - timedelta(days=5)
 
     try:
       while True:
@@ -69,7 +70,7 @@ if __name__ == '__main__':
           logging.info("decideMarket flag=%s" % flag)
 
           if flag == False:
-              pass
+              base_time = sleepTransaction(sleep_time, test_mode, base_time)
 
           else:
               # 基本sleep_time = 0を返す

@@ -44,31 +44,22 @@ oanda = oandapy.API(environment=env, access_token=token)
 #    candleFormat="midpoint",
 #    count="5"
 #)
-response = oanda.get_history(
-    instrument="USD_JPY",
-    start="2017-12-01T00:00:00",
-    end="2017-12-01T01:00:00",
-    granularity="S5",
-    candleFormat="midpoint"
-)
+#response = oanda.get_history(
+#    instrument="USD_JPY",
+#    start="2018-01-02T10:00:00",
+#    granularity="S5",
+#    candleFormat="midpoint"
+#)
+
+response = oanda.get_prices(
+    instruments="USD_JPY",
+    sessionId="abcdbdksl",
+    accountId=account_id)
 
 
 #response = json.load(response)
-instrument = response["instrument"]
-candles = response["candles"]
-insert_time_list = []
-price_list = []
 
-for candle in candles:
-  price_list.append(candle["openMid"])
-  insert_time = candle["time"].split(".")[0]
-  insert_time_list.append(insert_time)
-  sql = 
-  
-print price_list
-print insert_time_list
-
-#print response
+print response
 
 #response = oanda.get_historical_position_ratios()
 #response = oanda.get_history(instrument)

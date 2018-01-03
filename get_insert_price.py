@@ -20,12 +20,11 @@ if __name__ == "__main__":
     args = sys.argv
     currency = args[1].strip()
     con = MysqlConnector()
-    base_time = "2018-01-02 19:00:00"
-    end_time = "2018-01-02 23:00:00"
+    base_time = "2017-12-01 00:00:00"
+    end_time = "2017-12-31 00:00:00"
     #base_time = "2017-12-31 00:00:00"
     end_time = datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
     base_time = datetime.strptime(base_time, "%Y-%m-%d %H:%M:%S")
-    file = open("shortage_price.lst", "w")
 
     try:
         while True:
@@ -40,7 +39,19 @@ if __name__ == "__main__":
                 response = con.select_sql(sql)
 
                 if len(response) < 1:
-                    file.write("%s\n" % base_time)
+                    insert_time = base_time - timedelta(seconds=1)
+                    insert_time = insert_time.strftime("%Y-%m-%d %H:%M:%S")
+                    sql = u"select ask_price, bid_price, insert_time from %s_TABLE where insert_time = \'%s\'" % (currency, insert_time)
+                    response = con.select_sql(sql)
+                    for res in response:
+                      ask_price = res[0]
+                      bid_price = res[1]
+                      insert_time = res[2]
+                    base_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
+                    print base_time
+                    sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\')" % (currency, ask_price, bid_price, base_time)
+                    con.insert_sql(sql)
+                    base_time = datetime.strptime(base_time, "%Y-%m-%d %H:%M:%S")
                 else:
                     pass
 

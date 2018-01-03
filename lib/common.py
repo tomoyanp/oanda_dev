@@ -1,5 +1,6 @@
 # coding: utf-8
 import json
+import time
 from datetime import datetime, timedelta
 import pandas as pd
 import numpy as np
@@ -108,10 +109,15 @@ def getWMA(ask_price_list, bid_price_list, wma_length, candle_width):
     bid_price_list = pd.Series(bid_price_list)
     average_price_list = (ask_price_list + bid_price_list) / 2
     average_price_list = average_price_list.values.tolist()
+    logging.info("wma_length = %s" % wma_length)
+    logging.info("candle_width = %s" % candle_width)
+
     wma_length = (candle_width * wma_length) * -1
+    logging.info("wma_length = %s" % wma_length)
 
     # wma_lengthの分だけ抽出
     average_price_list = average_price_list[wma_length:]
+    logging.info("average_price_list length = %s" % len(average_price_list))
 
     # wma_lengthの分だけ、重みの積を積み上げる
     tmp_value = 0
@@ -123,6 +129,9 @@ def getWMA(ask_price_list, bid_price_list, wma_length, candle_width):
 
    # 総数をwma_lengthの総和（シグマ）で割る⇒ 移動平均点
     wma_value = tmp_value / denominator
+    logging.info("denominator = %s" % denominator)
+    logging.info("tmp_value = %s" % tmp_value)
+    logging.info("wma_value = %s" % wma_value)
 
     return wma_value
 

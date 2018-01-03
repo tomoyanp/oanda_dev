@@ -26,8 +26,8 @@ class Evo2BollingerAlgo(SuperAlgo):
                 pass
             else:
                 # トレンドのチェック
-#                slope = self.newCheckTrend(base_time)
-#                logging.info("time = %s, slope = %s" % (base_time, slope))
+                slope = self.newCheckTrend(base_time)
+                logging.info("time = %s, slope = %s" % (base_time, slope))
 
                 # window_size 28 * candle_width 600 （10分足で28本分）
                 window_size = self.config_data["window_size"]
@@ -42,8 +42,7 @@ class Evo2BollingerAlgo(SuperAlgo):
 
                 # 過去5本分（50分）のsigmaだけ抽出
                 sigma_length = self.config_data["sigma_length"]
-                data_set = extraBollingerDataSet(data_set, sigma_length, candle_width)
-
+                data_set     = extraBollingerDataSet(data_set, sigma_length, candle_width)
                 upper_sigmas = data_set["upper_sigmas"]
                 lower_sigmas = data_set["lower_sigmas"]
                 price_list   = data_set["price_list"]
@@ -57,48 +56,45 @@ class Evo2BollingerAlgo(SuperAlgo):
 
                 # 現在価格が移動平均より上であれば、買い
                 # 現在価格が移動平均より下であれば、売り
-                wma_length = 200
-                
-                flag, self.wma_index = countIndex(self.wma_index, candle_width)
-                if flag:
-                    wma_value = getWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
-                
-                
-                current_price = (self.ask_price_list[-1] + self.bid_price_list[-1]) / 2
-                if sigma_flag and wma_value < current_price:
-                    trade_flag = "buy"
-                    logging.info("DECIDE ORDER")
-                    logging.info("wma_value = %s, price = %s, trade_flag = %s" %(wma_value, current_price, trade_flag))
-                if sigma_flag and wma_value > current_price:
-                    trade_flag = "sell"
-                    logging.info("DECIDE ORDER")
-                    logging.info("wma_value = %s, price = %s, trade_flag = %s" %(wma_value, current_price, trade_flag))
-                else:
-                    trade_flag = "pass"
+                # 全然正確に計算できない。。。
+#                wma_length = 200
+#                
+#                flag, self.wma_index = countIndex(self.wma_index, candle_width)
+#                if flag:
+#                    self.wma_value = getWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
+#                
+#                current_price = (self.ask_price_list[-1] + self.bid_price_list[-1]) / 2
+#                if sigma_flag and self.wma_value < current_price:
+#                    trade_flag = "buy"
+#                    logging.info("DECIDE ORDER")
+#                    logging.info("wma_value = %s, price = %s, trade_flag = %s" %(self.wma_value, current_price, trade_flag))
+#                if sigma_flag and self.wma_value > current_price:
+#                    trade_flag = "sell"
+#                    logging.info("DECIDE ORDER")
+#                    logging.info("wma_value = %s, price = %s, trade_flag = %s" %(self.wma_value, current_price, trade_flag))
+#                else:
+#                    trade_flag = "pass"
 
                 # トレンドが上向きであれば、買い
                 # トレンドが下向きであれば、売り
                 # 回帰分析を使ったパターンの方
-#                if sigma_flag and slope < 0:
-#                    trade_flag = "sell"
-#                    logging.info("DECIDE ORDER")
-#                    logging.info("base = %s, price = %s, trade_flag = %s" %(base[0], lst[0], trade_flag))
-#                elif sigma_flag and slope > 0:
-#                    trade_flag = "buy"
-#                    logging.info("DECIDE ORDER")
-#                    logging.info("base = %s, price = %s, trade_flag = %s" %(base[0], lst[0], trade_flag))
-#                else:
-#                    trade_flag = "pass"
-
-                if upper_sigmas[-1] - lower_sigmas[-1] < 0.1:
+                if sigma_flag and slope < 0:
+                    trade_flag = "sell"
+                    logging.info("DECIDE ORDER")
+                    logging.info("base = %s, price = %s, trade_flag = %s" %(base[0], lst[0], trade_flag))
+                elif sigma_flag and slope > 0:
+                    trade_flag = "buy"
+                    logging.info("DECIDE ORDER")
+                    logging.info("base = %s, price = %s, trade_flag = %s" %(base[0], lst[0], trade_flag))
+                else:
                     trade_flag = "pass"
 
-                if trade_flag != "pass":
-                    trade_sleep_time = self.config_data["trade_sleep_time"]
-                else:
-                    trade_sleep_time = 0
+               # ボリンジャーバンドの幅が一定以上であれば
+#                if upper_sigmas[-1] - lower_sigmas[-1] < 0.1:
+#                    trade_flag = "pass"
                 
-                return trade_flag, trade_sleep_time
+                logging.info("wma_value = %s" % self.wma_value)
+                return trade_flag
 
         except:
             raise
@@ -138,6 +134,8 @@ class Evo2BollingerAlgo(SuperAlgo):
 
                     lower_sigma = lower_sigmas[-1]
                     upper_sigma = upper_sigmas[-1]
+                    logging.info("DECIDE STL lower_sigma = %s, supper_sigma = %s" % (lower_sigma, upper_sigma))
+                    logging.info("DECIDE STL current_ask_price = %s, current_bid_price = %s" % (current_ask_price, current_bid_price))
 
                     # 上下どちらかのシグマにぶつかったら決済してしまう
                     # 利確、損切り兼任

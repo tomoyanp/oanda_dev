@@ -97,7 +97,7 @@ class TradeWrapper:
         order_price = self.trade_algo.getOrderPrice()
         stl_price = self.trade_algo.getCurrentPrice()
         footer = "at %s ======\n" % nowftime
-        self.result_file.write(msg + nowftime)
+        self.result_file.write(msg + footer)
         self.result_file.write("ORDER_PRICE=%s, STL_PRICE=%s, ORDER_KIND=%s, PROFIT=%s\n" % (order_price, stl_price, order_kind, profit))
         self.result_file.write("PROFIT=%s\n" % profit)
         self.result_file.write("======================================================\n")
@@ -114,7 +114,6 @@ class TradeWrapper:
     # 今ポジションを持っているか確認
     # なければ、フラグをリセットする
     def checkPosition(self):
-        logging.info("=== Start TradeWrapper.checkPosition Logic ===")
         sleep_time = 0
 
         # test modeの場合は考慮不要
@@ -144,19 +143,15 @@ class TradeWrapper:
                 self.trade_algo.setOrderFlag(True)
                 self.stl_sleep_flag = True
 
-            logging.info("=== End TradeWrapper.checkPosition Logic ===")
         return sleep_time
 
     def setInstrumentRespoonse(self, base_time):
         sleep_time = 0
-        logging.info("=== Start TradeWrapper.setInstrumentRespoonse Logic ===")
         logging.info("base_time=%s" % base_time)
         self.trade_algo.setPriceTable(base_time)
-        logging.info("=== End TradeWrapper.setInstrumentRespoonse Logic ===")
         return sleep_time
 
     def stlDecisionWrapper(self, base_time):
-        logging.info("=== Start TradeWrapper.stlDecisionWrapper Logic ===")
         sleep_time = 0
         order_flag = self.trade_algo.getOrderFlag()
 
@@ -212,24 +207,23 @@ class TradeWrapper:
         else:
             pass
 
-        logging.info("=== End TradeWrapper.stlDecisionWrapper Logic ===")
+        logging.info("stl decision sleep_time = %s" % sleep_time)
         return sleep_time
 
     def tradeDecisionWrapper(self, base_time):
         sleep_time = 0
-        logging.info("=== Start TradeWrapper.tradeDecisionWrapper Logic ===")
         order_flag = self.trade_algo.getOrderFlag()
 
         if order_flag:
             pass
         else:
-            sleep_time = self.config_data["sleep_time"]
             trade_flag = self.trade_algo.decideTrade(base_time)
              # 以下は, decideTradeの中で実装する
 #            trade_flag = self.trade_algo.decideTradeTime(base_time, trade_flag)
 #            trade_flag = self.trade_algo.checkTrend(base_time, trade_flag)
 
             if trade_flag == "pass":
+                sleep_time = self.config_data["sleep_time"]
                 self.trade_algo.resetFlag()
             else:
                 sleep_time = self.config_data["trade_sleep_time"]
@@ -237,16 +231,16 @@ class TradeWrapper:
                 if self.test_mode:
                     pass
                 else:
+                    threshold_list = self.trade_algo.calcThreshold(trade_flag)
                     response = self.oanda_wrapper.order(trade_flag, self.instrument, threshold_list["stoploss"], threshold_list["takeprofit"])
                     order_price = response["price"]
 
-                    #threshold_list = self.trade_algo.calcThreshold(order_price, trade_flag)
                     #response = self.oanda_wrapper.modify_trade(trade_flag, trade_flag, threshold_list["stoploss"], threshold_list["takeprofit"])
 
                 self.tradeLogWrite(trade_flag)
                 order_flag = True
                 self.trade_algo.setOrderData(trade_flag, order_price, order_flag)
 
-            logging.info("=== End TradeWrapper.stlDecisionWrapper Logic ===")
 
+        logging.info("trade decision sleep_time = %s" % sleep_time)
         return sleep_time

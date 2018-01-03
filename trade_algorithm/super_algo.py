@@ -40,6 +40,7 @@ class SuperAlgo(object):
         self.mysqlConnector = MysqlConnector()
         self.trend_index = 0
         self.trend_flag = ""
+        self.wma_value = 0
 
 ################################################
 # listは、要素数が大きいほうが古い。
@@ -111,6 +112,9 @@ class SuperAlgo(object):
             self.ask_price_list.reverse()
             self.bid_price_list.reverse()
             self.insert_time_list.reverse()
+
+            for i in range(0, len(self.ask_price_list)):
+                logging.info("insert_time = %s, ask_price = %s, bid_price = %s" % (self.insert_time_list[i], self.ask_price_list[i], self.bid_price_list[i]))
 
     def addResponse(self, response):
         if len(response) < 1:

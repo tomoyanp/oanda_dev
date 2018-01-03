@@ -27,24 +27,18 @@ token = 'e93bdc312be2c3e0a4a18f5718db237a-32ca3b9b94401fca447d4049ab046fad'
 env = 'live'
 
 mysql_connector = MysqlConnector()
+start_time = "2017-12-27T00:00:00"
+start_time = datetime.strptime(start_time, "%Y-%m-%dT%H:%M:%S")
 now = datetime.now()
 
-file = open("shortage_price.lst")
-for insert_time in file:
-    insert_time = insert_time.strip()
+while start_time < now:
     # 通貨
     instrument = "USD_JPY"
-    print insert_time
-    
-    insert_time = datetime.strptime(insert_time, "%Y-%m-%d %H:%M:%S")
-
-
-    start_time = insert_time - timedelta(hours=9)
-    end_time = start_time + timedelta(seconds=5)
-
-    start_time = start_time.strftime("%Y-%m-%dT%H:%M:%S")
+    end_time = start_time + timedelta(minutes=60)
     end_time = end_time.strftime("%Y-%m-%dT%H:%M:%S")
-    print insert_time
+    start_time = start_time.strftime("%Y-%m-%dT%H:%M:%S")
+    
+    print start_time
     print end_time
     oanda = oandapy.API(environment=env, access_token=token)
 
@@ -64,21 +58,24 @@ for insert_time in file:
     if len(response) > 0:
         instrument = response["instrument"]
         candles = response["candles"]
+        insert_time_list = []
+        price_list = []
         
         for candle in candles:
             ask_price = (candle["openMid"])
             bid_price = (candle["openMid"])
-            print ask_price
-            print bid_price
-            sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\')" % (instrument, ask_price, bid_price, insert_time)
-            print sql
-            print "================================"
-            try:
+            insert_time = candle["time"].split(".")[0]
+            insert_time = datetime.strptime(insert_time, "%Y-%m-%dT%H:%M:%S")
+            for i in range(0, 5):
+                insert_time = insert_time.strftime("%Y-%m-%d %H:%M:%S")
+                sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\')" % (instrument, ask_price, bid_price, insert_time)
                 mysql_connector.insert_sql(sql)
-            except Exception as e:
-                print e
+                print sql
+                insert_time = datetime.strptime(insert_time, "%Y-%m-%d %H:%M:%S")
+                insert_time = insert_time + timedelta(seconds=1) 
+                start_time = insert_time 
     else:
-        print "No JsonData"
-        print "================================="
+        start_time = datetime.strptime(start_time, "%Y-%m-%dT%H:%M:%S")
+        start_time = start_time + timedelta(minutes=1)
     
 
