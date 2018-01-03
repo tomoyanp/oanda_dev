@@ -81,11 +81,11 @@ class Evo2BollingerAlgo(SuperAlgo):
                 if sigma_flag and slope < 0:
                     trade_flag = "sell"
                     logging.info("DECIDE ORDER")
-                    logging.info("base = %s, price = %s, trade_flag = %s" %(base[0], lst[0], trade_flag))
+                    logging.info("base_line = %s, price = %s, trade_flag = %s, slope = %s" %(base_lines[-1], price_list[-1], trade_flag, slope))
                 elif sigma_flag and slope > 0:
                     trade_flag = "buy"
                     logging.info("DECIDE ORDER")
-                    logging.info("base = %s, price = %s, trade_flag = %s" %(base[0], lst[0], trade_flag))
+                    logging.info("base_line = %s, price = %s, trade_flag = %s, slope = %s" %(base_lines[-1], price_list[-1], trade_flag, slope))
                 else:
                     trade_flag = "pass"
 
