@@ -13,17 +13,13 @@ from mysql_connector import MysqlConnector
 from oanda_wrapper import OandaWrapper
 from price_obj import PriceObj
 from datetime import datetime, timedelta
-from common import decideMarket
+from common import decideMarket, getWMA
 import time
 
 if __name__ == "__main__":
     args = sys.argv
     currency = args[1].strip()
     con = MysqlConnector()
-    polling_time = 0.5
-    sleep_time = 3600
-    units = 1000
-    oanda_wrapper = OandaWrapper(env, account_id, token, units)
 
     while True:
         try:
@@ -35,7 +31,7 @@ if __name__ == "__main__":
             else:
                 now = now.strftime("%Y-%m-%d %H:%M:%S")
                 width = 4000 * 200
-                sql = u"select ask_price, bid_price, insert_time from %s_TABLE where insert_time <= now ORDER_BY insert_time DESC limit %s" % (currency, width)
+                sql = u"select ask_price, bid_price, insert_time from %s_TABLE where insert_time <= \'%s\' ORDER BY insert_time DESC limit %s" % (currency, now, width)
                 response = con.select_sql(sql)
                 ask_price_list = []
                 bid_price_list = []
@@ -48,16 +44,16 @@ if __name__ == "__main__":
 
                 wma_length = 200
                 candle_width = 60
-                60wma_value = getWMA(ask_price_list, bid_price_list, wma_length, candle_width)
+                wma_value = getWMA(ask_price_list, bid_price_list, wma_length, candle_width)
+                print wma_value
                 candle_width = 300
-                300wma_value = getWMA(ask_price_list, bid_price_list, wma_length, candle_width)
+                wma_value = getWMA(ask_price_list, bid_price_list, wma_length, candle_width)
+                print wma_value
 
                 candle_width = 3600
-                3600wma_value = getWMA(ask_price_list, bid_price_list, wma_length, candle_width)
+                wma_value = getWMA(ask_price_list, bid_price_list, wma_length, candle_width)
 
-                print 60wma_value
-                print 300wma_value
-                print 3600wma_value
+                print wma_value
 
         except Exception as e:
             print e.args
