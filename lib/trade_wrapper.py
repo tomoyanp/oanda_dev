@@ -84,10 +84,10 @@ class TradeWrapper:
         else:
             profit = order_price - stl_price
 
-        logging.info("order_kind=%s" % order_kind)
-        logging.info("order_price=%s" % order_price)
-        logging.info("stl_price=%s" % stl_price)
-        logging.info("profit=%s" % profit)
+        #logging.info("order_kind=%s" % order_kind)
+        #logging.info("order_price=%s" % order_price)
+        #logging.info("stl_price=%s" % stl_price)
+        #logging.info("profit=%s" % profit)
 
         return profit
 
@@ -121,10 +121,10 @@ class TradeWrapper:
             pass
         else:
             position_flag = self.oanda_wrapper.get_trade_position(self.instrument)
-            logging.info("trade_position flag=%s" % position_flag)
+            #logging.info("trade_position flag=%s" % position_flag)
             if position_flag == False:
                 # 決済した直後であればスリープする
-                logging.info("stl_sleep_flag=%s" % self.stl_sleep_flag)
+                #logging.info("stl_sleep_flag=%s" % self.stl_sleep_flag)
                 trade_id = self.trade_algo.getTradeId()
                 if self.stl_sleep_flag and trade_id != 0:
 
@@ -147,7 +147,7 @@ class TradeWrapper:
 
     def setInstrumentRespoonse(self, base_time):
         sleep_time = 0
-        logging.info("base_time=%s" % base_time)
+        #logging.info("base_time=%s" % base_time)
         self.trade_algo.setPriceTable(base_time)
         return sleep_time
 
@@ -191,7 +191,7 @@ class TradeWrapper:
                     else:
                         sleep_time = self.config_data["stl_sleep_ltime"]
 
-                    logging.info("sleep_time=%s" % sleep_time)
+                    #logging.info("sleep_time=%s" % sleep_time)
 
                     # 計算した利益を結果ファイルに出力
                     msg = "===== EXECUTE SETTLEMENT "
@@ -232,7 +232,7 @@ class TradeWrapper:
                     pass
                 else:
                     threshold_list = self.trade_algo.calcThreshold(trade_flag)
-                    logging.info("takeprofit = %s, stoploss = %s" % (threshold_list["takeprofit"], threshold_list["stoploss"]))
+                    #logging.info("takeprofit = %s, stoploss = %s" % (threshold_list["takeprofit"], threshold_list["stoploss"]))
                     response = self.oanda_wrapper.order(trade_flag, self.instrument, threshold_list["stoploss"], threshold_list["takeprofit"])
                     order_price = response["price"]
                     self.trade_algo.setTradeId(response)

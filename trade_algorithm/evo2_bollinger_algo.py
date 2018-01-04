@@ -51,7 +51,7 @@ class Evo2BollingerAlgo(SuperAlgo):
                 sigma_flag = False
                 # 過去5本で移動平均線付近にいるか確認する
                 for i in range(0, len(price_list)):
-                    if price_list[i] - base_lines[i] < 0.005 and price_list[i] - base_lines[i] > -0.005:
+                    if price_list[i] - base_lines[i] <= 0.05 and price_list[i] - base_lines[i] >= -0.05:
                         sigma_flag = True
 
                 # 現在価格が移動平均より上であれば、買い
@@ -93,7 +93,7 @@ class Evo2BollingerAlgo(SuperAlgo):
 #                if upper_sigmas[-1] - lower_sigmas[-1] < 0.1:
 #                    trade_flag = "pass"
                 
-                logging.info("wma_value = %s" % self.wma_value)
+                #logging.info("wma_value = %s" % self.wma_value)
                 return trade_flag
 
         except:

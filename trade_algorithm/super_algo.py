@@ -53,14 +53,14 @@ class SuperAlgo(object):
         self.trade_id = 0
 
     def getInitialSql(self, base_time):
-        logging.info("=== Start SuperAlgo.getInitialSql Logic ===")
+        #logging.info("=== Start SuperAlgo.getInitialSql Logic ===")
         time_width = self.config_data["time_width"]
 
         end_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
 
         sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time < \'%s\' ORDER BY insert_time DESC limit %s" % (self.instrument, end_time, time_width)
         logging.info("sql=%s" % sql)
-        logging.info("=== End SuperAlgo.getInitialSql Logic ===")
+        #logging.info("=== End SuperAlgo.getInitialSql Logic ===")
         return sql
 
     def getSql(self, base_time):
@@ -88,7 +88,7 @@ class SuperAlgo(object):
             sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' and insert_time like \'%00\' order by insert_time " % (self.instrument, start_time, end_time)
         else:
             sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' order by insert_time " % (self.instrument, start_time, end_time)
-        logging.info(sql)
+        #logging.info(sql)
         return sql
 
     def getAddSql(self, base_time):
@@ -113,8 +113,8 @@ class SuperAlgo(object):
             self.bid_price_list.reverse()
             self.insert_time_list.reverse()
 
-            for i in range(0, len(self.ask_price_list)):
-                logging.info("insert_time = %s, ask_price = %s, bid_price = %s" % (self.insert_time_list[i], self.ask_price_list[i], self.bid_price_list[i]))
+            logging.info("start_insert_time = %s, ask_price = %s, bid_price = %s" % (self.insert_time_list[0], self.ask_price_list[0], self.bid_price_list[0]))
+            logging.info("end_insert_time = %s, ask_price = %s, bid_price = %s" % (self.insert_time_list[-1], self.ask_price_list[-1], self.bid_price_list[-1]))
 
     def addResponse(self, response):
         if len(response) < 1:
@@ -185,15 +185,15 @@ class SuperAlgo(object):
         return self.order_kind
 
     def decideTradeTime(self, base_time, trade_flag):
-        logging.info("=== Start SuperAlgo.decideTradeTime Logic ===")
+        #logging.info("=== Start SuperAlgo.decideTradeTime Logic ===")
 
         enable_time_mode = self.config_data["enable_time_mode"]
-        logging.info("enable_time_mode=%s" % enable_time_mode)
+        #logging.info("enable_time_mode=%s" % enable_time_mode)
         if enable_time_mode == "on":
             enable_times = self.config_data["enable_time"]
             enable_flag = False
-            logging.info("base_time=%s" % base_time)
-            logging.info("enable_times=%s" % enable_times)
+            #logging.info("base_time=%s" % base_time)
+            #logging.info("enable_times=%s" % enable_times)
             cmp_time = base_time.strftime("%Y-%m-%d")
 
             for ent in enable_times:
@@ -206,14 +206,14 @@ class SuperAlgo(object):
         else:
             enable_flag = True
 
-        logging.info("enable_flag=%s" % enable_flag)
+        #logging.info("enable_flag=%s" % enable_flag)
 
         if enable_flag:
             pass
         else:
             trade_flag = "pass"
 
-        logging.info("=== End SuperAlho.decideTradeTime Logic ===")
+        #logging.info("=== End SuperAlho.decideTradeTime Logic ===")
 
         return trade_flag
 
@@ -271,34 +271,34 @@ class SuperAlgo(object):
             self.stoploss_rate = float(self.stoploss_rate)
             ask_price = float(ask_price)
             bid_price = float(bid_price)
-            logging.info("TAKE PROFIT RATE = %s" % self.takeprofit_rate)
-            logging.info("STOP LOSS RATE = %s" % self.stoploss_rate)
-            logging.info("ASK PRICE = %s" % ask_price)
-            logging.info("BID PRICE = %s" % bid_price)
+            #logging.info("TAKE PROFIT RATE = %s" % self.takeprofit_rate)
+            #logging.info("STOP LOSS RATE = %s" % self.stoploss_rate)
+            #logging.info("ASK PRICE = %s" % ask_price)
+            #logging.info("BID PRICE = %s" % bid_price)
 
             stl_flag = False
             if self.order_kind == "buy":
                 if bid_price > self.takeprofit_rate or bid_price < self.stoploss_rate:
-                    logging.info("SETTLE TRUEEEEEEEEEEEEEEEEEE(BUY)")
+                    #logging.info("SETTLE TRUEEEEEEEEEEEEEEEEEE(BUY)")
                     stl_flag = True
 
             elif self.order_kind == "sell":
                 if ask_price < self.takeprofit_rate or ask_price > self.stoploss_rate:
-                    logging.info("%s < %s" % (ask_price, self.takeprofit_rate))
-                    logging.info("%s > %s" % (ask_price, self.stoploss_rate))
-                    logging.info("SETTLE TRUEEEEEEEEEEEEEEEEEE(SELL)")
-                    logging.info("TAKE PROFIT RATE = %s" % self.takeprofit_rate)
-                    logging.info(type(self.takeprofit_rate))
-                    logging.info("STOP LOSS RATE = %s" % self.stoploss_rate)
-                    logging.info(type(self.stoploss_rate))
-                    logging.info("ASK PRICE = %s" % ask_price)
-                    logging.info(type(ask_price))
-                    logging.info("BID PRICE = %s" % bid_price)
-                    logging.info(type(bid_price))
+                    #logging.info("%s < %s" % (ask_price, self.takeprofit_rate))
+                    #logging.info("%s > %s" % (ask_price, self.stoploss_rate))
+                    #logging.info("SETTLE TRUEEEEEEEEEEEEEEEEEE(SELL)")
+                    #logging.info("TAKE PROFIT RATE = %s" % self.takeprofit_rate)
+                    #logging.info(type(self.takeprofit_rate))
+                    #logging.info("STOP LOSS RATE = %s" % self.stoploss_rate)
+                    #logging.info(type(self.stoploss_rate))
+                    #logging.info("ASK PRICE = %s" % ask_price)
+                    #logging.info(type(ask_price))
+                    #logging.info("BID PRICE = %s" % bid_price)
+                    #logging.info(type(bid_price))
 
                     stl_flag = True
 
-            logging.info("SETTLE FLAG = %s" % stl_flag)
+            #logging.info("SETTLE FLAG = %s" % stl_flag)
             return stl_flag
         except:
             raise
