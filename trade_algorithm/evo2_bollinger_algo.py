@@ -72,7 +72,7 @@ class Evo2BollingerAlgo(SuperAlgo):
                 if sigma_flag == "buy" and self.wma_value < current_price:
                     trade_flag = "buy"
                     logging.info("EXECUTE BUY ORDER")
-                if sigma_flag == "sell" and self.wma_value > current_price:
+                elif sigma_flag == "sell" and self.wma_value > current_price:
                     trade_flag = "sell"
                     logging.info("EXECUTE SELL ORDER")
                 else:
@@ -96,7 +96,7 @@ class Evo2BollingerAlgo(SuperAlgo):
 #                if upper_sigmas[-1] - lower_sigmas[-1] < 0.1:
 #                    trade_flag = "pass"
                 
-                #logging.info("wma_value = %s" % self.wma_value)
+                logging.info("trade_flag = %s" % trade_flag)
                 return trade_flag
 
         except:
