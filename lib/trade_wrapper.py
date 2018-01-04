@@ -135,7 +135,7 @@ class TradeWrapper:
                         sleep_time = self.config_data["stl_sleep_ltime"]
 
                     msg = "===== EXECUTE SETTLEMENT STOP OR LIMIT ORDER "
-                    self.settlmentLogWrite(profit, msg)
+                    self.settlementLogWrite(profit, msg)
                     self.stl_sleep_flag = False
 
                 self.trade_algo.resetFlag()
