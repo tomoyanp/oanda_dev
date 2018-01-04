@@ -30,6 +30,7 @@ class Evo2BollingerAlgo(SuperAlgo):
 #                logging.info("time = %s, slope = %s" % (base_time, slope))
 
                 # window_size 28 * candle_width 600 （10分足で28本分）
+                trade_flag = "pass"
                 window_size = self.config_data["window_size"]
                 candle_width = self.config_data["candle_width"]
                 sigma_valiable = self.config_data["bollinger_sigma"]
