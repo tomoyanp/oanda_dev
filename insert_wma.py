@@ -1,0 +1,65 @@
+# coding: utf-8
+
+# 実行スクリプトのパスを取得して、追加
+import sys
+import os
+current_path = os.path.abspath(os.path.dirname(__file__))
+sys.path.append(current_path)
+sys.path.append(current_path + "/trade_algorithm")
+sys.path.append(current_path + "/obj")
+sys.path.append(current_path + "/lib")
+
+from mysql_connector import MysqlConnector
+from oanda_wrapper import OandaWrapper
+from price_obj import PriceObj
+from datetime import datetime, timedelta
+from common import decideMarket
+import time
+
+if __name__ == "__main__":
+    args = sys.argv
+    currency = args[1].strip()
+    con = MysqlConnector()
+    polling_time = 0.5
+    sleep_time = 3600
+    units = 1000
+    oanda_wrapper = OandaWrapper(env, account_id, token, units)
+
+    while True:
+        try:
+            now = datetime.now()
+            flag = decideMarket(now)
+
+            if flag == False:
+                pass
+            else:
+                now = now.strftime("%Y-%m-%d %H:%M:%S")
+                width = 4000 * 200
+                sql = u"select ask_price, bid_price, insert_time from %s_TABLE where insert_time <= now ORDER_BY insert_time DESC limit %s" % (currency, width)
+                response = con.select_sql(sql)
+                ask_price_list = []
+                bid_price_list = []
+                for res in response:
+                    ask_price_list.append(res[0])
+                    bid_price_list.append(res[1])
+
+                ask_price_list.reverse()
+                bid_price_list.reverse()
+
+                wma_length = 200
+                candle_width = 60
+                60wma_value = getWMA(ask_price_list, bid_price_list, wma_length, candle_width)
+                candle_width = 300
+                300wma_value = getWMA(ask_price_list, bid_price_list, wma_length, candle_width)
+
+                candle_width = 3600
+                3600wma_value = getWMA(ask_price_list, bid_price_list, wma_length, candle_width)
+
+                print 60wma_value
+                print 300wma_value
+                print 3600wma_value
+
+        except Exception as e:
+            print e.args
+
+
