@@ -64,14 +64,14 @@ class Evo2BollingerAlgo(SuperAlgo):
                     self.wma_value = getWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
                 
                 current_price = (self.ask_price_list[-1] + self.bid_price_list[-1]) / 2
+                logging.info("DECIDE TRADE base_line = %s, price = %s" %(base_lines[-1], current_price))
+                logging.info("DECIDE TRADE wma_value = %s, price = %s, trade_flag = %s" %(self.wma_value, current_price, trade_flag))
                 if sigma_flag and self.wma_value < current_price:
                     trade_flag = "buy"
-                    logging.info("DECIDE ORDER")
-                    logging.info("wma_value = %s, price = %s, trade_flag = %s" %(self.wma_value, current_price, trade_flag))
+                    logging.info("EXECUTE BUY ORDER")
                 if sigma_flag and self.wma_value > current_price:
                     trade_flag = "sell"
-                    logging.info("DECIDE ORDER")
-                    logging.info("wma_value = %s, price = %s, trade_flag = %s" %(self.wma_value, current_price, trade_flag))
+                    logging.info("EXECUTE SELL ORDER")
                 else:
                     trade_flag = "pass"
 
@@ -134,22 +134,19 @@ class Evo2BollingerAlgo(SuperAlgo):
 
                     lower_sigma = lower_sigmas[-1]
                     upper_sigma = upper_sigmas[-1]
-                    logging.info("DECIDE STL lower_sigma = %s, supper_sigma = %s" % (lower_sigma, upper_sigma))
-                    logging.info("DECIDE STL current_ask_price = %s, current_bid_price = %s" % (current_ask_price, current_bid_price))
+                    logging.info("DECIDE STL upper_sigma = %s, ask_price = %s, bid_price = %s, lower_sigma = %s" %(upper_sigma, current_ask_price, current_bid_price, lower_sigma))
 
                     # 上下どちらかのシグマにぶつかったら決済してしまう
                     # 利確、損切り兼任
                     stl_flag = False
                     if self.order_kind == "buy":
                         if current_bid_price < lower_sigma or current_bid_price > upper_sigma:
-                           logging.info("DECIDE STL")
-                           logging.info("upper_sigma = %s, price = %s, lower_sigma = %s" %(upper_sigma, current_bid_price, lower_sigma))
+                           logging.info("EXECUTE STL")
                            stl_flag = True
 
                     elif self.order_kind == "sell":
                         if current_ask_price < lower_sigma or current_ask_price > upper_sigma:
-                           logging.info("DECIDE STL")
-                           logging.info("upper_sigma = %s, price = %s, lower_sigma = %s" %(upper_sigma, current_ask_price, lower_sigma))
+                           logging.info("EXECUTE STL")
                            stl_flag = True
 
 
