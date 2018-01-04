@@ -49,11 +49,13 @@ class Evo2BollingerAlgo(SuperAlgo):
                 price_list   = data_set["price_list"]
                 base_lines   = data_set["base_lines"]
 
-                sigma_flag = False
+                sigma_flag = "pass"
                 # 過去5本で移動平均線付近にいるか確認する
-                for i in range(0, len(price_list)):
-                    if price_list[i] - base_lines[i] <= 0.05 and price_list[i] - base_lines[i] >= -0.05:
-                        sigma_flag = True
+#                for i in range(0, len(price_list)):
+                if price_list[-1] - base_lines[-1] <= 0.05 and price_list[-1] - base_lines[-1] >= 0:
+                    sigma_flag = "sell"
+                elif base_lines[-1] - price_list[-1] <= 0.05 and base_lines[-1] - price_list[-1] >= 0:
+                    sigma_flag = "buy"
 
                 # 現在価格が移動平均より上であれば、買い
                 # 現在価格が移動平均より下であれば、売り
@@ -65,12 +67,12 @@ class Evo2BollingerAlgo(SuperAlgo):
                     self.wma_value = getWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
                 
                 current_price = (self.ask_price_list[-1] + self.bid_price_list[-1]) / 2
-                logging.info("DECIDE TRADE base_line = %s, price = %s" %(base_lines[-1], current_price))
+                logging.info("DECIDE TRADE base_line = %s, price = %s, sigma_flag = %s" %(base_lines[-1], current_price, sigma_flag))
                 logging.info("DECIDE TRADE wma_value = %s, price = %s, trade_flag = %s" %(self.wma_value, current_price, trade_flag))
-                if sigma_flag and self.wma_value < current_price:
+                if sigma_flag == "buy" and self.wma_value < current_price:
                     trade_flag = "buy"
                     logging.info("EXECUTE BUY ORDER")
-                if sigma_flag and self.wma_value > current_price:
+                if sigma_flag == "sell" and self.wma_value > current_price:
                     trade_flag = "sell"
                     logging.info("EXECUTE SELL ORDER")
                 else:
