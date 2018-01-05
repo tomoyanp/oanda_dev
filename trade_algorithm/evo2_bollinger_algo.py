@@ -11,7 +11,7 @@
 ####################################################
 
 from super_algo import SuperAlgo
-from common import instrument_init, account_init, decideMarket, getBollingerDataSet, extraBollingerDataSet, countIndex
+from common import instrument_init, account_init, decideMarket, getBollingerDataSet, extraBollingerDataSet, countIndex, getEWMA
 from datetime import datetime, timedelta
 import logging
 import pandas as pd
