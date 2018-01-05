@@ -63,7 +63,8 @@ class Evo2BollingerAlgo(SuperAlgo):
                 base_lines   = data_set["base_lines"]
 
                 sigma_flag = False
-                if current_price - base_lines[-1] <= 0.05 and current_price - base_lines[-1] >= 0.05:
+                cmp_value = current_price - base_lines[-1]
+                if -0.05 < cmp_value < 0.05:
                     sigma_flag = True
 
                 # slopeが上向き、現在価格が移動平均(EWMA200)より上、現在価格が移動平均(SMA)付近にいる
