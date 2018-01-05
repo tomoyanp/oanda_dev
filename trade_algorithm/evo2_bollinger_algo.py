@@ -137,18 +137,19 @@ class Evo2BollingerAlgo(SuperAlgo):
 
                     lower_sigma = lower_sigmas[-1]
                     upper_sigma = upper_sigmas[-1]
-                    logging.info("DECIDE STL upper_sigma = %s, ask_price = %s, bid_price = %s, lower_sigma = %s" %(upper_sigma, current_ask_price, current_bid_price, lower_sigma))
+                    current_price = (current_ask_price + current_bid_price) / 2
+                    logging.info("DECIDE STL upper_sigma = %s, ask_price = %s, current_price = %s, bid_price = %s, lower_sigma = %s" %(upper_sigma, current_ask_price, current_price, current_bid_price, lower_sigma))
 
                     # 上下どちらかのシグマにぶつかったら決済してしまう
                     # 利確、損切り兼任
                     stl_flag = False
                     if self.order_kind == "buy":
-                        if current_bid_price < lower_sigma or current_bid_price > upper_sigma:
+                        if current_price < lower_sigma or current_price > upper_sigma:
                            logging.info("EXECUTE STL")
                            stl_flag = True
 
                     elif self.order_kind == "sell":
-                        if current_ask_price < lower_sigma or current_ask_price > upper_sigma:
+                        if current_price < lower_sigma or current_price > upper_sigma:
                            logging.info("EXECUTE STL")
                            stl_flag = True
 
