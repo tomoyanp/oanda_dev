@@ -104,36 +104,65 @@ def extraBollingerDataSet(data_set, sigma_length, candle_width):
 
 # 加重移動平均を計算
 # wma_length = 期間（200日移動平均、など）
-def getWMA(ask_price_list, bid_price_list, wma_length, candle_width):
+#def getWMA(ask_price_list, bid_price_list, wma_length, candle_width):
+#    ask_price_list = pd.Series(ask_price_list)
+#    bid_price_list = pd.Series(bid_price_list)
+#    average_price_list = (ask_price_list + bid_price_list) / 2
+#    average_price_list = average_price_list.values.tolist()
+#    #logging.info("wma_length = %s" % wma_length)
+#    #logging.info("candle_width = %s" % candle_width)
+#
+#    wma_length = (candle_width * wma_length) * -1
+#    #logging.info("wma_length = %s" % wma_length)
+#
+#    # wma_lengthの分だけ抽出
+#    average_price_list = average_price_list[wma_length:]
+#    #logging.info("average_price_list length = %s" % len(average_price_list))
+#
+#    # wma_lengthの分だけ、重みの積を積み上げる
+#    tmp_value = 0
+#    denominator = 0
+#    for i in range(0, len(average_price_list)):
+#        weight = i + 1
+#        denominator = denominator + weight
+#        tmp_value = tmp_value + (average_price_list[i]*weight)
+#
+#   # 総数をwma_lengthの総和（シグマ）で割る⇒ 移動平均点
+#    wma_value = tmp_value / denominator
+#    #logging.info("denominator = %s" % denominator)
+#    #logging.info("tmp_value = %s" % tmp_value)
+#    #logging.info("wma_value = %s" % wma_value)
+#
+#    return wma_value
+
+
+def getEWMA(ask_price_list, bid_price_list, wma_length, candle_width):
     ask_price_list = pd.Series(ask_price_list)
     bid_price_list = pd.Series(bid_price_list)
     average_price_list = (ask_price_list + bid_price_list) / 2
+
+    wma_length = (candle_width * wma_length) 
+    logging.info("getEWMA price_list length = %s, wma_length = %s" % (len(average_price_list), wma_length)
+
+    wma_value_list = average_price_list.ewm(ignore_na=False, span=wma_length, min_periods=0, adjust=True).mean()
+
     average_price_list = average_price_list.values.tolist()
-    #logging.info("wma_length = %s" % wma_length)
-    #logging.info("candle_width = %s" % candle_width)
+    wma_value_list = wma_value_list.values.tolist()
 
-    wma_length = (candle_width * wma_length) * -1
-    #logging.info("wma_length = %s" % wma_length)
+    return wma_value_list
 
-    # wma_lengthの分だけ抽出
-    average_price_list = average_price_list[wma_length:]
-    #logging.info("average_price_list length = %s" % len(average_price_list))
+def getSlope(target_list):
+    index_list = []
+    for i in range(0, len(target_list):
+        index_list.append(i)
 
-    # wma_lengthの分だけ、重みの積を積み上げる
-    tmp_value = 0
-    denominator = 0
-    for i in range(0, len(average_price_list)):
-        weight = i + 1
-        denominator = denominator + weight
-        tmp_value = tmp_value + (average_price_list[i]*weight)
+    price_list = np.array(target_list)
+    index_list = np.array(index_list)
 
-   # 総数をwma_lengthの総和（シグマ）で割る⇒ 移動平均点
-    wma_value = tmp_value / denominator
-    #logging.info("denominator = %s" % denominator)
-    #logging.info("tmp_value = %s" % tmp_value)
-    #logging.info("wma_value = %s" % wma_value)
+    z = np.polyfit(index_list, price_list, 1)
+    slope, intercept = np.poly1d(z)
 
-    return wma_value
+    return slope
 
 # trendcheckとかの補助的な計算は毎回やる必要ないので
 # ここでindex形式でスリープさせる

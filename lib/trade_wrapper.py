@@ -74,23 +74,6 @@ class TradeWrapper:
         else:
             self.trade_algo = HiLowAlgo(self.instrument, self.base_path, self.config_name)
 
-    def calcProfit(self):
-        order_kind = self.trade_algo.getOrderKind()
-        order_price = self.trade_algo.getOrderPrice()
-        stl_price = self.trade_algo.getCurrentPrice()
-        self.trade_algo.setStlPrice(order_price)
-        if order_kind == "buy":
-            profit = stl_price - order_price
-        else:
-            profit = order_price - stl_price
-
-        #logging.info("order_kind=%s" % order_kind)
-        #logging.info("order_price=%s" % order_price)
-        #logging.info("stl_price=%s" % stl_price)
-        #logging.info("profit=%s" % profit)
-
-        return profit
-
     def settlementLogWrite(self, profit, msg):
         nowftime = self.trade_algo.getCurrentTime()
         order_kind = self.trade_algo.getOrderKind()
@@ -128,11 +111,7 @@ class TradeWrapper:
                 trade_id = self.trade_algo.getTradeId()
                 if self.stl_sleep_flag and trade_id != 0:
 
-                    profit = self.calcProfit()
-                    if profit > 0:
-                        sleep_time = self.config_data["stl_sleep_vtime"]
-                    else:
-                        sleep_time = self.config_data["stl_sleep_ltime"]
+                    profit, sleep_time = self.trade_algo.calcProfit()
 
                     msg = "===== EXECUTE SETTLEMENT STOP OR LIMIT ORDER "
                     self.settlementLogWrite(profit, msg)
@@ -184,14 +163,7 @@ class TradeWrapper:
                         stl_price = response["price"]
                         self.trade_algo.setStlPrice(stl_price)
 
-                    profit = self.calcProfit()
-
-                    if profit > 0:
-                        sleep_time = self.config_data["stl_sleep_vtime"]
-                    else:
-                        sleep_time = self.config_data["stl_sleep_ltime"]
-
-                    #logging.info("sleep_time=%s" % sleep_time)
+                    profit, sleep_time = self.trade_algo.calcProfit()
 
                     # 計算した利益を結果ファイルに出力
                     msg = "===== EXECUTE SETTLEMENT "

@@ -16,10 +16,62 @@ from datetime import datetime, timedelta
 from common import decideMarket, getWMA
 import time
 
+
+def getInitialRecord(base_time):
+    insert_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
+    width = 4000 * 200
+    sql = u"select ask_price, bid_price, insert_time from %s_TABLE where insert_time <= \'%s\' ORDER BY insert_time DESC limit %s" % (currency, insert_time, width)
+    print sql
+    response = con.select_sql(sql)
+
+    now = datetime.now()
+
+    ask_price_list = []
+    bid_price_list = []
+    insert_time_list = []
+
+    for res in response:
+        ask_price_list.append(res[0])
+        bid_price_list.append(res[1])
+        insert_time_list.append(res[2])
+
+    ask_price_list.reverse()
+    bid_price_list.reverse()
+    insert_time_list.reverse()
+    
+    while now != base_time:
+        base_time = base_time + timedelta(seconds=1)
+        insert_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
+        sql = u"select ask_price, bid_price, insert_time from %s_TABLE where insert_time = \'%s\'" % (currency, insert_time)
+        print sql
+        response = con.select_sql(sql)
+
+        for res in response:
+            ask_price_list.append(res[0])
+            bid_price_list.append(res[1])
+            insert_time_list.append(res[2])
+ 
+        now = datetime.now()
+
+    return ask_price_list, bid_price_list, insert_time_list, base_time
+
+def addRecord():
+
+
+
+
+
 if __name__ == "__main__":
     args = sys.argv
     currency = args[1].strip()
     con = MysqlConnector()
+    now = datetime.now()
+    resposne = getInitialRecord(now)
+
+    ask_price_list = []
+    bid_price_list = []
+    insert_time_list = []
+
 
     while True:
         try:
@@ -30,9 +82,7 @@ if __name__ == "__main__":
                 pass
             else:
                 now = now.strftime("%Y-%m-%d %H:%M:%S")
-                width = 4000 * 200
                 sql = u"select ask_price, bid_price, insert_time from %s_TABLE where insert_time <= \'%s\' ORDER BY insert_time DESC limit %s" % (currency, now, width)
-                response = con.select_sql(sql)
                 ask_price_list = []
                 bid_price_list = []
                 for res in response:

@@ -42,6 +42,9 @@ class SuperAlgo(object):
         self.trend_flag = ""
         self.wma_value = 0
 
+        self.profit_history = "i" # initial
+        self.order_history  = "i" # initial
+
 ################################################
 # listは、要素数が大きいほうが古い。
 # 小さいほうが新しい
@@ -389,6 +392,27 @@ class SuperAlgo(object):
 
        return slope
 
+
+    def calcProfit(self):
+        stl_price = self.getCurrentPrice()
+        self.trade_algo.setStlPrice(stl_price)
+        if self.order_kind == "buy":
+            profit = stl_price - self.order_price
+        else:
+            profit = self.order_price - stl_price
+
+        if profit > 0:
+            self.profit_history = "v"
+            sleep_time = self.config_data["stl_sleep_vtime"]
+        else:
+            self.profit_history = "l"
+            sleep_time = self.config_data["stl_sleep_ltime"]
+
+        self.order_histroy = self.order_kind
+        logging.info("order_price = %s, stl_price = %s, order_kind = %s, profit = %s" % (self.order_price, self.stl_price, self.order_kind, profit)
+        logging.info("profit_history = %s, order_history = %s, " % (self.profit_history, self.order_history))
+
+        return profit, sleep_time
 
     @abstractmethod
     def decideTrade(self):
