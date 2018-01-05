@@ -142,7 +142,7 @@ def getEWMA(ask_price_list, bid_price_list, wma_length, candle_width):
     average_price_list = (ask_price_list + bid_price_list) / 2
 
     wma_length = (candle_width * wma_length) 
-    logging.info("getEWMA price_list length = %s, wma_length = %s" % (len(average_price_list), wma_length)
+    logging.info("getEWMA price_list length = %s, wma_length = %s" % (len(average_price_list), wma_length))
 
     wma_value_list = average_price_list.ewm(ignore_na=False, span=wma_length, min_periods=0, adjust=True).mean()
 
@@ -153,7 +153,7 @@ def getEWMA(ask_price_list, bid_price_list, wma_length, candle_width):
 
 def getSlope(target_list):
     index_list = []
-    for i in range(0, len(target_list):
+    for i in range(0, len(target_list)):
         index_list.append(i)
 
     price_list = np.array(target_list)

@@ -10,7 +10,7 @@ from datetime import datetime,timedelta
 import numpy as np
 import logging
 import os
-from common import instrument_init, account_init, decideMarket
+from common import instrument_init, account_init, decideMarket, getEWMA
 from abc import ABCMeta, abstractmethod
 from mysql_connector import MysqlConnector
 
@@ -409,7 +409,7 @@ class SuperAlgo(object):
             sleep_time = self.config_data["stl_sleep_ltime"]
 
         self.order_histroy = self.order_kind
-        logging.info("order_price = %s, stl_price = %s, order_kind = %s, profit = %s" % (self.order_price, self.stl_price, self.order_kind, profit)
+        logging.info("order_price = %s, stl_price = %s, order_kind = %s, profit = %s" % (self.order_price, self.stl_price, self.order_kind, profit))
         logging.info("profit_history = %s, order_history = %s, " % (self.profit_history, self.order_history))
 
         return profit, sleep_time
