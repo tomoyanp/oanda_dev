@@ -11,7 +11,7 @@
 ####################################################
 
 from super_algo import SuperAlgo
-from common import instrument_init, account_init, decideMarket, getBollingerDataSet, extraBollingerDataSet, countIndex, getEWMA
+from common import instrument_init, account_init, decideMarket, getBollingerDataSet, extraBollingerDataSet, getEWMA, countIndex, getSlope
 from datetime import datetime, timedelta
 import logging
 import pandas as pd
@@ -41,7 +41,7 @@ class Evo2BollingerAlgo(SuperAlgo):
                 # トレンドの取得
                 slope_length = 20 * -1
                 slope_list = ewma50[slope_length:]
-                slope = newCheckTrend(slope_list)
+                slope = getSlope(slope_list)
                 logging.info("time = %s, slope = %s" % (base_time, slope))
 
                 slope_threshold = 0.1

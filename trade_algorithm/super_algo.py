@@ -10,7 +10,7 @@ from datetime import datetime,timedelta
 import numpy as np
 import logging
 import os
-from common import instrument_init, account_init, decideMarket, getEWMA
+from common import instrument_init, account_init, decideMarket
 from abc import ABCMeta, abstractmethod
 from mysql_connector import MysqlConnector
 
