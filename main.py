@@ -60,8 +60,8 @@ if __name__ == '__main__':
     sleep_time = 10
 
     base_time = datetime.now()
-    end_time = base_time - timedelta(days=0)
-    base_time = base_time - timedelta(days=2)
+    end_time = base_time - timedelta(days=1)
+    base_time = base_time - timedelta(days=4)
 
     try:
       while True:

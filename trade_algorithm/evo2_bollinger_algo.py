@@ -17,6 +17,9 @@ import logging
 import pandas as pd
 import decimal
 
+low_slope_threshold  = -0.3
+high_slope_threshold = 0.3
+
 class Evo2BollingerAlgo(SuperAlgo):
     def __init__(self, instrument, base_path, config_name):
         super(Evo2BollingerAlgo, self).__init__(instrument, base_path, config_name)
@@ -45,7 +48,6 @@ class Evo2BollingerAlgo(SuperAlgo):
                 slope = getSlope(slope_list)
                 logging.info("time = %s, slope = %s" % (base_time, slope))
 
-                slope_threshold = 0.3
 
                 current_price = self.getCurrentPrice()
 
@@ -69,10 +71,10 @@ class Evo2BollingerAlgo(SuperAlgo):
                     sigma_flag = True
 
                 # slopeが上向き、現在価格が移動平均(EWMA200)より上、現在価格が移動平均(SMA)付近にいる
-                if slope - slope_threshold > 0 and ewma200[-1] < current_price and sigma_flag:
+                if slope - high_slope_threshold > 0 and ewma200[-1] < current_price and sigma_flag:
                     trade_flag = "buy"
                 # slopeが下向き、現在価格が移動平均(EWMA200)より下、現在価格が移動平均(SMA)付近にいる
-                elif slope + slope_threshold < 0 and ewma200[-1] > current_price and sigma_flag:
+                elif slope - low_slope_threshold < 0 and ewma200[-1] > current_price and sigma_flag:
                     trade_flag = "sell"
                 else:
                     trade_flag = "pass"
@@ -91,12 +93,27 @@ class Evo2BollingerAlgo(SuperAlgo):
         try:
             stl_flag = False
             ex_stlmode = self.config_data["ex_stlmode"]
-
+            window_size = self.config_data["window_size"]
+            sigma_valiable = self.config_data["bollinger_sigma"]
+            candle_width = self.config_data["candle_width"]
+ 
             if self.order_flag:
                 if ex_stlmode == "on":
-                    window_size = self.config_data["window_size"]
-                    sigma_valiable = self.config_data["bollinger_sigma"]
-                    candle_width = self.config_data["candle_width"]
+
+                    # 移動平均の取得(WMA50)
+                    wma_length = 50
+                    ewma50 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
+    
+                    # トレンドの取得 20から10に変えてみる
+                    slope_length = (10 * candle_width) * -1
+                    slope_list = ewma50[slope_length:]
+                    #logging.info(slope_list)
+                    slope = getSlope(slope_list)
+                    logging.info("time = %s, slope = %s" % (base_time, slope))
+    
+
+
+                    # get Bollinger Band
                     data_set = getBollingerDataSet(self.ask_price_list,
                                                    self.bid_price_list,
                                                    window_size,
@@ -129,6 +146,12 @@ class Evo2BollingerAlgo(SuperAlgo):
                         if current_price > upper_sigma:
                            logging.info("EXECUTE STL")
                            stl_flag = True
+
+                    elif low_slope_threshold < slope < high_slope_threshold:
+                        logging.info("EXECUTE STL")
+                        stl_flag = True
+
+
 
             else:
                 pass
