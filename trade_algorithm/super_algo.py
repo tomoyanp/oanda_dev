@@ -395,7 +395,7 @@ class SuperAlgo(object):
 
     def calcProfit(self):
         stl_price = self.getCurrentPrice()
-        self.trade_algo.setStlPrice(stl_price)
+        self.setStlPrice(stl_price)
         if self.order_kind == "buy":
             profit = stl_price - self.order_price
         else:

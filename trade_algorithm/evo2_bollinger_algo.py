@@ -38,13 +38,14 @@ class Evo2BollingerAlgo(SuperAlgo):
                 wma_length = 200
                 ewma200 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
 
-                # トレンドの取得
-                slope_length = 20 * -1
+                # トレンドの取得 20から10に変えてみる
+                slope_length = (10 * candle_width) * -1
                 slope_list = ewma50[slope_length:]
+                #logging.info(slope_list)
                 slope = getSlope(slope_list)
                 logging.info("time = %s, slope = %s" % (base_time, slope))
 
-                slope_threshold = 0.1
+                slope_threshold = 0.3
 
                 current_price = self.getCurrentPrice()
 
@@ -64,20 +65,20 @@ class Evo2BollingerAlgo(SuperAlgo):
 
                 sigma_flag = False
                 cmp_value = current_price - base_lines[-1]
-                if -0.05 < cmp_value < 0.05:
+                if -0.01 < cmp_value < 0.01:
                     sigma_flag = True
 
                 # slopeが上向き、現在価格が移動平均(EWMA200)より上、現在価格が移動平均(SMA)付近にいる
                 if slope - slope_threshold > 0 and ewma200[-1] < current_price and sigma_flag:
                     trade_flag = "buy"
                 # slopeが下向き、現在価格が移動平均(EWMA200)より下、現在価格が移動平均(SMA)付近にいる
-                elif slope + slope_threshold < 0 and ewma200[-1] < current_price and sigma_flag:
+                elif slope + slope_threshold < 0 and ewma200[-1] > current_price and sigma_flag:
                     trade_flag = "sell"
                 else:
                     trade_flag = "pass"
 
                 logging.info("DECIDE TRADE base = %s, price = %s, sigma_flag = %s" %(base_lines[-1], current_price, sigma_flag))
-                logging.info("DECIDE TRADE slope = %s, ewma200 = %s, trade_flag = %s" %(slope, ewma200[-1], trade_flag))
+                logging.info("DECIDE TRADE slope = %s, ewma200 = %s, trade_flag = %s" %(str(slope), ewma200[-1], trade_flag))
 
                 return trade_flag
 
@@ -113,7 +114,7 @@ class Evo2BollingerAlgo(SuperAlgo):
                     lower_sigma = lower_sigmas[-1]
                     upper_sigma = upper_sigmas[-1]
                     current_price = self.getCurrentPrice()
-                    logging.info("DECIDE STL upper_sigma = %s, current_price = %s, lower_sigma = %s" %(upper_sigma, current_ask_price, current_price, current_bid_price, lower_sigma))
+                    logging.info("DECIDE STL upper_sigma = %s, current_price = %s, lower_sigma = %s" %(upper_sigma, current_price, lower_sigma))
 
                     # 買いの場合はlower_sigmaにぶつかったら決済
                     # 売りの場合はupper_sigmaにぶつかったら決済

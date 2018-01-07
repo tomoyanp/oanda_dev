@@ -153,23 +153,14 @@ def getEWMA(ask_price_list, bid_price_list, wma_length, candle_width):
 
 def getSlope(target_list):
     index_list = []
-    tmp_list = []
-    index = 60
-
-    for i in range(0, len(target_list)):
-        if i % index == 0:
-            tmp_list.append(target_list[i])
-
-    target_list = tmp_list
-    length = len(target_list) * 10
-    #length = len(target_list)
+    #length = len(target_list) * 10
+    length = len(target_list)
     for i in range(1, len(target_list)+1):
-        val = float(i)/float(length)
+        val = i/length
         index_list.append(val)
 
     price_list = np.array(target_list)
     index_list = np.array(index_list)
-    #print index_list
 
     z = np.polyfit(index_list, price_list, 1)
     slope, intercept = np.poly1d(z)
