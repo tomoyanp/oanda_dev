@@ -37,6 +37,7 @@ if __name__ == "__main__":
                 sql = u"select insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (currency, start_time, end_time)
                 print sql
                 response = con.select_sql(sql)
+                print response
                 print "==============================================="
                 for res in response:
                     tm = res[0].strftime("%Y-%m-%d %H:%M:%S")
