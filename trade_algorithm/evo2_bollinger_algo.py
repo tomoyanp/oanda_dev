@@ -132,6 +132,7 @@ class Evo2BollingerAlgo(SuperAlgo):
                     upper_sigma = upper_sigmas[-1]
                     current_price = self.getCurrentPrice()
                     logging.info("DECIDE STL upper_sigma = %s, current_price = %s, lower_sigma = %s" %(upper_sigma, current_price, lower_sigma))
+                    logging.info("DECIDE STL low_slope_threshold = %s, slope = %s, high_slope_threshold = %s" %(low_slope_threshold, slope, high_slope_threshold))
 
                     # 買いの場合はlower_sigmaにぶつかったら決済
                     # 売りの場合はupper_sigmaにぶつかったら決済
