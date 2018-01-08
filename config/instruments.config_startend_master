@@ -10,7 +10,7 @@
     "stl_sleep_time": "1",
     "stl_sleep_vtime": 1800,
     "stl_sleep_ltime": 1800,
-    "units": 40000,
+    "units": 30000,
     "step_wise_unit": 1,
     "step_wise_coefficient_threshold": 0.9,
     "enable_time": ["21:00:00", "22:00:00", "23:00:00"],
