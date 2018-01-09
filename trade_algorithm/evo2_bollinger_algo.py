@@ -105,7 +105,7 @@ class Evo2BollingerAlgo(SuperAlgo):
                     ewma50 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
     
                     # トレンドの取得 20から10に変えてみる
-                    slope_length = (10 * candle_width) * -1
+                    slope_length = (5 * candle_width) * -1
                     slope_list = ewma50[slope_length:]
                     #logging.info(slope_list)
                     slope = getSlope(slope_list)
@@ -131,13 +131,16 @@ class Evo2BollingerAlgo(SuperAlgo):
                     lower_sigma = lower_sigmas[-1]
                     upper_sigma = upper_sigmas[-1]
                     current_price = self.getCurrentPrice()
+                    order_price = self.getOrderPrice()
                     logging.info("DECIDE STL upper_sigma = %s, current_price = %s, lower_sigma = %s" %(upper_sigma, current_price, lower_sigma))
-                    logging.info("DECIDE STL low_slope_threshold = %s, slope = %s, high_slope_threshold = %s" %(low_slope_threshold, slope, high_slope_threshold))
+                    logging.info("DECIDE STL order_price = %s, low_slope_threshold = %s, slope = %s, high_slope_threshold = %s" %(order_price, low_slope_threshold, slope, high_slope_threshold))
+                    logging.info("DECIDE STL low_slope_threshold_type = %s, slope_type = %s, high_slope_threshold_type = %s" %(type(low_slope_threshold), type(slope), type(high_slope_threshold)))
 
                     # 買いの場合はlower_sigmaにぶつかったら決済
                     # 売りの場合はupper_sigmaにぶつかったら決済
-                    # 1.5シグマのほうが良いかもしれん
                     stl_flag = False
+
+                    # Stop Loss Algorithm
                     if self.order_kind == "buy":
                         if current_price < lower_sigma:
                            logging.info("EXECUTE STL")
@@ -148,9 +151,20 @@ class Evo2BollingerAlgo(SuperAlgo):
                            logging.info("EXECUTE STL")
                            stl_flag = True
 
-                    elif low_slope_threshold < slope < high_slope_threshold:
-                        logging.info("EXECUTE STL")
-                        stl_flag = True
+
+                    # Take Profit Algorithm
+                    # min_take_profit = self.config_data["min_take_profit"]
+                    min_take_profit = 0.1
+                    if self.order_kind == "buy": 
+                        if (current_price - order_price) > min_take_profit:
+                            if low_slope_threshold < slope < high_slope_threshold:
+                                logging.info("EXECUTE STL")
+                                stl_flag = True
+                    elif self.order_kind == "sell":
+                        if (order_price - current_price) > min_take_profit:
+                            if float(low_slope_threshold) < float(slope) < float(high_slope_threshold):
+                                logging.info("EXECUTE STL")
+                                stl_flag = True
 
 
 
