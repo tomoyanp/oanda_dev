@@ -130,9 +130,12 @@ class Evo2BollingerAlgo(SuperAlgo):
 
                     lower_sigma = lower_sigmas[-1]
                     upper_sigma = upper_sigmas[-1]
+                    base_line = base_lines[-1]
+                    current_ask_price = self.ask_price_list[-1]
+                    current_bid_price = self.bid_price_list[-1]
                     current_price = self.getCurrentPrice()
                     order_price = self.getOrderPrice()
-                    logging.info("DECIDE STL upper_sigma = %s, current_price = %s, lower_sigma = %s" %(upper_sigma, current_price, lower_sigma))
+                    logging.info("DECIDE STL upper_sigma = %s, current_price = %s, lower_sigma = %s, base_line = %s" %(upper_sigma, current_price, lower_sigma, base_line))
                     logging.info("DECIDE STL order_price = %s, low_slope_threshold = %s, slope = %s, high_slope_threshold = %s" %(order_price, low_slope_threshold, slope, high_slope_threshold))
                     logging.info("DECIDE STL low_slope_threshold_type = %s, slope_type = %s, high_slope_threshold_type = %s" %(type(low_slope_threshold), type(slope), type(high_slope_threshold)))
 
@@ -156,13 +159,13 @@ class Evo2BollingerAlgo(SuperAlgo):
                     # min_take_profit = self.config_data["min_take_profit"]
                     min_take_profit = 0.1
                     if self.order_kind == "buy": 
-                        if (current_price - order_price) > min_take_profit:
-                            if low_slope_threshold < slope < high_slope_threshold:
+                        if (current_bid_price - order_price) > min_take_profit:
+                            if -0.02 < (current_price - base_line) < 0.02:
                                 logging.info("EXECUTE STL")
                                 stl_flag = True
                     elif self.order_kind == "sell":
-                        if (order_price - current_price) > min_take_profit:
-                            if float(low_slope_threshold) < float(slope) < float(high_slope_threshold):
+                        if (order_price - current_ask_price) > min_take_profit:
+                            if -0.02 < (current_price - base_line) < 0.02:
                                 logging.info("EXECUTE STL")
                                 stl_flag = True
 
