@@ -157,7 +157,7 @@ class Evo2BollingerAlgo(SuperAlgo):
                     min_take_profit = 0.1
                     if self.order_kind == "buy": 
                         if (current_price - order_price) > min_take_profit:
-                            if low_slope_threshold < slope < high_slope_threshold:
+                            if float(low_slope_threshold) < float(slope) < float(high_slope_threshold):
                                 logging.info("EXECUTE STL")
                                 stl_flag = True
                     elif self.order_kind == "sell":
