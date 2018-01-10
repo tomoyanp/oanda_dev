@@ -203,69 +203,76 @@ class Evo2BollingerAlgo(SuperAlgo):
                     # Take Profit Algorithm #
                     #########################
 
-                    # When current price don't touch bollinger band sigma 1, Execute Settlement.
-
-                    # min_take_profit = self.config_data["min_take_profit"]
-                    logging.info("DECIDE STL current_bid_price = %s, current_ask_price = %s, order_price = %s" %(current_bid_price, current_ask_price, order_price))
-
-                    # get Bollinger Band sigma 1
-                    sigma_valiable = 1
-                    data_set = getBollingerDataSet(self.ask_price_list,
-                                                   self.bid_price_list,
-                                                   window_size,
-                                                   sigma_valiable,
-                                                   candle_width)
-
-                    #sigma_length = self.config_data["sigma_length"]
-                    # Extra Bollinger Band for 5 minutes
-                    sigma_length = 1
-                    data_set = extraBollingerDataSet(data_set, sigma_length, candle_width)
-                    upper_sigmas = data_set["upper_sigmas"]
-                    lower_sigmas = data_set["lower_sigmas"]
-                    price_list   = data_set["price_list"]
-                    base_lines   = data_set["base_lines"]
-
-
-                    min_take_profit = 0.1
-                    bollinger_flag = False
-                    if self.order_kind == "buy":
-                        if (float(current_bid_price) - float(order_price)) > float(min_take_profit):
-                            for i in range(0, len(price_list)):
-                                if price_list[i] > upper_sigmas[i]:
-                                    bollinger_flag = True
-                                    logging.info("price > upper_sigma, price = %s, upper_sigma = %s" % (price_list[i], upper_sigmas[i]))
-                            if bollinger_flag:
-                                pass
-                            else:
-                                stl_flag = True
-                    elif self.order_kind == "sell":
-                        if (float(order_price) - float(current_ask_price)) > float(min_take_profit):
-                            for i in range(0, len(price_list)):
-                                if price_list[i] < lower_sigmas[i]:
-                                    bollinger_flag = True
-                                    logging.info("price < lower_sigma, price = %s, lower_sigma = %s" % (price_list[i], lower_sigmas[i]))
-                            if bollinger_flag:
-                                pass
-                            else:
-                                stl_flag = True
+#                    # When current price don't touch bollinger band sigma 1, Execute Settlement.
+#
+#                    # min_take_profit = self.config_data["min_take_profit"]
+#                    logging.info("DECIDE STL current_bid_price = %s, current_ask_price = %s, order_price = %s" %(current_bid_price, current_ask_price, order_price))
+#
+#                    # get Bollinger Band sigma 1
+#                    sigma_valiable = 1
+#                    data_set = getBollingerDataSet(self.ask_price_list,
+#                                                   self.bid_price_list,
+#                                                   window_size,
+#                                                   sigma_valiable,
+#                                                   candle_width)
+#
+#                    #sigma_length = self.config_data["sigma_length"]
+#                    # Extra Bollinger Band for 5 minutes
+#                    sigma_length = 1
+#                    data_set = extraBollingerDataSet(data_set, sigma_length, candle_width)
+#                    upper_sigmas = data_set["upper_sigmas"]
+#                    lower_sigmas = data_set["lower_sigmas"]
+#                    price_list   = data_set["price_list"]
+#                    base_lines   = data_set["base_lines"]
+#
+#
+#                    min_take_profit = 0.1
+#                    bollinger_flag = False
+#                    if self.order_kind == "buy":
+#                        if (float(current_bid_price) - float(order_price)) > float(min_take_profit):
+#                            for i in range(0, len(price_list)):
+#                                if price_list[i] > upper_sigmas[i]:
+#                                    bollinger_flag = True
+#                                    logging.info("price > upper_sigma, price = %s, upper_sigma = %s" % (price_list[i], upper_sigmas[i]))
+#                            if bollinger_flag:
+#                                pass
+#                            else:
+#                                stl_flag = True
+#                    elif self.order_kind == "sell":
+#                        if (float(order_price) - float(current_ask_price)) > float(min_take_profit):
+#                            for i in range(0, len(price_list)):
+#                                if price_list[i] < lower_sigmas[i]:
+#                                    bollinger_flag = True
+#                                    logging.info("price < lower_sigma, price = %s, lower_sigma = %s" % (price_list[i], lower_sigmas[i]))
+#                            if bollinger_flag:
+#                                pass
+#                            else:
+#                                stl_flag = True
                    
+
+
+
+
+
+
+
 
 
                     # min_take_profit = self.config_data["min_take_profit"]
                     # When current_price is matched moving average price, execute Settlement
 
-#                    min_take_profit = 0.1
-#                    if self.order_kind == "buy":
-#                        if (current_bid_price - order_price) > min_take_profit:
-#                            if -0.02 < (current_price - base_line) < 0.02:
-#                                logging.info("EXECUTE STL")
-#                                stl_flag = True
-#                    elif self.order_kind == "sell":
-#                        if (order_price - current_ask_price) > min_take_profit:
-#                            if -0.02 < (current_price - base_line) < 0.02:
-#                                logging.info("EXECUTE STL")
-#                                stl_flag = True
-#
+                    min_take_profit = 0.1
+                    if self.order_kind == "buy":
+                        if (current_bid_price - order_price) > min_take_profit:
+                            if -0.02 < (current_price - base_line) < 0.02:
+                                logging.info("EXECUTE STL")
+                                stl_flag = True
+                    elif self.order_kind == "sell":
+                        if (order_price - current_ask_price) > min_take_profit:
+                            if -0.02 < (current_price - base_line) < 0.02:
+                                logging.info("EXECUTE STL")
+                                stl_flag = True
+
 
 
             else:
