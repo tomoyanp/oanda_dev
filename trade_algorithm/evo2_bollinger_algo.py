@@ -98,10 +98,11 @@ class Evo2BollingerAlgo(SuperAlgo):
                     upper_3sigma = data_3set["upper_sigmas"][-1]
                     lower_3sigma = data_3set["lower_sigmas"][-1]
                     logging.info("DECIDE TRADE lower_3sigma = %s, upper_3sigma = %s, current_price = %s" % (lower_3sigma, upper_3sigma, current_price))
-                    if current_price > upper_3sigma:
+                    # 現在価格が3シグマを上回ること、現在価格が200日移動平均線を上回ること
+                    if current_price > upper_3sigma and current_price > ewma200[-1]:
                         trade_flag = "buy"
                         logging.info("EXECUTE TRADE")
-                    elif current_price < lower_3sigma:
+                    elif current_price < lower_3sigma and current_price < ewma200[-1]:
                         trade_flag = "sell"
                         logging.info("EXECUTE TRADE")
                     else:
