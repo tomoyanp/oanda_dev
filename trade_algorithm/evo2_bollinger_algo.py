@@ -64,10 +64,6 @@ class Evo2BollingerAlgo(SuperAlgo):
                                                window_size,
                                                sigma_valiable,
                                                candle_width)
-
-                # 過去5本分（50分）のsigmaだけ抽出
-                sigma_length = self.config_data["sigma_length"]
-                data_set     = extraBollingerDataSet(data_set, sigma_length, candle_width)
                 upper_sigmas = data_set["upper_sigmas"]
                 lower_sigmas = data_set["lower_sigmas"]
                 price_list   = data_set["price_list"]
@@ -83,7 +79,7 @@ class Evo2BollingerAlgo(SuperAlgo):
                 logging.info("DECIDE TRADE cmp_lower_sigma = %s, cmp_upper_sigma = %s" % (cmp_lower_sigma, cmp_upper_sigma))
 
                 range_flag = False
-                if (float(cmp_upper_sigma) - float(cmp_lower_sigma)) > float(bollinger_width_threshold):
+                if (float(cmp_upper_sigma) - float(cmp_lower_sigma)) < float(bollinger_width_threshold):
                     range_flag = True
                 else:
                     range_flag = False
