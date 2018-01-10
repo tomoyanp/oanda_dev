@@ -167,8 +167,9 @@ class Evo2BollingerAlgo(SuperAlgo):
                                                    sigma_valiable,
                                                    candle_width)
 
-#                    # 過去5本分（50分）のsigmaだけ抽出
-                    sigma_length = self.config_data["sigma_length"]
+                    #sigma_length = self.config_data["sigma_length"]
+                    # Extra Bollinger Band for 5 minutes
+                    sigma_length = 1
                     data_set = extraBollingerDataSet(data_set, sigma_length, candle_width)
                     upper_sigmas = data_set["upper_sigmas"]
                     lower_sigmas = data_set["lower_sigmas"]
@@ -203,19 +204,24 @@ class Evo2BollingerAlgo(SuperAlgo):
 
 
                     # Take Profit Algorithm
-                    # min_take_profit = self.config_data["min_take_profit"]
-                    min_take_profit = 0.1
-                    if self.order_kind == "buy":
-                        if (current_bid_price - order_price) > min_take_profit:
-                            if -0.02 < (current_price - base_line) < 0.02:
-                                logging.info("EXECUTE STL")
-                                stl_flag = True
-                    elif self.order_kind == "sell":
-                        if (order_price - current_ask_price) > min_take_profit:
-                            if -0.02 < (current_price - base_line) < 0.02:
-                                logging.info("EXECUTE STL")
-                                stl_flag = True
+                    
 
+
+                    # min_take_profit = self.config_data["min_take_profit"]
+                    # When current_price is matched moving average price, execute Settlement
+
+#                    min_take_profit = 0.1
+#                    if self.order_kind == "buy":
+#                        if (current_bid_price - order_price) > min_take_profit:
+#                            if -0.02 < (current_price - base_line) < 0.02:
+#                                logging.info("EXECUTE STL")
+#                                stl_flag = True
+#                    elif self.order_kind == "sell":
+#                        if (order_price - current_ask_price) > min_take_profit:
+#                            if -0.02 < (current_price - base_line) < 0.02:
+#                                logging.info("EXECUTE STL")
+#                                stl_flag = True
+#
 
 
             else:
