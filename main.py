@@ -61,7 +61,7 @@ if __name__ == '__main__':
 
     base_time = datetime.now()
     end_time = base_time - timedelta(days=0)
-    base_time = base_time - timedelta(days=1)
+    base_time = base_time - timedelta(days=2)
 
     try:
       while True:
