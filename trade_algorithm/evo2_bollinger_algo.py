@@ -166,7 +166,7 @@ class Evo2BollingerAlgo(SuperAlgo):
                                                    sigma_valiable,
                                                    candle_width)
 
-                    #sigma_length = self.config_data["sigma_length"]
+                    sigma_length = self.config_data["sigma_length"]
                     # Extra Bollinger Band for 5 minutes
                     data_set = extraBollingerDataSet(data_set, sigma_length, candle_width)
                     upper_sigmas = data_set["upper_sigmas"]
