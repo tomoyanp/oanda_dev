@@ -43,91 +43,124 @@ class Evo2BollingerAlgo(SuperAlgo):
             if self.order_flag:
                 pass
             else:
-                # 移動平均の取得(WMA50)
-                wma_length = 50
-                ewma50 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
-                wma_length = 200
-                ewma200 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
+
+                #############################################
+                # Get 1h * 21 WMA and check long time trend #
+                #############################################
+
+                # 移動平均の取得（WMA21（1時間足））
+                candle_width = 3600
+                wma_length = 21
+                ewma21_3600 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
 
                 # トレンドの取得 20から10に変えてみる
                 slope_length = (10 * candle_width) * -1
                 slope_list = ewma50[slope_length:]
-                #logging.info(slope_list)
                 slope = getSlope(slope_list)
-                logging.info("time = %s, slope = %s" % (base_time, slope))
+                logging.info("LongTimeTrend slope = %s" % slope)
 
-
-                current_price = self.getCurrentPrice()
-
-                data_set = getBollingerDataSet(self.ask_price_list,
-                                               self.bid_price_list,
-                                               window_size,
-                                               sigma_valiable,
-                                               candle_width)
-                upper_sigmas = data_set["upper_sigmas"]
-                lower_sigmas = data_set["lower_sigmas"]
-                price_list   = data_set["price_list"]
-                base_lines   = data_set["base_lines"]
-
-                ### rangeかどうか判断
-                # ボリンジャーバンド幅の閾値
-                bollinger_width_threshold = 0.2
-                # 何分前のものを取るか
-                sigmas_before = (10*60)*-1
-                cmp_upper_sigma = upper_sigmas[sigmas_before]
-                cmp_lower_sigma = lower_sigmas[sigmas_before]
-                logging.info("DECIDE TRADE cmp_lower_sigma = %s, cmp_upper_sigma = %s" % (cmp_lower_sigma, cmp_upper_sigma))
-
-                range_flag = False
-                if (float(cmp_upper_sigma) - float(cmp_lower_sigma)) < float(bollinger_width_threshold):
-                    range_flag = True
+                # 3600の21日移動平均の傾きが、0.5以上であれば売買ロジックに入る
+                high_trend_threshold = 0.5
+                low_trend_threshold = -0.5
+                if float(high_trend_threshold) < float(slope):
+                    trend_flag = "buy"
+                elif float(low_trend_threshold) > float(slope)
+                    trend_flag = "sell"
                 else:
-                    range_flag = False
-                logging.info("DECIDE TRADE range_flag = %s" % range_flag)
+                    trend_flag = "pass"
+                    
+                if trend_flag == "pass":
+                    pass
+                else:
+                    # 移動平均の取得(WMA50)
+                    wma_length = 50
+                    ewma50 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
+                    wma_length = 200
+                    ewma200 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
 
-                # rangeの場合は、ブレイクを待つ
-                if range_flag:
-                    # 3シグマで計算
-                    sigma_valiable = 3
-                    data_3set = getBollingerDataSet(self.ask_price_list,
+                    # トレンドの取得 20から10に変えてみる
+                    slope_length = (10 * candle_width) * -1
+                    slope_list = ewma50[slope_length:]
+                    slope = getSlope(slope_list)
+                    logging.info("time = %s, slope = %s" % (base_time, slope))
+
+
+                    current_price = self.getCurrentPrice()
+
+                    data_set = getBollingerDataSet(self.ask_price_list,
                                                    self.bid_price_list,
                                                    window_size,
                                                    sigma_valiable,
                                                    candle_width)
+                    upper_sigmas = data_set["upper_sigmas"]
+                    lower_sigmas = data_set["lower_sigmas"]
+                    price_list   = data_set["price_list"]
+                    base_lines   = data_set["base_lines"]
 
-                    upper_3sigma = data_3set["upper_sigmas"][-1]
-                    lower_3sigma = data_3set["lower_sigmas"][-1]
-                    logging.info("DECIDE TRADE lower_3sigma = %s, upper_3sigma = %s, current_price = %s" % (lower_3sigma, upper_3sigma, current_price))
-                    # 現在価格が3シグマを上回ること、現在価格が200日移動平均線を上回ること
-                    if current_price > upper_3sigma and current_price > ewma200[-1]:
-                        trade_flag = "buy"
-                        logging.info("EXECUTE TRADE")
-                    elif current_price < lower_3sigma and current_price < ewma200[-1]:
-                        trade_flag = "sell"
-                        logging.info("EXECUTE TRADE")
+
+                    ########################
+                    # Check Trend or Range #
+                    ########################
+
+                    ### rangeかどうか判断
+                    # ボリンジャーバンド幅の閾値
+                    bollinger_width_threshold = 0.2
+                    # 何分前のものを取るか
+                    sigmas_before = (10*60)*-1
+                    cmp_upper_sigma = upper_sigmas[sigmas_before]
+                    cmp_lower_sigma = lower_sigmas[sigmas_before]
+                    logging.info("DECIDE TRADE cmp_lower_sigma = %s, cmp_upper_sigma = %s" % (cmp_lower_sigma, cmp_upper_sigma))
+
+                    range_flag = False
+                    if (float(cmp_upper_sigma) - float(cmp_lower_sigma)) < float(bollinger_width_threshold):
+                        range_flag = True
                     else:
-                        trade_flag = "pass"
+                        range_flag = False
+                    logging.info("DECIDE TRADE range_flag = %s" % range_flag)
 
-                # rangeではない場合は、トレンドフォローする
-                else:
-                    sigma_flag = False
-                    cmp_value = current_price - base_lines[-1]
-                    if -0.01 < cmp_value < 0.01:
-                        sigma_flag = True
+                    # rangeの場合は、ブレイクを待つ
+                    if range_flag:
+                        # 3シグマで計算
+                        sigma_valiable = 3
+                        data_3set = getBollingerDataSet(self.ask_price_list,
+                                                       self.bid_price_list,
+                                                       window_size,
+                                                       sigma_valiable,
+                                                       candle_width)
 
-                    # slopeが上向き、現在価格が移動平均(EWMA200)より上、現在価格が移動平均(SMA)付近にいる
-                    if slope - high_slope_threshold > 0 and ewma200[-1] < current_price and sigma_flag:
-                        trade_flag = "buy"
-                        logging.info("EXECUTE TRADE")
-                    # slopeが下向き、現在価格が移動平均(EWMA200)より下、現在価格が移動平均(SMA)付近にいる
-                    elif slope - low_slope_threshold < 0 and ewma200[-1] > current_price and sigma_flag:
-                        trade_flag = "sell"
-                        logging.info("EXECUTE TRADE")
+                        upper_3sigma = data_3set["upper_sigmas"][-1]
+                        lower_3sigma = data_3set["lower_sigmas"][-1]
+                        logging.info("DECIDE TRADE lower_3sigma = %s, upper_3sigma = %s, current_price = %s" % (lower_3sigma, upper_3sigma, current_price))
+                        # 現在価格が3シグマを上回ること、現在価格が200日移動平均線を上回ること
+                        if current_price > upper_3sigma and current_price > ewma200[-1] and trend_flag == "buy":
+                            trade_flag = "buy"
+                            logging.info("EXECUTE TRADE")
+                        elif current_price < lower_3sigma and current_price < ewma200[-1] and trend_flag == "sell":
+                            trade_flag = "sell"
+                            logging.info("EXECUTE TRADE")
+                        else:
+                            trade_flag = "pass"
+
+                    # rangeではない場合は、トレンドフォローする
                     else:
-                        trade_flag = "pass"
+                        sigma_flag = False
+                        cmp_value = current_price - base_lines[-1]
+                        if -0.01 < cmp_value < 0.01:
+                            sigma_flag = True
 
-                    logging.info("DECIDE TRADE base = %s, price = %s, sigma_flag = %s" %(base_lines[-1], current_price, sigma_flag))
-                    logging.info("DECIDE TRADE slope = %s, ewma200 = %s, trade_flag = %s" %(str(slope), ewma200[-1], trade_flag))
+                        # slopeが上向き、現在価格が移動平均(EWMA200)より上、現在価格が移動平均(SMA)付近にいる
+                        if slope - high_slope_threshold > 0 and ewma200[-1] < current_price and sigma_flag and trend_flag == "buy":
+                            trade_flag = "buy"
+                            logging.info("EXECUTE TRADE")
+                        # slopeが下向き、現在価格が移動平均(EWMA200)より下、現在価格が移動平均(SMA)付近にいる
+                    elif slope - low_slope_threshold < 0 and ewma200[-1] > current_price and sigma_flag and trend_flag == "sell":
+                            trade_flag = "sell"
+                            logging.info("EXECUTE TRADE")
+                        else:
+                            trade_flag = "pass"
+
+                        logging.info("DECIDE TRADE base = %s, price = %s, sigma_flag = %s" %(base_lines[-1], current_price, sigma_flag))
+                        logging.info("DECIDE TRADE slope = %s, ewma200 = %s, trade_flag = %s" %(str(slope), ewma200[-1], trade_flag))
 
                 return trade_flag
 
@@ -248,7 +281,7 @@ class Evo2BollingerAlgo(SuperAlgo):
 #                                pass
 #                            else:
 #                                stl_flag = True
-                   
+
 
 
 

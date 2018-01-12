@@ -111,7 +111,7 @@ class SuperAlgo(object):
                 self.ask_price_list.append(line[0])
                 self.bid_price_list.append(line[1])
                 self.insert_time_list.append(line[2])
-                
+
             self.ask_price_list.reverse()
             self.bid_price_list.reverse()
             self.insert_time_list.reverse()
@@ -413,6 +413,7 @@ class SuperAlgo(object):
         logging.info("profit_history = %s, order_history = %s, " % (self.profit_history, self.order_history))
 
         return profit, sleep_time
+
 
     @abstractmethod
     def decideTrade(self):
