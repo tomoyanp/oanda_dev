@@ -49,22 +49,21 @@ class Evo2BollingerAlgo(SuperAlgo):
                 #############################################
 
                 # 移動平均の取得（WMA21（1時間足））
-                candle_width = 3600
                 wma_length = 21
-                ewma21_3600 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
+                ewma21_3600 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, 3600)
 
                 # トレンドの取得 20から10に変えてみる
-                slope_length = (10 * candle_width) * -1
-                slope_list = ewma50[slope_length:]
+                slope_length = (10 * 3600) * -1
+                slope_list = ewma21_3600[slope_length:]
                 slope = getSlope(slope_list)
                 logging.info("LongTimeTrend slope = %s" % slope)
 
                 # 3600の21日移動平均の傾きが、0.5以上であれば売買ロジックに入る
-                high_trend_threshold = 0.5
-                low_trend_threshold = -0.5
+                high_trend_threshold = 1.0
+                low_trend_threshold = -1.0
                 if float(high_trend_threshold) < float(slope):
                     trend_flag = "buy"
-                elif float(low_trend_threshold) > float(slope)
+                elif float(low_trend_threshold) > float(slope):
                     trend_flag = "sell"
                 else:
                     trend_flag = "pass"
@@ -153,7 +152,7 @@ class Evo2BollingerAlgo(SuperAlgo):
                             trade_flag = "buy"
                             logging.info("EXECUTE TRADE")
                         # slopeが下向き、現在価格が移動平均(EWMA200)より下、現在価格が移動平均(SMA)付近にいる
-                    elif slope - low_slope_threshold < 0 and ewma200[-1] > current_price and sigma_flag and trend_flag == "sell":
+                        elif slope - low_slope_threshold < 0 and ewma200[-1] > current_price and sigma_flag and trend_flag == "sell":
                             trade_flag = "sell"
                             logging.info("EXECUTE TRADE")
                         else:

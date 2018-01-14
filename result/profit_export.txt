@@ -24,3 +24,651 @@
 # units = 40000
 # window_size = 28
 PROFIT=0.037
+==== 20180107140948.result ====
+#########################
+# main.py GBP_JPY demo evo2_bollinger evo2_bollinger_master test 
+# bollinger_sigma = 2
+# candle_width = 300
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# ex_trade_mode = off
+# optional_threshold = 5.1
+# sigma_length = 1
+# sleep_time = 10
+# stl_sleep_ltime = 600
+# stl_sleep_time = 10
+# stl_sleep_vtime = 600
+# stl_time_width = 100000
+# stop_loss = 0.2
+# take_profit = 1.2
+# time_width = 100000
+# trade_sigma_length = 1
+# trade_sleep_time = 300
+# trade_threshold = 0.1
+# trend_follow_mode = off
+# trend_time_width = 12
+# units = 20000
+# window_size = 28
+PROFIT=-0.192
+==== 20180107210230.result ====
+#########################
+# main.py GBP_JPY demo evo2_bollinger evo2_bollinger_master 
+# bollinger_sigma = 2
+# candle_width = 300
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# ex_trade_mode = off
+# optional_threshold = 5.1
+# sigma_length = 1
+# sleep_time = 10
+# stl_sleep_ltime = 600
+# stl_sleep_time = 10
+# stl_sleep_vtime = 600
+# stl_time_width = 100000
+# stop_loss = 0.2
+# take_profit = 1.2
+# time_width = 100000
+# trade_sigma_length = 1
+# trade_sleep_time = 300
+# trade_threshold = 0.1
+# trend_follow_mode = off
+# trend_time_width = 12
+# units = 20000
+# window_size = 28
+PROFIT=0
+==== 20180108094017.result ====
+#########################
+# main.py GBP_JPY demo evo2_bollinger evo2_bollinger_master 
+# bollinger_sigma = 2
+# candle_width = 300
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# ex_trade_mode = off
+# optional_threshold = 5.1
+# sigma_length = 1
+# sleep_time = 1
+# stl_sleep_ltime = 600
+# stl_sleep_time = 1
+# stl_sleep_vtime = 10
+# stl_time_width = 100000
+# stop_loss = 0.2
+# take_profit = 1.2
+# time_width = 100000
+# trade_sigma_length = 1
+# trade_sleep_time = 300
+# trade_threshold = 0.1
+# trend_follow_mode = off
+# trend_time_width = 12
+# units = 20000
+# window_size = 28
+PROFIT=0.164
+==== 20180108201228.result ====
+#########################
+# main.py GBP_JPY production evo2_bollinger evo2_bollinger_master 
+# bollinger_sigma = 2
+# candle_width = 300
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# ex_trade_mode = off
+# optional_threshold = 5.1
+# sigma_length = 1
+# sleep_time = 1
+# stl_sleep_ltime = 600
+# stl_sleep_time = 1
+# stl_sleep_vtime = 10
+# stl_time_width = 100000
+# stop_loss = 0.2
+# take_profit = 1.2
+# time_width = 100000
+# trade_sigma_length = 1
+# trade_sleep_time = 300
+# trade_threshold = 0.1
+# trend_follow_mode = off
+# trend_time_width = 12
+# units = 20000
+# window_size = 28
+PROFIT=0
+==== 20180108235102.result ====
+#########################
+# main.py GBP_JPY production evo2_bollinger evo2_bollinger_master 
+# bollinger_sigma = 2
+# candle_width = 300
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# ex_trade_mode = off
+# optional_threshold = 5.1
+# sigma_length = 1
+# sleep_time = 1
+# stl_sleep_ltime = 600
+# stl_sleep_time = 1
+# stl_sleep_vtime = 10
+# stl_time_width = 100000
+# stop_loss = 0.2
+# take_profit = 1.2
+# time_width = 100000
+# trade_sigma_length = 1
+# trade_sleep_time = 300
+# trade_threshold = 0.1
+# trend_follow_mode = off
+# trend_time_width = 12
+# units = 20000
+# window_size = 28
+PROFIT=0.1815
+==== 20180109081715.result ====
+#########################
+# main.py GBP_JPY production evo2_bollinger evo2_bollinger_master 
+# bollinger_sigma = 2
+# candle_width = 300
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# ex_trade_mode = off
+# optional_threshold = 5.1
+# sigma_length = 1
+# sleep_time = 1
+# stl_sleep_ltime = 600
+# stl_sleep_time = 1
+# stl_sleep_vtime = 10
+# stl_time_width = 100000
+# stop_loss = 0.2
+# take_profit = 0.5
+# time_width = 100000
+# trade_sigma_length = 1
+# trade_sleep_time = 300
+# trade_threshold = 0.1
+# trend_follow_mode = off
+# trend_time_width = 12
+# units = 20000
+# window_size = 28
+PROFIT=0.559
+==== 20180110081419.result ====
+#########################
+# main.py GBP_JPY production evo2_bollinger evo2_bollinger_master 
+# bollinger_sigma = 2
+# candle_width = 300
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# ex_trade_mode = off
+# optional_threshold = 5.1
+# sigma_length = 1
+# sleep_time = 1
+# stl_sleep_ltime = 600
+# stl_sleep_time = 1
+# stl_sleep_vtime = 10
+# stl_time_width = 100000
+# stop_loss = 0.2
+# take_profit = 0.5
+# time_width = 100000
+# trade_sigma_length = 1
+# trade_sleep_time = 300
+# trade_threshold = 0.1
+# trend_follow_mode = off
+# trend_time_width = 12
+# units = 20000
+# window_size = 28
+PROFIT=0.808
+==== 20180111081102.result ====
+#########################
+# main.py GBP_JPY production evo2_bollinger evo2_bollinger_master 
+# bollinger_sigma = 2
+# candle_width = 300
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# ex_trade_mode = off
+# optional_threshold = 5.1
+# sigma_length = 1
+# sleep_time = 1
+# stl_sleep_ltime = 600
+# stl_sleep_time = 1
+# stl_sleep_vtime = 10
+# stl_time_width = 100000
+# stop_loss = 0.2
+# take_profit = 1.0
+# time_width = 100000
+# trade_sigma_length = 1
+# trade_sleep_time = 300
+# trade_threshold = 0.1
+# trend_follow_mode = off
+# trend_time_width = 12
+# units = 20000
+# window_size = 28
+PROFIT=0
+==== 20180111123845.result ====
+#########################
+# main.py GBP_JPY production evo2_bollinger evo2_bollinger_master 
+# bollinger_sigma = 2
+# candle_width = 300
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# ex_trade_mode = off
+# optional_threshold = 5.1
+# sigma_length = 1
+# sleep_time = 1
+# stl_sleep_ltime = 600
+# stl_sleep_time = 1
+# stl_sleep_vtime = 10
+# stl_time_width = 100000
+# stop_loss = 0.2
+# take_profit = 1.0
+# time_width = 100000
+# trade_sigma_length = 1
+# trade_sleep_time = 300
+# trade_threshold = 0.1
+# trend_follow_mode = off
+# trend_time_width = 12
+# units = 20000
+# window_size = 28
+PROFIT=-0.248
+==== 20180111200635.result ====
+#########################
+# main.py GBP_JPY production evo2_bollinger evo2_bollinger_master 
+# bollinger_sigma = 2
+# candle_width = 300
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# ex_trade_mode = off
+# optional_threshold = 5.1
+# sigma_length = 1
+# sleep_time = 1
+# stl_sleep_ltime = 600
+# stl_sleep_time = 1
+# stl_sleep_vtime = 10
+# stl_time_width = 100000
+# stop_loss = 0.2
+# take_profit = 1.0
+# time_width = 100000
+# trade_sigma_length = 1
+# trade_sleep_time = 300
+# trade_threshold = 0.1
+# trend_follow_mode = off
+# trend_time_width = 12
+# units = 20000
+# window_size = 28
+PROFIT=0
+==== 20180111200740.result ====
+#########################
+# main.py GBP_JPY production evo2_bollinger evo2_bollinger_master 
+# bollinger_sigma = 2
+# candle_width = 300
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# ex_trade_mode = off
+# optional_threshold = 5.1
+# sigma_length = 1
+# sleep_time = 1
+# stl_sleep_ltime = 600
+# stl_sleep_time = 1
+# stl_sleep_vtime = 10
+# stl_time_width = 100000
+# stop_loss = 0.2
+# take_profit = 1.0
+# time_width = 100000
+# trade_sigma_length = 1
+# trade_sleep_time = 300
+# trade_threshold = 0.1
+# trend_follow_mode = off
+# trend_time_width = 12
+# units = 20000
+# window_size = 28
+PROFIT=0.961
+==== 20180113120910.result ====
+#########################
+# main.py GBP_JPY demo evo2_bollinger evo2_bollinger_test test 
+# bollinger_sigma = 2
+# candle_width = 300
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# ex_trade_mode = off
+# optional_threshold = 5.1
+# sigma_length = 1
+# sleep_time = 10
+# stl_sleep_ltime = 600
+# stl_sleep_time = 10
+# stl_sleep_vtime = 10
+# stl_time_width = 100000
+# stop_loss = 0.2
+# take_profit = 1.2
+# time_width = 100000
+# trade_sigma_length = 1
+# trade_sleep_time = 300
+# trade_threshold = 0.1
+# trend_follow_mode = off
+# trend_time_width = 12
+# units = 20000
+# window_size = 28
+PROFIT=0.81
+==== 20180107140948.result ====
+#########################
+# main.py GBP_JPY demo evo2_bollinger evo2_bollinger_master test 
+# bollinger_sigma = 2
+# candle_width = 300
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# ex_trade_mode = off
+# optional_threshold = 5.1
+# sigma_length = 1
+# sleep_time = 10
+# stl_sleep_ltime = 600
+# stl_sleep_time = 10
+# stl_sleep_vtime = 600
+# stl_time_width = 100000
+# stop_loss = 0.2
+# take_profit = 1.2
+# time_width = 100000
+# trade_sigma_length = 1
+# trade_sleep_time = 300
+# trade_threshold = 0.1
+# trend_follow_mode = off
+# trend_time_width = 12
+# units = 20000
+# window_size = 28
+PROFIT=-0.192
+==== 20180107210230.result ====
+#########################
+# main.py GBP_JPY demo evo2_bollinger evo2_bollinger_master 
+# bollinger_sigma = 2
+# candle_width = 300
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# ex_trade_mode = off
+# optional_threshold = 5.1
+# sigma_length = 1
+# sleep_time = 10
+# stl_sleep_ltime = 600
+# stl_sleep_time = 10
+# stl_sleep_vtime = 600
+# stl_time_width = 100000
+# stop_loss = 0.2
+# take_profit = 1.2
+# time_width = 100000
+# trade_sigma_length = 1
+# trade_sleep_time = 300
+# trade_threshold = 0.1
+# trend_follow_mode = off
+# trend_time_width = 12
+# units = 20000
+# window_size = 28
+PROFIT=0
+==== 20180108094017.result ====
+#########################
+# main.py GBP_JPY demo evo2_bollinger evo2_bollinger_master 
+# bollinger_sigma = 2
+# candle_width = 300
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# ex_trade_mode = off
+# optional_threshold = 5.1
+# sigma_length = 1
+# sleep_time = 1
+# stl_sleep_ltime = 600
+# stl_sleep_time = 1
+# stl_sleep_vtime = 10
+# stl_time_width = 100000
+# stop_loss = 0.2
+# take_profit = 1.2
+# time_width = 100000
+# trade_sigma_length = 1
+# trade_sleep_time = 300
+# trade_threshold = 0.1
+# trend_follow_mode = off
+# trend_time_width = 12
+# units = 20000
+# window_size = 28
+PROFIT=0.164
+==== 20180108201228.result ====
+#########################
+# main.py GBP_JPY production evo2_bollinger evo2_bollinger_master 
+# bollinger_sigma = 2
+# candle_width = 300
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# ex_trade_mode = off
+# optional_threshold = 5.1
+# sigma_length = 1
+# sleep_time = 1
+# stl_sleep_ltime = 600
+# stl_sleep_time = 1
+# stl_sleep_vtime = 10
+# stl_time_width = 100000
+# stop_loss = 0.2
+# take_profit = 1.2
+# time_width = 100000
+# trade_sigma_length = 1
+# trade_sleep_time = 300
+# trade_threshold = 0.1
+# trend_follow_mode = off
+# trend_time_width = 12
+# units = 20000
+# window_size = 28
+PROFIT=0
+==== 20180108235102.result ====
+#########################
+# main.py GBP_JPY production evo2_bollinger evo2_bollinger_master 
+# bollinger_sigma = 2
+# candle_width = 300
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# ex_trade_mode = off
+# optional_threshold = 5.1
+# sigma_length = 1
+# sleep_time = 1
+# stl_sleep_ltime = 600
+# stl_sleep_time = 1
+# stl_sleep_vtime = 10
+# stl_time_width = 100000
+# stop_loss = 0.2
+# take_profit = 1.2
+# time_width = 100000
+# trade_sigma_length = 1
+# trade_sleep_time = 300
+# trade_threshold = 0.1
+# trend_follow_mode = off
+# trend_time_width = 12
+# units = 20000
+# window_size = 28
+PROFIT=0.1815
+==== 20180109081715.result ====
+#########################
+# main.py GBP_JPY production evo2_bollinger evo2_bollinger_master 
+# bollinger_sigma = 2
+# candle_width = 300
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# ex_trade_mode = off
+# optional_threshold = 5.1
+# sigma_length = 1
+# sleep_time = 1
+# stl_sleep_ltime = 600
+# stl_sleep_time = 1
+# stl_sleep_vtime = 10
+# stl_time_width = 100000
+# stop_loss = 0.2
+# take_profit = 0.5
+# time_width = 100000
+# trade_sigma_length = 1
+# trade_sleep_time = 300
+# trade_threshold = 0.1
+# trend_follow_mode = off
+# trend_time_width = 12
+# units = 20000
+# window_size = 28
+PROFIT=0.559
+==== 20180110081419.result ====
+#########################
+# main.py GBP_JPY production evo2_bollinger evo2_bollinger_master 
+# bollinger_sigma = 2
+# candle_width = 300
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# ex_trade_mode = off
+# optional_threshold = 5.1
+# sigma_length = 1
+# sleep_time = 1
+# stl_sleep_ltime = 600
+# stl_sleep_time = 1
+# stl_sleep_vtime = 10
+# stl_time_width = 100000
+# stop_loss = 0.2
+# take_profit = 0.5
+# time_width = 100000
+# trade_sigma_length = 1
+# trade_sleep_time = 300
+# trade_threshold = 0.1
+# trend_follow_mode = off
+# trend_time_width = 12
+# units = 20000
+# window_size = 28
+PROFIT=0.808
+==== 20180111081102.result ====
+#########################
+# main.py GBP_JPY production evo2_bollinger evo2_bollinger_master 
+# bollinger_sigma = 2
+# candle_width = 300
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# ex_trade_mode = off
+# optional_threshold = 5.1
+# sigma_length = 1
+# sleep_time = 1
+# stl_sleep_ltime = 600
+# stl_sleep_time = 1
+# stl_sleep_vtime = 10
+# stl_time_width = 100000
+# stop_loss = 0.2
+# take_profit = 1.0
+# time_width = 100000
+# trade_sigma_length = 1
+# trade_sleep_time = 300
+# trade_threshold = 0.1
+# trend_follow_mode = off
+# trend_time_width = 12
+# units = 20000
+# window_size = 28
+PROFIT=0
+==== 20180111123845.result ====
+#########################
+# main.py GBP_JPY production evo2_bollinger evo2_bollinger_master 
+# bollinger_sigma = 2
+# candle_width = 300
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# ex_trade_mode = off
+# optional_threshold = 5.1
+# sigma_length = 1
+# sleep_time = 1
+# stl_sleep_ltime = 600
+# stl_sleep_time = 1
+# stl_sleep_vtime = 10
+# stl_time_width = 100000
+# stop_loss = 0.2
+# take_profit = 1.0
+# time_width = 100000
+# trade_sigma_length = 1
+# trade_sleep_time = 300
+# trade_threshold = 0.1
+# trend_follow_mode = off
+# trend_time_width = 12
+# units = 20000
+# window_size = 28
+PROFIT=-0.248
+==== 20180111200635.result ====
+#########################
+# main.py GBP_JPY production evo2_bollinger evo2_bollinger_master 
+# bollinger_sigma = 2
+# candle_width = 300
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# ex_trade_mode = off
+# optional_threshold = 5.1
+# sigma_length = 1
+# sleep_time = 1
+# stl_sleep_ltime = 600
+# stl_sleep_time = 1
+# stl_sleep_vtime = 10
+# stl_time_width = 100000
+# stop_loss = 0.2
+# take_profit = 1.0
+# time_width = 100000
+# trade_sigma_length = 1
+# trade_sleep_time = 300
+# trade_threshold = 0.1
+# trend_follow_mode = off
+# trend_time_width = 12
+# units = 20000
+# window_size = 28
+PROFIT=0
+==== 20180111200740.result ====
+#########################
+# main.py GBP_JPY production evo2_bollinger evo2_bollinger_master 
+# bollinger_sigma = 2
+# candle_width = 300
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# ex_trade_mode = off
+# optional_threshold = 5.1
+# sigma_length = 1
+# sleep_time = 1
+# stl_sleep_ltime = 600
+# stl_sleep_time = 1
+# stl_sleep_vtime = 10
+# stl_time_width = 100000
+# stop_loss = 0.2
+# take_profit = 1.0
+# time_width = 100000
+# trade_sigma_length = 1
+# trade_sleep_time = 300
+# trade_threshold = 0.1
+# trend_follow_mode = off
+# trend_time_width = 12
+# units = 20000
+# window_size = 28
+PROFIT=0.961
+==== 20180113120910.result ====
+#########################
+# main.py GBP_JPY demo evo2_bollinger evo2_bollinger_test test 
+# bollinger_sigma = 2
+# candle_width = 300
+# enable_time = [u'01:00:00', u'02:00:00', u'04:00:00', u'05:00:00', u'06:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# ex_trade_mode = off
+# optional_threshold = 5.1
+# sigma_length = 1
+# sleep_time = 10
+# stl_sleep_ltime = 600
+# stl_sleep_time = 10
+# stl_sleep_vtime = 10
+# stl_time_width = 100000
+# stop_loss = 0.2
+# take_profit = 1.2
+# time_width = 100000
+# trade_sigma_length = 1
+# trade_sleep_time = 300
+# trade_threshold = 0.1
+# trend_follow_mode = off
+# trend_time_width = 12
+# units = 20000
+# window_size = 28
+PROFIT=2.337
