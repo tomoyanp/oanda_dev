@@ -73,7 +73,7 @@ if __name__ == "__main__":
 
     except Exception as e:
         message = "*** insert_check.py %s is Failed ***\n" % currency
-        message = message + traceback.format_exc()
-        sendmail = SendMail("tomoyanpy@gmail.com", "tomoyanpy@softbank.ne.jp", property_path)
-        sendmail.set_msg(message)
-        sendmail.send_mail()
+        #message = message + traceback.format_exc()
+        #sendmail = SendMail("tomoyanpy@gmail.com", "tomoyanpy@softbank.ne.jp", property_path)
+        #sendmail.set_msg(message)
+        #sendmail.send_mail()
