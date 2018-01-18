@@ -14,10 +14,9 @@ from common import instrument_init, account_init, decideMarket
 from abc import ABCMeta, abstractmethod
 from mysql_connector import MysqlConnector
 
-#class SuperAlgo(metaclass=ABCMeta):
 class SuperAlgo(object):
 
-    def __init__(self, instrument, base_path, config_name):
+    def __init__(self, instrument, base_path, config_name, base_time):
         self.base_path = base_path
         self.instrument = instrument
         self.config_data = instrument_init(self.instrument, self.base_path, config_name)
@@ -45,6 +44,11 @@ class SuperAlgo(object):
         self.profit_history = "i" # initial
         self.order_history  = "i" # initial
 
+        self.start_time = base_time - timedelta(seconds=self.config_data["time_width"]
+        self.end_time = base_time
+        self.base_time = base_time
+        self.setInitialPrice()
+
 ################################################
 # listは、要素数が大きいほうが古い。
 # 小さいほうが新しい
@@ -55,49 +59,39 @@ class SuperAlgo(object):
         self.order_kind = ""
         self.trade_id = 0
 
+    def setInitialPrice(self):
+        sql = self.getInitialSql(self.base_time)
+        response = self.mysqlConnector.select_sql(sql)
+        self.setResponse(sql)
+
+    def addPrice(self, base_time):
+        cmp_end_time = self.end_time.strftime("%Y-%m-%d %H:%M:%S")
+        cmp_base_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
+        if cmp_end_time == cmp_base_time:
+            pass
+        else:
+            self.start_time = self.end_time
+            self.end_time = base_time
+            sql = self.getAddSql()
+            print(sql)
+            response = self.mysqlConnector.select_sql(sql)
+            self.addResponse(response)
+
+    def getAddSql(self):
+        start_time = self.start_time.strftime("%Y-%m-%d %H:%M:%S")
+        end_time = self.end_time.strftime("%Y-%m-%d %H:%M:%S")
+        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time >= \'%s\' and insert_time < \'%s\' ORDER BY insert_time ASC" % (self.instruments, start_time, end_time)
+
+        return sql
+
+
     def getInitialSql(self, base_time):
-        #logging.info("=== Start SuperAlgo.getInitialSql Logic ===")
         time_width = self.config_data["time_width"]
 
         end_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
 
         sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time < \'%s\' ORDER BY insert_time DESC limit %s" % (self.instrument, end_time, time_width)
         logging.info("sql=%s" % sql)
-        #logging.info("=== End SuperAlgo.getInitialSql Logic ===")
-        return sql
-
-    def getSql(self, base_time):
-        time_width = self.config_data["time_width"]
-        chart_pollong = self.config_data["chart_polling"]
-        start_time = base_time - timedelta(seconds=time_width)
-        day = start_time.day
-        hour = start_time.hour
-        if day == 5 and hour > 6:
-            start_time = start_time - timedelta(hours=48)
-
-        elif day == 6:
-            start_time = start_time - timedelta(hours=48)
-
-        elif day == 0 and hour < 6:
-            start_time = start_time - timedelta(hours=48)
-
-
-        start_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
-        end_time = base_time.strftime("%Y-%m-%d %H:%M:%M:%S")
-
-        if chart_polling == "hour":
-            sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' and insert_time like \'%00:00\' order by insert_time " % (self.instrument, start_time, end_time)
-        elif chart_pollong == "minute":
-            sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' and insert_time like \'%00\' order by insert_time " % (self.instrument, start_time, end_time)
-        else:
-            sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' order by insert_time " % (self.instrument, start_time, end_time)
-        #logging.info(sql)
-        return sql
-
-    def getAddSql(self, base_time):
-        base_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
-        #sql = "select distinct ask_price, bid_price, insert_time from %s_TABLE where insert_time = \'%s\' limit 1" % (self.instrument, base_time)
-        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time = \'%s\' limit 1" % (self.instrument, base_time)
         return sql
 
     def setResponse(self, response):
@@ -120,28 +114,19 @@ class SuperAlgo(object):
             logging.info("end_insert_time = %s, ask_price = %s, bid_price = %s" % (self.insert_time_list[-1], self.ask_price_list[-1], self.bid_price_list[-1]))
 
     def addResponse(self, response):
-        if len(response) < 1:
+        response_length = len(response)
+        if response_length < 0:
             pass
         else:
-            self.ask_price_list.pop(0)
-            self.bid_price_list.pop(0)
-            self.insert_time_list.pop(0)
+            for i in range(0, response_length):
+                self.ask_price_list.pop(0)
+                self.bid_price_list.pop(0)
+                self.insert_time_list.pop(0)
 
-        for line in response:
-            self.ask_price_list.append(line[0])
-            self.bid_price_list.append(line[1])
-            self.insert_time_list.append(line[2])
-
-    def setPriceTable(self, base_time):
-        sql = self.getInitialSql(base_time)
-        print sql
-        response = self.mysqlConnector.select_sql(sql)
-        self.setResponse(response)
-
-    def setNewPricetable(self, base_time):
-        sql = self.getSql(base_time)
-        response = self.mysqlConnector.select_sql(sql)
-        self.setResponse(response)
+            for res in response:
+                self.ask_price_list.append(res[0])
+                self.bid_price_list.append(res[1])
+                self.insert_time_list.append(res[2])
 
     def setOrderData(self, trade_flag, order_price, order_flag):
         self.order_kind = trade_flag

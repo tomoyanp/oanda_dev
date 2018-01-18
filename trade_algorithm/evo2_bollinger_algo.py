@@ -30,8 +30,8 @@ low_slope_threshold  = -0.3
 high_slope_threshold = 0.3
 
 class Evo2BollingerAlgo(SuperAlgo):
-    def __init__(self, instrument, base_path, config_name):
-        super(Evo2BollingerAlgo, self).__init__(instrument, base_path, config_name)
+    def __init__(self, instrument, base_path, config_name, base_time):
+        super(Evo2BollingerAlgo, self).__init__(instrument, base_path, config_name, base_time)
         self.base_price = 0
 
     def decideTrade(self, base_time):

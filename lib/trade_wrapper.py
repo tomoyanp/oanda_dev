@@ -15,7 +15,6 @@ from evo_bollinger_algo import EvoBollingerAlgo
 from evo2_bollinger_algo import Evo2BollingerAlgo
 from oanda_wrapper import OandaWrapper
 from common import instrument_init, account_init
-from set_price_thread import SetPriceThread
 import time
 import logging
 
@@ -62,22 +61,19 @@ class TradeWrapper:
 
     def setTradeAlgo(self, algo, base_time):
         if algo == "step":
-            self.trade_algo = StepWiseAlgo(self.instrument, self.base_path, self.config_name)
+            self.trade_algo = StepWiseAlgo(self.instrument, self.base_path, self.config_name, base_time)
         elif algo == "startend":
-            self.trade_algo = StartEndAlgo(self.instrument, self.base_path, self.config_name)
+            self.trade_algo = StartEndAlgo(self.instrument, self.base_path, self.config_name, base_time)
         elif algo == "timetrend":
-            self.trade_algo = TimeTrendAlgo(self.instrument, self.base_path, self.config_name)
+            self.trade_algo = TimeTrendAlgo(self.instrument, self.base_path, self.config_name, base_time)
         elif algo == "bollinger":
-            self.trade_algo = BollingerAlgo(self.instrument, self.base_path, self.config_name)
+            self.trade_algo = BollingerAlgo(self.instrument, self.base_path, self.config_name, base_time)
         elif algo == "evo_bollinger":
-            self.trade_algo = EvoBollingerAlgo(self.instrument, self.base_path, self.config_name)
+            self.trade_algo = EvoBollingerAlgo(self.instrument, self.base_path, self.config_name, base_time)
         elif algo == "evo2_bollinger":
-            self.trade_algo = Evo2BollingerAlgo(self.instrument, self.base_path, self.config_name)
+            self.trade_algo = Evo2BollingerAlgo(self.instrument, self.base_path, self.config_name, base_time)
         else:
-            self.trade_algo = HiLowAlgo(self.instrument, self.base_path, self.config_name)
-
-        self.th = SetPriceThread(self.instrument, base_time, self.config_data["time_width"])
-        self.th.start()
+            self.trade_algo = HiLowAlgo(self.instrument, self.base_path, self.config_name, base_time)
 
     def settlementLogWrite(self, profit, msg):
         nowftime = self.trade_algo.getCurrentTime()
@@ -131,11 +127,7 @@ class TradeWrapper:
 
     def setInstrumentResponse(self, base_time):
         sleep_time = 0
-        #logging.info("base_time=%s" % base_time)
-        self.th.setBaseTime(base_time)
-        ask_price_list, bid_price_list, insert_time_list = self.th.getDataSet()
-        #self.trade_algo.setPriceTable()
-        self.trade_algo.setDataSet(ask_price_list, bid_price_list, insert_time_list)
+        self.trade_algo.addPrice(base_time)
         return sleep_time
 
     def stlDecisionWrapper(self, base_time):
