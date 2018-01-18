@@ -414,6 +414,10 @@ class SuperAlgo(object):
 
         return profit, sleep_time
 
+    def setDataSet(self, ask_price_list, bid_price_list, insert_time_list):
+        self.ask_price_list = ask_price_list
+        self.bid_price_list = bid_price_list
+        self.insert_time_list = insert_time_list
 
     @abstractmethod
     def decideTrade(self):

@@ -26,6 +26,7 @@ class SetPriceThread(threading.Thread):
         self.end_time = base_time
         self.base_time = base_time
         self.con = MysqlConnector()
+        self.setPrice()
 
     def getDataSet(self):
         return self.ask_price_list, self.bid_price_list, self.insert_time_list
@@ -90,7 +91,7 @@ class SetPriceThread(threading.Thread):
         print(self.base_time)
 
     def run(self):
-        self.setPrice()
         while True:
             self.addPrice() 
+            time.sleep(0.1)
       
