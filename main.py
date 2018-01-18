@@ -51,15 +51,13 @@ if __name__ == '__main__':
     else:
         test_mode = False
 
-    logging.info("=== Start Main Logic ===")
-    logging.info(args)
 
     # ポーリング時間
     sleep_time = 10
 
     base_time = datetime.now()
     end_time = base_time - timedelta(days=0)
-    base_time = base_time - timedelta(days=1)
+    base_time = base_time - timedelta(days=5)
 
     trade_wrapper = TradeWrapper(instrument, mode, test_mode, current_path, config_name, args)
     trade_wrapper.setTradeAlgo(algo, base_time)
@@ -73,7 +71,6 @@ if __name__ == '__main__':
           else:
               base_time = datetime.now()
           flag = decideMarket(base_time)
-          logging.info("decideMarket flag=%s" % flag)
 
           if flag == False:
               sleep_time = 1
@@ -103,9 +100,6 @@ if __name__ == '__main__':
 
           if test_mode:
               now = datetime.now()
-              logging.info("now_time = %s, now = %s" % (type(now), now))
-              logging.info("base_time_type = %s, base_time = %s" % (type(base_time), base_time))
-              logging.info("end_time_type = %s, end_time = %s" % (type(end_time), end_time))
               
               if base_time > now or base_time > end_time:
                   raise ValueError("Complete Back Test")

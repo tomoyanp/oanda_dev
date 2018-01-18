@@ -105,10 +105,8 @@ class TradeWrapper:
             pass
         else:
             position_flag = self.oanda_wrapper.get_trade_position(self.instrument)
-            #logging.info("trade_position flag=%s" % position_flag)
             if position_flag == False:
                 # 決済した直後であればスリープする
-                #logging.info("stl_sleep_flag=%s" % self.stl_sleep_flag)
                 trade_id = self.trade_algo.getTradeId()
                 if self.stl_sleep_flag and trade_id != 0:
 
@@ -179,7 +177,6 @@ class TradeWrapper:
         else:
             pass
 
-        logging.info("stl decision sleep_time = %s" % sleep_time)
         return sleep_time
 
     def tradeDecisionWrapper(self, base_time):
@@ -204,7 +201,6 @@ class TradeWrapper:
                     pass
                 else:
                     threshold_list = self.trade_algo.calcThreshold(trade_flag)
-                    #logging.info("takeprofit = %s, stoploss = %s" % (threshold_list["takeprofit"], threshold_list["stoploss"]))
                     response = self.oanda_wrapper.order(trade_flag, self.instrument, threshold_list["stoploss"], threshold_list["takeprofit"])
                     order_price = response["price"]
                     self.trade_algo.setTradeId(response)
@@ -216,5 +212,4 @@ class TradeWrapper:
                 self.trade_algo.setOrderData(trade_flag, order_price, order_flag)
 
 
-        logging.info("trade decision sleep_time = %s" % sleep_time)
         return sleep_time

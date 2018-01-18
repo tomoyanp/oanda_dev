@@ -142,7 +142,6 @@ def getEWMA(ask_price_list, bid_price_list, wma_length, candle_width):
     average_price_list = (ask_price_list + bid_price_list) / 2
 
     wma_length = (candle_width * wma_length)
-    logging.info("getEWMA price_list length = %s, wma_length = %s" % (len(average_price_list), wma_length))
 
     wma_value_list = average_price_list.ewm(ignore_na=False, span=wma_length, min_periods=0, adjust=True).mean()
 
@@ -196,6 +195,5 @@ def sleepTransaction(sleep_time, test_mode, base_time):
     else:
         time.sleep(sleep_time)
         base_time = datetime.now()
-    #logging.info("base_time=%s" % base_time)
 
     return base_time

@@ -44,7 +44,7 @@ class SuperAlgo(object):
         self.profit_history = "i" # initial
         self.order_history  = "i" # initial
 
-        self.start_time = base_time - timedelta(seconds=self.config_data["time_width"]
+        self.start_time = base_time - timedelta(seconds=self.config_data["time_width"])
         self.end_time = base_time
         self.base_time = base_time
         self.setInitialPrice()
@@ -62,7 +62,7 @@ class SuperAlgo(object):
     def setInitialPrice(self):
         sql = self.getInitialSql(self.base_time)
         response = self.mysqlConnector.select_sql(sql)
-        self.setResponse(sql)
+        self.setResponse(response)
 
     def addPrice(self, base_time):
         cmp_end_time = self.end_time.strftime("%Y-%m-%d %H:%M:%S")
@@ -80,7 +80,7 @@ class SuperAlgo(object):
     def getAddSql(self):
         start_time = self.start_time.strftime("%Y-%m-%d %H:%M:%S")
         end_time = self.end_time.strftime("%Y-%m-%d %H:%M:%S")
-        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time >= \'%s\' and insert_time < \'%s\' ORDER BY insert_time ASC" % (self.instruments, start_time, end_time)
+        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time >= \'%s\' and insert_time < \'%s\' ORDER BY insert_time ASC" % (self.instrument, start_time, end_time)
 
         return sql
 
@@ -173,15 +173,10 @@ class SuperAlgo(object):
         return self.order_kind
 
     def decideTradeTime(self, base_time, trade_flag):
-        #logging.info("=== Start SuperAlgo.decideTradeTime Logic ===")
-
         enable_time_mode = self.config_data["enable_time_mode"]
-        #logging.info("enable_time_mode=%s" % enable_time_mode)
         if enable_time_mode == "on":
             enable_times = self.config_data["enable_time"]
             enable_flag = False
-            #logging.info("base_time=%s" % base_time)
-            #logging.info("enable_times=%s" % enable_times)
             cmp_time = base_time.strftime("%Y-%m-%d")
 
             for ent in enable_times:
@@ -194,14 +189,12 @@ class SuperAlgo(object):
         else:
             enable_flag = True
 
-        #logging.info("enable_flag=%s" % enable_flag)
 
         if enable_flag:
             pass
         else:
             trade_flag = "pass"
 
-        #logging.info("=== End SuperAlho.decideTradeTime Logic ===")
 
         return trade_flag
 
@@ -259,34 +252,17 @@ class SuperAlgo(object):
             self.stoploss_rate = float(self.stoploss_rate)
             ask_price = float(ask_price)
             bid_price = float(bid_price)
-            #logging.info("TAKE PROFIT RATE = %s" % self.takeprofit_rate)
-            #logging.info("STOP LOSS RATE = %s" % self.stoploss_rate)
-            #logging.info("ASK PRICE = %s" % ask_price)
-            #logging.info("BID PRICE = %s" % bid_price)
 
             stl_flag = False
             if self.order_kind == "buy":
                 if bid_price > self.takeprofit_rate or bid_price < self.stoploss_rate:
-                    #logging.info("SETTLE TRUEEEEEEEEEEEEEEEEEE(BUY)")
                     stl_flag = True
 
             elif self.order_kind == "sell":
                 if ask_price < self.takeprofit_rate or ask_price > self.stoploss_rate:
-                    #logging.info("%s < %s" % (ask_price, self.takeprofit_rate))
-                    #logging.info("%s > %s" % (ask_price, self.stoploss_rate))
-                    #logging.info("SETTLE TRUEEEEEEEEEEEEEEEEEE(SELL)")
-                    #logging.info("TAKE PROFIT RATE = %s" % self.takeprofit_rate)
-                    #logging.info(type(self.takeprofit_rate))
-                    #logging.info("STOP LOSS RATE = %s" % self.stoploss_rate)
-                    #logging.info(type(self.stoploss_rate))
-                    #logging.info("ASK PRICE = %s" % ask_price)
-                    #logging.info(type(ask_price))
-                    #logging.info("BID PRICE = %s" % bid_price)
-                    #logging.info(type(bid_price))
 
                     stl_flag = True
 
-            #logging.info("SETTLE FLAG = %s" % stl_flag)
             return stl_flag
         except:
             raise
@@ -394,8 +370,6 @@ class SuperAlgo(object):
             sleep_time = self.config_data["stl_sleep_ltime"]
 
         self.order_histroy = self.order_kind
-        logging.info("order_price = %s, stl_price = %s, order_kind = %s, profit = %s" % (self.order_price, self.stl_price, self.order_kind, profit))
-        logging.info("profit_history = %s, order_history = %s, " % (self.profit_history, self.order_history))
 
         return profit, sleep_time
 
