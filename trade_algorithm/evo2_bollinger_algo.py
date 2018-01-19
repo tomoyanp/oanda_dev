@@ -70,15 +70,16 @@ class Evo2BollingerAlgo(SuperAlgo):
                 logging.info("%s 1h*21 ewma slope(10s) slope = %s, trend_flag = %s" % (base_time, slope, trend_flag))
                 current_price = self.getCurrentPrice()
                 if trend_flag == "range":
-                    data_set = getBollingerDataSet(self.ask_price_list, self.bid_price_list, window_size, sigma_valiable, 1800)
-                    if current_price > data_set["upper_sigmas"][-1]:
-                        trade_flag = "sell"
-                    elif current_price < data_set["lower_sigmas"][-1]:
-                        trade_flag = "buy"
-                    else:
-                        trade_flag = "pass"
-
-                    logging.info("%s 30m bollinger band upper_sigma = %s, lower_sigma = %s" % (base_time, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1]))
+                    pass
+#                    data_set = getBollingerDataSet(self.ask_price_list, self.bid_price_list, window_size, sigma_valiable, 1800)
+#                    if current_price > data_set["upper_sigmas"][-1]:
+#                        trade_flag = "sell"
+#                    elif current_price < data_set["lower_sigmas"][-1]:
+#                        trade_flag = "buy"
+#                    else:
+#                        trade_flag = "pass"
+#
+#                    logging.info("%s 30m bollinger band upper_sigma = %s, lower_sigma = %s" % (base_time, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1]))
 
                 else:
                     data_set = getBollingerDataSet(self.ask_price_list, self.bid_price_list, window_size, sigma_valiable, candle_width)
