@@ -58,8 +58,8 @@ class Evo2BollingerAlgo(SuperAlgo):
                 slope = getSlope(slope_list)
 
                 # 3600の21日移動平均の傾きが、2.0以上であれば売買ロジックに入る
-                high_trend_threshold = 2.0
-                low_trend_threshold = -2.0
+                high_trend_threshold = 1.0
+                low_trend_threshold = -1.0
                 if float(high_trend_threshold) < float(slope):
                     trend_flag = "buy"
                 elif float(low_trend_threshold) > float(slope):
