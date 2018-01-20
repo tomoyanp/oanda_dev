@@ -1,5 +1,5 @@
 # coding: utf-8
-# 長期トレンドの判定を止めてみる
+### 長期トレンドを1h 21ewma 10本分の傾きで計算している
 ####################################################
 # トレード判断
 # １）1h ewma21*10 のslopeを計算（閾値2.0）
@@ -70,9 +70,6 @@ class Evo2BollingerAlgo(SuperAlgo):
                 else:
                     trend_flag = "range"
 
-                # ロジック止めるためダミーにする
-                trend_flag = "dummy"
-
                 logging.info("%s 1h*21 ewma slope(10s) slope = %s, trend_flag = %s" % (base_time, slope, trend_flag))
                 current_price = self.getCurrentPrice()
                 if trend_flag == "range":
@@ -114,11 +111,11 @@ class Evo2BollingerAlgo(SuperAlgo):
 
 
                     # slopeが上向き、現在価格が移動平均(EWMA200)より上、現在価格がbollinger3_sigmaより上にいる
-                    if ((slope - high_slope_threshold) > 0) and (ewma200[-1] < current_price) and (current_price > upper3_sigma):
+                    if ((slope - high_slope_threshold) > 0) and (ewma200[-1] < current_price) and (trend_flag == "buy") and (current_price > upper3_sigma):
                         trade_flag = "buy"
                         logging.info("EXECUTE TRADE")
                     # slopeが下向き、現在価格が移動平均(EWMA200)より下、現在価格がbollinger3_sigmaより下にいる
-                    elif ((slope - low_slope_threshold) < 0) and (ewma200[-1] > current_price) and (current_price < lower3_sigma):
+                    elif ((slope - low_slope_threshold) < 0) and (ewma200[-1] > current_price) and (trend_flag == "sell") and (current_price < lower3_sigma):
                         trade_flag = "sell"
                         logging.info("EXECUTE TRADE")
                     else:
