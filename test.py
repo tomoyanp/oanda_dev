@@ -18,34 +18,33 @@ from common import getEWMA, getSlope
 
 start_time = "2018-01-08 07:00:00"
 start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
-
 now = datetime.now()
+con = MysqlConnecter()
 
-con = MysqlConnector()
-while now > start_time:
-  now = datetime.now()
-
-  sql = "select ask_price, bid_price, insert_time from GBP_JPY_TABLE where insert_time < \'%s\' ORDER BY insert_time DESC limit 100000" % start_time
-
-  response = con.select_sql(sql)
-  ask_price_list = []
-  bid_price_list = []
-  insert_time_list = []
-  for res in response:
-    ask_price_list.append(res[0])
-    bid_price_list.append(res[1])
-    insert_time_list.append(res[2])
+def ewmaWrapper(sql, wma_length):
+    response = con.select_sql(sql)
+    ask_price_list = []
+    bid_price_list = []
+    insert_time_list = []
+    for res in response:
+      ask_price_list.append(res[0])
+      bid_price_list.append(res[1])
+      insert_time_list.append(res[2])
+ 
+    ask_price_list.reverse()
+    bid_price_list.reverse()
+    insert_time_list.reverse()
     
+    ewma = getEWMA(ask_price_list, bid_price_list, wma_length, 1)
+    return ewma[-1]
 
-  ask_price_list.reverse()
-  bid_price_list.reverse()
-  insert_time_list.reverse()
+while now > start_time:
+    now = datetime.now()
 
-#  ewma50 = getEWMA(ask_price_list, bid_price_list, 50, 300)
-  ewma21 = getEWMA(ask_price_list, bid_price_list, 21, 3600)
-  slope_length = 5*3600*-1
-  slope_list = ewma50[slope_length:]
-  slope = getSlope(slope_list)
-  print "time = %s, slope = %s" % (start_time, slope)
-  start_time = start_time + timedelta(minutes=10)
+    wma_length = 100
+    sql = "select ask_price, bid_price, insert_time from GBP_JPY_TABLE where insert_time < \'%s\'   and insert_time like ‘%%59:59’ ORDER BY insert_time DESC limit %s" % (start_time, wma_length)
+
+    ewma_value = ewmaWrapper(sql, wma_length)
+    print "time = %s, ewma_value = %s" % (start_time, ewma_value)
+    start_time = start_time + timedelta(minutes=10)
 
