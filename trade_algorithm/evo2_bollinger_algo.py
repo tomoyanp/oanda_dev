@@ -53,7 +53,9 @@ class Evo2BollingerAlgo(SuperAlgo):
                 ewma21_3600 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, 3600)
 
                 # トレンドの取得 20から10に変えてみる
-                slope_length = (10 * 3600) * -1
+                #slope_length = (10 * 3600) * -1
+                # 長期トレンドを5に変えてみる
+                slope_length = (5 * 3600) * -1
                 slope_list = ewma21_3600[slope_length:]
                 slope = getSlope(slope_list)
 
