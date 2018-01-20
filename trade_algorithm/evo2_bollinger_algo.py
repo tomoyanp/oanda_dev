@@ -50,7 +50,7 @@ class Evo2BollingerAlgo(SuperAlgo):
 
                 # 移動平均の取得（WMA100（1時間足））
                 wma_length = 100
-                ewma21_3600 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, 3600)
+                ewma100_3600 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, 3600)
 
                 current_price = self.getCurrentPrice()
 
@@ -62,7 +62,7 @@ class Evo2BollingerAlgo(SuperAlgo):
                 else:
                     trend_flag = "range"
 
-                logging.info("%s 1h*21 ewma slope(10s) slope = %s, trend_flag = %s" % (base_time, slope, trend_flag))
+                logging.info("%s 1h*100 ewma value = %s, current_price = %s, trend_flag = %s" % (base_time, ewma100_3600[-1], current_price, trend_flag))
                 if trend_flag == "range":
                     pass
 #                    data_set = getBollingerDataSet(self.ask_price_list, self.bid_price_list, window_size, sigma_valiable, 1800)
