@@ -1,5 +1,5 @@
 # coding: utf-8
-### 長期トレンドの計算をやめて、1h 100日移動平均と現在価格の比較を実施する方式にしてみた
+# 長期トレンドの判定を止めてみる
 ####################################################
 # トレード判断
 # １）1h ewma21*10 のslopeを計算（閾値2.0）
@@ -48,21 +48,33 @@ class Evo2BollingerAlgo(SuperAlgo):
                 # Get 1h * 21 WMA and check long time trend #
                 #############################################
 
-                # 移動平均の取得（WMA100（1時間足））
-                wma_length = 100
+                # 移動平均の取得（WMA21（1時間足））
+                wma_length = 21
                 ewma21_3600 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, 3600)
 
-                current_price = self.getCurrentPrice()
+                # トレンドの取得 20から10に変えてみる
+                #slope_length = (10 * 3600) * -1
+                # 長期トレンドを5に変えてみる
+                slope_length = (5 * 3600) * -1
+                slope_list = ewma21_3600[slope_length:]
+                slope = getSlope(slope_list)
 
-                # 3600の100日移動平均と、現在価格を比較
-                if ewma100_3600[-1] < current_price:
+                # 長期トレンドの取得
+                # 3600の21日移動平均の傾きが、2.0以上であれば売買ロジックに入る
+                high_trend_threshold = 1.0
+                low_trend_threshold = -1.0
+                if float(high_trend_threshold) < float(slope):
                     trend_flag = "buy"
-                elif ewma100_3600[-1] > current_price:
+                elif float(low_trend_threshold) > float(slope):
                     trend_flag = "sell"
                 else:
                     trend_flag = "range"
 
+                # ロジック止めるためダミーにする
+                trend_flag = "dummy"
+
                 logging.info("%s 1h*21 ewma slope(10s) slope = %s, trend_flag = %s" % (base_time, slope, trend_flag))
+                current_price = self.getCurrentPrice()
                 if trend_flag == "range":
                     pass
 #                    data_set = getBollingerDataSet(self.ask_price_list, self.bid_price_list, window_size, sigma_valiable, 1800)
@@ -102,11 +114,11 @@ class Evo2BollingerAlgo(SuperAlgo):
 
 
                     # slopeが上向き、現在価格が移動平均(EWMA200)より上、現在価格がbollinger3_sigmaより上にいる
-                    if ((slope - high_slope_threshold) > 0) and (ewma200[-1] < current_price) and (trend_flag == "buy") and (current_price > upper3_sigma):
+                    if ((slope - high_slope_threshold) > 0) and (ewma200[-1] < current_price) and (current_price > upper3_sigma):
                         trade_flag = "buy"
                         logging.info("EXECUTE TRADE")
                     # slopeが下向き、現在価格が移動平均(EWMA200)より下、現在価格がbollinger3_sigmaより下にいる
-                    elif ((slope - low_slope_threshold) < 0) and (ewma200[-1] > current_price) and (trend_flag == "sell") and (current_price < lower3_sigma):
+                    elif ((slope - low_slope_threshold) < 0) and (ewma200[-1] > current_price) and (current_price < lower3_sigma):
                         trade_flag = "sell"
                         logging.info("EXECUTE TRADE")
                     else:
