@@ -59,7 +59,6 @@ class Evo2BollingerAlgo(SuperAlgo):
                 slope_list = ewma21_3600[slope_length:]
                 slope = getSlope(slope_list)
 
-                # 長期トレンドの取得
                 # 3600の21日移動平均の傾きが、2.0以上であれば売買ロジックに入る
                 high_trend_threshold = 1.0
                 low_trend_threshold = -1.0
@@ -85,8 +84,6 @@ class Evo2BollingerAlgo(SuperAlgo):
 #                    logging.info("%s 30m bollinger band upper_sigma = %s, lower_sigma = %s" % (base_time, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1]))
 
                 else:
-                    # 移動平均じゃなく、トレンド発生＋3シグマ突破でエントリーに変えてみる
-                    sigma_valiable = 3
                     data_set = getBollingerDataSet(self.ask_price_list, self.bid_price_list, window_size, sigma_valiable, candle_width)
 
                     # 移動平均の取得(WMA50)
@@ -101,38 +98,26 @@ class Evo2BollingerAlgo(SuperAlgo):
                     slope = getSlope(slope_list)
                     baseline_touch_flag = False
 
-                    upper3_sigma = data_set["upper_sigmas"][-1]
-                    lower3_sigma = data_set["lower_sigmas"][-1]
+                    # 移動平均線付近かどうか
+                    cmp_value = current_price - data_set["base_lines"][-1]
+                    if -0.01 < cmp_value < 0.01:
+                        baseline_touch_flag = True
 
-#                    # 移動平均線付近かどうか
-#                    cmp_value = current_price - data_set["base_lines"][-1]
-#                    if -0.01 < cmp_value < 0.01:
-#                        baseline_touch_flag = True
-
-
-                    # slopeが上向き、現在価格が移動平均(EWMA200)より上、現在価格がbollinger3_sigmaより上にいる
-                    if ((slope - high_slope_threshold) > 0) and (ewma200[-1] < current_price) and (trend_flag == "buy") and (current_price > upper3_sigma):
+                    # slopeが上向き、現在価格が移動平均(EWMA200)より上、現在価格が移動平均(SMA)付近にいる
+                    if slope - high_slope_threshold > 0 and ewma200[-1] < current_price and baseline_touch_flag and trend_flag == "buy":
                         trade_flag = "buy"
                         logging.info("EXECUTE TRADE")
-                    # slopeが下向き、現在価格が移動平均(EWMA200)より下、現在価格がbollinger3_sigmaより下にいる
-                    elif ((slope - low_slope_threshold) < 0) and (ewma200[-1] > current_price) and (trend_flag == "sell") and (current_price < lower3_sigma):
+                    # slopeが下向き、現在価格が移動平均(EWMA200)より下、現在価格が移動平均(SMA)付近にいる
+                    elif slope - low_slope_threshold < 0 and ewma200[-1] > current_price and baseline_touch_flag and trend_flag == "sell":
                         trade_flag = "sell"
                         logging.info("EXECUTE TRADE")
                     else:
                         trade_flag = "pass"
 
-#                    # slopeが上向き、現在価格が移動平均(EWMA200)より上、現在価格が移動平均(SMA)付近にいる
-#                    if slope - high_slope_threshold > 0 and ewma200[-1] < current_price and baseline_touch_flag and trend_flag == "buy":
-#                        trade_flag = "buy"
-#                        logging.info("EXECUTE TRADE")
-#                    # slopeが下向き、現在価格が移動平均(EWMA200)より下、現在価格が移動平均(SMA)付近にいる
-#                    elif slope - low_slope_threshold < 0 and ewma200[-1] > current_price and baseline_touch_flag and trend_flag == "sell":
-#                        trade_flag = "sell"
-#                        logging.info("EXECUTE TRADE")
-#                    else:
-#                        trade_flag = "pass"
-
-                    logging.info("%s 5m 50ewma slope = %s, 5m 200ewma = %s, current_price = %s, upper_3sigma = %s, lower_3sigma = %s, trade_flag = %s" % (base_time, slope, ewma200[-1], current_price, upper3_sigma, lower3_sigma, trade_flag))
+                    logging.info("%s 5m 50 ewma slope = %s, trend_flag = %s" % (base_time, slope, trend_flag))
+                    logging.info("%s current_price = %s, 5m 200 ewma = %s" % (base_time, current_price, ewma200[-1]))
+                    logging.info("%s current_price = %s, base_line = %s" % (base_time, current_price, data_set["base_lines"][-1]))
+                    logging.info("%s trade_flag = %s" % (base_time, trade_flag))
 
                 return trade_flag
 
