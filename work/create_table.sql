@@ -61,3 +61,13 @@ grant all privileges on 'oanda_db'.GBP_JPY_TABLE to 'tomoyan';
 grant all privileges on 'oanda_db'.USD_JPY_TABLE to 'tomoyan';
 ALTER TABLE GBP_JPY_TABLE ADD INDEX time_index(insert_time)
 ALTER TABLE USD_JPY_TABLE ADD INDEX time_index(insert_time)
+
+create GBP_JPY_EWMA_TABLE(id int auto_increment not null primary key, ewma_value double not null, ewma_length int not null, insert_time timestamp not null, candle_width int not null) UNIQUE(ewma_value, ewma_length, insert_time)
+"insert into GBP_JPY_EWMA_TABLE(ewma_value, ewma_length, candle_width, insert_time) values (%s, %s, %s, %s, \'%s\')"
+
+
+mysql> create GBP_JPY_EWMA_TABLE(id int auto_increment not null primary key, ewma_value double not null, ewma_length int not null, insert_time timestamp not null, candle_width int not null ,
+UNIQUE(ewma_value, ewma_length, insert_time));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GBP_JPY_EWMA_TABLE(id int auto_increment not null primary key, ewma_value double' at line 1
+
+mysql> create table GBP_JPY_EWMA_TABLE(id int auto_increment not null primary key, ewma_value double not null, ewma_length int not null, insert_time timestamp not null, candle_width int not null ,UNIQUE(ewma_length, insert_time, candle_width));

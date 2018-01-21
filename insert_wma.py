@@ -14,38 +14,103 @@ sys.path.append(current_path + "/lib")
 from common import getSlope
 from mysql_connector import MysqlConnector
 from datetime import datetime, timedelta
-from common import getEWMA, getSlope
+from common import getEWMA, getSlope, decideMarket
 
-start_time = "2018-01-08 07:00:00"
+start_time = "2018-01-06 07:00:00"
 start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
-
 now = datetime.now()
-
 con = MysqlConnector()
-while now > start_time:
-  now = datetime.now()
 
-  sql = "select ask_price, bid_price, insert_time from GBP_JPY_TABLE where insert_time < \'%s\' ORDER BY insert_time DESC limit 100000" % start_time
+args = sys.argv
+instruments = args[1].strip()
 
-  response = con.select_sql(sql)
-  ask_price_list = []
-  bid_price_list = []
-  insert_time_list = []
-  for res in response:
-    ask_price_list.append(res[0])
-    bid_price_list.append(res[1])
-    insert_time_list.append(res[2])
-    
+def ewmaWrapper(start_time, wma_length):
+    sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time < \'%s\' ORDER BY insert_time DESC limit %s" % (instruments, start_time, wma_length)
+    response = con.select_sql(sql)
+    ask_price_list = []
+    bid_price_list = []
+    insert_time_list = []
+    for res in response:
+      ask_price_list.append(res[0])
+      bid_price_list.append(res[1])
+      insert_time_list.append(res[2])
+ 
+    ask_price_list.reverse()
+    bid_price_list.reverse()
+    insert_time_list.reverse()
 
-  ask_price_list.reverse()
-  bid_price_list.reverse()
-  insert_time_list.reverse()
+    wma_length = len(ask_price_list)
+#    ewma = getEWMA(ask_price_list, bid_price_list, wma_length, 1)
+    ewma = getEWMA(bid_price_list, bid_price_list, wma_length, 1)
+    return ewma[-1]
 
-#  ewma50 = getEWMA(ask_price_list, bid_price_list, 50, 300)
-  ewma21 = getEWMA(ask_price_list, bid_price_list, 21, 3600)
-  slope_length = 5*3600*-1
-  slope_list = ewma50[slope_length:]
-  slope = getSlope(slope_list)
-  print "time = %s, slope = %s" % (start_time, slope)
-  start_time = start_time + timedelta(minutes=10)
+while True:
+    try:
+        flag = decideMarket(start_time)
+        if flag == False:
+            pass
 
+        else:
+            if now < start_time:
+                time.sleep(60)
+            else:
+                now = datetime.now()
+            
+                # 1h 21
+                ewma_length = 21
+                candle_width = 3600
+                wma_length = ewma_length * candle_width
+                ewma_value = ewmaWrapper(start_time, wma_length)
+            #    print "time = %s, ewma_value = %s" % (start_time, ewma_value)
+                sql = "insert into %s_EWMA_TABLE(ewma_value, ewma_length, candle_width, insert_time) values(%s, %s, %s, \'%s\')" % (instruments, ewma_value, ewma_length, candle_width, start_time)
+                con.insert_sql(sql)
+            
+                # 1h 50
+                ewma_length = 50
+                candle_width = 3600
+                wma_length = ewma_length * candle_width
+                ewma_value = ewmaWrapper(start_time, wma_length)
+            #    print "time = %s, ewma_value = %s" % (start_time, ewma_value)
+                sql = "insert into %s_EWMA_TABLE(ewma_value, ewma_length, candle_width, insert_time) values(%s, %s, %s, \'%s\')" % (instruments, ewma_value, ewma_length, candle_width, start_time)
+                con.insert_sql(sql)
+            
+                # 1h 100
+                ewma_length = 100
+                candle_width = 3600
+                wma_length = ewma_length * candle_width
+                ewma_value = ewmaWrapper(start_time, wma_length)
+            #    print "time = %s, ewma_value = %s" % (start_time, ewma_value)
+                sql = "insert into %s_EWMA_TABLE(ewma_value, ewma_length, candle_width, insert_time) values(%s, %s, %s, \'%s\')" % (instruments, ewma_value, ewma_length, candle_width, start_time)
+                con.insert_sql(sql)
+            
+                # 5m 21
+                ewma_length = 21
+                candle_width = 300
+                wma_length = ewma_length * candle_width
+                ewma_value = ewmaWrapper(start_time, wma_length)
+            #    print "time = %s, ewma_value = %s" % (start_time, ewma_value)
+                sql = "insert into %s_EWMA_TABLE(ewma_value, ewma_length, candle_width, insert_time) values(%s, %s, %s, \'%s\')" % (instruments, ewma_value, ewma_length, candle_width, start_time)
+                con.insert_sql(sql)
+            
+                # 5m 50
+                ewma_length = 50
+                candle_width = 300
+                wma_length = ewma_length * candle_width
+                ewma_value = ewmaWrapper(start_time, wma_length)
+            #    print "time = %s, ewma_value = %s" % (start_time, ewma_value)
+                sql = "insert into %s_EWMA_TABLE(ewma_value, ewma_length, candle_width, insert_time) values(%s, %s, %s, \'%s\')" % (instruments, ewma_value, ewma_length, candle_width, start_time)
+                con.insert_sql(sql)
+            
+                # 5m 200
+                ewma_length = 200
+                candle_width = 300
+                wma_length = ewma_length * candle_width
+                ewma_value = ewmaWrapper(start_time, wma_length)
+            #    print "time = %s, ewma_value = %s" % (start_time, ewma_value)
+                sql = "insert into %s_EWMA_TABLE(ewma_value, ewma_length, candle_width, insert_time) values(%s, %s, %s, \'%s\')" % (instruments, ewma_value, ewma_length, candle_width, start_time)
+                con.insert_sql(sql)
+            
+        start_time = start_time + timedelta(minutes=1)
+        
+    except:
+        pass
