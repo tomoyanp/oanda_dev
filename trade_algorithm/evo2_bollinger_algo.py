@@ -48,16 +48,17 @@ class Evo2BollingerAlgo(SuperAlgo):
                 # Get 1h * 21 WMA and check long time trend #
                 #############################################
 
-                # 移動平均の取得（WMA100（1時間足））
-                wma_length = 100
+                # 移動平均の取得（WMA200（1時間足））
+                wma_length = 200
                 ewma100_3600 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, 3600)
 
                 current_price = self.getCurrentPrice()
 
-                # 3600の100日移動平均と、現在価格を比較
-                if ewma100_3600[-1] < current_price:
+                # 3600の200日加重移動平均と、現在価格を比較
+                # 0.1以上差があれば、売買ロジックに入る
+                if ewma100_3600[-1] + 0.1 < current_price:
                     trend_flag = "buy"
-                elif ewma100_3600[-1] > current_price:
+                elif ewma100_3600[-1] - 0.1 > current_price:
                     trend_flag = "sell"
                 else:
                     trend_flag = "range"
@@ -65,15 +66,6 @@ class Evo2BollingerAlgo(SuperAlgo):
                 logging.info("%s 1h*100 ewma value = %s, current_price = %s, trend_flag = %s" % (base_time, ewma100_3600[-1], current_price, trend_flag))
                 if trend_flag == "range":
                     pass
-#                    data_set = getBollingerDataSet(self.ask_price_list, self.bid_price_list, window_size, sigma_valiable, 1800)
-#                    if current_price > data_set["upper_sigmas"][-1]:
-#                        trade_flag = "sell"
-#                    elif current_price < data_set["lower_sigmas"][-1]:
-#                        trade_flag = "buy"
-#                    else:
-#                        trade_flag = "pass"
-#
-#                    logging.info("%s 30m bollinger band upper_sigma = %s, lower_sigma = %s" % (base_time, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1]))
 
                 else:
                     # 移動平均じゃなく、トレンド発生＋3シグマ突破でエントリーに変えてみる
@@ -95,12 +87,6 @@ class Evo2BollingerAlgo(SuperAlgo):
                     upper3_sigma = data_set["upper_sigmas"][-1]
                     lower3_sigma = data_set["lower_sigmas"][-1]
 
-#                    # 移動平均線付近かどうか
-#                    cmp_value = current_price - data_set["base_lines"][-1]
-#                    if -0.01 < cmp_value < 0.01:
-#                        baseline_touch_flag = True
-
-
                     # slopeが上向き、現在価格が移動平均(EWMA200)より上、現在価格がbollinger3_sigmaより上にいる
                     if ((slope - high_slope_threshold) > 0) and (ewma200[-1] < current_price) and (trend_flag == "buy") and (current_price > upper3_sigma):
                         trade_flag = "buy"
@@ -111,17 +97,6 @@ class Evo2BollingerAlgo(SuperAlgo):
                         logging.info("EXECUTE TRADE")
                     else:
                         trade_flag = "pass"
-
-#                    # slopeが上向き、現在価格が移動平均(EWMA200)より上、現在価格が移動平均(SMA)付近にいる
-#                    if slope - high_slope_threshold > 0 and ewma200[-1] < current_price and baseline_touch_flag and trend_flag == "buy":
-#                        trade_flag = "buy"
-#                        logging.info("EXECUTE TRADE")
-#                    # slopeが下向き、現在価格が移動平均(EWMA200)より下、現在価格が移動平均(SMA)付近にいる
-#                    elif slope - low_slope_threshold < 0 and ewma200[-1] > current_price and baseline_touch_flag and trend_flag == "sell":
-#                        trade_flag = "sell"
-#                        logging.info("EXECUTE TRADE")
-#                    else:
-#                        trade_flag = "pass"
 
                     logging.info("%s 5m 50ewma slope = %s, 5m 200ewma = %s, current_price = %s, upper_3sigma = %s, lower_3sigma = %s, trade_flag = %s" % (base_time, slope, ewma200[-1], current_price, upper3_sigma, lower3_sigma, trade_flag))
 
