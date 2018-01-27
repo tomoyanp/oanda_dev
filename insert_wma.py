@@ -124,7 +124,7 @@ while now > start_time:
                 sql = "insert into %s_EWMA_TABLE(ewma_value, ewma_length, candle_width, insert_time) values(%s, %s, %s, \'%s\')" % (instruments, ewma_value, ewma_length, candle_width, start_time)
                 con.insert_sql(sql)
 
-                start_time = start_time + timedelta(minutes=1)
+        start_time = start_time + timedelta(minutes=1)
 
     except:
         print traceback.format_exc()
