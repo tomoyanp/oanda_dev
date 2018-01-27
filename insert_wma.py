@@ -27,8 +27,9 @@ instruments = args[1].strip()
 
 def getPrice(base_time, time_width):
     base_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
+    print base_time
     sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time < \'%s\' ORDER BY insert_time DESC limit %s" % (instruments, base_time, time_width)
-    print sql
+    #print sql
     response = mysqlConnector.select_sql(sql)
     if len(response) < 1:
         pass
@@ -76,7 +77,7 @@ while now > start_time:
                 candle_width = 3600
                 wma_length = ewma_length * candle_width
                 ewma_value = ewmaWrapper(ask_price_list, bid_price_list, wma_length)
-                print "time = %s, ewma_value = %s" % (start_time, ewma_value)
+                print "time = %s, ewma_length = %s, candle_width = %s, ewma_value = %s" % (start_time, ewma_length, candle_width, ewma_value)
                 sql = "insert into %s_EWMA_TABLE(ewma_value, ewma_length, candle_width, insert_time) values(%s, %s, %s, \'%s\')" % (instruments, ewma_value, ewma_length, candle_width, start_time)
                 con.insert_sql(sql)
 
@@ -85,7 +86,7 @@ while now > start_time:
                 candle_width = 3600
                 wma_length = ewma_length * candle_width
                 ewma_value = ewmaWrapper(ask_price_list, bid_price_list, wma_length)
-                print "time = %s, ewma_value = %s" % (start_time, ewma_value)
+                print "time = %s, ewma_length = %s, candle_width = %s, ewma_value = %s" % (start_time, ewma_length, candle_width, ewma_value)
                 sql = "insert into %s_EWMA_TABLE(ewma_value, ewma_length, candle_width, insert_time) values(%s, %s, %s, \'%s\')" % (instruments, ewma_value, ewma_length, candle_width, start_time)
                 con.insert_sql(sql)
 
@@ -94,7 +95,7 @@ while now > start_time:
                 candle_width = 3600
                 wma_length = ewma_length * candle_width
                 ewma_value = ewmaWrapper(ask_price_list, bid_price_list, wma_length)
-                print "time = %s, ewma_value = %s" % (start_time, ewma_value)
+                print "time = %s, ewma_length = %s, candle_width = %s, ewma_value = %s" % (start_time, ewma_length, candle_width, ewma_value)
                 sql = "insert into %s_EWMA_TABLE(ewma_value, ewma_length, candle_width, insert_time) values(%s, %s, %s, \'%s\')" % (instruments, ewma_value, ewma_length, candle_width, start_time)
                 con.insert_sql(sql)
 
@@ -103,7 +104,7 @@ while now > start_time:
                 candle_width = 300
                 wma_length = ewma_length * candle_width
                 ewma_value = ewmaWrapper(ask_price_list, bid_price_list, wma_length)
-                print "time = %s, ewma_value = %s" % (start_time, ewma_value)
+                print "time = %s, ewma_length = %s, candle_width = %s, ewma_value = %s" % (start_time, ewma_length, candle_width, ewma_value)
                 sql = "insert into %s_EWMA_TABLE(ewma_value, ewma_length, candle_width, insert_time) values(%s, %s, %s, \'%s\')" % (instruments, ewma_value, ewma_length, candle_width, start_time)
                 con.insert_sql(sql)
 
@@ -113,7 +114,7 @@ while now > start_time:
                 candle_width = 300
                 wma_length = ewma_length * candle_width
                 ewma_value = ewmaWrapper(ask_price_list, bid_price_list, wma_length)
-                print "time = %s, ewma_value = %s" % (start_time, ewma_value)
+                print "time = %s, ewma_length = %s, candle_width = %s, ewma_value = %s" % (start_time, ewma_length, candle_width, ewma_value)
                 sql = "insert into %s_EWMA_TABLE(ewma_value, ewma_length, candle_width, insert_time) values(%s, %s, %s, \'%s\')" % (instruments, ewma_value, ewma_length, candle_width, start_time)
                 con.insert_sql(sql)
 
@@ -123,7 +124,7 @@ while now > start_time:
                 candle_width = 300
                 wma_length = ewma_length * candle_width
                 ewma_value = ewmaWrapper(ask_price_list, bid_price_list, wma_length)
-                print "time = %s, ewma_value = %s" % (start_time, ewma_value)
+                print "time = %s, ewma_length = %s, candle_width = %s, ewma_value = %s" % (start_time, ewma_length, candle_width, ewma_value)
                 sql = "insert into %s_EWMA_TABLE(ewma_value, ewma_length, candle_width, insert_time) values(%s, %s, %s, \'%s\')" % (instruments, ewma_value, ewma_length, candle_width, start_time)
                 con.insert_sql(sql)
 
