@@ -37,7 +37,7 @@ def getPrice(base_time, time_width):
     else:
         index = 0
         for line in response:
-            if index_unit % time_unit == 0:
+            if index % time_unit == 0:
                 ask_price_list.append(line[0])
                 bid_price_list.append(line[1])
                 insert_time_list.append(line[2])
