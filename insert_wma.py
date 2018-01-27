@@ -16,7 +16,7 @@ from mysql_connector import MysqlConnector
 from datetime import datetime, timedelta
 from common import getEWMA, getSlope, decideMarket
 
-start_time = "2018-01-25 07:00:00"
+start_time = "2018-01-22 05:00:00"
 start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
 
 now = datetime.now()
@@ -46,12 +46,8 @@ def getPrice(base_time, time_width):
     return ask_price_list, bid_price_list, insert_time_list
 
 def ewmaWrapper(ask_price_list, bid_price_list, wma_length):
-    wma_length = wma_length * -1
-    tmp_ask_price_list = ask_price_list[wma_length:]
-    tmp_bid_price_list = bid_price_list[wma_length:]
-
-    wma_length = len(ask_price_list)
-    ewma = getEWMA(tmp_ask_price_list, tmp_bid_price_list, wma_length, 1)
+    list_length = wma_length * -1
+    ewma = getEWMA(ask_price_list[list_length:], bid_price_list[list_length:], wma_length, 1)
     return ewma[-1]
 
 ask_price_list = []
