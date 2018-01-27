@@ -20,7 +20,7 @@ start_time = "2018-01-25 07:00:00"
 start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
 
 now = datetime.now()
-mysqlConnector = MysqlConnector()
+con = MysqlConnector()
 
 args = sys.argv
 instruments = args[1].strip()
@@ -30,7 +30,7 @@ def getPrice(base_time, time_width):
     print base_time
     sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time < \'%s\' ORDER BY insert_time DESC limit %s" % (instruments, base_time, time_width)
     #print sql
-    response = mysqlConnector.select_sql(sql)
+    response = con.select_sql(sql)
     if len(response) < 1:
         pass
     else:
@@ -131,4 +131,6 @@ while now > start_time:
                 start_time = start_time + timedelta(minutes=1)
 
     except:
-        pass
+        print traceback.format_exc()
+        start_time = start_time + timedelta(minutes=1)
+        break
