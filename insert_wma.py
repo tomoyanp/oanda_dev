@@ -46,7 +46,6 @@ def getPrice(base_time, time_width):
             insert_time_list.append(line[2])
 #            index = index + 1
 
-
         ask_price_list.reverse()
         bid_price_list.reverse()
         insert_time_list.reverse()
