@@ -105,7 +105,7 @@ def extraBollingerDataSet(data_set, sigma_length, candle_width):
 
 # 加重移動平均を計算
 # wma_length = 期間（200日移動平均、など）
-def getEWMA(ask_price_list, bid_price_list, wma_length, candle_width):
+def getOriginalEWMA(ask_price_list, bid_price_list, wma_length, candle_width):
     ask_price_list = pd.Series(ask_price_list)
     bid_price_list = pd.Series(bid_price_list)
     average_price_list = (ask_price_list + bid_price_list) / 2
@@ -137,7 +137,7 @@ def getEWMA(ask_price_list, bid_price_list, wma_length, candle_width):
     return wma_value
 
 
-def getEMA(ask_price_list, bid_price_list, wma_length, candle_width):
+def getEWMA(ask_price_list, bid_price_list, wma_length, candle_width):
     ask_price_list = pd.Series(ask_price_list)
     bid_price_list = pd.Series(bid_price_list)
     average_price_list = (ask_price_list + bid_price_list) / 2

@@ -20,7 +20,7 @@
 ####################################################
 
 from super_algo import SuperAlgo
-from common import instrument_init, account_init, decideMarket, getBollingerDataSet, extraBollingerDataSet, getEWMA, countIndex, getSlope
+from common import instrument_init, account_init, decideMarket, getBollingerDataSet, extraBollingerDataSet, getEWMA, countIndex, getSlope, getOriginalEWMA
 from datetime import datetime, timedelta
 import logging
 import pandas as pd
@@ -50,20 +50,22 @@ class Evo2BollingerAlgo(SuperAlgo):
 
                 # 移動平均の取得（WMA200（1時間足））
                 wma_length = 200
-                ewma100_3600 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, 3600)
+                ewma100_3600 = getOriginalEWMA(self.ask_price_list, self.bid_price_list, wma_length, 3600)
+                pd_ewma100_3600 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, 3600)
 
                 current_price = self.getCurrentPrice()
 
                 # 3600の200日加重移動平均と、現在価格を比較
                 # 0.1以上差があれば、売買ロジックに入る
-                if ewma100_3600[-1] + 0.1 < current_price:
+                if (float(ewma100_3600) + float(0.1)) < current_price:
                     trend_flag = "buy"
-                elif ewma100_3600[-1] - 0.1 > current_price:
+                elif (float(ewma100_3600) - float(0.1)) > current_price:
                     trend_flag = "sell"
                 else:
                     trend_flag = "range"
 
-                logging.info("%s 1h*100 ewma value = %s, current_price = %s, trend_flag = %s" % (base_time, ewma100_3600[-1], current_price, trend_flag))
+                logging.info("%s 1h*200 original ewma value = %s, current_price = %s, trend_flag = %s" % (base_time, ewma100_3600, current_price, trend_flag))
+                logging.info("%s 1h*200 ewma value = %s, current_price = %s, trend_flag = %s" % (base_time, pd_ewma100_3600[-1], current_price, trend_flag))
                 if trend_flag == "range":
                     pass
 

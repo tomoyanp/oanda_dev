@@ -29,7 +29,7 @@ ask_price_list = []
 bid_price_list = []
 insert_time_list = []
 
-def addPrice(self, instrument, base_time, end_time):
+def addPrice(base_time, end_time):
     cmp_end_time  = end_time.strftime("%Y-%m-%d %H:%M:%S")
     cmp_base_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
     if cmp_end_time == cmp_base_time:
@@ -39,7 +39,7 @@ def addPrice(self, instrument, base_time, end_time):
         end_time = base_time
         start_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
         end_time = end_time.strftime("%Y-%m-%d %H:%M:%S")
-        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time >= \'%s\' and insert_time < \'%s\' ORDER BY insert_time ASC" % (instrument, start_time, end_time)
+        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time >= \'%s\' and insert_time < \'%s\' ORDER BY insert_time ASC" % (instruments, start_time, end_time)
         print(sql)
         response = mysqlConnector.select_sql(sql)
         response_length = len(response)
@@ -59,12 +59,11 @@ def addPrice(self, instrument, base_time, end_time):
     end_time = datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
     return end_time
 
-def setInitialPrice(self, instrument, base_time, time_width):
+def setInitialPrice(base_time, time_width):
     end_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
-    sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time < \'%s\' ORDER BY insert_time DESC limit %s" % (instrument, end_time, time_width)
+    sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time < \'%s\' ORDER BY insert_time DESC limit %s" % (instruments, end_time, time_width)
     print sql
     response = mysqlConnector.select_sql(sql)
-    setResponse(response)
 
     if len(response) < 1:
         pass
@@ -81,8 +80,6 @@ def setInitialPrice(self, instrument, base_time, time_width):
     end_time = datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
     return end_time
 
-
-
 def ewmaWrapper(wma_length):
     wma_length = wma_length * -1
     tmp_ask_price_list = ask_price_list[wma_length:]
@@ -92,13 +89,12 @@ def ewmaWrapper(wma_length):
     ewma = getEWMA(tmp_bid_price_list, tmp_bid_price_list, wma_length, 1)
     return ewma[-1]
 
+end_time = setInitialPrice(start_time, 4000*100)
 while True:
-    setInitialPrice(start_time)
     try:
         flag = decideMarket(start_time)
         if flag == False:
             pass
-
         else:
             if now < start_time:
                 time.sleep(60)
@@ -160,8 +156,8 @@ while True:
                 sql = "insert into %s_EWMA_TABLE(ewma_value, ewma_length, candle_width, insert_time) values(%s, %s, %s, \'%s\')" % (instruments, ewma_value, ewma_length, candle_width, start_time)
 #                con.insert_sql(sql)
 
-        start_time = start_time + timedelta(minutes=1)
-        addPrice(start_time)
+                start_time = start_time + timedelta(minutes=1)
+                end_time = addPrice(start_time, end_time)
 
     except:
         pass
