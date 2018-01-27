@@ -57,7 +57,8 @@ ask_price_list = []
 bid_price_list = []
 insert_time_list = []
 
-while True:
+#while True:
+while now > start_time:
     try:
         flag = decideMarket(start_time)
         if flag == False:
