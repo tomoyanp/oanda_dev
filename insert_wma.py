@@ -32,16 +32,20 @@ def getPrice(base_time, time_width):
     time_unit = 60
     #print sql
     response = con.select_sql(sql)
+    ask_price_list = []
+    bid_price_list = []
+    insert_time_list = []
     if len(response) < 1:
         pass
     else:
         index = 0
         for line in response:
-            if index_unit % time_unit == 0:
-                ask_price_list.append(line[0])
-                bid_price_list.append(line[1])
-                insert_time_list.append(line[2])
-            index = index + 1
+#            if index_unit % time_unit == 0:
+            ask_price_list.append(line[0])
+            bid_price_list.append(line[1])
+            insert_time_list.append(line[2])
+#            index = index + 1
+
 
         ask_price_list.reverse()
         bid_price_list.reverse()
