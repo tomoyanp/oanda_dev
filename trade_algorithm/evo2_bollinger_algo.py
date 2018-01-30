@@ -46,7 +46,8 @@ class Evo2BollingerAlgo(SuperAlgo):
                 current_price = self.getCurrentPrice()
 
                 # 移動平均じゃなく、トレンド発生＋3シグマ突破でエントリーに変えてみる
-                sigma_valiable = 3
+                # modify to 2.5
+                sigma_valiable = 2.5
                 data_set = getBollingerDataSet(self.ask_price_list, self.bid_price_list, window_size, sigma_valiable, candle_width)
 
                 # 移動平均の取得(WMA50)
