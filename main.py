@@ -57,7 +57,7 @@ if __name__ == '__main__':
 
     base_time = datetime.now()
     end_time = base_time - timedelta(days=0)
-    base_time = base_time - timedelta(days=5)
+    base_time = base_time - timedelta(days=3)
 
     trade_wrapper = TradeWrapper(instrument, mode, test_mode, current_path, config_name, args)
     trade_wrapper.setTradeAlgo(algo, base_time)

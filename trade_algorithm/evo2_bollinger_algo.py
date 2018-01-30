@@ -43,64 +43,39 @@ class Evo2BollingerAlgo(SuperAlgo):
             if self.order_flag:
                 pass
             else:
-
-                #############################################
-                # Get 1h * 21 WMA and check long time trend #
-                #############################################
-
-                # 移動平均の取得（WMA200（1時間足））
-                wma_length = 200
-                ewma100_3600 = getOriginalEWMA(self.ask_price_list, self.bid_price_list, wma_length, 3600)
-                pd_ewma100_3600 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, 3600)
-
                 current_price = self.getCurrentPrice()
 
-                # 3600の200日加重移動平均と、現在価格を比較
-                # 0.1以上差があれば、売買ロジックに入る
-                if (float(ewma100_3600) + float(0.1)) < current_price:
-                    trend_flag = "buy"
-                elif (float(ewma100_3600) - float(0.1)) > current_price:
-                    trend_flag = "sell"
+                # 移動平均じゃなく、トレンド発生＋3シグマ突破でエントリーに変えてみる
+                sigma_valiable = 3
+                data_set = getBollingerDataSet(self.ask_price_list, self.bid_price_list, window_size, sigma_valiable, candle_width)
+
+                # 移動平均の取得(WMA50)
+                wma_length = 50
+                ewma50 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
+                wma_length = 200
+                ewma200 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
+
+                # 短期トレンドの取得
+                slope_length = (10 * candle_width) * -1
+                slope_list = ewma50[slope_length:]
+                slope = getSlope(slope_list)
+                baseline_touch_flag = False
+
+                upper3_sigma = data_set["upper_sigmas"][-1]
+                lower3_sigma = data_set["lower_sigmas"][-1]
+
+                # slopeが上向き、現在価格が移動平均(EWMA200)より上、現在価格がbollinger3_sigmaより上にいる
+                if ((slope - high_slope_threshold) > 0) and (ewma200[-1] < current_price) and (current_price > upper3_sigma):
+                    trade_flag = "buy"
+                    logging.info("EXECUTE TRADE")
+                # slopeが下向き、現在価格が移動平均(EWMA200)より下、現在価格がbollinger3_sigmaより下にいる
+                elif ((slope - low_slope_threshold) < 0) and (ewma200[-1] > current_price) and (current_price < lower3_sigma):
+                    trade_flag = "sell"
+                    logging.info("EXECUTE TRADE")
                 else:
-                    trend_flag = "range"
+                    trade_flag = "pass"
 
-                logging.info("%s 1h*200 original ewma value = %s, current_price = %s, trend_flag = %s" % (base_time, ewma100_3600, current_price, trend_flag))
-                logging.info("%s 1h*200 ewma value = %s, current_price = %s, trend_flag = %s" % (base_time, pd_ewma100_3600[-1], current_price, trend_flag))
-                if trend_flag == "range":
-                    pass
-
-                else:
-                    # 移動平均じゃなく、トレンド発生＋3シグマ突破でエントリーに変えてみる
-                    sigma_valiable = 3
-                    data_set = getBollingerDataSet(self.ask_price_list, self.bid_price_list, window_size, sigma_valiable, candle_width)
-
-                    # 移動平均の取得(WMA50)
-                    wma_length = 50
-                    ewma50 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
-                    wma_length = 200
-                    ewma200 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
-
-                    # 短期トレンドの取得
-                    slope_length = (10 * candle_width) * -1
-                    slope_list = ewma50[slope_length:]
-                    slope = getSlope(slope_list)
-                    baseline_touch_flag = False
-
-                    upper3_sigma = data_set["upper_sigmas"][-1]
-                    lower3_sigma = data_set["lower_sigmas"][-1]
-
-                    # slopeが上向き、現在価格が移動平均(EWMA200)より上、現在価格がbollinger3_sigmaより上にいる
-                    if ((slope - high_slope_threshold) > 0) and (ewma200[-1] < current_price) and (trend_flag == "buy") and (current_price > upper3_sigma):
-                        trade_flag = "buy"
-                        logging.info("EXECUTE TRADE")
-                    # slopeが下向き、現在価格が移動平均(EWMA200)より下、現在価格がbollinger3_sigmaより下にいる
-                    elif ((slope - low_slope_threshold) < 0) and (ewma200[-1] > current_price) and (trend_flag == "sell") and (current_price < lower3_sigma):
-                        trade_flag = "sell"
-                        logging.info("EXECUTE TRADE")
-                    else:
-                        trade_flag = "pass"
-
-                    logging.info("%s 5m 50ewma slope = %s, 5m 200ewma = %s, current_price = %s, upper_3sigma = %s, lower_3sigma = %s, trade_flag = %s" % (base_time, slope, ewma200[-1], current_price, upper3_sigma, lower3_sigma, trade_flag))
+                logging.info("%s 5m 50ewma slope = %s, 5m 200ewma = %s, current_price = %s, upper_3sigma = %s, lower_3sigma = %s, trade_flag = %s" % (base_time, slope, ewma200[-1], current_price, upper3_sigma, lower3_sigma, trade_flag))
 
                 return trade_flag
 

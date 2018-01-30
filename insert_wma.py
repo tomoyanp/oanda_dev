@@ -45,7 +45,7 @@ def getPrice(base_time, time_width):
             bid_price_list.append(line[1])
             insert_time_list.append(line[2])
 #            index = index + 1
-
+        print len(ask_price_list)
         ask_price_list.reverse()
         bid_price_list.reverse()
         insert_time_list.reverse()
@@ -72,12 +72,12 @@ while now > start_time:
                 time.sleep(60)
             else:
                 now = datetime.now()
-                time_width = 60 * 200
+                time_width = 3600 * 200
                 ask_price_list, bid_price_list, insert_time_list = getPrice(start_time, time_width)
 
                 # 1h 21
                 ewma_length = 21
-                candle_width = 60
+                candle_width = 3600
                 wma_length = ewma_length * candle_width
                 ewma_value = ewmaWrapper(ask_price_list, bid_price_list, wma_length)
                 print "time = %s, ewma_length = %s, candle_width = %s, ewma_value = %s" % (start_time, ewma_length, candle_width, ewma_value)
@@ -86,7 +86,7 @@ while now > start_time:
 
                 # 1h 50
                 ewma_length = 50
-                candle_width = 60
+                candle_width = 3600
                 wma_length = ewma_length * candle_width
                 ewma_value = ewmaWrapper(ask_price_list, bid_price_list, wma_length)
                 print "time = %s, ewma_length = %s, candle_width = %s, ewma_value = %s" % (start_time, ewma_length, candle_width, ewma_value)
@@ -95,7 +95,7 @@ while now > start_time:
 
                 # 1h 100
                 ewma_length = 200
-                candle_width = 60
+                candle_width = 3600
                 wma_length = ewma_length * candle_width
                 ewma_value = ewmaWrapper(ask_price_list, bid_price_list, wma_length)
                 print "time = %s, ewma_length = %s, candle_width = %s, ewma_value = %s" % (start_time, ewma_length, candle_width, ewma_value)
@@ -104,7 +104,7 @@ while now > start_time:
 
                 # 5m 21
                 ewma_length = 21
-                candle_width = 5
+                candle_width = 300
                 wma_length = ewma_length * candle_width
                 ewma_value = ewmaWrapper(ask_price_list, bid_price_list, wma_length)
                 print "time = %s, ewma_length = %s, candle_width = %s, ewma_value = %s" % (start_time, ewma_length, candle_width, ewma_value)
@@ -114,7 +114,7 @@ while now > start_time:
 
                 # 5m 50
                 ewma_length = 50
-                candle_width = 5
+                candle_width = 300
                 wma_length = ewma_length * candle_width
                 ewma_value = ewmaWrapper(ask_price_list, bid_price_list, wma_length)
                 print "time = %s, ewma_length = %s, candle_width = %s, ewma_value = %s" % (start_time, ewma_length, candle_width, ewma_value)
@@ -124,7 +124,7 @@ while now > start_time:
 
                 # 5m 200
                 ewma_length = 200
-                candle_width = 5
+                candle_width = 300
                 wma_length = ewma_length * candle_width
                 ewma_value = ewmaWrapper(ask_price_list, bid_price_list, wma_length)
                 print "time = %s, ewma_length = %s, candle_width = %s, ewma_value = %s" % (start_time, ewma_length, candle_width, ewma_value)

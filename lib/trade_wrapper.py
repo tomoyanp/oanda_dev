@@ -187,8 +187,8 @@ class TradeWrapper:
             pass
         else:
             trade_flag = self.trade_algo.decideTrade(base_time)
-             # 以下は, decideTradeの中で実装する
-#            trade_flag = self.trade_algo.decideTradeTime(base_time, trade_flag)
+            # 以下は, decideTradeの中で実装する
+            trade_flag = self.trade_algo.decideTradeTime(base_time, trade_flag)
 #            trade_flag = self.trade_algo.checkTrend(base_time, trade_flag)
 
             if trade_flag == "pass":
