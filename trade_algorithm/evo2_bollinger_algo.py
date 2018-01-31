@@ -133,20 +133,9 @@ class Evo2BollingerAlgo(SuperAlgo):
             if self.order_flag:
                 if ex_stlmode == "on":
 
-                    # 移動平均の取得(WMA50)
-                    wma_length = 50
-                    ewma50 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
-
-                    # トレンドの取得 20から10に変えてみる
-                    slope_length = (5 * candle_width) * -1
-                    slope_list = ewma50[slope_length:]
-                    #logging.info(slope_list)
-                    slope = getSlope(slope_list)
-                    logging.info("time = %s, slope = %s" % (base_time, slope))
-
                     # Stop Loss Algorithm
-                    # get Bollinger Band sigma 2
-                    sigma_valiable = 3
+                    # get Bollinger Band sigma 2.5
+                    sigma_valiable = 2.5
                     data_set = getBollingerDataSet(self.ask_price_list,
                                                    self.bid_price_list,
                                                    window_size,
@@ -168,86 +157,29 @@ class Evo2BollingerAlgo(SuperAlgo):
                     current_bid_price = self.bid_price_list[-1]
                     current_price = self.getCurrentPrice()
                     order_price = self.getOrderPrice()
-                    logging.info("DECIDE STL upper_sigma = %s, current_price = %s, lower_sigma = %s, base_line = %s" %(upper_sigma, current_price, lower_sigma, base_line))
-                    logging.info("DECIDE STL order_price = %s, low_slope_threshold = %s, slope = %s, high_slope_threshold = %s" %(order_price, low_slope_threshold, slope, high_slope_threshold))
-                    logging.info("DECIDE STL low_slope_threshold_type = %s, slope_type = %s, high_slope_threshold_type = %s" %(type(low_slope_threshold), type(slope), type(high_slope_threshold)))
 
                     # 買いの場合はlower_sigmaにぶつかったら決済
                     # 売りの場合はupper_sigmaにぶつかったら決済
                     stl_flag = False
 
-                    if self.order_kind == "buy":
-                        if current_price < lower_sigma:
-                           logging.info("EXECUTE STL")
-                           stl_flag = True
+                    # 移動平均の取得(WMA50)
+                    wma_length = 50
+                    candle_width = 300
+                    ewma50 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
+    
+                    # 短期トレンドの取得
+                    slope_length = (10 * candle_width) * -1
+                    slope_list = ewma50[slope_length:]
+                    slope = getSlope(slope_list)
+    
+                    # slopeが上向き、現在価格がbollinger3_sigmaより上にいる
+                    if ((slope - high_slope_threshold) > 0) and (current_price > upper_sigma):
+                        stl_flag = True
+                    # slopeが下向き、現在価格がbollinger3_sigmaより下にいる
+                    elif ((slope - low_slope_threshold) < 0) and (current_price < lower_sigma):
+                        stl_flag = True
 
-                    elif self.order_kind == "sell":
-                        if current_price > upper_sigma:
-                           logging.info("EXECUTE STL")
-                           stl_flag = True
-
-                    #########################
-                    # Take Profit Algorithm #
-                    #########################
-
-#                    # When current price don't touch bollinger band sigma 1, Execute Settlement.
-#
-#                    # min_take_profit = self.config_data["min_take_profit"]
-#                    logging.info("DECIDE STL current_bid_price = %s, current_ask_price = %s, order_price = %s" %(current_bid_price, current_ask_price, order_price))
-#
-#                    # get Bollinger Band sigma 1
-#                    sigma_valiable = 1
-#                    data_set = getBollingerDataSet(self.ask_price_list,
-#                                                   self.bid_price_list,
-#                                                   window_size,
-#                                                   sigma_valiable,
-#                                                   candle_width)
-#
-#                    #sigma_length = self.config_data["sigma_length"]
-#                    # Extra Bollinger Band for 5 minutes
-#                    sigma_length = 1
-#                    data_set = extraBollingerDataSet(data_set, sigma_length, candle_width)
-#                    upper_sigmas = data_set["upper_sigmas"]
-#                    lower_sigmas = data_set["lower_sigmas"]
-#                    price_list   = data_set["price_list"]
-#                    base_lines   = data_set["base_lines"]
-#
-#
-#                    min_take_profit = 0.1
-#                    bollinger_flag = False
-#                    if self.order_kind == "buy":
-#                        if (float(current_bid_price) - float(order_price)) > float(min_take_profit):
-#                            for i in range(0, len(price_list)):
-#                                if price_list[i] > upper_sigmas[i]:
-#                                    bollinger_flag = True
-#                                    logging.info("price > upper_sigma, price = %s, upper_sigma = %s" % (price_list[i], upper_sigmas[i]))
-#                            if bollinger_flag:
-#                                pass
-#                            else:
-#                                stl_flag = True
-#                    elif self.order_kind == "sell":
-#                        if (float(order_price) - float(current_ask_price)) > float(min_take_profit):
-#                            for i in range(0, len(price_list)):
-#                                if price_list[i] < lower_sigmas[i]:
-#                                    bollinger_flag = True
-#                                    logging.info("price < lower_sigma, price = %s, lower_sigma = %s" % (price_list[i], lower_sigmas[i]))
-#                            if bollinger_flag:
-#                                pass
-#                            else:
-#                                stl_flag = True
-
-
-
-
-
-
-
-
-
-
-                    # min_take_profit = self.config_data["min_take_profit"]
-                    # When current_price is matched moving average price, execute Settlement
-
+                    # 最小利確0.1以上、移動平均にぶつかったら
                     min_take_profit = 0.1
                     if self.order_kind == "buy":
                         if (current_bid_price - order_price) > min_take_profit:
@@ -261,6 +193,10 @@ class Evo2BollingerAlgo(SuperAlgo):
                                 stl_flag = True
 
 
+                    logging.info("DECIDE STL upper_sigma = %s, current_price = %s, lower_sigma = %s, base_line = %s" %(upper_sigma, current_price, lower_sigma, base_line))
+                    logging.info("DECIDE STL order_price = %s, low_slope_threshold = %s, slope = %s, high_slope_threshold = %s" %(order_price, low_slope_threshold, slope, high_slope_threshold))
+                    logging.info("DECIDE STL low_slope_threshold_type = %s, slope_type = %s, high_slope_threshold_type = %s" %(type(low_slope_threshold), type(slope), type(high_slope_threshold)))
+                    logging.info("DECIDE STL ewma50 slope = %s, upper_sigma = %s, lower_sigma = %s" % (slope, upper_sigma, lower_sigma))
 
             else:
                 pass

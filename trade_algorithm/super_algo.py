@@ -384,7 +384,7 @@ class SuperAlgo(object):
         before_day = base_time - timedelta(days=1)
         before_end_time = base_time.strftime("%Y-%m-%d 06:59:59")
         before_start_time = before_day.strftime("%Y-%m-%d 07:00:00")
-        before_start_time = datetime.strptime("%Y-%m-%d %H:%M:%S", before_start_time)
+        before_start_time = datetime.strptime(before_start_time, "%Y-%m-%d %H:%M:%S")
         if decideMarket(before_start_time):
             before_start_time = before_day.strftime("%Y-%m-%d 07:00:00")
         else:
