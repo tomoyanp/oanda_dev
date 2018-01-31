@@ -41,23 +41,22 @@ if __name__ == '__main__':
     mode       = args[2]
     algo       = args[3]
     config_name     = args[4]
+    base_time = datetime.now()
+
     if len(args) > 5:
         test_args  = args[5]
     else:
         test_args = "live"
 
     if test_args == "test":
+        end_time = base_time - timedelta(days=0)
+        base_time = base_time - timedelta(days=14)
         test_mode = True
     else:
         test_mode = False
 
-
     # ポーリング時間
     sleep_time = 10
-
-    base_time = datetime.now()
-    end_time = base_time - timedelta(days=0)
-    base_time = base_time - timedelta(days=14)
 
     trade_wrapper = TradeWrapper(instrument, mode, test_mode, current_path, config_name, args)
     trade_wrapper.setTradeAlgo(algo, base_time)
