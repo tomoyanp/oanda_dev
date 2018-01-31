@@ -380,12 +380,13 @@ class SuperAlgo(object):
         self.bid_price_list = bid_price_list
         self.insert_time_list = insert_time_list
 
-    def getHiLowPriceBeforeDay(base_time):
+    def getHiLowPriceBeforeDay(self, base_time):
         before_end_time = base_time.strftime("%Y-%m-%d 06:59:59")
         before_day = base_time - timedelta(days=1)
         before_start_time = before_day.strftime("%Y-%m-%d 07:00:00")
-        sql = "select max(ask_price), max(bid_price) from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (before_start_time, before_end_time, instruments)
-        response = self.mysql_connector.select_sql(sql)
+        sql = "select max(ask_price), max(bid_price) from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, before_start_time, before_end_time)
+        print sql
+        response = self.mysqlConnector.select_sql(sql)
 
         for res in response:
             ask_price = res[0]
@@ -393,8 +394,9 @@ class SuperAlgo(object):
 
         hi_price = (ask_price + bid_price)/2
 
-        sql = "select min(ask_price), min(bid_price) from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (before_start_time, before_end_time, instruments)
-        response = self.mysql_connector.select_sql(sql)
+        sql = "select min(ask_price), min(bid_price) from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, before_start_time, before_end_time)
+        print sql
+        response = self.mysqlConnector.select_sql(sql)
 
         for res in response:
             ask_price = res[0]
@@ -404,13 +406,13 @@ class SuperAlgo(object):
 
         return hi_price, min_price
 
-    def getStartEndPrice(base_time):
+    def getStartEndPrice(self, base_time):
         start_time = base_time.strftime("%Y-%m-%d 07:00:00")
         end_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
 
         sql = "select ask_price, bid_price from %s_TABLE where insert_time = \'%s\'" % (self.instrument, start_time)
 
-        response = self.mysql_connector.select_sql(sql)
+        response = self.mysqlConnector.select_sql(sql)
         for res in response:
             ask_price = res[0]
             bid_price = res[1]
@@ -419,7 +421,7 @@ class SuperAlgo(object):
 
         sql = "select ask_price, bid_price from %s_TABLE where insert_time = \'%s\'" % (self.instrument, end_time)
 
-        response = self.mysql_connector.select_sql(sql)
+        response = self.mysqlConnector.select_sql(sql)
         for res in response:
             ask_price = res[0]
             bid_price = res[1]
