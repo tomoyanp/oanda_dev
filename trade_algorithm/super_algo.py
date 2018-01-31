@@ -380,6 +380,54 @@ class SuperAlgo(object):
         self.bid_price_list = bid_price_list
         self.insert_time_list = insert_time_list
 
+    def getHiLowPriceBeforeDay(base_time):
+        before_end_time = base_time.strftime("%Y-%m-%d 06:59:59")
+        before_day = base_time - timedelta(days=1)
+        before_start_time = before_day.strftime("%Y-%m-%d 07:00:00")
+        sql = "select max(ask_price), max(bid_price) from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (before_start_time, before_end_time, instruments)
+        response = self.mysql_connector.select_sql(sql)
+
+        for res in response:
+            ask_price = res[0]
+            bid_price = res[1]
+
+        hi_price = (ask_price + bid_price)/2
+
+        sql = "select min(ask_price), min(bid_price) from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (before_start_time, before_end_time, instruments)
+        response = self.mysql_connector.select_sql(sql)
+
+        for res in response:
+            ask_price = res[0]
+            bid_price = res[1]
+
+        min_price = (ask_price + bid_price)/2
+
+        return hi_price, min_price
+
+    def getStartEndPrice(base_time):
+        start_time = base_time.strftime("%Y-%m-%d 07:00:00")
+        end_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
+
+        sql = "select ask_price, bid_price from %s_TABLE where insert_time = \'%s\'" % (self.instrument, start_time)
+
+        response = self.mysql_connector.select_sql(sql)
+        for res in response:
+            ask_price = res[0]
+            bid_price = res[1]
+
+        start_price = (ask_price + bid_price)/2
+
+        sql = "select ask_price, bid_price from %s_TABLE where insert_time = \'%s\'" % (self.instrument, end_time)
+
+        response = self.mysql_connector.select_sql(sql)
+        for res in response:
+            ask_price = res[0]
+            bid_price = res[1]
+
+        end_price = (ask_price + bid_price)/2
+
+        return start_price, end_price
+
     @abstractmethod
     def decideTrade(self):
         pass

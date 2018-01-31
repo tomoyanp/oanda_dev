@@ -3,6 +3,12 @@
 # トレード判断
 #　5分足 × 50移動平均のslopeが閾値(0.3)以上の時（トレンド発生と判断）
 #　現在価格と5分足 200日移動平均線の比較（上にいれば買い、下にいれば売り）
+#　現在価格が、前日（06:00-05:59）の高値、安値圏から0.5以上幅があること
+#　　前日が陰線引けであれば、安値圏と比較
+#　　前日が陽線引けであれば、高値圏と比較
+#　当日の高値、安値の差が1.0以内であること
+#　　下落幅が1.0以上であれば、売りはなし
+#　　上昇幅が1.0以上であれべ、買いはなし
 #　現在価格がbollinger 3シグマにヒットしている場合、trade_before_flagをONにする
 #  trade_before_flagがONの状態＆現在価格が2シグマ内に収まった状態でエントリーする
 #　※bollingerにヒットした瞬間にエントリーすると高値づかみしてしまうため
@@ -57,6 +63,16 @@ class Evo2BollingerAlgo(SuperAlgo):
             else:
                 current_price = self.getCurrentPrice()
 
+                # 前日高値、安値の計算
+                hi_price, low_price = self.getHiLowPriceBeforeDay(base_time)
+                hilow_price_threshold = 0.5
+                logging.info("hi_price = %s, current_price = %s, low_price = %s" % (hi_price, current_price, low_price))
+
+                # 当日始め値と現在価格の差を取得(現在価格-始値)
+                start_price, end_price = self.getStartEndPrice(base_time)
+                startend_price_threshold = 1.0
+                logging.info("start_price = %s, end_price = %s" % (start_price, end_price))
+
                 # 移動平均じゃなく、トレンド発生＋3シグマ突破でエントリーに変えてみる
                 # modify to 2.5
                 sigma_valiable = 2.5
@@ -79,12 +95,20 @@ class Evo2BollingerAlgo(SuperAlgo):
 
                 # slopeが上向き、現在価格が移動平均(EWMA200)より上、現在価格がbollinger3_sigmaより上にいる
                 if ((slope - high_slope_threshold) > 0) and (ewma200[-1] < current_price) and (current_price > upper3_sigma):
-                    self.trade_before_flag = "buy"
-                    logging.info("TRADE_BEFORE_FLAG set buy")
+                    # 現在価格が前日高値に対し0.5以内にいる or 当日の値動きが1.0以上ある場合、トレードしない
+                    if float(hi_price - hilow_price_threshold) < float(current_price) < float(hi_price) or (end_price - start_price) > startend_price_threshold:
+                        self.trade_before_flag = "pass"
+                    else:
+                        self.trade_before_flag = "buy"
+                        logging.info("TRADE_BEFORE_FLAG set buy")
                 # slopeが下向き、現在価格が移動平均(EWMA200)より下、現在価格がbollinger3_sigmaより下にいる
                 elif ((slope - low_slope_threshold) < 0) and (ewma200[-1] > current_price) and (current_price < lower3_sigma):
-                    self.trade_before_flag = "sell"
-                    logging.info("TRADE_BEFORE_FLAG set sell")
+                    # 現在価格が前日安値に対し0.5以内にいる or 当日の値動きが1.0以上ある場合、トレードしない
+                    if float(low_price + hilow_price_threshold) > float(current_price) > float(low_price) or (start_price - end_price) > startend_price_threshold:
+                        self.trade_before_flag = "pass"
+                    else:
+                        self.trade_before_flag = "sell"
+                        logging.info("TRADE_BEFORE_FLAG set sell")
                 else:
                     self.trade_before_flag = "pass"
 

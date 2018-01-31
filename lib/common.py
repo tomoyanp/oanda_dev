@@ -198,3 +198,9 @@ def sleepTransaction(sleep_time, test_mode, base_time):
         base_time = datetime.now()
 
     return base_time
+
+def getHiLowPriceBeforeDay(base_time):
+    before_end_time = base_time.strftime("%Y-%m-%d 06:59:59")
+    before_day = base_time - timedelta(days=1)
+    before_start_time = before_day.strftime("%Y-%m-%d 07:00:00")
+    sql = "select max(ask_price_list), bid_price_list from GBP_JPY_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (before_start_time, before_end_time)
