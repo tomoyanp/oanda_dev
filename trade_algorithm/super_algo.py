@@ -40,6 +40,7 @@ class SuperAlgo(object):
         self.trend_index = 0
         self.trend_flag = ""
         self.wma_value = 0
+        self.trade_before_flag = ""
 
         self.profit_history = "i" # initial
         self.order_history  = "i" # initial
@@ -56,6 +57,7 @@ class SuperAlgo(object):
 
     def resetFlag(self):
         self.order_flag = False
+        self.trade_before_flag = ""
         self.order_kind = ""
         self.trade_id = 0
 
