@@ -381,9 +381,19 @@ class SuperAlgo(object):
         self.insert_time_list = insert_time_list
 
     def getHiLowPriceBeforeDay(self, base_time):
-        before_end_time = base_time.strftime("%Y-%m-%d 06:59:59")
         before_day = base_time - timedelta(days=1)
+        before_end_time = base_time.strftime("%Y-%m-%d 06:59:59")
         before_start_time = before_day.strftime("%Y-%m-%d 07:00:00")
+        before_start_time = datetime.strptime("%Y-%m-%d %H:%M:%S", before_start_time)
+        if decideMarket(before_start_time):
+            before_start_time = before_day.strftime("%Y-%m-%d 07:00:00")
+        else:
+            before_start_day = base_time - timedelta(days=3)
+            before_end_day = base_time - timedelta(days=2)
+
+            before_start_time = before_start_day.strftime("%Y-%m-%d 07:00:00")
+            before_end_time = before_end_day.strftime("%Y-%m-%d 06:59:59")
+ 
         sql = "select max(ask_price), max(bid_price) from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, before_start_time, before_end_time)
         print sql
         response = self.mysqlConnector.select_sql(sql)
