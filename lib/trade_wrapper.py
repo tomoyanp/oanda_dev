@@ -193,7 +193,7 @@ class TradeWrapper:
 
             if trade_flag == "pass":
                 sleep_time = self.config_data["sleep_time"]
-                self.trade_algo.resetFlag()
+                #self.trade_algo.resetFlag()
             else:
                 sleep_time = self.config_data["trade_sleep_time"]
                 order_price = self.trade_algo.getCurrentPrice()
