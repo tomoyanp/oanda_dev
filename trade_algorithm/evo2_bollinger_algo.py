@@ -173,14 +173,15 @@ class Evo2BollingerAlgo(SuperAlgo):
                     slope = getSlope(slope_list)
     
                     # slopeが上向き、現在価格がbollinger3_sigmaより上にいる
-                    if ((slope - high_slope_threshold) > 0) and (current_price > upper_sigma):
+                    if ((slope - high_slope_threshold) > 0) and (current_price > upper_sigma) and self.order_kind == "sell":
                         stl_flag = True
                     # slopeが下向き、現在価格がbollinger3_sigmaより下にいる
-                    elif ((slope - low_slope_threshold) < 0) and (current_price < lower_sigma):
+                    elif ((slope - low_slope_threshold) < 0) and (current_price < lower_sigma) and self.order_kind == "buy":
                         stl_flag = True
 
                     # 最小利確0.1以上、移動平均にぶつかったら
-                    min_take_profit = 0.1
+                    # modify to 0.4
+                    min_take_profit = 0.4
                     if self.order_kind == "buy":
                         if (current_bid_price - order_price) > min_take_profit:
                             if -0.02 < (current_price - base_line) < 0.02:
