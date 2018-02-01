@@ -51,7 +51,6 @@ class Evo2BollingerAlgo(SuperAlgo):
 
 
                 # 移動平均じゃなく、トレンド発生＋3シグマ突破でエントリーに変えてみる
-                data_set = getBollingerDataSet(self.ask_price_list, self.bid_price_list, window_size, sigma_valiable, candle_width)
                 upper_sigma = self.bollinger_2p5sigma_dataset["upper_sigma"]
                 lower_sigma = self.bollinger_2p5sigma_dataset["lower_sigma"]
                 base_line = self.bollinger_2p5sigma_dataset["base_line"]
@@ -75,7 +74,7 @@ class Evo2BollingerAlgo(SuperAlgo):
                         logging.info("EXECUTE BUY")
                         trade_flag = "buy"
                 # slopeが下向き、現在価格が移動平均(EWMA200)より下、現在価格がbollinger3_sigmaより下にいる
-                elif ((slope - low_slope_threshold) < 0) and (ewma200 > current_price) and (current_price < lower3_sigma):
+                elif ((slope - low_slope_threshold) < 0) and (ewma200 > current_price) and (current_price < lower_sigma):
                     # 現在価格が前日安値に対し0.5以内にいる or 当日の値動きが1.0以上ある場合、トレードしない
                     if float(low_price + hilow_price_threshold) > float(current_price) > float(low_price) or (start_price - end_price) > startend_price_threshold:
                         pass

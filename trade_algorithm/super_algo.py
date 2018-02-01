@@ -10,7 +10,7 @@ from datetime import datetime,timedelta
 import numpy as np
 import logging
 import os
-from common import instrument_init, account_init, decideMarket
+from common import instrument_init, account_init, decideMarket, getBollingerDataSet, extraBollingerDataSet, getEWMA, countIndex, getSlope, getOriginalEWMA
 from abc import ABCMeta, abstractmethod
 from mysql_connector import MysqlConnector
 
@@ -451,7 +451,7 @@ class SuperAlgo(object):
         # 当日始め値と現在価格の差を取得(現在価格-始値)
         start_price, end_price = self.getStartEndPrice(base_time)
         self.start_end_price_dataset = {"start_price": start_price,
-                                        "low_price": low_price,
+                                        "end_price": end_price,
                                         "get_time": base_time}
 
         # 移動平均じゃなく、トレンド発生＋3シグマ突破でエントリーに変えてみる
@@ -490,10 +490,10 @@ class SuperAlgo(object):
 
     def setIndicator(self, base_time):
         logging.info("######### setIndicator base_time = %s ############" % base_time)
-        polling_time = 24
+        polling_time = 1 
         cmp_time = self.hi_low_price_dataset["get_time"] + timedelta(hours=polling_time)
         logging.info("self.hi_low_price_dataset get_time = %s" % self.hi_low_price_dataset["get_time"])
-        if cmp_time < base_time:
+        if cmp_time < base_time and int(base_time.hour) == 7:
             # 前日高値、安値の計算
             hi_price, low_price = self.getHiLowPriceBeforeDay(base_time)
             self.hi_low_price_dataset = {"hi_price": hi_price,
@@ -508,7 +508,7 @@ class SuperAlgo(object):
             # 当日始め値と現在価格の差を取得(現在価格-始値)
             start_price, end_price = self.getStartEndPrice(base_time)
             self.start_end_price_dataset = {"start_price": start_price,
-                                            "low_price": low_price,
+                                            "end_price": end_price,
                                             "get_time": base_time}
             logging.info("self.start_end_price_dataset = %s" % self.start_end_price_dataset)
 
