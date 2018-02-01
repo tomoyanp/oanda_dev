@@ -126,6 +126,7 @@ class TradeWrapper:
     def setInstrumentResponse(self, base_time):
         sleep_time = 0
         self.trade_algo.addPrice(base_time)
+        self.trade_algo.setIndicator(base_time)
         return sleep_time
 
     def stlDecisionWrapper(self, base_time):

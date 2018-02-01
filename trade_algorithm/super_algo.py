@@ -49,6 +49,7 @@ class SuperAlgo(object):
         self.end_time = base_time
         self.base_time = base_time
         self.setInitialPrice()
+        self.setInitialIndicator(self.base_time)
 
 ################################################
 # listは、要素数が大きいほうが古い。
@@ -393,7 +394,7 @@ class SuperAlgo(object):
 
             before_start_time = before_start_day.strftime("%Y-%m-%d 07:00:00")
             before_end_time = before_end_day.strftime("%Y-%m-%d 06:59:59")
- 
+
         sql = "select max(ask_price), max(bid_price) from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, before_start_time, before_end_time)
         print sql
         response = self.mysqlConnector.select_sql(sql)
@@ -439,6 +440,111 @@ class SuperAlgo(object):
         end_price = (ask_price + bid_price)/2
 
         return start_price, end_price
+
+    def setInitialIndicator(self, base_time):
+        # 前日高値、安値の計算
+        hi_price, low_price = self.getHiLowPriceBeforeDay(base_time)
+        self.hi_low_price_dataset = {"hi_price": hi_price,
+                                     "low_price": low_price,
+                                     "get_time": base_time}
+
+        # 当日始め値と現在価格の差を取得(現在価格-始値)
+        start_price, end_price = self.getStartEndPrice(base_time)
+        self.start_end_price_dataset = {"start_price": start_price,
+                                        "low_price": low_price,
+                                        "get_time": base_time}
+
+        # 移動平均じゃなく、トレンド発生＋3シグマ突破でエントリーに変えてみる
+        window_size = 28
+        candle_width = 300
+        sigma_valiable = 2.5
+        data_set = getBollingerDataSet(self.ask_price_list, self.bid_price_list, window_size, sigma_valiable, candle_width)
+        self.bollinger_2p5sigma_dataset = {"upper_sigma": data_set["upper_sigmas"][-1],
+                                           "lower_sigma": data_set["lower_sigmas"][-1],
+                                           "base_line": data_set["base_lines"][-1],
+                                           "get_time": base_time}
+
+        # 移動平均の取得(WMA50)
+        wma_length = 50
+        ewma50 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
+        # 短期トレンドの取得
+        slope_length = (10 * candle_width) * -1
+        slope_list = ewma50[slope_length:]
+        slope = getSlope(slope_list)
+        self.ewma50_5m_dataset = {"ewma_value": ewma50[-1],
+                               "slope": slope,
+                               "get_time": base_time}
+
+        # 移動平均の取得(WMA200)
+        wma_length = 200
+        ewma200 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
+        self.ewma200_5m_dataset = {"ewma_value": ewma200[-1],
+                                "get_time": base_time}
+
+        logging.info("######### setInitialIndicator base_time = %s ############" % base_time)
+        logging.info("self.hi_low_price_dataset = %s" % self.hi_low_price_dataset)
+        logging.info("self.start_end_price_dataset = %s" % self.start_end_price_dataset)
+        logging.info("self.bollinger_2p5sigma_dataset = %s" % self.bollinger_2p5sigma_dataset)
+        logging.info("self.ewma50_5m_dataset = %s" % self.ewma50_5m_dataset)
+        logging.info("self.ewma200_5m_dataset = %s" % self.ewma200_5m_dataset)
+
+    def setIndicator(self, base_time):
+        logging.info("######### setIndicator base_time = %s ############" % base_time)
+        polling_time = 24
+        cmp_time = self.hi_low_price_dataset["get_time"] + timedelta(hours=polling_time)
+        logging.info("self.hi_low_price_dataset get_time = %s" % self.hi_low_price_dataset["get_time"])
+        if cmp_time < base_time:
+            # 前日高値、安値の計算
+            hi_price, low_price = self.getHiLowPriceBeforeDay(base_time)
+            self.hi_low_price_dataset = {"hi_price": hi_price,
+                                         "low_price": low_price,
+                                         "get_time": base_time}
+            logging.info("self.hi_low_price_dataset = %s" % self.hi_low_price_dataset)
+
+        polling_time = 1
+        cmp_time = self.start_end_price_dataset["get_time"] + timedelta(hours=polling_time)
+        logging.info("self.start_end_price_dataset get_time = %s" % self.start_end_price_dataset["get_time"])
+        if cmp_time < base_time:
+            # 当日始め値と現在価格の差を取得(現在価格-始値)
+            start_price, end_price = self.getStartEndPrice(base_time)
+            self.start_end_price_dataset = {"start_price": start_price,
+                                            "low_price": low_price,
+                                            "get_time": base_time}
+            logging.info("self.start_end_price_dataset = %s" % self.start_end_price_dataset)
+
+        polling_time = 60
+        cmp_time = self.bollinger_2p5sigma_dataset["get_time"] + timedelta(seconds=polling_time)
+        logging.info("self.bollinger_2p5sigma_dataset get_time = %s" % self.bollinger_2p5sigma_dataset["get_time"])
+        if cmp_time < base_time:
+            # bollinger_band 2.5sigma
+            window_size = 28
+            candle_width = 300
+            sigma_valiable = 2.5
+            data_set = getBollingerDataSet(self.ask_price_list, self.bid_price_list, window_size, sigma_valiable, candle_width)
+            self.bollinger_2p5sigma_dataset = {"upper_sigma": data_set["upper_sigmas"][-1],
+                                               "lower_sigma": data_set["lower_sigmas"][-1],
+                                               "base_line": data_set["base_lines"][-1],
+                                               "get_time": base_time}
+
+            # 移動平均の取得(WMA50)
+            wma_length = 50
+            ewma50 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
+            # 短期トレンドの取得
+            slope_length = (10 * candle_width) * -1
+            slope_list = ewma50[slope_length:]
+            slope = getSlope(slope_list)
+            self.ewma50_5m_dataset = {"ewma_value": ewma50[-1],
+                                   "slope": slope,
+                                   "get_time": base_time}
+
+            # 移動平均の取得(WMA200)
+            wma_length = 200
+            ewma200 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
+            self.ewma200_5m_dataset = {"ewma_value": ewma200[-1],
+                                    "get_time": base_time}
+            logging.info("self.bollinger_2p5sigma_dataset = %s" % self.bollinger_2p5sigma_dataset)
+            logging.info("self.ewma50_5m_dataset = %s" % self.ewma50_5m_dataset)
+            logging.info("self.ewma200_5m_dataset = %s" % self.ewma200_5m_dataset)
 
     @abstractmethod
     def decideTrade(self):
