@@ -418,7 +418,13 @@ class SuperAlgo(object):
         return hi_price, min_price
 
     def getStartEndPrice(self, base_time):
-        start_time = base_time.strftime("%Y-%m-%d 07:00:00")
+        # 日またぎの場合
+        if 0 <= int(base_time.hour) <= 7:
+            start_day = base_time - timedelta(days=1)
+            start_time = start_day.strftime("%Y-%m-%d 07:00:00")
+        else:
+            start_time = base_time.strftime("%Y-%m-%d 07:00:00")
+
         end_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
 
         sql = "select ask_price, bid_price from %s_TABLE where insert_time = \'%s\'" % (self.instrument, start_time)
@@ -490,7 +496,7 @@ class SuperAlgo(object):
 
     def setIndicator(self, base_time):
         logging.info("######### setIndicator base_time = %s ############" % base_time)
-        polling_time = 1 
+        polling_time = 1
         cmp_time = self.hi_low_price_dataset["get_time"] + timedelta(hours=polling_time)
         logging.info("self.hi_low_price_dataset get_time = %s" % self.hi_low_price_dataset["get_time"])
         if cmp_time < base_time and int(base_time.hour) == 7:
