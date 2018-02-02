@@ -134,8 +134,8 @@ class Evo2BollingerAlgo(SuperAlgo):
                         logging.info("EXECUTE SETTLEMENT")
                         stl_flag = True
 
-                    # 最小利確0.4以上、移動平均にぶつかったら
-                    min_take_profit = 0.4
+                    # 最小利確0.3以上、移動平均にぶつかったら
+                    min_take_profit = 0.3
                     if self.order_kind == "buy":
                         if (current_bid_price - order_price) > min_take_profit:
                             if -0.02 < (current_price - base_line) < 0.02:
@@ -146,6 +146,26 @@ class Evo2BollingerAlgo(SuperAlgo):
                             if -0.02 < (current_price - base_line) < 0.02:
                                 logging.info("EXECUTE STL")
                                 stl_flag = True
+
+
+                    # 最小利確0.3を超えたら、トレールストップモードをONにする
+                    if self.order_kind == "buy":
+                        if (current_bid_price - order_price) > min_take_profit:
+                            logging.info("SET TRAIL FLAG ON")
+                            self.trail_flag = True
+                    elif self.order_kind == "sell":
+                        if (order_price - current_ask_price) > min_take_profit:
+                            logging.info("SET TRAIL FLAG ON")
+                            self.trail_flag = True
+
+                    if self.trail_flag == True and self.order_kind == "buy":
+                        if (current_bid_price - order_price) < 0:
+                            logging.info("EXECUTE TRAIL STOP")
+                            stl_flag = True
+                    elif self.trail_flag == True and self.order_kind == "sell":
+                        if (order_price - current_ask_price) < 0:
+                            logging.info("EXECUTE TRAIL STOP")
+                            stl_flag = True
 
                     logging.info("######### decideStl Logic base_time = %s ##########" % base_time)
                     logging.info("upper_sigma = %s, current_price = %s, lower_sigma = %s, base_line = %s" %(upper_sigma, current_price, lower_sigma, base_line))

@@ -48,7 +48,8 @@ class SuperAlgo(object):
         self.start_time = base_time - timedelta(seconds=self.config_data["time_width"])
         self.end_time = base_time
         self.base_time = base_time
-        self.setInitialPrice()
+        self.trail_flag = False
+        self.setInitialPrice(self.base_time)
         self.setInitialIndicator(self.base_time)
 
 ################################################
@@ -58,12 +59,12 @@ class SuperAlgo(object):
 
     def resetFlag(self):
         self.order_flag = False
-        self.trade_before_flag = ""
         self.order_kind = ""
         self.trade_id = 0
+        self.trail_flag = False
 
-    def setInitialPrice(self):
-        sql = self.getInitialSql(self.base_time)
+    def setInitialPrice(self, base_time):
+        sql = self.getInitialSql(base_time)
         response = self.mysqlConnector.select_sql(sql)
         self.setResponse(response)
 
@@ -419,7 +420,7 @@ class SuperAlgo(object):
 
     def getStartEndPrice(self, base_time):
         # 日またぎの場合
-        if 0 <= int(base_time.hour) <= 7:
+        if 0 <= int(base_time.hour) <= 6:
             start_day = base_time - timedelta(days=1)
             start_time = start_day.strftime("%Y-%m-%d 07:00:00")
         else:
