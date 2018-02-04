@@ -41,14 +41,14 @@ if __name__ == "__main__":
 
     now = datetime.now()
     base_time = now
-    base_time = now - timedelta(days=1)
+    base_time = now - timedelta(days=5)
 
     # for TEST
     #base_time = datetime.strptime("2018-01-10 11:00:00", "%Y-%m-%d %H:%M:%S")
 
     try:
         while True:
-            flag = decideMarket(now)
+            flag = decideMarket(base_time)
 
             now = datetime.now()
             tmp_time = now - timedelta(seconds=10)
@@ -59,6 +59,8 @@ if __name__ == "__main__":
             else:
                 base_time = base_time + timedelta(seconds=1)
                 print "base_time = %s" % base_time
+
+            print flag
 
             if flag == False:
                 pass
@@ -73,6 +75,7 @@ if __name__ == "__main__":
 
     except Exception as e:
         message = "*** insert_check.py %s is Failed ***\n" % currency
+        print e
         #message = message + traceback.format_exc()
         #sendmail = SendMail("tomoyanpy@gmail.com", "tomoyanpy@softbank.ne.jp", property_path)
         #sendmail.set_msg(message)

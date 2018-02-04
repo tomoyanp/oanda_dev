@@ -16,7 +16,7 @@ from mysql_connector import MysqlConnector
 from datetime import datetime, timedelta
 from common import getEWMA, getSlope
 
-start_time = "2018-01-08 07:00:00"
+start_time = "2018-01-15 07:00:00"
 start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
 
 now = datetime.now()
@@ -41,11 +41,17 @@ while now > start_time:
   bid_price_list.reverse()
   insert_time_list.reverse()
 
-#  ewma50 = getEWMA(ask_price_list, bid_price_list, 50, 300)
-  ewma21 = getEWMA(ask_price_list, bid_price_list, 21, 3600)
-  slope_length = 5*3600*-1
+  ewma50 = getEWMA(ask_price_list, bid_price_list, 50, 300)
+  slope_length = 10*300*-1
   slope_list = ewma50[slope_length:]
   slope = getSlope(slope_list)
-  print "time = %s, slope = %s" % (start_time, slope)
+  print "time = %s, ewma5m_50_slope = %s" % (start_time, slope)
+
+
+  ewma21 = getEWMA(ask_price_list, bid_price_list, 21, 3600)
+  slope_length = 2*3600*-1
+  slope_list = ewma21[slope_length:]
+  slope = getSlope(slope_list)
+  print "time = %s, ewma1h_21_slope = %s" % (start_time, slope)
   start_time = start_time + timedelta(minutes=10)
 
