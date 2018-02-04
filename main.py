@@ -50,7 +50,7 @@ if __name__ == '__main__':
 
     if test_args == "test":
         end_time = base_time - timedelta(days=0)
-        base_time = base_time - timedelta(days=14)
+        base_time = base_time - timedelta(days=21)
         test_mode = True
     else:
         test_mode = False
