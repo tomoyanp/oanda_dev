@@ -1,0 +1,19 @@
+
+DBの名前 　oanda_db
+ユーザ   　 tomoyan/tomoyan180
+
+通貨価格　管理テーブル GBP_JPY_TABLE, USD_JPY_TABLE
+----------------------------------------------------------------------------------------------------------
+|col_name | id                              | ask_price | bid_price | insert_time                        |
+----------------------------------------------------------------------------------------------------------
+|type     | BIGINT                          | double    | double    | TIMESTAMP                          |
+|option   | not null default auto_increment |           |           | not null default current_timestamp |
+
+
+TRANSACTION_STORE
+ trade_id int not null primary # getted by oanda api 
+ instrument char(10) not null  # trade currency "GBP_JPY" , "USD_JPY"
+ mode char(10) not null        # production or demo or test
+ order_kind char(10) not null  # buy or sell
+ order_price double not null   # order_price ex) 110.001
+ result char(5)                # True is done settlment, False is having position
