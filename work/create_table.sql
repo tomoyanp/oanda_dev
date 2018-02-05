@@ -71,3 +71,6 @@ UNIQUE(ewma_value, ewma_length, insert_time));
 ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GBP_JPY_EWMA_TABLE(id int auto_increment not null primary key, ewma_value double' at line 1
 
 mysql> create table GBP_JPY_EWMA_TABLE(id int auto_increment not null primary key, ewma_value double not null, ewma_length int not null, insert_time timestamp not null, candle_width int not null ,UNIQUE(ewma_length, insert_time, candle_width));
+
+create TRANSACTION_STORE(trade_id int not null primary key, instrument char(10) not null, mode char(10) not null, order_kind char(10) not null, order_price double not null, order_time timestamp not null, stl_price double, result char(5))
+create TRANSACTION_STORE(trade_id int not null primary key, instrument char(10) not null, mode char(10) not null, order_kind char(10) not null, order_price double not null, order_time timestamp not null, stl_price double, result char(5))
