@@ -28,24 +28,30 @@ token = 'e93bdc312be2c3e0a4a18f5718db237a-32ca3b9b94401fca447d4049ab046fad'
 env = 'live'
 
 mysql_connector = MysqlConnector()
-start_time = "2018-01-06T00:00:00"
+#start_time = "2018-01-06T00:00:00"
+start_time = "2018-02-06T00:00:00"
 start_time = datetime.strptime(start_time, "%Y-%m-%dT%H:%M:%S")
 now = datetime.now()
-now = start_time + datetime.strptime("2018-01-08 23:59:59", "%Y-%m-%d %H:%M:%S")
 
 while start_time < now:
     # 通貨
     instrument = "NZD_JPY"
     end_time = start_time + timedelta(minutes=10)
+    market_flag = decideMarket(start_time)
+    end_time = end_time.strftime("%Y-%m-%dT%H:%M:%S")
+    start_time = start_time.strftime("%Y-%m-%dT%H:%M:%S")
 
-    if decideMarket(start_time) == False:
+    if market_flag == False:
         pass
     else:
-        end_time = end_time.strftime("%Y-%m-%dT%H:%M:%S")
-        start_time = start_time.strftime("%Y-%m-%dT%H:%M:%S")
 
         oanda = oandapy.API(environment=env, access_token=token)
         response = {}
+
+        print "====== START TIME ======"
+        print start_time
+        print "======  END TIME  ======"
+        print end_time
         try :
             response = oanda.get_history(
                 instrument=instrument,
@@ -56,6 +62,8 @@ while start_time < now:
             )
         except ValueError as e:
             print e
+            print start_time
+
 
         if len(response) > 0:
             instrument = response["instrument"]
@@ -74,4 +82,11 @@ while start_time < now:
                 print sql
                 #mysql_connector.insert_sql(sql)
 
+    end_time = datetime.strptime(end_time, "%Y-%m-%dT%H:%M:%S")
     start_time = end_time
+
+
+print "====== START TIME ======"
+print start_time.strftime("%Y-%m-%d %H:%M:%S")
+print "======  NOW TIME  ======"
+print now.strftime("%Y-%m-%d %H:%M:%S")
