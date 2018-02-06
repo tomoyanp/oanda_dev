@@ -74,5 +74,5 @@ mysql> create table GBP_JPY_EWMA_TABLE(id int auto_increment not null primary ke
 
 create table TRANSACTION_STORE(trade_id int not null primary key, instrument char(10) not null, mode char(10) not null, order_kind char(10) not null, order_price double not null, order_time timestamp not null, stl_price double, result char(5))
 
-create table NZD_JPY_TABLE(id BIGINT, ask_price double, bid_price double, insert_time timestamp)
+create table NZD_JPY_TABLE(ask_price double, bid_price double, insert_time timestamp primary)
 alter table NZD_JPY_TABLE add index insert_time_index(insert_time)
