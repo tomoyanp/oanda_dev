@@ -75,7 +75,7 @@ class Evo2BollingerAlgo(SuperAlgo):
                         logging.info("EXECUTE BUY")
                         trade_flag = "buy"
                 # slopeが下向き、現在価格が移動平均(EWMA200(5分), EWMA200(1時間)より下、現在価格がbollinger3_sigmaより下にいる
-            elif ((slope - low_slope_threshold) < 0) and (ewma200 > current_price) and (current_price < lower_sigma) and (ewma200 > current_price):
+                elif ((slope - low_slope_threshold) < 0) and (ewma200 > current_price) and (current_price < lower_sigma) and (ewma200 > current_price):
                     # 現在価格が前日安値に対し0.5以内にいる or 当日の値動きが1.0以上ある場合、トレードしない
                     if float(low_price + hilow_price_threshold) > float(current_price) > float(low_price) or (start_price - end_price) > startend_price_threshold:
                         pass

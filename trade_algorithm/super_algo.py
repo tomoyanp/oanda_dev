@@ -454,7 +454,9 @@ class SuperAlgo(object):
         wma_length = 200
         candle_width = 3600
         limit_length = wma_length * candle_width
-        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time < \'%s\' limit order by insert_time desc limit %s" % (self.instrument, base_time, limit_length)
+        base_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
+        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time < \'%s\' order by insert_time desc limit %s" % (self.instrument, base_time, limit_length)
+        print sql
 
         response = self.mysqlConnector.select_sql(sql)
 
