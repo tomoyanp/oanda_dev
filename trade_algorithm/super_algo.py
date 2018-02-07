@@ -456,10 +456,10 @@ class SuperAlgo(object):
         limit_length = wma_length * candle_width
         base_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
         sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time < \'%s\' order by insert_time desc limit %s" % (self.instrument, base_time, limit_length)
+#       sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time < \'%s\' and insert_time like \'%%59:59\' order by insert_time desc limit %s" % (self.instrument, base_time, limit_length)
         print sql
 
         response = self.mysqlConnector.select_sql(sql)
-
 
         ask_price_list = []
         bid_price_list = []
@@ -469,6 +469,9 @@ class SuperAlgo(object):
             ask_price_list.append(res[0])
             bid_price_list.append(res[1])
             insert_time_list.append(res[2])
+
+        ask_price_list.reverse()
+        bid_price_list.reverse()
 
         ewma200 = getEWMA(ask_price_list, bid_price_list, wma_length, candle_width)
 
