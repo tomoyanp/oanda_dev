@@ -58,6 +58,7 @@ class Evo2BollingerAlgo(SuperAlgo):
                 ewma50 = self.ewma50_5m_dataset["ewma_value"]
                 slope = self.ewma50_5m_dataset["slope"]
                 ewma200 = self.ewma200_5m_dataset["ewma_value"]
+                ewma200_1h = self.ewma200_1h_dataset["ewma_value"]
 
                 startend_price_threshold = 1.0
                 hilow_price_threshold = 0.5
@@ -65,16 +66,16 @@ class Evo2BollingerAlgo(SuperAlgo):
                 low_slope_threshold  = -0.3
                 high_slope_threshold = 0.3
 
-                # slopeが上向き、現在価格が移動平均(EWMA200)より上、現在価格がbollinger3_sigmaより上にいる
-                if ((slope - high_slope_threshold) > 0) and (ewma200 < current_price) and (current_price > upper_sigma):
+                # slopeが上向き、現在価格が移動平均(EWMA200(5分), EWMA200(1時間))より上、現在価格がbollinger3_sigmaより上にいる
+                if ((slope - high_slope_threshold) > 0) and (ewma200 < current_price) and (current_price > upper_sigma) and (ewma200_1h < current_price):
                     # 現在価格が前日高値に対し0.5以内にいる or 当日の値動きが1.0以上ある場合、トレードしない
                     if float(hi_price - hilow_price_threshold) < float(current_price) < float(hi_price) or (end_price - start_price) > startend_price_threshold:
                         pass
                     else:
                         logging.info("EXECUTE BUY")
                         trade_flag = "buy"
-                # slopeが下向き、現在価格が移動平均(EWMA200)より下、現在価格がbollinger3_sigmaより下にいる
-                elif ((slope - low_slope_threshold) < 0) and (ewma200 > current_price) and (current_price < lower_sigma):
+                # slopeが下向き、現在価格が移動平均(EWMA200(5分), EWMA200(1時間)より下、現在価格がbollinger3_sigmaより下にいる
+            elif ((slope - low_slope_threshold) < 0) and (ewma200 > current_price) and (current_price < lower_sigma) and (ewma200 > current_price):
                     # 現在価格が前日安値に対し0.5以内にいる or 当日の値動きが1.0以上ある場合、トレードしない
                     if float(low_price + hilow_price_threshold) > float(current_price) > float(low_price) or (start_price - end_price) > startend_price_threshold:
                         pass
@@ -87,7 +88,7 @@ class Evo2BollingerAlgo(SuperAlgo):
                 logging.info("####### decideTrade Logic base_time = %s #######" % base_time)
                 logging.info("start_price = %s, end_price = %s" % (start_price, end_price))
                 logging.info("hi_price = %s, low_price = %s" % (hi_price, low_price))
-                logging.info("5m 50ewma slope = %s, 5m 200ewma = %s, current_price = %s, upper_2.5sigma = %s, lower_2.5sigma = %s, trade_flag = %s" % (slope, ewma200, current_price, upper_sigma, lower_sigma, trade_flag))
+                logging.info("5m 50ewma slope = %s, 5m 200ewma = %s, 1h 200ewma = %s, current_price = %s, upper_2.5sigma = %s, lower_2.5sigma = %s, trade_flag = %s" % (slope, ewma200, ewma200_1h, current_price, upper_sigma, lower_sigma, trade_flag))
 
             return trade_flag
 

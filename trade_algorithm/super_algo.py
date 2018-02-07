@@ -384,17 +384,18 @@ class SuperAlgo(object):
 
     def getHiLowPriceBeforeDay(self, base_time):
         before_day = base_time - timedelta(days=1)
-        before_end_time = base_time.strftime("%Y-%m-%d 06:59:59")
+
+        # 高値安値は直近1時間まで見てみる
+        before_end_time = base_time - timedelta(hours=1)
+        before_end_time = before_end_time.strftime("%Y-%m-%d %H:%M:%S")
+
         before_start_time = before_day.strftime("%Y-%m-%d 07:00:00")
         before_start_time = datetime.strptime(before_start_time, "%Y-%m-%d %H:%M:%S")
         if decideMarket(before_start_time):
             before_start_time = before_day.strftime("%Y-%m-%d 07:00:00")
         else:
             before_start_day = base_time - timedelta(days=3)
-            before_end_day = base_time - timedelta(days=2)
-
             before_start_time = before_start_day.strftime("%Y-%m-%d 07:00:00")
-            before_end_time = before_end_day.strftime("%Y-%m-%d 06:59:59")
 
         sql = "select max(ask_price), max(bid_price) from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, before_start_time, before_end_time)
         print sql
@@ -448,6 +449,29 @@ class SuperAlgo(object):
 
         return start_price, end_price
 
+    def getLongEwma(self, base_time):
+        # 移動平均の取得(WMA200 * 1h candles)
+        wma_length = 200
+        candle_width = 3600
+        limit_length = wma_length * candle_width
+        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time < \'%s\' limit order by insert_time desc limit %s" % (self.instrument, base_time, limit_length)
+
+        response = self.mysqlConnector.select_sql(sql)
+
+
+        ask_price_list = []
+        bid_price_list = []
+        insert_time_list = []
+
+        for res in response:
+            ask_price_list.append(res[0])
+            bid_price_list.append(res[1])
+            insert_time_list.append(res[2])
+
+        ewma200 = getEWMA(ask_price_list, bid_price_list, wma_length, candle_width)
+
+        return ewma200
+
     def setInitialIndicator(self, base_time):
         # 前日高値、安値の計算
         hi_price, low_price = self.getHiLowPriceBeforeDay(base_time)
@@ -460,6 +484,11 @@ class SuperAlgo(object):
         self.start_end_price_dataset = {"start_price": start_price,
                                         "end_price": end_price,
                                         "get_time": base_time}
+
+        # 1時間足200日移動平均線を取得する
+        ewma200_1h = self.getLongEwma(base_time)
+        self.ewma200_1h_dataset = {"ewma_value": ewma200_1h[-1],
+                               "get_time": base_time}
 
         # 移動平均じゃなく、トレンド発生＋3シグマ突破でエントリーに変えてみる
         window_size = 28
@@ -518,6 +547,12 @@ class SuperAlgo(object):
                                             "end_price": end_price,
                                             "get_time": base_time}
             logging.info("self.start_end_price_dataset = %s" % self.start_end_price_dataset)
+
+            # 1時間足200日移動平均線を取得する
+            ewma200_1h = self.getLongEwma(base_time)
+            self.ewma200_1h_dataset = {"ewma_value": ewma200_1h[-1],
+                                       "get_time": base_time}
+
 
         polling_time = 60
         cmp_time = self.bollinger_2p5sigma_dataset["get_time"] + timedelta(seconds=polling_time)
