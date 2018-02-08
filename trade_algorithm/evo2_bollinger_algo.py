@@ -120,6 +120,10 @@ class Evo2BollingerAlgo(SuperAlgo):
 
                     # 移動平均の取得(WMA50)
                     ewma50 = self.ewma50_5m_dataset["ewma_value"]
+                    slope = self.ewma50_5m_dataset["slope"]
+
+                    low_slope_threshold  = -0.3
+                    high_slope_threshold = 0.3
 
                     # 損切り
                     # slopeが上向き、現在価格がbollinger3_sigmaより上にいる
