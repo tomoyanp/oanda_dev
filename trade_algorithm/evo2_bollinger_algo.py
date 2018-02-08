@@ -11,7 +11,7 @@
 #　　上昇幅が1.0以上であれべ、買いはなし
 #  現在価格が、ボリンジャーバンド2.5シグマにタッチすること
 #
-# 損切り判断をもとに戻した版
+# 損切り判断
 # １）反対側の3シグマにヒットしたら決済する
 #
 # 利確判断
@@ -127,11 +127,11 @@ class Evo2BollingerAlgo(SuperAlgo):
 
                     # 損切り
                     # slopeが上向き、現在価格がbollinger3_sigmaより上にいる
-                    if (current_price > upper_sigma) and self.order_kind == "sell":
+                    if ((slope - high_slope_threshold) > 0) and (current_price > upper_sigma) and self.order_kind == "sell":
                         logging.info("EXECUTE SETTLEMENT")
                         stl_flag = True
                     # slopeが下向き、現在価格がbollinger3_sigmaより下にいる
-                    elif (current_price < lower_sigma) and self.order_kind == "buy":
+                    elif ((slope - low_slope_threshold) < 0) and (current_price < lower_sigma) and self.order_kind == "buy":
                         logging.info("EXECUTE SETTLEMENT")
                         stl_flag = True
 
