@@ -40,7 +40,7 @@ while start_time < end_time:
     # 通貨
     instrument = "GBP_JPY"
     
-    start_ftime = start_time - timedelta(hours=14)
+    start_ftime = start_time - timedelta(hours=9)
 #    start_ftime = start_time
     start_ftime = start_ftime.strftime("%Y-%m-%dT%H:%M:%S")
 

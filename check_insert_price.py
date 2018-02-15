@@ -44,7 +44,7 @@ if __name__ == "__main__":
     base_time = now - timedelta(days=5)
 
     # for TEST
-    base_time = datetime.strptime("2018-02-06 12:03:00", "%Y-%m-%d %H:%M:%S")
+    base_time = datetime.strptime("2018-02-15 00:00:00", "%Y-%m-%d %H:%M:%S")
 
     try:
         while True:

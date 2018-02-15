@@ -32,7 +32,7 @@ env = 'live'
 #oanda_wrapper = OandaWrapper(env, account_id, token)
 
 # 通貨
-instrument = "USD_JPY"
+instrument = "GBP_JPY"
 
 oanda = oandapy.API(environment=env, access_token=token)
 #response = oanda.get_positions(account_id)
@@ -52,7 +52,8 @@ oanda = oandapy.API(environment=env, access_token=token)
 #)
 
 response = oanda.get_prices(
-    instruments="USD_JPY",
+    instruments="GBP_JPY",
+    alignmentTimezone="Asia/Tokyo",
     sessionId="abcdbdksl",
     accountId=account_id)
 
