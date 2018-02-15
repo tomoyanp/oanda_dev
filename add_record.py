@@ -29,18 +29,20 @@ env = 'live'
 mysql_connector = MysqlConnector()
 now = datetime.now()
 
+#start_time = "2018-02-15 08:35:00"
 start_time = "2018-02-15 08:35:00"
 end_time = now
 
 start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
-end_time = datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
+#end_time = datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
 
-while start_time > end_time:
+while start_time < end_time:
     # 通貨
-    instrument = "USD_JPY"
+    instrument = "GBP_JPY"
     
-    start_ftime = start_time - timedelta(hours=9)
-    start_ftime = start_ftime.strftime("%Y-%m-%d %H:%M:%S")
+    start_ftime = start_time - timedelta(hours=14)
+#    start_ftime = start_time
+    start_ftime = start_ftime.strftime("%Y-%m-%dT%H:%M:%S")
 
     oanda = oandapy.API(environment=env, access_token=token)
     response = {}
@@ -52,7 +54,7 @@ while start_time > end_time:
             candleFormat="midpoint"
         )
     except ValueError as e:
-        pass
+        print e
 
     if len(response) > 0:
         instrument = response["instrument"]
@@ -62,9 +64,6 @@ while start_time > end_time:
         insert_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
         sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\')" % (instrument, ask_price, bid_price, insert_time)
         print sql
-         
-
-    start_time = start_time + timedelta(seconds=5)
 
 #        for candle in candles:
 #            ask_price = (candle["openMid"])
@@ -79,3 +78,4 @@ while start_time > end_time:
 #                pass
     else:
         pass
+    start_time = start_time + timedelta(seconds=5)
