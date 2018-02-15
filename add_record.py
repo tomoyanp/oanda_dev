@@ -29,8 +29,8 @@ env = 'live'
 mysql_connector = MysqlConnector()
 now = datetime.now()
 
-start_time = "2018-01-03 00:00:00"
-end_time   = "2018-01-04 00:00:00"
+start_time = "2018-02-15 08:35:00"
+end_time = now
 
 start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
 end_time = datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
@@ -39,43 +39,43 @@ while start_time > end_time:
     # 通貨
     instrument = "USD_JPY"
     
-    insert_time = datetime.strptime(insert_time, "%Y-%m-%d %H:%M:%S")
+    start_ftime = start_time - timedelta(hours=9)
+    start_ftime = start_ftime.strftime("%Y-%m-%d %H:%M:%S")
 
-    start_time = insert_time - timedelta(hours=9)
-
-    start_time = start_time.strftime("%Y-%m-%dT%H:%M:%S")
     oanda = oandapy.API(environment=env, access_token=token)
-
     response = {}
     try :
         response = oanda.get_history(
             instrument=instrument,
-            start=start_time,
+            start=start_ftime,
             granularity="S5",
             candleFormat="midpoint"
         )
     except ValueError as e:
-        print e       
-
+        pass
 
     if len(response) > 0:
         instrument = response["instrument"]
         candles = response["candles"]
-        
-        for candle in candles:
-            ask_price = (candle["openMid"])
-            bid_price = (candle["openMid"])
-            print ask_price
-            print bid_price
-            sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\')" % (instrument, ask_price, bid_price, insert_time)
-            print sql
-            print "================================"
-            try:
-                mysql_connector.insert_sql(sql)
-            except Exception as e:
-                print e
-    else:
-        print "No JsonData"
-        print "================================="
-    
+        ask_price = candles[0]["openMid"]
+        bid_price = candles[0]["openMid"]
+        insert_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
+        sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\')" % (instrument, ask_price, bid_price, insert_time)
+        print sql
+         
 
+    start_time = start_time + timedelta(seconds=5)
+
+#        for candle in candles:
+#            ask_price = (candle["openMid"])
+#            bid_price = (candle["openMid"])
+#            print ask_price
+#            print bid_price
+#            sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\')" % (instrument, ask_price, bid_price, insert_time)
+#            print sql
+#            try:
+#                mysql_connector.insert_sql(sql)
+#            except Exception as e:
+#                pass
+    else:
+        pass
