@@ -22,6 +22,14 @@ from send_mail import SendMail
 from oandapy import oandapy
 import time
 
+
+# python extra_record_sql.py GBP_JPY[instrument] 2018-02-16[start_day] 00:00:00[start_time]
+args = sys.argv
+instrument = args[1]
+start_day = args[2]
+start_time = args[2]
+start_time = "%s %s" % (start_day, start_time)
+
 account_id = 4093685
 token = 'e93bdc312be2c3e0a4a18f5718db237a-32ca3b9b94401fca447d4049ab046fad'
 env = 'live'
@@ -29,19 +37,15 @@ env = 'live'
 mysql_connector = MysqlConnector()
 now = datetime.now()
 
-#start_time = "2018-02-15 08:35:00"
 start_time = "2018-02-15 08:35:00"
 end_time = now
-
 start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
-#end_time = datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
+
+sql_file = open("w", "%s_record.sql" % instrument)
 
 while start_time < end_time:
     # 通貨
-    instrument = "GBP_JPY"
-    
     start_ftime = start_time - timedelta(hours=9)
-#    start_ftime = start_time
     start_ftime = start_ftime.strftime("%Y-%m-%dT%H:%M:%S")
 
     oanda = oandapy.API(environment=env, access_token=token)
@@ -63,19 +67,10 @@ while start_time < end_time:
         bid_price = candles[0]["openMid"]
         insert_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
         sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\')" % (instrument, ask_price, bid_price, insert_time)
-        print sql
-
-#        for candle in candles:
-#            ask_price = (candle["openMid"])
-#            bid_price = (candle["openMid"])
-#            print ask_price
-#            print bid_price
-#            sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\')" % (instrument, ask_price, bid_price, insert_time)
-#            print sql
-#            try:
-#                mysql_connector.insert_sql(sql)
-#            except Exception as e:
-#                pass
+        sql_file.write(sql + "\n")
     else:
-        pass
+        print "response length <= 0"
+
     start_time = start_time + timedelta(seconds=5)
+
+sql_file.close()
