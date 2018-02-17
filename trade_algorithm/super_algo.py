@@ -454,7 +454,6 @@ class SuperAlgo(object):
         limit_length = wma_length * candle_width
         base_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
         sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time < \'%s\' order by insert_time desc limit %s" % (self.instrument, base_time, limit_length)
-#       sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time < \'%s\' and insert_time like \'%%59:59\' order by insert_time desc limit %s" % (self.instrument, base_time, limit_length)
         print sql
 
         response = self.mysqlConnector.select_sql(sql)
@@ -528,28 +527,28 @@ class SuperAlgo(object):
         logging.info("self.ewma200_5m_dataset = %s" % self.ewma200_5m_dataset)
 
     def setIndicator(self, base_time):
-        logging.info("######### setIndicator base_time = %s ############" % base_time)
+        #logging.info("######### setIndicator base_time = %s ############" % base_time)
         polling_time = 1
         cmp_time = self.hi_low_price_dataset["get_time"] + timedelta(hours=polling_time)
-        logging.info("self.hi_low_price_dataset get_time = %s" % self.hi_low_price_dataset["get_time"])
+        #logging.info("self.hi_low_price_dataset get_time = %s" % self.hi_low_price_dataset["get_time"])
         if cmp_time < base_time and int(base_time.hour) == 7:
             # 前日高値、安値の計算
             hi_price, low_price = self.getHiLowPriceBeforeDay(base_time)
             self.hi_low_price_dataset = {"hi_price": hi_price,
                                          "low_price": low_price,
                                          "get_time": base_time}
-            logging.info("self.hi_low_price_dataset = %s" % self.hi_low_price_dataset)
+        #    logging.info("self.hi_low_price_dataset = %s" % self.hi_low_price_dataset)
 
         polling_time = 1
         cmp_time = self.start_end_price_dataset["get_time"] + timedelta(hours=polling_time)
-        logging.info("self.start_end_price_dataset get_time = %s" % self.start_end_price_dataset["get_time"])
+        #logging.info("self.start_end_price_dataset get_time = %s" % self.start_end_price_dataset["get_time"])
         if cmp_time < base_time:
             # 当日始め値と現在価格の差を取得(現在価格-始値)
             start_price, end_price = self.getStartEndPrice(base_time)
             self.start_end_price_dataset = {"start_price": start_price,
                                             "end_price": end_price,
                                             "get_time": base_time}
-            logging.info("self.start_end_price_dataset = %s" % self.start_end_price_dataset)
+        #    logging.info("self.start_end_price_dataset = %s" % self.start_end_price_dataset)
 
             # 1時間足200日移動平均線を取得する
             ewma200_1h = self.getLongEwma(base_time)
@@ -559,7 +558,7 @@ class SuperAlgo(object):
 
         polling_time = 60
         cmp_time = self.bollinger_2p5sigma_dataset["get_time"] + timedelta(seconds=polling_time)
-        logging.info("self.bollinger_2p5sigma_dataset get_time = %s" % self.bollinger_2p5sigma_dataset["get_time"])
+        #logging.info("self.bollinger_2p5sigma_dataset get_time = %s" % self.bollinger_2p5sigma_dataset["get_time"])
         if cmp_time < base_time:
             # bollinger_band 2.5sigma
             window_size = 28
@@ -587,9 +586,9 @@ class SuperAlgo(object):
             ewma200 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
             self.ewma200_5m_dataset = {"ewma_value": ewma200[-1],
                                     "get_time": base_time}
-            logging.info("self.bollinger_2p5sigma_dataset = %s" % self.bollinger_2p5sigma_dataset)
-            logging.info("self.ewma50_5m_dataset = %s" % self.ewma50_5m_dataset)
-            logging.info("self.ewma200_5m_dataset = %s" % self.ewma200_5m_dataset)
+        #    logging.info("self.bollinger_2p5sigma_dataset = %s" % self.bollinger_2p5sigma_dataset)
+        #    logging.info("self.ewma50_5m_dataset = %s" % self.ewma50_5m_dataset)
+        #    logging.info("self.ewma200_5m_dataset = %s" % self.ewma200_5m_dataset)
 
     @abstractmethod
     def decideTrade(self):
