@@ -31,6 +31,7 @@ class Evo2BollingerAlgo(SuperAlgo):
     def __init__(self, instrument, base_path, config_name, base_time):
         super(Evo2BollingerAlgo, self).__init__(instrument, base_path, config_name, base_time)
         self.base_price = 0
+        self.break_wait_flag = "buy"
 
     def decideTrade(self, base_time):
         trade_flag = "pass"
