@@ -483,12 +483,6 @@ class SuperAlgo(object):
                                      "low_price": low_price,
                                      "get_time": base_time}
 
-        # 当日始め値と現在価格の差を取得(現在価格-始値)
-#        start_price, end_price = self.getStartEndPrice(base_time)
-#        self.start_end_price_dataset = {"start_price": start_price,
-#                                        "end_price": end_price,
-#                                        "get_time": base_time}
-#
         # 1時間足200日移動平均線を取得する
         ewma200_1h = self.getLongEwma(base_time)
         self.ewma200_1h_dataset = {"ewma_value": ewma200_1h[-1],
@@ -523,7 +517,6 @@ class SuperAlgo(object):
 
         logging.info("######### setInitialIndicator base_time = %s ############" % base_time)
         logging.info("self.hi_low_price_dataset = %s" % self.hi_low_price_dataset)
-#        logging.info("self.start_end_price_dataset = %s" % self.start_end_price_dataset)
         logging.info("self.bollinger_2p5sigma_dataset = %s" % self.bollinger_2p5sigma_dataset)
         logging.info("self.ewma50_5m_dataset = %s" % self.ewma50_5m_dataset)
         logging.info("self.ewma200_5m_dataset = %s" % self.ewma200_5m_dataset)
@@ -542,16 +535,8 @@ class SuperAlgo(object):
         #    logging.info("self.hi_low_price_dataset = %s" % self.hi_low_price_dataset)
 
         polling_time = 1
-#        cmp_time = self.start_end_price_dataset["get_time"] + timedelta(hours=polling_time)
-        #logging.info("self.start_end_price_dataset get_time = %s" % self.start_end_price_dataset["get_time"])
+        cmp_time = self.ewma200_1h_dataset["get_time"] + timedelta(hours=polling_time)
         if cmp_time < base_time:
-#            # 当日始め値と現在価格の差を取得(現在価格-始値)
-#            start_price, end_price = self.getStartEndPrice(base_time)
-#            self.start_end_price_dataset = {"start_price": start_price,
-#                                            "end_price": end_price,
-#                                            "get_time": base_time}
-        #    logging.info("self.start_end_price_dataset = %s" % self.start_end_price_dataset)
-
             # 1時間足200日移動平均線を取得する
             ewma200_1h = self.getLongEwma(base_time)
             self.ewma200_1h_dataset = {"ewma_value": ewma200_1h[-1],
@@ -588,9 +573,6 @@ class SuperAlgo(object):
             ewma200 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
             self.ewma200_5m_dataset = {"ewma_value": ewma200[-1],
                                     "get_time": base_time}
-        #    logging.info("self.bollinger_2p5sigma_dataset = %s" % self.bollinger_2p5sigma_dataset)
-        #    logging.info("self.ewma50_5m_dataset = %s" % self.ewma50_5m_dataset)
-        #    logging.info("self.ewma200_5m_dataset = %s" % self.ewma200_5m_dataset)
 
     @abstractmethod
     def decideTrade(self):

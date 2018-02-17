@@ -31,6 +31,7 @@ class Evo2BollingerAlgo(SuperAlgo):
     def __init__(self, instrument, base_path, config_name, base_time):
         super(Evo2BollingerAlgo, self).__init__(instrument, base_path, config_name, base_time)
         self.base_price = 0
+        self.break_wait_flag = "buy"
 
     def decideTrade(self, base_time):
         trade_flag = "pass"
@@ -106,7 +107,6 @@ class Evo2BollingerAlgo(SuperAlgo):
 
                 logging.info("####### decideTrade Logic base_time = %s #######" % base_time)
                 logging.info("break_wait_flag = %s" % (self.break_wait_flag))
-#                logging.info("start_price = %s, end_price = %s" % (start_price, end_price))
                 logging.info("hi_price = %s, low_price = %s" % (hi_price, low_price))
                 logging.info("5m 50ewma slope = %s, 5m 200ewma = %s, 1h 200ewma = %s, current_price = %s, upper_2.5sigma = %s, lower_2.5sigma = %s, trade_flag = %s" % (slope, ewma200, ewma200_1h, current_price, upper_sigma, lower_sigma, trade_flag))
 
