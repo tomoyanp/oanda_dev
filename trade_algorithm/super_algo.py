@@ -523,7 +523,7 @@ class SuperAlgo(object):
 
         logging.info("######### setInitialIndicator base_time = %s ############" % base_time)
         logging.info("self.hi_low_price_dataset = %s" % self.hi_low_price_dataset)
-        logging.info("self.start_end_price_dataset = %s" % self.start_end_price_dataset)
+#        logging.info("self.start_end_price_dataset = %s" % self.start_end_price_dataset)
         logging.info("self.bollinger_2p5sigma_dataset = %s" % self.bollinger_2p5sigma_dataset)
         logging.info("self.ewma50_5m_dataset = %s" % self.ewma50_5m_dataset)
         logging.info("self.ewma200_5m_dataset = %s" % self.ewma200_5m_dataset)
@@ -542,7 +542,7 @@ class SuperAlgo(object):
         #    logging.info("self.hi_low_price_dataset = %s" % self.hi_low_price_dataset)
 
         polling_time = 1
-        cmp_time = self.start_end_price_dataset["get_time"] + timedelta(hours=polling_time)
+#        cmp_time = self.start_end_price_dataset["get_time"] + timedelta(hours=polling_time)
         #logging.info("self.start_end_price_dataset get_time = %s" % self.start_end_price_dataset["get_time"])
         if cmp_time < base_time:
 #            # 当日始め値と現在価格の差を取得(現在価格-始値)
