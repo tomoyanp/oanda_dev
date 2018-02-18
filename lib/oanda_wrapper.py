@@ -90,10 +90,11 @@ class OandaWrapper:
         except:
             raise
 
-    def get_current_trade(self):
+    def get_current_trades(self):
         try:
-            response = self.oanda_get_trades(self.accout_id)
-        except:
+            response = self.oanda.get_trades(self.account_id)
+        except e:
+            print e
             raise
 
         return response
