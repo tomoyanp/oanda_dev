@@ -75,6 +75,24 @@ class TradeWrapper:
         else:
             self.trade_algo = HiLowAlgo(self.instrument, self.base_path, self.config_name, base_time)
 
+        self.setCurrentTrade()
+
+    def setCurrentTrade(self):
+        if self.test_mode:
+            pass
+        else:
+            response = self.oanada_wrapper.get_current_trades()
+            if len(response) > 0:
+                trade_data = response["trades"][0]
+                order_price = trade_data["price"]
+                order_kind = trade_data["side"]
+                trade_id = trade_data["id"]
+                self.trade_algo.setOrderData(order_kind, order_price, order_flag)
+                self.trade_algo.setTradeId(trade_id)
+                logging.info("setCurrentTrade = True")
+            else:
+                pass
+
     def settlementLogWrite(self, profit, msg):
         nowftime = self.trade_algo.getCurrentTime()
         order_kind = self.trade_algo.getOrderKind()
@@ -202,9 +220,8 @@ class TradeWrapper:
                     threshold_list = self.trade_algo.calcThreshold(trade_flag)
                     response = self.oanda_wrapper.order(trade_flag, self.instrument, threshold_list["stoploss"], threshold_list["takeprofit"])
                     order_price = response["price"]
-                    self.trade_algo.setTradeId(response)
-
-                    #response = self.oanda_wrapper.modify_trade(trade_flag, trade_flag, threshold_list["stoploss"], threshold_list["takeprofit"])
+                    trade_id = response["tradeOpened"]["id"]
+                    self.trade_algo.setTradeId(trade_id)
 
                 self.tradeLogWrite(trade_flag)
                 order_flag = True

@@ -137,10 +137,8 @@ class SuperAlgo(object):
         self.order_price = order_price
         self.order_flag = order_flag
 
-    def setTradeId(self, response):
-        print response
-        self.trade_id = response["tradeOpened"]["id"]
-        print self.trade_id
+    def setTradeId(self, trade_id):
+        self.trade_id = trade_id
 
     def getTradeId(self):
         return self.trade_id
