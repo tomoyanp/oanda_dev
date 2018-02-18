@@ -51,20 +51,23 @@ oanda = oandapy.API(environment=env, access_token=token)
 #    candleFormat="midpoint"
 #)
 
-response = oanda.get_prices(
-    instruments="GBP_JPY",
-    alignmentTimezone="Asia/Tokyo",
-    sessionId="abcdbdksl",
-    accountId=account_id)
-
+#response = oanda.get_prices(
+#    instruments="GBP_JPY",
+#    alignmentTimezone="Asia/Tokyo",
+#    sessionId="abcdbdksl",
+#    accountId=account_id)
+#
 
 #response = json.load(response)
 
-print response
 
 #response = oanda.get_historical_position_ratios()
 #response = oanda.get_history(instrument)
 #response = oanda.get_position(account_id, instrument)
+#response = oanda.get_trades(
+#                 accountId=account_id,
+#                 instruments=instrument)
+response = oanda.get_trades(account_id)
 print response
 
 #response = oanda_wrapper.order("buy", instrument, 0, 0)
