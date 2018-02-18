@@ -81,12 +81,13 @@ class TradeWrapper:
         if self.test_mode:
             pass
         else:
-            response = self.oanada_wrapper.get_current_trades()
+            response = self.oanda_wrapper.get_current_trades()
             if len(response) > 0:
                 trade_data = response["trades"][0]
                 order_price = trade_data["price"]
                 order_kind = trade_data["side"]
                 trade_id = trade_data["id"]
+                order_flag = True
                 self.trade_algo.setOrderData(order_kind, order_price, order_flag)
                 self.trade_algo.setTradeId(trade_id)
                 logging.info("setCurrentTrade = True")
