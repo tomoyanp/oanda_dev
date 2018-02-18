@@ -484,11 +484,11 @@ class SuperAlgo(object):
                                      "get_time": base_time}
 
         # 当日始め値と現在価格の差を取得(現在価格-始値)
-        start_price, end_price = self.getStartEndPrice(base_time)
-        self.start_end_price_dataset = {"start_price": start_price,
-                                        "end_price": end_price,
-                                        "get_time": base_time}
-
+#        start_price, end_price = self.getStartEndPrice(base_time)
+#        self.start_end_price_dataset = {"start_price": start_price,
+#                                        "end_price": end_price,
+#                                        "get_time": base_time}
+#
         # 1時間足200日移動平均線を取得する
         ewma200_1h = self.getLongEwma(base_time)
         self.ewma200_1h_dataset = {"ewma_value": ewma200_1h[-1],
@@ -545,11 +545,11 @@ class SuperAlgo(object):
         cmp_time = self.start_end_price_dataset["get_time"] + timedelta(hours=polling_time)
         #logging.info("self.start_end_price_dataset get_time = %s" % self.start_end_price_dataset["get_time"])
         if cmp_time < base_time:
-            # 当日始め値と現在価格の差を取得(現在価格-始値)
-            start_price, end_price = self.getStartEndPrice(base_time)
-            self.start_end_price_dataset = {"start_price": start_price,
-                                            "end_price": end_price,
-                                            "get_time": base_time}
+#            # 当日始め値と現在価格の差を取得(現在価格-始値)
+#            start_price, end_price = self.getStartEndPrice(base_time)
+#            self.start_end_price_dataset = {"start_price": start_price,
+#                                            "end_price": end_price,
+#                                            "get_time": base_time}
         #    logging.info("self.start_end_price_dataset = %s" % self.start_end_price_dataset)
 
             # 1時間足200日移動平均線を取得する
