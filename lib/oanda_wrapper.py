@@ -93,8 +93,7 @@ class OandaWrapper:
     def get_current_trades(self):
         try:
             response = self.oanda.get_trades(self.account_id)
-        except e:
-            print e
+        except:
             raise
 
         return response
