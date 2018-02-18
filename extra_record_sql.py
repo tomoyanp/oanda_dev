@@ -44,7 +44,6 @@ start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
 sql_file = open("w", "%s_record.sql" % instrument)
 
 while start_time < end_time:
-    # 通貨
     start_ftime = start_time - timedelta(hours=9)
     start_ftime = start_ftime.strftime("%Y-%m-%dT%H:%M:%S")
 
@@ -66,8 +65,25 @@ while start_time < end_time:
         ask_price = candles[0]["openMid"]
         bid_price = candles[0]["openMid"]
         insert_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
+<<<<<<< Updated upstream
         sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\')" % (instrument, ask_price, bid_price, insert_time)
         sql_file.write(sql + "\n")
+=======
+        sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\');" % (instrument, ask_price, bid_price, insert_time)
+        print sql
+
+#        for candle in candles:
+#            ask_price = (candle["openMid"])
+#            bid_price = (candle["openMid"])
+#            print ask_price
+#            print bid_price
+#            sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\')" % (instrument, ask_price, bid_price, insert_time)
+#            print sql
+#            try:
+#                mysql_connector.insert_sql(sql)
+#            except Exception as e:
+#                pass
+>>>>>>> Stashed changes
     else:
         print "response length <= 0"
 
