@@ -67,13 +67,17 @@ class Evo2BollingerAlgo(SuperAlgo):
 
                 # 高値安値チェックのみに引っかかった場合、breakモードに突入する
                 if self.break_wait_flag == "buy":
-                    if (current_price - high_price) > 0.1:
+                    logging.info("BUY RANGE BREAK MODE LOGIC current_price = %s, hi_price = %s, comp = %s" %(current_price, hi_price, (current_price - hi_price)))
+#                    if (current_price - hi_price) > 0.1:
+                    if (current_price - hi_price) > 0:
                         logging.info("EXECUTE BUY RANGE BREAK MODE")
                         trade_flag = "buy"
                     else:
                         pass
                 elif self.break_wait_flag == "sell":
-                    if (low_price - current_price) > 0.1:
+                    logging.info("SELL RANGE BREAK MODE LOGIC current_price = %s, low_price = %s, comp = %s" %(current_price, low_price, (low_price - current_price)))
+#                    if (low_price - current_price) > 0.1:
+                    if (low_price - current_price) > 0:
                         logging.info("EXECUTE SELL RANGE BREAK MODE")
                         trade_flag = "sell"
                     else:
