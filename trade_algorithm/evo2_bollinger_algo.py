@@ -46,8 +46,8 @@ class Evo2BollingerAlgo(SuperAlgo):
 
 
                 # 当日始め値と現在価格の差を取得(現在価格-始値)
-                start_price = self.start_end_price_dataset["start_price"]
-                end_price = self.start_end_price_dataset["end_price"]
+#                start_price = self.start_end_price_dataset["start_price"]
+#                end_price = self.start_end_price_dataset["end_price"]
 
                 # 移動平均じゃなく、トレンド発生＋2.5シグマ突破でエントリーに変えてみる
                 upper_sigma = self.bollinger_2p5sigma_dataset["upper_sigma"]
@@ -106,7 +106,7 @@ class Evo2BollingerAlgo(SuperAlgo):
 
                 logging.info("####### decideTrade Logic base_time = %s #######" % base_time)
                 logging.info("break_wait_flag = %s" % (self.break_wait_flag))
-                logging.info("start_price = %s, end_price = %s" % (start_price, end_price))
+#                logging.info("start_price = %s, end_price = %s" % (start_price, end_price))
                 logging.info("hi_price = %s, low_price = %s" % (hi_price, low_price))
                 logging.info("5m 50ewma slope = %s, 5m 200ewma = %s, 1h 200ewma = %s, current_price = %s, upper_2.5sigma = %s, lower_2.5sigma = %s, trade_flag = %s" % (slope, ewma200, ewma200_1h, current_price, upper_sigma, lower_sigma, trade_flag))
 
