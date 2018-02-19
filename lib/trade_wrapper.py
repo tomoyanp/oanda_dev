@@ -82,7 +82,7 @@ class TradeWrapper:
             pass
         else:
             response = self.oanda_wrapper.get_current_trades()
-            if len(response) > 0:
+            if len(response["trades"]) > 0:
                 trade_data = response["trades"][0]
                 order_price = trade_data["price"]
                 order_kind = trade_data["side"]
