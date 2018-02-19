@@ -6,13 +6,7 @@ import traceback
 import json
 
 from datetime import datetime, timedelta
-from step_wise_algo import StepWiseAlgo
-from hi_low_algo import HiLowAlgo
-from start_end_algo import StartEndAlgo
-from time_trend_algo import TimeTrendAlgo
-from bollinger_algo import BollingerAlgo
-from evo_bollinger_algo import EvoBollingerAlgo
-from evo2_bollinger_algo import Evo2BollingerAlgo
+from trendfollow_algo import TrendFollowAlgo
 from oanda_wrapper import OandaWrapper
 from common import instrument_init, account_init
 import time
@@ -72,6 +66,28 @@ class TradeWrapper:
             self.trade_algo = EvoBollingerAlgo(self.instrument, self.base_path, self.config_name, base_time)
         elif algo == "evo2_bollinger":
             self.trade_algo = Evo2BollingerAlgo(self.instrument, self.base_path, self.config_name, base_time)
+        elif algo == "trendfollow":
+            self.trade_algo = TrendFollowAlgo(self.instrument, self.base_path, self.config_name, base_time)
+        else:
+            self.trade_algo = HiLowAlgo(self.instrument, self.base_path, self.config_name, base_time)
+
+        self.setCurrentTrade()
+
+    def setCurrentTrade(self):
+        if self.test_mode:
+            pass
+        else:
+            response = self.oanda_wrapper.get_current_trades()
+            if len(response) > 0:
+                trade_data = response["trades"][0]
+                order_price = trade_data["price"]
+                order_kind = trade_data["side"]
+                trade_id = trade_data["id"]
+                order_flag = True
+                self.trade_algo.setOrderData(order_kind, order_price, order_flag, trade_id)
+                logging.info("setCurrentTrade = True")
+            else:
+                pass
         else:
             self.trade_algo = HiLowAlgo(self.instrument, self.base_path, self.config_name, base_time)
 
