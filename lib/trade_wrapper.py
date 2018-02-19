@@ -88,8 +88,7 @@ class TradeWrapper:
                 order_kind = trade_data["side"]
                 trade_id = trade_data["id"]
                 order_flag = True
-                self.trade_algo.setOrderData(order_kind, order_price, order_flag)
-                self.trade_algo.setTradeId(trade_id)
+                self.trade_algo.setOrderData(order_kind, order_price, order_flag, trade_id)
                 logging.info("setCurrentTrade = True")
             else:
                 pass
@@ -222,11 +221,10 @@ class TradeWrapper:
                     response = self.oanda_wrapper.order(trade_flag, self.instrument, threshold_list["stoploss"], threshold_list["takeprofit"])
                     order_price = response["price"]
                     trade_id = response["tradeOpened"]["id"]
-                    self.trade_algo.setTradeId(trade_id)
 
                 self.tradeLogWrite(trade_flag)
                 order_flag = True
-                self.trade_algo.setOrderData(trade_flag, order_price, order_flag)
+                self.trade_algo.setOrderData(trade_flag, order_price, order_flag, trade_id)
 
 
         return sleep_time
