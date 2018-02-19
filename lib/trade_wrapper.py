@@ -88,8 +88,6 @@ class TradeWrapper:
                 logging.info("setCurrentTrade = True")
             else:
                 pass
-        else:
-            self.trade_algo = HiLowAlgo(self.instrument, self.base_path, self.config_name, base_time)
 
         self.setCurrentTrade()
 
