@@ -27,9 +27,9 @@ import pandas as pd
 import decimal
 
 
-class Evo2BollingerAlgo(SuperAlgo):
+class TrendFollowAlgo(SuperAlgo):
     def __init__(self, instrument, base_path, config_name, base_time):
-        super(Evo2BollingerAlgo, self).__init__(instrument, base_path, config_name, base_time)
+        super(TrendFollowAlgo, self).__init__(instrument, base_path, config_name, base_time)
         self.base_price = 0
 
     def decideTrade(self, base_time):
