@@ -205,7 +205,8 @@ class TradeWrapper:
         else:
             trade_flag = self.trade_algo.decideTrade(base_time)
             # 以下は, decideTradeの中で実装する
-            trade_flag = self.trade_algo.decideTradeTime(base_time, trade_flag)
+            # trade_flag = self.trade_algo.decideTradeTime(base_time, trade_flag)
+             trade_flag = self.trade_algo.decideTradeTime(base_time, trade_flag)
 
             if trade_flag == "pass":
                 sleep_time = self.config_data["sleep_time"]
