@@ -347,6 +347,8 @@ class TrendFollowAlgo(SuperAlgo):
                                          "get_time": base_time}
         #    logging.info("self.hi_low_price_dataset = %s" % self.hi_low_price_dataset)
 
+        polling_time = 3600
+        cmp_time = self.ewma200_1h_dataset["get_time"] + timedelta(seconds=polling_time)
         if cmp_time < base_time:
             # 1時間足200日移動平均線を取得する
             ewma200_1h = self.getLongEwma(base_time)
