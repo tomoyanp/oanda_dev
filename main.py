@@ -50,7 +50,7 @@ if __name__ == '__main__':
 
     if test_args == "test":
         end_time = base_time - timedelta(days=0)
-        base_time = base_time - timedelta(days=19)
+        base_time = base_time - timedelta(days=21)
         test_mode = True
     else:
         test_mode = False
@@ -64,7 +64,8 @@ if __name__ == '__main__':
     try:
       while True:
           logging.info("=== Start Main.Loop Logic ===")
-
+          print "test mode = %s" % test_mode
+          print "base_time = %s" % base_time
           if test_mode:
               pass
           else:

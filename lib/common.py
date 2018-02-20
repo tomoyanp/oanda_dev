@@ -192,6 +192,8 @@ def countIndex(index, candle_width):
 def sleepTransaction(sleep_time, test_mode, base_time):
     sleep_time = int(sleep_time)
     if test_mode:
+        print "NO SLEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEP"
+        print "SLEEP TIME = %s" % sleep_time
         base_time = base_time + timedelta(seconds=sleep_time)
     else:
         time.sleep(sleep_time)
