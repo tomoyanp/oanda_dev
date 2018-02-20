@@ -213,7 +213,8 @@ class TradeWrapper:
                 sleep_time = self.config_data["trade_sleep_time"]
                 order_price = self.trade_algo.getCurrentPrice()
                 if self.test_mode:
-                    pass
+                    # dummy trade id for test mode
+                    trade_id = 12345
                 else:
                     threshold_list = self.trade_algo.calcThreshold(trade_flag)
                     response = self.oanda_wrapper.order(trade_flag, self.instrument, threshold_list["stoploss"], threshold_list["takeprofit"])
