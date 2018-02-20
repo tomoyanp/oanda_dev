@@ -91,24 +91,6 @@ class TradeWrapper:
             else:
                 pass
 
-        self.setCurrentTrade()
-
-    def setCurrentTrade(self):
-        if self.test_mode:
-            pass
-        else:
-            response = self.oanda_wrapper.get_current_trades()
-            if len(response["trades"]) > 0:
-                trade_data = response["trades"][0]
-                order_price = trade_data["price"]
-                order_kind = trade_data["side"]
-                trade_id = trade_data["id"]
-                order_flag = True
-                self.trade_algo.setOrderData(order_kind, order_price, order_flag, trade_id)
-                logging.info("setCurrentTrade = True")
-            else:
-                pass
-
     def settlementLogWrite(self, profit, msg):
         nowftime = self.trade_algo.getCurrentTime()
         order_kind = self.trade_algo.getOrderKind()
