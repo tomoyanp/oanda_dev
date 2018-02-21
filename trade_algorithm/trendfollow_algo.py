@@ -91,7 +91,7 @@ class TrendFollowAlgo(SuperAlgo):
                         logging.info("EXECUTE BUY NORMAL MODE")
                         trade_flag = "buy"
                 # slopeが下向き、現在価格が移動平均(EWMA200(5分), EWMA200(1時間)より下、現在価格がbollinger3_sigmaより下にいる
-                elif ((slope - low_slope_threshold) < 0) and (ewma200 > current_price) and (current_price < lower_sigma) and (ewma200 > current_price):
+                elif ((slope - low_slope_threshold) < 0) and (ewma200 > current_price) and (current_price < lower_sigma) and (ewma200_1h > current_price):
                     # 現在価格が前日安値に対し0.5以内にいる or 当日の値動きが1.0以上ある場合、トレードしない
                     if float(low_price + hilow_price_threshold) > float(current_price) > float(low_price):
                         self.break_wait_flag = "sell"
@@ -339,17 +339,13 @@ class TrendFollowAlgo(SuperAlgo):
         #logging.info("######### setIndicator base_time = %s ############" % base_time)
         polling_time = 1
         cmp_time = self.hi_low_price_dataset["get_time"] + timedelta(hours=polling_time)
-        if cmp_time < base_time and int(base_time.hour) == 7:
+        if cmp_time < base_time:
             # 前日高値、安値の計算
             hi_price, low_price = self.getHiLowPriceBeforeDay(base_time)
             self.hi_low_price_dataset = {"hi_price": hi_price,
                                          "low_price": low_price,
                                          "get_time": base_time}
-        #    logging.info("self.hi_low_price_dataset = %s" % self.hi_low_price_dataset)
 
-        polling_time = 3600
-        cmp_time = self.ewma200_1h_dataset["get_time"] + timedelta(seconds=polling_time)
-        if cmp_time < base_time:
             # 1時間足200日移動平均線を取得する
             ewma200_1h = self.getLongEwma(base_time)
             self.ewma200_1h_dataset = {"ewma_value": ewma200_1h[-1],
