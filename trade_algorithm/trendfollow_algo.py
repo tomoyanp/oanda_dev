@@ -352,7 +352,7 @@ class TrendFollowAlgo(SuperAlgo):
                                        "get_time": base_time}
 
 
-        polling_time = 60
+        polling_time = 0
         cmp_time = self.bollinger_2p5sigma_dataset["get_time"] + timedelta(seconds=polling_time)
         if cmp_time < base_time:
             # bollinger_band 2.5sigma
