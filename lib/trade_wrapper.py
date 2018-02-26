@@ -132,7 +132,7 @@ class TradeWrapper:
                     self.settlementLogWrite(profit, msg)
                     self.stl_sleep_flag = False
 
-                self.trade_algo.resetFlag()
+                    self.trade_algo.resetFlag()
             else:
                 self.trade_algo.setOrderFlag(True)
                 self.stl_sleep_flag = True
