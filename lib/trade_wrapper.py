@@ -125,14 +125,12 @@ class TradeWrapper:
                 # 決済した直後であればスリープする
                 trade_id = self.trade_algo.getTradeId()
                 if self.stl_sleep_flag and trade_id != 0:
-
                     profit, sleep_time = self.trade_algo.calcProfit()
 
                     msg = "===== EXECUTE SETTLEMENT STOP OR LIMIT ORDER "
                     self.settlementLogWrite(profit, msg)
                     self.stl_sleep_flag = False
-
-                self.trade_algo.resetFlag()
+                    self.trade_algo.resetFlag()
             else:
                 self.trade_algo.setOrderFlag(True)
                 self.stl_sleep_flag = True
