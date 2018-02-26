@@ -58,6 +58,7 @@ class SuperAlgo(object):
         self.order_kind = ""
         self.trade_id = 0
         self.trail_flag = False
+        self.trail_second_flag = False
         self.break_wait_flag = "pass"
 
     def setInitialPrice(self, base_time):
