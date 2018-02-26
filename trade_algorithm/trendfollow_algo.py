@@ -165,17 +165,30 @@ class TrendFollowAlgo(SuperAlgo):
                                 logging.info("EXECUTE STL")
                                 stl_flag = True
 
+                    first_take_profit = 0.3
+                    second_take_profit = 0.5
 
                     # 最小利確0.3を超えたら、トレールストップモードをONにする
                     if self.order_kind == "buy":
-                        if (current_bid_price - order_price) > min_take_profit:
+                        if (current_bid_price - order_price) > first_take_profit:
                             logging.info("SET TRAIL FLAG ON")
                             self.trail_flag = True
                     elif self.order_kind == "sell":
-                        if (order_price - current_ask_price) > min_take_profit:
+                        if (order_price - current_ask_price) > first_take_profit:
                             logging.info("SET TRAIL FLAG ON")
                             self.trail_flag = True
 
+                    # 含み益0.5超えたら、トレールストップの二段階目をONにする
+                    if self.order_kind == "buy":
+                        if (current_bid_price - order_price) > second_take_profit:
+                            logging.info("SET TRAIL SECOND FLAG ON")
+                            self.trail_second_flag = True
+                    elif self.order_kind == "sell":
+                        if (order_price - current_ask_price) > second_take_profit:
+                            logging.info("SET TRAIL SECOND FLAG ON")
+                            self.trail_second_flag = True
+
+                    # trail_flagがONで、含み益がなくなったら決済する
                     if self.trail_flag == True and self.order_kind == "buy":
                         if (current_bid_price - order_price) < 0:
                             logging.info("EXECUTE TRAIL STOP")
@@ -183,6 +196,16 @@ class TrendFollowAlgo(SuperAlgo):
                     elif self.trail_flag == True and self.order_kind == "sell":
                         if (order_price - current_ask_price) < 0:
                             logging.info("EXECUTE TRAIL STOP")
+                            stl_flag = True
+
+                    # second_flagがTrueで且つ、含み益が0.3以下になったら決済する
+                    if self.trail_second_flag == True and self.order_kind == "buy":
+                        if (current_bid_price - order_price) < 0.3:
+                            logging.info("EXECUTE TRAIL SECOND STOP")
+                            stl_flag = True
+                    elif self.trail_second_flag == True and self.order_kind == "sell":
+                        if (order_price - current_ask_price) < 0.3:
+                            logging.info("EXECUTE TRAIL SECOND STOP")
                             stl_flag = True
 
                     logging.info("######### decideStl Logic base_time = %s ##########" % base_time)

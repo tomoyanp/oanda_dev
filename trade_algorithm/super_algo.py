@@ -43,6 +43,7 @@ class SuperAlgo(object):
         self.base_time = base_time
 
         self.trail_flag = False
+        self.trail_second_flag = False
         self.break_wait_flag = "pass"
         self.setInitialPrice(self.base_time)
         self.setInitialIndicator(self.base_time)
