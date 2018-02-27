@@ -173,7 +173,7 @@ class TrendFollowAlgo(SuperAlgo):
         except:
             raise
 
-    def decideTrailLogic(self, stl_flag, current_ask_price, current_bid_price, current_price, order_price)
+    def decideTrailLogic(self, stl_flag, current_ask_price, current_bid_price, current_price, order_price):
         first_flag = self.config_data["first_trail_mode"]
         second_flag = self.config_data["second_trail_mode"]
         first_take_profit = 0.3
