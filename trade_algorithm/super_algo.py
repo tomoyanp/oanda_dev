@@ -44,6 +44,7 @@ class SuperAlgo(object):
 
         self.trail_flag = False
         self.trail_second_flag = False
+        self.trail_price = 0
         self.break_wait_flag = "pass"
         self.setInitialPrice(self.base_time)
         self.setInitialIndicator(self.base_time)
@@ -60,6 +61,7 @@ class SuperAlgo(object):
         self.trail_flag = False
         self.trail_second_flag = False
         self.break_wait_flag = "pass"
+        self.trail_price = 0
 
     def setInitialPrice(self, base_time):
         sql = self.getInitialSql(base_time)
