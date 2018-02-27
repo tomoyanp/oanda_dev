@@ -162,7 +162,7 @@ class TrendFollowAlgo(SuperAlgo):
                                 logging.info("EXECUTE STL")
                                 stl_flag = True
 
-                    stl_flag = self.decideTrailLogic(stl_flag)
+                    stl_flag = self.decideTrailLogic(stl_flag, current_ask_price, current_bid_price, current_price, order_price)
                     logging.info("######### decideStl Logic base_time = %s ##########" % base_time)
                     logging.info("upper_sigma = %s, current_price = %s, lower_sigma = %s, base_line = %s" %(upper_sigma, current_price, lower_sigma, base_line))
                     logging.info("order_price = %s, slope = %s" %(order_price, slope))
@@ -173,7 +173,7 @@ class TrendFollowAlgo(SuperAlgo):
         except:
             raise
 
-    def decideTrailLogic(self, stl_flag):
+    def decideTrailLogic(self, stl_flag, current_ask_price, current_bid_price, current_price, order_price)
         first_flag = self.config_data["first_trail_mode"]
         second_flag = self.config_data["second_trail_mode"]
         first_take_profit = 0.3
