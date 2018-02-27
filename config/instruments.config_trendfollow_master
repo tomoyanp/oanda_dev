@@ -14,7 +14,6 @@
     "enable_time_mode": "on",
     "ex_stlmode": "on",
     "first_trail_mode": "on",
-    "second_trail_mode": "on"
-
+    "second_trail_mode": "off"
   }
 }
