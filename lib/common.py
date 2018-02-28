@@ -159,7 +159,8 @@ def getEWMA(ask_price_list, bid_price_list, wma_length, candle_width):
     bid_price_list = pd.Series(bid_price_list)
     average_price_list = (ask_price_list + bid_price_list) / 2
 
-    wma_length = (candle_width * wma_length)
+    #wma_length = (candle_width * wma_length)
+    wma_length = len(average_price_list)
 
     wma_value_list = average_price_list.ewm(ignore_na=False, span=wma_length, min_periods=0, adjust=True).mean()
 

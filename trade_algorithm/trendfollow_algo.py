@@ -278,17 +278,21 @@ class TrendFollowAlgo(SuperAlgo):
 
     def getHiLowPriceBeforeDay(self, base_time):
         # 過去25時間分
-        term = 25 * 3600
+        term = 25 * 3600 * -1
         # そのうち直近1時間は排除
         exclude_term = 1 * 3600 * -1
 
         # listから対象期間抽出
         ask_price_list = self.ask_price_list[term:]
         bid_price_list = self.bid_price_list[term:]
+        insert_time_list = self.insert_time_list[term:]
 
         # そのうち直近1時間排除
         ask_price_list = ask_price_list[:exclude_term]
         bid_price_list = bid_price_list[:exclude_term]
+        insert_time_list = insert_time_list[:exclude_term]
+
+        logging.info("base_time = %s, start_time = %s, end_time = %s" % (base_time, insert_time_list[0], insert_time_list[-1]))
 
         ask_price_list = pd.Series(ask_price_list)
         bid_price_list = pd.Series(bid_price_list)
@@ -372,13 +376,14 @@ class TrendFollowAlgo(SuperAlgo):
         wma_length = 200
         candle_width = 3600
 
-        index = wma_length * candle_width * -1
+        #index = wma_length * candle_width * -1
 
         # listから対象期間抽出
-        ask_price_list = self.ask_price_list[index:]
-        bid_price_list = self.bid_price_list[index:]
+        #ask_price_list = self.ask_price_list[index:]
+        #bid_price_list = self.bid_price_list[index:]
 
-        ewma200 = getEWMA(ask_price_list, bid_price_list, wma_length, candle_width)
+        #ewma200 = getEWMA(ask_price_list, bid_price_list, wma_length, candle_width)
+        ewma200 = getEWMA(self.ask_price_list, self.bid_price_list, wma_length, candle_width)
 
         return ewma200
 
