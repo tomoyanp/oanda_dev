@@ -59,6 +59,10 @@ def decideMarket(base_time):
     return flag
 
 def getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width):
+    index = (window_size + 10) * candle_width * -1
+    ask_price_list = ask_price_list[index:]
+    bid_price_list = bid_price_list[index:]
+    
     # pandasの形式に変換
     ask_lst = pd.Series(ask_price_list)
     bid_lst = pd.Series(bid_price_list)
