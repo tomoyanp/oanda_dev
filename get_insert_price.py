@@ -1,5 +1,7 @@
 # coding: utf-8
 
+# レコードが不足していた場合、1秒前のものをコピーして入れるやつ
+
 # 実行スクリプトのパスを取得して、追加
 import sys
 import os
@@ -20,8 +22,8 @@ if __name__ == "__main__":
     args = sys.argv
     currency = args[1].strip()
     con = MysqlConnector()
-    base_time = "2017-12-01 00:00:00"
-    end_time = "2017-12-31 00:00:00"
+    base_time = "2017-01-04 07:01:30"
+    end_time = "2018-01-10 00:00:00"
     #base_time = "2017-12-31 00:00:00"
     end_time = datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
     base_time = datetime.strptime(base_time, "%Y-%m-%d %H:%M:%S")
@@ -43,6 +45,8 @@ if __name__ == "__main__":
                     insert_time = insert_time.strftime("%Y-%m-%d %H:%M:%S")
                     sql = u"select ask_price, bid_price, insert_time from %s_TABLE where insert_time = \'%s\'" % (currency, insert_time)
                     response = con.select_sql(sql)
+                    print sql
+                    print response
                     for res in response:
                       ask_price = res[0]
                       bid_price = res[1]

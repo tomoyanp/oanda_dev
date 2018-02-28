@@ -23,12 +23,21 @@ def account_init(mode, base_path):
 # マーケットが休みであればfalseを返す
 def decideMarket(base_time):
     flag = True
-    month = base_time.month
-    week = base_time.weekday()
-    hour = base_time.hour
+    month = int(base_time.month)
+    week = int(base_time.weekday())
+    day = int(base_time.day)
+    hour = int(base_time.hour)
 
+    if month == 12 and day == 30 and hour > 6:
+        flag = False
+    elif month == 12 and day == 31:
+        flag = False
+    elif month == 1 and day == 1:
+        flag = False
+    elif month == 1 and day == 2 and hour < 7:
+        flag = False
     # 冬時間の場合
-    if month == 11 or month == 12 or month == 1 or month == 2 or month == 3:
+    elif (month == 11 and day > 5) or month == 12 or month == 1 or month == 2 or (month == 3 and day < 12):
         if week == 5 and hour > 6:
             flag = False
 
