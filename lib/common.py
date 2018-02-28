@@ -62,7 +62,7 @@ def getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valia
     index = (window_size + 10) * candle_width * -1
     ask_price_list = ask_price_list[index:]
     bid_price_list = bid_price_list[index:]
-    
+
     # pandasの形式に変換
     ask_lst = pd.Series(ask_price_list)
     bid_lst = pd.Series(bid_price_list)
@@ -151,6 +151,10 @@ def getOriginalEWMA(ask_price_list, bid_price_list, wma_length, candle_width):
 
 
 def getEWMA(ask_price_list, bid_price_list, wma_length, candle_width):
+    index = wma_length * candle_width * -1
+    ask_price_list = ask_price_list[index:]
+    bid_price_list = bid_price_list[index:]
+    
     ask_price_list = pd.Series(ask_price_list)
     bid_price_list = pd.Series(bid_price_list)
     average_price_list = (ask_price_list + bid_price_list) / 2
