@@ -1,5 +1,6 @@
 {
   "GBP_JPY": {
+    "__comments" : "current master mode",
     "stop_loss": 0.5,
     "take_profit": 1.0,
     "time_width": 720000,
