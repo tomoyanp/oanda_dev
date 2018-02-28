@@ -275,95 +275,108 @@ class TrendFollowAlgo(SuperAlgo):
 #
 #        return stl_flag
 
-    def getHiLowPriceBeforeDay(self, base_time):
-        before_day = base_time - timedelta(days=1)
 
-        # 高値安値は直近1時間まで見てみる
-        before_end_time = base_time - timedelta(hours=1)
-        before_end_time = before_end_time.strftime("%Y-%m-%d %H:%M:%S")
+    def getHiLowPriceBeforeDay(self, base_time)
+        # 過去25時間分
+        term = 25 * 3600
+        # そのうち直近1時間は排除
+        exclude_term = 1 * 3600 * -1
 
-        before_start_time = before_day.strftime("%Y-%m-%d 07:00:00")
-        before_start_time = datetime.strptime(before_start_time, "%Y-%m-%d %H:%M:%S")
-        if decideMarket(before_start_time):
-            before_start_time = before_day.strftime("%Y-%m-%d 07:00:00")
-        else:
-            before_start_day = base_time - timedelta(days=3)
-            before_start_time = before_start_day.strftime("%Y-%m-%d 07:00:00")
+        # listから対象期間抽出
+        ask_price_list = self.ask_price_list[term:]
+        bid_price_list = self.bid_price_list[term:]
 
-        sql = "select max(ask_price), max(bid_price) from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, before_start_time, before_end_time)
-        print sql
-        response = self.mysqlConnector.select_sql(sql)
+        # そのうち直近1時間排除
+        ask_price_list = ask_price_list[:exclude_term]
+        bid_price_list = bid_price_list[:exclude_term]
 
-        for res in response:
-            ask_price = res[0]
-            bid_price = res[1]
+        ask_price_list = pd.Series(ask_price_list)
+        bid_price_list = pd.Series(bid_price_list)
+        current_price_list = (ask_price_list + bid_price_list) / 2
+        high_price = current_price_list.max()
+        min_price = current_price_list.min()
 
-        hi_price = (ask_price + bid_price)/2
+        retrun high_price, min_price
 
-        sql = "select min(ask_price), min(bid_price) from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, before_start_time, before_end_time)
-        print sql
-        response = self.mysqlConnector.select_sql(sql)
+#    def getHiLowPriceBeforeDay(self, base_time):
+#        before_day = base_time - timedelta(days=1)
 
-        for res in response:
-            ask_price = res[0]
-            bid_price = res[1]
+#        # 高値安値は直近1時間まで見てみる
+#        before_end_time = base_time - timedelta(hours=1)
+#        before_end_time = before_end_time.strftime("%Y-%m-%d %H:%M:%S")
 
-        min_price = (ask_price + bid_price)/2
+#        before_start_time = before_day.strftime("%Y-%m-%d 07:00:00")
+#        before_start_time = datetime.strptime(before_start_time, "%Y-%m-%d %H:%M:%S")
+#        if decideMarket(before_start_time):
+#            before_start_time = before_day.strftime("%Y-%m-%d 07:00:00")
+#        else:
+#            before_start_day = base_time - timedelta(days=3)
+#            before_start_time = before_start_day.strftime("%Y-%m-%d 07:00:00")
 
-        return hi_price, min_price
+#        sql = "select max(ask_price), max(bid_price) from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, before_start_time, before_end_time)
+#        print sql
+#        response = self.mysqlConnector.select_sql(sql)
 
-    def getStartEndPrice(self, base_time):
-        # 日またぎの場合
-        if 0 <= int(base_time.hour) <= 6:
-            start_day = base_time - timedelta(days=1)
-            start_time = start_day.strftime("%Y-%m-%d 07:00:00")
-        else:
-            start_time = base_time.strftime("%Y-%m-%d 07:00:00")
+#        for res in response:
+#            ask_price = res[0]
+#            bid_price = res[1]
 
-        end_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
+#        hi_price = (ask_price + bid_price)/2
 
-        sql = "select ask_price, bid_price from %s_TABLE where insert_time = \'%s\'" % (self.instrument, start_time)
+#        sql = "select min(ask_price), min(bid_price) from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, before_start_time, before_end_time)
+#        print sql
+#        response = self.mysqlConnector.select_sql(sql)
 
-        response = self.mysqlConnector.select_sql(sql)
-        for res in response:
-            ask_price = res[0]
-            bid_price = res[1]
+#        for res in response:
+#            ask_price = res[0]
+#            bid_price = res[1]
 
-        start_price = (ask_price + bid_price)/2
+#        min_price = (ask_price + bid_price)/2
 
-        sql = "select ask_price, bid_price from %s_TABLE where insert_time = \'%s\'" % (self.instrument, end_time)
+#        return hi_price, min_price
 
-        response = self.mysqlConnector.select_sql(sql)
-        for res in response:
-            ask_price = res[0]
-            bid_price = res[1]
+#    def getStartEndPrice(self, base_time):
+#        # 日またぎの場合
+#        if 0 <= int(base_time.hour) <= 6:
+#            start_day = base_time - timedelta(days=1)
+#            start_time = start_day.strftime("%Y-%m-%d 07:00:00")
+#        else:
+#            start_time = base_time.strftime("%Y-%m-%d 07:00:00")
 
-        end_price = (ask_price + bid_price)/2
+#        end_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
 
-        return start_price, end_price
+#        sql = "select ask_price, bid_price from %s_TABLE where insert_time = \'%s\'" % (self.instrument, start_time)
+
+#        response = self.mysqlConnector.select_sql(sql)
+#        for res in response:
+#            ask_price = res[0]
+#            bid_price = res[1]
+
+#        start_price = (ask_price + bid_price)/2
+
+#        sql = "select ask_price, bid_price from %s_TABLE where insert_time = \'%s\'" % (self.instrument, end_time)
+
+#        response = self.mysqlConnector.select_sql(sql)
+#        for res in response:
+#            ask_price = res[0]
+#            bid_price = res[1]
+
+#        end_price = (ask_price + bid_price)/2
+
+#        return start_price, end_price
+
+
 
     def getLongEwma(self, base_time):
         # 移動平均の取得(WMA200 * 1h candles)
         wma_length = 200
         candle_width = 3600
-        limit_length = wma_length * candle_width
-        base_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
-        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time < \'%s\' order by insert_time desc limit %s" % (self.instrument, base_time, limit_length)
-        print sql
 
-        response = self.mysqlConnector.select_sql(sql)
+        index = wma_length * candle_width * -1
 
-        ask_price_list = []
-        bid_price_list = []
-        insert_time_list = []
-
-        for res in response:
-            ask_price_list.append(res[0])
-            bid_price_list.append(res[1])
-            insert_time_list.append(res[2])
-
-        ask_price_list.reverse()
-        bid_price_list.reverse()
+        # listから対象期間抽出
+        ask_price_list = self.ask_price_list[index:]
+        bid_price_list = self.bid_price_list[index:]
 
         ewma200 = getEWMA(ask_price_list, bid_price_list, wma_length, candle_width)
 
