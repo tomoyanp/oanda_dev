@@ -50,8 +50,8 @@ if __name__ == '__main__':
 
     if test_args == "test":
         end_time = base_time - timedelta(days=0)
-#        base_time = base_time - timedelta(days=26)
-        base_time = datetime.strptime("2017-02-01 00:00:00", "%Y-%m-%d %H:%M:%S")
+#        base_time = datetime.strptime("2017-02-01 00:00:00", "%Y-%m-%d %H:%M:%S")
+        base_time = datetime.strptime("2018-02-10 00:00:00", "%Y-%m-%d %H:%M:%S")
         test_mode = True
     else:
         test_mode = False

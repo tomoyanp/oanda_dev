@@ -276,7 +276,7 @@ class TrendFollowAlgo(SuperAlgo):
 #        return stl_flag
 
 
-    def getHiLowPriceBeforeDay(self, base_time)
+    def getHiLowPriceBeforeDay(self, base_time):
         # 過去25時間分
         term = 25 * 3600
         # そのうち直近1時間は排除
@@ -296,7 +296,7 @@ class TrendFollowAlgo(SuperAlgo):
         high_price = current_price_list.max()
         min_price = current_price_list.min()
 
-        retrun high_price, min_price
+        return high_price, min_price
 
 #    def getHiLowPriceBeforeDay(self, base_time):
 #        before_day = base_time - timedelta(days=1)
