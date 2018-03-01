@@ -16,6 +16,7 @@ from common import instrument_init, decideMarket, getEWMA, getBollingerDataSet, 
 class ComputePriceThread(threading.Thread):
     def __init__(self, instrument, base_path, config_name, indicator_object, base_time):
         super(ComputePriceThread, self).__init__()
+        self.instrument = instrument
         self.config_data = instrument_init(instrument, base_path, config_name)
         self.indicator_object = indicator_object
         self.old_base_time = base_time
@@ -50,9 +51,9 @@ class ComputePriceThread(threading.Thread):
         else:
             self.addPrice(base_time)
 
-    def calculatePollingTime(base_time, cmp_object, polling_time):
+    def calculatePollingTime(self, base_time, cmp_object, polling_time):
         flag = False
-        if len(comp_time_dataset) > 0:
+        if len(cmp_object) > 0:
             get_time = cmp_object["get_time"]
             if base_time > (get_time + timedelta(seconds=polling_time)):
                 flag = True
@@ -70,7 +71,7 @@ class ComputePriceThread(threading.Thread):
         # 1時間置きに実行
         polling_time = 3600
         cmp_object = self.indicator_object.getHighLowPriceDataset()
-        if calculatePollingTime(base_time, cmp_object, polling_time)
+        if self.calculatePollingTime(base_time, cmp_object, polling_time):
             # 前日高値、安値の計算
             high_price, low_price = self.getHiLowPriceBeforeDay(base_time)
             self.indicator_object.setHighLowPriceDataset(high_price, low_price, base_time)
