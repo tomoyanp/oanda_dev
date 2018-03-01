@@ -25,6 +25,44 @@ class ComputePriceThread(threading.Thread):
         self.setPrice(base_time)
         self.setIndicator(base_time)
 
+
+    def getHiLowPriceBeforeDay(self, base_time):
+        before_day = base_time - timedelta(days=1)
+
+        # 高値安値は直近1時間まで見てみる
+        before_end_time = base_time - timedelta(hours=1)
+        before_end_time = before_end_time.strftime("%Y-%m-%d %H:%M:%S")
+
+        before_start_time = before_day.strftime("%Y-%m-%d 07:00:00")
+        before_start_time = datetime.strptime(before_start_time, "%Y-%m-%d %H:%M:%S")
+        if decideMarket(before_start_time):
+            before_start_time = before_day.strftime("%Y-%m-%d 07:00:00")
+        else:
+            before_start_day = base_time - timedelta(days=3)
+            before_start_time = before_start_day.strftime("%Y-%m-%d 07:00:00")
+
+        sql = "select max(ask_price), max(bid_price) from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, before_start_time, before_end_time)
+        print sql
+        response = self.mysql_connector.select_sql(sql)
+
+        for res in response:
+            ask_price = res[0]
+            bid_price = res[1]
+
+        hi_price = (ask_price + bid_price)/2
+
+        sql = "select min(ask_price), min(bid_price) from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, before_start_time, before_end_time)
+        print sql
+        response = self.mysql_connector.select_sql(sql)
+
+        for res in response:
+            ask_price = res[0]
+            bid_price = res[1]
+
+        min_price = (ask_price + bid_price)/2
+
+        return hi_price, min_price
+
     def setBaseTime(self, base_time):
         self.base_time = base_time
 
