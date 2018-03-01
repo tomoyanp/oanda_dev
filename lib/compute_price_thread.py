@@ -117,8 +117,8 @@ class ComputePriceThread(threading.Thread):
             wma_length = 200
             candle_width = 3600
             # 移動平均の取得(WMA200 1h)
-            ewma200_1h = getEwma(ask_price_list, bid_price_list, wma_length, candle_width)
-            self.indicator_object.setEwma200_1hDataset(ewma2001h, base_time)
+            ewma200_1h = getEWMA(ask_price_list, bid_price_list, wma_length, candle_width)
+            self.indicator_object.setEwma200_1hDataset(ewma200_1h, base_time)
 
         # 2.5シグマボリンジャーバンドを取得する
         window_size = 28
@@ -144,7 +144,8 @@ class ComputePriceThread(threading.Thread):
         self.indicator_object.setEwma200_5mDataset(ewma200, base_time)
 
     def run(self):
-        while True:
+        for i in range(0, 10000):
+#        while True:
             base_time = self.getBaseTime()
             if self.old_base_time < base_time:
                 if decideMarket(base_time):
