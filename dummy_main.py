@@ -7,22 +7,17 @@ sys.path.append(current_path)
 sys.path.append(current_path + "/lib")
 config_name = "trendfollow_dummy"
 
-from compute_price_thread import ComputePriceThread
-from indicator_object import IndicatorObject
+from compute_indicator import ComputeIndicator
 from datetime import datetime, timedelta
+import time
 
 if __name__ == "__main__":
     instrument = "GBP_JPY"
-    indicator_object = IndicatorObject()
-    base_time = datetime.now()
-    thread = ComputePriceThread(instrument, current_path, config_name, indicator_object, base_time)
-    thread.start()
     base_time = datetime.strptime("2018-02-01 00:00:00", "%Y-%m-%d %H:%M:%S")
+    compute_indicator = ComputeIndicator(instrument, current_path, config_name, base_time)
 
-    for i in range(0, 10000):
-        base_time = base_time + timedelta(seconds=2)
-        thread.setBaseTime(base_time)
-        ask_price_list, bid_price_list, insert_time_list = indicator_object.getPriceList()
-        for elm in insert_time_list:
-            print elm
-        print "============================"
+    for i in range(0, 1000):
+        base_time = base_time + timedelta(seconds=1)
+        compute_indicator.setBaseTime(base_time)
+        compute_indicator.compute()
+        compute_indicator.insertIndicator()

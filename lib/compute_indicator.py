@@ -7,15 +7,13 @@
 # Parent Class ===> price_object.getPrice
 #############################################
 
-import threading
 from datetime import datetime, timedelta
 from indicator_object import IndicatorObject
 from mysql_connector import MysqlConnector
 from common import instrument_init, decideMarket, getEWMA, getBollingerDataSet, getSlope
 
-class ComputePriceThread(threading.Thread):
-    def __init__(self, instrument, base_path, config_name, indicator_object, base_time):
-        super(ComputePriceThread, self).__init__()
+class ComputeIndicator:
+    def __init__(self, instrument, base_path, config_name base_time):
         self.instrument = instrument
         self.config_data = instrument_init(instrument, base_path, config_name)
         self.indicator_object = indicator_object
@@ -24,7 +22,6 @@ class ComputePriceThread(threading.Thread):
         self.mysql_connector = MysqlConnector()
         self.setPrice(base_time)
         self.setIndicator(base_time)
-
 
     def getHiLowPriceBeforeDay(self, base_time):
         before_day = base_time - timedelta(days=1)
@@ -144,23 +141,15 @@ class ComputePriceThread(threading.Thread):
         ewma200 = getEWMA(ask_price_list, bid_price_list, wma_length, candle_width)
         self.indicator_object.setEwma200_5mDataset(ewma200, base_time)
 
-    def run(self):
-        print "thread start"
-        for i in range(0, 100):
-            #print "thread start"
-#        while True:
-            base_time = self.getBaseTime()
-            #print base_time
-            #print "=========================="
-            #print "base_time = %s" % base_time
-            #print "old_base_time = %s" % self.old_base_time
-            if self.old_base_time < base_time:
-                print base_time
-                if decideMarket(base_time):
-                    self.setPrice(base_time)
-                    self.setIndicator(base_time)
-                self.old_base_time = base_time
-            else:
-                pass
-            #print "thread end"
-        print "thread end"
+    def compute(self, base_time):
+        base_time = self.getBaseTime()
+        if self.old_base_time < base_time:
+            if decideMarket(base_time):
+                self.setPrice(base_time)
+                self.setIndicator(base_time)
+            self.old_base_time = base_time
+        else:
+            pass
+
+    def insert_indicator(self):
+        pass
