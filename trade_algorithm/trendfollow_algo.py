@@ -38,69 +38,76 @@ class TrendFollowAlgo(SuperAlgo):
             if self.order_flag:
                 pass
             else:
-                current_price = self.getCurrentPrice()
+                minutes = base_time.minute
+                seconds = base_time.second
+                # 5分足の終値付近で計算ロジックに入る
+                if (minutes % 5 == 4) and second > 50:
+                    current_price = self.getCurrentPrice()
 
-                # 前日高値、安値の計算
-                hi_price = self.hi_low_price_dataset["hi_price"]
-                low_price = self.hi_low_price_dataset["low_price"]
+                    # 前日高値、安値の計算
+                    hi_price = self.hi_low_price_dataset["hi_price"]
+                    low_price = self.hi_low_price_dataset["low_price"]
 
 
-                # 当日始め値と現在価格の差を取得(現在価格-始値)
+                    # 当日始め値と現在価格の差を取得(現在価格-始値)
 
-                # 移動平均じゃなく、トレンド発生＋2.5シグマ突破でエントリーに変えてみる
-                upper_sigma = self.bollinger_2p5sigma_dataset["upper_sigma"]
-                lower_sigma = self.bollinger_2p5sigma_dataset["lower_sigma"]
-                base_line = self.bollinger_2p5sigma_dataset["base_line"]
+                    # 移動平均じゃなく、トレンド発生＋2.5シグマ突破でエントリーに変えてみる
+                    upper_sigma = self.bollinger_2p5sigma_dataset["upper_sigma"]
+                    lower_sigma = self.bollinger_2p5sigma_dataset["lower_sigma"]
+                    base_line = self.bollinger_2p5sigma_dataset["base_line"]
 
-                ewma50 = self.ewma50_5m_dataset["ewma_value"]
-                slope = self.ewma50_5m_dataset["slope"]
-                ewma200 = self.ewma200_5m_dataset["ewma_value"]
-                ewma200_1h = self.ewma200_1h_dataset["ewma_value"]
+                    ewma50 = self.ewma50_5m_dataset["ewma_value"]
+                    slope = self.ewma50_5m_dataset["slope"]
+                    ewma200 = self.ewma200_5m_dataset["ewma_value"]
+                    ewma200_1h = self.ewma200_1h_dataset["ewma_value"]
 
-                startend_price_threshold = 1.0
-                hilow_price_threshold = 0.5
-                baseline_touch_flag = False
-                low_slope_threshold  = -0.3
-                high_slope_threshold = 0.3
+                    startend_price_threshold = 1.0
+                    hilow_price_threshold = 0.5
+                    baseline_touch_flag = False
+                    low_slope_threshold  = -0.3
+                    high_slope_threshold = 0.3
 
-                # 高値安値チェックのみに引っかかった場合、breakモードに突入する
-                if self.break_wait_flag == "buy":
-                    logging.info("BUY RANGE BREAK MODE LOGIC current_price = %s, hi_price = %s, comp = %s" %(current_price, hi_price, (current_price - hi_price)))
-                    if (current_price - hi_price) > 0.1:
-                        logging.info("EXECUTE BUY RANGE BREAK MODE")
-                        trade_flag = "buy"
+                    # 高値安値チェックのみに引っかかった場合、breakモードに突入する
+                    if self.break_wait_flag == "buy":
+                        logging.info("BUY RANGE BREAK MODE LOGIC current_price = %s, hi_price = %s, comp = %s" %(current_price, hi_price, (current_price - hi_price)))
+                        if (current_price - hi_price) > 0.1:
+                            logging.info("EXECUTE BUY RANGE BREAK MODE")
+                            trade_flag = "buy"
+                        else:
+                            pass
+                    elif self.break_wait_flag == "sell":
+                        logging.info("SELL RANGE BREAK MODE LOGIC current_price = %s, low_price = %s, comp = %s" %(current_price, low_price, (low_price - current_price)))
+                        if (low_price - current_price) > 0.1:
+                            logging.info("EXECUTE SELL RANGE BREAK MODE")
+                            trade_flag = "sell"
+                        else:
+                            pass
                     else:
                         pass
-                elif self.break_wait_flag == "sell":
-                    logging.info("SELL RANGE BREAK MODE LOGIC current_price = %s, low_price = %s, comp = %s" %(current_price, low_price, (low_price - current_price)))
-                    if (low_price - current_price) > 0.1:
-                        logging.info("EXECUTE SELL RANGE BREAK MODE")
-                        trade_flag = "sell"
+
+                    # slopeが上向き、現在価格が移動平均(EWMA200(5分), EWMA200(1時間))より上、現在価格がbollinger3_sigmaより上にいる
+                    if ((slope - high_slope_threshold) > 0) and (ewma200 < current_price) and (current_price > upper_sigma) and (ewma200_1h < current_price):
+                        # 現在価格が前日高値に対し0.5以内にいる or 当日の値動きが1.0以上ある場合、トレードしない
+                        if float(hi_price - hilow_price_threshold) < float(current_price) < (float(hi_price) + 0.1):
+                            self.break_wait_flag = "buy"
+                            logging.info("MOVING RANGE BREAK MODE = buy")
+                        else:
+                            logging.info("EXECUTE BUY NORMAL MODE")
+                            trade_flag = "buy"
+                    # slopeが下向き、現在価格が移動平均(EWMA200(5分), EWMA200(1時間)より下、現在価格がbollinger3_sigmaより下にいる
+                    elif ((slope - low_slope_threshold) < 0) and (ewma200 > current_price) and (current_price < lower_sigma) and (ewma200_1h > current_price):
+                        # 現在価格が前日安値に対し0.5以内にいる or 当日の値動きが1.0以上ある場合、トレードしない
+                        if float(low_price + hilow_price_threshold) > float(current_price) > (float(low_price) - 0.1):
+                            self.break_wait_flag = "sell"
+                            logging.info("MOVING RANGE BREAK MODE = sell")
+                        else:
+                            logging.info("EXECUTE SELL NORMAL MODE")
+                            trade_flag = "sell"
+
                     else:
-                        pass
+                        trade_flag = "pass"
                 else:
                     pass
-
-                # slopeが上向き、現在価格が移動平均(EWMA200(5分), EWMA200(1時間))より上、現在価格がbollinger3_sigmaより上にいる
-                if ((slope - high_slope_threshold) > 0) and (ewma200 < current_price) and (current_price > upper_sigma) and (ewma200_1h < current_price):
-                    # 現在価格が前日高値に対し0.5以内にいる or 当日の値動きが1.0以上ある場合、トレードしない
-                    if float(hi_price - hilow_price_threshold) < float(current_price) < (float(hi_price) + 0.1):
-                        self.break_wait_flag = "buy"
-                        logging.info("MOVING RANGE BREAK MODE = buy")
-                    else:
-                        logging.info("EXECUTE BUY NORMAL MODE")
-                        trade_flag = "buy"
-                # slopeが下向き、現在価格が移動平均(EWMA200(5分), EWMA200(1時間)より下、現在価格がbollinger3_sigmaより下にいる
-                elif ((slope - low_slope_threshold) < 0) and (ewma200 > current_price) and (current_price < lower_sigma) and (ewma200_1h > current_price):
-                    # 現在価格が前日安値に対し0.5以内にいる or 当日の値動きが1.0以上ある場合、トレードしない
-                    if float(low_price + hilow_price_threshold) > float(current_price) > (float(low_price) - 0.1):
-                        self.break_wait_flag = "sell"
-                        logging.info("MOVING RANGE BREAK MODE = sell")
-                    else:
-                        logging.info("EXECUTE SELL NORMAL MODE")
-                        trade_flag = "sell"
-                else:
-                    trade_flag = "pass"
 
                 logging.info("####### decideTrade Logic base_time = %s #######" % base_time)
                 logging.info("break_wait_flag = %s" % (self.break_wait_flag))
@@ -402,7 +409,8 @@ class TrendFollowAlgo(SuperAlgo):
         # 移動平均じゃなく、トレンド発生＋3シグマ突破でエントリーに変えてみる
         window_size = 28
         candle_width = 300
-        sigma_valiable = 2.5
+        #sigma_valiable = 2.5
+        sigma_valiable = 3
         data_set = getBollingerDataSet(self.ask_price_list, self.bid_price_list, window_size, sigma_valiable, candle_width)
         self.bollinger_2p5sigma_dataset = {"upper_sigma": data_set["upper_sigmas"][-1],
                                            "lower_sigma": data_set["lower_sigmas"][-1],
@@ -455,7 +463,8 @@ class TrendFollowAlgo(SuperAlgo):
             # bollinger_band 2.5sigma
             window_size = 28
             candle_width = 300
-            sigma_valiable = 2.5
+            #sigma_valiable = 2.5
+            sigma_valiable = 3
             data_set = getBollingerDataSet(self.ask_price_list, self.bid_price_list, window_size, sigma_valiable, candle_width)
             self.bollinger_2p5sigma_dataset = {"upper_sigma": data_set["upper_sigmas"][-1],
                                                "lower_sigma": data_set["lower_sigmas"][-1],
