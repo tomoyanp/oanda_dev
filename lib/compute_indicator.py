@@ -16,7 +16,7 @@ class ComputeIndicator:
     def __init__(self, instrument, base_path, config_name, base_time):
         self.instrument = instrument
         self.config_data = instrument_init(instrument, base_path, config_name)
-        self.indicator_object = indicator_object
+        self.indicator_object = IndicatorObject()
         self.old_base_time = base_time
         self.base_time = base_time
         self.mysql_connector = MysqlConnector()
@@ -121,7 +121,7 @@ class ComputeIndicator:
         data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
         # instrument, type, upper_sigma, lower_sigma, base_line, insert_time
         ind_type = "bollinger1"
-        sql = "insert into indicator_table(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(%s, %s, %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigma"][-1], data_set["lower_sigma"][-1], data_set["base_line"][-1] base_time)
+        sql = "insert into indicator_table(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(%s, %s, %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigma"][-1], data_set["lower_sigma"][-1], data_set["base_line"][-1], base_time)
         print sql
 
         # 2.5シグマボリンジャーバンドを取得する
@@ -131,7 +131,7 @@ class ComputeIndicator:
         data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
         # instrument, type, upper_sigma, lower_sigma, base_line, insert_time
         ind_type = "bollinger2.5"
-        sql = "insert into indicator_table(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(%s, %s, %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigma"][-1], data_set["lower_sigma"][-1], data_set["base_line"][-1] base_time)
+        sql = "insert into indicator_table(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(%s, %s, %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigma"][-1], data_set["lower_sigma"][-1], data_set["base_line"][-1], base_time)
         print sql
 
         # 3シグマボリンジャーバンドを取得する
@@ -141,7 +141,7 @@ class ComputeIndicator:
         data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
         # instrument, type, upper_sigma, lower_sigma, base_line, insert_time
         ind_type = "bollinger3"
-        sql = "insert into indicator_table(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(%s, %s, %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigma"][-1], data_set["lower_sigma"][-1], data_set["base_line"][-1] base_time)
+        sql = "insert into indicator_table(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(%s, %s, %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigma"][-1], data_set["lower_sigma"][-1], data_set["base_line"][-1], base_time)
         print sql
 
         # 移動平均の取得(WMA50 5m)
