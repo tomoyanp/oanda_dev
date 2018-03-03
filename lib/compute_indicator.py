@@ -73,7 +73,7 @@ class ComputeIndicator:
         flag = False
         if len(response) > 0:
             get_time = response[0][0]
-            get_time = datetime.strptime(get_time, "%Y-%m-%d %H:%M:%S")
+            #get_time = datetime.strptime(get_time, "%Y-%m-%d %H:%M:%S")
             if base_time > (get_time + timedelta(seconds=polling_time)):
                 flag = True
             else:
