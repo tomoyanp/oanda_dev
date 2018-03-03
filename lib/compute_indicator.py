@@ -90,7 +90,7 @@ class ComputeIndicator:
         # 1時間置きに実行
         polling_time = 3600
         ind_type = "highlow"
-        sql = "select insert_time from indicator_table where insert_time < \'%s\' and type = \'%s\' limit 1" % ind_type
+        sql = "select insert_time from indicator_table where insert_time < \'%s\' and type = \'%s\' limit 1" % (base_time, ind_type)
         response = self.mysql_connector.select_sql(sql)
         if self.calculatePollingTime(base_time, response, polling_time):
             # 前日高値、安値の計算
@@ -103,7 +103,7 @@ class ComputeIndicator:
 
         polling_time = 3600
         ind_type = "ewma1h200"
-        sql = "select insert_time from indicator_table where insert_time < \'%s\' and type = \'%s\' limit 1" % ind_type
+        sql = "select insert_time from indicator_table where insert_time < \'%s\' and type = \'%s\' limit 1" % (base_time, ind_type)
         response = self.mysql_connector.select_sql(sql)
         if self.calculatePollingTime(base_time, response, polling_time):
             wma_length = 200
