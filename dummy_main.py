@@ -22,5 +22,5 @@ if __name__ == "__main__":
             base_time = base_time + timedelta(seconds=1)
             compute_indicator.computeInsertIndicator(base_time)
 
-        except:
-            pass
+        except Exception as e:
+            print e.args
