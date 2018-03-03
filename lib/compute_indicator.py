@@ -26,15 +26,15 @@ class ComputeIndicator:
     def getHiLowPrice(self, base_time):
         # 直近2時間前〜1時間前の高値、安値を入れる
         # 一日で取りたい場合はSQLでフォローする
-        start_day = base_time - timedelta(hours=2)
-        end_day = base_time - timedelta(hours=1)
+        start_time = base_time - timedelta(hours=2)
+        end_time = base_time - timedelta(hours=1)
         sql = "select max(ask_price), max(bid_price) from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, start_time, end_time) #print sql
         response = self.mysql_connector.select_sql(sql)
         for res in response:
             ask_price = res[0]
             bid_price = res[1]
         hi_price = (ask_price + bid_price)/2
-        sql = "select min(ask_price), min(bid_price) from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, before_start_time, before_end_time)
+        sql = "select min(ask_price), min(bid_price) from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, start_time, end_time)
         response = self.mysql_connector.select_sql(sql)
         for res in response:
             ask_price = res[0]
@@ -121,7 +121,7 @@ class ComputeIndicator:
         data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
         # instrument, type, upper_sigma, lower_sigma, base_line, insert_time
         ind_type = "bollinger1"
-        sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(%s, %s, %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigma"][-1], data_set["lower_sigma"][-1], data_set["base_line"][-1], base_time)
+        sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(%s, %s, %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
         print sql
 
         # 2.5シグマボリンジャーバンドを取得する
@@ -131,7 +131,7 @@ class ComputeIndicator:
         data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
         # instrument, type, upper_sigma, lower_sigma, base_line, insert_time
         ind_type = "bollinger2.5"
-        sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(%s, %s, %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigma"][-1], data_set["lower_sigma"][-1], data_set["base_line"][-1], base_time)
+        sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(%s, %s, %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
         print sql
 
         # 3シグマボリンジャーバンドを取得する
@@ -141,7 +141,7 @@ class ComputeIndicator:
         data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
         # instrument, type, upper_sigma, lower_sigma, base_line, insert_time
         ind_type = "bollinger3"
-        sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(%s, %s, %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigma"][-1], data_set["lower_sigma"][-1], data_set["base_line"][-1], base_time)
+        sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(%s, %s, %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
         print sql
 
         # 移動平均の取得(WMA50 5m)
