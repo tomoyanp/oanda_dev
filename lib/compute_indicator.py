@@ -165,7 +165,7 @@ class ComputeIndicator:
 
         # instrument, type, ewma_value, insert_time
         ind_type = "ewma5m200"
-        sql = "insert into INDICATOR_TABLE(instrument, type, ewma_value, insert_time) values(%s, %s, %s, %s, \'%s\')" % (self.instrument, ind_type, ewma200[-1], base_time)
+        sql = "insert into INDICATOR_TABLE(instrument, type, ewma_value, insert_time) values(%s, %s, %s,  \'%s\')" % (self.instrument, ind_type, ewma200[-1], base_time)
         print sql
 
     def computeInsertIndicator(self, base_time):
