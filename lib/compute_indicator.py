@@ -13,7 +13,7 @@ from mysql_connector import MysqlConnector
 from common import instrument_init, decideMarket, getEWMA, getBollingerDataSet, getSlope
 
 class ComputeIndicator:
-    def __init__(self, instrument, base_path, config_name base_time):
+    def __init__(self, instrument, base_path, config_name, base_time):
         self.instrument = instrument
         self.config_data = instrument_init(instrument, base_path, config_name)
         self.indicator_object = indicator_object
@@ -24,7 +24,7 @@ class ComputeIndicator:
         self.setIndicator(base_time)
 
     def getHiLowPrice(self, base_time):
-        # 直近2時間前～1時間前の高値、安値を入れる
+        # 直近2時間前〜1時間前の高値、安値を入れる
         # 一日で取りたい場合はSQLでフォローする
         start_day = base_time - timedelta(hours=2)
         end_day = base_time - timedelta(hours=1)
