@@ -97,7 +97,7 @@ class ComputeIndicator:
             high_price, low_price = self.getHiLowPrice(base_time)
 
             # instrument, type, high_price, low_price, insert_time
-            sql = "insert into INDICATOR_TABLE(instrument, type, high_price, low_price, insert_time) values(%s, %s, %s, %s, \'%s\')" % (self.instrument, ind_type, high_price, low_price, base_time)
+            sql = "insert into INDICATOR_TABLE(instrument, type, high_price, low_price, insert_time) values(\'%s\', \'%s\', %s, %s, \'%s\')" % (self.instrument, ind_type, high_price, low_price, base_time)
             self.mysql_connector.insert_sql(sql)
             print sql
 
@@ -112,7 +112,7 @@ class ComputeIndicator:
             # 移動平均の取得(WMA200 1h)
             ewma200_1h = getEWMA(ask_price_list, bid_price_list, wma_length, candle_width)
             # instrument, type, ewma_value, insert_time
-            sql = "insert into INDICATOR_TABLE(instrument, type, ewma_value,  insert_time) values(%s, %s, %s, \'%s\')" % (self.instrument, ind_type, ewma200_1h[-1], base_time)
+            sql = "insert into INDICATOR_TABLE(instrument, type, ewma_value,  insert_time) values(\'%s\', \'%s\', %s, \'%s\')" % (self.instrument, ind_type, ewma200_1h[-1], base_time)
             self.mysql_connector.insert_sql(sql)
             print sql
 
@@ -123,7 +123,7 @@ class ComputeIndicator:
         data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
         # instrument, type, upper_sigma, lower_sigma, base_line, insert_time
         ind_type = "bollinger1"
-        sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(%s, %s, %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
+        sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(\'%s\', \'%s\', %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
         self.mysql_connector.insert_sql(sql)
         print sql
 
@@ -134,7 +134,7 @@ class ComputeIndicator:
         data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
         # instrument, type, upper_sigma, lower_sigma, base_line, insert_time
         ind_type = "bollinger2.5"
-        sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(%s, %s, %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
+        sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(\'%s\', \'%s\', %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
         self.mysql_connector.insert_sql(sql)
         print sql
 
@@ -145,7 +145,7 @@ class ComputeIndicator:
         data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
         # instrument, type, upper_sigma, lower_sigma, base_line, insert_time
         ind_type = "bollinger3"
-        sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(%s, %s, %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
+        sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(\'%s\', \'%s\', %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
         self.mysql_connector.insert_sql(sql)
         print sql
 
@@ -160,7 +160,7 @@ class ComputeIndicator:
 
         # instrument, type, ewma_value, insert_time
         ind_type = "ewma5m50"
-        sql = "insert into INDICATOR_TABLE(instrument, type, ewma_value, slope, insert_time) values(%s, %s, %s, %s, \'%s\')" % (self.instrument, ind_type, ewma50[-1], slope, base_time)
+        sql = "insert into INDICATOR_TABLE(instrument, type, ewma_value, slope, insert_time) values(\'%s\', \'%s\', %s, %s, \'%s\')" % (self.instrument, ind_type, ewma50[-1], slope, base_time)
         self.mysql_connector.insert_sql(sql)
         print sql
 
@@ -171,7 +171,7 @@ class ComputeIndicator:
 
         # instrument, type, ewma_value, insert_time
         ind_type = "ewma5m200"
-        sql = "insert into INDICATOR_TABLE(instrument, type, ewma_value, insert_time) values(%s, %s, %s,  \'%s\')" % (self.instrument, ind_type, ewma200[-1], base_time)
+        sql = "insert into INDICATOR_TABLE(instrument, type, ewma_value, insert_time) values(\'%s\', \'%s\', %s,  \'%s\')" % (self.instrument, ind_type, ewma200[-1], base_time)
         self.mysql_connector.insert_sql(sql)
         print sql
 
