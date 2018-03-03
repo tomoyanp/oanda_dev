@@ -1,20 +1,22 @@
 {
   "GBP_JPY": {
-    "__comments" : "current master mode",
+    "__comments1" : "change bollinger valiable 2.5",
+    "__comments2" : "when end price, decide trade",
+    "__comments3" : "trail mode off",
     "stop_loss": 0.5,
     "take_profit": 1.0,
     "time_width": 720000,
     "stl_time_width": 720000,
-    "sleep_time": 10,
+    "sleep_time": 5,
     "trade_sleep_time": 10,
-    "stl_sleep_time": 10,
+    "stl_sleep_time": 5,
     "stl_sleep_vtime": 3600,
     "stl_sleep_ltime": 10,
     "units": 20000,
     "enable_time": ["00:00:00", "01:00:00", "02:00:00", "03:00:00", "08:00:00", "09:00:00", "10:00:00", "11:00:00", "12:00:00", "13:00:00", "14:00:00", "15:00:00", "16:00:00", "17:00:00", "18:00:00", "19:00:00", "20:00:00", "21:00:00", "22:00:00", "23:00:00"],
-    "enable_time_mode": "on",
+    "enable_time_mode": "off",
     "ex_stlmode": "on",
-    "first_trail_mode": "on",
+    "first_trail_mode": "off",
     "second_trail_mode": "off"
   }
 }

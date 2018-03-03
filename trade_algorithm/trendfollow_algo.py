@@ -41,7 +41,7 @@ class TrendFollowAlgo(SuperAlgo):
                 minutes = base_time.minute
                 seconds = base_time.second
                 # 5分足の終値付近で計算ロジックに入る
-                if (minutes % 5 == 4) and second > 50:
+                if (minutes % 5 == 4) and seconds > 50:
                     current_price = self.getCurrentPrice()
 
                     # 前日高値、安値の計算
@@ -131,52 +131,56 @@ class TrendFollowAlgo(SuperAlgo):
             ex_stlmode = self.config_data["ex_stlmode"]
             if self.order_flag:
                 if ex_stlmode == "on":
+                    minutes = base_time.minute
+                    seconds = base_time.second
+                    # 5分足の終値付近で計算ロジックに入る
+                    if (minutes % 5 == 4) and seconds > 50:
 
-                    # Stop Loss Algorithm
-                    # get Bollinger Band sigma 2.5
-                    upper_sigma = self.bollinger_2p5sigma_dataset["upper_sigma"]
-                    lower_sigma = self.bollinger_2p5sigma_dataset["lower_sigma"]
-                    base_line = self.bollinger_2p5sigma_dataset["base_line"]
-
-                    current_ask_price = self.ask_price_list[-1]
-                    current_bid_price = self.bid_price_list[-1]
-                    current_price = self.getCurrentPrice()
-                    order_price = self.getOrderPrice()
-
-                    # 移動平均の取得(WMA50)
-                    ewma50 = self.ewma50_5m_dataset["ewma_value"]
-                    slope = self.ewma50_5m_dataset["slope"]
-
-                    low_slope_threshold  = -0.3
-                    high_slope_threshold = 0.3
-
-                    # 損切り
-                    # slopeが上向き、現在価格がbollinger2.5_sigmaより上にいる
-                    if ((slope - high_slope_threshold) > 0) and (current_price > upper_sigma) and self.order_kind == "sell":
-                        logging.info("EXECUTE SETTLEMENT")
-                        stl_flag = True
-                    # slopeが下向き、現在価格がbollinger2.5_sigmaより下にいる
-                    elif ((slope - low_slope_threshold) < 0) and (current_price < lower_sigma) and self.order_kind == "buy":
-                        logging.info("EXECUTE SETTLEMENT")
-                        stl_flag = True
-
-                    # 最小利確0.3以上、移動平均にぶつかったら
-                    min_take_profit = 0.3
-                    if self.order_kind == "buy":
-                        if (current_bid_price - order_price) > min_take_profit:
-                            if -0.02 < (current_price - base_line) < 0.02:
-                                logging.info("EXECUTE STL")
-                                stl_flag = True
-                    elif self.order_kind == "sell":
-                        if (order_price - current_ask_price) > min_take_profit:
-                            if -0.02 < (current_price - base_line) < 0.02:
-                                logging.info("EXECUTE STL")
-                                stl_flag = True
-
-                    stl_flag = self.decideTrailLogic(stl_flag, current_ask_price, current_bid_price, current_price, order_price)
-                    logging.info("######### decideStl Logic base_time = %s ##########" % base_time)
-                    logging.info("upper_sigma = %s, current_price = %s, lower_sigma = %s, base_line = %s" %(upper_sigma, current_price, lower_sigma, base_line))
-                    logging.info("order_price = %s, slope = %s" %(order_price, slope))
+                        # Stop Loss Algorithm
+                        # get Bollinger Band sigma 2.5
+                        upper_sigma = self.bollinger_2p5sigma_dataset["upper_sigma"]
+                        lower_sigma = self.bollinger_2p5sigma_dataset["lower_sigma"]
+                        base_line = self.bollinger_2p5sigma_dataset["base_line"]
+    
+                        current_ask_price = self.ask_price_list[-1]
+                        current_bid_price = self.bid_price_list[-1]
+                        current_price = self.getCurrentPrice()
+                        order_price = self.getOrderPrice()
+    
+                        # 移動平均の取得(WMA50)
+                        ewma50 = self.ewma50_5m_dataset["ewma_value"]
+                        slope = self.ewma50_5m_dataset["slope"]
+    
+                        low_slope_threshold  = -0.3
+                        high_slope_threshold = 0.3
+    
+                        # 損切り
+                        # slopeが上向き、現在価格がbollinger2.5_sigmaより上にいる
+                        if ((slope - high_slope_threshold) > 0) and (current_price > upper_sigma) and self.order_kind == "sell":
+                            logging.info("EXECUTE SETTLEMENT")
+                            stl_flag = True
+                        # slopeが下向き、現在価格がbollinger2.5_sigmaより下にいる
+                        elif ((slope - low_slope_threshold) < 0) and (current_price < lower_sigma) and self.order_kind == "buy":
+                            logging.info("EXECUTE SETTLEMENT")
+                            stl_flag = True
+    
+                        # 最小利確0.3以上、移動平均にぶつかったら
+                        min_take_profit = 0.3
+                        if self.order_kind == "buy":
+                            if (current_bid_price - order_price) > min_take_profit:
+                                if -0.02 < (current_price - base_line) < 0.02:
+                                    logging.info("EXECUTE STL")
+                                    stl_flag = True
+                        elif self.order_kind == "sell":
+                            if (order_price - current_ask_price) > min_take_profit:
+                                if -0.02 < (current_price - base_line) < 0.02:
+                                    logging.info("EXECUTE STL")
+                                    stl_flag = True
+    
+                        stl_flag = self.decideTrailLogic(stl_flag, current_ask_price, current_bid_price, current_price, order_price)
+                        logging.info("######### decideStl Logic base_time = %s ##########" % base_time)
+                        logging.info("upper_sigma = %s, current_price = %s, lower_sigma = %s, base_line = %s" %(upper_sigma, current_price, lower_sigma, base_line))
+                        logging.info("order_price = %s, slope = %s" %(order_price, slope))
             else:
                 pass
 
@@ -413,8 +417,8 @@ class TrendFollowAlgo(SuperAlgo):
         # 移動平均じゃなく、トレンド発生＋3シグマ突破でエントリーに変えてみる
         window_size = 28
         candle_width = 300
-        #sigma_valiable = 2.5
-        sigma_valiable = 3
+        sigma_valiable = 2.5
+        #sigma_valiable = 3
         data_set = getBollingerDataSet(self.ask_price_list, self.bid_price_list, window_size, sigma_valiable, candle_width)
         self.bollinger_2p5sigma_dataset = {"upper_sigma": data_set["upper_sigmas"][-1],
                                            "lower_sigma": data_set["lower_sigmas"][-1],
@@ -467,8 +471,8 @@ class TrendFollowAlgo(SuperAlgo):
             # bollinger_band 2.5sigma
             window_size = 28
             candle_width = 300
-            #sigma_valiable = 2.5
-            sigma_valiable = 3
+            sigma_valiable = 2.5
+            #sigma_valiable = 3
             data_set = getBollingerDataSet(self.ask_price_list, self.bid_price_list, window_size, sigma_valiable, candle_width)
             self.bollinger_2p5sigma_dataset = {"upper_sigma": data_set["upper_sigmas"][-1],
                                                "lower_sigma": data_set["lower_sigmas"][-1],
