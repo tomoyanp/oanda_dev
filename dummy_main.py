@@ -18,4 +18,4 @@ if __name__ == "__main__":
 
     for i in range(0, 1000):
         base_time = base_time + timedelta(seconds=1)
-        compute_indicator.computeInserttIndicator(base_time)
+        compute_indicator.computeInsertIndicator(base_time)

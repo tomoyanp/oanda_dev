@@ -169,7 +169,6 @@ class ComputeIndicator:
         print sql
 
     def computeInsertIndicator(self, base_time):
-        base_time = self.getBaseTime()
         print "BASE_TIME = %s" % base_time
         if self.old_base_time < base_time:
             if decideMarket(base_time):
