@@ -13,15 +13,16 @@ from mysql_connector import MysqlConnector
 from common import instrument_init, decideMarket, getEWMA, getBollingerDataSet, getSlope
 
 class ComputeIndicator:
-    def __init__(self, instrument, base_path, config_name, base_time):
+    def __init__(self, instrument, time_width, base_time):
         self.instrument = instrument
-        self.config_data = instrument_init(instrument, base_path, config_name)
+        self.time_width = time_width
+#        self.config_data = instrument_init(instrument, base_path, config_name)
         self.indicator_object = IndicatorObject()
         self.old_base_time = base_time
         self.base_time = base_time
         self.mysql_connector = MysqlConnector()
         self.setPrice(base_time)
-        self.setIndicator(base_time)
+#        self.setIndicator(base_time)
 
     def getHiLowPrice(self, base_time):
         # 直近2時間前〜1時間前の高値、安値を入れる
@@ -50,9 +51,9 @@ class ComputeIndicator:
         return self.base_time
 
     def setInitialPrice(self, base_time):
-        time_width = self.config_data["time_width"]
+        #time_width = self.config_data["time_width"]
         end_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
-        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time < \'%s\' ORDER BY insert_time DESC limit %s" % (self.instrument, end_time, time_width)
+        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time < \'%s\' ORDER BY insert_time DESC limit %s" % (self.instrument, end_time, self.time_width)
         response = self.mysql_connector.select_sql(sql)
         self.indicator_object.setPriceList(response)
 
@@ -73,8 +74,12 @@ class ComputeIndicator:
         flag = False
         if len(response) > 0:
             get_time = response[0][0]
+#            print "=============================================="
+#            print get_time
+#            print base_time
             #get_time = datetime.strptime(get_time, "%Y-%m-%d %H:%M:%S")
-            if base_time > (get_time + timedelta(seconds=polling_time)):
+            if base_time >= (get_time + timedelta(seconds=polling_time)):
+                print "TRUEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
                 flag = True
             else:
                 pass
@@ -83,47 +88,77 @@ class ComputeIndicator:
 
         return flag
 
-    def setIndicator(self, base_time):
+    def set1hIndicator(self, base_time):
         ask_price_list = self.indicator_object.getAskPriceList()
         bid_price_list = self.indicator_object.getBidPriceList()
 
         try: 
             # 1時間置きに実行
-            polling_time = 3600
             ind_type = "highlow"
-            sql = "select insert_time from INDICATOR_TABLE where insert_time < \'%s\' and type = \'%s\' limit 1" % (base_time, ind_type)
-            response = self.mysql_connector.select_sql(sql)
-            if self.calculatePollingTime(base_time, response, polling_time):
-                # 前日高値、安値の計算
+            # 前日高値、安値の計算
+            if decideMarket(base_time - timedelta(hours=2)):
                 high_price, low_price = self.getHiLowPrice(base_time)
     
                 # instrument, type, high_price, low_price, insert_time
                 sql = "insert into INDICATOR_TABLE(instrument, type, high_price, low_price, insert_time) values(\'%s\', \'%s\', %s, %s, \'%s\')" % (self.instrument, ind_type, high_price, low_price, base_time)
                 self.mysql_connector.insert_sql(sql)
                 print sql
+     
     
-    
-            polling_time = 3600
             ind_type = "ewma1h200"
-            sql = "select insert_time from INDICATOR_TABLE where insert_time < \'%s\' and type = \'%s\' limit 1" % (base_time, ind_type)
-            response = self.mysql_connector.select_sql(sql)
-            if self.calculatePollingTime(base_time, response, polling_time):
-                wma_length = 200
-                candle_width = 3600
-                # 移動平均の取得(WMA200 1h)
-                ewma200_1h = getEWMA(ask_price_list, bid_price_list, wma_length, candle_width)
-                # instrument, type, ewma_value, insert_time
-                sql = "insert into INDICATOR_TABLE(instrument, type, ewma_value,  insert_time) values(\'%s\', \'%s\', %s, \'%s\')" % (self.instrument, ind_type, ewma200_1h[-1], base_time)
-                self.mysql_connector.insert_sql(sql)
-                print sql
+            wma_length = 200
+            candle_width = 3600
+            # 移動平均の取得(WMA200 1h)
+            ewma200_1h = getEWMA(ask_price_list, bid_price_list, wma_length, candle_width)
+            # instrument, type, ewma_value, insert_time
+            sql = "insert into INDICATOR_TABLE(instrument, type, ewma_value,  insert_time) values(\'%s\', \'%s\', %s, \'%s\')" % (self.instrument, ind_type, ewma200_1h[-1], base_time)
+            self.mysql_connector.insert_sql(sql)
+            print sql
     
+
+            ind_type = "bollinger1h1"
+            window_size = 28
+            candle_width = 3600
+            sigma_valiable = 1
+            data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
+            sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(\'%s\', \'%s\', %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
+            self.mysql_connector.insert_sql(sql)
+            print sql
+ 
+            ind_type = "bollinger1h2.5"
+            window_size = 28
+            candle_width = 3600
+            sigma_valiable = 2.5
+            data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
+            sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(\'%s\', \'%s\', %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
+            self.mysql_connector.insert_sql(sql)
+            print sql
+ 
+            ind_type = "bollinger1h3"
+            window_size = 28
+            candle_width = 3600
+            sigma_valiable = 3
+            data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
+            sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(\'%s\', \'%s\', %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
+            self.mysql_connector.insert_sql(sql)
+            print sql
+ 
+        except Exception as e:
+            raise
+
+
+    def set5mIndicator(self, base_time):
+        ask_price_list = self.indicator_object.getAskPriceList()
+        bid_price_list = self.indicator_object.getBidPriceList()
+
+        try: 
             # 1シグマボリンジャーバンドを取得する
             window_size = 28
             candle_width = 300
             sigma_valiable = 1
             data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
             # instrument, type, upper_sigma, lower_sigma, base_line, insert_time
-            ind_type = "bollinger1"
+            ind_type = "bollinger5m1"
             sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(\'%s\', \'%s\', %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
             self.mysql_connector.insert_sql(sql)
             print sql
@@ -134,7 +169,7 @@ class ComputeIndicator:
             sigma_valiable = 2.5
             data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
             # instrument, type, upper_sigma, lower_sigma, base_line, insert_time
-            ind_type = "bollinger2.5"
+            ind_type = "bollinger5m2.5"
             sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(\'%s\', \'%s\', %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
             self.mysql_connector.insert_sql(sql)
             print sql
@@ -145,7 +180,7 @@ class ComputeIndicator:
             sigma_valiable = 3
             data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
             # instrument, type, upper_sigma, lower_sigma, base_line, insert_time
-            ind_type = "bollinger3"
+            ind_type = "bollinger5m3"
             sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(\'%s\', \'%s\', %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
             self.mysql_connector.insert_sql(sql)
             print sql
@@ -175,20 +210,26 @@ class ComputeIndicator:
             sql = "insert into INDICATOR_TABLE(instrument, type, ewma_value, insert_time) values(\'%s\', \'%s\', %s,  \'%s\')" % (self.instrument, ind_type, ewma200[-1], base_time)
             self.mysql_connector.insert_sql(sql)
             print sql
+
         except Exception as e:
             raise
 
-    def computeInsertIndicator(self, base_time):
+    def computeInsertIndicator(self, base_time, span):
         print "BASE_TIME = %s" % base_time
         if self.old_base_time < base_time:
             if decideMarket(base_time):
                 self.setPrice(base_time)
                 try: 
-                    self.setIndicator(base_time)
+                    if span == "1h":
+                        self.set1hIndicator(base_time)
+                    elif span == "5m":
+                        print "OKOK"
+
+                        self.set5mIndicator(base_time)
+                    else:
+                        print "No Input span parameter"
                 except Exception as e:
                     raise
-
             self.old_base_time = base_time
         else:
             print "SKIP: base_time < old_base_time"
-        #    pass
