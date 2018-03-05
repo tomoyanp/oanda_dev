@@ -13,10 +13,31 @@ DBの名前 　oanda_db
  -> 決済したら、settlement_price、settlement_time、flagを更新する
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
-|col_name | order_id | instrument | execution_price | settlment_price | regression_value | execution_time            | settlement_time | flag            | 
+|col_name | order_id | instrument | execution_price | settlment_price | regression_value | execution_time            | settlement_time | flag            |
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
-|type     | BIGINT   | VARCHAR    | VARCHAR         | VARCHAR         | VARCHAR          | TIMESTAMP                 | TIMESTAMP       | VARCHAR         | 
+|type     | BIGINT   | VARCHAR    | VARCHAR         | VARCHAR         | VARCHAR          | TIMESTAMP                 | TIMESTAMP       | VARCHAR         |
 |option   | not null |            |                 |                 |                  | default current_timestamp |                 | default 'FALSE' |
 
 
 
+sql> desc INDICATOR_TABLE
+    -> ;
++-------------+-----------+------+-----+-------------------+-----------------------------+
+| Field       | Type      | Null | Key | Default           | Extra         |
++-------------+-----------+------+-----+-------------------+-----------------------------+
+| id          | int(11)   | NO   | PRI | NULL              | auto_increment         |
+| instrument  | char(10)  | NO   | MUL | NULL              |         |
+| type        | char(20)  | NO   |     | NULL              |         |
+| upper_sigma | double    | YES  |     | NULL              |         |
+| lower_sigma | double    | YES  |     | NULL              |         |
+| base_line   | double    | YES  |     | NULL              |         |
+| slope       | double    | YES  |     | NULL              |         |
+| ewma_value  | double    | YES  |     | NULL              |         |
+| high_price  | double    | YES  |     | NULL              |         |
+| low_price   | double    | YES  |     | NULL              |         |
+| insert_time | timestamp | NO   | MUL | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
++-------------+-----------+------+-----+-------------------+-----------------------------+
+11 rows in set (0.00 sec)
+
+mysql>
+            # 移動平均の取得(WMA200 1h)

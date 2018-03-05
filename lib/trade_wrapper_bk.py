@@ -35,6 +35,7 @@ class TradeWrapper:
         # 使うものインスタンス化
         self.oanda_wrapper      = OandaWrapper(self.env, self.account_id, self.token, units)
 
+
         # 指値でいつの間にか決済されてしまったときはこれでスリープさせる
         self.stl_sleep_flag = False
 
@@ -138,7 +139,7 @@ class TradeWrapper:
 
     def setInstrumentResponse(self, base_time):
         sleep_time = 0
-        self.trade_algo.setPrice(base_time)
+        self.trade_algo.addPrice(base_time)
         self.trade_algo.setIndicator(base_time)
         return sleep_time
 

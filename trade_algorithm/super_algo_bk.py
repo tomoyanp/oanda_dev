@@ -20,9 +20,9 @@ class SuperAlgo(object):
         self.base_path = base_path
         self.instrument = instrument
         self.config_data = instrument_init(self.instrument, self.base_path, config_name)
-        self.ask_price = 0
-        self.bid_price = 0
-        self.insert_time = ""
+        self.ask_price_list = []
+        self.bid_price_list = []
+        self.insert_time_list = []
         self.order_price = 0
         self.stl_price = 0
         self.stoploss_rate = 0
@@ -32,11 +32,22 @@ class SuperAlgo(object):
         self.order_flag = False
         self.trade_id = 0
         self.order_kind = ""
+
         self.mysqlConnector = MysqlConnector()
+
+        self.profit_history = "i" # initial
+        self.order_history  = "i" # initial
+
+        self.start_time = base_time - timedelta(seconds=self.config_data["time_width"])
+        self.end_time = base_time
+        self.base_time = base_time
+
         self.trail_flag = False
         self.trail_second_flag = False
         self.trail_price = 0
         self.break_wait_flag = "pass"
+        self.setInitialPrice(self.base_time)
+        self.setInitialIndicator(self.base_time)
 
 ################################################
 # listは、要素数が大きいほうが古い。
@@ -52,18 +63,80 @@ class SuperAlgo(object):
         self.break_wait_flag = "pass"
         self.trail_price = 0
 
+    def setInitialPrice(self, base_time):
+        sql = self.getInitialSql(base_time)
+        response = self.mysqlConnector.select_sql(sql)
+        self.setResponse(response)
+
+    def addPrice(self, base_time):
+        cmp_end_time = self.end_time.strftime("%Y-%m-%d %H:%M:%S")
+        cmp_base_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
+        if cmp_end_time == cmp_base_time:
+            pass
+        else:
+            self.start_time = self.end_time
+            self.end_time = base_time
+            sql = self.getAddSql()
+            print(sql)
+            response = self.mysqlConnector.select_sql(sql)
+            self.addResponse(response)
+
+    def getAddSql(self):
+        start_time = self.start_time.strftime("%Y-%m-%d %H:%M:%S")
+        end_time = self.end_time.strftime("%Y-%m-%d %H:%M:%S")
+        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time >= \'%s\' and insert_time < \'%s\' ORDER BY insert_time ASC" % (self.instrument, start_time, end_time)
+
+        return sql
+
+
+    def getInitialSql(self, base_time):
+        time_width = self.config_data["time_width"]
+
+        end_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
+
+        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time < \'%s\' ORDER BY insert_time DESC limit %s" % (self.instrument, end_time, time_width)
+        logging.info("sql=%s" % sql)
+        return sql
+
+    def setResponse(self, response):
+        if len(response) < 1:
+            pass
+        else:
+            self.ask_price_list = []
+            self.bid_price_list = []
+            self.insert_time_list = []
+            for line in response:
+                self.ask_price_list.append(line[0])
+                self.bid_price_list.append(line[1])
+                self.insert_time_list.append(line[2])
+
+            self.ask_price_list.reverse()
+            self.bid_price_list.reverse()
+            self.insert_time_list.reverse()
+
+            logging.info("start_insert_time = %s, ask_price = %s, bid_price = %s" % (self.insert_time_list[0], self.ask_price_list[0], self.bid_price_list[0]))
+            logging.info("end_insert_time = %s, ask_price = %s, bid_price = %s" % (self.insert_time_list[-1], self.ask_price_list[-1], self.bid_price_list[-1]))
+
+    def addResponse(self, response):
+        response_length = len(response)
+        if response_length < 0:
+            pass
+        else:
+            for i in range(0, response_length):
+                self.ask_price_list.pop(0)
+                self.bid_price_list.pop(0)
+                self.insert_time_list.pop(0)
+
+            for res in response:
+                self.ask_price_list.append(res[0])
+                self.bid_price_list.append(res[1])
+                self.insert_time_list.append(res[2])
+
     def setOrderData(self, trade_flag, order_price, order_flag, trade_id):
         self.order_kind = trade_flag
         self.order_price = order_price
         self.order_flag = order_flag
         self.trade_id = trade_id
-
-    def setPrice(self, base_time):
-        sql = "select ask_price, bid_price, insert_price from %s_TABLE where insert_time <= \'%s\' order by insert_time DESC limit 1" % (self.instrument, base_time)
-        response = self.mysql_connector.select_sql(sql)
-        self.ask_price = response[0][0]
-        self.bid_price = reponse[0][1]
-        self.insert_time = response[0][2]
 
     def setTradeId(self, trade_id):
         self.trade_id = trade_id
@@ -93,11 +166,11 @@ class SuperAlgo(object):
         return self.stl_price
 
     def getCurrentPrice(self):
-        price = (self.ask_price + self.bid_price) / 2
+        price = (self.ask_price_list[-1] + self.bid_price_list[-1]) / 2
         return price
 
     def getCurrentTime(self):
-        return self.insert_time
+        return self.insert_time_list[len(self.insert_time_list)-1]
 
     def getOrderKind(self):
         return self.order_kind
@@ -134,11 +207,11 @@ class SuperAlgo(object):
         list_max = len(self.ask_price_list) - 1
         threshold_list = {}
         if trade_flag == "buy":
-            threshold_list["stoploss"] = self.ask_price - stop_loss
-            threshold_list["takeprofit"] = self.ask_price + take_profit
+            threshold_list["stoploss"] = self.ask_price_list[list_max] - stop_loss
+            threshold_list["takeprofit"] = self.ask_price_list[list_max] + take_profit
         else:
-            threshold_list["stoploss"] = self.bid_price + stop_loss
-            threshold_list["takeprofit"] = self.bid_price - take_profit
+            threshold_list["stoploss"] = self.bid_price_list[list_max] + stop_loss
+            threshold_list["takeprofit"] = self.bid_price_list[list_max] - take_profit
 
         if take_profit == 0:
             threshold_list["takeprofit"] = 0
@@ -155,18 +228,21 @@ class SuperAlgo(object):
     # testmodeでstoploss, takdeprofitに引っかかった場合
     def decideReverceStl(self):
         try:
+            ask_price = self.ask_price_list[len(self.ask_price_list)-1]
+            bid_price = self.bid_price_list[len(self.bid_price_list)-1]
             self.takeprofit_rate = float(self.takeprofit_rate)
             self.stoploss_rate = float(self.stoploss_rate)
-            self.ask_price = float(self.ask_price)
-            self.bid_price = float(self.bid_price)
+            ask_price = float(ask_price)
+            bid_price = float(bid_price)
 
             stl_flag = False
             if self.order_kind == "buy":
-                if self.bid_price > self.takeprofit_rate or self.bid_price < self.stoploss_rate:
+                if bid_price > self.takeprofit_rate or bid_price < self.stoploss_rate:
                     stl_flag = True
 
             elif self.order_kind == "sell":
-                if self.ask_price < self.takeprofit_rate or self.ask_price > self.stoploss_rate:
+                if ask_price < self.takeprofit_rate or ask_price > self.stoploss_rate:
+
                     stl_flag = True
 
             return stl_flag
@@ -193,8 +269,18 @@ class SuperAlgo(object):
 
         return profit, sleep_time
 
+    def setDataSet(self, ask_price_list, bid_price_list, insert_time_list):
+        self.ask_price_list = ask_price_list
+        self.bid_price_list = bid_price_list
+        self.insert_time_list = insert_time_list
+
+
     @abstractmethod
-    def setIndicatorWrapper(self, base_time):
+    def setInitialIndicator(self, base_time):
+        pass
+
+    @abstractmethod
+    def setIndicator(self, base_time):
         pass
 
     @abstractmethod
