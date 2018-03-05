@@ -15,8 +15,9 @@ import time
 if __name__ == "__main__":
     instrument = "GBP_JPY"
 #    base_time = datetime.strptime("2017-02-10 00:00:00", "%Y-%m-%d %H:%M:%S")
-    base_time = datetime.strptime("2017-03-10 00:00:00", "%Y-%m-%d %H:%M:%S")
-    end_time = datetime.now()
+    base_time = datetime.strptime("2017-02-01 00:00:00", "%Y-%m-%d %H:%M:%S")
+    end_time = datetime.strptime("2017-02-10 00:00:00", "%Y-%m-%d %H:%M:%S")
+#    end_time = datetime.now()
     time_width = 300 * 200
     compute_indicator = ComputeIndicator(instrument, time_width, base_time)
 

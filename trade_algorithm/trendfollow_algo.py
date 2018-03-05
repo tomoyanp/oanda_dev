@@ -223,7 +223,7 @@ class TrendFollowAlgo(SuperAlgo):
     def setIndicator(self, base_time):
         # bollinger 5m 2.5sigma
         ind_type = "bollinger5m2.5"
-        sql = "select upper_sigma, lower_sigma, base_line from INDICATOR_TABLE where insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC " % (base_time, ind_type)
+        sql = "select upper_sigma, lower_sigma, base_line from INDICATOR_TABLE where insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC " % (self.instrument, base_time, ind_type)
         response = self.mysql_connector.select_sql(sql)
         self.5m25_upper_sigma = response[0][0]
         self.5m25_lower_sigma = response[0][1]
@@ -231,7 +231,7 @@ class TrendFollowAlgo(SuperAlgo):
 
         # bollinger 1h 3sigma
         ind_type = "bollinger1h3"
-        sql = "select upper_sigma, lower_sigma, base_line from INDICATOR_TABLE where insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC " % (base_time, ind_type)
+        sql = "select upper_sigma, lower_sigma, base_line from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC " % (self.instrument, base_time, ind_type)
         response = self.mysql_connector.select_sql(sql)
         self.1h3_upper_sigma = response[0][0]
         self.1h3_lower_sigma = response[0][1]
@@ -239,26 +239,26 @@ class TrendFollowAlgo(SuperAlgo):
 
         # ewma5m50
         ind_type = "ewma5m50"
-        sql = "select ewma_value, slope from INDICATOR_TABLE where insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC " % (base_time, ind_type)
+        sql = "select ewma_value, slope from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC " % (self.instrument, base_time, ind_type)
         response = self.mysql_connector.select_sql(sql)
         self.ewma5m50_value = response[0][0]
         self.ewma5m50_slope = response[0][1]
 
         # ewma5m200
         ind_type = "ewma5m200"
-        sql = "select ewma_value from INDICATOR_TABLE where insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC " % (base_time, ind_type)
+        sql = "select ewma_value from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC " % (self.instrument, base_time, ind_type)
         response = self.mysql_connector.select_sql(sql)
         self.ewma5m200_value = response[0][0]
 
         # ewma1h200
         ind_type = "ewma1h200"
-        sql = "select ewma_value from INDICATOR_TABLE where insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC " % (base_time, ind_type)
+        sql = "select ewma_value from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC " % (self.instrument, base_time, ind_type)
         response = self.mysql_connector.select_sql(sql)
         self.ewma1h200_value = response[0][0]
 
         # high low price
         ind_type = "highlow"
-        sql = "select high_price, low_price from INDICATOR_TABLE where insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC " % (base_time, ind_type)
+        sql = "select high_price, low_price from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC " % (self.instrument, base_time, ind_type)
         response = self.mysql_connector.select_sql(sql)
         self.high_price = response[0][0]
         self.low_price = response[0][1]

@@ -37,10 +37,9 @@ class IndicatorObject:
         if response_length < 1:
             pass
         else:
-            for i in range(0, response_length):
-                self.ask_price_list.pop(0)
-                self.bid_price_list.pop(0)
-                self.insert_time_list.pop(0)
+            del self.ask_price_list[0:response_length]
+            del self.bid_price_list[0:response_length]
+            del self.insert_time_list[0:response_length]
 
             for res in response:
                 self.ask_price_list.append(res[0])
