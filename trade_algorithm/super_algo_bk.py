@@ -35,6 +35,9 @@ class SuperAlgo(object):
 
         self.mysqlConnector = MysqlConnector()
 
+        self.profit_history = "i" # initial
+        self.order_history  = "i" # initial
+
         self.start_time = base_time - timedelta(seconds=self.config_data["time_width"])
         self.end_time = base_time
         self.base_time = base_time
@@ -60,20 +63,80 @@ class SuperAlgo(object):
         self.break_wait_flag = "pass"
         self.trail_price = 0
 
+    def setInitialPrice(self, base_time):
+        sql = self.getInitialSql(base_time)
+        response = self.mysqlConnector.select_sql(sql)
+        self.setResponse(response)
+
+    def addPrice(self, base_time):
+        cmp_end_time = self.end_time.strftime("%Y-%m-%d %H:%M:%S")
+        cmp_base_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
+        if cmp_end_time == cmp_base_time:
+            pass
+        else:
+            self.start_time = self.end_time
+            self.end_time = base_time
+            sql = self.getAddSql()
+            print(sql)
+            response = self.mysqlConnector.select_sql(sql)
+            self.addResponse(response)
+
+    def getAddSql(self):
+        start_time = self.start_time.strftime("%Y-%m-%d %H:%M:%S")
+        end_time = self.end_time.strftime("%Y-%m-%d %H:%M:%S")
+        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time >= \'%s\' and insert_time < \'%s\' ORDER BY insert_time ASC" % (self.instrument, start_time, end_time)
+
+        return sql
+
+
+    def getInitialSql(self, base_time):
+        time_width = self.config_data["time_width"]
+
+        end_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
+
+        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time < \'%s\' ORDER BY insert_time DESC limit %s" % (self.instrument, end_time, time_width)
+        logging.info("sql=%s" % sql)
+        return sql
+
+    def setResponse(self, response):
+        if len(response) < 1:
+            pass
+        else:
+            self.ask_price_list = []
+            self.bid_price_list = []
+            self.insert_time_list = []
+            for line in response:
+                self.ask_price_list.append(line[0])
+                self.bid_price_list.append(line[1])
+                self.insert_time_list.append(line[2])
+
+            self.ask_price_list.reverse()
+            self.bid_price_list.reverse()
+            self.insert_time_list.reverse()
+
+            logging.info("start_insert_time = %s, ask_price = %s, bid_price = %s" % (self.insert_time_list[0], self.ask_price_list[0], self.bid_price_list[0]))
+            logging.info("end_insert_time = %s, ask_price = %s, bid_price = %s" % (self.insert_time_list[-1], self.ask_price_list[-1], self.bid_price_list[-1]))
+
+    def addResponse(self, response):
+        response_length = len(response)
+        if response_length < 0:
+            pass
+        else:
+            for i in range(0, response_length):
+                self.ask_price_list.pop(0)
+                self.bid_price_list.pop(0)
+                self.insert_time_list.pop(0)
+
+            for res in response:
+                self.ask_price_list.append(res[0])
+                self.bid_price_list.append(res[1])
+                self.insert_time_list.append(res[2])
+
     def setOrderData(self, trade_flag, order_price, order_flag, trade_id):
         self.order_kind = trade_flag
         self.order_price = order_price
         self.order_flag = order_flag
         self.trade_id = trade_id
-
-    def getPrice(self, base_time):
-        sql = "select ask_price, bid_price, insert_price from %s_TABLE where insert_time < \'%s\' order by insert_time DESC limit 1" % (self.instrument, base_time)
-        response = self.mysql_connector.select_sql(sql)
-        ask_price = response[0][0]
-        bid_price = reponse[0][1]
-        insert_time = response[0][2]
-
-        return ask_price, bid_price, insert_time
 
     def setTradeId(self, trade_id):
         self.trade_id = trade_id
@@ -206,8 +269,18 @@ class SuperAlgo(object):
 
         return profit, sleep_time
 
+    def setDataSet(self, ask_price_list, bid_price_list, insert_time_list):
+        self.ask_price_list = ask_price_list
+        self.bid_price_list = bid_price_list
+        self.insert_time_list = insert_time_list
+
+
     @abstractmethod
-    def setIndicatorWrapper(self, base_time):
+    def setInitialIndicator(self, base_time):
+        pass
+
+    @abstractmethod
+    def setIndicator(self, base_time):
         pass
 
     @abstractmethod
