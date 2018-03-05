@@ -32,7 +32,7 @@ class SuperAlgo(object):
         self.order_flag = False
         self.trade_id = 0
         self.order_kind = ""
-        self.mysqlConnector = MysqlConnector()
+        self.mysql_connector = MysqlConnector()
         self.trail_flag = False
         self.trail_second_flag = False
         self.trail_price = 0
@@ -59,10 +59,10 @@ class SuperAlgo(object):
         self.trade_id = trade_id
 
     def setPrice(self, base_time):
-        sql = "select ask_price, bid_price, insert_price from %s_TABLE where insert_time <= \'%s\' order by insert_time DESC limit 1" % (self.instrument, base_time)
+        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time <= \'%s\' order by insert_time DESC limit 1" % (self.instrument, base_time)
         response = self.mysql_connector.select_sql(sql)
         self.ask_price = response[0][0]
-        self.bid_price = reponse[0][1]
+        self.bid_price = response[0][1]
         self.insert_time = response[0][2]
 
     def setTradeId(self, trade_id):
@@ -131,7 +131,6 @@ class SuperAlgo(object):
     def calcThreshold(self, trade_flag):
         stop_loss = self.config_data["stop_loss"]
         take_profit = self.config_data["take_profit"]
-        list_max = len(self.ask_price_list) - 1
         threshold_list = {}
         if trade_flag == "buy":
             threshold_list["stoploss"] = self.ask_price - stop_loss
