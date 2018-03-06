@@ -26,6 +26,8 @@ class TrendFollowAlgo(SuperAlgo):
     def __init__(self, instrument, base_path, config_name, base_time):
         super(TrendFollowAlgo, self).__init__(instrument, base_path, config_name, base_time)
         self.base_price = 0
+        self.setPrice(base_time)
+        self.setIndicator(base_time)
 
     def decideTrade(self, base_time):
         trade_flag = "pass"
@@ -37,6 +39,8 @@ class TrendFollowAlgo(SuperAlgo):
                 seconds = base_time.second
                 # 5分足の終値付近で計算ロジックに入る
                 if (minutes % 5 == 4) and seconds > 50:
+                    # 性能的に5分に一回呼び出しに変更
+                    self.setIndicator(base_time)
                     current_price = self.getCurrentPrice()
                     startend_price_threshold = 1.0
                     hilow_price_threshold = 0.5
@@ -115,10 +119,10 @@ class TrendFollowAlgo(SuperAlgo):
                     seconds = base_time.second
                     # 5分足の終値付近で計算ロジックに入る
                     if (minutes % 5 == 4) and seconds > 50:
+                        # 性能的に5分に一回呼び出しに変更
+                        self.setIndicator(base_time)
 
                         # Stop Loss Algorithm
-                        current_ask_price = self.getAskPrice
-                        current_bid_price = self.bid_price_list[-1]
                         current_price = self.getCurrentPrice()
                         order_price = self.getOrderPrice()
 
@@ -139,17 +143,17 @@ class TrendFollowAlgo(SuperAlgo):
                         # 最小利確0.3以上、移動平均にぶつかったら
                         min_take_profit = 0.3
                         if self.order_kind == "buy":
-                            if (current_bid_price - order_price) > min_take_profit:
+                            if (self.bid_price - order_price) > min_take_profit:
                                 if -0.02 < (current_price - self.base_line_5m25) < 0.02:
                                     logging.info("EXECUTE STL")
                                     stl_flag = True
                         elif self.order_kind == "sell":
-                            if (order_price - current_ask_price) > min_take_profit:
+                            if (order_price - self.ask_price) > min_take_profit:
                                 if -0.02 < (current_price - self.base_line_5m25) < 0.02:
                                     logging.info("EXECUTE STL")
                                     stl_flag = True
 
-                        stl_flag = self.decideTrailLogic(stl_flag, current_ask_price, current_bid_price, current_price, order_price)
+                        stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, current_price, order_price)
                         logging.info("######### decideStl Logic base_time = %s ##########" % base_time)
                         logging.info("upper_sigma = %s, current_price = %s, lower_sigma = %s, base_line = %s" %(self.upper_sigma_5m25, current_price, self.lower_sigma_5m25, self.base_line_5m25))
                         logging.info("order_price = %s, slope = %s" %(order_price, self.ewma5m50_slope))
@@ -218,7 +222,7 @@ class TrendFollowAlgo(SuperAlgo):
     def setIndicator(self, base_time):
         # bollinger 5m 2.5sigma
         ind_type = "bollinger5m2.5"
-        sql = "select upper_sigma, lower_sigma, base_line from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC " % (self.instrument, base_time, ind_type)
+        sql = "select upper_sigma, lower_sigma, base_line from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC limit 1" % (self.instrument, base_time, ind_type)
         response = self.mysql_connector.select_sql(sql)
         self.upper_sigma_5m25 = response[0][0]
         self.lower_sigma_5m25 = response[0][1]
@@ -226,7 +230,7 @@ class TrendFollowAlgo(SuperAlgo):
 
         # bollinger 1h 3sigma
         ind_type = "bollinger1h3"
-        sql = "select upper_sigma, lower_sigma, base_line from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC " % (self.instrument, base_time, ind_type)
+        sql = "select upper_sigma, lower_sigma, base_line from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC limit 1" % (self.instrument, base_time, ind_type)
         response = self.mysql_connector.select_sql(sql)
         self.upper_sigma_1h3 = response[0][0]
         self.lower_sigma_1h3 = response[0][1]
@@ -234,26 +238,34 @@ class TrendFollowAlgo(SuperAlgo):
 
         # ewma5m50
         ind_type = "ewma5m50"
-        sql = "select ewma_value, slope from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC " % (self.instrument, base_time, ind_type)
+        sql = "select ewma_value, slope from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC limit 1" % (self.instrument, base_time, ind_type)
         response = self.mysql_connector.select_sql(sql)
         self.ewma5m50_value = response[0][0]
         self.ewma5m50_slope = response[0][1]
 
         # ewma5m200
         ind_type = "ewma5m200"
-        sql = "select ewma_value from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC " % (self.instrument, base_time, ind_type)
+        sql = "select ewma_value from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC  limit 1" % (self.instrument, base_time, ind_type)
         response = self.mysql_connector.select_sql(sql)
         self.ewma5m200_value = response[0][0]
 
         # ewma1h200
         ind_type = "ewma1h200"
-        sql = "select ewma_value from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC " % (self.instrument, base_time, ind_type)
+        sql = "select ewma_value from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC  limit 1" % (self.instrument, base_time, ind_type)
         response = self.mysql_connector.select_sql(sql)
         self.ewma1h200_value = response[0][0]
 
         # high low price
         ind_type = "highlow"
-        sql = "select high_price, low_price from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC " % (self.instrument, base_time, ind_type)
+        span = 24
+        end_time = base_time - timedelta(hours=1)
+        sql = "select high_price, low_price from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC limit %s" % (self.instrument, base_time, ind_type, span)
         response = self.mysql_connector.select_sql(sql)
-        self.high_price = response[0][0]
-        self.low_price = response[0][1]
+        high_price_list = []
+        low_price_list = []
+        for res in response:
+            high_price_list.append(res[0])
+            low_price_list.append(res[1])
+
+        self.high_price = max(high_price_list)
+        self.low_price =  min(low_price_list)
