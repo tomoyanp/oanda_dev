@@ -3,6 +3,8 @@
     "__comments1" : "change bollinger valiable 2.5",
     "__comments2" : "when end price, decide trade",
     "__comments3" : "trail mode off",
+    "__comments4" : "add bollinger 3sigma logic",
+    "__comments5" : "bollinger 3sigma threshold change 2 to 3",
     "stop_loss": 0.5,
     "take_profit": 1.0,
     "time_width": 720000,

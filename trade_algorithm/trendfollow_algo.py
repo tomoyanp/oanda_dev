@@ -67,7 +67,8 @@ class TrendFollowAlgo(SuperAlgo):
                         pass
 
                     # slopeが上向き、現在価格が移動平均(EWMA200(5分), EWMA200(1時間))より上、現在価格がbollinger3_sigmaより上にいる
-                    if ((self.ewma5m50_slope - high_slope_threshold) > 0) and (self.ewma5m200_value < current_price) and (current_price > self.upper_sigma_5m25) and (self.ewma1h200_value < current_price):
+                    if ((self.ewma5m50_slope - high_slope_threshold) > 0) and (self.ewma5m200_value < current_price) and (current_price > self.upper_sigma_5m25) and (float(self.upper_sigma_1h3) - float(self.lower_sigma_1h3)) > 3:
+#                    if ((self.ewma5m50_slope - high_slope_threshold) > 0) and (self.ewma5m200_value < current_price) and (current_price > self.upper_sigma_5m25):
                         # 現在価格が前日高値に対し0.5以内にいる or 当日の値動きが1.0以上ある場合、トレードしない
                         if float(self.high_price - hilow_price_threshold) < float(current_price) < (float(self.high_price) + 0.1):
                             self.break_wait_flag = "buy"
@@ -76,7 +77,8 @@ class TrendFollowAlgo(SuperAlgo):
                             logging.info("EXECUTE BUY NORMAL MODE")
                             trade_flag = "buy"
                     # slopeが下向き、現在価格が移動平均(EWMA200(5分), EWMA200(1時間)より下、現在価格がbollinger3_sigmaより下にいる
-                    elif (self.ewma5m50_slope - low_slope_threshold) < 0 and self.ewma5m200_value > current_price and current_price < self.lower_sigma_5m25 and self.ewma1h200_value > current_price:
+                    elif (self.ewma5m50_slope - low_slope_threshold) < 0 and self.ewma5m200_value > current_price and current_price < self.lower_sigma_5m25 and (float(self.upper_sigma_1h3) - float(self.lower_sigma_1h3)) > 3:
+#                    elif (self.ewma5m50_slope - low_slope_threshold) < 0 and self.ewma5m200_value > current_price and current_price < self.lower_sigma_5m25:
                         # 現在価格が前日安値に対し0.5以内にいる or 当日の値動きが1.0以上ある場合、トレードしない
                         if float(self.low_price + hilow_price_threshold) > float(current_price) > (float(self.low_price) - 0.1):
                             self.break_wait_flag = "sell"
@@ -95,6 +97,7 @@ class TrendFollowAlgo(SuperAlgo):
                     logging.info("break_wait_flag = %s" % (self.break_wait_flag))
                     logging.info("hi_price = %s, low_price = %s" % (self.high_price, self.low_price))
                     logging.info("5m 50ewma slope = %s, 5m 200ewma = %s, 1h 200ewma = %s, current_price = %s, upper_2.5sigma = %s, lower_2.5sigma = %s, trade_flag = %s" % (self.ewma5m50_slope, self.ewma5m200_value, self.ewma1h200_value, current_price, self.upper_sigma_5m25, self.lower_sigma_5m25, trade_flag))
+                    logging.info("bollinger1h3 Logic = %s" % (self.upper_sigma_1h3 - self.lower_sigma_1h3))
 
                 else:
                     pass
@@ -269,3 +272,4 @@ class TrendFollowAlgo(SuperAlgo):
 
         self.high_price = max(high_price_list)
         self.low_price =  min(low_price_list)
+
