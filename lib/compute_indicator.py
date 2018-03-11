@@ -50,23 +50,35 @@ class ComputeIndicator:
         return self.base_time
 
     def setInitialPrice(self, base_time):
+        logging.info("setInitialPrice Start")
         end_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
+        self.old_base_time = base_time
+
         sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time < \'%s\' ORDER BY insert_time DESC limit %s" % (self.instrument, end_time, self.time_width)
         response = self.mysql_connector.select_sql(sql)
         self.indicator_object.setPriceList(response)
+        logging.info("setInitialPrice End")
 
     def addPrice(self, base_time):
+        logging.info("addPrice Start")
         start_time = self.old_base_time.strftime("%Y-%m-%d %H:%M:%S")
         end_time = base_time.strftime("%Y-%m-%d %H:%M:%S")
         sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time >= \'%s\' and insert_time < \'%s\'" % (self.instrument, start_time, end_time)
+        self.old_base_time = base_time
+        logging.info(sql)
+        logging.info("select SQL Start")
         response = self.mysql_connector.select_sql(sql)
+        logging.info("select SQL END")
         self.indicator_object.addPriceList(response)
+        logging.info("addPrice End")
 
     def setPrice(self, base_time):
+        logging.info("setPrice Start")
         if len(self.indicator_object.getAskPriceList()) == 0:
             self.setInitialPrice(base_time)
         else:
             self.addPrice(base_time)
+        logging.info("setPrice End")
 
     def calculatePollingTime(self, base_time, response, polling_time):
         flag = False

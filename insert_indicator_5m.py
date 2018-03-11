@@ -10,13 +10,18 @@ config_name = "trendfollow_dummy"
 import traceback
 from compute_indicator import ComputeIndicator
 from datetime import datetime, timedelta
-import time
+import time, logging
+
+now = datetime.now()
+now = now.strftime("%Y%m%d%H%M%S")
+logfilename = "%s/log/indicator_%s.log" %(current_path, now)
+logging.basicConfig(filename=logfilename, level=logging.INFO)
 
 if __name__ == "__main__":
     instrument = "GBP_JPY"
-#    base_time = datetime.strptime("2017-02-10 00:00:00", "%Y-%m-%d %H:%M:%S")
-    base_time = datetime.strptime("2018-03-05 19:00:00", "%Y-%m-%d %H:%M:%S")
-    end_time = datetime.strptime("2018-03-06 00:00:00", "%Y-%m-%d %H:%M:%S")
+    base_time = datetime.strptime("2018-03-09 18:00:00", "%Y-%m-%d %H:%M:%S")
+#    base_time = datetime.strptime("2018-02-01 00:00:00", "%Y-%m-%d %H:%M:%S")
+    end_time = datetime.strptime("2018-03-10 18:00:00", "%Y-%m-%d %H:%M:%S")
 #    end_time = datetime.now()
     time_width = 300 * 200
     compute_indicator = ComputeIndicator(instrument, time_width, base_time)
@@ -29,6 +34,5 @@ if __name__ == "__main__":
             compute_indicator.computeInsertIndicator(base_time, span)
 
         except Exception as e:
-            print e.args
-            print traceback.format_exc()
+            logging.info(traceback.format_exc())
 

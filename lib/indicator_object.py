@@ -6,6 +6,7 @@
 #
 #####################################################################
 
+import logging
 class IndicatorObject:
     def __init__(self):
         self.ask_price_list = []
@@ -37,14 +38,22 @@ class IndicatorObject:
         if response_length < 1:
             pass
         else:
+            logging.info("Remove Price List Start")
             del self.ask_price_list[0:response_length]
             del self.bid_price_list[0:response_length]
             del self.insert_time_list[0:response_length]
+#            self.ask_price_list = self.ask_price_list[response_length:]
+#            self.bid_price_list = self.bid_price_list[response_length:]
+#            self.insert_time_list = self.insert_time_list[response_length:]
+            logging.info("Remove Price List End")
 
+            logging.info("Add Price List Start")
             for res in response:
                 self.ask_price_list.append(res[0])
                 self.bid_price_list.append(res[1])
                 self.insert_time_list.append(res[2])
+            logging.info("Add Price List End")
+        logging.info("PRICE_LIST LENGTH: ask_price_list = %s, bid_price_list = %s" % (len(self.ask_price_list), len(self.bid_price_list)))
 
     def getPriceList(self):
         return self.ask_price_list, self.bid_price_list, self.insert_time_list

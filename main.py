@@ -50,10 +50,8 @@ if __name__ == '__main__':
 
     if test_args == "test":
         end_time = base_time - timedelta(days=0)
-        base_time = datetime.strptime("2017-02-01 00:00:00", "%Y-%m-%d %H:%M:%S")
-#        base_time = datetime.strptime("2018-02-01 00:00:00", "%Y-%m-%d %H:%M:%S")
-#        base_time = datetime.strptime("2018-01-10 00:00:00", "%Y-%m-%d %H:%M:%S")
-#        base_time = datetime.strptime("2018-03-01 00:00:00", "%Y-%m-%d %H:%M:%S")
+        end_time = datetime.strptime("2018-03-01 00:00:00", "%Y-%m-%d %H:%M:%S")
+        base_time = datetime.strptime("2017-03-01 00:00:00", "%Y-%m-%d %H:%M:%S")
         test_mode = True
     else:
         test_mode = False
@@ -66,7 +64,6 @@ if __name__ == '__main__':
 
     try:
       while True:
-          logging.info("=== Start Main.Loop Logic ===")
           print "test mode = %s" % test_mode
           print "base_time = %s" % base_time
           if test_mode:
@@ -107,7 +104,6 @@ if __name__ == '__main__':
               if base_time > now or base_time > end_time:
                   raise ValueError("Complete Back Test")
 
-          logging.info("=== End Main.Loop Logic ===")
 
     except:
         message = traceback.format_exc()
