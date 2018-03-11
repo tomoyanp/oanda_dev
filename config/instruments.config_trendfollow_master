@@ -4,6 +4,7 @@
     "__comments1" : "stop loss rate 1.0",
     "__comments2" : "high low price span is 24 hours",
     "__comments3" : "remove RANGE BREAK MODE, STOP ORDER LOGIC",
+    "__comments4" : "trail_mode off",
     "stop_loss": 1.0,
     "take_profit": 1.0,
     "time_width": 720000,
@@ -17,7 +18,7 @@
     "enable_time": ["00:00:00", "01:00:00", "02:00:00", "03:00:00", "08:00:00", "09:00:00", "10:00:00", "11:00:00", "12:00:00", "13:00:00", "14:00:00", "15:00:00", "16:00:00", "17:00:00", "18:00:00", "19:00:00", "20:00:00", "21:00:00", "22:00:00", "23:00:00"],
     "enable_time_mode": "off",
     "ex_stlmode": "on",
-    "first_trail_mode": "on",
+    "first_trail_mode": "off",
     "second_trail_mode": "off"
   }
 }
