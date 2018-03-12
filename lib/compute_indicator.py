@@ -225,6 +225,75 @@ class ComputeIndicator:
         except Exception as e:
             logging.info(traceback.format_exc())
 
+    def set1mIndicator(self, base_time):
+        ask_price_list = self.indicator_object.getAskPriceList()
+        bid_price_list = self.indicator_object.getBidPriceList()
+
+        try:
+            logging.info("set5mIndicator base_time = %s" % base_time)
+            # 1シグマボリンジャーバンドを取得する
+            window_size = 28
+            candle_width = 60
+            sigma_valiable = 1
+            data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
+            # instrument, type, upper_sigma, lower_sigma, base_line, insert_time
+            ind_type = "bollinger1m1"
+            sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(\'%s\', \'%s\', %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
+            self.mysql_connector.insert_sql(sql)
+            logging.info(sql)
+
+            # 2.5シグマボリンジャーバンドを取得する
+            window_size = 28
+            candle_width = 60
+            sigma_valiable = 2.5
+            data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
+            # instrument, type, upper_sigma, lower_sigma, base_line, insert_time
+            ind_type = "bollinger1m2.5"
+            sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(\'%s\', \'%s\', %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
+            self.mysql_connector.insert_sql(sql)
+            logging.info(sql)
+
+            # 3シグマボリンジャーバンドを取得する
+            window_size = 28
+            candle_width = 60
+            sigma_valiable = 3
+            data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
+            # instrument, type, upper_sigma, lower_sigma, base_line, insert_time
+            ind_type = "bollinger1m3"
+            sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(\'%s\', \'%s\', %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
+            self.mysql_connector.insert_sql(sql)
+            logging.info(sql)
+
+            # 移動平均の取得(WMA50 5m)
+            wma_length = 50
+            candle_width = 60
+            ewma50 = getEWMA(ask_price_list, bid_price_list, wma_length, candle_width)
+            # 短期トレンドの取得
+            slope_length = (10 * candle_width) * -1
+            slope_list = ewma50[slope_length:]
+            slope = getSlope(slope_list)
+
+            # instrument, type, ewma_value, insert_time
+            ind_type = "ewma1m50"
+            sql = "insert into INDICATOR_TABLE(instrument, type, ewma_value, slope, insert_time) values(\'%s\', \'%s\', %s, %s, \'%s\')" % (self.instrument, ind_type, ewma50[-1], slope, base_time)
+            self.mysql_connector.insert_sql(sql)
+            logging.info(sql)
+
+            # 移動平均の取得(WMA200 5m)
+            wma_length = 200
+            candle_width = 60
+            ewma200 = getEWMA(ask_price_list, bid_price_list, wma_length, candle_width)
+
+            # instrument, type, ewma_value, insert_time
+            ind_type = "ewma1m200"
+            sql = "insert into INDICATOR_TABLE(instrument, type, ewma_value, insert_time) values(\'%s\', \'%s\', %s,  \'%s\')" % (self.instrument, ind_type, ewma200[-1], base_time)
+            self.mysql_connector.insert_sql(sql)
+            logging.info(sql)
+
+        except Exception as e:
+            logging.info(traceback.format_exc())
+
+
     def computeInsertIndicator(self, base_time, span):
         if decideMarket(base_time):
             self.setPrice(base_time)
@@ -233,6 +302,8 @@ class ComputeIndicator:
                     self.set1hIndicator(base_time)
                 elif span == "5m":
                     self.set5mIndicator(base_time)
+                elif span == "1m":
+                    self.set1mIndicator(base_time)
                 else:
                     pass
             except Exception as e:
