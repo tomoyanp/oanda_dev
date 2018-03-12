@@ -48,19 +48,19 @@ class TrendFollowAlgo(SuperAlgo):
                     high_slope_threshold = 0.3
 
                     # bollingerバンド3シグマの幅が2以下、かつewma200の上にいること
-                    if (self.upper_sigma_1h3 - self.lower_sigma_1h3) > 2 and self.ewma5m200 < current_price:
-                        if current_price > self.upper_sigma1m25:
+                    if (self.upper_sigma_1h3 - self.lower_sigma_1h3) > 2 and self.ewma5m200_value < current_price:
+                        if current_price > self.upper_sigma_1m25:
                             trade_flag = "sell" # 逆張り
 
                     # bollingerバンド3シグマの幅が2以下、かつewma200の下にいること
-                    if (self.upper_sigma_1h3 - self.lower_sigma_1h3) > 2 and self.ewma5m200 > current_price:
-                        if current_price < self.lower_sigma1m25:
+                    if (self.upper_sigma_1h3 - self.lower_sigma_1h3) > 2 and self.ewma5m200_value > current_price:
+                        if current_price < self.lower_sigma_1m25:
                             trade_flag = "buy"
                     else:
                         trade_flag = "pass"
 
                     logging.info("####### decideTrade Logic base_time = %s #######" % base_time)
-                    logging.info("5m 200ewma = %s, current_price = %s, upper_2.5sigma = %s, lower_2.5sigma = %s, trade_flag = %s" % (self.ewma5m200, current_price, self.upper_sigma_1m25, self.lower_sigma_1m25, trade_flag))
+                    logging.info("5m 200ewma = %s, current_price = %s, upper_2.5sigma = %s, lower_2.5sigma = %s, trade_flag = %s" % (self.ewma5m200_value, current_price, self.upper_sigma_1m25, self.lower_sigma_1m25, trade_flag))
                     logging.info("upper 1h 3sigma = %s, lower 1h 3sigma = %s upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
 
                 else:
