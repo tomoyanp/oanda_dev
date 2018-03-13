@@ -31,7 +31,6 @@ class TrendFollowAlgo(SuperAlgo):
 
     def decideTrade(self, base_time):
         trade_flag = "pass"
-        trade_mode = "null"
         try:
             if self.order_flag:
                 pass
@@ -44,16 +43,9 @@ class TrendFollowAlgo(SuperAlgo):
                     # 性能的に5分に一回呼び出しに変更
                     self.setIndicator(base_time)
                     current_price = self.getCurrentPrice()
-                    trade_flag, trade_mode = self.decideTrendFollowTrade(trade_flag, trade_mode, current_price)
+                    trade_flag = self.decideTrendFollowTrade(trade_flag, trade_mode, current_price)
 
-                # 1分足の終値付近で計算ロジックに入る
-                elif seconds > 50 and trade_flag == "pass":
-                    logging.info("%s :TrendReverseTradeLogic START" % base_time)
-                    self.setIndicator(base_time)
-                    trade_flag, trade_mode = self.decideTrendReverseTrade(trade_flag, trade_mode, current_price)
-
-            return trade_flag, trade_mode
-
+            return trade_flag
         except:
             raise
 
@@ -69,14 +61,9 @@ class TrendFollowAlgo(SuperAlgo):
                     seconds = base_time.second
                     current_price = self.getCurrentPrice()
                     # 5分足の終値付近で計算ロジックに入る
-                    if (minutes % 5 == 4) and seconds > 50 and self.trade_mode == "follow":
+                    if (minutes % 5 == 4) and seconds > 50":
                         logging.info("%s :TrendFollowStlLogic START" % base_time)
                         self.setIndicator(base_time)
-                        stl_flag = self.decideTrendFollowStl(stl_flag, current_price)
-
-                    elif seconds > 50 and self.trade_mode == "reverse":
-                        logging.info("%s :TrendReverseStlLogic START" % base_time)
-                        self.setIndicator(base_time, stl_flag)
                         stl_flag = self.decideTrendFollowStl(stl_flag, current_price)
             else:
                 pass
@@ -84,28 +71,6 @@ class TrendFollowAlgo(SuperAlgo):
             return stl_flag
         except:
             raise
-
-    def decideTrendReverseStl(self, stl_flag, current_price):
-        # Stop Loss Algorithm
-        if self.order_kind == "buy":
-            if current_price < self.lower_sigma_1m3:
-                logging.info("EXECUTE STLEMENT at Trend Reverse Mode")
-                stl_flag = True
-            elif current_price > self.upper_sigma_1m25:
-                logging.info("EXECUTE STLEMENT at Trend Reverse Mode")
-                stl_flag = True
-
-        elif self.order_kind == "sell":
-            if current_price > self.upper_sigma_1m3:
-                logging.info("EXECUTE STLEMENT at Trend Reverse Mode")
-                stl_flag = True
-            elif current_price < self.lower_sigma_1m25:
-                logging.info("EXECUTE STLEMENT at Trend Reverse Mode")
-                stl_flag = True
-
-        logging.info("upper_sigma_1m3 = %s, lower_sigma_1m3 = %s, order_kind = %s, stl_flag = %s" %(self.upper_sigma_1m3, self.lower_sigma_1m3, self.order_kind, stl_flag))
-
-        return stl_flag
 
     def decideTrendFollowStl(self, stl_flag, current_price):
         # Stop Loss Algorithm
@@ -131,7 +96,7 @@ class TrendFollowAlgo(SuperAlgo):
 
         return stl_flag
 
-    def decideTrendFollowTrade(self, trade_flag, trade_mode, current_price):
+    def decideTrendFollowTrade(self, trade_flag, current_price):
         low_slope_threshold  = -0.3
         high_slope_threshold = 0.3
         hilow_price_threshold = 0.5
@@ -182,7 +147,6 @@ class TrendFollowAlgo(SuperAlgo):
                                 logging.info("low_price logic: OK, current_price = %s, low_price = %s" % (current_price, self.low_price))
                                 logging.info("EXECUTE ORDER SELL at Trend Follow Mode")
                                 trade_flag = "sell"
-                                trade_mode = "follow"
                             else:
                                 logging.info("low_price logic: NG, current_price = %s, low_price = %s" % (current_price, self.low_price))
                         else:
@@ -196,37 +160,7 @@ class TrendFollowAlgo(SuperAlgo):
         else:
             logging.info("bollinger 3 sigma logic: NG, upper_sigma_1h3 = %s, lower_sigma_1h3 = %s, upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
 
-        return trade_flag, trade_mode
-
-    def decideTrendReverseTrade(self, trade_flag, trade_mode, current_price):
-        # bollingerバンド3シグマの幅が2以下、かつewma200の上にいること
-        if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
-            logging.info("bollinger 3 sigma logic: OK, upper_sigma_1h3 = %s, lower_sigma_1h3 = %s, upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
-            if current_price > self.upper_sigma_1m25:
-                logging.info("upper_sigma logic: OK, current_price = %s, upper_sigma_1m25 = %s" % (current_price, self.upper_sigma_1m25))
-                logging.info("EXECUTE ORDER SELL at Trend Reverse Mode")
-                trade_flag = "sell" # 逆張り
-                trade_mode = "reverse"
-            else:
-                logging.info("upper_sigma logic: NG, current_price = %s, upper_sigma_1m25 = %s" % (current_price, self.upper_sigma_1m25))
-        else:
-            logging.info("bollinger 3 sigma logic: NG, upper_sigma_1h3 = %s, lower_sigma_1h3 = %s, upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
-
-
-        # bollingerバンド3シグマの幅が2以下、かつewma200の下にいること
-        if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
-            logging.info("bollinger 3 sigma logic: OK, upper_sigma_1h3 = %s, lower_sigma_1h3 = %s, upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
-            if current_price < self.lower_sigma_1m25:
-                logging.info("lower_sigma logic: OK, current_price = %s, lower_sigma_1m25 = %s" % (current_price, self.lower_sigma_1m25))
-                logging.info("EXECUTE ORDER BUY at Trend Reverse Mode")
-                trade_flag = "buy"
-                trade_mode = "reverse"
-            else:
-                logging.info("lower_sigma logic: NG, current_price = %s, lower_sigma_1m25 = %s" % (current_price, self.lower_sigma_1m25))
-        else:
-            logging.info("bollinger 3 sigma logic: OK, upper_sigma_1h3 = %s, lower_sigma_1h3 = %s, upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
-
-        return trade_flag, trade_mode
+        return trade_flag
 
     def decideTrailLogic(self, stl_flag, current_ask_price, current_bid_price, current_price, order_price):
         first_flag = self.config_data["first_trail_mode"]
@@ -283,13 +217,9 @@ class TrendFollowAlgo(SuperAlgo):
         return stl_flag
 
     def setIndicator(self, base_time):
-        self.setBollinger1m25(base_time)
-        self.setBollinger1m3(base_time)
         self.setBollinger5m25(base_time)
         self.setBollinger1h3(base_time)
         self.setEwma5m50(base_time)
         self.setEwma5m200(base_time)
         self.setEwma1h200(base_time)
         self.setHighlowPrice(base_time)
-
-

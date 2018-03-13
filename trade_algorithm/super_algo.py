@@ -37,7 +37,6 @@ class SuperAlgo(object):
         self.trail_second_flag = False
         self.trail_price = 0
         self.break_wait_flag = "pass"
-        self.trade_mode = "null"
 
 ################################################
 # listは、要素数が大きいほうが古い。
@@ -52,14 +51,12 @@ class SuperAlgo(object):
         self.trail_second_flag = False
         self.break_wait_flag = "pass"
         self.trail_price = 0
-        self.trade_mode = "null"
 
-    def setOrderData(self, trade_flag, trade_mode, order_price, order_flag, trade_id):
+    def setOrderData(self, trade_flag, order_price, order_flag, trade_id):
         self.order_kind = trade_flag
         self.order_price = order_price
         self.order_flag = order_flag
         self.trade_id = trade_id
-        self.trade_mode = trade_mode
 
     def setPrice(self, base_time):
         sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time <= \'%s\' order by insert_time DESC limit 1" % (self.instrument, base_time)
@@ -269,10 +266,8 @@ class SuperAlgo(object):
         self.high_price = max(high_price_list)
         self.low_price =  min(low_price_list)
 
-
-
     @abstractmethod
-    def setIndicatorWrapper(self, base_time):
+    def setIndicator(self, base_time):
         pass
 
     @abstractmethod

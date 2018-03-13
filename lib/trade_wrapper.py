@@ -37,6 +37,7 @@ class TradeWrapper:
 
         # 指値でいつの間にか決済されてしまったときはこれでスリープさせる
         self.stl_sleep_flag = False
+        self.onfile_path = ""
 
         now = datetime.now()
         base_time = now.strftime("%Y%m%d%H%M%S")
@@ -53,23 +54,14 @@ class TradeWrapper:
 
 
     def setTradeAlgo(self, algo, base_time):
-        if algo == "step":
-            self.trade_algo = StepWiseAlgo(self.instrument, self.base_path, self.config_name, base_time)
-        elif algo == "startend":
-            self.trade_algo = StartEndAlgo(self.instrument, self.base_path, self.config_name, base_time)
-        elif algo == "timetrend":
-            self.trade_algo = TimeTrendAlgo(self.instrument, self.base_path, self.config_name, base_time)
-        elif algo == "bollinger":
-            self.trade_algo = BollingerAlgo(self.instrument, self.base_path, self.config_name, base_time)
-        elif algo == "evo_bollinger":
-            self.trade_algo = EvoBollingerAlgo(self.instrument, self.base_path, self.config_name, base_time)
-        elif algo == "evo2_bollinger":
-            self.trade_algo = Evo2BollingerAlgo(self.instrument, self.base_path, self.config_name, base_time)
-        elif algo == "trendfollow":
+        if algo == "trendfollow":
             self.trade_algo = TrendFollowAlgo(self.instrument, self.base_path, self.config_name, base_time)
+        elif algo == "trendreverse":
+            self.trade_algo = TrendReverseAlgo(self.instrument, self.base_path, self.config_name, base_time)
         else:
             self.trade_algo = HiLowAlgo(self.instrument, self.base_path, self.config_name, base_time)
 
+        self.onfile_path = "%s/onfile/%s" % (self.base_path, algo)
         self.setCurrentTrade()
 
     def setCurrentTrade(self):
@@ -77,19 +69,34 @@ class TradeWrapper:
             pass
         else:
             response = self.oanda_wrapper.get_current_trades()
-            print response
-            print len(response)
-            if len(response["trades"]) > 0:
+            onfile_flag = self.checkOnfile()
+
+            if len(response["trades"]) > 0 and onfile_flag:
                 trade_data = response["trades"][0]
                 order_price = trade_data["price"]
                 order_kind = trade_data["side"]
                 trade_id = trade_data["id"]
                 order_flag = True
-                trade_mode = "null"
-                self.trade_algo.setOrderData(order_kind, trade_mode, order_price, order_flag, trade_id)
+                self.trade_algo.setOrderData(order_kind, order_price, order_flag, trade_id)
                 logging.info("setCurrentTrade = True")
             else:
                 pass
+
+    def removeOnfile(self):
+        commands.getoutput("rm -f %s/onfile" % self.onfile_path)
+
+    def createOnfile(self):
+        commands.getoutput("touch %s/onfile" % self.onfile_path)
+
+    def checkOnfile(self):
+        onfile_exists = commands.getoutput("ls %s/onfile | wc -l" % self.onfile_path)
+        onfile_exists = int(onfile_exists)
+
+        flag = False
+        if onfile_exists > 0:
+            flag = True
+
+        return flag
 
     def settlementLogWrite(self, profit, msg):
         nowftime = self.trade_algo.getCurrentTime()
@@ -121,7 +128,10 @@ class TradeWrapper:
             pass
         else:
             position_flag = self.oanda_wrapper.get_trade_position(self.instrument)
-            if position_flag == False:
+            onfile_flag = self.checkOnfile()
+
+            # positionがないのに、onfileがあった場合、決済されたと判断
+            if position_flag == False and onfile_flag:
                 # 決済した直後であればスリープする
                 trade_id = self.trade_algo.getTradeId()
                 if self.stl_sleep_flag and trade_id != 0:
@@ -131,8 +141,8 @@ class TradeWrapper:
                     self.settlementLogWrite(profit, msg)
                     self.stl_sleep_flag = False
                     self.trade_algo.resetFlag()
+                    self.removeOnfile()
             else:
-                self.trade_algo.setOrderFlag(True)
                 self.stl_sleep_flag = True
 
         return sleep_time
@@ -140,7 +150,7 @@ class TradeWrapper:
     def setInstrumentResponse(self, base_time):
         sleep_time = 0
         self.trade_algo.setPrice(base_time)
-#        self.trade_algo.setIndicator(base_time)
+
         return sleep_time
 
     def stlDecisionWrapper(self, base_time):
@@ -152,9 +162,10 @@ class TradeWrapper:
             sleep_time = self.config_data["stl_sleep_time"]
             stl_flag = self.trade_algo.decideStl(base_time)
             trade_id = self.trade_algo.getTradeId()
+            onfile_flag = self.checkOnfile()
 
             #trade_idがある場合もしくはテストモードであれば
-            if self.test_mode == True or trade_id != 0:
+            if (self.test_mode == True or trade_id != 0) and onfile_flag:
 
                 # テストモードであれば、指値のチェックをフォローしてあげる
                 test_stl_flag = False
@@ -164,7 +175,6 @@ class TradeWrapper:
 
                 # stl_flagが立ってたら決済する
                 if stl_flag:
-
                     self.trade_algo.setStlPrice(self.trade_algo.getCurrentPrice)
 
                     # 決済注文
@@ -184,6 +194,7 @@ class TradeWrapper:
 
                     # flagの初期化
                     self.trade_algo.resetFlag()
+                    self.removeOnfile()
                     self.stl_sleep_flag = False
                 else:
                     pass
@@ -201,9 +212,7 @@ class TradeWrapper:
         if order_flag:
             pass
         else:
-            trade_flag, trade_mode = self.trade_algo.decideTrade(base_time)
-            # 以下は, decideTradeの中で実装する
-            # trade_flag = self.trade_algo.decideTradeTime(base_time, trade_flag)
+            trade_flag = self.trade_algo.decideTrade(base_time)
             trade_flag = self.trade_algo.decideTradeTime(base_time, trade_flag)
 
             if trade_flag == "pass":
@@ -222,7 +231,7 @@ class TradeWrapper:
 
                 self.tradeLogWrite(trade_flag)
                 order_flag = True
-                self.trade_algo.setOrderData(trade_flag, trade_mode, order_price, order_flag, trade_id)
-
+                self.trade_algo.setOrderData(trade_flag, order_price, order_flag, trade_id)
+                self.createOnfile()
 
         return sleep_time
