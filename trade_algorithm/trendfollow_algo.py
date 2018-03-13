@@ -31,6 +31,7 @@ class TrendFollowAlgo(SuperAlgo):
 
     def decideTrade(self, base_time):
         trade_flag = "pass"
+        trade_mode = "null"
         try:
             if self.order_flag:
                 pass
@@ -39,66 +40,19 @@ class TrendFollowAlgo(SuperAlgo):
                 seconds = base_time.second
                 # 5分足の終値付近で計算ロジックに入る
                 if (minutes % 5 == 4) and seconds > 50:
+                    logging.info("%s :TrendFollowTradeLogic START" % base_time)
                     # 性能的に5分に一回呼び出しに変更
                     self.setIndicator(base_time)
                     current_price = self.getCurrentPrice()
-                    startend_price_threshold = 1.0
-                    hilow_price_threshold = 0.5
-                    baseline_touch_flag = False
-                    low_slope_threshold  = -0.3
-                    high_slope_threshold = 0.3
+                    trade_flag, trade_mode = self.decideTrendFollowTrade(trade_flag, trade_mode, current_price)
 
-                    # 高値安値チェックのみに引っかかった場合、breakモードに突入する
-#                    if self.break_wait_flag == "buy":
-#                        logging.info("BUY RANGE BREAK MODE LOGIC current_price = %s, hi_price = %s, comp = %s" %(current_price, self.high_price, (current_price - self.high_price)))
-#                        if (current_price - self.high_price) > 0.1:
-#                            logging.info("EXECUTE BUY RANGE BREAK MODE")
-#                            trade_flag = "buy"
-#                        else:
-#                            pass
-#                    elif self.break_wait_flag == "sell":
-#                        logging.info("SELL RANGE BREAK MODE LOGIC current_price = %s, low_price = %s, comp = %s" %(current_price, self.low_price, (self.low_price - current_price)))
-#                        if (self.low_price - current_price) > 0.1:
-#                            logging.info("EXECUTE SELL RANGE BREAK MODE")
-#                            trade_flag = "sell"
-#                        else:
-#                            pass
-#                    else:
-#                        pass
+                # 1分足の終値付近で計算ロジックに入る
+                elif seconds > 50 and trade_flag == "pass":
+                    logging.info("%s :TrendReverseTradeLogic START" % base_time)
+                    self.setIndicator(base_time)
+                    trade_flag, trade_mode = self.decideTrendReverseTrade(trade_flag, trade_mode, current_price)
 
-                    # slopeが上向き、現在価格が移動平均(EWMA200(5分), EWMA200(1時間))より上、現在価格がbollinger3_sigmaより上にいる
-                    if ((self.ewma5m50_slope - high_slope_threshold) > 0) and (self.ewma5m200_value < current_price) and (current_price > self.upper_sigma_5m25) and (current_price - self.ewma1h200_value) > 0.1 and (self.upper_sigma_1h3 - self.lower_sigma_1h3) > 2:
-#                    if ((self.ewma5m50_slope - high_slope_threshold) > 0) and (self.ewma5m200_value < current_price) and (current_price > self.upper_sigma_5m25) and (current_price - self.ewma1h200_value) > 0.1:
-                        # 現在価格が前日高値に対し0.5以内にいる or 当日の値動きが1.0以上ある場合、トレードしない
-                        if float(self.high_price - hilow_price_threshold) < float(current_price) < (float(self.high_price) + 0.1):
-                            self.break_wait_flag = "buy"
-                            logging.info("MOVING RANGE BREAK MODE = buy")
-                        else:
-                            trade_flag = "buy"
-                    # slopeが下向き、現在価格が移動平均(EWMA200(5分), EWMA200(1時間)より下、現在価格がbollinger3_sigmaより下にいる
-                    elif (self.ewma5m50_slope - low_slope_threshold) < 0 and self.ewma5m200_value > current_price and current_price < self.lower_sigma_5m25 and (self.ewma1h200_value - current_price) > 0.1 and (self.upper_sigma_1h3 - self.lower_sigma_1h3) > 2:
-#                    elif (self.ewma5m50_slope - low_slope_threshold) < 0 and self.ewma5m200_value > current_price and current_price < self.lower_sigma_5m25 and (self.ewma1h200_value - current_price) > 0.1:
-                        # 現在価格が前日安値に対し0.5以内にいる or 当日の値動きが1.0以上ある場合、トレードしない
-                        if float(self.low_price + hilow_price_threshold) > float(current_price) > (float(self.low_price) - 0.1):
-                            self.break_wait_flag = "sell"
-                            logging.info("MOVING RANGE BREAK MODE = sell")
-                        else:
-                            trade_flag = "sell"
-
-                    else:
-                        trade_flag = "pass"
-
-                    logging.info("####### decideTrade Logic base_time = %s #######" % base_time)
-                    logging.info("break_wait_flag = %s" % (self.break_wait_flag))
-                    logging.info("hi_price = %s, low_price = %s" % (self.high_price, self.low_price))
-                    logging.info("5m 50ewma slope = %s, 5m 200ewma = %s, 1h 200ewma = %s, current_price = %s, upper_2.5sigma = %s, lower_2.5sigma = %s, trade_flag = %s" % (self.ewma5m50_slope, self.ewma5m200_value, self.ewma1h200_value, current_price, self.upper_sigma_5m25, self.lower_sigma_5m25, trade_flag))
-                    logging.info("upper 1h 3sigma = %s, lower 1h 3sigma = %s upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
-
-                else:
-                    pass
-
-
-            return trade_flag
+            return trade_flag, trade_mode
 
         except:
             raise
@@ -113,46 +67,17 @@ class TrendFollowAlgo(SuperAlgo):
                 if ex_stlmode == "on":
                     minutes = base_time.minute
                     seconds = base_time.second
+                    current_price = self.getCurrentPrice()
                     # 5分足の終値付近で計算ロジックに入る
-                    if (minutes % 5 == 4) and seconds > 50:
-                        # 性能的に5分に一回呼び出しに変更
+                    if (minutes % 5 == 4) and seconds > 50 and self.trade_mode == "follow":
+                        logging.info("%s :TrendFollowStlLogic START" % base_time)
                         self.setIndicator(base_time)
+                        stl_flag = self.decideTrendFollowStl(stl_flag, current_price)
 
-                        # Stop Loss Algorithm
-                        current_price = self.getCurrentPrice()
-                        order_price = self.getOrderPrice()
-
-                        # 移動平均の取得(WMA50)
-                        low_slope_threshold  = -0.3
-                        high_slope_threshold = 0.3
-
-                        # 損切り
-#                        # slopeが上向き、現在価格がbollinger2.5_sigmaより上にいる
-#                        if ((self.ewma5m50_slope - high_slope_threshold) > 0) and (current_price > self.upper_sigma_5m25) and self.order_kind == "sell":
-#                            logging.info("EXECUTE SETTLEMENT")
-#                            stl_flag = True
-#                        # slopeが下向き、現在価格がbollinger2.5_sigmaより下にいる
-#                        elif ((self.ewma5m50_slope - low_slope_threshold) < 0) and (current_price < self.lower_sigma_5m25) and self.order_kind == "buy":
-#                            logging.info("EXECUTE SETTLEMENT")
-#                            stl_flag = True
-
-                        # 最小利確0.3以上、移動平均にぶつかったら
-                        min_take_profit = 0.3
-                        if self.order_kind == "buy":
-                            if (self.bid_price - order_price) > min_take_profit:
-                                if -0.02 < (current_price - self.base_line_5m25) < 0.02:
-                                    logging.info("EXECUTE STL")
-                                    stl_flag = True
-                        elif self.order_kind == "sell":
-                            if (order_price - self.ask_price) > min_take_profit:
-                                if -0.02 < (current_price - self.base_line_5m25) < 0.02:
-                                    logging.info("EXECUTE STL")
-                                    stl_flag = True
-
-                        stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, current_price, order_price)
-                        logging.info("######### decideStl Logic base_time = %s ##########" % base_time)
-                        logging.info("upper_sigma = %s, current_price = %s, lower_sigma = %s, base_line = %s" %(self.upper_sigma_5m25, current_price, self.lower_sigma_5m25, self.base_line_5m25))
-                        logging.info("order_price = %s, slope = %s" %(order_price, self.ewma5m50_slope))
+                    elif seconds > 50 and self.trade_mode == "reverse":
+                        logging.info("%s :TrendReverseStlLogic START" % base_time)
+                        self.setIndicator(base_time, stl_flag)
+                        stl_flag = self.decideTrendFollowStl(stl_flag, current_price)
             else:
                 pass
 
@@ -160,6 +85,148 @@ class TrendFollowAlgo(SuperAlgo):
         except:
             raise
 
+    def decideTrendReverseStl(self, stl_flag, current_price):
+        # Stop Loss Algorithm
+        if self.order_kind == "buy":
+            if current_price < self.lower_sigma_1m3:
+                logging.info("EXECUTE STLEMENT at Trend Reverse Mode")
+                stl_flag = True
+            elif current_price > self.upper_sigma_1m25:
+                logging.info("EXECUTE STLEMENT at Trend Reverse Mode")
+                stl_flag = True
+
+        elif self.order_kind == "sell":
+            if current_price > self.upper_sigma_1m3:
+                logging.info("EXECUTE STLEMENT at Trend Reverse Mode")
+                stl_flag = True
+            elif current_price < self.lower_sigma_1m25:
+                logging.info("EXECUTE STLEMENT at Trend Reverse Mode")
+                stl_flag = True
+
+        logging.info("upper_sigma_1m3 = %s, lower_sigma_1m3 = %s, order_kind = %s, stl_flag = %s" %(self.upper_sigma_1m3, self.lower_sigma_1m3, self.order_kind, stl_flag))
+
+        return stl_flag
+
+    def decideTrendFollowStl(self, stl_flag, current_price):
+        # Stop Loss Algorithm
+        order_price = self.getOrderPrice()
+
+        # 最小利確0.3以上、移動平均にぶつかったら
+        min_take_profit = 0.3
+        if self.order_kind == "buy":
+            logging.info("current_bid_price = %s, current_price = %s, order_price = %s, base_line_5m25 = %s, order_kind = %s" %(self.bid_price, current_price, order_price, self.base_line_5m25, self.order_kind))
+            if (self.bid_price - order_price) > min_take_profit:
+                if -0.02 < (current_price - self.base_line_5m25) < 0.02:
+                    logging.info("EXECUTE STLEMENT at Trend Follow Mode")
+                    stl_flag = True
+        elif self.order_kind == "sell":
+            logging.info("current_ask_price = %s, current_price = %s, order_price = %s, base_line_5m25 = %s, order_kind = %s" %(self.ask_price, current_price, order_price, self.base_line_5m25, self.order_kind))
+            if (order_price - self.ask_price) > min_take_profit:
+                if -0.02 < (current_price - self.base_line_5m25) < 0.02:
+                    logging.info("EXECUTE STLEMENT at Trend Follow Mode")
+                    stl_flag = True
+
+        stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, current_price, order_price)
+        logging.info("stl_flag = %s" % stl_flag)
+
+        return stl_flag
+
+    def decideTrendFollowTrade(self, trade_flag, trade_mode, current_price):
+        low_slope_threshold  = -0.3
+        high_slope_threshold = 0.3
+        hilow_price_threshold = 0.5
+
+        # Buy Logic at Trend Follow Mode
+        if (self.upper_sigma_1h3 - self.lower_sigma_1h3) > 2:
+            logging.info("bollinger 3 sigma logic: OK, upper_sigma_1h3 = %s, lower_sigma_1h3 = %s, upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
+            if (current_price - self.ewma1h200_value) > 0.1:
+                logging.info("ewma1h200 logic: OK, current_price = %s, ewma1h200 = %s, current_price - ewma1h200 = %s" % (current_price, self.ewma1h200_value,(current_price - self.ewma1h200_value)))
+                if self.ewma5m200_value < current_price:
+                    logging.info("ewma5m200 logic: OK, current_price = %s, ewma5m200 = %s" % (current_price, self.ewma5m200_value))
+                    if self.ewma5m50_slope - high_slope_threshold) > 0:
+                        logging.info("ewma5m50 slope logic: OK, ewma5m50_slope = %s, high_slope_threshold = %s" % (self.ewma5m50_slope, high_slope_threshold))
+                        if current_price > self.upper_sigma_5m25:
+                            logging.info("upper_sigma logic: OK, current_price = %s, upper_sigma_5m25 = %s" % (current_price, self.upper_sigma_5m25))
+                            if float(self.high_price - hilow_price_threshold) > float(current_price) or float(current_price) > (float(self.high_price) + 0.1):
+                                logging.info("high_price logic: OK, current_price = %s, high_price = %s" % (current_price, self.high_price))
+                                logging.info("EXECUTE ORDER BUY at Trend Follow Mode")
+                                    trade_flag = "buy"
+                                    trade_mode = "follow"
+                            else:
+                                logging.info("high_price logic: NG, current_price = %s, high_price = %s" % (current_price, self.high_price))
+                        else:
+                            logging.info("upper_sigma logic: NG, current_price = %s, upper_sigma_5m25 = %s" % (current_price, self.upper_sigma_5m25))
+                    else:
+                        logging.info("ewma5m50 slope logic: NG, ewma5m50_slope = %s, high_slope_threshold = %s" % (self.ewma5m50_slope, high_slope_threshold))
+                else:
+                    logging.info("ewma5m200 logic: NG, current_price = %s, ewma5m200 = %s" % (current_price, self.ewma5m200_value))
+            else:
+                logging.info("ewma1h200 logic: NG, current_price = %s, ewma1h200 = %s, current_price - ewma1h200 = %s" % (current_price, self.ewma1h200_value,(current_price - self.ewma1h200_value)))
+        else:
+            logging.info("bollinger 3 sigma logic: NG, upper_sigma_1h3 = %s, lower_sigma_1h3 = %s, upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
+
+
+
+        # Sell Logic at Trend Follow Mode
+        if (self.upper_sigma_1h3 - self.lower_sigma_1h3) > 2:
+            logging.info("bollinger 3 sigma logic: OK, upper_sigma_1h3 = %s, lower_sigma_1h3 = %s, upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
+            if (self.ewma1h200_value - current_price) > 0.1:
+                logging.info("ewma1h200 logic: OK, current_price = %s, ewma1h200 = %s, ewma1h200 - current_price = %s" % (current_price, self.ewma1h200_value,(self.ewma1h200_value - current_price)))
+                if self.ewma5m200_value > current_price:
+                    logging.info("ewma5m200 logic: OK, current_price = %s, ewma5m200 = %s" % (current_price, self.ewma5m200_value))
+                    if (self.ewma5m50_slope - low_slope_threshold) < 0:
+                        logging.info("ewma5m50 slope logic: OK, ewma5m50_slope = %s, low_slope_threshold = %s" % (self.ewma5m50_slope, low_slope_threshold))
+                        if current_price < self.lower_sigma_5m25:
+                            logging.info("lower_sigma logic: OK, current_price = %s, lower_sigma_5m25 = %s" % (current_price, self.lower_sigma_5m25))
+                            if float(self.low_price + hilow_price_threshold) < float(current_price) or float(current_price) < (float(self.low_price) - 0.1):
+                                logging.info("low_price logic: OK, current_price = %s, low_price = %s" % (current_price, self.low_price))
+                                logging.info("EXECUTE ORDER SELL at Trend Follow Mode")
+                                trade_flag = "sell"
+                                trade_mode = "follow"
+                            else:
+                                logging.info("low_price logic: NG, current_price = %s, low_price = %s" % (current_price, self.low_price))
+                        else:
+                            logging.info("lower_sigma logic: NG, current_price = %s, lower_sigma_5m25 = %s" % (current_price, self.lower_sigma_5m25))
+                    else:
+                        logging.info("ewma5m50 slope logic: NG, ewma5m50_slope = %s, low_slope_threshold = %s" % (self.ewma5m50_slope, low_slope_threshold))
+                else:
+                    logging.info("ewma5m200 logic: NG, current_price = %s, ewma5m200 = %s" % (current_price, self.ewma5m200_value))
+            else:
+                logging.info("ewma1h200 logic: NG, current_price = %s, ewma1h200 = %s, ewma1h200 - current_price = %s" % (current_price, self.ewma1h200_value,(self.ewma1h200_value - current_price)))
+        else:
+            logging.info("bollinger 3 sigma logic: NG, upper_sigma_1h3 = %s, lower_sigma_1h3 = %s, upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
+
+        return trade_flag, trade_mode
+
+    def decideTrendReverseTrade(self, trade_flag, trade_mode, current_price):
+        # bollingerバンド3シグマの幅が2以下、かつewma200の上にいること
+        if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
+            logging.info("bollinger 3 sigma logic: OK, upper_sigma_1h3 = %s, lower_sigma_1h3 = %s, upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
+            if current_price > self.upper_sigma_1m25:
+                logging.info("upper_sigma logic: OK, current_price = %s, upper_sigma_1m25 = %s" % (current_price, self.upper_sigma_1m25))
+                logging.info("EXECUTE ORDER SELL at Trend Reverse Mode")
+                trade_flag = "sell" # 逆張り
+                trade_mode = "reverse"
+            else:
+                logging.info("upper_sigma logic: NG, current_price = %s, upper_sigma_1m25 = %s" % (current_price, self.upper_sigma_1m25))
+        else:
+            logging.info("bollinger 3 sigma logic: NG, upper_sigma_1h3 = %s, lower_sigma_1h3 = %s, upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
+
+
+        # bollingerバンド3シグマの幅が2以下、かつewma200の下にいること
+        if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
+            logging.info("bollinger 3 sigma logic: OK, upper_sigma_1h3 = %s, lower_sigma_1h3 = %s, upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
+            if current_price < self.lower_sigma_1m25:
+                logging.info("lower_sigma logic: OK, current_price = %s, lower_sigma_1m25 = %s" % (current_price, self.lower_sigma_1m25))
+                logging.info("EXECUTE ORDER BUY at Trend Reverse Mode")
+                trade_flag = "buy"
+                trade_mode = "reverse"
+            else:
+                logging.info("lower_sigma logic: NG, current_price = %s, lower_sigma_1m25 = %s" % (current_price, self.lower_sigma_1m25))
+        else:
+            logging.info("bollinger 3 sigma logic: OK, upper_sigma_1h3 = %s, lower_sigma_1h3 = %s, upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
+
+        return trade_flag, trade_mode
 
     def decideTrailLogic(self, stl_flag, current_ask_price, current_bid_price, current_price, order_price):
         first_flag = self.config_data["first_trail_mode"]
@@ -216,54 +283,13 @@ class TrendFollowAlgo(SuperAlgo):
         return stl_flag
 
     def setIndicator(self, base_time):
-        # bollinger 5m 2.5sigma
-        ind_type = "bollinger5m2.5"
-        sql = "select upper_sigma, lower_sigma, base_line from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC limit 1" % (self.instrument, base_time, ind_type)
-        response = self.mysql_connector.select_sql(sql)
-        self.upper_sigma_5m25 = response[0][0]
-        self.lower_sigma_5m25 = response[0][1]
-        self.base_line_5m25 = response[0][2]
+        self.setBollinger1m25(base_time)
+        self.setBollinger1m3(base_time)
+        self.setBollinger5m25(base_time)
+        self.setBollinger1h3(base_time)
+        self.setEwma5m50(base_time)
+        self.setEwma5m200(base_time)
+        self.setEwma1h200(base_time)
+        self.setHighlowPrice(base_time)
 
-        # bollinger 1h 3sigma
-        ind_type = "bollinger1h3"
-        sql = "select upper_sigma, lower_sigma, base_line from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC limit 1" % (self.instrument, base_time, ind_type)
-        response = self.mysql_connector.select_sql(sql)
-        self.upper_sigma_1h3 = response[0][0]
-        self.lower_sigma_1h3 = response[0][1]
-        self.base_line_1h3 = response[0][2]
-
-        # ewma5m50
-        ind_type = "ewma5m50"
-        sql = "select ewma_value, slope from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC limit 1" % (self.instrument, base_time, ind_type)
-        response = self.mysql_connector.select_sql(sql)
-        self.ewma5m50_value = response[0][0]
-        self.ewma5m50_slope = response[0][1]
-
-        # ewma5m200
-        ind_type = "ewma5m200"
-        sql = "select ewma_value from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC  limit 1" % (self.instrument, base_time, ind_type)
-        response = self.mysql_connector.select_sql(sql)
-        self.ewma5m200_value = response[0][0]
-
-        # ewma1h200
-        ind_type = "ewma1h200"
-        sql = "select ewma_value from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC  limit 1" % (self.instrument, base_time, ind_type)
-        response = self.mysql_connector.select_sql(sql)
-        self.ewma1h200_value = response[0][0]
-
-        # high low price
-        ind_type = "highlow"
-#        span = 24 * 5
-        span = 24
-        end_time = base_time - timedelta(hours=1)
-        sql = "select high_price, low_price from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC limit %s" % (self.instrument, base_time, ind_type, span)
-        response = self.mysql_connector.select_sql(sql)
-        high_price_list = []
-        low_price_list = []
-        for res in response:
-            high_price_list.append(res[0])
-            low_price_list.append(res[1])
-
-        self.high_price = max(high_price_list)
-        self.low_price =  min(low_price_list)
 

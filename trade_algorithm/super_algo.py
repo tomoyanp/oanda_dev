@@ -37,6 +37,7 @@ class SuperAlgo(object):
         self.trail_second_flag = False
         self.trail_price = 0
         self.break_wait_flag = "pass"
+        self.trade_mode = "null"
 
 ################################################
 # listは、要素数が大きいほうが古い。
@@ -51,12 +52,14 @@ class SuperAlgo(object):
         self.trail_second_flag = False
         self.break_wait_flag = "pass"
         self.trail_price = 0
+        self.trade_mode = "null"
 
-    def setOrderData(self, trade_flag, order_price, order_flag, trade_id):
+    def setOrderData(self, trade_flag, trade_mode, order_price, order_flag, trade_id):
         self.order_kind = trade_flag
         self.order_price = order_price
         self.order_flag = order_flag
         self.trade_id = trade_id
+        self.trade_mode = trade_mode
 
     def setPrice(self, base_time):
         sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time <= \'%s\' order by insert_time DESC limit 1" % (self.instrument, base_time)
@@ -191,6 +194,82 @@ class SuperAlgo(object):
         self.order_histroy = self.order_kind
 
         return profit, sleep_time
+
+    def setBollinger1m25(self, base_time):
+         # bollinger 1m 2.5sigma
+        ind_type = "bollinger1m2.5"
+        sql = "select upper_sigma, lower_sigma, base_line from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC limit 1" % (self.instrument, base_time, ind_type)
+        response = self.mysql_connector.select_sql(sql)
+        self.upper_sigma_1m25 = response[0][0]
+        self.lower_sigma_1m25 = response[0][1]
+        self.base_line_1m25 = response[0][2]
+
+    def setBollinger1m3(self, base_time):
+         # bollinger 1m 3sigma
+        ind_type = "bollinger1m3"
+        sql = "select upper_sigma, lower_sigma, base_line from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC limit 1" % (self.instrument, base_time, ind_type)
+        response = self.mysql_connector.select_sql(sql)
+        self.upper_sigma_1m3 = response[0][0]
+        self.lower_sigma_1m3 = response[0][1]
+        self.base_line_1m3 = response[0][2]
+
+
+    def setBollinger5m25(self, base_time):
+        # bollinger 5m 2.5sigma
+        ind_type = "bollinger5m2.5"
+        sql = "select upper_sigma, lower_sigma, base_line from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC limit 1" % (self.instrument, base_time, ind_type)
+        response = self.mysql_connector.select_sql(sql)
+        self.upper_sigma_5m25 = response[0][0]
+        self.lower_sigma_5m25 = response[0][1]
+        self.base_line_5m25 = response[0][2]
+
+    def setBollinger1h3(self, base_time):
+        # bollinger 1h 3sigma
+        ind_type = "bollinger1h3"
+        sql = "select upper_sigma, lower_sigma, base_line from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC limit 1" % (self.instrument, base_time, ind_type)
+        response = self.mysql_connector.select_sql(sql)
+        self.upper_sigma_1h3 = response[0][0]
+        self.lower_sigma_1h3 = response[0][1]
+        self.base_line_1h3 = response[0][2]
+
+    def setEwma5m50(self, base_time):
+        # ewma5m50
+        ind_type = "ewma5m50"
+        sql = "select ewma_value, slope from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC limit 1" % (self.instrument, base_time, ind_type)
+        response = self.mysql_connector.select_sql(sql)
+        self.ewma5m50_value = response[0][0]
+        self.ewma5m50_slope = response[0][1]
+
+    def setEwma5m200(self, base_time):
+        # ewma5m200
+        ind_type = "ewma5m200"
+        sql = "select ewma_value from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC  limit 1" % (self.instrument, base_time, ind_type)
+        response = self.mysql_connector.select_sql(sql)
+        self.ewma5m200_value = response[0][0]
+
+    def setEwma1h200(self, base_time):
+        # ewma1h200
+        ind_type = "ewma1h200"
+        sql = "select ewma_value from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC  limit 1" % (self.instrument, base_time, ind_type)
+        response = self.mysql_connector.select_sql(sql)
+        self.ewma1h200_value = response[0][0]
+
+    def setHighlowPrice(self, base_time, span):
+        # high low price
+        ind_type = "highlow"
+        end_time = base_time - timedelta(hours=1)
+        sql = "select high_price, low_price from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC limit %s" % (self.instrument, end_time, ind_type, span)
+        response = self.mysql_connector.select_sql(sql)
+        high_price_list = []
+        low_price_list = []
+        for res in response:
+            high_price_list.append(res[0])
+            low_price_list.append(res[1])
+
+        self.high_price = max(high_price_list)
+        self.low_price =  min(low_price_list)
+
+
 
     @abstractmethod
     def setIndicatorWrapper(self, base_time):

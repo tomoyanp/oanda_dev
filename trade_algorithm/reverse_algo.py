@@ -48,13 +48,11 @@ class TrendFollowAlgo(SuperAlgo):
                     high_slope_threshold = 0.3
 
                     # bollingerバンド3シグマの幅が2以下、かつewma200の上にいること
-#                    if (self.upper_sigma_1h3 - self.lower_sigma_1h3) > 2 and self.ewma5m200_value > current_price:
                     if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
                         if current_price > self.upper_sigma_1m25:
                             trade_flag = "sell" # 逆張り
 
                     # bollingerバンド3シグマの幅が2以下、かつewma200の下にいること
-#                    if (self.upper_sigma_1h3 - self.lower_sigma_1h3) > 2 and self.ewma5m200_value < current_price:
                     if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
                         if current_price < self.lower_sigma_1m25:
                             trade_flag = "buy"

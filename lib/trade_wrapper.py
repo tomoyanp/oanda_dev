@@ -85,7 +85,8 @@ class TradeWrapper:
                 order_kind = trade_data["side"]
                 trade_id = trade_data["id"]
                 order_flag = True
-                self.trade_algo.setOrderData(order_kind, order_price, order_flag, trade_id)
+                trade_mode = "null"
+                self.trade_algo.setOrderData(order_kind, trade_mode, order_price, order_flag, trade_id)
                 logging.info("setCurrentTrade = True")
             else:
                 pass
@@ -200,7 +201,7 @@ class TradeWrapper:
         if order_flag:
             pass
         else:
-            trade_flag = self.trade_algo.decideTrade(base_time)
+            trade_flag, trade_mode = self.trade_algo.decideTrade(base_time)
             # 以下は, decideTradeの中で実装する
             # trade_flag = self.trade_algo.decideTradeTime(base_time, trade_flag)
             trade_flag = self.trade_algo.decideTradeTime(base_time, trade_flag)
@@ -221,7 +222,7 @@ class TradeWrapper:
 
                 self.tradeLogWrite(trade_flag)
                 order_flag = True
-                self.trade_algo.setOrderData(trade_flag, order_price, order_flag, trade_id)
+                self.trade_algo.setOrderData(trade_flag, trade_mode, order_price, order_flag, trade_id)
 
 
         return sleep_time
