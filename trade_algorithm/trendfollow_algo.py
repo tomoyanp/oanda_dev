@@ -221,4 +221,5 @@ class TrendFollowAlgo(SuperAlgo):
         self.setEwma5m50(base_time)
         self.setEwma5m200(base_time)
         self.setEwma1h200(base_time)
-        self.setHighlowPrice(base_time)
+        span = 24
+        self.setHighlowPrice(base_time, span)
