@@ -3,6 +3,7 @@
 import sys
 import os
 import traceback
+import json
 
 # 実行スクリプトのパスを取得して、追加
 current_path = os.path.abspath(os.path.dirname(__file__))
@@ -31,17 +32,42 @@ env = 'live'
 #oanda_wrapper = OandaWrapper(env, account_id, token)
 
 # 通貨
-instrument = "USD_JPY"
+instrument = "GBP_JPY"
 
 oanda = oandapy.API(environment=env, access_token=token)
 #response = oanda.get_positions(account_id)
-response = oanda.get_account(account_id)
+#response = oanda.get_account(account_id)
 #response = oanda.get_transaction_history(account_id)
-#print response
+response = oanda.get_history(
+    instrument="USD_JPY",
+    start="2018-01-02T10:00:00",
+    granularity="S5",
+    candleFormat="midpoint"
+)
+#response = oanda.get_history(
+#    instrument="USD_JPY",
+#    start="2018-01-02T10:00:00",
+#    granularity="S5",
+#    candleFormat="midpoint"
+#)
+
+#response = oanda.get_prices(
+#    instruments="GBP_JPY",
+#    alignmentTimezone="Asia/Tokyo",
+#    sessionId="abcdbdksl",
+#    accountId=account_id)
+#
+
+#response = json.load(response)
+
 
 #response = oanda.get_historical_position_ratios()
 #response = oanda.get_history(instrument)
 #response = oanda.get_position(account_id, instrument)
+#response = oanda.get_trades(
+#                 accountId=account_id,
+#                 instruments=instrument)
+#response = oanda.get_trades(account_id)
 print response
 
 #response = oanda_wrapper.order("buy", instrument, 0, 0)
