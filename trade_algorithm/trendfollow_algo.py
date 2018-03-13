@@ -43,7 +43,7 @@ class TrendFollowAlgo(SuperAlgo):
                     # 性能的に5分に一回呼び出しに変更
                     self.setIndicator(base_time)
                     current_price = self.getCurrentPrice()
-                    trade_flag = self.decideTrendFollowTrade(trade_flag, trade_mode, current_price)
+                    trade_flag = self.decideTrendFollowTrade(trade_flag, current_price)
 
             return trade_flag
         except:
@@ -61,7 +61,7 @@ class TrendFollowAlgo(SuperAlgo):
                     seconds = base_time.second
                     current_price = self.getCurrentPrice()
                     # 5分足の終値付近で計算ロジックに入る
-                    if (minutes % 5 == 4) and seconds > 50":
+                    if (minutes % 5 == 4) and seconds > 50:
                         logging.info("%s :TrendFollowStlLogic START" % base_time)
                         self.setIndicator(base_time)
                         stl_flag = self.decideTrendFollowStl(stl_flag, current_price)
@@ -108,15 +108,14 @@ class TrendFollowAlgo(SuperAlgo):
                 logging.info("ewma1h200 logic: OK, current_price = %s, ewma1h200 = %s, current_price - ewma1h200 = %s" % (current_price, self.ewma1h200_value,(current_price - self.ewma1h200_value)))
                 if self.ewma5m200_value < current_price:
                     logging.info("ewma5m200 logic: OK, current_price = %s, ewma5m200 = %s" % (current_price, self.ewma5m200_value))
-                    if self.ewma5m50_slope - high_slope_threshold) > 0:
+                    if (self.ewma5m50_slope - high_slope_threshold) > 0:
                         logging.info("ewma5m50 slope logic: OK, ewma5m50_slope = %s, high_slope_threshold = %s" % (self.ewma5m50_slope, high_slope_threshold))
                         if current_price > self.upper_sigma_5m25:
                             logging.info("upper_sigma logic: OK, current_price = %s, upper_sigma_5m25 = %s" % (current_price, self.upper_sigma_5m25))
                             if float(self.high_price - hilow_price_threshold) > float(current_price) or float(current_price) > (float(self.high_price) + 0.1):
                                 logging.info("high_price logic: OK, current_price = %s, high_price = %s" % (current_price, self.high_price))
                                 logging.info("EXECUTE ORDER BUY at Trend Follow Mode")
-                                    trade_flag = "buy"
-                                    trade_mode = "follow"
+                                trade_flag = "buy"
                             else:
                                 logging.info("high_price logic: NG, current_price = %s, high_price = %s" % (current_price, self.high_price))
                         else:

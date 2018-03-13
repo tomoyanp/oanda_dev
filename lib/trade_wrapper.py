@@ -7,8 +7,10 @@ import json
 
 from datetime import datetime, timedelta
 from trendfollow_algo import TrendFollowAlgo
+from trendreverse_algo import TrendReverseAlgo
 from oanda_wrapper import OandaWrapper
 from common import instrument_init, account_init
+import commands
 import time
 import logging
 

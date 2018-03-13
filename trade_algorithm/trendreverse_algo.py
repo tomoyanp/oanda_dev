@@ -39,10 +39,11 @@ class TrendReverseAlgo(SuperAlgo):
                 seconds = base_time.second
 
                 # 1分足の終値付近で計算ロジックに入る
-                elif seconds > 50 and trade_flag == "pass":
+                if seconds > 50 and trade_flag == "pass":
                     logging.info("%s :TrendReverseTradeLogic START" % base_time)
                     self.setIndicator(base_time)
-                    trade_flag, trade_mode = self.decideTrendReverseTrade(trade_flag, current_price)
+                    current_price = self.getCurrentPrice()
+                    trade_flag = self.decideTrendReverseTrade(trade_flag, current_price)
 
             return trade_flag
 
@@ -61,10 +62,10 @@ class TrendReverseAlgo(SuperAlgo):
                     seconds = base_time.second
                     current_price = self.getCurrentPrice()
 
-                    elif seconds > 50 and self.trade_mode == "reverse":
+                    if seconds > 50:
                         logging.info("%s :TrendReverseStlLogic START" % base_time)
-                        self.setIndicator(base_time, stl_flag)
-                        stl_flag = self.decideTrendFollowStl(stl_flag, current_price)
+                        self.setIndicator(base_time)
+                        stl_flag = self.decideTrendReverseStl(stl_flag, current_price)
             else:
                 pass
 
@@ -118,7 +119,7 @@ class TrendReverseAlgo(SuperAlgo):
             else:
                 logging.info("lower_sigma logic: NG, current_price = %s, lower_sigma_1m25 = %s" % (current_price, self.lower_sigma_1m25))
         else:
-            logging.info("bollinger 3 sigma logic: OK, upper_sigma_1h3 = %s, lower_sigma_1h3 = %s, upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
+            logging.info("bollinger 3 sigma logic: NG, upper_sigma_1h3 = %s, lower_sigma_1h3 = %s, upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
 
         return trade_flag
 
