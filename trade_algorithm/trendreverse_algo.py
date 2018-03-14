@@ -39,7 +39,8 @@ class TrendReverseAlgo(SuperAlgo):
                 seconds = base_time.second
 
                 # 1分足の終値付近で計算ロジックに入る
-                if seconds > 50 and trade_flag == "pass":
+#                if seconds > 50:
+                if minutes % 5 == 4 and seconds > 50:
                     logging.info("%s :TrendReverseTradeLogic START" % base_time)
                     self.setIndicator(base_time)
                     current_price = self.getCurrentPrice()
@@ -62,7 +63,8 @@ class TrendReverseAlgo(SuperAlgo):
                     seconds = base_time.second
                     current_price = self.getCurrentPrice()
 
-                    if seconds > 50:
+#                    if seconds > 50:
+                    if minutes % 5 == 4 and seconds > 50:
                         logging.info("%s :TrendReverseStlLogic START" % base_time)
                         self.setIndicator(base_time)
                         stl_flag = self.decideTrendReverseStl(stl_flag, current_price)
