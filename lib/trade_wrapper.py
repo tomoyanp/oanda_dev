@@ -91,7 +91,7 @@ class TradeWrapper:
         commands.getoutput("touch %s/onfile" % self.onfile_path)
 
     def checkOnfile(self):
-        onfile_exists = commands.getoutput("ls %s/onfile | wc -l" % self.onfile_path)
+        onfile_exists = commands.getoutput("ls %s/ | wc -l" % self.onfile_path)
         onfile_exists = int(onfile_exists)
 
         flag = False

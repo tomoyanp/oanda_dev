@@ -220,6 +220,16 @@ class SuperAlgo(object):
         self.lower_sigma_5m25 = response[0][1]
         self.base_line_5m25 = response[0][2]
 
+    def setBollinger5m3(self, base_time):
+        # bollinger 5m 3sigma
+        ind_type = "bollinger5m3"
+        sql = "select upper_sigma, lower_sigma, base_line from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC limit 1" % (self.instrument, base_time, ind_type)
+        response = self.mysql_connector.select_sql(sql)
+        self.upper_sigma_5m3 = response[0][0]
+        self.lower_sigma_5m3 = response[0][1]
+        self.base_line_5m3 = response[0][2]
+
+
     def setBollinger1h3(self, base_time):
         # bollinger 1h 3sigma
         ind_type = "bollinger1h3"
