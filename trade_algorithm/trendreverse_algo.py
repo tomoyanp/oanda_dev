@@ -80,7 +80,7 @@ class TrendReverseAlgo(SuperAlgo):
             raise
 
 
-    def decideTrendReverseStlTakeprofit(self, stl_flag, current_price):
+    def decideTrendReverseStlTakeProfit(self, stl_flag, current_price):
         if self.order_kind == "buy":
             if current_price > self.upper_sigma_5m25:
                 logging.info("EXECUTE STLEMENT at Trend Reverse Mode")
