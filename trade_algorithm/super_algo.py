@@ -181,7 +181,7 @@ class SuperAlgo(object):
         else:
             profit = self.order_price - stl_price
 
-        if profit > 0:
+        if profit >= 0:
             self.profit_history = "v"
             sleep_time = self.config_data["stl_sleep_vtime"]
         else:
