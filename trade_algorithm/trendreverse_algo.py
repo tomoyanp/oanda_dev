@@ -117,8 +117,8 @@ class TrendReverseAlgo(SuperAlgo):
         # bollingerバンド3シグマの幅が2以下、かつewma200の上にいること
         if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
             logging.info("bollinger 3 sigma logic: OK, upper_sigma_1h3 = %s, lower_sigma_1h3 = %s, upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
-#            if current_price > self.upper_sigma_1m25:
-            if current_price > self.upper_sigma_1m25 and current_price < self.ewma5m200_value:
+            if current_price > self.upper_sigma_1m25:
+#            if current_price > self.upper_sigma_1m25 and current_price < self.ewma5m200_value:
                 logging.info("upper_sigma logic: OK, current_price = %s, upper_sigma_1m25 = %s" % (current_price, self.upper_sigma_1m25))
                 logging.info("EXECUTE ORDER SELL at Trend Reverse Mode")
                 trade_flag = "sell" # 逆張り
@@ -131,8 +131,8 @@ class TrendReverseAlgo(SuperAlgo):
         # bollingerバンド3シグマの幅が2以下、かつewma200の下にいること
         if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
             logging.info("bollinger 3 sigma logic: OK, upper_sigma_1h3 = %s, lower_sigma_1h3 = %s, upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
-#            if current_price < self.lower_sigma_1m25:
-            if current_price < self.lower_sigma_1m25 and current_price > self.ewma5m200_value:
+            if current_price < self.lower_sigma_1m25:
+#            if current_price < self.lower_sigma_1m25 and current_price > self.ewma5m200_value:
                 logging.info("lower_sigma logic: OK, current_price = %s, lower_sigma_1m25 = %s" % (current_price, self.lower_sigma_1m25))
                 logging.info("EXECUTE ORDER BUY at Trend Reverse Mode")
                 trade_flag = "buy"
@@ -201,4 +201,4 @@ class TrendReverseAlgo(SuperAlgo):
         self.setBollinger1m25(base_time)
         self.setBollinger1m3(base_time)
         self.setBollinger1h3(base_time)
-        self.setEwma5m200(base_time)
+#        self.setEwma5m200(base_time)
