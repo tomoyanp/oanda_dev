@@ -115,7 +115,7 @@ class TrendReverseAlgo(SuperAlgo):
 
     def decideTrendReverseTrade(self, trade_flag, current_price):
         # bollingerバンド3シグマの幅が2以下、かつewma200の上にいること
-        if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
+        if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2 and self.ewma5m50_slope < 0.3:
             logging.info("bollinger 3 sigma logic: OK, upper_sigma_1h3 = %s, lower_sigma_1h3 = %s, upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
             if current_price > self.upper_sigma_1m25:
 #            if current_price > self.upper_sigma_1m25 and current_price < self.ewma5m200_value:
@@ -129,7 +129,7 @@ class TrendReverseAlgo(SuperAlgo):
 
 
         # bollingerバンド3シグマの幅が2以下、かつewma200の下にいること
-        if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
+        if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2 and self.ewma5m50_slope > -0.3:
             logging.info("bollinger 3 sigma logic: OK, upper_sigma_1h3 = %s, lower_sigma_1h3 = %s, upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
             if current_price < self.lower_sigma_1m25:
 #            if current_price < self.lower_sigma_1m25 and current_price > self.ewma5m200_value:
@@ -201,4 +201,4 @@ class TrendReverseAlgo(SuperAlgo):
         self.setBollinger1m25(base_time)
         self.setBollinger1m3(base_time)
         self.setBollinger1h3(base_time)
-#        self.setEwma5m200(base_time)
+        self.setEwma5m50(base_time)
