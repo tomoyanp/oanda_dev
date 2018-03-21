@@ -192,7 +192,17 @@ class SuperAlgo(object):
 
         return profit, sleep_time
 
-    def setBollinger1m25(self, base_time):
+
+    def setBollinger1m1(self, base_time):
+         # bollinger 1m 1sigma
+        ind_type = "bollinger1m1"
+        sql = "select upper_sigma, lower_sigma, base_line from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC limit 1" % (self.instrument, base_time, ind_type)
+        response = self.mysql_connector.select_sql(sql)
+        self.upper_sigma_1m1 = response[0][0]
+        self.lower_sigma_1m1 = response[0][1]
+        self.base_line_1m1 = response[0][2]
+
+    def setBollinger1m1(self, base_time):
          # bollinger 1m 2.5sigma
         ind_type = "bollinger1m2.5"
         sql = "select upper_sigma, lower_sigma, base_line from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC limit 1" % (self.instrument, base_time, ind_type)

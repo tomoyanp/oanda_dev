@@ -84,12 +84,14 @@ class TrendReverseAlgo(SuperAlgo):
 
     def decideTrendReverseStlTakeProfit(self, stl_flag, current_price):
         if self.order_kind == "buy":
-            if current_price > self.upper_sigma_1m25:
+#            if current_price > self.upper_sigma_1m25:
+            if current_price > self.upper_sigma_1m1:
                 logging.info("EXECUTE STLEMENT at Trend Reverse Mode")
                 stl_flag = True
 
         elif self.order_kind == "sell":
-            if current_price < self.lower_sigma_1m25:
+#            if current_price < self.lower_sigma_1m25:
+            if current_price < self.lower_sigma_1m1:
                 logging.info("EXECUTE STLEMENT at Trend Reverse Mode")
                 stl_flag = True
 
@@ -198,7 +200,7 @@ class TrendReverseAlgo(SuperAlgo):
         return stl_flag
 
     def setIndicator(self, base_time):
+        self.setBollinger1m1(base_time)
         self.setBollinger1m25(base_time)
         self.setBollinger1m3(base_time)
         self.setBollinger1h3(base_time)
-        self.setEwma5m50(base_time)
