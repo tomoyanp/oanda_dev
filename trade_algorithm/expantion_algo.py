@@ -106,7 +106,7 @@ class ExpantionAlgo(SuperAlgo):
                 trade_flag = "sell"
                 logging.info("1m3 bollinger logic: OK, lower_sigma + 0.1 = %s , current_price = %s" % ((self.lower_sigma_1m3 - 0.1), current_price))
             else:
-                logging.info("1m3 bollinger logic: NG, upper_sigma = %s, lower_sigma = %s, current_price = %s" % (self.upper_sigma_1m3, self.lower_sigma, current_price))
+                logging.info("1m3 bollinger logic: NG, upper_sigma = %s, lower_sigma = %s, current_price = %s" % (self.upper_sigma_1m3, self.lower_sigma_1m3, current_price))
         else:
             logging.info("1h3 bollinger logic: NG, upper_sigma = %s, lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
 
