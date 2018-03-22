@@ -90,6 +90,17 @@ class ExpantionAlgo(SuperAlgo):
                     logging.info("EXECUTE STLEMENT at Trend Follow Mode")
                     stl_flag = True
 
+        # 逆側にぶつかったら決済する
+        if self.order_kind == "buy":
+            if current_price < self.lower_sigma_1m3:
+                stl_flag = True
+                logging.info("EXECUTE STLEMENT at Reverse Stl mode")
+        elif self.order_kind == "sell":
+            if current_price > self.upper_sigma_1m3:
+                stl_flag = True
+                logging.info("EXECUTE STLEMENT at Reverse Stl mode")
+
+
         stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, current_price, order_price)
         logging.info("stl_flag = %s" % stl_flag)
 
