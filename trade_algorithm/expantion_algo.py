@@ -102,7 +102,7 @@ class ExpantionAlgo(SuperAlgo):
             if current_price > (self.upper_sigma_1m3 + 0.1):
                 trade_flag = "buy"
                 logging.info("1m3 bollinger logic: OK, upper_sigma + 0.1 = %s , current_price = %s" % ((self.upper_sigma_1m3 + 0.1), current_price))
-            elif current_price < (self.lower_sigma_1m3 - 0.1)):
+            elif current_price < (self.lower_sigma_1m3 - 0.1):
                 trade_flag = "sell"
                 logging.info("1m3 bollinger logic: OK, lower_sigma + 0.1 = %s , current_price = %s" % ((self.lower_sigma_1m3 - 0.1), current_price))
             else:
