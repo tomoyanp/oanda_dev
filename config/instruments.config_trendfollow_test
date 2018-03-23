@@ -1,12 +1,11 @@
 {
   "GBP_JPY": {
     "__comments" : "current master, bollinger band 3 sigma logic > 2",
-    "__comments1" : "stop loss rate 2.0, take profit rate 2.0",
+    "__comments1" : "stop loss rate 0.3, take profit rate 0.3",
     "__comments2" : "high low price span is 24 hours",
-    "__comments3" : "remove RANGE BREAK MODE, STOP ORDER LOGIC",
     "__comments4" : "trail_mode on",
-    "stop_loss": 2.0,
-    "take_profit": 2.0,
+    "stop_loss": 0.3,
+    "take_profit": 0.3,
     "time_width": 720000,
     "stl_time_width": 720000,
     "sleep_time": 5,
