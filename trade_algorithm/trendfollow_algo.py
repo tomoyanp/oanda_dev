@@ -101,6 +101,15 @@ class TrendFollowAlgo(SuperAlgo):
         high_slope_threshold = 0.3
         hilow_price_threshold = 0.5
 
+        # current price touch base_line
+        if self.break_wait_flag == "buy":
+            if self.base_line_5m25 > current_price:
+                trade_flag = "buy"
+        elif self.break_wait_flag == "sell":
+            if self.base_line_5m25 < current_price:
+                trade_flag = "sell"
+
+
         # Buy Logic at Trend Follow Mode
         if (self.upper_sigma_1h3 - self.lower_sigma_1h3) > 2:
             logging.info("bollinger 3 sigma logic: OK, upper_sigma_1h3 = %s, lower_sigma_1h3 = %s, upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
@@ -115,7 +124,8 @@ class TrendFollowAlgo(SuperAlgo):
                             if float(self.high_price - hilow_price_threshold) > float(current_price) or float(current_price) > (float(self.high_price) + 0.1):
                                 logging.info("high_price logic: OK, current_price = %s, high_price = %s" % (current_price, self.high_price))
                                 logging.info("EXECUTE ORDER BUY at Trend Follow Mode")
-                                trade_flag = "buy"
+                                #trade_flag = "buy"
+                                self.break_wait_flag = "buy"
                             else:
                                 logging.info("high_price logic: NG, current_price = %s, high_price = %s" % (current_price, self.high_price))
                         else:
@@ -145,7 +155,8 @@ class TrendFollowAlgo(SuperAlgo):
                             if float(self.low_price + hilow_price_threshold) < float(current_price) or float(current_price) < (float(self.low_price) - 0.1):
                                 logging.info("low_price logic: OK, current_price = %s, low_price = %s" % (current_price, self.low_price))
                                 logging.info("EXECUTE ORDER SELL at Trend Follow Mode")
-                                trade_flag = "sell"
+                                #trade_flag = "sell"
+                                self.break_wait_flag = "sell"
                             else:
                                 logging.info("low_price logic: NG, current_price = %s, low_price = %s" % (current_price, self.low_price))
                         else:
