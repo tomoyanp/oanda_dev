@@ -108,8 +108,7 @@ if __name__ == '__main__':
 
     except:
         message = traceback.format_exc()
-        print message
+        logging.info(message)
         sendmail = SendMail("tomoyanpy@gmail.com", "tomoyanpy@softbank.ne.jp", property_path)
         sendmail.set_msg(message)
         sendmail.send_mail()
-        print message
