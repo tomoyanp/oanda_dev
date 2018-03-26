@@ -60,7 +60,7 @@ class ExpantionAlgo(SuperAlgo):
                     seconds = base_time.second
                     current_price = self.getCurrentPrice()
                     # 1分足の終値付近で計算ロジックに入る
-                    if seconds > 50:
+                    if minutes % 5 == 4 and seconds > 50:
                         logging.info("%s :ExpantionStlLogic START" % base_time)
                         self.setIndicator(base_time)
                         stl_flag = self.decideExpantionStl(stl_flag, current_price)
@@ -74,7 +74,7 @@ class ExpantionAlgo(SuperAlgo):
     def decideExpantionStl(self, stl_flag, current_price):
         # Stop Loss Algorithm
         order_price = self.getOrderPrice()
-        min_take_profit = 0.3
+        min_take_profit = 0.7
 
         # bollinger 逆側の向きが変わったら
         if self.order_kind == "buy":
