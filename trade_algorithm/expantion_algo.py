@@ -114,10 +114,10 @@ class ExpantionAlgo(SuperAlgo):
         # slopeは上を向いている場合は買いエントリしない。下を向いている場合は売りエントリしない
         if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
             logging.info("1h3 bollinger logic: OK, upper_sigma = %s, lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
-            if current_price > (self.upper_sigma_5m3) and self.bollinger_1h3_slope < slope_high_threshold:
+            if current_price > (self.upper_sigma_5m3) and self.bollinger1h3_slope < slope_high_threshold:
                 trade_flag = "buy"
                 logging.info("5m3 bollinger logic: OK, upper_sigma + 0.1 = %s , current_price = %s" % ((self.upper_sigma_5m3), current_price))
-            elif current_price < (self.lower_sigma_5m3) and self.bollinger_1h3_slope > slope_low_threshold:
+            elif current_price < (self.lower_sigma_5m3) and self.bollinger1h3_slope > slope_low_threshold:
                 trade_flag = "sell"
                 logging.info("5m3 bollinger logic: OK, lower_sigma + 0.1 = %s , current_price = %s" % ((self.lower_sigma_5m3), current_price))
             else:
