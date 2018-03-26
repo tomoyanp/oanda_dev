@@ -99,35 +99,34 @@ class ComputeIndicator:
         bid_price_list = self.indicator_object.getBidPriceList()
 
         try: 
-#            sql = "select insert_time from INDICATOR_TABLE where insert_time <= \'%s\' and type = \'bollinger1h3\' order by insert_time DESC limit 1" % base_time
-            sql = "select insert_time from INDICATOR_TABLE where insert_time <= \'%s\' and type = \'ewma1h50\' order by insert_time DESC limit 1" % base_time
+            sql = "select insert_time from INDICATOR_TABLE where insert_time <= \'%s\' and type = \'bollinger1h3\' order by insert_time DESC limit 1" % base_time
             response = self.mysql_connector.select_sql(sql)
             polling_time = 3600
             if self.calculatePollingTime(base_time, response, polling_time):
-#                # 1時間置きに実行
-#                ind_type = "highlow"
-#                # 前日高値、安値の計算
-#                if decideMarket(base_time - timedelta(hours=2)):
-#                    high_price, low_price = self.getHiLowPrice(base_time)
-#        
-#                    # instrument, type, high_price, low_price, insert_time
-#                    sql = "insert into INDICATOR_TABLE(instrument, type, high_price, low_price, insert_time) values(\'%s\', \'%s\', %s, %s, \'%s\')" % (self.instrument, ind_type, high_price, low_price, base_time)
-#                    self.mysql_connector.insert_sql(sql)
-#                    logging.info(sql)
-#         
-#        
-#                ind_type = "ewma1h200"
-#                wma_length = 200
-#                candle_width = 3600
-#                # 移動平均の取得(WMA200 1h)
-#                ewma200_1h = getEWMA(ask_price_list, bid_price_list, wma_length, candle_width)
-#
-#
-#
-#                # instrument, type, ewma_value, insert_time
-#                sql = "insert into INDICATOR_TABLE(instrument, type, ewma_value,  insert_time) values(\'%s\', \'%s\', %s, \'%s\')" % (self.instrument, ind_type, ewma200_1h[-1], base_time)
-#                self.mysql_connector.insert_sql(sql)
-#                logging.info(sql)
+                # 1時間置きに実行
+                ind_type = "highlow"
+                # 前日高値、安値の計算
+                if decideMarket(base_time - timedelta(hours=2)):
+                    high_price, low_price = self.getHiLowPrice(base_time)
+        
+                    # instrument, type, high_price, low_price, insert_time
+                    sql = "insert into INDICATOR_TABLE(instrument, type, high_price, low_price, insert_time) values(\'%s\', \'%s\', %s, %s, \'%s\')" % (self.instrument, ind_type, high_price, low_price, base_time)
+                    self.mysql_connector.insert_sql(sql)
+                    logging.info(sql)
+         
+        
+                ind_type = "ewma1h200"
+                wma_length = 200
+                candle_width = 3600
+                # 移動平均の取得(WMA200 1h)
+                ewma200_1h = getEWMA(ask_price_list, bid_price_list, wma_length, candle_width)
+
+
+
+                # instrument, type, ewma_value, insert_time
+                sql = "insert into INDICATOR_TABLE(instrument, type, ewma_value,  insert_time) values(\'%s\', \'%s\', %s, \'%s\')" % (self.instrument, ind_type, ewma200_1h[-1], base_time)
+                self.mysql_connector.insert_sql(sql)
+                logging.info(sql)
 
                 ind_type = "ewma1h50"
                 wma_length = 50
@@ -146,32 +145,32 @@ class ComputeIndicator:
                 logging.info(sql)
 
     
-#                ind_type = "bollinger1h1"
-#                window_size = 28
-#                candle_width = 3600
-#                sigma_valiable = 1
-#                data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
-#                sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(\'%s\', \'%s\', %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
-#                self.mysql_connector.insert_sql(sql)
-#                logging.info(sql)
-#     
-#                ind_type = "bollinger1h2.5"
-#                window_size = 28
-#                candle_width = 3600
-#                sigma_valiable = 2.5
-#                data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
-#                sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(\'%s\', \'%s\', %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
-#                self.mysql_connector.insert_sql(sql)
-#                logging.info(sql)
-#     
-#                ind_type = "bollinger1h3"
-#                window_size = 28
-#                candle_width = 3600
-#                sigma_valiable = 3
-#                data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
-#                sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(\'%s\', \'%s\', %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
-#                self.mysql_connector.insert_sql(sql)
-#                logging.info(sql)
+                ind_type = "bollinger1h1"
+                window_size = 28
+                candle_width = 3600
+                sigma_valiable = 1
+                data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
+                sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(\'%s\', \'%s\', %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
+                self.mysql_connector.insert_sql(sql)
+                logging.info(sql)
+     
+                ind_type = "bollinger1h2.5"
+                window_size = 28
+                candle_width = 3600
+                sigma_valiable = 2.5
+                data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
+                sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(\'%s\', \'%s\', %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
+                self.mysql_connector.insert_sql(sql)
+                logging.info(sql)
+     
+                ind_type = "bollinger1h3"
+                window_size = 28
+                candle_width = 3600
+                sigma_valiable = 3
+                data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
+                sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(\'%s\', \'%s\', %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
+                self.mysql_connector.insert_sql(sql)
+                logging.info(sql)
  
         except Exception as e:
             logging.info(traceback.format_exc())
