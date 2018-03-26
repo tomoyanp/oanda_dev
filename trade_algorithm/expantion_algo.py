@@ -75,22 +75,15 @@ class ExpantionAlgo(SuperAlgo):
         # Stop Loss Algorithm
         order_price = self.getOrderPrice()
 
-        # 最小利確0.3以上、移動平均にぶつかったら
-        min_take_profit = 0.3
+        # bollinger 逆側の向きが変わったら
         if self.order_kind == "buy":
-            logging.info("current_bid_price = %s, current_price = %s, order_price = %s, base_line_5m25 = %s, order_kind = %s" %(self.bid_price, current_price, order_price, self.base_line_5m25, self.order_kind))
-            if (self.bid_price - order_price) > min_take_profit:
-                if -0.02 < (current_price - self.base_line_5m25) < 0.02:
-                    logging.info("EXECUTE STLEMENT at Trend Follow Mode")
-                    stl_flag = True
+            if self.bollinger1h3_lower_simga_slope > 0:
+                stl_flag = True
         elif self.order_kind == "sell":
-            logging.info("current_ask_price = %s, current_price = %s, order_price = %s, base_line_5m25 = %s, order_kind = %s" %(self.ask_price, current_price, order_price, self.base_line_5m25, self.order_kind))
-            if (order_price - self.ask_price) > min_take_profit:
-                if -0.02 < (current_price - self.base_line_5m25) < 0.02:
-                    logging.info("EXECUTE STLEMENT at Trend Follow Mode")
-                    stl_flag = True
+            if self.bollinger1h3_upper_sigma_slope < 0:
+                stl_flag = True
 
-        # 逆側にぶつかったら決済する
+        # 損切り逆方向にタッチしたら
         if self.order_kind == "buy":
             if current_price < self.lower_sigma_5m3:
                 stl_flag = True
@@ -99,7 +92,6 @@ class ExpantionAlgo(SuperAlgo):
             if current_price > self.upper_sigma_5m3:
                 stl_flag = True
                 logging.info("EXECUTE STLEMENT at Reverse Stl mode")
-
 
         stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, current_price, order_price)
         logging.info("stl_flag = %s" % stl_flag)

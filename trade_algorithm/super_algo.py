@@ -278,14 +278,22 @@ class SuperAlgo(object):
     def setSlopeBollinger1h3(self, base_time):
         # ewma1h50
         ind_type = "bollinger1h3"
-        sql = "select base_line from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC  limit 5" % (self.instrument, base_time, ind_type)
+        sql = "select base_line, upper_sigma, lower_sigma from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC  limit 5" % (self.instrument, base_time, ind_type)
         response = self.mysql_connector.select_sql(sql)
-        tmp = []
+        tmp_base_line = []
+        tmp_upper_sigma = []
+        tmp_lower_sigma = []
         for res in response:
-            tmp.append(res[0])
-        tmp.reverse()
-        self.bollinger1h3_slope = tmp[4] - tmp[0]
+            tmp_base_line.append(res[0])
+            tmp_upper_sigma.append(res[1])
+            tmp_lower_sigma.append(res[2])
 
+        tmp_base_line.reverse()
+        tmp_upper_sigma.reverse()
+        tmp_lower_sigma.reverse()
+        self.bollinger1h3_slope = tmp_base_line[4] - tmp_base_line[0]
+        self.bollinger1h3_upper_sigma_slope = tmp_upper_sigma[4] - tmp_upper_sigma[0]
+        self.bollinger1h3_lower_simga_slope = tmp_lower_sigmag[4] - tmp_lower_sigma[0]
 
 
     def setEwma1h200(self, base_time):
