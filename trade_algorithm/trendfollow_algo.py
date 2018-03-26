@@ -113,29 +113,20 @@ class TrendFollowAlgo(SuperAlgo):
         # Buy Logic at Trend Follow Mode
         if (self.upper_sigma_1h3 - self.lower_sigma_1h3) > 2:
             logging.info("bollinger 3 sigma logic: OK, upper_sigma_1h3 = %s, lower_sigma_1h3 = %s, upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
-            if (current_price - self.ewma1h200_value) > 0.1:
-                logging.info("ewma1h200 logic: OK, current_price = %s, ewma1h200 = %s, current_price - ewma1h200 = %s" % (current_price, self.ewma1h200_value,(current_price - self.ewma1h200_value)))
-                if self.ewma5m200_value < current_price:
-                    logging.info("ewma5m200 logic: OK, current_price = %s, ewma5m200 = %s" % (current_price, self.ewma5m200_value))
-                    if (self.ewma5m50_slope - high_slope_threshold) > 0:
-                        logging.info("ewma5m50 slope logic: OK, ewma5m50_slope = %s, high_slope_threshold = %s" % (self.ewma5m50_slope, high_slope_threshold))
-                        if current_price > self.upper_sigma_5m25:
-                            logging.info("upper_sigma logic: OK, current_price = %s, upper_sigma_5m25 = %s" % (current_price, self.upper_sigma_5m25))
-                            if float(self.high_price - hilow_price_threshold) > float(current_price) or float(current_price) > (float(self.high_price) + 0.1):
-                                logging.info("high_price logic: OK, current_price = %s, high_price = %s" % (current_price, self.high_price))
-                                logging.info("EXECUTE ORDER BUY at Trend Follow Mode")
-                                #trade_flag = "buy"
-                                self.break_wait_flag = "buy"
-                            else:
-                                logging.info("high_price logic: NG, current_price = %s, high_price = %s" % (current_price, self.high_price))
-                        else:
-                            logging.info("upper_sigma logic: NG, current_price = %s, upper_sigma_5m25 = %s" % (current_price, self.upper_sigma_5m25))
+            if self.ewma5m200_value < current_price:
+                logging.info("ewma5m200 logic: OK, current_price = %s, ewma5m200 = %s" % (current_price, self.ewma5m200_value))
+                if (self.ewma5m50_slope - high_slope_threshold) > 0:
+                    logging.info("ewma5m50 slope logic: OK, ewma5m50_slope = %s, high_slope_threshold = %s" % (self.ewma5m50_slope, high_slope_threshold))
+                    if current_price > self.upper_sigma_5m25:
+                        logging.info("upper_sigma logic: OK, current_price = %s, upper_sigma_5m25 = %s" % (current_price, self.upper_sigma_5m25))
+                        #trade_flag = "buy"
+                        self.break_wait_flag = "buy"
                     else:
-                        logging.info("ewma5m50 slope logic: NG, ewma5m50_slope = %s, high_slope_threshold = %s" % (self.ewma5m50_slope, high_slope_threshold))
+                        logging.info("upper_sigma logic: NG, current_price = %s, upper_sigma_5m25 = %s" % (current_price, self.upper_sigma_5m25))
                 else:
-                    logging.info("ewma5m200 logic: NG, current_price = %s, ewma5m200 = %s" % (current_price, self.ewma5m200_value))
+                    logging.info("ewma5m50 slope logic: NG, ewma5m50_slope = %s, high_slope_threshold = %s" % (self.ewma5m50_slope, high_slope_threshold))
             else:
-                logging.info("ewma1h200 logic: NG, current_price = %s, ewma1h200 = %s, current_price - ewma1h200 = %s" % (current_price, self.ewma1h200_value,(current_price - self.ewma1h200_value)))
+                logging.info("ewma5m200 logic: NG, current_price = %s, ewma5m200 = %s" % (current_price, self.ewma5m200_value))
         else:
             logging.info("bollinger 3 sigma logic: NG, upper_sigma_1h3 = %s, lower_sigma_1h3 = %s, upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
 
@@ -144,29 +135,20 @@ class TrendFollowAlgo(SuperAlgo):
         # Sell Logic at Trend Follow Mode
         if (self.upper_sigma_1h3 - self.lower_sigma_1h3) > 2:
             logging.info("bollinger 3 sigma logic: OK, upper_sigma_1h3 = %s, lower_sigma_1h3 = %s, upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
-            if (self.ewma1h200_value - current_price) > 0.1:
-                logging.info("ewma1h200 logic: OK, current_price = %s, ewma1h200 = %s, ewma1h200 - current_price = %s" % (current_price, self.ewma1h200_value,(self.ewma1h200_value - current_price)))
-                if self.ewma5m200_value > current_price:
-                    logging.info("ewma5m200 logic: OK, current_price = %s, ewma5m200 = %s" % (current_price, self.ewma5m200_value))
-                    if (self.ewma5m50_slope - low_slope_threshold) < 0:
-                        logging.info("ewma5m50 slope logic: OK, ewma5m50_slope = %s, low_slope_threshold = %s" % (self.ewma5m50_slope, low_slope_threshold))
-                        if current_price < self.lower_sigma_5m25:
-                            logging.info("lower_sigma logic: OK, current_price = %s, lower_sigma_5m25 = %s" % (current_price, self.lower_sigma_5m25))
-                            if float(self.low_price + hilow_price_threshold) < float(current_price) or float(current_price) < (float(self.low_price) - 0.1):
-                                logging.info("low_price logic: OK, current_price = %s, low_price = %s" % (current_price, self.low_price))
-                                logging.info("EXECUTE ORDER SELL at Trend Follow Mode")
-                                #trade_flag = "sell"
-                                self.break_wait_flag = "sell"
-                            else:
-                                logging.info("low_price logic: NG, current_price = %s, low_price = %s" % (current_price, self.low_price))
-                        else:
-                            logging.info("lower_sigma logic: NG, current_price = %s, lower_sigma_5m25 = %s" % (current_price, self.lower_sigma_5m25))
+            if self.ewma5m200_value > current_price:
+                logging.info("ewma5m200 logic: OK, current_price = %s, ewma5m200 = %s" % (current_price, self.ewma5m200_value))
+                if (self.ewma5m50_slope - low_slope_threshold) < 0:
+                    logging.info("ewma5m50 slope logic: OK, ewma5m50_slope = %s, low_slope_threshold = %s" % (self.ewma5m50_slope, low_slope_threshold))
+                    if current_price < self.lower_sigma_5m25:
+                        logging.info("lower_sigma logic: OK, current_price = %s, lower_sigma_5m25 = %s" % (current_price, self.lower_sigma_5m25))
+                        #trade_flag = "sell"
+                        self.break_wait_flag = "sell"
                     else:
-                        logging.info("ewma5m50 slope logic: NG, ewma5m50_slope = %s, low_slope_threshold = %s" % (self.ewma5m50_slope, low_slope_threshold))
+                        logging.info("lower_sigma logic: NG, current_price = %s, lower_sigma_5m25 = %s" % (current_price, self.lower_sigma_5m25))
                 else:
-                    logging.info("ewma5m200 logic: NG, current_price = %s, ewma5m200 = %s" % (current_price, self.ewma5m200_value))
+                    logging.info("ewma5m50 slope logic: NG, ewma5m50_slope = %s, low_slope_threshold = %s" % (self.ewma5m50_slope, low_slope_threshold))
             else:
-                logging.info("ewma1h200 logic: NG, current_price = %s, ewma1h200 = %s, ewma1h200 - current_price = %s" % (current_price, self.ewma1h200_value,(self.ewma1h200_value - current_price)))
+                logging.info("ewma5m200 logic: NG, current_price = %s, ewma5m200 = %s" % (current_price, self.ewma5m200_value))
         else:
             logging.info("bollinger 3 sigma logic: NG, upper_sigma_1h3 = %s, lower_sigma_1h3 = %s, upper_sigma - lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3, (self.upper_sigma_1h3 - self.lower_sigma_1h3)))
 
@@ -231,6 +213,6 @@ class TrendFollowAlgo(SuperAlgo):
         self.setBollinger1h3(base_time)
         self.setEwma5m50(base_time)
         self.setEwma5m200(base_time)
-        self.setEwma1h200(base_time)
-        span = 24
-        self.setHighlowPrice(base_time, span)
+#        self.setEwma1h200(base_time)
+#        span = 24
+#        self.setHighlowPrice(base_time, span)

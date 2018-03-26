@@ -4,6 +4,7 @@
     "__comments1" : "stop loss rate 0.3, take profit rate 0.3",
     "__comments2" : "high low price span is 24 hours",
     "__comments4" : "trail_mode on",
+    "__comments5" : "remove ewma1h hilow price logic",
     "stop_loss": 0.3,
     "take_profit": 0.3,
     "time_width": 720000,

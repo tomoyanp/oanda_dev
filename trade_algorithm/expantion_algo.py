@@ -2,7 +2,7 @@
 ####################################################
 # トレード判断
 # bollinger 1h3sigmaの幅が1.5以下（expantionの判定）
-# bollinger 1m3+0.1の突破
+# bollinger 5m3+0.1の突破
 #
 # 損切り判断
 # １）とりあえず0.3に設定
@@ -37,7 +37,7 @@ class ExpantionAlgo(SuperAlgo):
                 minutes = base_time.minute
                 seconds = base_time.second
                 # 1分足の終値付近で計算ロジックに入る
-                if seconds > 50:
+                if minutes % 5 == 4 and seconds > 50:
                     logging.info("%s :TrendExpantionLogic START" % base_time)
                     # 性能的に5分に一回呼び出しに変更
                     self.setIndicator(base_time)
@@ -92,11 +92,11 @@ class ExpantionAlgo(SuperAlgo):
 
         # 逆側にぶつかったら決済する
         if self.order_kind == "buy":
-            if current_price < self.lower_sigma_1m3:
+            if current_price < self.lower_sigma_5m3:
                 stl_flag = True
                 logging.info("EXECUTE STLEMENT at Reverse Stl mode")
         elif self.order_kind == "sell":
-            if current_price > self.upper_sigma_1m3:
+            if current_price > self.upper_sigma_5m3:
                 stl_flag = True
                 logging.info("EXECUTE STLEMENT at Reverse Stl mode")
 
@@ -110,14 +110,14 @@ class ExpantionAlgo(SuperAlgo):
         # Buy Logic at Trend Follow Mode
         if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 1.5:
             logging.info("1h3 bollinger logic: OK, upper_sigma = %s, lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
-            if current_price > (self.upper_sigma_1m3 + 0.1):
+            if current_price > (self.upper_sigma_5m3 + 0.1):
                 trade_flag = "buy"
-                logging.info("1m3 bollinger logic: OK, upper_sigma + 0.1 = %s , current_price = %s" % ((self.upper_sigma_1m3 + 0.1), current_price))
-            elif current_price < (self.lower_sigma_1m3 - 0.1):
+                logging.info("5m3 bollinger logic: OK, upper_sigma + 0.1 = %s , current_price = %s" % ((self.upper_sigma_5m3 + 0.1), current_price))
+            elif current_price < (self.lower_sigma_5m3 - 0.1):
                 trade_flag = "sell"
-                logging.info("1m3 bollinger logic: OK, lower_sigma + 0.1 = %s , current_price = %s" % ((self.lower_sigma_1m3 - 0.1), current_price))
+                logging.info("5m3 bollinger logic: OK, lower_sigma + 0.1 = %s , current_price = %s" % ((self.lower_sigma_5m3 - 0.1), current_price))
             else:
-                logging.info("1m3 bollinger logic: NG, upper_sigma = %s, lower_sigma = %s, current_price = %s" % (self.upper_sigma_1m3, self.lower_sigma_1m3, current_price))
+                logging.info("5m3 bollinger logic: NG, upper_sigma = %s, lower_sigma = %s, current_price = %s" % (self.upper_sigma_5m3, self.lower_sigma_5m3, current_price))
         else:
             logging.info("1h3 bollinger logic: NG, upper_sigma = %s, lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
 
@@ -178,6 +178,6 @@ class ExpantionAlgo(SuperAlgo):
         return stl_flag
 
     def setIndicator(self, base_time):
-        self.setBollinger1m3(base_time)
+        self.setBollinger5m3(base_time)
         self.setBollinger5m25(base_time)
         self.setBollinger1h3(base_time)
