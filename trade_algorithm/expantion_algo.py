@@ -74,13 +74,16 @@ class ExpantionAlgo(SuperAlgo):
     def decideExpantionStl(self, stl_flag, current_price):
         # Stop Loss Algorithm
         order_price = self.getOrderPrice()
+        min_take_profit = 0.3
 
         # bollinger 逆側の向きが変わったら
         if self.order_kind == "buy":
-            if self.bollinger1h3_lower_simga_slope > 0:
+            if (self.bid_price - order_price) > min_take_profit and self.bollinger1h3_lower_simga_slope > 0:
+                logging.info("EXECUTE STLMENT at Take Profit")
                 stl_flag = True
         elif self.order_kind == "sell":
-            if self.bollinger1h3_upper_sigma_slope < 0:
+            if (order_price - self.ask_price) > min_take_profit and self.bollinger1h3_upper_sigma_slope < 0:
+                logging.info("EXECUTE STLMENT at Take Profit")
                 stl_flag = True
 
         # 損切り逆方向にタッチしたら
