@@ -108,18 +108,18 @@ class ExpantionAlgo(SuperAlgo):
 
     def decideExpantionTrade(self, trade_flag, current_price):
         # Buy Logic at Trend Follow Mode
-        slope_high_threshold = 0.5
-        slope_low_threshold = -0.5
+        slope_high_threshold = 0.3
+        slope_low_threshold = -0.3
 
         # slopeは上を向いている場合は買いエントリしない。下を向いている場合は売りエントリしない
-        if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 1.5:
+        if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
             logging.info("1h3 bollinger logic: OK, upper_sigma = %s, lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
-            if current_price > (self.upper_sigma_5m3 + 0.1) and self.ewma1h50_slope < slope_high_threshold:
+            if current_price > (self.upper_sigma_5m3) and self.bollinger_1h3_slope < slope_high_threshold:
                 trade_flag = "buy"
-                logging.info("5m3 bollinger logic: OK, upper_sigma + 0.1 = %s , current_price = %s" % ((self.upper_sigma_5m3 + 0.1), current_price))
-            elif current_price < (self.lower_sigma_5m3 - 0.1) and self.ewma1h50_slope > slope_low_threshold:
+                logging.info("5m3 bollinger logic: OK, upper_sigma + 0.1 = %s , current_price = %s" % ((self.upper_sigma_5m3), current_price))
+            elif current_price < (self.lower_sigma_5m3) and self.bollinger_1h3_slope > slope_low_threshold:
                 trade_flag = "sell"
-                logging.info("5m3 bollinger logic: OK, lower_sigma + 0.1 = %s , current_price = %s" % ((self.lower_sigma_5m3 - 0.1), current_price))
+                logging.info("5m3 bollinger logic: OK, lower_sigma + 0.1 = %s , current_price = %s" % ((self.lower_sigma_5m3), current_price))
             else:
                 logging.info("5m3 bollinger logic: NG, upper_sigma = %s, lower_sigma = %s, current_price = %s" % (self.upper_sigma_5m3, self.lower_sigma_5m3, current_price))
         else:
@@ -185,4 +185,5 @@ class ExpantionAlgo(SuperAlgo):
         self.setBollinger5m3(base_time)
         self.setBollinger5m25(base_time)
         self.setBollinger1h3(base_time)
-        self.setSlopeEwma1h50(base_time)
+#        self.setSlopeEwma1h50(base_time)
+        self.setSlopeBollinger1h3(base_time)

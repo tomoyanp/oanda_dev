@@ -275,6 +275,19 @@ class SuperAlgo(object):
         tmp.reverse()
         self.ewma1h50_slope = tmp[4] - tmp[0]
 
+    def setSlopeBollinger1h3(self, base_time):
+        # ewma1h50
+        ind_type = "bollinger1h3"
+        sql = "select base_line from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC  limit 5" % (self.instrument, base_time, ind_type)
+        response = self.mysql_connector.select_sql(sql)
+        tmp = []
+        for res in response:
+            tmp.append(res[0])
+        tmp.reverse()
+        self.bollinger1h3_slope = tmp[4] - tmp[0]
+
+
+
     def setEwma1h200(self, base_time):
         # ewma1h200
         ind_type = "ewma1h200"
