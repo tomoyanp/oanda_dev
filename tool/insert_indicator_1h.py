@@ -19,17 +19,16 @@ logging.basicConfig(filename=logfilename, level=logging.INFO)
 
 if __name__ == "__main__":
     instrument = "GBP_JPY"
-    base_time = datetime.strptime("2018-03-09 18:00:00", "%Y-%m-%d %H:%M:%S")
-#    base_time = datetime.strptime("2018-02-01 00:00:00", "%Y-%m-%d %H:%M:%S")
-    end_time = datetime.strptime("2018-03-10 18:00:00", "%Y-%m-%d %H:%M:%S")
+    base_time = datetime.strptime("2017-02-01 00:00:00", "%Y-%m-%d %H:%M:%S")
+    end_time = datetime.strptime("2018-03-26 20:00:00", "%Y-%m-%d %H:%M:%S")
 #    end_time = datetime.now()
     time_width = 3600 * 200
     compute_indicator = ComputeIndicator(instrument, time_width, base_time)
+    now = datetime.now()
 
-    while base_time < end_time:
+    while base_time < end_time and base_time < now:
         try:
-#            base_time = base_time + timedelta(seconds=1)
-#            base_time = base_time + timedelta(minutes=5)
+            now = datetime.now()
             base_time = base_time + timedelta(minutes=20)
             span = "1h"
             compute_indicator.computeInsertIndicator(base_time, span)

@@ -50,10 +50,3 @@ if __name__ == "__main__":
         except Exception as e:
             print e.args
 
-
-#        sql = u"select * from GBP_JPY_TABLE"
-#        response = con.select_sql(sql)
-#        for line in response:
-#            print type(line)
-#            for obj in line:
-#                print obj
