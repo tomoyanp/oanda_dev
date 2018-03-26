@@ -108,8 +108,8 @@ class ExpantionAlgo(SuperAlgo):
 
     def decideExpantionTrade(self, trade_flag, current_price):
         # Buy Logic at Trend Follow Mode
-        slope_high_threshold = 0.3
-        slope_low_threshold = -0.3
+        slope_high_threshold = 0.5
+        slope_low_threshold = -0.5
 
         # slopeは上を向いている場合は買いエントリしない。下を向いている場合は売りエントリしない
         if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 1.5:
@@ -185,4 +185,4 @@ class ExpantionAlgo(SuperAlgo):
         self.setBollinger5m3(base_time)
         self.setBollinger5m25(base_time)
         self.setBollinger1h3(base_time)
-        self.setEwma1h50(base_time)
+        self.setSlopeEwma1h50(base_time)

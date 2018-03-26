@@ -264,13 +264,16 @@ class SuperAlgo(object):
         response = self.mysql_connector.select_sql(sql)
         self.ewma5m200_value = response[0][0]
 
-    def setEwma1h50(self, base_time):
+    def setSlopeEwma1h50(self, base_time):
         # ewma1h50
         ind_type = "ewma1h50"
-        sql = "select ewma_value, slope from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC  limit 1" % (self.instrument, base_time, ind_type)
+        sql = "select ewma_value, slope from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC  limit 5" % (self.instrument, base_time, ind_type)
         response = self.mysql_connector.select_sql(sql)
-        self.ewma1h50_value = response[0][0]
-        self.ewma1h50_slope = response[0][1]
+        tmp = []
+        for res in response:
+            tmp.append(res[0])
+        tmp.reverse()
+        self.ewma1h50_slope = tmp[4] - tmp[0]
 
     def setEwma1h200(self, base_time):
         # ewma1h200
