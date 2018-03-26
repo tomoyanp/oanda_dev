@@ -3,6 +3,7 @@
 ## dummy
 import os, sys
 current_path = os.path.abspath(os.path.dirname(__file__))
+current_path = current_path + "/.."
 sys.path.append(current_path)
 sys.path.append(current_path + "/lib")
 config_name = "trendfollow_dummy"
