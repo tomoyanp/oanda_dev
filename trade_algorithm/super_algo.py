@@ -293,7 +293,7 @@ class SuperAlgo(object):
         tmp_lower_sigma.reverse()
         self.bollinger1h3_slope = tmp_base_line[4] - tmp_base_line[0]
         self.bollinger1h3_upper_sigma_slope = tmp_upper_sigma[4] - tmp_upper_sigma[0]
-        self.bollinger1h3_lower_simga_slope = tmp_lower_sigmag[4] - tmp_lower_sigma[0]
+        self.bollinger1h3_lower_simga_slope = tmp_lower_sigma[4] - tmp_lower_sigma[0]
 
 
     def setEwma1h200(self, base_time):

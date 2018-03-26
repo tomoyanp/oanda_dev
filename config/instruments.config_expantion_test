@@ -1,6 +1,7 @@
 {
   "GBP_JPY": {
     "__comments" : "expantion mode",
+    "__comments2" : "modify take profit algorithm",
     "stop_loss": 0.3,
     "take_profit": 1.0,
     "time_width": 720000,
