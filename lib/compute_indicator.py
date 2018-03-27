@@ -128,21 +128,21 @@ class ComputeIndicator:
                 self.mysql_connector.insert_sql(sql)
                 logging.info(sql)
 
-                ind_type = "ewma1h50"
-                wma_length = 50
-                candle_width = 3600
-                # 移動平均の取得(WMA50 1h)
-                ewma50_1h = getEWMA(ask_price_list, bid_price_list, wma_length, candle_width)
-
-                # 短期トレンドの取得
-                slope_length = (5 * candle_width) * -1
-                slope_list = ewma50_1h[slope_length:]
-                slope = getSlope(slope_list)
-
-                # instrument, type, ewma_value, insert_time
-                sql = "insert into INDICATOR_TABLE(instrument, type, ewma_value,  insert_time, slope) values(\'%s\', \'%s\', %s, \'%s\', %s)" % (self.instrument, ind_type, ewma50_1h[-1], base_time, slope)
-                self.mysql_connector.insert_sql(sql)
-                logging.info(sql)
+#                ind_type = "ewma1h50"
+#                wma_length = 50
+#                candle_width = 3600
+#                # 移動平均の取得(WMA50 1h)
+#                ewma50_1h = getEWMA(ask_price_list, bid_price_list, wma_length, candle_width)
+#
+#                # 短期トレンドの取得
+#                slope_length = (5 * candle_width) * -1
+#                slope_list = ewma50_1h[slope_length:]
+#                slope = getSlope(slope_list)
+#
+#                # instrument, type, ewma_value, insert_time
+#                sql = "insert into INDICATOR_TABLE(instrument, type, ewma_value,  insert_time, slope) values(\'%s\', \'%s\', %s, \'%s\', %s)" % (self.instrument, ind_type, ewma50_1h[-1], base_time, slope)
+#                self.mysql_connector.insert_sql(sql)
+#                logging.info(sql)
 
     
                 ind_type = "bollinger1h1"
