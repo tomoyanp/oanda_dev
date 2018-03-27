@@ -171,7 +171,7 @@ class TradeWrapper:
                 if stl_flag == False and self.test_mode:
                     test_stl_flag = self.trade_algo.decideReverceStl()
                     stl_flag = test_stl_flag
-                    self.result_logger.info("# EXECUTE STOP OR LIMIT ORDER")
+                    #self.result_logger.info("# EXECUTE STOP OR LIMIT ORDER")
 
                 # stl_flagが立ってたら決済する
                 if stl_flag:
