@@ -105,18 +105,17 @@ class TradeWrapper:
         order_kind = self.trade_algo.getOrderKind()
         order_price = self.trade_algo.getOrderPrice()
         stl_price = self.trade_algo.getCurrentPrice()
-        footer = "at %s ======" % nowftime
+        footer = "at %s" % nowftime
         self.result_logger.info(msg + footer)
-        self.result_logger.info("ORDER_PRICE=%s, STL_PRICE=%s, ORDER_KIND=%s, PROFIT=%s" % (order_price, stl_price, order_kind, profit))
-        self.result_logger.info("PROFIT=%s" % profit)
-        self.result_logger.info("======================================================")
+        self.result_logger.info("# ORDER_PRICE=%s, STL_PRICE=%s, ORDER_KIND=%s, PROFIT=%s" % (order_price, stl_price, order_kind, profit))
+        self.result_logger.info("# PROFIT=%s" % profit)
 
     def tradeLogWrite(self, trade_flag):
         nowftime = self.trade_algo.getCurrentTime()
         order_price = self.trade_algo.getCurrentPrice()
         threshold_list = self.trade_algo.calcThreshold(trade_flag)
-        self.result_logger.info("===== EXECUTE ORDER at %s ======" % nowftime)
-        self.result_logger.info("ORDER_PRICE=%s, TRADE_FLAG=%s" % (order_price, trade_flag))
+        self.result_logger.info("# EXECUTE ORDER at %s" % nowftime)
+        self.result_logger.info("# ORDER_PRICE=%s, TRADE_FLAG=%s" % (order_price, trade_flag))
 
     # 今ポジションを持っているか確認
     # なければ、フラグをリセットする
@@ -137,7 +136,7 @@ class TradeWrapper:
                 if self.stl_sleep_flag and trade_id != 0:
                     profit, sleep_time = self.trade_algo.calcProfit()
 
-                    msg = "===== EXECUTE SETTLEMENT STOP OR LIMIT ORDER "
+                    msg = "# EXECUTE SETTLEMENT STOP OR LIMIT ORDER "
                     self.settlementLogWrite(profit, msg)
                     self.stl_sleep_flag = False
                     self.trade_algo.resetFlag()
@@ -172,6 +171,7 @@ class TradeWrapper:
                 if stl_flag == False and self.test_mode:
                     test_stl_flag = self.trade_algo.decideReverceStl()
                     stl_flag = test_stl_flag
+                    self.result_logger.info("# EXECUTE STOP OR LIMIT ORDER")
 
                 # stl_flagが立ってたら決済する
                 if stl_flag:
@@ -189,7 +189,7 @@ class TradeWrapper:
                     profit, sleep_time = self.trade_algo.calcProfit()
 
                     # 計算した利益を結果ファイルに出力
-                    msg = "===== EXECUTE SETTLEMENT "
+                    msg = "# EXECUTE SETTLEMENT "
                     self.settlementLogWrite(profit, msg)
 
                     # flagの初期化
