@@ -16,7 +16,7 @@
 from super_algo import SuperAlgo
 from common import instrument_init, account_init, decideMarket, getBollingerDataSet, extraBollingerDataSet, getEWMA, countIndex, getSlope, getOriginalEWMA
 from datetime import datetime, timedelta
-import logging
+from logging import getLogger, FileHandler, DEBUG
 import pandas as pd
 import decimal
 
@@ -27,6 +27,8 @@ class ExpantionAlgo(SuperAlgo):
         self.base_price = 0
         self.setPrice(base_time)
         self.setIndicator(base_time)
+        self.debug_logger = getLogger("debug")
+        self.result_logger = getLogger("result")
 
     def decideTrade(self, base_time):
         trade_flag = "pass"
@@ -38,7 +40,7 @@ class ExpantionAlgo(SuperAlgo):
                 seconds = base_time.second
                 # 1分足の終値付近で計算ロジックに入る
                 if minutes % 5 == 4 and seconds > 50:
-                    logging.info("%s :TrendExpantionLogic START" % base_time)
+                    self.debug_logger.info("%s :TrendExpantionLogic START" % base_time)
                     # 性能的に5分に一回呼び出しに変更
                     self.setIndicator(base_time)
                     current_price = self.getCurrentPrice()
@@ -61,11 +63,11 @@ class ExpantionAlgo(SuperAlgo):
                     current_price = self.getCurrentPrice()
                     # 1分足の終値付近で計算ロジックに入る
                     if seconds > 50:
-                        logging.info("%s :ExpantionStlLogic START" % base_time)
+                        self.debug_logger.info("%s :ExpantionStlLogic START" % base_time)
                         self.setIndicator(base_time)
                         stl_flag = self.decideExpantionStopLoss(stl_flag, current_price)
                     if minutes == 0 and seconds > 50:
-                        logging.info("%s :ExpantionStlLogic START" % base_time)
+                        self.debug_logger.info("%s :ExpantionStlLogic START" % base_time)
                         self.setIndicator(base_time)
                         stl_flag = self.decideExpantionTakeProfit(stl_flag, current_price)
             else:
@@ -83,11 +85,15 @@ class ExpantionAlgo(SuperAlgo):
         # bollinger 逆側の向きが変わったら
         if self.order_kind == "buy":
             if (self.bid_price - order_price) > min_take_profit and self.bollinger1h3_lower_simga_slope > 0:
-                logging.info("EXECUTE STLMENT at Take Profit")
+                self.result_logger.info("# EXECUTE STLMENT at Take Profit")
+                self.result_logger.info("# current_bid_price=%s, order_price=%s, min_take_profit=%s" % (self.bid_price, order_price, min_take_profit))
+                self.result_logger.info("# bollinger1h3_lower_sigma_slope=%s" % (self.bollinger1h3_lower_sigma_slope))
                 stl_flag = True
         elif self.order_kind == "sell":
             if (order_price - self.ask_price) > min_take_profit and self.bollinger1h3_upper_sigma_slope < 0:
-                logging.info("EXECUTE STLMENT at Take Profit")
+                self.result_logger.info("# EXECUTE STLMENT at Take Profit")
+                self.result_logger.info("# current_ask_price=%s, order_price=%s, min_take_profit=%s" % (self.ask_price, order_price, min_take_profit))
+                self.result_logger.info("# bollinger1h3_upper_sigma_slope=%s" % (self.bollinger1h3_upper_sigma_slope))
                 stl_flag = True
 
         return stl_flag
@@ -105,7 +111,6 @@ class ExpantionAlgo(SuperAlgo):
 #                logging.info("EXECUTE STLEMENT at Reverse Stl mode")
 
         stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, current_price, order_price)
-        logging.info("stl_flag = %s" % stl_flag)
 
         return stl_flag
 
@@ -116,17 +121,22 @@ class ExpantionAlgo(SuperAlgo):
 
         # slopeは上を向いている場合は買いエントリしない。下を向いている場合は売りエントリしない
         if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
-            logging.info("1h3 bollinger logic: OK, upper_sigma = %s, lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
             if current_price > (self.upper_sigma_5m3) and self.bollinger1h3_slope < slope_high_threshold:
                 trade_flag = "buy"
-                logging.info("5m3 bollinger logic: OK, upper_sigma + 0.1 = %s , current_price = %s" % ((self.upper_sigma_5m3), current_price))
+                self.result_logger.info("#######################################################")
+                self.result_logger.info("# decideExpantionTrade: BUY")
+                self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
+                self.result_logger.info("# current_price=%s, upper_sigma_5m3=%s , bollinger_1h3_slope=%s" % (current_price, self.upper_sigma_5m3, self.bollinger1h3_slope))
             elif current_price < (self.lower_sigma_5m3) and self.bollinger1h3_slope > slope_low_threshold:
                 trade_flag = "sell"
-                logging.info("5m3 bollinger logic: OK, lower_sigma + 0.1 = %s , current_price = %s" % ((self.lower_sigma_5m3), current_price))
+                self.result_logger.info("#######################################################")
+                self.result_logger.info("# decideExpantionTrade: SELL")
+                self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
+                self.result_logger.info("# current_price=%s, lower_sigma_5m3=%s , bollinger_1h3_slope=%s" % (current_price, self.lower_sigma_5m3, self.bollinger1h3_slope))
             else:
-                logging.info("5m3 bollinger logic: NG, upper_sigma = %s, lower_sigma = %s, current_price = %s" % (self.upper_sigma_5m3, self.lower_sigma_5m3, current_price))
+                pass
         else:
-            logging.info("1h3 bollinger logic: NG, upper_sigma = %s, lower_sigma = %s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
+            pass
 
         return trade_flag
 
@@ -141,22 +151,22 @@ class ExpantionAlgo(SuperAlgo):
             # 最小利確0.3を超えたら、トレールストップモードをONにする
             if self.order_kind == "buy":
                 if (current_bid_price - order_price) > first_take_profit:
-                    logging.info("SET TRAIL FIRST FLAG ON")
                     self.trail_flag = True
             elif self.order_kind == "sell":
                 if (order_price - current_ask_price) > first_take_profit:
-                    logging.info("SET TRAIL FIRST FLAG ON")
                     self.trail_flag = True
 
 
             # trail_flagがONで、含み益がなくなったら決済する
             if self.trail_flag == True and self.order_kind == "buy":
                 if (current_bid_price - order_price) < 0:
-                    logging.info("EXECUTE FIRST TRAIL STOP")
+                    self.result_logger.info("# Execute Trail Stop")
+                    self.result_logger.info("# current_bid_price=%s, order_price=%s" % (current_bid_price, order_price))
                     stl_flag = True
             elif self.trail_flag == True and self.order_kind == "sell":
                 if (order_price - current_ask_price) < 0:
-                    logging.info("EXECUTE FIRST TRAIL STOP")
+                    self.result_logger.info("# Execute Trail Stop")
+                    self.result_logger.info("# current_ask_price=%s, order_price=%s" % (current_ask_price, order_price))
                     stl_flag = True
 
 
@@ -164,22 +174,18 @@ class ExpantionAlgo(SuperAlgo):
             # 含み益0.5超えたら、トレールストップの二段階目をONにする
             if self.order_kind == "buy":
                 if (current_bid_price - order_price) > second_take_profit:
-                    logging.info("SET TRAIL SECOND FLAG ON")
                     self.trail_second_flag = True
             elif self.order_kind == "sell":
                 if (order_price - current_ask_price) > second_take_profit:
-                    logging.info("SET TRAIL SECOND FLAG ON")
                     self.trail_second_flag = True
 
 
             # second_flagがTrueで且つ、含み益が0.3以下になったら決済する
             if self.trail_second_flag == True and self.order_kind == "buy":
                 if (current_bid_price - order_price) < 0.3:
-                    logging.info("EXECUTE TRAIL SECOND STOP")
                     stl_flag = True
             elif self.trail_second_flag == True and self.order_kind == "sell":
                 if (order_price - current_ask_price) < 0.3:
-                    logging.info("EXECUTE TRAIL SECOND STOP")
                     stl_flag = True
 
         return stl_flag
@@ -188,5 +194,4 @@ class ExpantionAlgo(SuperAlgo):
         self.setBollinger5m3(base_time)
         self.setBollinger5m25(base_time)
         self.setBollinger1h3(base_time)
-#        self.setSlopeEwma1h50(base_time)
         self.setSlopeBollinger1h3(base_time)

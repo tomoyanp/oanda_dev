@@ -13,7 +13,7 @@ from oanda_wrapper import OandaWrapper
 from common import instrument_init, account_init
 import commands
 import time
-import logging
+from logging import getLogger, FileHandler, DEBUG
 
 class TradeWrapper:
     def __init__(self, instrument, mode, test_mode, base_path, config_name, args):
@@ -42,19 +42,16 @@ class TradeWrapper:
         self.stl_sleep_flag = False
         self.onfile_path = ""
 
-        now = datetime.now()
-        base_time = now.strftime("%Y%m%d%H%M%S")
-        self.result_file = open("%s/result/%s.result" % (self.base_path, base_time), "w")
-        self.result_file.write("#########################\n")
+        self.debug_logger = getLogger("debug")
+        self.result_logger = getLogger("result")
+        self.result_logger.info("#########################")
         tmp = ""
         for arg in args:
             tmp = tmp + arg + " "
-        self.result_file.write("# %s\n" % tmp)
+        self.result_logger.info("# %s" % tmp)
         lst = sorted(self.config_data)
         for elm in lst:
-            self.result_file.write("# %s = %s\n" % (elm, self.config_data[elm]))
-        self.result_file.flush()
-
+            self.result_logger.info("# %s = %s" % (elm, self.config_data[elm]))
 
     def setTradeAlgo(self, algo, base_time):
         if algo == "trendfollow":
@@ -83,7 +80,7 @@ class TradeWrapper:
                 trade_id = trade_data["id"]
                 order_flag = True
                 self.trade_algo.setOrderData(order_kind, order_price, order_flag, trade_id)
-                logging.info("setCurrentTrade = True")
+                self.debug_logger.info("setCurrentTrade = True")
             else:
                 pass
 
@@ -108,20 +105,18 @@ class TradeWrapper:
         order_kind = self.trade_algo.getOrderKind()
         order_price = self.trade_algo.getOrderPrice()
         stl_price = self.trade_algo.getCurrentPrice()
-        footer = "at %s ======\n" % nowftime
-        self.result_file.write(msg + footer)
-        self.result_file.write("ORDER_PRICE=%s, STL_PRICE=%s, ORDER_KIND=%s, PROFIT=%s\n" % (order_price, stl_price, order_kind, profit))
-        self.result_file.write("PROFIT=%s\n" % profit)
-        self.result_file.write("======================================================\n")
-        self.result_file.flush()
+        footer = "at %s ======" % nowftime
+        self.result_logger.info(msg + footer)
+        self.result_logger.info("ORDER_PRICE=%s, STL_PRICE=%s, ORDER_KIND=%s, PROFIT=%s" % (order_price, stl_price, order_kind, profit))
+        self.result_logger.info("PROFIT=%s" % profit)
+        self.result_logger.info("======================================================")
 
     def tradeLogWrite(self, trade_flag):
         nowftime = self.trade_algo.getCurrentTime()
         order_price = self.trade_algo.getCurrentPrice()
         threshold_list = self.trade_algo.calcThreshold(trade_flag)
-        self.result_file.write("===== EXECUTE ORDER at %s ======\n" % nowftime)
-        self.result_file.write("ORDER_PRICE=%s, TRADE_FLAG=%s\n" % (order_price, trade_flag))
-        self.result_file.flush()
+        self.result_logger.info("===== EXECUTE ORDER at %s ======" % nowftime)
+        self.result_logger.info("ORDER_PRICE=%s, TRADE_FLAG=%s" % (order_price, trade_flag))
 
     # 今ポジションを持っているか確認
     # なければ、フラグをリセットする

@@ -20,22 +20,27 @@ from datetime import datetime, timedelta
 from send_mail import SendMail
 from common import decideMarket, sleepTransaction
 import time
-import logging
+from logging import getLogger, FileHandler, DEBUG
+
 now = datetime.now()
 now = now.strftime("%Y%m%d%H%M%S")
-logfilename = "%s/log/exec_%s.log" %(current_path, now)
-logging.basicConfig(filename=logfilename, level=logging.INFO)
+debug_logfilename = "%s/log/%s.log" %(current_path, now)
+result_logfilename = "%s/result/%s.log" %(current_path, now)
+
+debug_logger = getLogger("debug")
+result_logger = getLogger("result")
+
+debug_fh = FileHandler(debug_logfilename, "a+")
+result_fh = FileHandler(result_logfilename, "a+")
+
+debug_logger.addHandler(debug_fh)
+result_logger.addHandler(result_fh)
+debug_logger.setLevel(DEBUG)
+result_logger.setLevel(DEBUG)
 
 if __name__ == '__main__':
 
-    # argv["main.py", "$1(GBP_JPY)","$2(demo)", "step", "timetrend", "test"]
-    # argv[3] is "step" or "startend" or "hilow" or "timetrend"
-    # argv[4] is config_filename. when "instrument.config_timetrend" it's "timetrend"
-    # argv[4] is config_filename. when "instrument.config_2" it's "2"
-
     args = sys.argv
-
-
     # コマンドライン引数から、通貨とモード取得
     instrument = args[1]
     mode       = args[2]
@@ -108,7 +113,7 @@ if __name__ == '__main__':
 
     except:
         message = traceback.format_exc()
-        logging.info(message)
+        debug_logger.info(message)
         sendmail = SendMail("tomoyanpy@gmail.com", "tomoyanpy@softbank.ne.jp", property_path)
         sendmail.set_msg(message)
         sendmail.send_mail()

@@ -8,7 +8,7 @@
 
 from datetime import datetime,timedelta
 import numpy as np
-import logging
+from logging import getLogger, FileHandler, DEBUG
 import os
 from common import instrument_init, account_init, decideMarket, getBollingerDataSet, extraBollingerDataSet, getEWMA, countIndex, getSlope, getOriginalEWMA
 from abc import ABCMeta, abstractmethod
