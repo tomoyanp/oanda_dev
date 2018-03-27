@@ -4,6 +4,7 @@
 import sys
 import os
 current_path = os.path.abspath(os.path.dirname(__file__))
+current_path = current_path + "/.."
 sys.path.append(current_path)
 sys.path.append(current_path + "/trade_algorithm")
 sys.path.append(current_path + "/obj")
@@ -19,7 +20,7 @@ import time
 
 
 
-# if check value is empty, insert record before 1 seconds 
+# if check value is empty, insert record before 1 seconds
 def follow_record(con, base_time, currency):
     print "value is empty, base_time = %s" % base_time
     base_time_bef = base_time - timedelta(seconds=1)

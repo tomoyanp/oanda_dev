@@ -4,6 +4,7 @@
 import sys
 import os
 current_path = os.path.abspath(os.path.dirname(__file__))
+current_path = current_path + "/.."
 sys.path.append(current_path)
 sys.path.append(current_path + "/trade_algorithm")
 sys.path.append(current_path + "/obj")
@@ -49,4 +50,3 @@ if __name__ == "__main__":
 
         except Exception as e:
             print e.args
-

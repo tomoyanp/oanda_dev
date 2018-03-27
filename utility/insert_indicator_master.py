@@ -3,6 +3,7 @@
 ## dummy
 import os, sys
 current_path = os.path.abspath(os.path.dirname(__file__))
+current_path = current_path + "/.."
 sys.path.append(current_path)
 sys.path.append(current_path + "/lib")
 config_name = "trendfollow_dummy"
@@ -37,7 +38,7 @@ if __name__ == "__main__":
             while now < base_time:
                 time.sleep(1)
                 now = datetime.now()
-            
+
             span = "1h"
             compute_indicator.computeInsertIndicator(base_time, span)
             span = "5m"
@@ -46,5 +47,3 @@ if __name__ == "__main__":
         except Exception as e:
             logging.info(e.args)
             logging.info(traceback.format_exc())
-
-
