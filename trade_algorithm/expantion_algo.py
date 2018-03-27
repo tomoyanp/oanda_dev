@@ -60,10 +60,14 @@ class ExpantionAlgo(SuperAlgo):
                     seconds = base_time.second
                     current_price = self.getCurrentPrice()
                     # 1分足の終値付近で計算ロジックに入る
-                    if minutes % 5 == 4 and seconds > 50:
+                    if seconds > 50:
                         logging.info("%s :ExpantionStlLogic START" % base_time)
                         self.setIndicator(base_time)
-                        stl_flag = self.decideExpantionStl(stl_flag, current_price)
+                        stl_flag = self.decideExpantionStopLoss(stl_flag, current_price)
+                    if minutes == 0 and seconds > 50:
+                        logging.info("%s :ExpantionStlLogic START" % base_time)
+                        self.setIndicator(base_time)
+                        stl_flag = self.decideExpantionTakeProfit(stl_flag, current_price)
             else:
                 pass
 
@@ -71,7 +75,7 @@ class ExpantionAlgo(SuperAlgo):
         except:
             raise
 
-    def decideExpantionStl(self, stl_flag, current_price):
+    def decideExpantionTakeProfit(self, stl_flag, current_price):
         # Stop Loss Algorithm
         order_price = self.getOrderPrice()
         min_take_profit = 0.7
@@ -86,15 +90,19 @@ class ExpantionAlgo(SuperAlgo):
                 logging.info("EXECUTE STLMENT at Take Profit")
                 stl_flag = True
 
+        return stl_flag
+
+    def decideExpantionStopLoss(self, stl_flag, current_price):
         # 損切り逆方向にタッチしたら
-        if self.order_kind == "buy":
-            if current_price < self.lower_sigma_5m3:
-                stl_flag = True
-                logging.info("EXECUTE STLEMENT at Reverse Stl mode")
-        elif self.order_kind == "sell":
-            if current_price > self.upper_sigma_5m3:
-                stl_flag = True
-                logging.info("EXECUTE STLEMENT at Reverse Stl mode")
+        order_price = self.getOrderPrice()
+#        if self.order_kind == "buy":
+#            if current_price < self.lower_sigma_5m3:
+#                stl_flag = True
+#                logging.info("EXECUTE STLEMENT at Reverse Stl mode")
+#        elif self.order_kind == "sell":
+#            if current_price > self.upper_sigma_5m3:
+#                stl_flag = True
+#                logging.info("EXECUTE STLEMENT at Reverse Stl mode")
 
         stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, current_price, order_price)
         logging.info("stl_flag = %s" % stl_flag)

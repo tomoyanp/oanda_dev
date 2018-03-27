@@ -3,7 +3,7 @@
     "__comments" : "expantion mode",
     "__comments2" : "modify take profit algorithm",
     "stop_loss": 0.3,
-    "take_profit": 1.0,
+    "take_profit": 2.0,
     "time_width": 720000,
     "stl_time_width": 720000,
     "sleep_time": 5,
