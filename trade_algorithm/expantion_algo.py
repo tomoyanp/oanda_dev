@@ -84,7 +84,7 @@ class ExpantionAlgo(SuperAlgo):
 
         # bollinger 逆側の向きが変わったら
         if self.order_kind == "buy":
-            if (self.bid_price - order_price) > min_take_profit and self.bollinger1h3_lower_simga_slope > 0:
+            if (self.bid_price - order_price) > min_take_profit and self.bollinger1h3_lower_sigma_slope > 0:
                 self.result_logger.info("# EXECUTE STLMENT at Take Profit")
                 self.result_logger.info("# current_bid_price=%s, order_price=%s, min_take_profit=%s" % (self.bid_price, order_price, min_take_profit))
                 self.result_logger.info("# bollinger1h3_lower_sigma_slope=%s" % (self.bollinger1h3_lower_sigma_slope))
