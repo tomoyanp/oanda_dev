@@ -26,7 +26,7 @@ class ExpantionAlgo(SuperAlgo):
         super(ExpantionAlgo, self).__init__(instrument, base_path, config_name, base_time)
         self.base_price = 0
         self.setPrice(base_time)
-        self.setIndicator(base_time)
+#        self.setIndicator(base_time)
         self.debug_logger = getLogger("debug")
         self.result_logger = getLogger("result")
 
@@ -42,7 +42,12 @@ class ExpantionAlgo(SuperAlgo):
                 if minutes % 5 == 4 and seconds > 50:
                     self.debug_logger.info("%s :TrendExpantionLogic START" % base_time)
                     # 性能的に5分に一回呼び出しに変更
-                    self.setIndicator(base_time)
+                    # self.setIndicator(base_time)
+                    # add 
+                    self.setBollinger5m3(base_time)
+                    self.setBollinger1h3(base_time)
+                    # self.setSlopeBollinger1h3(base_time)
+
                     current_price = self.getCurrentPrice()
                     trade_flag = self.decideExpantionTrade(trade_flag, current_price)
 
@@ -64,11 +69,17 @@ class ExpantionAlgo(SuperAlgo):
                     # 1分足の終値付近で計算ロジックに入る
                     if seconds > 50:
                         self.debug_logger.info("%s :ExpantionStlLogic START" % base_time)
-                        self.setIndicator(base_time)
+                        # self.setIndicator(base_time)
+                        # self.setBollinger5m3(base_time)
+                        # self.setBollinger1h3(base_time)
+                        # self.setSlopeBollinger1h3(base_time)
                         stl_flag = self.decideExpantionStopLoss(stl_flag, current_price)
                     if minutes == 0 and seconds > 50:
+                        # self.setBollinger5m3(base_time)
+                        # self.setBollinger1h3(base_time)
+                        self.setSlopeBollinger1h3(base_time)
                         self.debug_logger.info("%s :ExpantionStlLogic START" % base_time)
-                        self.setIndicator(base_time)
+                        #self.setIndicator(base_time)
                         stl_flag = self.decideExpantionTakeProfit(stl_flag, current_price)
             else:
                 pass
@@ -116,23 +127,21 @@ class ExpantionAlgo(SuperAlgo):
 
     def decideExpantionTrade(self, trade_flag, current_price):
         # Buy Logic at Trend Follow Mode
-        slope_high_threshold = 0.3
-        slope_low_threshold = -0.3
 
         # slopeは上を向いている場合は買いエントリしない。下を向いている場合は売りエントリしない
         if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
-            if current_price > (self.upper_sigma_5m3) and self.bollinger1h3_slope < slope_high_threshold:
+            if current_price > (self.upper_sigma_5m3):
                 trade_flag = "buy"
                 self.result_logger.info("#######################################################")
                 self.result_logger.info("# decideExpantionTrade: BUY")
                 self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
-                self.result_logger.info("# current_price=%s, upper_sigma_5m3=%s , bollinger_1h3_slope=%s" % (current_price, self.upper_sigma_5m3, self.bollinger1h3_slope))
-            elif current_price < (self.lower_sigma_5m3) and self.bollinger1h3_slope > slope_low_threshold:
+                self.result_logger.info("# current_price=%s, upper_sigma_5m3=%s" % (current_price, self.upper_sigma_5m3))
+            elif current_price < (self.lower_sigma_5m3):
                 trade_flag = "sell"
                 self.result_logger.info("#######################################################")
                 self.result_logger.info("# decideExpantionTrade: SELL")
                 self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
-                self.result_logger.info("# current_price=%s, lower_sigma_5m3=%s , bollinger_1h3_slope=%s" % (current_price, self.lower_sigma_5m3, self.bollinger1h3_slope))
+                self.result_logger.info("# current_price=%s, lower_sigma_5m3=%s" % (current_price, self.lower_sigma_5m3))
             else:
                 pass
         else:
@@ -191,8 +200,4 @@ class ExpantionAlgo(SuperAlgo):
 
         return stl_flag
 
-    def setIndicator(self, base_time):
-        self.setBollinger5m3(base_time)
-        self.setBollinger5m25(base_time)
-        self.setBollinger1h3(base_time)
-        self.setSlopeBollinger1h3(base_time)
+#    def setIndicator(self, base_time):
