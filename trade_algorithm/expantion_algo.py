@@ -116,18 +116,16 @@ class ExpantionAlgo(SuperAlgo):
 
     def decideExpantionTrade(self, trade_flag, current_price):
         # Buy Logic at Trend Follow Mode
-        slope_high_threshold = 0.3
-        slope_low_threshold = -0.3
 
         # slopeは上を向いている場合は買いエントリしない。下を向いている場合は売りエントリしない
         if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
-            if current_price > (self.upper_sigma_5m3) and self.bollinger1h3_slope < slope_high_threshold:
+            if current_price > (self.upper_sigma_5m3):
                 trade_flag = "buy"
                 self.result_logger.info("#######################################################")
                 self.result_logger.info("# decideExpantionTrade: BUY")
                 self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
                 self.result_logger.info("# current_price=%s, upper_sigma_5m3=%s , bollinger_1h3_slope=%s" % (current_price, self.upper_sigma_5m3, self.bollinger1h3_slope))
-            elif current_price < (self.lower_sigma_5m3) and self.bollinger1h3_slope > slope_low_threshold:
+            elif current_price < (self.lower_sigma_5m3):
                 trade_flag = "sell"
                 self.result_logger.info("#######################################################")
                 self.result_logger.info("# decideExpantionTrade: SELL")
@@ -193,6 +191,4 @@ class ExpantionAlgo(SuperAlgo):
 
     def setIndicator(self, base_time):
         self.setBollinger5m3(base_time)
-        self.setBollinger5m25(base_time)
         self.setBollinger1h3(base_time)
-        self.setSlopeBollinger1h3(base_time)
