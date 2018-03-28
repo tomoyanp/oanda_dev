@@ -191,4 +191,8 @@ class ExpantionAlgo(SuperAlgo):
 
     def setIndicator(self, base_time):
         self.setBollinger5m3(base_time)
-        self.setBollinger1h3(base_time)
+
+        minutes = base_time.minute
+        if minutes > 50:
+            self.setBollinger1h3(base_time)
+            self.setSlopeBollinger1h3(base_time)
