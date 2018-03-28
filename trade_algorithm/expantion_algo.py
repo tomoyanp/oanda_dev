@@ -145,6 +145,7 @@ class ExpantionAlgo(SuperAlgo):
         second_flag = self.config_data["second_trail_mode"]
         first_take_profit = 0.3
         second_take_profit = 0.5
+        trail_take_profit = 0.2
 
 
         if first_flag == "on":
@@ -159,12 +160,12 @@ class ExpantionAlgo(SuperAlgo):
 
             # trail_flagがONで、含み益がなくなったら決済する
             if self.trail_flag == True and self.order_kind == "buy":
-                if (current_bid_price - order_price) < 0:
+                if (current_bid_price - order_price) < trail_take_profit:
                     self.result_logger.info("# Execute Trail Stop")
                     self.result_logger.info("# current_bid_price=%s, order_price=%s" % (current_bid_price, order_price))
                     stl_flag = True
             elif self.trail_flag == True and self.order_kind == "sell":
-                if (order_price - current_ask_price) < 0:
+                if (order_price - current_ask_price) < trail_take_profit:
                     self.result_logger.info("# Execute Trail Stop")
                     self.result_logger.info("# current_ask_price=%s, order_price=%s" % (current_ask_price, order_price))
                     stl_flag = True
