@@ -135,13 +135,13 @@ class ExpantionAlgo(SuperAlgo):
                 self.result_logger.info("#######################################################")
                 self.result_logger.info("# decideExpantionTrade: BUY")
                 self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
-                self.result_logger.info("# current_price=%s, upper_sigma_5m3=%s , bollinger_1h3_slope=%s" % (current_price, self.upper_sigma_5m3, self.bollinger1h3_slope))
+                self.result_logger.info("# current_price=%s, upper_sigma_5m3=%s" % (current_price, self.upper_sigma_5m3))
             elif current_price < (self.lower_sigma_5m3):
                 trade_flag = "sell"
                 self.result_logger.info("#######################################################")
                 self.result_logger.info("# decideExpantionTrade: SELL")
                 self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
-                self.result_logger.info("# current_price=%s, lower_sigma_5m3=%s , bollinger_1h3_slope=%s" % (current_price, self.lower_sigma_5m3, self.bollinger1h3_slope))
+                self.result_logger.info("# current_price=%s, lower_sigma_5m3=%s" % (current_price, self.lower_sigma_5m3))
             else:
                 pass
         else:
