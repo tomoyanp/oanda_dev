@@ -43,7 +43,7 @@ class ExpantionAlgo(SuperAlgo):
                     self.debug_logger.info("%s :TrendExpantionLogic START" % base_time)
                     # 性能的に5分に一回呼び出しに変更
                     # self.setIndicator(base_time)
-                    # add 
+                    # add
                     self.setBollinger5m3(base_time)
                     self.setBollinger1h3(base_time)
                     # self.setSlopeBollinger1h3(base_time)
@@ -131,17 +131,19 @@ class ExpantionAlgo(SuperAlgo):
         # slopeは上を向いている場合は買いエントリしない。下を向いている場合は売りエントリしない
         if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
             if current_price > (self.upper_sigma_5m3):
-                trade_flag = "buy"
-                self.result_logger.info("#######################################################")
-                self.result_logger.info("# decideExpantionTrade: BUY")
-                self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
-                self.result_logger.info("# current_price=%s, upper_sigma_5m3=%s" % (current_price, self.upper_sigma_5m3))
+                if self.order_history != "buy" or self.profit_history != "l":
+                    trade_flag = "buy"
+                    self.result_logger.info("#######################################################")
+                    self.result_logger.info("# decideExpantionTrade: BUY")
+                    self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
+                    self.result_logger.info("# current_price=%s, upper_sigma_5m3=%s" % (current_price, self.upper_sigma_5m3))
             elif current_price < (self.lower_sigma_5m3):
-                trade_flag = "sell"
-                self.result_logger.info("#######################################################")
-                self.result_logger.info("# decideExpantionTrade: SELL")
-                self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
-                self.result_logger.info("# current_price=%s, lower_sigma_5m3=%s" % (current_price, self.lower_sigma_5m3))
+                if self.order_history != "sell" or self.profit_history != "l":
+                    trade_flag = "sell"
+                    self.result_logger.info("#######################################################")
+                    self.result_logger.info("# decideExpantionTrade: SELL")
+                    self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
+                    self.result_logger.info("# current_price=%s, lower_sigma_5m3=%s" % (current_price, self.lower_sigma_5m3))
             else:
                 pass
         else:
