@@ -37,6 +37,8 @@ class SuperAlgo(object):
         self.trail_second_flag = False
         self.trail_price = 0
         self.break_wait_flag = "pass"
+        self.order_history = "pass"
+        self.profit_history = "pass"
 
 ################################################
 # listは、要素数が大きいほうが古い。
@@ -188,7 +190,7 @@ class SuperAlgo(object):
             self.profit_history = "l"
             sleep_time = self.config_data["stl_sleep_ltime"]
 
-        self.order_histroy = self.order_kind
+        self.order_history = self.order_kind
 
         return profit, sleep_time
 
