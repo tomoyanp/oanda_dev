@@ -154,7 +154,8 @@ class ExpantionAlgo(SuperAlgo):
         second_flag = self.config_data["second_trail_mode"]
         first_take_profit = 0.3
         second_take_profit = 0.5
-        trail_take_profit = 0.2
+        #trail_take_profit = 0.2
+        trail_take_profit = 0.1
 
 
         if first_flag == "on":
