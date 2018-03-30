@@ -91,7 +91,7 @@ class ExpantionAlgo(SuperAlgo):
     def decideExpantionTakeProfit(self, stl_flag, current_price):
         # Stop Loss Algorithm
         order_price = self.getOrderPrice()
-        min_take_profit = 0.7
+        min_take_profit = 0.5
 
         # bollinger 逆側の向きが変わったら
         if self.order_kind == "buy":
@@ -131,14 +131,16 @@ class ExpantionAlgo(SuperAlgo):
         # slopeは上を向いている場合は買いエントリしない。下を向いている場合は売りエントリしない
         if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
             if current_price > (self.upper_sigma_5m3):
-                if self.order_history != "buy" or self.profit_history != "l":
+#                if self.order_history != "buy" or self.profit_history != "l":
+                 if 0 == 0:
                     trade_flag = "buy"
                     self.result_logger.info("#######################################################")
                     self.result_logger.info("# decideExpantionTrade: BUY")
                     self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
                     self.result_logger.info("# current_price=%s, upper_sigma_5m3=%s" % (current_price, self.upper_sigma_5m3))
             elif current_price < (self.lower_sigma_5m3):
-                if self.order_history != "sell" or self.profit_history != "l":
+#                if self.order_history != "sell" or self.profit_history != "l":
+                 if 0 == 0:
                     trade_flag = "sell"
                     self.result_logger.info("#######################################################")
                     self.result_logger.info("# decideExpantionTrade: SELL")

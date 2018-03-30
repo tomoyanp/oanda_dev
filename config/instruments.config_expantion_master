@@ -1,7 +1,7 @@
 {
   "GBP_JPY": {
     "__comments" : "expantion mode",
-    "__comments2" : "modify take profit algorithm",
+    "__comments1" : "current master",
     "stop_loss": 0.3,
     "take_profit": 3.0,
     "time_width": 720000,
@@ -9,7 +9,7 @@
     "sleep_time": 5,
     "trade_sleep_time": 10,
     "stl_sleep_time": 5,
-    "stl_sleep_vtime": 3600,
+    "stl_sleep_vtime": 10,
     "stl_sleep_ltime": 10,
     "units": 10000,
     "enable_time": ["00:00:00", "01:00:00", "02:00:00", "03:00:00", "08:00:00", "09:00:00", "10:00:00", "11:00:00", "12:00:00", "13:00:00", "14:00:00", "15:00:00", "16:00:00", "17:00:00", "18:00:00", "19:00:00", "20:00:00", "21:00:00", "22:00:00", "23:00:00"],

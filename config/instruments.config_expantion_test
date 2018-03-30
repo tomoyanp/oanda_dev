@@ -1,9 +1,8 @@
 {
   "GBP_JPY": {
     "__comments" : "expantion mode",
-    "__comments2" : "stop loss rate 0.3",
-    "__comments2" : "modify trail mode logic",
-    "stop_loss": 0.1,
+    "__comments1" : "current master",
+    "stop_loss": 0.3,
     "take_profit": 3.0,
     "time_width": 720000,
     "stl_time_width": 720000,
