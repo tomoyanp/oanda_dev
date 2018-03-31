@@ -9,6 +9,7 @@ from datetime import datetime
 
 # 実行スクリプトのパスを取得して、追加
 current_path = os.path.abspath(os.path.dirname(__file__))
+current_path = current_path + "/.."
 sys.path.append(current_path)
 sys.path.append(current_path)
 sys.path.append(current_path + "/trade_algorithm")
