@@ -91,7 +91,7 @@ class ExpantionAlgo(SuperAlgo):
     def decideExpantionTakeProfit(self, stl_flag, current_price):
         # Stop Loss Algorithm
         order_price = self.getOrderPrice()
-        min_take_profit = 0.5
+        min_take_profit = 0.7
 
         # bollinger 逆側の向きが変わったら
         if self.order_kind == "buy":
@@ -159,7 +159,7 @@ class ExpantionAlgo(SuperAlgo):
         first_take_profit = 0.3
         second_take_profit = 0.5
         #trail_take_profit = 0.2
-        trail_take_profit = 0.1
+        trail_take_profit = 0
 
 
         if first_flag == "on":
