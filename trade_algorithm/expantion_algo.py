@@ -129,7 +129,7 @@ class ExpantionAlgo(SuperAlgo):
         # Buy Logic at Trend Follow Mode
 
         # slopeは上を向いている場合は買いエントリしない。下を向いている場合は売りエントリしない
-        if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
+        if (self.upper_sigma_1h3 - self.lower_sigma_1h3) > 1 and (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
             if current_price > (self.upper_sigma_5m3):
 #                if self.order_history != "buy" or self.profit_history != "l":
                  if 0 == 0:
