@@ -15,6 +15,7 @@
 
 from super_algo import SuperAlgo
 from common import instrument_init, account_init, decideMarket, getBollingerDataSet, extraBollingerDataSet, getEWMA, countIndex, getSlope, getOriginalEWMA
+from mysql_connector import MysqlConnector
 from datetime import datetime, timedelta
 from logging import getLogger, FileHandler, DEBUG
 import pandas as pd
@@ -29,6 +30,8 @@ class ExpantionAlgo(SuperAlgo):
 #        self.setIndicator(base_time)
         self.debug_logger = getLogger("debug")
         self.result_logger = getLogger("result")
+        self.slope = 0
+        self.mysql_connector = MysqlConnector()
 
     def decideTrade(self, base_time):
         trade_flag = "pass"
@@ -46,6 +49,7 @@ class ExpantionAlgo(SuperAlgo):
                     # add
                     self.setBollinger5m3(base_time)
                     self.setBollinger1h3(base_time)
+                    self.setSlope(base_time)
                     # self.setSlopeBollinger1h3(base_time)
 
                     current_price = self.getCurrentPrice()
@@ -115,11 +119,11 @@ class ExpantionAlgo(SuperAlgo):
         if self.order_kind == "buy":
             if current_price < self.lower_sigma_5m3:
                 stl_flag = True
-                logging.info("EXECUTE STLEMENT at Reverse Stl mode")
+                self.result_logger.info("# EXECUTE STLEMENT at Reverse Stl mode")
         elif self.order_kind == "sell":
             if current_price > self.upper_sigma_5m3:
                 stl_flag = True
-                logging.info("EXECUTE STLEMENT at Reverse Stl mode")
+                self.result_logger.info("# EXECUTE STLEMENT at Reverse Stl mode")
 
         stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, current_price, order_price)
 
@@ -131,7 +135,7 @@ class ExpantionAlgo(SuperAlgo):
         # slopeは上を向いている場合は買いエントリしない。下を向いている場合は売りエントリしない
 #        if (self.upper_sigma_1h3 - self.lower_sigma_1h3) > 1 and (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
         if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
-            if current_price > (self.upper_sigma_5m3):
+            if current_price > (self.upper_sigma_5m3) and self.slope > 0:
 #                if self.order_history != "buy" or self.profit_history != "l":
                  if 0 == 0:
                     trade_flag = "buy"
@@ -139,7 +143,7 @@ class ExpantionAlgo(SuperAlgo):
                     self.result_logger.info("# decideExpantionTrade: BUY")
                     self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
                     self.result_logger.info("# current_price=%s, upper_sigma_5m3=%s" % (current_price, self.upper_sigma_5m3))
-            elif current_price < (self.lower_sigma_5m3):
+            elif current_price < (self.lower_sigma_5m3) and self.slope < 0:
 #                if self.order_history != "sell" or self.profit_history != "l":
                  if 0 == 0:
                     trade_flag = "sell"
@@ -206,4 +210,14 @@ class ExpantionAlgo(SuperAlgo):
 
         return stl_flag
 
-#    def setIndicator(self, base_time):
+    def setSlope(self, base_time):
+        sql = "select base_line from INDICATOR_TABLE where instrument = \'%s\' and type = \'bollinger1h3\' and insert_time <= \'%s\' order by insert_time desc limit 5" % (self.instrument, base_time)
+        response = self.mysql_connector.select_sql(sql)
+        base_line_list = []
+        for res in response:
+            print res
+            base_line_list.append(res[0])
+
+        base_line_list.reverse()
+        self.slope = getSlope(base_line_list)
+
