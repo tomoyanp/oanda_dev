@@ -135,7 +135,7 @@ class ExpantionAlgo(SuperAlgo):
         # slopeは上を向いている場合は買いエントリしない。下を向いている場合は売りエントリしない
 #        if (self.upper_sigma_1h3 - self.lower_sigma_1h3) > 1 and (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
         if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
-            if current_price > (self.upper_sigma_5m3) and self.slope > 0:
+            if current_price > (self.upper_sigma_5m3) and self.slope > 0.01:
 #                if self.order_history != "buy" or self.profit_history != "l":
                  if self.buy_count >= 1:
                     trade_flag = "buy"
@@ -148,7 +148,7 @@ class ExpantionAlgo(SuperAlgo):
                     self.buy_count = self.buy_count + 1
                     self.sell_count = 0
                  
-            elif current_price < (self.lower_sigma_5m3) and self.slope < 0:
+            elif current_price < (self.lower_sigma_5m3) and self.slope < -0.01:
 #                if self.order_history != "sell" or self.profit_history != "l":
                 if self.sell_count >= 1:
                     trade_flag = "sell"
