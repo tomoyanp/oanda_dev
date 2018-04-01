@@ -74,7 +74,7 @@ class ExpantionAlgo(SuperAlgo):
                     if seconds >= 50:
                         self.debug_logger.info("%s :ExpantionStlLogic START" % base_time)
                         # self.setIndicator(base_time)
-                        # self.setBollinger5m3(base_time)
+                        self.setBollinger5m3(base_time)
                         # self.setBollinger1h3(base_time)
                         # self.setSlopeBollinger1h3(base_time)
                         stl_flag = self.decideExpantionStopLoss(stl_flag, current_price)
