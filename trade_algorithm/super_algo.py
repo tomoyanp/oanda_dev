@@ -39,6 +39,8 @@ class SuperAlgo(object):
         self.break_wait_flag = "pass"
         self.order_history = "pass"
         self.profit_history = "pass"
+        self.buy_count = 0
+        self.sell_count = 0
 
 ################################################
 # listは、要素数が大きいほうが古い。
@@ -53,6 +55,8 @@ class SuperAlgo(object):
         self.trail_second_flag = False
         self.break_wait_flag = "pass"
         self.trail_price = 0
+        self.buy_count = 0
+        self.sell_count = 0
 
     def setOrderData(self, trade_flag, order_price, order_flag, trade_id):
         self.order_kind = trade_flag
