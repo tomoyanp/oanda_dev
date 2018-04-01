@@ -143,6 +143,7 @@ class ExpantionAlgo(SuperAlgo):
                     self.result_logger.info("# decideExpantionTrade: BUY")
                     self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
                     self.result_logger.info("# current_price=%s, upper_sigma_5m3=%s" % (current_price, self.upper_sigma_5m3))
+                    self.result_logger.info("# slope=%s" % (self.slope))
             elif current_price < (self.lower_sigma_5m3) and self.slope < 0:
 #                if self.order_history != "sell" or self.profit_history != "l":
                  if 0 == 0:
@@ -151,6 +152,7 @@ class ExpantionAlgo(SuperAlgo):
                     self.result_logger.info("# decideExpantionTrade: SELL")
                     self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
                     self.result_logger.info("# current_price=%s, lower_sigma_5m3=%s" % (current_price, self.lower_sigma_5m3))
+                    self.result_logger.info("# slope=%s" % (self.slope))
             else:
                 pass
         else:
