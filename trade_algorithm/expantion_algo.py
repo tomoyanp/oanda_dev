@@ -27,7 +27,7 @@ class ExpantionAlgo(SuperAlgo):
         super(ExpantionAlgo, self).__init__(instrument, base_path, config_name, base_time)
         self.base_price = 0
         self.setPrice(base_time)
-#        self.setIndicator(base_time)
+        self.setIndicator(base_time)
         self.debug_logger = getLogger("debug")
         self.result_logger = getLogger("result")
         self.slope = 0
@@ -45,13 +45,7 @@ class ExpantionAlgo(SuperAlgo):
                 if minutes % 5 == 4 and seconds >= 50:
                     self.debug_logger.info("%s :TrendExpantionLogic START" % base_time)
                     # 性能的に5分に一回呼び出しに変更
-                    # self.setIndicator(base_time)
-                    # add
-                    self.setBollinger5m3(base_time)
-                    self.setBollinger1h3(base_time)
-                    self.setSlope(base_time)
-                    # self.setSlopeBollinger1h3(base_time)
-
+                    self.setIndicator(base_time)
                     current_price = self.getCurrentPrice()
                     trade_flag = self.decideExpantionTrade(trade_flag, current_price)
 
@@ -73,17 +67,11 @@ class ExpantionAlgo(SuperAlgo):
                     # 1分足の終値付近で計算ロジックに入る
                     if seconds >= 50:
                         self.debug_logger.info("%s :ExpantionStlLogic START" % base_time)
-                        # self.setIndicator(base_time)
-                        self.setBollinger5m3(base_time)
-                        # self.setBollinger1h3(base_time)
-                        # self.setSlopeBollinger1h3(base_time)
+                        self.setIndicator(base_time)
                         stl_flag = self.decideExpantionStopLoss(stl_flag, current_price)
                     if minutes == 0 and seconds >= 50:
-                        # self.setBollinger5m3(base_time)
-                        # self.setBollinger1h3(base_time)
-                        self.setSlopeBollinger1h3(base_time)
                         self.debug_logger.info("%s :ExpantionStlLogic START" % base_time)
-                        #self.setIndicator(base_time)
+                        self.setIndicator(base_time)
                         stl_flag = self.decideExpantionTakeProfit(stl_flag, current_price)
             else:
                 pass
@@ -230,3 +218,7 @@ class ExpantionAlgo(SuperAlgo):
         base_line_list.reverse()
         self.slope = getSlope(base_line_list)
 
+    def setIndicator(self, base_time):
+        self.setBollinger5m3(base_time)
+        self.setBollinger1h3(base_time)
+        self.setSlope(base_time)
