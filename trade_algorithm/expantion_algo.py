@@ -223,4 +223,5 @@ class ExpantionAlgo(SuperAlgo):
     def setIndicator(self, base_time):
         self.setBollinger5m3(base_time)
         self.setBollinger1h3(base_time)
+        self.setSlopeBollinger1h3(base_time)
         self.setSlope(base_time)
