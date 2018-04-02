@@ -64,15 +64,19 @@ class ExpantionAlgo(SuperAlgo):
                     minutes = base_time.minute
                     seconds = base_time.second
                     current_price = self.getCurrentPrice()
-                    # 1分足の終値付近で計算ロジックに入る
-                    if seconds >= 50:
+                    # 5分足の終値付近で計算ロジックに入る
+                    if minutes % 5 == 4 and seconds >= 50:
                         self.debug_logger.info("%s :ExpantionStlLogic START" % base_time)
                         self.setIndicator(base_time)
                         stl_flag = self.decideExpantionStopLoss(stl_flag, current_price)
+                    # 1時間ごとにやる
                     if minutes == 0 and seconds >= 50:
                         self.debug_logger.info("%s :ExpantionStlLogic START" % base_time)
                         self.setIndicator(base_time)
                         stl_flag = self.decideExpantionTakeProfit(stl_flag, current_price)
+
+                    # trailなので毎回
+                    stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, current_price, order_price)
             else:
                 pass
 
@@ -112,8 +116,6 @@ class ExpantionAlgo(SuperAlgo):
             if current_price > self.upper_sigma_5m3:
                 stl_flag = True
                 self.result_logger.info("# EXECUTE STLEMENT at Reverse Stl mode")
-
-        stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, current_price, order_price)
 
         return stl_flag
 
@@ -160,7 +162,6 @@ class ExpantionAlgo(SuperAlgo):
         second_flag = self.config_data["second_trail_mode"]
         first_take_profit = 0.3
         second_take_profit = 0.5
-        #trail_take_profit = 0.2
         trail_take_profit = 0.1
 
 
