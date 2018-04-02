@@ -108,14 +108,14 @@ class ExpantionAlgo(SuperAlgo):
     def decideExpantionStopLoss(self, stl_flag, current_price):
         # 損切り逆方向にタッチしたら
         order_price = self.getOrderPrice()
-        if self.order_kind == "buy":
-            if current_price < self.lower_sigma_5m3:
-                stl_flag = True
-                self.result_logger.info("# EXECUTE STLEMENT at Reverse Stl mode")
-        elif self.order_kind == "sell":
-            if current_price > self.upper_sigma_5m3:
-                stl_flag = True
-                self.result_logger.info("# EXECUTE STLEMENT at Reverse Stl mode")
+#        if self.order_kind == "buy":
+#            if current_price < self.lower_sigma_5m3:
+#                stl_flag = True
+#                self.result_logger.info("# EXECUTE STLEMENT at Reverse Stl mode")
+#        elif self.order_kind == "sell":
+#            if current_price > self.upper_sigma_5m3:
+#                stl_flag = True
+#                self.result_logger.info("# EXECUTE STLEMENT at Reverse Stl mode")
 
         return stl_flag
 
