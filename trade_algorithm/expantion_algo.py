@@ -76,7 +76,7 @@ class ExpantionAlgo(SuperAlgo):
                         stl_flag = self.decideExpantionTakeProfit(stl_flag, current_price)
 
                     # trailなので毎回
-                    stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, current_price, order_price)
+                    stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, current_price)
             else:
                 pass
 
@@ -157,7 +157,8 @@ class ExpantionAlgo(SuperAlgo):
 
         return trade_flag
 
-    def decideTrailLogic(self, stl_flag, current_ask_price, current_bid_price, current_price, order_price):
+    def decideTrailLogic(self, stl_flag, current_ask_price, current_bid_price, current_price):
+        order_price = self.getOrderPrice()
         first_flag = self.config_data["first_trail_mode"]
         second_flag = self.config_data["second_trail_mode"]
         first_take_profit = 0.3

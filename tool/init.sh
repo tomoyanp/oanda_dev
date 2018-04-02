@@ -4,4 +4,4 @@ mkdir ../property
 mkdir ../onfile/expantion
 mkdir ../onfile/trendfollow
 mkdir ../onfile/trendreverse
-cp /home/tomoyan/staging/oanda_dev/property/* ../property
+cp /home/tomoyan/master_config/property/* ../property
