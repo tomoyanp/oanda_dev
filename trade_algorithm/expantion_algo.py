@@ -236,12 +236,12 @@ class ExpantionAlgo(SuperAlgo):
                     self.trail_second_flag = True
 
             # trail_flagがONで、含み益がなくなったら決済する
-            if self.trail_flag == True and self.order_kind == "buy":
+            if self.trail_second_flag == True and self.order_kind == "buy":
                 if (self.most_high_price - 0.3) > current_bid_price:
                     self.result_logger.info("# Execute SecondTrail Stop")
                     self.result_logger.info("# current_bid_price=%s, order_price=%s" % (current_bid_price, order_price))
                     stl_flag = True
-            elif self.trail_flag == True and self.order_kind == "sell":
+            elif self.trail_second_flag == True and self.order_kind == "sell":
                 if (self.most_low_price + 0.3) < current_ask_price :
                     self.result_logger.info("# Execute SecondTrail Stop")
                     self.result_logger.info("# current_ask_price=%s, order_price=%s" % (current_ask_price, order_price))
