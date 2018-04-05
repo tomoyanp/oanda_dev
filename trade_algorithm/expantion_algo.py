@@ -106,16 +106,36 @@ class ExpantionAlgo(SuperAlgo):
         return stl_flag
 
     def decideExpantionStopLoss(self, stl_flag, current_price):
-        # 損切り逆方向にタッチしたら
-        order_price = self.getOrderPrice()
-        if self.order_kind == "buy":
-            if current_price < self.lower_sigma_5m3:
-                stl_flag = True
-                self.result_logger.info("# EXECUTE STLEMENT at Reverse Stl mode")
-        elif self.order_kind == "sell":
-            if current_price > self.upper_sigma_5m3:
-                stl_flag = True
-                self.result_logger.info("# EXECUTE STLEMENT at Reverse Stl mode")
+
+        if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
+            if current_price > (self.upper_sigma_5m3) and self.slope > 0.01:
+                self.buy_count = self.buy_count + 1
+                self.sell_count = 0
+                 
+            elif current_price < (self.lower_sigma_5m3) and self.slope < -0.01:
+                self.sell_count = self.sell_count + 1
+                self.buy_count = 0
+            else:
+                pass
+
+        if self.buy_count >= 2 and self.order_kind == "sell":
+            stl_flag = True
+            self.result_logger.info("# Execute Reverse Settlement")
+            self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
+            self.result_logger.info("# current_price=%s, upper_sigma_5m3=%s" % (current_price, self.upper_sigma_5m3))
+            self.result_logger.info("# slope=%s" % (self.slope))
+
+        elif self.sell_count >= 2 and self.order_kind == "buy":
+            stl_flag = True
+            self.result_logger.info("# Execute Reverse Settlement")
+            self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
+            self.result_logger.info("# current_price=%s, lower_sigma_5m3=%s" % (current_price, self.lower_sigma_5m3))
+            self.result_logger.info("# slope=%s" % (self.slope))
+
+ 
+        self.debug_logger.info("order_kind = %s" % self.order_kind)
+        self.debug_logger.info("buy_count = %s" % self.buy_count)
+        self.debug_logger.info("sell_count = %s" % self.sell_count)
 
         return stl_flag
 
@@ -123,35 +143,37 @@ class ExpantionAlgo(SuperAlgo):
         # Buy Logic at Trend Follow Mode
 
         # slopeは上を向いている場合は買いエントリしない。下を向いている場合は売りエントリしない
-#        if (self.upper_sigma_1h3 - self.lower_sigma_1h3) > 1 and (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
         if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
             if current_price > (self.upper_sigma_5m3) and self.slope > 0.01:
-#                if self.order_history != "buy" or self.profit_history != "l":
-                 if self.buy_count >= 1:
-                    trade_flag = "buy"
-                    self.result_logger.info("#######################################################")
-                    self.result_logger.info("# decideExpantionTrade: BUY")
-                    self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
-                    self.result_logger.info("# current_price=%s, upper_sigma_5m3=%s" % (current_price, self.upper_sigma_5m3))
-                    self.result_logger.info("# slope=%s" % (self.slope))
-                 else:
-                    self.buy_count = self.buy_count + 1
-                    self.sell_count = 0
+                self.buy_count = self.buy_count + 1
+                self.sell_count = 0
                  
             elif current_price < (self.lower_sigma_5m3) and self.slope < -0.01:
-#                if self.order_history != "sell" or self.profit_history != "l":
-                if self.sell_count >= 1:
-                    trade_flag = "sell"
-                    self.result_logger.info("#######################################################")
-                    self.result_logger.info("# decideExpantionTrade: SELL")
-                    self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
-                    self.result_logger.info("# current_price=%s, lower_sigma_5m3=%s" % (current_price, self.lower_sigma_5m3))
-                    self.result_logger.info("# slope=%s" % (self.slope))
-                else:
-                    self.sell_count = self.sell_count + 1
-                    self.buy_count = 0
+                self.sell_count = self.sell_count + 1
+                self.buy_count = 0
             else:
                 pass
+
+        if self.buy_count >= 2:
+            trade_flag = "buy"
+            self.result_logger.info("#######################################################")
+            self.result_logger.info("# decideExpantionTrade: BUY")
+            self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
+            self.result_logger.info("# current_price=%s, upper_sigma_5m3=%s" % (current_price, self.upper_sigma_5m3))
+            self.result_logger.info("# slope=%s" % (self.slope))
+            self.buy_count = 0
+            self.sell_count = 0
+
+        elif self.sell_count >= 2:
+            trade_flag = "sell"
+            self.result_logger.info("#######################################################")
+            self.result_logger.info("# decideExpantionTrade: SELL")
+            self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
+            self.result_logger.info("# current_price=%s, lower_sigma_5m3=%s" % (current_price, self.lower_sigma_5m3))
+            self.result_logger.info("# slope=%s" % (self.slope))
+            self.buy_count = 0
+            self.sell_count = 0
+
         else:
             pass
 
