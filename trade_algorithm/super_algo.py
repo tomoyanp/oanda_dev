@@ -48,6 +48,10 @@ class SuperAlgo(object):
 ###############################################
 
     def resetFlag(self):
+        if self.order_kind == "buy":
+            self.buy_count = 0
+        elif self.order_kind == "sell":
+            self.sell_count = 0
         self.order_flag = False
         self.order_kind = ""
         self.trade_id = 0
@@ -55,8 +59,6 @@ class SuperAlgo(object):
         self.trail_second_flag = False
         self.break_wait_flag = "pass"
         self.trail_price = 0
-        self.buy_count = 0
-        self.sell_count = 0
 
     def setOrderData(self, trade_flag, order_price, order_flag, trade_id):
         self.order_kind = trade_flag
