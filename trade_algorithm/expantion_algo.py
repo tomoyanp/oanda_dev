@@ -32,6 +32,10 @@ class ExpantionAlgo(SuperAlgo):
         self.result_logger = getLogger("result")
         self.slope = 0
         self.mysql_connector = MysqlConnector()
+        self.first_flag = self.config_data["first_trail_mode"]
+        self.second_flag = self.config_data["second_trail_mode"]
+        self.most_high_price = 0
+        self.most_low_price = 0
 
     def decideTrade(self, base_time):
         trade_flag = "pass"
@@ -86,21 +90,21 @@ class ExpantionAlgo(SuperAlgo):
 
     def decideExpantionTakeProfit(self, stl_flag, current_price):
         # Stop Loss Algorithm
-        order_price = self.getOrderPrice()
-        min_take_profit = 0.7
-
-        # bollinger 逆側の向きが変わったら
-        if self.order_kind == "buy":
-            if (self.bid_price - order_price) > min_take_profit and self.bollinger1h3_lower_sigma_slope > 0:
-                self.result_logger.info("# EXECUTE STLMENT at Take Profit")
-                self.result_logger.info("# current_bid_price=%s, order_price=%s, min_take_profit=%s" % (self.bid_price, order_price, min_take_profit))
-                self.result_logger.info("# bollinger1h3_lower_sigma_slope=%s" % (self.bollinger1h3_lower_sigma_slope))
-                stl_flag = True
-        elif self.order_kind == "sell":
-            if (order_price - self.ask_price) > min_take_profit and self.bollinger1h3_upper_sigma_slope < 0:
-                self.result_logger.info("# EXECUTE STLMENT at Take Profit")
-                self.result_logger.info("# current_ask_price=%s, order_price=%s, min_take_profit=%s" % (self.ask_price, order_price, min_take_profit))
-                self.result_logger.info("# bollinger1h3_upper_sigma_slope=%s" % (self.bollinger1h3_upper_sigma_slope))
+#        order_price = self.getOrderPrice()
+#        min_take_profit = 0.7
+#
+#        # bollinger 逆側の向きが変わったら
+#        if self.order_kind == "buy":
+#            if (self.bid_price - order_price) > min_take_profit and self.bollinger1h3_lower_sigma_slope > 0:
+#                self.result_logger.info("# EXECUTE STLMENT at Take Profit")
+#                self.result_logger.info("# current_bid_price=%s, order_price=%s, min_take_profit=%s" % (self.bid_price, order_price, min_take_profit))
+#                self.result_logger.info("# bollinger1h3_lower_sigma_slope=%s" % (self.bollinger1h3_lower_sigma_slope))
+#                stl_flag = True
+#        elif self.order_kind == "sell":
+#            if (order_price - self.ask_price) > min_take_profit and self.bollinger1h3_upper_sigma_slope < 0:
+#                self.result_logger.info("# EXECUTE STLMENT at Take Profit")
+#                self.result_logger.info("# current_ask_price=%s, order_price=%s, min_take_profit=%s" % (self.ask_price, order_price, min_take_profit))
+#                self.result_logger.info("# bollinger1h3_upper_sigma_slope=%s" % (self.bollinger1h3_upper_sigma_slope))
                 stl_flag = True
 
         return stl_flag
@@ -180,17 +184,29 @@ class ExpantionAlgo(SuperAlgo):
 
         return trade_flag
 
+    def resetFlag(self):
+        super(ExpantionAlgo, self)
+        self.most_high_price = 0
+        self.most_low_price = 0
+
     def decideTrailLogic(self, stl_flag, current_ask_price, current_bid_price, current_price):
         order_price = self.getOrderPrice()
-        first_flag = self.config_data["first_trail_mode"]
-        second_flag = self.config_data["second_trail_mode"]
-        first_take_profit = 0.3
-        second_take_profit = 0.5
-        trail_take_profit = 0.1
+        first_take_profit = 0.5
+        second_take_profit = 1.0
+        trail_take_profit = 0
+
+        if self.most_high_price == 0 and self.most_low_price == 0:
+            self.most_high_price = order_price
+            self.most_low_price = order_price
+
+        if self.most_high_price < current_bid_price:
+            self.most_high_price = current_bid_price
+        if self.most_low_price > current_ask_price:
+            self.most_low_price = current_ask_price
 
 
-        if first_flag == "on":
-            # 最小利確0.3を超えたら、トレールストップモードをONにする
+        if self.first_flag = "on"
+            # 最小利確0.5を超えたら、トレールストップモードをONにする
             if self.order_kind == "buy":
                 if (current_bid_price - order_price) > first_take_profit:
                     self.trail_flag = True
@@ -198,21 +214,20 @@ class ExpantionAlgo(SuperAlgo):
                 if (order_price - current_ask_price) > first_take_profit:
                     self.trail_flag = True
 
-
             # trail_flagがONで、含み益がなくなったら決済する
             if self.trail_flag == True and self.order_kind == "buy":
-                if (current_bid_price - order_price) < trail_take_profit:
-                    self.result_logger.info("# Execute Trail Stop")
+                if (self.most_high_price - 0.5) > current_bid_price:
+                    self.result_logger.info("# Execute FirstTrail Stop")
                     self.result_logger.info("# current_bid_price=%s, order_price=%s" % (current_bid_price, order_price))
                     stl_flag = True
             elif self.trail_flag == True and self.order_kind == "sell":
-                if (order_price - current_ask_price) < trail_take_profit:
-                    self.result_logger.info("# Execute Trail Stop")
+                if (self.most_low_price + 0.5) < current_ask_price :
+                    self.result_logger.info("# Execute FirstTrail Stop")
                     self.result_logger.info("# current_ask_price=%s, order_price=%s" % (current_ask_price, order_price))
                     stl_flag = True
 
 
-        if second_flag == "on":
+        if self.second_flag = "on"
             # 含み益0.5超えたら、トレールストップの二段階目をONにする
             if self.order_kind == "buy":
                 if (current_bid_price - order_price) > second_take_profit:
@@ -221,14 +236,58 @@ class ExpantionAlgo(SuperAlgo):
                 if (order_price - current_ask_price) > second_take_profit:
                     self.trail_second_flag = True
 
+            # trail_flagがONで、含み益がなくなったら決済する
+            if self.trail_flag == True and self.order_kind == "buy":
+                if (self.most_high_price - 0.3) > current_bid_price:
+                    self.result_logger.info("# Execute SecondTrail Stop")
+                    self.result_logger.info("# current_bid_price=%s, order_price=%s" % (current_bid_price, order_price))
+                    stl_flag = True
+            elif self.trail_flag == True and self.order_kind == "sell":
+                if (self.most_low_price + 0.3) < current_ask_price :
+                    self.result_logger.info("# Execute SecondTrail Stop")
+                    self.result_logger.info("# current_ask_price=%s, order_price=%s" % (current_ask_price, order_price))
+                    stl_flag = True
 
-            # second_flagがTrueで且つ、含み益が0.3以下になったら決済する
-            if self.trail_second_flag == True and self.order_kind == "buy":
-                if (current_bid_price - order_price) < 0.3:
-                    stl_flag = True
-            elif self.trail_second_flag == True and self.order_kind == "sell":
-                if (order_price - current_ask_price) < 0.3:
-                    stl_flag = True
+#        if first_flag == "on":
+#            # 最小利確0.3を超えたら、トレールストップモードをONにする
+#            if self.order_kind == "buy":
+#                if (current_bid_price - order_price) > first_take_profit:
+#                    self.trail_flag = True
+#            elif self.order_kind == "sell":
+#                if (order_price - current_ask_price) > first_take_profit:
+#                    self.trail_flag = True
+#
+#
+#            # trail_flagがONで、含み益がなくなったら決済する
+#            if self.trail_flag == True and self.order_kind == "buy":
+#                if (current_bid_price - order_price) < trail_take_profit:
+#                    self.result_logger.info("# Execute Trail Stop")
+#                    self.result_logger.info("# current_bid_price=%s, order_price=%s" % (current_bid_price, order_price))
+#                    stl_flag = True
+#            elif self.trail_flag == True and self.order_kind == "sell":
+#                if (order_price - current_ask_price) < trail_take_profit:
+#                    self.result_logger.info("# Execute Trail Stop")
+#                    self.result_logger.info("# current_ask_price=%s, order_price=%s" % (current_ask_price, order_price))
+#                    stl_flag = True
+#
+#
+#        if second_flag == "on":
+#            # 含み益0.5超えたら、トレールストップの二段階目をONにする
+#            if self.order_kind == "buy":
+#                if (current_bid_price - order_price) > second_take_profit:
+#                    self.trail_second_flag = True
+#            elif self.order_kind == "sell":
+#                if (order_price - current_ask_price) > second_take_profit:
+#                    self.trail_second_flag = True
+#
+#
+#            # second_flagがTrueで且つ、含み益が0.3以下になったら決済する
+#            if self.trail_second_flag == True and self.order_kind == "buy":
+#                if (current_bid_price - order_price) < 0.3:
+#                    stl_flag = True
+#            elif self.trail_second_flag == True and self.order_kind == "sell":
+#                if (order_price - current_ask_price) < 0.3:
+#                    stl_flag = True
 
         return stl_flag
 

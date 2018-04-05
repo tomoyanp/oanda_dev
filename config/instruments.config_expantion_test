@@ -2,7 +2,7 @@
   "GBP_JPY": {
     "__comments" : "expantion mode",
     "__comments1" : "current master",
-    "stop_loss": 0.2,
+    "stop_loss": 3.0,
     "take_profit": 3.0,
     "time_width": 720000,
     "stl_time_width": 720000,
@@ -10,12 +10,12 @@
     "trade_sleep_time": 10,
     "stl_sleep_time": 10,
     "stl_sleep_vtime": 10,
-    "stl_sleep_ltime": 10,
+    "stl_sleep_ltime": 1,
     "units": 10000,
     "enable_time": ["00:00:00", "01:00:00", "02:00:00", "03:00:00", "08:00:00", "09:00:00", "10:00:00", "11:00:00", "12:00:00", "13:00:00", "14:00:00", "15:00:00", "16:00:00", "17:00:00", "18:00:00", "19:00:00", "20:00:00", "21:00:00", "22:00:00", "23:00:00"],
     "enable_time_mode": "off",
     "ex_stlmode": "on",
     "first_trail_mode": "on",
-    "second_trail_mode": "off"
+    "second_trail_mode": "on"
   }
 }
