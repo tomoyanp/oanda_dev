@@ -1,0 +1,2312 @@
+#########################
+# ../main.py GBP_JPY demo expantion expantion_test test 
+# __comments = expantion mode
+# __comments1 = current master
+# enable_time = [u'00:00:00', u'01:00:00', u'02:00:00', u'03:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00', u'21:00:00', u'22:00:00', u'23:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# first_trail_mode = off
+# second_trail_mode = off
+# sleep_time = 10
+# stl_sleep_ltime = 10
+# stl_sleep_time = 10
+# stl_sleep_vtime = 10
+# stl_time_width = 720000
+# stop_loss = 0.2
+# take_profit = 2.0
+# time_width = 720000
+# trade_sleep_time = 10
+# units = 10000
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=140.84140202 , lower_sigma_1h3=139.376443119
+# current_price=140.178, upper_sigma_5m3=140.105183849
+# slope=0.024928100000130522
+# EXECUTE ORDER at 2017-03-02 15:19:50
+# ORDER_PRICE=140.178, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-03-02 19:04:10
+# ORDER_PRICE=140.178, STL_PRICE=139.9685, ORDER_KIND=buy, PROFIT=-0.2095
+# PROFIT=-0.2095
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=140.647804607 , lower_sigma_1h3=139.603527437
+# current_price=139.9295, lower_sigma_5m3=139.93284977
+# slope=-0.10364590700002653
+# EXECUTE ORDER at 2017-03-06 09:04:50
+# ORDER_PRICE=139.9295, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=139.0735, order_price=139.9295, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.141182525
+# EXECUTE SETTLEMENT at 2017-03-07 17:00:50
+# ORDER_PRICE=139.9295, STL_PRICE=139.0735, ORDER_KIND=sell, PROFIT=0.856
+# PROFIT=0.856
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=139.962485531 , lower_sigma_1h3=139.070168289
+# current_price=139.027, lower_sigma_5m3=139.074880713
+# slope=-0.15903243899996075
+# EXECUTE ORDER at 2017-03-07 17:09:50
+# ORDER_PRICE=139.027, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-03-07 18:16:00
+# ORDER_PRICE=139.027, STL_PRICE=139.2375, ORDER_KIND=sell, PROFIT=-0.2105
+# PROFIT=-0.2105
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=139.823901796 , lower_sigma_1h3=138.533680743
+# current_price=138.811, lower_sigma_5m3=138.834941088
+# slope=-0.14100582899992797
+# EXECUTE ORDER at 2017-03-08 12:29:50
+# ORDER_PRICE=138.811, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-03-08 21:50:30
+# ORDER_PRICE=138.811, STL_PRICE=139.012, ORDER_KIND=sell, PROFIT=-0.201
+# PROFIT=-0.201
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=139.907983385 , lower_sigma_1h3=138.261200295
+# current_price=139.3635, upper_sigma_5m3=139.360604624
+# slope=0.09790267899999609
+# EXECUTE ORDER at 2017-03-09 17:24:50
+# ORDER_PRICE=139.3635, TRADE_FLAG=buy
+# EXECUTE STLMENT at Take Profit
+# current_bid_price=140.0995, order_price=139.3635, min_take_profit=0.7
+# bollinger1h3_lower_sigma_slope=0.00528160900001
+# EXECUTE SETTLEMENT at 2017-03-10 13:00:50
+# ORDER_PRICE=139.3635, STL_PRICE=140.0995, ORDER_KIND=buy, PROFIT=0.736
+# PROFIT=0.736
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=140.553531799 , lower_sigma_1h3=138.644318449
+# current_price=140.223, upper_sigma_5m3=140.159901603
+# slope=0.30253688099992565
+# EXECUTE ORDER at 2017-03-10 13:54:50
+# ORDER_PRICE=140.223, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-03-10 23:58:00
+# ORDER_PRICE=140.223, STL_PRICE=139.981, ORDER_KIND=buy, PROFIT=-0.242
+# PROFIT=-0.242
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=140.423666581 , lower_sigma_1h3=138.802665116
+# current_price=139.7815, lower_sigma_5m3=140.042875891
+# slope=-0.024540550999876534
+# EXECUTE ORDER at 2017-03-15 18:34:50
+# ORDER_PRICE=139.7815, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-03-15 21:31:50
+# ORDER_PRICE=139.7815, STL_PRICE=139.988, ORDER_KIND=sell, PROFIT=-0.2065
+# PROFIT=-0.2065
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=140.522505692 , lower_sigma_1h3=138.885406907
+# current_price=139.797, lower_sigma_5m3=139.82843636
+# slope=-0.06855776100013365
+# EXECUTE ORDER at 2017-03-20 20:59:50
+# ORDER_PRICE=139.797, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=138.9775, order_price=139.797, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.078583628
+# EXECUTE SETTLEMENT at 2017-03-21 03:00:50
+# ORDER_PRICE=139.797, STL_PRICE=138.9775, ORDER_KIND=sell, PROFIT=0.8195
+# PROFIT=0.8195
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=139.817464512 , lower_sigma_1h3=137.827146996
+# current_price=138.849, lower_sigma_5m3=138.88414618
+# slope=-0.08617653800017541
+# EXECUTE ORDER at 2017-03-23 16:24:50
+# ORDER_PRICE=138.849, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-03-23 18:30:20
+# ORDER_PRICE=138.849, STL_PRICE=139.1245, ORDER_KIND=sell, PROFIT=-0.2755
+# PROFIT=-0.2755
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=139.577652937 , lower_sigma_1h3=137.918782877
+# current_price=138.575, lower_sigma_5m3=138.602428338
+# slope=-0.15680193499997014
+# EXECUTE ORDER at 2017-03-23 21:29:50
+# ORDER_PRICE=138.575, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-03-23 22:37:20
+# ORDER_PRICE=138.575, STL_PRICE=138.8125, ORDER_KIND=sell, PROFIT=-0.2375
+# PROFIT=-0.2375
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=139.448085336 , lower_sigma_1h3=138.466914218
+# current_price=139.1105, upper_sigma_5m3=139.107941256
+# slope=0.03686237700021793
+# EXECUTE ORDER at 2017-03-24 15:04:50
+# ORDER_PRICE=139.1105, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-03-24 15:58:50
+# ORDER_PRICE=139.1105, STL_PRICE=138.903, ORDER_KIND=buy, PROFIT=-0.2075
+# PROFIT=-0.2075
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=139.42526896 , lower_sigma_1h3=138.472011496
+# current_price=138.773, lower_sigma_5m3=138.776515244
+# slope=-0.030345760000075866
+# EXECUTE ORDER at 2017-03-24 18:24:50
+# ORDER_PRICE=138.773, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-03-25 05:34:20
+# ORDER_PRICE=138.773, STL_PRICE=138.981, ORDER_KIND=sell, PROFIT=-0.208
+# PROFIT=-0.208
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=139.295740061 , lower_sigma_1h3=137.807761378
+# current_price=138.685, lower_sigma_5m3=138.72569102
+# slope=-0.025828870000014867
+# EXECUTE ORDER at 2017-03-27 23:34:50
+# ORDER_PRICE=138.685, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-03-27 23:44:50
+# ORDER_PRICE=138.685, STL_PRICE=138.9365, ORDER_KIND=sell, PROFIT=-0.2515
+# PROFIT=-0.2515
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=139.594819288 , lower_sigma_1h3=137.70576598
+# current_price=139.1415, upper_sigma_5m3=139.114144124
+# slope=0.14029789300004405
+# EXECUTE ORDER at 2017-03-28 08:39:50
+# ORDER_PRICE=139.1415, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-03-28 10:12:50
+# ORDER_PRICE=139.1415, STL_PRICE=138.941, ORDER_KIND=buy, PROFIT=-0.2005
+# PROFIT=-0.2005
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=138.805394007 , lower_sigma_1h3=137.3399114
+# current_price=138.1445, upper_sigma_5m3=138.075390504
+# slope=0.010126784999845609
+# EXECUTE ORDER at 2017-03-30 18:24:50
+# ORDER_PRICE=138.1445, TRADE_FLAG=buy
+# EXECUTE STLMENT at Take Profit
+# current_bid_price=139.56, order_price=138.1445, min_take_profit=0.7
+# bollinger1h3_lower_sigma_slope=0.005372244
+# EXECUTE SETTLEMENT at 2017-03-31 06:00:50
+# ORDER_PRICE=138.1445, STL_PRICE=139.56, ORDER_KIND=buy, PROFIT=1.4155
+# PROFIT=1.4155
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=140.287289682 , lower_sigma_1h3=138.70386885
+# current_price=139.8445, upper_sigma_5m3=139.684082279
+# slope=0.21958730099996038
+# EXECUTE ORDER at 2017-04-01 05:54:50
+# ORDER_PRICE=139.8445, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-04-03 06:55:40
+# ORDER_PRICE=139.8445, STL_PRICE=139.6425, ORDER_KIND=buy, PROFIT=-0.202
+# PROFIT=-0.202
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=140.245311732 , lower_sigma_1h3=138.929165053
+# current_price=139.7775, upper_sigma_5m3=139.752583092
+# slope=0.0393849199998746
+# EXECUTE ORDER at 2017-04-03 14:09:50
+# ORDER_PRICE=139.7775, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-04-03 16:19:00
+# ORDER_PRICE=139.7775, STL_PRICE=139.5745, ORDER_KIND=buy, PROFIT=-0.203
+# PROFIT=-0.203
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=140.139267499 , lower_sigma_1h3=138.991684188
+# current_price=139.3295, lower_sigma_5m3=139.383731527
+# slope=-0.05634751999998009
+# EXECUTE ORDER at 2017-04-03 17:34:50
+# ORDER_PRICE=139.3295, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-04-03 19:06:30
+# ORDER_PRICE=139.3295, STL_PRICE=139.5385, ORDER_KIND=sell, PROFIT=-0.209
+# PROFIT=-0.209
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=140.161263928 , lower_sigma_1h3=138.85580378
+# current_price=138.5265, lower_sigma_5m3=138.815310779
+# slope=-0.05556282199987729
+# EXECUTE ORDER at 2017-04-03 23:59:50
+# ORDER_PRICE=138.5265, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=137.7935, order_price=138.5265, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.066805758
+# EXECUTE SETTLEMENT at 2017-04-04 14:00:50
+# ORDER_PRICE=138.5265, STL_PRICE=137.7935, ORDER_KIND=sell, PROFIT=0.733
+# PROFIT=0.733
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=138.608081031 , lower_sigma_1h3=136.895874326
+# current_price=137.6805, lower_sigma_5m3=137.694037361
+# slope=-0.20651108499992987
+# EXECUTE ORDER at 2017-04-05 12:29:50
+# ORDER_PRICE=137.6805, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-04-05 17:30:10
+# ORDER_PRICE=137.6805, STL_PRICE=137.9265, ORDER_KIND=sell, PROFIT=-0.246
+# PROFIT=-0.246
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=138.566362636 , lower_sigma_1h3=136.948737265
+# current_price=138.5845, upper_sigma_5m3=138.576692062
+# slope=0.2657194179998657
+# EXECUTE ORDER at 2017-04-05 21:04:50
+# ORDER_PRICE=138.5845, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-04-06 04:13:10
+# ORDER_PRICE=138.5845, STL_PRICE=138.3825, ORDER_KIND=buy, PROFIT=-0.202
+# PROFIT=-0.202
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=138.710719147 , lower_sigma_1h3=137.539009326
+# current_price=137.771, lower_sigma_5m3=138.066727556
+# slope=-0.10282916600000074
+# EXECUTE ORDER at 2017-04-07 10:19:50
+# ORDER_PRICE=137.771, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-04-07 14:24:10
+# ORDER_PRICE=137.771, STL_PRICE=137.9895, ORDER_KIND=sell, PROFIT=-0.2185
+# PROFIT=-0.2185
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=138.840991475 , lower_sigma_1h3=137.321883029
+# current_price=137.612, lower_sigma_5m3=137.647734319
+# slope=-0.030371801000040652
+# EXECUTE ORDER at 2017-04-07 16:19:50
+# ORDER_PRICE=137.612, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-04-07 16:38:40
+# ORDER_PRICE=137.612, STL_PRICE=137.847, ORDER_KIND=sell, PROFIT=-0.235
+# PROFIT=-0.235
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=138.991964603 , lower_sigma_1h3=137.04819249
+# current_price=137.2855, lower_sigma_5m3=137.28729442
+# slope=-0.14950910100011422
+# EXECUTE ORDER at 2017-04-07 21:34:50
+# ORDER_PRICE=137.2855, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-04-07 22:14:00
+# ORDER_PRICE=137.2855, STL_PRICE=137.504, ORDER_KIND=sell, PROFIT=-0.2185
+# PROFIT=-0.2185
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=138.524700105 , lower_sigma_1h3=136.904824746
+# current_price=138.2195, upper_sigma_5m3=138.209893321
+# slope=0.056281622000011994
+# EXECUTE ORDER at 2017-04-10 22:54:50
+# ORDER_PRICE=138.2195, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-04-10 23:12:20
+# ORDER_PRICE=138.2195, STL_PRICE=138.0085, ORDER_KIND=buy, PROFIT=-0.211
+# PROFIT=-0.211
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=138.448737632 , lower_sigma_1h3=137.169334243
+# current_price=137.2385, lower_sigma_5m3=137.290112118
+# slope=-0.10978670700000764
+# EXECUTE ORDER at 2017-04-11 15:54:50
+# ORDER_PRICE=137.2385, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-04-11 17:34:30
+# ORDER_PRICE=137.2385, STL_PRICE=137.47, ORDER_KIND=sell, PROFIT=-0.2315
+# PROFIT=-0.2315
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=138.450434308 , lower_sigma_1h3=136.912011129
+# current_price=137.258, lower_sigma_5m3=137.302881082
+# slope=-0.19668340900013556
+# EXECUTE ORDER at 2017-04-11 21:59:50
+# ORDER_PRICE=137.258, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=136.509, order_price=137.258, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.073700345
+# EXECUTE SETTLEMENT at 2017-04-14 02:00:50
+# ORDER_PRICE=137.258, STL_PRICE=136.509, ORDER_KIND=sell, PROFIT=0.749
+# PROFIT=0.749
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=137.244025202 , lower_sigma_1h3=136.383478667
+# current_price=136.3895, lower_sigma_5m3=136.489455047
+# slope=-0.08772202300006586
+# EXECUTE ORDER at 2017-04-14 02:09:50
+# ORDER_PRICE=136.3895, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-04-14 10:59:10
+# ORDER_PRICE=136.3895, STL_PRICE=136.5955, ORDER_KIND=sell, PROFIT=-0.206
+# PROFIT=-0.206
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=137.146989051 , lower_sigma_1h3=136.157014074
+# current_price=136.3735, lower_sigma_5m3=136.415070672
+# slope=-0.05624032600000512
+# EXECUTE ORDER at 2017-04-14 14:34:50
+# ORDER_PRICE=136.3735, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-04-18 00:29:40
+# ORDER_PRICE=136.3735, STL_PRICE=136.5835, ORDER_KIND=sell, PROFIT=-0.21
+# PROFIT=-0.21
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=136.899345274 , lower_sigma_1h3=135.228063754
+# current_price=136.902, upper_sigma_5m3=136.804082808
+# slope=0.15272668599998931
+# EXECUTE ORDER at 2017-04-18 04:19:50
+# ORDER_PRICE=136.902, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-04-18 18:05:00
+# ORDER_PRICE=136.902, STL_PRICE=136.662, ORDER_KIND=buy, PROFIT=-0.24
+# PROFIT=-0.24
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=140.264107645 , lower_sigma_1h3=138.589218595
+# current_price=139.782, upper_sigma_5m3=139.747268398
+# slope=0.033408481999936145
+# EXECUTE ORDER at 2017-04-20 16:34:50
+# ORDER_PRICE=139.782, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-04-20 20:01:20
+# ORDER_PRICE=139.782, STL_PRICE=139.567, ORDER_KIND=buy, PROFIT=-0.215
+# PROFIT=-0.215
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=140.415179743 , lower_sigma_1h3=138.576225366
+# current_price=139.9835, upper_sigma_5m3=139.822487095
+# slope=0.07446351800008479
+# EXECUTE ORDER at 2017-04-20 22:09:50
+# ORDER_PRICE=139.9835, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-04-20 22:22:40
+# ORDER_PRICE=139.9835, STL_PRICE=139.783, ORDER_KIND=buy, PROFIT=-0.2005
+# PROFIT=-0.2005
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=140.433541802 , lower_sigma_1h3=138.5690767
+# current_price=140.179, upper_sigma_5m3=140.119141698
+# slope=0.030420734000008293
+# EXECUTE ORDER at 2017-04-20 23:14:50
+# ORDER_PRICE=140.179, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-04-21 00:18:40
+# ORDER_PRICE=140.179, STL_PRICE=139.969, ORDER_KIND=buy, PROFIT=-0.21
+# PROFIT=-0.21
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=140.690690397 , lower_sigma_1h3=138.944852956
+# current_price=139.9565, upper_sigma_5m3=139.888659693
+# slope=0.22723211899991352
+# EXECUTE ORDER at 2017-04-21 14:39:50
+# ORDER_PRICE=139.9565, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-04-21 17:26:00
+# ORDER_PRICE=139.9565, STL_PRICE=139.732, ORDER_KIND=buy, PROFIT=-0.2245
+# PROFIT=-0.2245
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=140.59016075 , lower_sigma_1h3=139.144472732
+# current_price=139.366, lower_sigma_5m3=139.374044275
+# slope=-0.1203091009999016
+# EXECUTE ORDER at 2017-04-22 00:04:50
+# ORDER_PRICE=139.366, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-04-22 02:46:50
+# ORDER_PRICE=139.366, STL_PRICE=139.5695, ORDER_KIND=sell, PROFIT=-0.2035
+# PROFIT=-0.2035
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=143.531512264 , lower_sigma_1h3=142.069441059
+# current_price=142.84, upper_sigma_5m3=142.83479482
+# slope=0.18190791200006842
+# EXECUTE ORDER at 2017-04-27 07:19:50
+# ORDER_PRICE=142.84, TRADE_FLAG=buy
+# EXECUTE STLMENT at Take Profit
+# current_bid_price=143.5435, order_price=142.84, min_take_profit=0.7
+# bollinger1h3_lower_sigma_slope=0.035055778
+# EXECUTE SETTLEMENT at 2017-04-27 16:00:50
+# ORDER_PRICE=142.84, STL_PRICE=143.5435, ORDER_KIND=buy, PROFIT=0.7035
+# PROFIT=0.7035
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=143.615161253 , lower_sigma_1h3=142.249346882
+# current_price=143.5795, upper_sigma_5m3=143.565595693
+# slope=0.1418359619999069
+# EXECUTE ORDER at 2017-04-27 16:09:50
+# ORDER_PRICE=143.5795, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-04-27 17:00:50
+# ORDER_PRICE=143.5795, STL_PRICE=143.325, ORDER_KIND=buy, PROFIT=-0.2545
+# PROFIT=-0.2545
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=144.026653624 , lower_sigma_1h3=142.092835612
+# current_price=143.801, upper_sigma_5m3=143.752015759
+# slope=0.2489781259999155
+# EXECUTE ORDER at 2017-04-27 21:44:50
+# ORDER_PRICE=143.801, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-04-27 21:50:50
+# ORDER_PRICE=143.801, STL_PRICE=143.5775, ORDER_KIND=buy, PROFIT=-0.2235
+# PROFIT=-0.2235
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=143.929022487 , lower_sigma_1h3=142.989679447
+# current_price=143.6795, upper_sigma_5m3=143.604071751
+# slope=0.17791887399992945
+# EXECUTE ORDER at 2017-04-28 16:19:50
+# ORDER_PRICE=143.6795, TRADE_FLAG=buy
+# EXECUTE STLMENT at Take Profit
+# current_bid_price=144.389, order_price=143.6795, min_take_profit=0.7
+# bollinger1h3_lower_sigma_slope=0.282627616
+# EXECUTE SETTLEMENT at 2017-05-01 16:00:50
+# ORDER_PRICE=143.6795, STL_PRICE=144.389, ORDER_KIND=buy, PROFIT=0.7095
+# PROFIT=0.7095
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=145.538993605 , lower_sigma_1h3=143.737656098
+# current_price=145.028, upper_sigma_5m3=145.01892622
+# slope=0.19895302499999099
+# EXECUTE ORDER at 2017-05-03 09:14:50
+# ORDER_PRICE=145.028, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-05-03 13:41:00
+# ORDER_PRICE=145.028, STL_PRICE=144.813, ORDER_KIND=buy, PROFIT=-0.215
+# PROFIT=-0.215
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=145.49381798 , lower_sigma_1h3=144.104966941
+# current_price=145.0335, upper_sigma_5m3=144.906070851
+# slope=0.1585998990000857
+# EXECUTE ORDER at 2017-05-03 16:39:50
+# ORDER_PRICE=145.0335, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-05-03 18:25:30
+# ORDER_PRICE=145.0335, STL_PRICE=144.8215, ORDER_KIND=buy, PROFIT=-0.212
+# PROFIT=-0.212
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=145.399315223 , lower_sigma_1h3=144.578924311
+# current_price=145.183, upper_sigma_5m3=145.16981285
+# slope=0.06256857699997599
+# EXECUTE ORDER at 2017-05-04 08:44:50
+# ORDER_PRICE=145.183, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-05-04 15:26:40
+# ORDER_PRICE=145.183, STL_PRICE=144.9685, ORDER_KIND=buy, PROFIT=-0.2145
+# PROFIT=-0.2145
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=145.911410053 , lower_sigma_1h3=144.705615592
+# current_price=145.548, upper_sigma_5m3=145.515740202
+# slope=0.08864169100003927
+# EXECUTE ORDER at 2017-05-05 09:29:50
+# ORDER_PRICE=145.548, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-05-05 10:39:40
+# ORDER_PRICE=145.548, STL_PRICE=145.2855, ORDER_KIND=buy, PROFIT=-0.2625
+# PROFIT=-0.2625
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=146.448172665 , lower_sigma_1h3=144.465761462
+# current_price=146.4175, upper_sigma_5m3=146.241195796
+# slope=0.16328196700004283
+# EXECUTE ORDER at 2017-05-06 05:49:50
+# ORDER_PRICE=146.4175, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-05-06 05:57:10
+# ORDER_PRICE=146.4175, STL_PRICE=146.196, ORDER_KIND=buy, PROFIT=-0.2215
+# PROFIT=-0.2215
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=146.679797573 , lower_sigma_1h3=145.423407784
+# current_price=146.171, upper_sigma_5m3=146.138754419
+# slope=0.23660168800016668
+# EXECUTE ORDER at 2017-05-09 01:59:50
+# ORDER_PRICE=146.171, TRADE_FLAG=buy
+# EXECUTE STLMENT at Take Profit
+# current_bid_price=147.736, order_price=146.171, min_take_profit=0.7
+# bollinger1h3_lower_sigma_slope=0.007423289
+# EXECUTE SETTLEMENT at 2017-05-10 01:00:50
+# ORDER_PRICE=146.171, STL_PRICE=147.736, ORDER_KIND=buy, PROFIT=1.565
+# PROFIT=1.565
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=148.084902641 , lower_sigma_1h3=146.920830345
+# current_price=147.927, upper_sigma_5m3=147.862853908
+# slope=0.13924407299990565
+# EXECUTE ORDER at 2017-05-11 02:34:50
+# ORDER_PRICE=147.927, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-05-11 09:47:10
+# ORDER_PRICE=147.927, STL_PRICE=147.7225, ORDER_KIND=buy, PROFIT=-0.2045
+# PROFIT=-0.2045
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=147.377481346 , lower_sigma_1h3=145.561709328
+# current_price=146.739, upper_sigma_5m3=146.722397263
+# slope=0.22351002099986517
+# EXECUTE ORDER at 2017-05-16 09:19:50
+# ORDER_PRICE=146.739, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-05-16 10:46:00
+# ORDER_PRICE=146.739, STL_PRICE=146.5375, ORDER_KIND=buy, PROFIT=-0.2015
+# PROFIT=-0.2015
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=147.006544258 , lower_sigma_1h3=146.1691235
+# current_price=146.146, lower_sigma_5m3=146.155508039
+# slope=-0.13344375000002615
+# EXECUTE ORDER at 2017-05-16 23:34:50
+# ORDER_PRICE=146.146, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=145.22, order_price=146.146, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.324014311
+# EXECUTE SETTLEMENT at 2017-05-17 22:00:50
+# ORDER_PRICE=146.146, STL_PRICE=145.22, ORDER_KIND=sell, PROFIT=0.926
+# PROFIT=0.926
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=144.765619487 , lower_sigma_1h3=143.54395963
+# current_price=144.297, upper_sigma_5m3=144.270492226
+# slope=0.08216639299994775
+# EXECUTE ORDER at 2017-05-19 13:09:50
+# ORDER_PRICE=144.297, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-05-19 15:21:50
+# ORDER_PRICE=144.297, STL_PRICE=144.0925, ORDER_KIND=buy, PROFIT=-0.2045
+# PROFIT=-0.2045
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=145.305343651 , lower_sigma_1h3=143.367880109
+# current_price=145.157, upper_sigma_5m3=145.142247517
+# slope=0.2741516619999405
+# EXECUTE ORDER at 2017-05-19 22:54:50
+# ORDER_PRICE=145.157, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-05-20 02:09:30
+# ORDER_PRICE=145.157, STL_PRICE=144.9515, ORDER_KIND=buy, PROFIT=-0.2055
+# PROFIT=-0.2055
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=145.617889829 , lower_sigma_1h3=144.063930012
+# current_price=144.9045, upper_sigma_5m3=144.875665543
+# slope=0.14633722800004814
+# EXECUTE ORDER at 2017-05-22 19:09:50
+# ORDER_PRICE=144.9045, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-05-22 21:38:50
+# ORDER_PRICE=144.9045, STL_PRICE=144.6975, ORDER_KIND=buy, PROFIT=-0.207
+# PROFIT=-0.207
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=145.451877782 , lower_sigma_1h3=144.278984966
+# current_price=144.44, lower_sigma_5m3=144.494416341
+# slope=-0.017655927999894728
+# EXECUTE ORDER at 2017-05-23 00:09:50
+# ORDER_PRICE=144.44, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-05-23 01:16:30
+# ORDER_PRICE=144.44, STL_PRICE=144.645, ORDER_KIND=sell, PROFIT=-0.205
+# PROFIT=-0.205
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=145.318228777 , lower_sigma_1h3=144.191799645
+# current_price=144.432, lower_sigma_5m3=144.517083088
+# slope=-0.19523063199988389
+# EXECUTE ORDER at 2017-05-23 07:44:50
+# ORDER_PRICE=144.432, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-05-24 00:08:10
+# ORDER_PRICE=144.432, STL_PRICE=144.794, ORDER_KIND=sell, PROFIT=-0.362
+# PROFIT=-0.362
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=145.310591331 , lower_sigma_1h3=143.68324855
+# current_price=145.013, upper_sigma_5m3=145.012908659
+# slope=0.11473846600000293
+# EXECUTE ORDER at 2017-05-24 07:24:50
+# ORDER_PRICE=145.013, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-05-24 19:38:40
+# ORDER_PRICE=145.013, STL_PRICE=144.8095, ORDER_KIND=buy, PROFIT=-0.2035
+# PROFIT=-0.2035
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=145.291512786 , lower_sigma_1h3=144.413997829
+# current_price=144.5795, lower_sigma_5m3=144.580801792
+# slope=-0.06792110500009164
+# EXECUTE ORDER at 2017-05-26 04:14:50
+# ORDER_PRICE=144.5795, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-05-26 05:31:10
+# ORDER_PRICE=144.5795, STL_PRICE=144.7795, ORDER_KIND=sell, PROFIT=-0.2
+# PROFIT=-0.2
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=145.286885808 , lower_sigma_1h3=144.362624361
+# current_price=144.512, lower_sigma_5m3=144.559002075
+# slope=-0.06848184700016226
+# EXECUTE ORDER at 2017-05-26 08:04:50
+# ORDER_PRICE=144.512, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-05-26 20:02:50
+# ORDER_PRICE=144.512, STL_PRICE=142.494, ORDER_KIND=sell, PROFIT=2.018
+# PROFIT=2.018
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=143.310908784 , lower_sigma_1h3=142.04592321
+# current_price=142.858, lower_sigma_5m3=142.900863184
+# slope=-0.1301807800001433
+# EXECUTE ORDER at 2017-05-29 22:34:50
+# ORDER_PRICE=142.858, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=142.092, order_price=142.858, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.020591416
+# EXECUTE SETTLEMENT at 2017-05-30 10:00:50
+# ORDER_PRICE=142.858, STL_PRICE=142.092, ORDER_KIND=sell, PROFIT=0.766
+# PROFIT=0.766
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=143.499235095 , lower_sigma_1h3=141.580267633
+# current_price=142.036, lower_sigma_5m3=142.267535097
+# slope=-0.18364950300008484
+# EXECUTE ORDER at 2017-05-31 06:34:50
+# ORDER_PRICE=142.036, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-05-31 09:54:30
+# ORDER_PRICE=142.036, STL_PRICE=142.239, ORDER_KIND=sell, PROFIT=-0.203
+# PROFIT=-0.203
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=143.416868185 , lower_sigma_1h3=141.544956319
+# current_price=142.9315, upper_sigma_5m3=142.922662749
+# slope=0.2937326139998237
+# EXECUTE ORDER at 2017-06-01 14:04:50
+# ORDER_PRICE=142.9315, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-06-01 14:42:20
+# ORDER_PRICE=142.9315, STL_PRICE=142.721, ORDER_KIND=buy, PROFIT=-0.2105
+# PROFIT=-0.2105
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=143.475104071 , lower_sigma_1h3=141.56744201
+# current_price=143.089, upper_sigma_5m3=143.050231064
+# slope=0.16599414799989698
+# EXECUTE ORDER at 2017-06-01 17:19:50
+# ORDER_PRICE=143.089, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-06-01 18:17:10
+# ORDER_PRICE=143.089, STL_PRICE=142.878, ORDER_KIND=buy, PROFIT=-0.211
+# PROFIT=-0.211
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=143.099561619 , lower_sigma_1h3=141.69391477
+# current_price=142.646, lower_sigma_5m3=142.660919425
+# slope=-0.18497973700010092
+# EXECUTE ORDER at 2017-06-06 02:29:50
+# ORDER_PRICE=142.646, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=140.876, order_price=142.646, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.008902914
+# EXECUTE SETTLEMENT at 2017-06-07 03:00:50
+# ORDER_PRICE=142.646, STL_PRICE=140.876, ORDER_KIND=sell, PROFIT=1.77
+# PROFIT=1.77
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=141.386923297 , lower_sigma_1h3=139.755352447
+# current_price=140.795, upper_sigma_5m3=140.772816871
+# slope=0.10678903699998842
+# EXECUTE ORDER at 2017-06-12 14:54:50
+# ORDER_PRICE=140.795, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-06-12 15:32:20
+# ORDER_PRICE=140.795, STL_PRICE=140.585, ORDER_KIND=buy, PROFIT=-0.21
+# PROFIT=-0.21
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=142.496181659 , lower_sigma_1h3=141.194294234
+# current_price=141.8925, upper_sigma_5m3=141.890663908
+# slope=0.10718092699997374
+# EXECUTE ORDER at 2017-06-19 12:49:50
+# ORDER_PRICE=141.8925, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-06-19 14:03:40
+# ORDER_PRICE=141.8925, STL_PRICE=141.683, ORDER_KIND=buy, PROFIT=-0.2095
+# PROFIT=-0.2095
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=142.490555511 , lower_sigma_1h3=141.224965322
+# current_price=141.717, lower_sigma_5m3=141.783355004
+# slope=-0.013712597999937048
+# EXECUTE ORDER at 2017-06-20 00:14:50
+# ORDER_PRICE=141.717, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-06-20 01:36:50
+# ORDER_PRICE=141.717, STL_PRICE=141.92, ORDER_KIND=sell, PROFIT=-0.203
+# PROFIT=-0.203
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=142.528414983 , lower_sigma_1h3=141.59098338
+# current_price=142.4895, upper_sigma_5m3=142.364124127
+# slope=0.1606879469999485
+# EXECUTE ORDER at 2017-06-20 16:09:50
+# ORDER_PRICE=142.4895, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-06-20 16:30:10
+# ORDER_PRICE=142.4895, STL_PRICE=141.831, ORDER_KIND=buy, PROFIT=-0.6585
+# PROFIT=-0.6585
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=142.792683337 , lower_sigma_1h3=141.225223855
+# current_price=140.9045, lower_sigma_5m3=140.950817784
+# slope=-0.13512257100003647
+# EXECUTE ORDER at 2017-06-20 21:19:50
+# ORDER_PRICE=140.9045, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-06-20 21:43:30
+# ORDER_PRICE=140.9045, STL_PRICE=141.114, ORDER_KIND=sell, PROFIT=-0.2095
+# PROFIT=-0.2095
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=141.520125186 , lower_sigma_1h3=140.357371639
+# current_price=141.2, upper_sigma_5m3=141.178686231
+# slope=0.044706424000072964
+# EXECUTE ORDER at 2017-06-23 09:24:50
+# ORDER_PRICE=141.2, TRADE_FLAG=buy
+# EXECUTE STLMENT at Take Profit
+# current_bid_price=141.915, order_price=141.2, min_take_profit=0.7
+# bollinger1h3_lower_sigma_slope=0.118406462
+# EXECUTE SETTLEMENT at 2017-06-26 12:00:50
+# ORDER_PRICE=141.2, STL_PRICE=141.915, ORDER_KIND=buy, PROFIT=0.715
+# PROFIT=0.715
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=142.149160074 , lower_sigma_1h3=141.111736801
+# current_price=141.965, upper_sigma_5m3=141.954968592
+# slope=0.2627266869999087
+# EXECUTE ORDER at 2017-06-26 15:24:50
+# ORDER_PRICE=141.965, TRADE_FLAG=buy
+# EXECUTE STLMENT at Take Profit
+# current_bid_price=142.79, order_price=141.965, min_take_profit=0.7
+# bollinger1h3_lower_sigma_slope=0.056515975
+# EXECUTE SETTLEMENT at 2017-06-27 21:00:50
+# ORDER_PRICE=141.965, STL_PRICE=142.79, ORDER_KIND=buy, PROFIT=0.825
+# PROFIT=0.825
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=146.599016829 , lower_sigma_1h3=144.918271862
+# current_price=145.7025, upper_sigma_5m3=145.675553352
+# slope=0.16541111100005587
+# EXECUTE ORDER at 2017-06-30 13:39:50
+# ORDER_PRICE=145.7025, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-06-30 16:03:10
+# ORDER_PRICE=145.7025, STL_PRICE=145.502, ORDER_KIND=buy, PROFIT=-0.2005
+# PROFIT=-0.2005
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=147.042088732 , lower_sigma_1h3=145.881943312
+# current_price=146.27, lower_sigma_5m3=146.283749287
+# slope=-0.14016726300003618
+# EXECUTE ORDER at 2017-07-05 07:24:50
+# ORDER_PRICE=146.27, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-07-05 15:34:30
+# ORDER_PRICE=146.27, STL_PRICE=146.528, ORDER_KIND=sell, PROFIT=-0.258
+# PROFIT=-0.258
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=146.903906388 , lower_sigma_1h3=145.931192818
+# current_price=147.0345, upper_sigma_5m3=146.869564879
+# slope=0.11329464299991877
+# EXECUTE ORDER at 2017-07-06 18:54:50
+# ORDER_PRICE=147.0345, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-07-06 19:58:10
+# ORDER_PRICE=147.0345, STL_PRICE=146.8055, ORDER_KIND=buy, PROFIT=-0.229
+# PROFIT=-0.229
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=147.315254391 , lower_sigma_1h3=145.819884597
+# current_price=146.8915, upper_sigma_5m3=146.864368788
+# slope=0.13820711899997626
+# EXECUTE ORDER at 2017-07-07 09:14:50
+# ORDER_PRICE=146.8915, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-07-07 19:08:40
+# ORDER_PRICE=146.8915, STL_PRICE=146.6865, ORDER_KIND=buy, PROFIT=-0.205
+# PROFIT=-0.205
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=147.785110212 , lower_sigma_1h3=146.150672427
+# current_price=147.176, upper_sigma_5m3=147.114569456
+# slope=0.026266045999986564
+# EXECUTE ORDER at 2017-07-10 10:04:50
+# ORDER_PRICE=147.176, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-07-10 17:43:10
+# ORDER_PRICE=147.176, STL_PRICE=146.955, ORDER_KIND=buy, PROFIT=-0.221
+# PROFIT=-0.221
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=147.447230228 , lower_sigma_1h3=146.640908413
+# current_price=147.2575, upper_sigma_5m3=147.214229366
+# slope=0.051469864999992884
+# EXECUTE ORDER at 2017-07-11 13:59:50
+# ORDER_PRICE=147.2575, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-07-11 22:08:10
+# ORDER_PRICE=147.2575, STL_PRICE=146.8875, ORDER_KIND=buy, PROFIT=-0.37
+# PROFIT=-0.37
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=146.969480567 , lower_sigma_1h3=145.233446517
+# current_price=146.601, upper_sigma_5m3=146.586297583
+# slope=0.20748603700003543
+# EXECUTE ORDER at 2017-07-14 03:59:50
+# ORDER_PRICE=146.601, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-07-14 21:30:10
+# ORDER_PRICE=146.601, STL_PRICE=146.273, ORDER_KIND=buy, PROFIT=-0.328
+# PROFIT=-0.328
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=148.198437943 , lower_sigma_1h3=146.206308832
+# current_price=147.209, upper_sigma_5m3=147.191452239
+# slope=0.056008408000063105
+# EXECUTE ORDER at 2017-07-17 23:49:50
+# ORDER_PRICE=147.209, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-07-18 03:34:20
+# ORDER_PRICE=147.209, STL_PRICE=147.008, ORDER_KIND=buy, PROFIT=-0.201
+# PROFIT=-0.201
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=147.904256256 , lower_sigma_1h3=146.553448208
+# current_price=146.8005, lower_sigma_5m3=146.809501569
+# slope=-0.0963865819998452
+# EXECUTE ORDER at 2017-07-18 09:54:50
+# ORDER_PRICE=146.8005, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-07-18 11:03:40
+# ORDER_PRICE=146.8005, STL_PRICE=147.0345, ORDER_KIND=sell, PROFIT=-0.234
+# PROFIT=-0.234
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=147.681167011 , lower_sigma_1h3=146.425900895
+# current_price=146.36, lower_sigma_5m3=146.494634978
+# slope=-0.2203512650000164
+# EXECUTE ORDER at 2017-07-18 17:39:50
+# ORDER_PRICE=146.36, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=145.4515, order_price=146.36, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.669463614
+# EXECUTE SETTLEMENT at 2017-07-19 22:00:50
+# ORDER_PRICE=146.36, STL_PRICE=145.4515, ORDER_KIND=sell, PROFIT=0.9085
+# PROFIT=0.9085
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=146.364458775 , lower_sigma_1h3=145.083598418
+# current_price=145.0345, lower_sigma_5m3=145.140696218
+# slope=-0.23116463200011292
+# EXECUTE ORDER at 2017-07-20 23:44:50
+# ORDER_PRICE=145.0345, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-07-21 03:23:30
+# ORDER_PRICE=145.0345, STL_PRICE=145.237, ORDER_KIND=sell, PROFIT=-0.2025
+# PROFIT=-0.2025
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=146.195547747 , lower_sigma_1h3=144.392370904
+# current_price=145.0035, lower_sigma_5m3=145.015737388
+# slope=-0.2595814729998864
+# EXECUTE ORDER at 2017-07-21 19:49:50
+# ORDER_PRICE=145.0035, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=144.2045, order_price=145.0035, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.039071673
+# EXECUTE SETTLEMENT at 2017-07-22 01:00:50
+# ORDER_PRICE=145.0035, STL_PRICE=144.2045, ORDER_KIND=sell, PROFIT=0.799
+# PROFIT=0.799
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=145.162235166 , lower_sigma_1h3=143.852553128
+# current_price=144.8985, upper_sigma_5m3=144.877597473
+# slope=0.18750310000000522
+# EXECUTE ORDER at 2017-07-25 08:29:50
+# ORDER_PRICE=144.8985, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-07-25 11:22:30
+# ORDER_PRICE=144.8985, STL_PRICE=144.6975, ORDER_KIND=buy, PROFIT=-0.201
+# PROFIT=-0.201
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=145.398964048 , lower_sigma_1h3=143.969650882
+# current_price=145.292, upper_sigma_5m3=145.273496121
+# slope=0.17068459799987676
+# EXECUTE ORDER at 2017-07-25 20:24:50
+# ORDER_PRICE=145.292, TRADE_FLAG=buy
+# EXECUTE STLMENT at Take Profit
+# current_bid_price=146.188, order_price=145.292, min_take_profit=0.7
+# bollinger1h3_lower_sigma_slope=0.578804811
+# EXECUTE SETTLEMENT at 2017-07-27 00:00:50
+# ORDER_PRICE=145.292, STL_PRICE=146.188, ORDER_KIND=buy, PROFIT=0.896
+# PROFIT=0.896
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=146.480979031 , lower_sigma_1h3=145.227535305
+# current_price=146.39, upper_sigma_5m3=146.365159927
+# slope=0.08363058100004775
+# EXECUTE ORDER at 2017-07-27 18:59:50
+# ORDER_PRICE=146.39, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-07-27 22:53:30
+# ORDER_PRICE=146.39, STL_PRICE=146.1875, ORDER_KIND=buy, PROFIT=-0.2025
+# PROFIT=-0.2025
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=145.915993201 , lower_sigma_1h3=144.615283386
+# current_price=145.711, upper_sigma_5m3=145.698794117
+# slope=0.07310521000001031
+# EXECUTE ORDER at 2017-08-01 05:59:50
+# ORDER_PRICE=145.711, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-08-01 11:19:00
+# ORDER_PRICE=145.711, STL_PRICE=145.485, ORDER_KIND=buy, PROFIT=-0.226
+# PROFIT=-0.226
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=146.215396377 , lower_sigma_1h3=144.594884873
+# current_price=145.804, upper_sigma_5m3=145.742719469
+# slope=0.20144789300004712
+# EXECUTE ORDER at 2017-08-01 17:39:50
+# ORDER_PRICE=145.804, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-08-01 23:21:50
+# ORDER_PRICE=145.804, STL_PRICE=145.603, ORDER_KIND=buy, PROFIT=-0.201
+# PROFIT=-0.201
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=146.143800399 , lower_sigma_1h3=145.30068725
+# current_price=145.9455, upper_sigma_5m3=145.92300719
+# slope=0.07034841200013896
+# EXECUTE ORDER at 2017-08-02 09:09:50
+# ORDER_PRICE=145.9455, TRADE_FLAG=buy
+# EXECUTE STLMENT at Take Profit
+# current_bid_price=146.664, order_price=145.9455, min_take_profit=0.7
+# bollinger1h3_lower_sigma_slope=0.210979685
+# EXECUTE SETTLEMENT at 2017-08-03 18:00:50
+# ORDER_PRICE=145.9455, STL_PRICE=146.664, ORDER_KIND=buy, PROFIT=0.7185
+# PROFIT=0.7185
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=144.973481544 , lower_sigma_1h3=144.142503575
+# current_price=144.5465, lower_sigma_5m3=144.557181774
+# slope=-0.021193649999943026
+# EXECUTE ORDER at 2017-08-07 21:19:50
+# ORDER_PRICE=144.5465, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-08-09 10:50:50
+# ORDER_PRICE=144.5465, STL_PRICE=142.5365, ORDER_KIND=sell, PROFIT=2.01
+# PROFIT=2.01
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=143.50851808 , lower_sigma_1h3=142.296519568
+# current_price=142.681, lower_sigma_5m3=142.681050164
+# slope=-0.014789236000029416
+# EXECUTE ORDER at 2017-08-10 14:54:50
+# ORDER_PRICE=142.681, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=141.4765, order_price=142.681, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.052431148
+# EXECUTE SETTLEMENT at 2017-08-11 12:00:50
+# ORDER_PRICE=142.681, STL_PRICE=141.4765, ORDER_KIND=sell, PROFIT=1.2045
+# PROFIT=1.2045
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=142.552179824 , lower_sigma_1h3=140.926865017
+# current_price=142.5565, upper_sigma_5m3=142.508158593
+# slope=0.17840275299994593
+# EXECUTE ORDER at 2017-08-14 12:59:50
+# ORDER_PRICE=142.5565, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-08-14 18:11:50
+# ORDER_PRICE=142.5565, STL_PRICE=142.356, ORDER_KIND=buy, PROFIT=-0.2005
+# PROFIT=-0.2005
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=142.810808709 , lower_sigma_1h3=141.658284495
+# current_price=142.548, upper_sigma_5m3=142.510768958
+# slope=0.1429218489997656
+# EXECUTE ORDER at 2017-08-15 08:59:50
+# ORDER_PRICE=142.548, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-08-15 19:02:20
+# ORDER_PRICE=142.548, STL_PRICE=142.346, ORDER_KIND=buy, PROFIT=-0.202
+# PROFIT=-0.202
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=143.07674394 , lower_sigma_1h3=141.713915584
+# current_price=142.4775, lower_sigma_5m3=142.490379746
+# slope=-0.07562953799988775
+# EXECUTE ORDER at 2017-08-16 21:54:50
+# ORDER_PRICE=142.4775, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=141.655, order_price=142.4775, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.037041371
+# EXECUTE SETTLEMENT at 2017-08-17 20:00:50
+# ORDER_PRICE=142.4775, STL_PRICE=141.655, ORDER_KIND=sell, PROFIT=0.8225
+# PROFIT=0.8225
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=142.613152313 , lower_sigma_1h3=140.997282013
+# current_price=141.0505, lower_sigma_5m3=141.111399256
+# slope=-0.3906241559999713
+# EXECUTE ORDER at 2017-08-18 04:19:50
+# ORDER_PRICE=141.0505, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=140.303, order_price=141.0505, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.117374561
+# EXECUTE SETTLEMENT at 2017-08-18 22:00:50
+# ORDER_PRICE=141.0505, STL_PRICE=140.303, ORDER_KIND=sell, PROFIT=0.7475
+# PROFIT=0.7475
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=141.377940581 , lower_sigma_1h3=139.894712048
+# current_price=140.5735, lower_sigma_5m3=140.611793415
+# slope=-0.06388320899986419
+# EXECUTE ORDER at 2017-08-21 15:09:50
+# ORDER_PRICE=140.5735, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-08-22 09:05:00
+# ORDER_PRICE=140.5735, STL_PRICE=140.7795, ORDER_KIND=sell, PROFIT=-0.206
+# PROFIT=-0.206
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=141.135331014 , lower_sigma_1h3=139.977710504
+# current_price=140.885, upper_sigma_5m3=140.835255841
+# slope=0.03468720300006355
+# EXECUTE ORDER at 2017-08-22 16:04:50
+# ORDER_PRICE=140.885, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-08-22 16:29:50
+# ORDER_PRICE=140.885, STL_PRICE=140.6485, ORDER_KIND=buy, PROFIT=-0.2365
+# PROFIT=-0.2365
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=141.193605272 , lower_sigma_1h3=139.306308567
+# current_price=139.457, lower_sigma_5m3=139.462106008
+# slope=-0.24332651300004407
+# EXECUTE ORDER at 2017-08-24 01:24:50
+# ORDER_PRICE=139.457, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-08-24 01:59:20
+# ORDER_PRICE=139.457, STL_PRICE=139.657, ORDER_KIND=sell, PROFIT=-0.2
+# PROFIT=-0.2
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=140.498338246 , lower_sigma_1h3=138.964300048
+# current_price=140.05, lower_sigma_5m3=140.087980049
+# slope=-0.01748293600003327
+# EXECUTE ORDER at 2017-08-24 22:39:50
+# ORDER_PRICE=140.05, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-08-25 04:59:40
+# ORDER_PRICE=140.05, STL_PRICE=140.2585, ORDER_KIND=sell, PROFIT=-0.2085
+# PROFIT=-0.2085
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=140.781242862 , lower_sigma_1h3=138.984872663
+# current_price=140.582, upper_sigma_5m3=140.311407599
+# slope=0.229222520000152
+# EXECUTE ORDER at 2017-08-25 09:54:50
+# ORDER_PRICE=140.582, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-08-25 10:28:30
+# ORDER_PRICE=140.582, STL_PRICE=140.375, ORDER_KIND=buy, PROFIT=-0.207
+# PROFIT=-0.207
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=140.894726482 , lower_sigma_1h3=139.355915036
+# current_price=140.515, upper_sigma_5m3=140.506212383
+# slope=0.2816185270000248
+# EXECUTE ORDER at 2017-08-25 17:09:50
+# ORDER_PRICE=140.515, TRADE_FLAG=buy
+# EXECUTE STLMENT at Take Profit
+# current_bid_price=141.223, order_price=140.515, min_take_profit=0.7
+# bollinger1h3_lower_sigma_slope=0.195268406
+# EXECUTE SETTLEMENT at 2017-08-28 06:00:50
+# ORDER_PRICE=140.515, STL_PRICE=141.223, ORDER_KIND=buy, PROFIT=0.708
+# PROFIT=0.708
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=141.145167409 , lower_sigma_1h3=139.776335369
+# current_price=141.055, upper_sigma_5m3=140.99651259
+# slope=0.2625856650000582
+# EXECUTE ORDER at 2017-08-28 06:09:50
+# ORDER_PRICE=141.055, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-08-28 09:31:10
+# ORDER_PRICE=141.055, STL_PRICE=140.835, ORDER_KIND=buy, PROFIT=-0.22
+# PROFIT=-0.22
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=141.220490506 , lower_sigma_1h3=140.226123631
+# current_price=141.0645, upper_sigma_5m3=141.050131245
+# slope=0.15832306399999663
+# EXECUTE ORDER at 2017-08-28 20:24:50
+# ORDER_PRICE=141.0645, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-08-29 06:24:20
+# ORDER_PRICE=141.0645, STL_PRICE=140.854, ORDER_KIND=buy, PROFIT=-0.2105
+# PROFIT=-0.2105
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=141.66380856 , lower_sigma_1h3=140.126600865
+# current_price=140.854, upper_sigma_5m3=140.841195387
+# slope=0.06758754900010233
+# EXECUTE ORDER at 2017-08-29 18:49:50
+# ORDER_PRICE=140.854, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-08-29 19:21:50
+# ORDER_PRICE=140.854, STL_PRICE=140.641, ORDER_KIND=buy, PROFIT=-0.213
+# PROFIT=-0.213
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=143.092789564 , lower_sigma_1h3=141.186883948
+# current_price=142.7505, upper_sigma_5m3=142.724618597
+# slope=0.49163911200003846
+# EXECUTE ORDER at 2017-08-31 08:54:50
+# ORDER_PRICE=142.7505, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-08-31 16:16:40
+# ORDER_PRICE=142.7505, STL_PRICE=142.543, ORDER_KIND=buy, PROFIT=-0.2075
+# PROFIT=-0.2075
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=143.220921215 , lower_sigma_1h3=141.560148528
+# current_price=142.2505, lower_sigma_5m3=142.26058688
+# slope=-0.030481299000064008
+# EXECUTE ORDER at 2017-09-01 13:09:50
+# ORDER_PRICE=142.2505, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-09-01 19:52:50
+# ORDER_PRICE=142.2505, STL_PRICE=142.4585, ORDER_KIND=sell, PROFIT=-0.208
+# PROFIT=-0.208
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=143.239779757 , lower_sigma_1h3=141.694760868
+# current_price=142.1775, lower_sigma_5m3=142.203183399
+# slope=-0.03217524700014994
+# EXECUTE ORDER at 2017-09-04 14:09:50
+# ORDER_PRICE=142.1775, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=141.3165, order_price=142.1775, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.3041601
+# EXECUTE SETTLEMENT at 2017-09-05 12:00:50
+# ORDER_PRICE=142.1775, STL_PRICE=141.3165, ORDER_KIND=sell, PROFIT=0.861
+# PROFIT=0.861
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=142.35659751 , lower_sigma_1h3=141.005227837
+# current_price=141.5985, lower_sigma_5m3=141.607492214
+# slope=-0.03709340200011526
+# EXECUTE ORDER at 2017-09-06 01:34:50
+# ORDER_PRICE=141.5985, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-09-06 03:26:00
+# ORDER_PRICE=141.5985, STL_PRICE=141.807, ORDER_KIND=sell, PROFIT=-0.2085
+# PROFIT=-0.2085
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=142.195095828 , lower_sigma_1h3=141.073433537
+# current_price=141.5615, lower_sigma_5m3=141.607177731
+# slope=-0.027435712999924096
+# EXECUTE ORDER at 2017-09-06 07:44:50
+# ORDER_PRICE=141.5615, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-09-06 09:34:10
+# ORDER_PRICE=141.5615, STL_PRICE=141.7625, ORDER_KIND=sell, PROFIT=-0.201
+# PROFIT=-0.201
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=142.042393997 , lower_sigma_1h3=141.26124643
+# current_price=142.0005, upper_sigma_5m3=141.990735825
+# slope=0.12262993600010709
+# EXECUTE ORDER at 2017-09-06 19:44:50
+# ORDER_PRICE=142.0005, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-09-08 00:19:40
+# ORDER_PRICE=142.0005, STL_PRICE=141.7675, ORDER_KIND=buy, PROFIT=-0.233
+# PROFIT=-0.233
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=142.830765343 , lower_sigma_1h3=141.476563129
+# current_price=141.815, lower_sigma_5m3=141.915700918
+# slope=-0.1516126000000181
+# EXECUTE ORDER at 2017-09-08 14:04:50
+# ORDER_PRICE=141.815, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-09-08 21:29:10
+# ORDER_PRICE=141.815, STL_PRICE=142.0225, ORDER_KIND=sell, PROFIT=-0.2075
+# PROFIT=-0.2075
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=142.748046514 , lower_sigma_1h3=141.159803983
+# current_price=142.181, lower_sigma_5m3=142.211472666
+# slope=-0.05972224699990754
+# EXECUTE ORDER at 2017-09-09 04:24:50
+# ORDER_PRICE=142.181, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-09-09 05:31:40
+# ORDER_PRICE=142.181, STL_PRICE=142.3825, ORDER_KIND=sell, PROFIT=-0.2015
+# PROFIT=-0.2015
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=142.793833654 , lower_sigma_1h3=141.187598985
+# current_price=142.6035, upper_sigma_5m3=142.554351117
+# slope=0.08145113900007406
+# EXECUTE ORDER at 2017-09-11 06:09:50
+# ORDER_PRICE=142.6035, TRADE_FLAG=buy
+# EXECUTE STLMENT at Take Profit
+# current_bid_price=143.4005, order_price=142.6035, min_take_profit=0.7
+# bollinger1h3_lower_sigma_slope=0.121886931
+# EXECUTE SETTLEMENT at 2017-09-11 20:00:50
+# ORDER_PRICE=142.6035, STL_PRICE=143.4005, ORDER_KIND=buy, PROFIT=0.797
+# PROFIT=0.797
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=147.043133587 , lower_sigma_1h3=145.338036552
+# current_price=146.319, upper_sigma_5m3=146.298287423
+# slope=0.4197786439999633
+# EXECUTE ORDER at 2017-09-13 23:34:50
+# ORDER_PRICE=146.319, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-09-14 00:39:10
+# ORDER_PRICE=146.319, STL_PRICE=146.115, ORDER_KIND=buy, PROFIT=-0.204
+# PROFIT=-0.204
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=146.675004258 , lower_sigma_1h3=145.455612558
+# current_price=145.6645, lower_sigma_5m3=145.669762922
+# slope=-0.1914782239999912
+# EXECUTE ORDER at 2017-09-14 18:09:50
+# ORDER_PRICE=145.6645, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-09-14 19:21:40
+# ORDER_PRICE=145.6645, STL_PRICE=145.8735, ORDER_KIND=sell, PROFIT=-0.209
+# PROFIT=-0.209
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=151.44868794 , lower_sigma_1h3=150.047223221
+# current_price=150.884, upper_sigma_5m3=150.84081298
+# slope=0.12373340599993024
+# EXECUTE ORDER at 2017-09-20 09:04:50
+# ORDER_PRICE=150.884, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-09-20 12:39:30
+# ORDER_PRICE=150.884, STL_PRICE=150.679, ORDER_KIND=buy, PROFIT=-0.205
+# PROFIT=-0.205
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=151.784597674 , lower_sigma_1h3=150.054397663
+# current_price=151.6885, upper_sigma_5m3=151.686969822
+# slope=0.27434757000010035
+# EXECUTE ORDER at 2017-09-21 07:14:50
+# ORDER_PRICE=151.6885, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-09-21 17:58:00
+# ORDER_PRICE=151.6885, STL_PRICE=151.467, ORDER_KIND=buy, PROFIT=-0.2215
+# PROFIT=-0.2215
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=152.606329616 , lower_sigma_1h3=150.999987845
+# current_price=151.6565, lower_sigma_5m3=151.684532845
+# slope=-0.051769245999982554
+# EXECUTE ORDER at 2017-09-25 17:04:50
+# ORDER_PRICE=151.6565, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-09-25 17:11:50
+# ORDER_PRICE=151.6565, STL_PRICE=151.862, ORDER_KIND=sell, PROFIT=-0.2055
+# PROFIT=-0.2055
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=152.534469061 , lower_sigma_1h3=150.881679203
+# current_price=151.468, lower_sigma_5m3=151.484950883
+# slope=-0.20593680500019707
+# EXECUTE ORDER at 2017-09-25 23:49:50
+# ORDER_PRICE=151.468, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=150.7335, order_price=151.468, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.04517541
+# EXECUTE SETTLEMENT at 2017-09-26 00:00:50
+# ORDER_PRICE=151.468, STL_PRICE=150.7335, ORDER_KIND=sell, PROFIT=0.7345
+# PROFIT=0.7345
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=152.540179066 , lower_sigma_1h3=150.862147521
+# current_price=150.9085, lower_sigma_5m3=150.912915196
+# slope=-0.141797668000016
+# EXECUTE ORDER at 2017-09-26 00:09:50
+# ORDER_PRICE=150.9085, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=150.0955, order_price=150.9085, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.558058568
+# EXECUTE SETTLEMENT at 2017-09-26 20:00:50
+# ORDER_PRICE=150.9085, STL_PRICE=150.0955, ORDER_KIND=sell, PROFIT=0.813
+# PROFIT=0.813
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=151.400940249 , lower_sigma_1h3=149.838064712
+# current_price=151.1785, upper_sigma_5m3=151.158454391
+# slope=0.2733045380000434
+# EXECUTE ORDER at 2017-09-27 09:19:50
+# ORDER_PRICE=151.1785, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-09-27 12:37:00
+# ORDER_PRICE=151.1785, STL_PRICE=150.969, ORDER_KIND=buy, PROFIT=-0.2095
+# PROFIT=-0.2095
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=151.627818754 , lower_sigma_1h3=149.888118895
+# current_price=151.211, upper_sigma_5m3=151.137080529
+# slope=0.1337755190000575
+# EXECUTE ORDER at 2017-09-27 17:44:50
+# ORDER_PRICE=151.211, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-09-27 23:48:20
+# ORDER_PRICE=151.211, STL_PRICE=151.002, ORDER_KIND=buy, PROFIT=-0.209
+# PROFIT=-0.209
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=151.719616907 , lower_sigma_1h3=150.503294006
+# current_price=151.317, upper_sigma_5m3=151.312415476
+# slope=0.08379749400006635
+# EXECUTE ORDER at 2017-09-28 09:59:50
+# ORDER_PRICE=151.317, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-09-28 10:18:20
+# ORDER_PRICE=151.317, STL_PRICE=151.117, ORDER_KIND=buy, PROFIT=-0.2
+# PROFIT=-0.2
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=151.729739456 , lower_sigma_1h3=150.512203649
+# current_price=151.215, upper_sigma_5m3=151.184874044
+# slope=0.04671505500003165
+# EXECUTE ORDER at 2017-09-28 12:54:50
+# ORDER_PRICE=151.215, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-09-28 16:12:30
+# ORDER_PRICE=151.215, STL_PRICE=150.982, ORDER_KIND=buy, PROFIT=-0.233
+# PROFIT=-0.233
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=151.755493249 , lower_sigma_1h3=150.539995888
+# current_price=151.544, upper_sigma_5m3=151.454547334
+# slope=0.06249702300003694
+# EXECUTE ORDER at 2017-09-28 23:59:50
+# ORDER_PRICE=151.544, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-09-29 00:14:40
+# ORDER_PRICE=151.544, STL_PRICE=151.344, ORDER_KIND=buy, PROFIT=-0.2
+# PROFIT=-0.2
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=151.56940171 , lower_sigma_1h3=150.636766048
+# current_price=150.99, lower_sigma_5m3=150.996939989
+# slope=-0.023233284000049044
+# EXECUTE ORDER at 2017-09-29 16:09:50
+# ORDER_PRICE=150.99, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=150.2135, order_price=150.99, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.097867119
+# EXECUTE SETTLEMENT at 2017-10-02 18:00:50
+# ORDER_PRICE=150.99, STL_PRICE=150.2135, ORDER_KIND=sell, PROFIT=0.7765
+# PROFIT=0.7765
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=151.433448129 , lower_sigma_1h3=149.868289421
+# current_price=149.57, lower_sigma_5m3=149.735068224
+# slope=-0.3179197659999716
+# EXECUTE ORDER at 2017-10-02 21:24:50
+# ORDER_PRICE=149.57, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-10-03 06:01:30
+# ORDER_PRICE=149.57, STL_PRICE=149.779, ORDER_KIND=sell, PROFIT=-0.209
+# PROFIT=-0.209
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=150.494402174 , lower_sigma_1h3=149.081775703
+# current_price=149.5645, lower_sigma_5m3=149.590488235
+# slope=-0.34276733600008874
+# EXECUTE ORDER at 2017-10-03 21:19:50
+# ORDER_PRICE=149.5645, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-10-03 22:03:40
+# ORDER_PRICE=149.5645, STL_PRICE=149.774, ORDER_KIND=sell, PROFIT=-0.2095
+# PROFIT=-0.2095
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=150.282605462 , lower_sigma_1h3=149.045278566
+# current_price=149.2925, lower_sigma_5m3=149.324721932
+# slope=-0.06344449500002083
+# EXECUTE ORDER at 2017-10-04 09:19:50
+# ORDER_PRICE=149.2925, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-10-04 11:31:40
+# ORDER_PRICE=149.2925, STL_PRICE=149.4965, ORDER_KIND=sell, PROFIT=-0.204
+# PROFIT=-0.204
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=150.308860752 , lower_sigma_1h3=148.944079377
+# current_price=149.325, lower_sigma_5m3=149.353697131
+# slope=-0.09397859800010926
+# EXECUTE ORDER at 2017-10-04 13:34:50
+# ORDER_PRICE=149.325, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-10-04 17:39:50
+# ORDER_PRICE=149.325, STL_PRICE=149.5405, ORDER_KIND=sell, PROFIT=-0.2155
+# PROFIT=-0.2155
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=149.864331869 , lower_sigma_1h3=149.00051084
+# current_price=149.573, lower_sigma_5m3=149.575523819
+# slope=-0.03316148299989092
+# EXECUTE ORDER at 2017-10-05 02:14:50
+# ORDER_PRICE=149.573, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=148.014, order_price=149.573, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.051347662
+# EXECUTE SETTLEMENT at 2017-10-06 05:00:50
+# ORDER_PRICE=149.573, STL_PRICE=148.014, ORDER_KIND=sell, PROFIT=1.559
+# PROFIT=1.559
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=148.456752697 , lower_sigma_1h3=147.339258266
+# current_price=147.5495, lower_sigma_5m3=147.559140761
+# slope=-0.3784725459999162
+# EXECUTE ORDER at 2017-10-06 23:49:50
+# ORDER_PRICE=147.5495, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-10-09 15:31:20
+# ORDER_PRICE=147.5495, STL_PRICE=147.751, ORDER_KIND=sell, PROFIT=-0.2015
+# PROFIT=-0.2015
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=148.660665135 , lower_sigma_1h3=147.840562891
+# current_price=148.582, upper_sigma_5m3=148.505992499
+# slope=0.10257547199980924
+# EXECUTE ORDER at 2017-10-11 10:24:50
+# ORDER_PRICE=148.582, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-10-11 11:48:20
+# ORDER_PRICE=148.582, STL_PRICE=148.3795, ORDER_KIND=buy, PROFIT=-0.2025
+# PROFIT=-0.2025
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=149.043725807 , lower_sigma_1h3=147.712023499
+# current_price=148.8605, upper_sigma_5m3=148.845059668
+# slope=0.17873546599998885
+# EXECUTE ORDER at 2017-10-12 08:49:50
+# ORDER_PRICE=148.8605, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-10-12 15:46:20
+# ORDER_PRICE=148.8605, STL_PRICE=148.6595, ORDER_KIND=buy, PROFIT=-0.201
+# PROFIT=-0.201
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=149.226078126 , lower_sigma_1h3=148.444767657
+# current_price=148.647, lower_sigma_5m3=148.676755223
+# slope=-0.03150290199991896
+# EXECUTE ORDER at 2017-10-16 14:39:50
+# ORDER_PRICE=148.647, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-10-17 17:00:40
+# ORDER_PRICE=148.647, STL_PRICE=148.852, ORDER_KIND=sell, PROFIT=-0.205
+# PROFIT=-0.205
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=150.342099507 , lower_sigma_1h3=149.474796921
+# current_price=149.643, lower_sigma_5m3=149.653210177
+# slope=-0.07996473300001156
+# EXECUTE ORDER at 2017-10-24 22:59:50
+# ORDER_PRICE=149.643, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-10-25 17:30:50
+# ORDER_PRICE=149.643, STL_PRICE=149.88, ORDER_KIND=sell, PROFIT=-0.237
+# PROFIT=-0.237
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=150.917988952 , lower_sigma_1h3=149.285967397
+# current_price=149.4095, lower_sigma_5m3=149.46533909
+# slope=-0.30662522200007464
+# EXECUTE ORDER at 2017-10-27 16:54:50
+# ORDER_PRICE=149.4095, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-10-27 21:30:20
+# ORDER_PRICE=149.4095, STL_PRICE=149.6465, ORDER_KIND=sell, PROFIT=-0.237
+# PROFIT=-0.237
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=150.730659155 , lower_sigma_1h3=148.980055875
+# current_price=149.2575, lower_sigma_5m3=149.311163906
+# slope=-0.40513013299998846
+# EXECUTE ORDER at 2017-10-27 22:44:50
+# ORDER_PRICE=149.2575, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-10-28 01:25:20
+# ORDER_PRICE=149.2575, STL_PRICE=149.459, ORDER_KIND=sell, PROFIT=-0.2015
+# PROFIT=-0.2015
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=150.285249958 , lower_sigma_1h3=148.746607086
+# current_price=149.2005, lower_sigma_5m3=149.203512444
+# slope=-0.22333015799991307
+# EXECUTE ORDER at 2017-10-30 11:04:50
+# ORDER_PRICE=149.2005, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-10-30 13:39:20
+# ORDER_PRICE=149.2005, STL_PRICE=149.4035, ORDER_KIND=sell, PROFIT=-0.203
+# PROFIT=-0.203
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=149.957287539 , lower_sigma_1h3=149.023601052
+# current_price=150.13, upper_sigma_5m3=149.898485734
+# slope=0.09777157800010013
+# EXECUTE ORDER at 2017-10-31 21:59:50
+# ORDER_PRICE=150.13, TRADE_FLAG=buy
+# EXECUTE STLMENT at Take Profit
+# current_bid_price=151.108, order_price=150.13, min_take_profit=0.7
+# bollinger1h3_lower_sigma_slope=0.045831538
+# EXECUTE SETTLEMENT at 2017-11-01 13:00:50
+# ORDER_PRICE=150.13, STL_PRICE=151.108, ORDER_KIND=buy, PROFIT=0.978
+# PROFIT=0.978
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=152.001067015 , lower_sigma_1h3=150.561155008
+# current_price=151.3215, upper_sigma_5m3=151.296413393
+# slope=0.15211411199986738
+# EXECUTE ORDER at 2017-11-02 08:39:50
+# ORDER_PRICE=151.3215, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-11-02 18:06:40
+# ORDER_PRICE=151.3215, STL_PRICE=151.1165, ORDER_KIND=buy, PROFIT=-0.205
+# PROFIT=-0.205
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=152.014773091 , lower_sigma_1h3=150.618979141
+# current_price=149.912, lower_sigma_5m3=150.13337398
+# slope=-0.06940265300002581
+# EXECUTE ORDER at 2017-11-02 21:09:50
+# ORDER_PRICE=149.912, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=148.7455, order_price=149.912, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.00933271599999
+# EXECUTE SETTLEMENT at 2017-11-03 10:00:50
+# ORDER_PRICE=149.912, STL_PRICE=148.7455, ORDER_KIND=sell, PROFIT=1.1665
+# PROFIT=1.1665
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=149.633209246 , lower_sigma_1h3=148.523646806
+# current_price=149.3385, upper_sigma_5m3=149.333141332
+# slope=0.05126061399999466
+# EXECUTE ORDER at 2017-11-06 08:14:50
+# ORDER_PRICE=149.3385, TRADE_FLAG=buy
+# EXECUTE STLMENT at Take Profit
+# current_bid_price=150.0655, order_price=149.3385, min_take_profit=0.7
+# bollinger1h3_lower_sigma_slope=0.185082494
+# EXECUTE SETTLEMENT at 2017-11-07 13:00:50
+# ORDER_PRICE=149.3385, STL_PRICE=150.0655, ORDER_KIND=buy, PROFIT=0.727
+# PROFIT=0.727
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=150.375142259 , lower_sigma_1h3=149.536182244
+# current_price=149.565, lower_sigma_5m3=149.587758393
+# slope=-0.011881795000176323
+# EXECUTE ORDER at 2017-11-08 16:49:50
+# ORDER_PRICE=149.565, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=148.513, order_price=149.565, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.259517494
+# EXECUTE SETTLEMENT at 2017-11-09 19:00:50
+# ORDER_PRICE=149.565, STL_PRICE=148.513, ORDER_KIND=sell, PROFIT=1.052
+# PROFIT=1.052
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=149.779416792 , lower_sigma_1h3=148.251283506
+# current_price=148.964, lower_sigma_5m3=149.002720532
+# slope=-0.1190671619999411
+# EXECUTE ORDER at 2017-11-10 16:14:50
+# ORDER_PRICE=148.964, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-11-10 17:00:20
+# ORDER_PRICE=148.964, STL_PRICE=149.176, ORDER_KIND=sell, PROFIT=-0.212
+# PROFIT=-0.212
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=149.794771095 , lower_sigma_1h3=147.8843482
+# current_price=148.9295, lower_sigma_5m3=148.940416088
+# slope=-0.08923563999995573
+# EXECUTE ORDER at 2017-11-14 15:39:50
+# ORDER_PRICE=148.9295, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-11-14 17:06:10
+# ORDER_PRICE=148.9295, STL_PRICE=149.1385, ORDER_KIND=sell, PROFIT=-0.209
+# PROFIT=-0.209
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=149.669588169 , lower_sigma_1h3=148.117858607
+# current_price=148.9295, upper_sigma_5m3=148.88609716
+# slope=0.15177185099995016
+# EXECUTE ORDER at 2017-11-15 00:54:50
+# ORDER_PRICE=148.9295, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-11-15 11:00:10
+# ORDER_PRICE=148.9295, STL_PRICE=148.7195, ORDER_KIND=buy, PROFIT=-0.21
+# PROFIT=-0.21
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=149.71686129 , lower_sigma_1h3=148.273198333
+# current_price=148.2785, lower_sigma_5m3=148.575538129
+# slope=-0.0975771560000531
+# EXECUTE ORDER at 2017-11-15 18:49:50
+# ORDER_PRICE=148.2785, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-11-15 19:05:10
+# ORDER_PRICE=148.2785, STL_PRICE=148.4895, ORDER_KIND=sell, PROFIT=-0.211
+# PROFIT=-0.211
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=149.836191428 , lower_sigma_1h3=147.901036697
+# current_price=148.8325, lower_sigma_5m3=148.835074729
+# slope=-0.0404680289998078
+# EXECUTE ORDER at 2017-11-16 03:34:50
+# ORDER_PRICE=148.8325, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-11-16 16:04:00
+# ORDER_PRICE=148.8325, STL_PRICE=149.036, ORDER_KIND=sell, PROFIT=-0.2035
+# PROFIT=-0.2035
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=149.318252859 , lower_sigma_1h3=148.140794214
+# current_price=149.1735, upper_sigma_5m3=149.098951673
+# slope=0.06342227199998716
+# EXECUTE ORDER at 2017-11-16 18:44:50
+# ORDER_PRICE=149.1735, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-11-16 23:36:40
+# ORDER_PRICE=149.1735, STL_PRICE=148.9545, ORDER_KIND=buy, PROFIT=-0.219
+# PROFIT=-0.219
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=149.505589635 , lower_sigma_1h3=148.53746597
+# current_price=149.007, upper_sigma_5m3=148.990116405
+# slope=0.07634320500004335
+# EXECUTE ORDER at 2017-11-17 15:14:50
+# ORDER_PRICE=149.007, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-11-17 19:57:50
+# ORDER_PRICE=149.007, STL_PRICE=148.782, ORDER_KIND=buy, PROFIT=-0.225
+# PROFIT=-0.225
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=149.58681875 , lower_sigma_1h3=148.474151736
+# current_price=148.404, lower_sigma_5m3=148.420883498
+# slope=-0.023630730000038676
+# EXECUTE ORDER at 2017-11-17 22:54:50
+# ORDER_PRICE=148.404, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-11-20 17:44:00
+# ORDER_PRICE=148.404, STL_PRICE=148.7275, ORDER_KIND=sell, PROFIT=-0.3235
+# PROFIT=-0.3235
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=149.561207673 , lower_sigma_1h3=148.30952452
+# current_price=149.137, upper_sigma_5m3=149.102125425
+# slope=0.32859255900006207
+# EXECUTE ORDER at 2017-11-21 21:29:50
+# ORDER_PRICE=149.137, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-11-21 22:27:50
+# ORDER_PRICE=149.137, STL_PRICE=148.9355, ORDER_KIND=buy, PROFIT=-0.2015
+# PROFIT=-0.2015
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=149.385478706 , lower_sigma_1h3=148.48329059
+# current_price=148.7085, lower_sigma_5m3=148.718622037
+# slope=-0.09983559000001523
+# EXECUTE ORDER at 2017-11-22 13:29:50
+# ORDER_PRICE=148.7085, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=147.9715, order_price=148.7085, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.220806628
+# EXECUTE SETTLEMENT at 2017-11-23 18:00:50
+# ORDER_PRICE=148.7085, STL_PRICE=147.9715, ORDER_KIND=sell, PROFIT=0.737
+# PROFIT=0.737
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=148.657522638 , lower_sigma_1h3=147.60509631
+# current_price=148.705, upper_sigma_5m3=148.659450971
+# slope=0.1267891849998864
+# EXECUTE ORDER at 2017-11-24 23:19:50
+# ORDER_PRICE=148.705, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-11-27 10:31:00
+# ORDER_PRICE=148.705, STL_PRICE=148.505, ORDER_KIND=buy, PROFIT=-0.2
+# PROFIT=-0.2
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=149.129194031 , lower_sigma_1h3=147.886658549
+# current_price=148.522, upper_sigma_5m3=148.504087814
+# slope=0.09494027899988329
+# EXECUTE ORDER at 2017-11-27 18:04:50
+# ORDER_PRICE=148.522, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-11-27 21:16:40
+# ORDER_PRICE=148.522, STL_PRICE=148.3205, ORDER_KIND=buy, PROFIT=-0.2015
+# PROFIT=-0.2015
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=148.769610091 , lower_sigma_1h3=147.574852061
+# current_price=147.8025, lower_sigma_5m3=147.857238922
+# slope=-0.09781289900015613
+# EXECUTE ORDER at 2017-11-28 21:54:50
+# ORDER_PRICE=147.8025, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-11-29 02:47:10
+# ORDER_PRICE=147.8025, STL_PRICE=148.0365, ORDER_KIND=sell, PROFIT=-0.234
+# PROFIT=-0.234
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=152.236626982 , lower_sigma_1h3=150.589529119
+# current_price=151.1085, lower_sigma_5m3=151.232084655
+# slope=-0.2715385909999331
+# EXECUTE ORDER at 2017-12-06 07:59:50
+# ORDER_PRICE=151.1085, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=150.139, order_price=151.1085, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.00489201799999
+# EXECUTE SETTLEMENT at 2017-12-07 03:00:50
+# ORDER_PRICE=151.1085, STL_PRICE=150.139, ORDER_KIND=sell, PROFIT=0.9695
+# PROFIT=0.9695
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=151.287590642 , lower_sigma_1h3=149.479448048
+# current_price=150.396, lower_sigma_5m3=150.399819036
+# slope=-0.3263280759998408
+# EXECUTE ORDER at 2017-12-07 12:59:50
+# ORDER_PRICE=150.396, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-12-07 16:14:40
+# ORDER_PRICE=150.396, STL_PRICE=150.624, ORDER_KIND=sell, PROFIT=-0.228
+# PROFIT=-0.228
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=151.213400752 , lower_sigma_1h3=149.58915277
+# current_price=151.1205, upper_sigma_5m3=151.097926097
+# slope=0.1786734629999515
+# EXECUTE ORDER at 2017-12-08 00:04:50
+# ORDER_PRICE=151.1205, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-12-08 14:22:40
+# ORDER_PRICE=151.1205, STL_PRICE=153.1295, ORDER_KIND=buy, PROFIT=2.009
+# PROFIT=2.009
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=152.54715127 , lower_sigma_1h3=150.726959891
+# current_price=151.301, lower_sigma_5m3=151.312789843
+# slope=-0.25337462700014596
+# EXECUTE ORDER at 2017-12-12 15:59:50
+# ORDER_PRICE=151.301, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-12-12 17:07:30
+# ORDER_PRICE=151.301, STL_PRICE=151.509, ORDER_KIND=sell, PROFIT=-0.208
+# PROFIT=-0.208
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=151.728405057 , lower_sigma_1h3=151.166719447
+# current_price=151.164, lower_sigma_5m3=151.234334892
+# slope=-0.05017239600014792
+# EXECUTE ORDER at 2017-12-13 02:29:50
+# ORDER_PRICE=151.164, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-12-13 18:21:40
+# ORDER_PRICE=151.164, STL_PRICE=151.3775, ORDER_KIND=sell, PROFIT=-0.2135
+# PROFIT=-0.2135
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=151.798561393 , lower_sigma_1h3=150.721313656
+# current_price=151.065, lower_sigma_5m3=151.123287806
+# slope=-0.026348164000084866
+# EXECUTE ORDER at 2017-12-13 22:24:50
+# ORDER_PRICE=151.065, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-12-13 23:48:30
+# ORDER_PRICE=151.065, STL_PRICE=151.2855, ORDER_KIND=sell, PROFIT=-0.2205
+# PROFIT=-0.2205
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=151.792721416 , lower_sigma_1h3=150.652968267
+# current_price=150.9135, lower_sigma_5m3=150.923532315
+# slope=-0.05733973200006814
+# EXECUTE ORDER at 2017-12-15 03:04:50
+# ORDER_PRICE=150.9135, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=149.979, order_price=150.9135, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.029591366
+# EXECUTE SETTLEMENT at 2017-12-16 02:00:50
+# ORDER_PRICE=150.9135, STL_PRICE=149.979, ORDER_KIND=sell, PROFIT=0.9345
+# PROFIT=0.9345
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=151.082562747 , lower_sigma_1h3=149.847105507
+# current_price=150.6935, upper_sigma_5m3=150.671276409
+# slope=0.19592909300003547
+# EXECUTE ORDER at 2017-12-19 12:59:50
+# ORDER_PRICE=150.6935, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-12-19 19:08:10
+# ORDER_PRICE=150.6935, STL_PRICE=150.4785, ORDER_KIND=buy, PROFIT=-0.215
+# PROFIT=-0.215
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=150.929831917 , lower_sigma_1h3=150.311925226
+# current_price=150.9175, upper_sigma_5m3=150.869015349
+# slope=0.0627154259999772
+# EXECUTE ORDER at 2017-12-20 00:34:50
+# ORDER_PRICE=150.9175, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-12-20 01:16:00
+# ORDER_PRICE=150.9175, STL_PRICE=150.63, ORDER_KIND=buy, PROFIT=-0.2875
+# PROFIT=-0.2875
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=150.975971492 , lower_sigma_1h3=150.348251822
+# current_price=151.1755, upper_sigma_5m3=151.161313883
+# slope=0.13427323999983864
+# EXECUTE ORDER at 2017-12-20 03:04:50
+# ORDER_PRICE=151.1755, TRADE_FLAG=buy
+# EXECUTE STLMENT at Take Profit
+# current_bid_price=151.908, order_price=151.1755, min_take_profit=0.7
+# bollinger1h3_lower_sigma_slope=0.022796946
+# EXECUTE SETTLEMENT at 2017-12-20 23:00:50
+# ORDER_PRICE=151.1755, STL_PRICE=151.908, ORDER_KIND=buy, PROFIT=0.7325
+# PROFIT=0.7325
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=152.273481409 , lower_sigma_1h3=150.787626874
+# current_price=151.603, upper_sigma_5m3=151.542027518
+# slope=0.12555220800010847
+# EXECUTE ORDER at 2017-12-21 11:54:50
+# ORDER_PRICE=151.603, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-12-21 22:48:30
+# ORDER_PRICE=151.603, STL_PRICE=151.396, ORDER_KIND=buy, PROFIT=-0.207
+# PROFIT=-0.207
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=151.948966287 , lower_sigma_1h3=151.297091401
+# current_price=151.684, upper_sigma_5m3=151.682374
+# slope=0.03589176499997514
+# EXECUTE ORDER at 2017-12-22 15:39:50
+# ORDER_PRICE=151.684, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-12-22 18:30:00
+# ORDER_PRICE=151.684, STL_PRICE=151.4665, ORDER_KIND=buy, PROFIT=-0.2175
+# PROFIT=-0.2175
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=151.619000729 , lower_sigma_1h3=151.20276063
+# current_price=151.5305, upper_sigma_5m3=151.526503224
+# slope=0.050264012000137206
+# EXECUTE ORDER at 2017-12-26 15:24:50
+# ORDER_PRICE=151.5305, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-12-26 21:01:30
+# ORDER_PRICE=151.5305, STL_PRICE=151.3295, ORDER_KIND=buy, PROFIT=-0.201
+# PROFIT=-0.201
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=151.684055376 , lower_sigma_1h3=151.185722451
+# current_price=151.475, upper_sigma_5m3=151.440641141
+# slope=0.01135096700001775
+# EXECUTE ORDER at 2017-12-27 09:49:50
+# ORDER_PRICE=151.475, TRADE_FLAG=buy
+# EXECUTE STLMENT at Take Profit
+# current_bid_price=152.354, order_price=151.475, min_take_profit=0.7
+# bollinger1h3_lower_sigma_slope=0.012666086
+# EXECUTE SETTLEMENT at 2018-01-02 09:00:50
+# ORDER_PRICE=151.475, STL_PRICE=152.354, ORDER_KIND=buy, PROFIT=0.879
+# PROFIT=0.879
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=152.819433147 , lower_sigma_1h3=151.446886347
+# current_price=152.4445, upper_sigma_5m3=152.427468566
+# slope=0.22818050499998033
+# EXECUTE ORDER at 2018-01-02 16:09:50
+# ORDER_PRICE=152.4445, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-01-02 18:30:50
+# ORDER_PRICE=152.4445, STL_PRICE=152.233, ORDER_KIND=buy, PROFIT=-0.2115
+# PROFIT=-0.2115
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=152.648483028 , lower_sigma_1h3=151.824363996
+# current_price=152.289, upper_sigma_5m3=152.282639795
+# slope=0.035694145999950015
+# EXECUTE ORDER at 2018-01-03 01:09:50
+# ORDER_PRICE=152.289, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-01-03 23:20:20
+# ORDER_PRICE=152.289, STL_PRICE=152.0825, ORDER_KIND=buy, PROFIT=-0.2065
+# PROFIT=-0.2065
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=153.293232357 , lower_sigma_1h3=151.667364915
+# current_price=151.976, lower_sigma_5m3=151.9896617
+# slope=-0.03272380800003128
+# EXECUTE ORDER at 2018-01-03 23:44:50
+# ORDER_PRICE=151.976, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-01-04 08:44:30
+# ORDER_PRICE=151.976, STL_PRICE=152.1795, ORDER_KIND=sell, PROFIT=-0.2035
+# PROFIT=-0.2035
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=153.235983813 , lower_sigma_1h3=151.375678439
+# current_price=152.202, lower_sigma_5m3=152.216552118
+# slope=-0.11807797600014959
+# EXECUTE ORDER at 2018-01-04 15:29:50
+# ORDER_PRICE=152.202, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-01-04 17:23:10
+# ORDER_PRICE=152.202, STL_PRICE=152.4195, ORDER_KIND=sell, PROFIT=-0.2175
+# PROFIT=-0.2175
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=153.310455084 , lower_sigma_1h3=151.605227803
+# current_price=152.878, upper_sigma_5m3=152.823347084
+# slope=0.3297726929999513
+# EXECUTE ORDER at 2018-01-05 08:09:50
+# ORDER_PRICE=152.878, TRADE_FLAG=buy
+# EXECUTE STLMENT at Take Profit
+# current_bid_price=153.587, order_price=152.878, min_take_profit=0.7
+# bollinger1h3_lower_sigma_slope=0.13981638
+# EXECUTE SETTLEMENT at 2018-01-08 08:00:50
+# ORDER_PRICE=152.878, STL_PRICE=153.587, ORDER_KIND=buy, PROFIT=0.709
+# PROFIT=0.709
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=154.059038201 , lower_sigma_1h3=152.403337692
+# current_price=153.6, upper_sigma_5m3=153.596459635
+# slope=0.23872338700005374
+# EXECUTE ORDER at 2018-01-08 08:09:50
+# ORDER_PRICE=153.6, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-01-08 15:54:50
+# ORDER_PRICE=153.6, STL_PRICE=153.399, ORDER_KIND=buy, PROFIT=-0.201
+# PROFIT=-0.201
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=153.867800723 , lower_sigma_1h3=153.002851013
+# current_price=152.9475, lower_sigma_5m3=152.954300982
+# slope=-0.05897128000004756
+# EXECUTE ORDER at 2018-01-08 22:29:50
+# ORDER_PRICE=152.9475, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-01-08 23:56:30
+# ORDER_PRICE=152.9475, STL_PRICE=153.151, ORDER_KIND=sell, PROFIT=-0.2035
+# PROFIT=-0.2035
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=153.913355225 , lower_sigma_1h3=152.865846461
+# current_price=153.3425, lower_sigma_5m3=153.40946935
+# slope=-0.010382117999935617
+# EXECUTE ORDER at 2018-01-09 10:24:50
+# ORDER_PRICE=153.3425, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=152.45, order_price=153.3425, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.035063519
+# EXECUTE SETTLEMENT at 2018-01-10 06:00:50
+# ORDER_PRICE=153.3425, STL_PRICE=152.438, ORDER_KIND=sell, PROFIT=0.9045
+# PROFIT=0.9045
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=153.422136511 , lower_sigma_1h3=151.469191296
+# current_price=151.517, lower_sigma_5m3=151.737755523
+# slope=-0.5287215419997995
+# EXECUTE ORDER at 2018-01-10 15:44:50
+# ORDER_PRICE=151.517, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=150.657, order_price=151.517, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.00195354100001
+# EXECUTE SETTLEMENT at 2018-01-11 02:00:50
+# ORDER_PRICE=151.517, STL_PRICE=150.645, ORDER_KIND=sell, PROFIT=0.872
+# PROFIT=0.872
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=151.394715101 , lower_sigma_1h3=150.088414889
+# current_price=150.344, lower_sigma_5m3=150.384820707
+# slope=-0.45718735100004115
+# EXECUTE ORDER at 2018-01-11 20:54:50
+# ORDER_PRICE=150.344, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-01-11 21:32:40
+# ORDER_PRICE=150.344, STL_PRICE=150.5225, ORDER_KIND=sell, PROFIT=-0.1785
+# PROFIT=-0.1785
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=151.135103613 , lower_sigma_1h3=150.234264502
+# current_price=151.166, upper_sigma_5m3=151.10043312
+# slope=0.01239839399991525
+# EXECUTE ORDER at 2018-01-12 17:59:50
+# ORDER_PRICE=151.166, TRADE_FLAG=buy
+# EXECUTE STLMENT at Take Profit
+# current_bid_price=152.269, order_price=151.166, min_take_profit=0.7
+# bollinger1h3_lower_sigma_slope=0.123043686
+# EXECUTE SETTLEMENT at 2018-01-15 10:00:50
+# ORDER_PRICE=151.166, STL_PRICE=152.283, ORDER_KIND=buy, PROFIT=1.117
+# PROFIT=1.117
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=152.918749992 , lower_sigma_1h3=151.879526923
+# current_price=152.591, upper_sigma_5m3=152.574438727
+# slope=0.059247016999972535
+# EXECUTE ORDER at 2018-01-16 08:59:50
+# ORDER_PRICE=152.591, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-01-16 17:55:40
+# ORDER_PRICE=152.591, STL_PRICE=152.408, ORDER_KIND=buy, PROFIT=-0.183
+# PROFIT=-0.183
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=153.038794651 , lower_sigma_1h3=151.940075587
+# current_price=152.612, lower_sigma_5m3=152.613037081
+# slope=-0.05943930699994291
+# EXECUTE ORDER at 2018-01-17 21:59:50
+# ORDER_PRICE=152.612, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-01-17 22:54:20
+# ORDER_PRICE=152.612, STL_PRICE=152.789, ORDER_KIND=sell, PROFIT=-0.177
+# PROFIT=-0.177
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=153.099394995 , lower_sigma_1h3=151.941605908
+# current_price=153.182, upper_sigma_5m3=153.036023219
+# slope=0.07817591200006256
+# EXECUTE ORDER at 2018-01-18 00:59:50
+# ORDER_PRICE=153.182, TRADE_FLAG=buy
+# EXECUTE STLMENT at Take Profit
+# current_bid_price=153.929, order_price=153.182, min_take_profit=0.7
+# bollinger1h3_lower_sigma_slope=0.229812872
+# EXECUTE SETTLEMENT at 2018-01-18 14:00:50
+# ORDER_PRICE=153.182, STL_PRICE=153.942, ORDER_KIND=buy, PROFIT=0.76
+# PROFIT=0.76
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=155.287362157 , lower_sigma_1h3=153.558308062
+# current_price=155.551, upper_sigma_5m3=155.476821018
+# slope=0.12943041200009958
+# EXECUTE ORDER at 2018-01-25 00:49:50
+# ORDER_PRICE=155.551, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-01-25 00:57:00
+# ORDER_PRICE=155.551, STL_PRICE=155.32, ORDER_KIND=buy, PROFIT=-0.231
+# PROFIT=-0.231
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=156.199208185 , lower_sigma_1h3=154.275487311
+# current_price=155.04, lower_sigma_5m3=155.402096851
+# slope=-0.013213870000068
+# EXECUTE ORDER at 2018-01-26 23:24:50
+# ORDER_PRICE=155.04, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=153.788, order_price=155.04, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.076550906
+# EXECUTE SETTLEMENT at 2018-01-29 15:00:50
+# ORDER_PRICE=155.04, STL_PRICE=153.7735, ORDER_KIND=sell, PROFIT=1.2665
+# PROFIT=1.2665
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=154.318451625 , lower_sigma_1h3=152.70868156
+# current_price=153.224, lower_sigma_5m3=153.261437065
+# slope=-0.17714186599983642
+# EXECUTE ORDER at 2018-01-30 09:24:50
+# ORDER_PRICE=153.224, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-01-30 20:56:50
+# ORDER_PRICE=153.224, STL_PRICE=153.402, ORDER_KIND=sell, PROFIT=-0.178
+# PROFIT=-0.178
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=154.856927655 , lower_sigma_1h3=153.047097405
+# current_price=154.651, upper_sigma_5m3=154.543301799
+# slope=0.49275670099986574
+# EXECUTE ORDER at 2018-02-01 00:34:50
+# ORDER_PRICE=154.651, TRADE_FLAG=buy
+# EXECUTE STLMENT at Take Profit
+# current_bid_price=155.356, order_price=154.651, min_take_profit=0.7
+# bollinger1h3_lower_sigma_slope=0.02485652
+# EXECUTE SETTLEMENT at 2018-02-01 11:00:50
+# ORDER_PRICE=154.651, STL_PRICE=155.3705, ORDER_KIND=buy, PROFIT=0.7195
+# PROFIT=0.7195
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=156.856661528 , lower_sigma_1h3=155.3195425
+# current_price=155.1905, lower_sigma_5m3=155.357720999
+# slope=-0.09985501499991545
+# EXECUTE ORDER at 2018-02-05 08:09:50
+# ORDER_PRICE=155.1905, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-05 08:44:40
+# ORDER_PRICE=155.1905, STL_PRICE=155.368, ORDER_KIND=sell, PROFIT=-0.1775
+# PROFIT=-0.1775
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=152.948667958 , lower_sigma_1h3=151.044767816
+# current_price=152.089, lower_sigma_5m3=152.134057907
+# slope=-0.1487954609999366
+# EXECUTE ORDER at 2018-02-08 17:04:50
+# ORDER_PRICE=152.089, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-08 19:37:10
+# ORDER_PRICE=152.089, STL_PRICE=152.271, ORDER_KIND=sell, PROFIT=-0.182
+# PROFIT=-0.182
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=151.047685133 , lower_sigma_1h3=149.646280641
+# current_price=150.499, upper_sigma_5m3=150.494603091
+# slope=0.2262571529998464
+# EXECUTE ORDER at 2018-02-13 08:14:50
+# ORDER_PRICE=150.499, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-02-13 10:01:10
+# ORDER_PRICE=150.499, STL_PRICE=150.318, ORDER_KIND=buy, PROFIT=-0.181
+# PROFIT=-0.181
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=151.064671557 , lower_sigma_1h3=149.644638771
+# current_price=149.628, lower_sigma_5m3=149.714307062
+# slope=-0.06711926000006598
+# EXECUTE ORDER at 2018-02-13 16:09:50
+# ORDER_PRICE=149.628, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-14 06:31:40
+# ORDER_PRICE=149.628, STL_PRICE=149.805, ORDER_KIND=sell, PROFIT=-0.177
+# PROFIT=-0.177
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=150.271481238 , lower_sigma_1h3=148.400108841
+# current_price=148.319, lower_sigma_5m3=148.472975063
+# slope=-0.2650037490000653
+# EXECUTE ORDER at 2018-02-14 22:39:50
+# ORDER_PRICE=148.319, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-14 23:34:30
+# ORDER_PRICE=148.319, STL_PRICE=148.495, ORDER_KIND=sell, PROFIT=-0.176
+# PROFIT=-0.176
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=150.350268663 , lower_sigma_1h3=148.84533346
+# current_price=149.8035, upper_sigma_5m3=149.798067412
+# slope=0.020684757999896244
+# EXECUTE ORDER at 2018-02-16 09:39:50
+# ORDER_PRICE=149.8035, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-02-16 13:05:10
+# ORDER_PRICE=149.8035, STL_PRICE=149.6305, ORDER_KIND=buy, PROFIT=-0.173
+# PROFIT=-0.173
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=149.723287634 , lower_sigma_1h3=148.701949301
+# current_price=149.274, lower_sigma_5m3=149.291427818
+# slope=-0.043578815999985095
+# EXECUTE ORDER at 2018-02-19 21:19:50
+# ORDER_PRICE=149.274, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# upper_sigma_1h3=149.600266614 , lower_sigma_1h3=148.809413168
+# current_price=149.322, upper_sigma_5m3=149.32184131
+# slope=0.05957986700006403
+# EXECUTE SETTLEMENT at 2018-02-20 08:59:50
+# ORDER_PRICE=149.274, STL_PRICE=149.322, ORDER_KIND=sell, PROFIT=-0.048
+# PROFIT=-0.048
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=149.577305977 , lower_sigma_1h3=148.857398686
+# current_price=149.365, upper_sigma_5m3=149.332510699
+# slope=0.07439992600001724
+# EXECUTE ORDER at 2018-02-20 09:04:50
+# ORDER_PRICE=149.365, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-02-20 10:16:30
+# ORDER_PRICE=149.365, STL_PRICE=149.178, ORDER_KIND=buy, PROFIT=-0.187
+# PROFIT=-0.187
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=149.564667777 , lower_sigma_1h3=148.930165199
+# current_price=149.37, upper_sigma_5m3=149.354272583
+# slope=0.025119772999890547
+# EXECUTE ORDER at 2018-02-20 15:09:50
+# ORDER_PRICE=149.37, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-02-20 16:33:50
+# ORDER_PRICE=149.37, STL_PRICE=149.171, ORDER_KIND=buy, PROFIT=-0.199
+# PROFIT=-0.199
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=149.586930663 , lower_sigma_1h3=148.931810726
+# current_price=150.134, upper_sigma_5m3=149.919004931
+# slope=0.03960918500000374
+# EXECUTE ORDER at 2018-02-20 18:49:50
+# ORDER_PRICE=150.134, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-02-20 19:04:40
+# ORDER_PRICE=150.134, STL_PRICE=149.9555, ORDER_KIND=buy, PROFIT=-0.1785
+# PROFIT=-0.1785
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=149.577374467 , lower_sigma_1h3=148.583387646
+# current_price=148.989, lower_sigma_5m3=149.032553667
+# slope=-0.05689616999993215
+# EXECUTE ORDER at 2018-02-23 17:09:50
+# ORDER_PRICE=148.989, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-23 17:30:20
+# ORDER_PRICE=148.989, STL_PRICE=149.184, ORDER_KIND=sell, PROFIT=-0.195
+# PROFIT=-0.195
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=149.554202877 , lower_sigma_1h3=148.594634553
+# current_price=148.995, lower_sigma_5m3=149.071699095
+# slope=-0.024714281000144812
+# EXECUTE ORDER at 2018-02-23 20:14:50
+# ORDER_PRICE=148.995, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-23 20:47:20
+# ORDER_PRICE=148.995, STL_PRICE=149.173, ORDER_KIND=sell, PROFIT=-0.178
+# PROFIT=-0.178
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=149.592332672 , lower_sigma_1h3=148.646093261
+# current_price=149.117, upper_sigma_5m3=149.060067634
+# slope=0.06150394400009022
+# EXECUTE ORDER at 2018-02-24 04:59:50
+# ORDER_PRICE=149.117, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-02-27 23:03:50
+# ORDER_PRICE=149.117, STL_PRICE=148.931, ORDER_KIND=buy, PROFIT=-0.186
+# PROFIT=-0.186
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=149.813143452 , lower_sigma_1h3=148.863703552
+# current_price=149.378, lower_sigma_5m3=149.381809759
+# slope=-0.031775856999945826
+# EXECUTE ORDER at 2018-02-28 05:19:50
+# ORDER_PRICE=149.378, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# upper_sigma_1h3=149.804497061 , lower_sigma_1h3=148.877058395
+# current_price=149.394, upper_sigma_5m3=149.391334347
+# slope=0.03814179099999687
+# EXECUTE SETTLEMENT at 2018-02-28 08:24:50
+# ORDER_PRICE=149.378, STL_PRICE=149.394, ORDER_KIND=sell, PROFIT=-0.016
+# PROFIT=-0.016
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=149.804497061 , lower_sigma_1h3=148.877058395
+# current_price=149.3875, upper_sigma_5m3=149.403506975
+# slope=0.03814179099999687
+# EXECUTE ORDER at 2018-02-28 08:29:50
+# ORDER_PRICE=149.3875, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-02-28 09:54:30
+# ORDER_PRICE=149.3875, STL_PRICE=149.1885, ORDER_KIND=buy, PROFIT=-0.199
+# PROFIT=-0.199
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=149.868238032 , lower_sigma_1h3=148.691901908
+# current_price=148.744, lower_sigma_5m3=148.801825127
+# slope=-0.13766647799996665
+# EXECUTE ORDER at 2018-02-28 15:09:50
+# ORDER_PRICE=148.744, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-28 15:43:40
+# ORDER_PRICE=148.744, STL_PRICE=148.937, ORDER_KIND=sell, PROFIT=-0.193
+# PROFIT=-0.193
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=149.991002068 , lower_sigma_1h3=148.398826871
+# current_price=148.28, lower_sigma_5m3=148.307758359
+# slope=-0.15467069500001712
+# EXECUTE ORDER at 2018-02-28 20:49:50
+# ORDER_PRICE=148.28, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=146.803, order_price=148.28, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.063780986
+# EXECUTE SETTLEMENT at 2018-03-01 10:00:50
+# ORDER_PRICE=148.28, STL_PRICE=146.7875, ORDER_KIND=sell, PROFIT=1.4925
+# PROFIT=1.4925
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=147.521613999 , lower_sigma_1h3=146.055124671
+# current_price=146.1885, lower_sigma_5m3=146.188809644
+# slope=-0.37387316600008186
+# EXECUTE ORDER at 2018-03-02 07:54:50
+# ORDER_PRICE=146.1885, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-03-02 09:28:20
+# ORDER_PRICE=146.1885, STL_PRICE=146.3665, ORDER_KIND=sell, PROFIT=-0.178
+# PROFIT=-0.178
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=147.606160567 , lower_sigma_1h3=145.652061407
+# current_price=145.9135, lower_sigma_5m3=146.058239981
+# slope=-0.20170129899983494
+# EXECUTE ORDER at 2018-03-02 14:59:50
+# ORDER_PRICE=145.9135, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=145.149, order_price=145.9135, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.334212783
+# EXECUTE SETTLEMENT at 2018-03-05 17:00:50
+# ORDER_PRICE=145.9135, STL_PRICE=145.137, ORDER_KIND=sell, PROFIT=0.7765
+# PROFIT=0.7765
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=146.267402411 , lower_sigma_1h3=144.835630258
+# current_price=146.178, upper_sigma_5m3=146.075590088
+# slope=0.07458324400011583
+# EXECUTE ORDER at 2018-03-05 23:39:50
+# ORDER_PRICE=146.178, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-06 00:20:10
+# ORDER_PRICE=146.178, STL_PRICE=145.991, ORDER_KIND=buy, PROFIT=-0.187
+# PROFIT=-0.187
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=148.565115714 , lower_sigma_1h3=147.130089892
+# current_price=147.864, upper_sigma_5m3=147.84579844
+# slope=0.1324068860001127
+# EXECUTE ORDER at 2018-03-12 21:09:50
+# ORDER_PRICE=147.864, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# upper_sigma_1h3=148.369581544 , lower_sigma_1h3=147.417694547
+# current_price=147.838, lower_sigma_5m3=147.865550749
+# slope=-0.029565088999957856
+# EXECUTE SETTLEMENT at 2018-03-13 08:19:50
+# ORDER_PRICE=147.864, STL_PRICE=147.838, ORDER_KIND=buy, PROFIT=-0.026
+# PROFIT=-0.026
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=148.369581544 , lower_sigma_1h3=147.417694547
+# current_price=147.835, lower_sigma_5m3=147.842877093
+# slope=-0.029565088999957856
+# EXECUTE ORDER at 2018-03-13 08:24:50
+# ORDER_PRICE=147.835, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-03-13 12:29:00
+# ORDER_PRICE=147.835, STL_PRICE=148.012, ORDER_KIND=sell, PROFIT=-0.177
+# PROFIT=-0.177
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=149.430631839 , lower_sigma_1h3=147.944691276
+# current_price=148.261, lower_sigma_5m3=148.348737439
+# slope=-0.21680684999994224
+# EXECUTE ORDER at 2018-03-15 08:49:50
+# ORDER_PRICE=148.261, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=147.524, order_price=148.261, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.112034219
+# EXECUTE SETTLEMENT at 2018-03-15 20:00:50
+# ORDER_PRICE=148.261, STL_PRICE=147.512, ORDER_KIND=sell, PROFIT=0.749
+# PROFIT=0.749
+#######################################################
+# decideExpantionTrade: SELL
+# upper_sigma_1h3=148.809302018 , lower_sigma_1h3=147.398292973
+# current_price=148.0535, lower_sigma_5m3=148.101149512
+# slope=-0.07936353599998996
+# EXECUTE ORDER at 2018-03-16 09:09:50
+# ORDER_PRICE=148.0535, TRADE_FLAG=sell
+# EXECUTE STLMENT at Take Profit
+# current_ask_price=147.079, order_price=148.0535, min_take_profit=0.7
+# bollinger1h3_upper_sigma_slope=-0.235520819
+# EXECUTE SETTLEMENT at 2018-03-19 14:00:50
+# ORDER_PRICE=148.0535, STL_PRICE=147.067, ORDER_KIND=sell, PROFIT=0.9865
+# PROFIT=0.9865
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=149.598582827 , lower_sigma_1h3=148.729811062
+# current_price=149.464, upper_sigma_5m3=149.410882688
+# slope=0.01619976099999991
+# EXECUTE ORDER at 2018-03-21 18:39:50
+# ORDER_PRICE=149.464, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-21 20:43:30
+# ORDER_PRICE=149.464, STL_PRICE=149.191, ORDER_KIND=buy, PROFIT=-0.273
+# PROFIT=-0.273
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=149.799032319 , lower_sigma_1h3=148.665306619
+# current_price=149.903, upper_sigma_5m3=149.704484583
+# slope=0.13645198799987063
+# EXECUTE ORDER at 2018-03-22 03:04:50
+# ORDER_PRICE=149.903, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-22 09:26:40
+# ORDER_PRICE=149.903, STL_PRICE=149.7295, ORDER_KIND=buy, PROFIT=-0.1735
+# PROFIT=-0.1735
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=150.430687715 , lower_sigma_1h3=148.617153098
+# current_price=149.808, upper_sigma_5m3=149.793767504
+# slope=0.18916669099990766
+# EXECUTE ORDER at 2018-03-22 14:09:50
+# ORDER_PRICE=149.808, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-22 17:00:20
+# ORDER_PRICE=149.808, STL_PRICE=149.6315, ORDER_KIND=buy, PROFIT=-0.1765
+# PROFIT=-0.1765
+#######################################################
+# decideExpantionTrade: BUY
+# upper_sigma_1h3=149.249906091 , lower_sigma_1h3=147.409578125
+# current_price=149.038, upper_sigma_5m3=148.958757713
+# slope=0.20036714800005795
+# EXECUTE ORDER at 2018-03-26 16:14:50
+# ORDER_PRICE=149.038, TRADE_FLAG=buy
