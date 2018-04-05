@@ -183,10 +183,10 @@ class ExpantionAlgo(SuperAlgo):
 
         return trade_flag
 
-    def resetFlag(self):
-        super(ExpantionAlgo, self)
-        self.most_high_price = 0
-        self.most_low_price = 0
+#    def resetFlag(self):
+#        super(ExpantionAlgo, self)
+#        self.most_high_price = 0
+#        self.most_low_price = 0
 
     def decideTrailLogic(self, stl_flag, current_ask_price, current_bid_price, current_price):
         order_price = self.getOrderPrice()

@@ -59,6 +59,8 @@ class SuperAlgo(object):
         self.trail_second_flag = False
         self.break_wait_flag = "pass"
         self.trail_price = 0
+        self.most_high_price = 0
+        self.most_low_price = 0
 
     def setOrderData(self, trade_flag, order_price, order_flag, trade_id):
         self.order_kind = trade_flag
