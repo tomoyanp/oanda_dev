@@ -204,7 +204,7 @@ class ExpantionAlgo(SuperAlgo):
             self.most_low_price = current_ask_price
 
 
-        if self.first_flag = "on"
+        if self.first_flag == "on":
             # 最小利確0.5を超えたら、トレールストップモードをONにする
             if self.order_kind == "buy":
                 if (current_bid_price - order_price) > first_take_profit:
@@ -226,7 +226,7 @@ class ExpantionAlgo(SuperAlgo):
                     stl_flag = True
 
 
-        if self.second_flag = "on"
+        if self.second_flag == "on":
             # 含み益0.5超えたら、トレールストップの二段階目をONにする
             if self.order_kind == "buy":
                 if (current_bid_price - order_price) > second_take_profit:
