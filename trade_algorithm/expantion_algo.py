@@ -104,7 +104,7 @@ class ExpantionAlgo(SuperAlgo):
 #                self.result_logger.info("# EXECUTE STLMENT at Take Profit")
 #                self.result_logger.info("# current_ask_price=%s, order_price=%s, min_take_profit=%s" % (self.ask_price, order_price, min_take_profit))
 #                self.result_logger.info("# bollinger1h3_upper_sigma_slope=%s" % (self.bollinger1h3_upper_sigma_slope))
-                stl_flag = True
+#                stl_flag = True
 
         return stl_flag
 
