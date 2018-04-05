@@ -73,14 +73,13 @@ class ExpantionAlgo(SuperAlgo):
                         self.debug_logger.info("%s :ExpantionStlLogic START" % base_time)
                         self.setIndicator(base_time)
                         stl_flag = self.decideExpantionStopLoss(stl_flag, current_price)
+                        stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, current_price)
                     # 1時間ごとにやる
                     if minutes == 0 and seconds >= 50:
                         self.debug_logger.info("%s :ExpantionStlLogic START" % base_time)
                         self.setIndicator(base_time)
                         stl_flag = self.decideExpantionTakeProfit(stl_flag, current_price)
 
-                    # trailなので毎回
-                    stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, current_price)
             else:
                 pass
 
