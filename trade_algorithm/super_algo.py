@@ -332,7 +332,7 @@ class SuperAlgo(object):
 
     def setVolatilityPrice(self, base_time):
         start_time = base_time - timedelta(minutes=5)
-        sql = "select ask_price, bid_price from %s_TABLE where insert_time = \'%s\';"
+        sql = "select ask_price, bid_price from %s_TABLE where insert_time = \'%s\'" % (self.instrument, start_time)
         response = self.mysql_connector.select_sql(sql)
         for res in response:
             self.volatility_buy_price = res[0]
