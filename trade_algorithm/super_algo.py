@@ -41,6 +41,8 @@ class SuperAlgo(object):
         self.profit_history = "pass"
         self.buy_count = 0
         self.sell_count = 0
+        self.volatility_bid_price = 0
+        self.volatility_buy_price = 0
 
 ################################################
 # listは、要素数が大きいほうが古い。
@@ -316,7 +318,7 @@ class SuperAlgo(object):
     def setHighlowPrice(self, base_time, span):
         # high low price
         ind_type = "highlow"
-        end_time = base_time - timedelta(hours=1)
+        end_time = base_time - timedelta(hours=5)
         sql = "select high_price, low_price from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC limit %s" % (self.instrument, end_time, ind_type, span)
         response = self.mysql_connector.select_sql(sql)
         high_price_list = []
@@ -327,6 +329,14 @@ class SuperAlgo(object):
 
         self.high_price = max(high_price_list)
         self.low_price =  min(low_price_list)
+
+    def setVolatilityPrice(self, base_time):
+        start_time = base_time - timedelta(minutes=5)
+        sql = "select ask_price, bid_price from %s_TABLE where insert_time = \'%s\';"
+        response = self.mysql_connector.select_sql(sql)
+        for res in response:
+            self.volatility_buy_price = res[0]
+            self.volatility_bid_price = res[1]
 
     @abstractmethod
     def setIndicator(self, base_time):

@@ -43,15 +43,21 @@ class ExpantionAlgo(SuperAlgo):
             if self.order_flag:
                 pass
             else:
+                weekday = base_time.weekday()
+                hour = base_time.hour
                 minutes = base_time.minute
                 seconds = base_time.second
                 # 1分足の終値付近で計算ロジックに入る
-                if minutes % 5 == 4 and seconds >= 50:
+                if minutes % 5 == 0 and seconds <= 10:
                     self.debug_logger.info("%s :TrendExpantionLogic START" % base_time)
                     # 性能的に5分に一回呼び出しに変更
                     self.setIndicator(base_time)
                     current_price = self.getCurrentPrice()
                     trade_flag = self.decideExpantionTrade(trade_flag, current_price)
+
+                # 土曜の5時以降はエントリーしない
+                if weekday == 5 and hour >= 5:
+                    trade_flag = "pass"
 
             return trade_flag
         except:
@@ -67,9 +73,11 @@ class ExpantionAlgo(SuperAlgo):
                 if ex_stlmode == "on":
                     minutes = base_time.minute
                     seconds = base_time.second
+                    weekday = base_time.weekday()
+                    hour = base_time.hour
                     current_price = self.getCurrentPrice()
                     # 5分足の終値付近で計算ロジックに入る
-                    if minutes % 5 == 4 and seconds >= 50:
+                    if minutes % 5 == 0 and seconds <= 10:
                         self.debug_logger.info("%s :ExpantionStlLogic START" % base_time)
                         self.setIndicator(base_time)
                         stl_flag = self.decideExpantionStopLoss(stl_flag, current_price)
@@ -77,9 +85,12 @@ class ExpantionAlgo(SuperAlgo):
                     # 1時間ごとにやる
                     if minutes == 0 and seconds >= 50:
                         self.debug_logger.info("%s :ExpantionStlLogic START" % base_time)
-                        self.setIndicator(base_time)
+                        #self.setIndicator(base_time)
                         stl_flag = self.decideExpantionTakeProfit(stl_flag, current_price)
 
+                    # 土曜の5時以降にポジションを持っている場合は決済する
+                    if weekday == 5 and hour >= 5:
+                        stl_flag = True
             else:
                 pass
 
@@ -122,21 +133,33 @@ class ExpantionAlgo(SuperAlgo):
             else:
                 pass
 
-        if self.buy_count >= 2 and self.order_kind == "sell":
+        if self.volatility_buy_price + 0.5 < current_price and self.order_kind == "sell":
+            stl_flag = True
+            self.result_logger.info("# Execute Volatility Settlement")
+            self.result_logger.info("# volatility_buy_price=%s, current_price=%s" % (self.volatility_buy_price, current_price))
+            self.buy_count = 0
+            self.sell_count = 0
+        elif self.volatility_bid_price - 0.5 < current_price and self.order_kind == "buy":
+            stl_flag = True
+            self.result_logger.info("# Execute Volatility Settlement")
+            self.result_logger.info("# volatility_bid_price=%s, current_price=%s" % (self.volatility_bid_price, current_price))
+            self.buy_count = 0
+            self.sell_count = 0
+
+        if self.buy_count >= 2 and self.high_price - 0.5 < current_price < self.high_price + 0.5 and self.order_kind == "sell":
             stl_flag = True
             self.result_logger.info("# Execute Reverse Settlement")
             self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
             self.result_logger.info("# current_price=%s, upper_sigma_5m3=%s" % (current_price, self.upper_sigma_5m3))
             self.result_logger.info("# slope=%s" % (self.slope))
 
-        elif self.sell_count >= 2 and self.order_kind == "buy":
+        elif self.sell_count >= 2 and self.low_price - 0.5 < current_price < self.low_price + 0.5 and self.order_kind == "buy":
             stl_flag = True
             self.result_logger.info("# Execute Reverse Settlement")
             self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
             self.result_logger.info("# current_price=%s, lower_sigma_5m3=%s" % (current_price, self.lower_sigma_5m3))
             self.result_logger.info("# slope=%s" % (self.slope))
 
- 
         self.debug_logger.info("order_kind = %s" % self.order_kind)
         self.debug_logger.info("buy_count = %s" % self.buy_count)
         self.debug_logger.info("sell_count = %s" % self.sell_count)
@@ -158,7 +181,22 @@ class ExpantionAlgo(SuperAlgo):
             else:
                 pass
 
-        if self.buy_count >= 2:
+        if self.volatility_buy_price + 0.5 < current_price:
+            trade_flag = "buy"
+            self.result_logger.info("#######################################################")
+            self.result_logger.info("# decideExpantionTrade: BUY at volatility_price")
+            self.result_logger.info("# volatility_buy_price=%s, current_price=%s" % (self.volatility_buy_price, current_price))
+            self.buy_count = 0
+            self.sell_count = 0
+        elif self.volatility_bid_price - 0.5 < current_price:
+            trade_flag = "sell"
+            self.result_logger.info("#######################################################")
+            self.result_logger.info("# decideExpantionTrade: SELL at volatility_price")
+            self.result_logger.info("# volatility_bid_price=%s, current_price=%s" % (self.volatility_bid_price, current_price))
+            self.buy_count = 0
+            self.sell_count = 0
+
+        if self.buy_count >= 2 and self.high_price - 0.5 < current_price < self.high_price + 0.5:
             trade_flag = "buy"
             self.result_logger.info("#######################################################")
             self.result_logger.info("# decideExpantionTrade: BUY")
@@ -168,7 +206,7 @@ class ExpantionAlgo(SuperAlgo):
             self.buy_count = 0
             self.sell_count = 0
 
-        elif self.sell_count >= 2:
+        elif self.sell_count >= 2 and self.low_price - 0.5 < current_price < self.low_price + 0.5:
             trade_flag = "sell"
             self.result_logger.info("#######################################################")
             self.result_logger.info("# decideExpantionTrade: SELL")
@@ -306,3 +344,5 @@ class ExpantionAlgo(SuperAlgo):
         self.setBollinger1h3(base_time)
         self.setSlopeBollinger1h3(base_time)
         self.setSlope(base_time)
+        self.setVolatilityPrice(base_time)
+        self.setHighlowPrice(base_time, 24)
