@@ -181,18 +181,20 @@ class ExpantionAlgo(SuperAlgo):
             else:
                 pass
 
-        if self.volatility_buy_price + 0.5 < current_price:
+        if float(self.volatility_buy_price) + float(0.5) < current_price:
             trade_flag = "buy"
             self.result_logger.info("#######################################################")
             self.result_logger.info("# decideExpantionTrade: BUY at volatility_price")
             self.result_logger.info("# volatility_buy_price=%s, current_price=%s" % (self.volatility_buy_price, current_price))
+            self.debug_logger.info("volatility_price + 0.5 = %s, current_price=%s" % (float(self.volatility_buy_price) + float(0.5), current_price))
             self.buy_count = 0
             self.sell_count = 0
-        elif self.volatility_bid_price - 0.5 < current_price:
+        elif float(self.volatility_bid_price) - float(0.5) > current_price:
             trade_flag = "sell"
             self.result_logger.info("#######################################################")
             self.result_logger.info("# decideExpantionTrade: SELL at volatility_price")
             self.result_logger.info("# volatility_bid_price=%s, current_price=%s" % (self.volatility_bid_price, current_price))
+            self.debug_logger.info("volatility_price - 0.5 = %s, current_price=%s " % (float(self.volatility_buy_price) + float(0.5), current_price))
             self.buy_count = 0
             self.sell_count = 0
 
