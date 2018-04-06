@@ -133,27 +133,29 @@ class ExpantionAlgo(SuperAlgo):
             else:
                 pass
 
-        if self.volatility_buy_price + 0.5 < current_price and self.order_kind == "sell":
+        if float(self.volatility_buy_price) + float(0.5) < current_price and self.order_kind == "sell":
             stl_flag = True
             self.result_logger.info("# Execute Volatility Settlement")
             self.result_logger.info("# volatility_buy_price=%s, current_price=%s" % (self.volatility_buy_price, current_price))
             self.buy_count = 0
             self.sell_count = 0
-        elif self.volatility_bid_price - 0.5 < current_price and self.order_kind == "buy":
+        elif float(self.volatility_bid_price) - float(0.5) > current_price and self.order_kind == "buy":
             stl_flag = True
             self.result_logger.info("# Execute Volatility Settlement")
             self.result_logger.info("# volatility_bid_price=%s, current_price=%s" % (self.volatility_bid_price, current_price))
             self.buy_count = 0
             self.sell_count = 0
 
-        if self.buy_count >= 2 and self.high_price - 0.5 < current_price < self.high_price + 0.5 and self.order_kind == "sell":
+#        if self.buy_count >= 2 and current_price < (float(self.high_price) - float(0.5)) and  (float(self.high_price) + float(0.5)) < current_price and self.order_kind == "sell":
+        if self.buy_count >= 2 and self.order_kind == "sell":
             stl_flag = True
             self.result_logger.info("# Execute Reverse Settlement")
             self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
             self.result_logger.info("# current_price=%s, upper_sigma_5m3=%s" % (current_price, self.upper_sigma_5m3))
             self.result_logger.info("# slope=%s" % (self.slope))
 
-        elif self.sell_count >= 2 and self.low_price - 0.5 < current_price < self.low_price + 0.5 and self.order_kind == "buy":
+#        elif self.sell_count >= 2 and (float(self.low_price) + float(0.5)) < current_price and current_price < (float(self.low_price) - float(0.5)) and self.order_kind == "buy":
+        elif self.sell_count >= 2 and self.order_kind == "buy":
             stl_flag = True
             self.result_logger.info("# Execute Reverse Settlement")
             self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
@@ -198,7 +200,8 @@ class ExpantionAlgo(SuperAlgo):
             self.buy_count = 0
             self.sell_count = 0
 
-        if self.buy_count >= 2 and self.high_price - 0.5 < current_price < self.high_price + 0.5:
+#        if self.buy_count >= 2 and current_price < (float(self.high_price) - float(0.5)) and (float(self.high_price) + float(0.5)) < current_price:
+        if self.buy_count >= 2:
             trade_flag = "buy"
             self.result_logger.info("#######################################################")
             self.result_logger.info("# decideExpantionTrade: BUY")
@@ -208,7 +211,8 @@ class ExpantionAlgo(SuperAlgo):
             self.buy_count = 0
             self.sell_count = 0
 
-        elif self.sell_count >= 2 and self.low_price - 0.5 < current_price < self.low_price + 0.5:
+#        elif self.sell_count >= 2 and current_price < (float(self.low_price) - float(0.5)) and (float(self.low_price) + float(0.5)) < current_price:
+        elif self.sell_count >= 2:
             trade_flag = "sell"
             self.result_logger.info("#######################################################")
             self.result_logger.info("# decideExpantionTrade: SELL")
