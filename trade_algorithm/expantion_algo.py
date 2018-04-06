@@ -90,6 +90,7 @@ class ExpantionAlgo(SuperAlgo):
 
                     # 土曜の5時以降にポジションを持っている場合は決済する
                     if weekday == 5 and hour >= 5:
+                        self.result_logger.info("weekend stl logic")
                         stl_flag = True
             else:
                 pass
