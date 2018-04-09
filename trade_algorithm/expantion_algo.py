@@ -47,17 +47,22 @@ class ExpantionAlgo(SuperAlgo):
                 hour = base_time.hour
                 minutes = base_time.minute
                 seconds = base_time.second
-                # 1分足の終値付近で計算ロジックに入る
-                if minutes % 5 == 0 and seconds <= 10:
-                    self.debug_logger.info("%s :TrendExpantionLogic START" % base_time)
-                    # 性能的に5分に一回呼び出しに変更
-                    self.setIndicator(base_time)
-                    current_price = self.getCurrentPrice()
-                    trade_flag = self.decideExpantionTrade(trade_flag, current_price)
+                # 4 ~ 14時は除外
+                if hour < 4 or hour > 14:
+                    # 1分足の終値付近で計算ロジックに入る
+                    if minutes % 5 == 0 and seconds <= 10:
+                        self.debug_logger.info("%s :TrendExpantionLogic START" % base_time)
+                        # 性能的に5分に一回呼び出しに変更
+                        self.setIndicator(base_time)
+                        current_price = self.getCurrentPrice()
+                        trade_flag = self.decideExpantionTrade(trade_flag, current_price)
 
-                # 土曜の5時以降はエントリーしない
-                if weekday == 5 and hour >= 5:
-                    trade_flag = "pass"
+                    # 土曜の5時以降はエントリーしない
+                    if weekday == 5 and hour >= 5:
+                        trade_flag = "pass"
+                else:
+                    self.buy_count = 0
+                    self.sell_count = 0
 
             return trade_flag
         except:
@@ -100,23 +105,6 @@ class ExpantionAlgo(SuperAlgo):
             raise
 
     def decideExpantionTakeProfit(self, stl_flag, current_price):
-        # Stop Loss Algorithm
-#        order_price = self.getOrderPrice()
-#        min_take_profit = 0.7
-#
-#        # bollinger 逆側の向きが変わったら
-#        if self.order_kind == "buy":
-#            if (self.bid_price - order_price) > min_take_profit and self.bollinger1h3_lower_sigma_slope > 0:
-#                self.result_logger.info("# EXECUTE STLMENT at Take Profit")
-#                self.result_logger.info("# current_bid_price=%s, order_price=%s, min_take_profit=%s" % (self.bid_price, order_price, min_take_profit))
-#                self.result_logger.info("# bollinger1h3_lower_sigma_slope=%s" % (self.bollinger1h3_lower_sigma_slope))
-#                stl_flag = True
-#        elif self.order_kind == "sell":
-#            if (order_price - self.ask_price) > min_take_profit and self.bollinger1h3_upper_sigma_slope < 0:
-#                self.result_logger.info("# EXECUTE STLMENT at Take Profit")
-#                self.result_logger.info("# current_ask_price=%s, order_price=%s, min_take_profit=%s" % (self.ask_price, order_price, min_take_profit))
-#                self.result_logger.info("# bollinger1h3_upper_sigma_slope=%s" % (self.bollinger1h3_upper_sigma_slope))
-#                stl_flag = True
 
         return stl_flag
 
@@ -127,7 +115,7 @@ class ExpantionAlgo(SuperAlgo):
             if current_price > (self.upper_sigma_5m3) and self.slope > 0.01:
                 self.buy_count = self.buy_count + 1
                 self.sell_count = 0
-                 
+
             elif current_price < (self.lower_sigma_5m3) and self.slope < -0.01:
                 self.sell_count = self.sell_count + 1
                 self.buy_count = 0
@@ -156,7 +144,7 @@ class ExpantionAlgo(SuperAlgo):
                 self.result_logger.info("# slope=%s" % (self.slope))
 
         elif self.sell_count >= 2 and self.order_kind == "buy":
-            if (float(self.low_price) + float(0.5)) < current_price or current_price < (float(self.low_price) - float(0.5)): 
+            if (float(self.low_price) + float(0.5)) < current_price or current_price < (float(self.low_price) - float(0.5)):
                 stl_flag = True
                 self.result_logger.info("# Execute Reverse Settlement")
                 self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
@@ -171,13 +159,12 @@ class ExpantionAlgo(SuperAlgo):
 
     def decideExpantionTrade(self, trade_flag, current_price):
         # Buy Logic at Trend Follow Mode
-
         # slopeは上を向いている場合は買いエントリしない。下を向いている場合は売りエントリしない
         if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
             if current_price > (self.upper_sigma_5m3) and self.slope > 0.01:
                 self.buy_count = self.buy_count + 1
                 self.sell_count = 0
-                 
+
             elif current_price < (self.lower_sigma_5m3) and self.slope < -0.01:
                 self.sell_count = self.sell_count + 1
                 self.buy_count = 0
