@@ -148,7 +148,7 @@ class ExpantionAlgo(SuperAlgo):
             self.sell_count = 0
 
         if self.buy_count >= 2 and self.order_kind == "sell":
-            if current_price < (float(self.high_price) - float(0.5)) or (float(self.high_price) + float(0.2)) < current_price:
+            if current_price < (float(self.high_price) - float(0.5)) or (float(self.high_price) + float(0.5)) < current_price:
                 stl_flag = True
                 self.result_logger.info("# Execute Reverse Settlement")
                 self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
@@ -156,7 +156,7 @@ class ExpantionAlgo(SuperAlgo):
                 self.result_logger.info("# slope=%s" % (self.slope))
 
         elif self.sell_count >= 2 and self.order_kind == "buy":
-            if (float(self.low_price) + float(0.5)) < current_price or current_price < (float(self.low_price) - float(0.2)): 
+            if (float(self.low_price) + float(0.5)) < current_price or current_price < (float(self.low_price) - float(0.5)): 
                 stl_flag = True
                 self.result_logger.info("# Execute Reverse Settlement")
                 self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
@@ -202,7 +202,7 @@ class ExpantionAlgo(SuperAlgo):
             self.sell_count = 0
 
         if self.buy_count >= 2:
-            if current_price < (float(self.high_price) - float(0.5)) or (float(self.high_price) + float(0.2)) < current_price:
+            if current_price < (float(self.high_price) - float(0.5)) or (float(self.high_price) + float(0.5)) < current_price:
                 trade_flag = "buy"
                 self.result_logger.info("#######################################################")
                 self.result_logger.info("# decideExpantionTrade: BUY")
@@ -213,7 +213,7 @@ class ExpantionAlgo(SuperAlgo):
                 self.sell_count = 0
 
         elif self.sell_count >= 2:
-            if current_price < (float(self.low_price) - float(0.2)) or (float(self.low_price) + float(0.5)) < current_price:
+            if current_price < (float(self.low_price) - float(0.5)) or (float(self.low_price) + float(0.5)) < current_price:
                 trade_flag = "sell"
                 self.result_logger.info("#######################################################")
                 self.result_logger.info("# decideExpantionTrade: SELL")
