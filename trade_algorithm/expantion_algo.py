@@ -48,7 +48,8 @@ class ExpantionAlgo(SuperAlgo):
                 minutes = base_time.minute
                 seconds = base_time.second
                 # 4 ~ 14時は除外
-                if hour < 4 or hour > 14:
+#                if hour < 4 or hour > 14:
+                if 0==0:
                     # 1分足の終値付近で計算ロジックに入る
                     if minutes % 5 == 0 and seconds <= 10:
                         self.debug_logger.info("%s :TrendExpantionLogic START" % base_time)
