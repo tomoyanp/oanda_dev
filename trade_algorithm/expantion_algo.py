@@ -48,8 +48,8 @@ class ExpantionAlgo(SuperAlgo):
                 minutes = base_time.minute
                 seconds = base_time.second
                 # 4 ~ 14時は除外
-#                if hour < 4 or hour > 14:
-                if 0==0:
+                if hour < 4 or hour > 14:
+#                if 0==0:
                     # 1分足の終値付近で計算ロジックに入る
                     if minutes % 5 == 0 and seconds <= 10:
                         self.debug_logger.info("%s :TrendExpantionLogic START" % base_time)
@@ -203,9 +203,8 @@ class ExpantionAlgo(SuperAlgo):
                 self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
                 self.result_logger.info("# current_price=%s, upper_sigma_5m3=%s" % (current_price, self.upper_sigma_5m3))
                 self.result_logger.info("# slope=%s" % (self.slope))
-
-            self.buy_count = 0
-            self.sell_count = 0
+                self.buy_count = 0
+                self.sell_count = 0
 
         elif self.sell_count >= 2:
             if current_price < (float(self.low_price) - float(0.5)) or (float(self.low_price) + float(0.5)) < current_price:
@@ -215,9 +214,8 @@ class ExpantionAlgo(SuperAlgo):
                 self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
                 self.result_logger.info("# current_price=%s, lower_sigma_5m3=%s" % (current_price, self.lower_sigma_5m3))
                 self.result_logger.info("# slope=%s" % (self.slope))
-
-            self.buy_count = 0
-            self.sell_count = 0
+                self.buy_count = 0
+                self.sell_count = 0
 
         else:
             pass
