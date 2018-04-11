@@ -68,11 +68,11 @@ class DaytimeAlgo(SuperAlgo):
             stl_flag = False
             ex_stlmode = self.config_data["ex_stlmode"]
             if self.order_flag:
+                minutes = base_time.minute
+                seconds = base_time.second
+                weekday = base_time.weekday()
+                hour = base_time.hour
                 if ex_stlmode == "on":
-                    minutes = base_time.minute
-                    seconds = base_time.second
-                    weekday = base_time.weekday()
-                    hour = base_time.hour
                     current_price = self.getCurrentPrice()
                     if minutes % 5 == 0 and seconds <= 10:
                         self.debug_logger.info("%s :DaytimeStlLogic START" % base_time)
@@ -98,10 +98,10 @@ class DaytimeAlgo(SuperAlgo):
     def decideDaytimeTrade(self, trade_flag, current_price):
 
         if self.upper_sigma_1m3 < current_price:
-            self.result_logger("# current_price higher than upper_sigma_1m3")
+            self.result_logger.info("# current_price higher than upper_sigma_1m3")
             trade_flag = "buy"
-        elif self.lower_sigma > current_price:
-            self.result_logger("# current_price lower than upper_sigma_1m3")
+        elif self.lower_sigma_1m3 > current_price:
+            self.result_logger.info("# current_price lower than upper_sigma_1m3")
             trade_flag = "sell"
 
         else:
