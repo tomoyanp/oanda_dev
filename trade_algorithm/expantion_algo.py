@@ -103,11 +103,13 @@ class ExpantionAlgo(SuperAlgo):
     def decideExpantion(self, current_price):
         if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
             if current_price > (self.upper_sigma_5m3) and self.slope > 0.01:
-                self.buy_count = self.buy_count + 1
+                #self.buy_count = self.buy_count + 1
+                self.buy_count = self.buy_count + 2
                 self.sell_count = 0
 
             elif current_price < (self.lower_sigma_5m3) and self.slope < -0.01:
-                self.sell_count = self.sell_count + 1
+                #self.sell_count = self.sell_count + 1
+                self.sell_count = self.sell_count + 2
                 self.buy_count = 0
 
     def decideExpantionStopLoss(self, stl_flag, current_price):
@@ -231,7 +233,7 @@ class ExpantionAlgo(SuperAlgo):
     def decideHighPrice(self, current_price):
         highprice_threshold = 0.5
         flag = False
-        if current_price < (float(self.high_price) - float(highprice_threshold)) or (float(self.high_price) + float(highprice_threshold)) < current_price:
+        if current_price > (float(self.high_price) + float(highprice_threshold)) or current_price < (float(self.high_price) - float(highprice_threshold)):
             flag = True
 
         return flag
