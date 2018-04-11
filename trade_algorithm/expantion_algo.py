@@ -47,9 +47,10 @@ class ExpantionAlgo(SuperAlgo):
                 hour = base_time.hour
                 minutes = base_time.minute
                 seconds = base_time.second
-                # 4 ~ 14時は除外
-                if hour < 4 or hour > 14:
-#                if 0==0:
+                # 土曜の5時以降はエントリーしない
+                if weekday == 5 and hour >= 5:
+                    trade_flag = "pass"
+                elif hour < 4 or hour > 14:
                     # 1分足の終値付近で計算ロジックに入る
                     if minutes % 5 == 0 and seconds <= 10:
                         self.debug_logger.info("%s :TrendExpantionLogic START" % base_time)
@@ -58,9 +59,6 @@ class ExpantionAlgo(SuperAlgo):
                         current_price = self.getCurrentPrice()
                         trade_flag = self.decideExpantionTrade(trade_flag, current_price)
 
-                    # 土曜の5時以降はエントリーしない
-                    if weekday == 5 and hour >= 5:
-                        trade_flag = "pass"
                 else:
                     self.buy_count = 0
                     self.sell_count = 0
@@ -82,17 +80,19 @@ class ExpantionAlgo(SuperAlgo):
                     weekday = base_time.weekday()
                     hour = base_time.hour
                     current_price = self.getCurrentPrice()
+                    # 土曜の5時以降にポジションを持っている場合は決済する
+                    if weekday == 5 and hour >= 5:
+                        self.result_logger.info("# weekend stl logic")
+                        stl_flag = True
+
                     # 5分足の終値付近で計算ロジックに入る
-                    if minutes % 5 == 0 and seconds <= 10:
+                    elif minutes % 5 == 0 and seconds <= 10:
                         self.debug_logger.info("%s :ExpantionStlLogic START" % base_time)
                         self.setIndicator(base_time)
                         stl_flag = self.decideExpantionStopLoss(stl_flag, current_price)
                         stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, current_price)
 
-                    # 土曜の5時以降にポジションを持っている場合は決済する
-                    if weekday == 5 and hour >= 5:
-                        self.result_logger.info("# weekend stl logic")
-                        stl_flag = True
+
             else:
                 pass
 
