@@ -17,6 +17,7 @@ def account_init(mode, base_path):
     property_path = "%s/property" % base_path
     property_file = open("%s/account.properties" % property_path, "r")
     jsonData = json.load(property_file)
+    print jsonData
     account_data = jsonData[mode]
     return account_data
 
