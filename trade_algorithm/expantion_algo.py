@@ -101,16 +101,20 @@ class ExpantionAlgo(SuperAlgo):
             raise
 
     def decideExpantion(self, current_price):
-        if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
-            #if current_price > (self.upper_sigma_5m3) and self.slope > 0.01:
-            if current_price > (self.upper_sigma_5m3) and self.slope > 0:
+        # when current_price touch reversed sigma, count = 0
+        # when value is bigger than 2 between upper 3sigma and lower 3sigma, bollinger band base line's slope is bigger than 0,
+        # count += 1
+        if current_price > (self.upper_sigma_5m3):
+            if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2 and self.slope > 0:
                 self.buy_count = self.buy_count + 1
-                self.sell_count = 0
 
-            #elif current_price < (self.lower_sigma_5m3) and self.slope < -0.01:
-            elif current_price < (self.lower_sigma_5m3) and self.slope < 0:
+            self.sell_count = 0
+
+        elif current_price < (self.lower_sigma_5m3) and self.slope < 0:
+            if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2 and self.slope < 0:
                 self.sell_count = self.sell_count + 1
-                self.buy_count = 0
+
+            self.buy_count = 0
 
     def decideExpantionStopLoss(self, stl_flag, current_price):
         self.decideExpantion(current_price)
