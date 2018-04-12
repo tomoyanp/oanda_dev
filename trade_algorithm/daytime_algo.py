@@ -92,6 +92,11 @@ class DaytimeAlgo(SuperAlgo):
         return trade_flag
 
     def getStartPrice(self, base_time):
+        weekday = base_time.weekday()
+        if int(weekday) == 0:
+            base_time = base_time - timedelta(days=3)
+        else:
+            base_time = base_time - timedelta(days=1)
         start_time = base_time.strftime("%Y-%m-%d 07:00:00")
         #start_time = base_time.strftime("%Y-%m-%d 08:00:00")
         sql = "select ask_price, bid_price from %s_TABLE where insert_time = \'%s\'" % (self.instrument, start_time)
