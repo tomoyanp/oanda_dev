@@ -46,7 +46,8 @@ class DaytimeAlgo(SuperAlgo):
                 hour = base_time.hour
                 minutes = base_time.minute
                 seconds = base_time.second
-                if hour == 9 and minutes == 59:
+#                if hour == 9 and minutes == 59:
+                if hour == 7 and minutes == 59:
                     self.debug_logger.info("%s :DaytimeLogic START" % base_time)
                     start_price = self.getStartPrice(base_time)
                     current_price = self.getCurrentPrice()
@@ -91,7 +92,8 @@ class DaytimeAlgo(SuperAlgo):
         return trade_flag
 
     def getStartPrice(self, base_time):
-        start_time = base_time.strftime("%Y-%m-%d 08:00:00")
+        start_time = base_time.strftime("%Y-%m-%d 07:00:00")
+        #start_time = base_time.strftime("%Y-%m-%d 08:00:00")
         sql = "select ask_price, bid_price from %s_TABLE where insert_time = \'%s\'" % (self.instrument, start_time)
         response = self.mysql_connector.select_sql(sql)
         ask_price = response[0][0]
