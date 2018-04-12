@@ -1,8 +1,8 @@
 {
   "GBP_JPY": {
     "__comments" : "daytime mode",
-    "stop_loss": 0.1,
-    "take_profit": 0.1,
+    "stop_loss": 0.5,
+    "take_profit": 1.0,
     "time_width": 720000,
     "stl_time_width": 720000,
     "sleep_time": 10,
