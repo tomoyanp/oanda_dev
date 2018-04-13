@@ -49,9 +49,12 @@ class DaytimeAlgo(SuperAlgo):
 #                if hour == 9 and minutes == 59:
                 if hour == 7 and minutes == 59:
                     self.debug_logger.info("%s :DaytimeLogic START" % base_time)
-                    start_price = self.getStartPrice(base_time)
+                    start_price, insert_time = self.getStartPrice(base_time)
                     current_price = self.getCurrentPrice()
                     trade_flag = self.decideDaytimeTrade(trade_flag, current_price, start_price)
+                    self.result_logger.info("################################")
+                    self.result_logger.info("# start_price at %s, values=%s, current_price=%s" % (insert_time, start_price))
+                    self.result_logger.info("# current_price - start_price difference=%s" % (float(current_price) - float(start_price)))
 
             return trade_flag
         except:
@@ -104,6 +107,6 @@ class DaytimeAlgo(SuperAlgo):
         insert_time = response[-1][2]
         self.debug_logger.info(insert_time)
 
-        return ((ask_price + bid_price) / 2)
+        return ((ask_price + bid_price) / 2), insert_time
 
 
