@@ -1,0 +1,2487 @@
+#########################
+# ../main.py GBP_JPY demo daytime daytime_test test 
+# __comments = daytime mode
+# enable_time = [u'00:00:00', u'01:00:00', u'02:00:00', u'03:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00', u'21:00:00', u'22:00:00', u'23:00:00']
+# enable_time_mode = off
+# ex_stlmode = off
+# first_trail_mode = off
+# second_trail_mode = off
+# sleep_time = 60
+# stl_sleep_ltime = 1
+# stl_sleep_time = 60
+# stl_sleep_vtime = 10
+# stl_time_width = 720000
+# stop_loss = 0.5
+# take_profit = 1.0
+# time_width = 720000
+# trade_sleep_time = 10
+# units = 10000
+################################
+# start_price at 2017-02-28 07:00:00, values=140.2265, current_price=139.67
+# current_price - start_price difference=-0.5565
+# EXECUTE ORDER at 2017-03-01 07:59:00
+# ORDER_PRICE=139.67, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-03-01 10:14:10
+# ORDER_PRICE=139.67, STL_PRICE=140.179, ORDER_KIND=sell, PROFIT=-0.509
+# PROFIT=-0.509
+################################
+# start_price at 2017-03-01 07:00:00, values=139.628, current_price=139.8985
+# current_price - start_price difference=0.2705
+# EXECUTE ORDER at 2017-03-02 07:59:11
+# ORDER_PRICE=139.8985, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-03-02 14:59:21
+# ORDER_PRICE=139.8985, STL_PRICE=139.9795, ORDER_KIND=buy, PROFIT=0.081
+# PROFIT=0.081
+################################
+# start_price at 2017-03-02 07:00:00, values=139.8155, current_price=140.3545
+# current_price - start_price difference=0.539
+# EXECUTE ORDER at 2017-03-03 07:59:31
+# ORDER_PRICE=140.3545, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-03-03 14:59:41
+# ORDER_PRICE=140.3545, STL_PRICE=140.0415, ORDER_KIND=buy, PROFIT=-0.313
+# PROFIT=-0.313
+################################
+# start_price at 2017-03-03 07:00:00, values=140.3685, current_price=140.2235
+# current_price - start_price difference=-0.145
+# EXECUTE ORDER at 2017-03-06 07:59:00
+# ORDER_PRICE=140.2235, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-03-06 14:59:10
+# ORDER_PRICE=140.2235, STL_PRICE=139.9105, ORDER_KIND=sell, PROFIT=0.313
+# PROFIT=0.313
+################################
+# start_price at 2017-03-06 07:00:00, values=139.984, current_price=139.4875
+# current_price - start_price difference=-0.4965
+# EXECUTE ORDER at 2017-03-07 07:59:20
+# ORDER_PRICE=139.4875, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-03-07 14:59:30
+# ORDER_PRICE=139.4875, STL_PRICE=139.438, ORDER_KIND=sell, PROFIT=0.0495
+# PROFIT=0.0495
+################################
+# start_price at 2017-03-07 07:00:00, values=139.347, current_price=139.145
+# current_price - start_price difference=-0.202
+# EXECUTE ORDER at 2017-03-08 07:59:40
+# ORDER_PRICE=139.145, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-03-08 14:59:50
+# ORDER_PRICE=139.145, STL_PRICE=138.8145, ORDER_KIND=sell, PROFIT=0.3305
+# PROFIT=0.3305
+################################
+# start_price at 2017-03-08 07:00:00, values=139.0625, current_price=139.2615
+# current_price - start_price difference=0.199
+# EXECUTE ORDER at 2017-03-09 07:59:00
+# ORDER_PRICE=139.2615, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-03-09 14:59:10
+# ORDER_PRICE=139.2615, STL_PRICE=139.208, ORDER_KIND=buy, PROFIT=-0.0535
+# PROFIT=-0.0535
+################################
+# start_price at 2017-03-09 07:00:00, values=139.193, current_price=139.932
+# current_price - start_price difference=0.739
+# EXECUTE ORDER at 2017-03-10 07:59:11
+# ORDER_PRICE=139.932, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-03-10 14:59:21
+# ORDER_PRICE=139.932, STL_PRICE=140.306, ORDER_KIND=buy, PROFIT=0.374
+# PROFIT=0.374
+################################
+# start_price at 2017-03-10 08:00:00, values=139.878, current_price=139.7415
+# current_price - start_price difference=-0.1365
+# EXECUTE ORDER at 2017-03-13 07:59:00
+# ORDER_PRICE=139.7415, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-03-13 14:59:10
+# ORDER_PRICE=139.7415, STL_PRICE=139.774, ORDER_KIND=sell, PROFIT=-0.0325
+# PROFIT=-0.0325
+################################
+# start_price at 2017-03-13 07:00:00, values=139.6855, current_price=140.358
+# current_price - start_price difference=0.6725
+# EXECUTE ORDER at 2017-03-14 07:59:11
+# ORDER_PRICE=140.358, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-03-14 14:59:21
+# ORDER_PRICE=140.358, STL_PRICE=140.1715, ORDER_KIND=buy, PROFIT=-0.1865
+# PROFIT=-0.1865
+################################
+# start_price at 2017-03-14 07:00:00, values=140.353, current_price=139.3825
+# current_price - start_price difference=-0.9705
+# EXECUTE ORDER at 2017-03-15 07:59:22
+# ORDER_PRICE=139.3825, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-03-15 14:59:32
+# ORDER_PRICE=139.3825, STL_PRICE=139.7705, ORDER_KIND=sell, PROFIT=-0.388
+# PROFIT=-0.388
+################################
+# start_price at 2017-03-15 07:00:00, values=139.47, current_price=139.457
+# current_price - start_price difference=-0.013
+# EXECUTE ORDER at 2017-03-16 07:59:33
+# ORDER_PRICE=139.457, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-03-16 14:59:43
+# ORDER_PRICE=139.457, STL_PRICE=138.9735, ORDER_KIND=sell, PROFIT=0.4835
+# PROFIT=0.4835
+################################
+# start_price at 2017-03-16 07:00:00, values=139.463, current_price=140.064
+# current_price - start_price difference=0.601
+# EXECUTE ORDER at 2017-03-17 07:59:53
+# ORDER_PRICE=140.064, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-03-17 14:59:03
+# ORDER_PRICE=140.064, STL_PRICE=140.067, ORDER_KIND=buy, PROFIT=0.00300000000001
+# PROFIT=0.00300000000001
+################################
+# start_price at 2017-03-17 07:00:00, values=140.0475, current_price=139.663
+# current_price - start_price difference=-0.3845
+# EXECUTE ORDER at 2017-03-20 07:59:00
+# ORDER_PRICE=139.663, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-03-20 14:59:10
+# ORDER_PRICE=139.663, STL_PRICE=139.598, ORDER_KIND=sell, PROFIT=0.065
+# PROFIT=0.065
+################################
+# start_price at 2017-03-20 07:00:00, values=139.569, current_price=139.1095
+# current_price - start_price difference=-0.4595
+# EXECUTE ORDER at 2017-03-21 07:59:20
+# ORDER_PRICE=139.1095, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-03-21 14:59:30
+# ORDER_PRICE=139.1095, STL_PRICE=139.339, ORDER_KIND=sell, PROFIT=-0.2295
+# PROFIT=-0.2295
+################################
+# start_price at 2017-03-21 07:00:00, values=139.043, current_price=139.1105
+# current_price - start_price difference=0.0675
+# EXECUTE ORDER at 2017-03-22 07:59:31
+# ORDER_PRICE=139.1105, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-03-22 14:59:41
+# ORDER_PRICE=139.1105, STL_PRICE=139.1445, ORDER_KIND=buy, PROFIT=0.034
+# PROFIT=0.034
+################################
+# start_price at 2017-03-22 07:00:00, values=139.429, current_price=138.8355
+# current_price - start_price difference=-0.5935
+# EXECUTE ORDER at 2017-03-23 07:59:51
+# ORDER_PRICE=138.8355, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-03-23 14:59:01
+# ORDER_PRICE=138.8355, STL_PRICE=139.095, ORDER_KIND=sell, PROFIT=-0.2595
+# PROFIT=-0.2595
+################################
+# start_price at 2017-03-23 07:00:00, values=138.85, current_price=138.9575
+# current_price - start_price difference=0.1075
+# EXECUTE ORDER at 2017-03-24 07:59:02
+# ORDER_PRICE=138.9575, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-03-24 14:59:12
+# ORDER_PRICE=138.9575, STL_PRICE=139.0975, ORDER_KIND=buy, PROFIT=0.14
+# PROFIT=0.14
+################################
+# start_price at 2017-03-24 07:00:00, values=138.9185, current_price=138.351
+# current_price - start_price difference=-0.5675
+# EXECUTE ORDER at 2017-03-27 07:59:00
+# ORDER_PRICE=138.351, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-03-27 14:59:10
+# ORDER_PRICE=138.351, STL_PRICE=138.164, ORDER_KIND=sell, PROFIT=0.187
+# PROFIT=0.187
+################################
+# start_price at 2017-03-27 07:00:00, values=138.6435, current_price=138.959
+# current_price - start_price difference=0.3155
+# EXECUTE ORDER at 2017-03-28 07:59:20
+# ORDER_PRICE=138.959, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-03-28 14:59:30
+# ORDER_PRICE=138.959, STL_PRICE=138.9015, ORDER_KIND=buy, PROFIT=-0.0575
+# PROFIT=-0.0575
+################################
+# start_price at 2017-03-28 07:00:00, values=138.9695, current_price=138.4285
+# current_price - start_price difference=-0.541
+# EXECUTE ORDER at 2017-03-29 07:59:31
+# ORDER_PRICE=138.4285, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-03-29 14:59:41
+# ORDER_PRICE=138.4285, STL_PRICE=137.838, ORDER_KIND=sell, PROFIT=0.5905
+# PROFIT=0.5905
+################################
+# start_price at 2017-03-29 07:00:00, values=138.3625, current_price=138.21
+# current_price - start_price difference=-0.1525
+# EXECUTE ORDER at 2017-03-30 07:59:51
+# ORDER_PRICE=138.21, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-03-30 10:37:01
+# ORDER_PRICE=138.21, STL_PRICE=138.7255, ORDER_KIND=sell, PROFIT=-0.5155
+# PROFIT=-0.5155
+################################
+# start_price at 2017-03-30 07:00:00, values=138.113, current_price=139.505
+# current_price - start_price difference=1.392
+# EXECUTE ORDER at 2017-03-31 07:59:02
+# ORDER_PRICE=139.505, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-03-31 14:59:12
+# ORDER_PRICE=139.505, STL_PRICE=139.557, ORDER_KIND=buy, PROFIT=0.052
+# PROFIT=0.052
+################################
+# start_price at 2017-03-31 07:00:00, values=139.4835, current_price=139.723
+# current_price - start_price difference=0.2395
+# EXECUTE ORDER at 2017-04-03 07:59:00
+# ORDER_PRICE=139.723, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-04-03 14:59:10
+# ORDER_PRICE=139.723, STL_PRICE=139.7395, ORDER_KIND=buy, PROFIT=0.0165
+# PROFIT=0.0165
+################################
+# start_price at 2017-04-03 07:00:00, values=139.6895, current_price=138.4465
+# current_price - start_price difference=-1.243
+# EXECUTE ORDER at 2017-04-04 07:59:20
+# ORDER_PRICE=138.4465, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-04-04 14:21:30
+# ORDER_PRICE=138.4465, STL_PRICE=137.3095, ORDER_KIND=sell, PROFIT=1.137
+# PROFIT=1.137
+################################
+# start_price at 2017-04-04 07:00:00, values=138.396, current_price=137.8445
+# current_price - start_price difference=-0.5515
+# EXECUTE ORDER at 2017-04-05 07:59:40
+# ORDER_PRICE=137.8445, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-04-05 14:59:50
+# ORDER_PRICE=137.8445, STL_PRICE=137.792, ORDER_KIND=sell, PROFIT=0.0525
+# PROFIT=0.0525
+################################
+# start_price at 2017-04-05 07:00:00, values=137.7775, current_price=137.971
+# current_price - start_price difference=0.1935
+# EXECUTE ORDER at 2017-04-06 07:59:00
+# ORDER_PRICE=137.971, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-04-06 14:59:10
+# ORDER_PRICE=137.971, STL_PRICE=137.809, ORDER_KIND=buy, PROFIT=-0.162
+# PROFIT=-0.162
+################################
+# start_price at 2017-04-06 07:00:00, values=138.026, current_price=138.1805
+# current_price - start_price difference=0.1545
+# EXECUTE ORDER at 2017-04-07 07:59:11
+# ORDER_PRICE=138.1805, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-04-07 10:17:21
+# ORDER_PRICE=138.1805, STL_PRICE=137.6505, ORDER_KIND=buy, PROFIT=-0.53
+# PROFIT=-0.53
+################################
+# start_price at 2017-04-07 07:00:00, values=138.2075, current_price=137.712
+# current_price - start_price difference=-0.4955
+# EXECUTE ORDER at 2017-04-10 07:59:00
+# ORDER_PRICE=137.712, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-04-10 14:59:10
+# ORDER_PRICE=137.712, STL_PRICE=138.038, ORDER_KIND=sell, PROFIT=-0.326
+# PROFIT=-0.326
+################################
+# start_price at 2017-04-10 07:00:00, values=137.462, current_price=137.55
+# current_price - start_price difference=0.088
+# EXECUTE ORDER at 2017-04-11 07:59:11
+# ORDER_PRICE=137.55, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-04-11 14:59:21
+# ORDER_PRICE=137.55, STL_PRICE=137.433, ORDER_KIND=buy, PROFIT=-0.117
+# PROFIT=-0.117
+################################
+# start_price at 2017-04-11 07:00:00, values=137.6825, current_price=136.943
+# current_price - start_price difference=-0.7395
+# EXECUTE ORDER at 2017-04-12 07:59:22
+# ORDER_PRICE=136.943, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-04-12 14:59:32
+# ORDER_PRICE=136.943, STL_PRICE=136.7225, ORDER_KIND=sell, PROFIT=0.2205
+# PROFIT=0.2205
+################################
+# start_price at 2017-04-12 07:00:00, values=136.8885, current_price=136.7445
+# current_price - start_price difference=-0.144
+# EXECUTE ORDER at 2017-04-13 07:59:42
+# ORDER_PRICE=136.7445, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-04-13 14:59:52
+# ORDER_PRICE=136.7445, STL_PRICE=136.9575, ORDER_KIND=sell, PROFIT=-0.213
+# PROFIT=-0.213
+################################
+# start_price at 2017-04-13 07:00:00, values=136.732, current_price=136.511
+# current_price - start_price difference=-0.221
+# EXECUTE ORDER at 2017-04-14 07:59:53
+# ORDER_PRICE=136.511, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-04-14 14:59:03
+# ORDER_PRICE=136.511, STL_PRICE=136.1745, ORDER_KIND=sell, PROFIT=0.3365
+# PROFIT=0.3365
+################################
+# start_price at 2017-04-14 07:00:00, values=136.501, current_price=136.105
+# current_price - start_price difference=-0.396
+# EXECUTE ORDER at 2017-04-17 07:59:00
+# ORDER_PRICE=136.105, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-04-17 14:59:10
+# ORDER_PRICE=136.105, STL_PRICE=135.815, ORDER_KIND=sell, PROFIT=0.29
+# PROFIT=0.29
+################################
+# start_price at 2017-04-17 07:00:00, values=136.258, current_price=136.962
+# current_price - start_price difference=0.704
+# EXECUTE ORDER at 2017-04-18 07:59:20
+# ORDER_PRICE=136.962, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-04-18 14:59:30
+# ORDER_PRICE=136.962, STL_PRICE=137.121, ORDER_KIND=buy, PROFIT=0.159
+# PROFIT=0.159
+################################
+# start_price at 2017-04-18 07:00:00, values=136.994, current_price=139.2885
+# current_price - start_price difference=2.2945
+# EXECUTE ORDER at 2017-04-19 07:59:40
+# ORDER_PRICE=139.2885, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-04-19 14:59:50
+# ORDER_PRICE=139.2885, STL_PRICE=139.414, ORDER_KIND=buy, PROFIT=0.1255
+# PROFIT=0.1255
+################################
+# start_price at 2017-04-19 07:00:00, values=139.2915, current_price=139.227
+# current_price - start_price difference=-0.0645
+# EXECUTE ORDER at 2017-04-20 07:59:00
+# ORDER_PRICE=139.227, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-04-20 14:59:10
+# ORDER_PRICE=139.227, STL_PRICE=139.452, ORDER_KIND=sell, PROFIT=-0.225
+# PROFIT=-0.225
+################################
+# start_price at 2017-04-20 07:00:00, values=139.1535, current_price=140.0945
+# current_price - start_price difference=0.941
+# EXECUTE ORDER at 2017-04-21 07:59:11
+# ORDER_PRICE=140.0945, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-04-21 14:59:21
+# ORDER_PRICE=140.0945, STL_PRICE=140.0455, ORDER_KIND=buy, PROFIT=-0.049
+# PROFIT=-0.049
+################################
+# start_price at 2017-04-21 07:00:00, values=139.998, current_price=140.9705
+# current_price - start_price difference=0.9725
+# EXECUTE ORDER at 2017-04-24 07:59:00
+# ORDER_PRICE=140.9705, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-04-24 14:59:10
+# ORDER_PRICE=140.9705, STL_PRICE=141.011, ORDER_KIND=buy, PROFIT=0.0405
+# PROFIT=0.0405
+################################
+# start_price at 2017-04-24 07:00:00, values=141.447, current_price=140.4025
+# current_price - start_price difference=-1.0445
+# EXECUTE ORDER at 2017-04-25 07:59:20
+# ORDER_PRICE=140.4025, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-04-25 14:33:30
+# ORDER_PRICE=140.4025, STL_PRICE=140.9065, ORDER_KIND=sell, PROFIT=-0.504
+# PROFIT=-0.504
+################################
+# start_price at 2017-04-25 07:00:00, values=140.4435, current_price=142.433
+# current_price - start_price difference=1.9895
+# EXECUTE ORDER at 2017-04-26 07:59:31
+# ORDER_PRICE=142.433, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-04-26 14:59:41
+# ORDER_PRICE=142.433, STL_PRICE=142.973, ORDER_KIND=buy, PROFIT=0.54
+# PROFIT=0.54
+################################
+# start_price at 2017-04-26 07:00:00, values=142.544, current_price=142.9175
+# current_price - start_price difference=0.3735
+# EXECUTE ORDER at 2017-04-27 07:59:51
+# ORDER_PRICE=142.9175, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-04-27 14:59:01
+# ORDER_PRICE=142.9175, STL_PRICE=143.162, ORDER_KIND=buy, PROFIT=0.2445
+# PROFIT=0.2445
+################################
+# start_price at 2017-04-27 07:00:00, values=142.7105, current_price=143.5345
+# current_price - start_price difference=0.824
+# EXECUTE ORDER at 2017-04-28 07:59:11
+# ORDER_PRICE=143.5345, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-04-28 14:59:21
+# ORDER_PRICE=143.5345, STL_PRICE=143.444, ORDER_KIND=buy, PROFIT=-0.0905
+# PROFIT=-0.0905
+################################
+# start_price at 2017-04-28 07:00:00, values=143.549, current_price=143.8995
+# current_price - start_price difference=0.3505
+# EXECUTE ORDER at 2017-05-01 07:59:00
+# ORDER_PRICE=143.8995, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-05-01 14:59:10
+# ORDER_PRICE=143.8995, STL_PRICE=144.251, ORDER_KIND=buy, PROFIT=0.3515
+# PROFIT=0.3515
+################################
+# start_price at 2017-05-01 07:00:00, values=144.216, current_price=144.2705
+# current_price - start_price difference=0.0545
+# EXECUTE ORDER at 2017-05-02 07:59:20
+# ORDER_PRICE=144.2705, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-05-02 14:59:30
+# ORDER_PRICE=144.2705, STL_PRICE=144.4745, ORDER_KIND=buy, PROFIT=0.204
+# PROFIT=0.204
+################################
+# start_price at 2017-05-02 07:00:00, values=144.158, current_price=144.898
+# current_price - start_price difference=0.74
+# EXECUTE ORDER at 2017-05-03 07:59:40
+# ORDER_PRICE=144.898, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-05-03 14:59:50
+# ORDER_PRICE=144.898, STL_PRICE=144.719, ORDER_KIND=buy, PROFIT=-0.179
+# PROFIT=-0.179
+################################
+# start_price at 2017-05-03 07:00:00, values=144.936, current_price=145.0435
+# current_price - start_price difference=0.1075
+# EXECUTE ORDER at 2017-05-04 07:59:51
+# ORDER_PRICE=145.0435, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-05-04 14:59:01
+# ORDER_PRICE=145.0435, STL_PRICE=145.2515, ORDER_KIND=buy, PROFIT=0.208
+# PROFIT=0.208
+################################
+# start_price at 2017-05-04 07:00:00, values=144.9685, current_price=145.4145
+# current_price - start_price difference=0.446
+# EXECUTE ORDER at 2017-05-05 07:59:11
+# ORDER_PRICE=145.4145, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-05-05 12:52:21
+# ORDER_PRICE=145.4145, STL_PRICE=144.8915, ORDER_KIND=buy, PROFIT=-0.523
+# PROFIT=-0.523
+################################
+# start_price at 2017-05-05 07:00:00, values=145.4025, current_price=146.3405
+# current_price - start_price difference=0.938
+# EXECUTE ORDER at 2017-05-08 07:59:00
+# ORDER_PRICE=146.3405, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-05-08 14:59:10
+# ORDER_PRICE=146.3405, STL_PRICE=146.281, ORDER_KIND=buy, PROFIT=-0.0595
+# PROFIT=-0.0595
+################################
+# start_price at 2017-05-08 07:00:00, values=146.5595, current_price=146.565
+# current_price - start_price difference=0.00549999999998
+# EXECUTE ORDER at 2017-05-09 07:59:11
+# ORDER_PRICE=146.565, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-05-09 14:59:21
+# ORDER_PRICE=146.565, STL_PRICE=146.824, ORDER_KIND=buy, PROFIT=0.259
+# PROFIT=0.259
+################################
+# start_price at 2017-05-09 07:00:00, values=146.594, current_price=147.2625
+# current_price - start_price difference=0.6685
+# EXECUTE ORDER at 2017-05-10 07:59:31
+# ORDER_PRICE=147.2625, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-05-10 14:59:41
+# ORDER_PRICE=147.2625, STL_PRICE=147.49, ORDER_KIND=buy, PROFIT=0.2275
+# PROFIT=0.2275
+################################
+# start_price at 2017-05-10 07:00:00, values=147.4525, current_price=147.786
+# current_price - start_price difference=0.3335
+# EXECUTE ORDER at 2017-05-11 07:59:51
+# ORDER_PRICE=147.786, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-05-11 14:59:01
+# ORDER_PRICE=147.786, STL_PRICE=147.762, ORDER_KIND=buy, PROFIT=-0.024
+# PROFIT=-0.024
+################################
+# start_price at 2017-05-11 07:00:00, values=147.8175, current_price=146.6505
+# current_price - start_price difference=-1.167
+# EXECUTE ORDER at 2017-05-12 07:59:02
+# ORDER_PRICE=146.6505, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-05-12 14:59:12
+# ORDER_PRICE=146.6505, STL_PRICE=146.647, ORDER_KIND=sell, PROFIT=0.0035
+# PROFIT=0.0035
+################################
+# start_price at 2017-05-12 07:00:00, values=146.7105, current_price=145.9935
+# current_price - start_price difference=-0.717
+# EXECUTE ORDER at 2017-05-15 07:59:00
+# ORDER_PRICE=145.9935, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-05-15 14:59:10
+# ORDER_PRICE=145.9935, STL_PRICE=146.268, ORDER_KIND=sell, PROFIT=-0.2745
+# PROFIT=-0.2745
+################################
+# start_price at 2017-05-15 07:00:00, values=146.0015, current_price=146.6025
+# current_price - start_price difference=0.601
+# EXECUTE ORDER at 2017-05-16 07:59:11
+# ORDER_PRICE=146.6025, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-05-16 14:59:21
+# ORDER_PRICE=146.6025, STL_PRICE=146.541, ORDER_KIND=buy, PROFIT=-0.0615
+# PROFIT=-0.0615
+################################
+# start_price at 2017-05-16 07:00:00, values=146.4975, current_price=145.7115
+# current_price - start_price difference=-0.786
+# EXECUTE ORDER at 2017-05-17 07:59:22
+# ORDER_PRICE=145.7115, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-05-17 14:59:32
+# ORDER_PRICE=145.7115, STL_PRICE=145.5055, ORDER_KIND=sell, PROFIT=0.206
+# PROFIT=0.206
+################################
+# start_price at 2017-05-17 07:00:00, values=146.0905, current_price=143.9025
+# current_price - start_price difference=-2.188
+# EXECUTE ORDER at 2017-05-18 07:59:42
+# ORDER_PRICE=143.9025, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-05-18 14:59:52
+# ORDER_PRICE=143.9025, STL_PRICE=144.168, ORDER_KIND=sell, PROFIT=-0.2655
+# PROFIT=-0.2655
+################################
+# start_price at 2017-05-18 07:00:00, values=143.708, current_price=144.3295
+# current_price - start_price difference=0.6215
+# EXECUTE ORDER at 2017-05-19 07:59:53
+# ORDER_PRICE=144.3295, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-05-19 14:59:03
+# ORDER_PRICE=144.3295, STL_PRICE=144.299, ORDER_KIND=buy, PROFIT=-0.0305
+# PROFIT=-0.0305
+################################
+# start_price at 2017-05-19 07:00:00, values=144.383, current_price=144.8485
+# current_price - start_price difference=0.4655
+# EXECUTE ORDER at 2017-05-22 07:59:00
+# ORDER_PRICE=144.8485, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-05-22 14:59:10
+# ORDER_PRICE=144.8485, STL_PRICE=144.935, ORDER_KIND=buy, PROFIT=0.0865
+# PROFIT=0.0865
+################################
+# start_price at 2017-05-22 07:00:00, values=144.7365, current_price=144.4375
+# current_price - start_price difference=-0.299
+# EXECUTE ORDER at 2017-05-23 07:59:20
+# ORDER_PRICE=144.4375, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-05-23 14:59:30
+# ORDER_PRICE=144.4375, STL_PRICE=144.1915, ORDER_KIND=sell, PROFIT=0.246
+# PROFIT=0.246
+################################
+# start_price at 2017-05-23 07:00:00, values=144.666, current_price=144.9355
+# current_price - start_price difference=0.2695
+# EXECUTE ORDER at 2017-05-24 07:59:40
+# ORDER_PRICE=144.9355, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-05-24 14:59:50
+# ORDER_PRICE=144.9355, STL_PRICE=145.222, ORDER_KIND=buy, PROFIT=0.2865
+# PROFIT=0.2865
+################################
+# start_price at 2017-05-24 07:00:00, values=144.9245, current_price=144.7905
+# current_price - start_price difference=-0.134
+# EXECUTE ORDER at 2017-05-25 07:59:00
+# ORDER_PRICE=144.7905, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-05-25 14:59:10
+# ORDER_PRICE=144.7905, STL_PRICE=145.0665, ORDER_KIND=sell, PROFIT=-0.276
+# PROFIT=-0.276
+################################
+# start_price at 2017-05-25 07:00:00, values=144.721, current_price=144.5785
+# current_price - start_price difference=-0.1425
+# EXECUTE ORDER at 2017-05-26 07:59:11
+# ORDER_PRICE=144.5785, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-05-26 14:01:21
+# ORDER_PRICE=144.5785, STL_PRICE=143.543, ORDER_KIND=sell, PROFIT=1.0355
+# PROFIT=1.0355
+################################
+# start_price at 2017-05-26 07:00:00, values=144.6965, current_price=142.5455
+# current_price - start_price difference=-2.151
+# EXECUTE ORDER at 2017-05-29 07:59:00
+# ORDER_PRICE=142.5455, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-05-29 14:59:10
+# ORDER_PRICE=142.5455, STL_PRICE=142.816, ORDER_KIND=sell, PROFIT=-0.2705
+# PROFIT=-0.2705
+################################
+# start_price at 2017-05-29 07:00:00, values=142.592, current_price=142.6365
+# current_price - start_price difference=0.0445
+# EXECUTE ORDER at 2017-05-30 07:59:11
+# ORDER_PRICE=142.6365, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-05-30 10:00:21
+# ORDER_PRICE=142.6365, STL_PRICE=142.097, ORDER_KIND=buy, PROFIT=-0.5395
+# PROFIT=-0.5395
+################################
+# start_price at 2017-05-30 07:00:00, values=142.828, current_price=142.028
+# current_price - start_price difference=-0.8
+# EXECUTE ORDER at 2017-05-31 07:59:22
+# ORDER_PRICE=142.028, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-05-31 11:58:32
+# ORDER_PRICE=142.028, STL_PRICE=142.559, ORDER_KIND=sell, PROFIT=-0.531
+# PROFIT=-0.531
+################################
+# start_price at 2017-05-31 07:00:00, values=141.8785, current_price=142.659
+# current_price - start_price difference=0.7805
+# EXECUTE ORDER at 2017-06-01 07:59:33
+# ORDER_PRICE=142.659, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-06-01 14:59:43
+# ORDER_PRICE=142.659, STL_PRICE=142.753, ORDER_KIND=buy, PROFIT=0.094
+# PROFIT=0.094
+################################
+# start_price at 2017-06-01 07:00:00, values=142.7275, current_price=143.5215
+# current_price - start_price difference=0.794
+# EXECUTE ORDER at 2017-06-02 07:59:53
+# ORDER_PRICE=143.5215, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-06-02 14:59:03
+# ORDER_PRICE=143.5215, STL_PRICE=143.788, ORDER_KIND=buy, PROFIT=0.2665
+# PROFIT=0.2665
+################################
+# start_price at 2017-06-02 07:00:00, values=143.516, current_price=142.202
+# current_price - start_price difference=-1.314
+# EXECUTE ORDER at 2017-06-05 07:59:00
+# ORDER_PRICE=142.202, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-06-05 14:59:10
+# ORDER_PRICE=142.202, STL_PRICE=142.4325, ORDER_KIND=sell, PROFIT=-0.2305
+# PROFIT=-0.2305
+################################
+# start_price at 2017-06-05 07:00:00, values=142.1185, current_price=142.5815
+# current_price - start_price difference=0.463
+# EXECUTE ORDER at 2017-06-06 07:59:11
+# ORDER_PRICE=142.5815, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-06-06 10:16:21
+# ORDER_PRICE=142.5815, STL_PRICE=142.062, ORDER_KIND=buy, PROFIT=-0.5195
+# PROFIT=-0.5195
+################################
+# start_price at 2017-06-06 07:00:00, values=142.581, current_price=141.222
+# current_price - start_price difference=-1.359
+# EXECUTE ORDER at 2017-06-07 07:59:22
+# ORDER_PRICE=141.222, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-06-07 14:59:32
+# ORDER_PRICE=141.222, STL_PRICE=141.41, ORDER_KIND=sell, PROFIT=-0.188
+# PROFIT=-0.188
+################################
+# start_price at 2017-06-07 07:00:00, values=141.155, current_price=142.192
+# current_price - start_price difference=1.037
+# EXECUTE ORDER at 2017-06-08 07:59:33
+# ORDER_PRICE=142.192, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-06-08 14:59:43
+# ORDER_PRICE=142.192, STL_PRICE=141.785, ORDER_KIND=buy, PROFIT=-0.407
+# PROFIT=-0.407
+################################
+# start_price at 2017-06-08 07:00:00, values=142.274, current_price=140.876
+# current_price - start_price difference=-1.398
+# EXECUTE ORDER at 2017-06-09 07:59:44
+# ORDER_PRICE=140.876, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-06-09 08:52:54
+# ORDER_PRICE=140.876, STL_PRICE=139.867, ORDER_KIND=sell, PROFIT=1.009
+# PROFIT=1.009
+################################
+# start_price at 2017-06-09 07:00:00, values=140.0825, current_price=140.6355
+# current_price - start_price difference=0.553
+# EXECUTE ORDER at 2017-06-12 07:59:00
+# ORDER_PRICE=140.6355, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-06-12 14:59:10
+# ORDER_PRICE=140.6355, STL_PRICE=140.7385, ORDER_KIND=buy, PROFIT=0.103
+# PROFIT=0.103
+################################
+# start_price at 2017-06-12 07:00:00, values=140.59, current_price=139.141
+# current_price - start_price difference=-1.449
+# EXECUTE ORDER at 2017-06-13 07:59:20
+# ORDER_PRICE=139.141, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-06-13 14:59:30
+# ORDER_PRICE=139.141, STL_PRICE=139.352, ORDER_KIND=sell, PROFIT=-0.211
+# PROFIT=-0.211
+################################
+# start_price at 2017-06-13 07:00:00, values=139.304, current_price=140.312
+# current_price - start_price difference=1.008
+# EXECUTE ORDER at 2017-06-14 07:59:31
+# ORDER_PRICE=140.312, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-06-14 14:59:41
+# ORDER_PRICE=140.312, STL_PRICE=140.2705, ORDER_KIND=buy, PROFIT=-0.0415
+# PROFIT=-0.0415
+################################
+# start_price at 2017-06-14 07:00:00, values=140.388, current_price=139.4665
+# current_price - start_price difference=-0.9215
+# EXECUTE ORDER at 2017-06-15 07:59:42
+# ORDER_PRICE=139.4665, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-06-15 14:59:52
+# ORDER_PRICE=139.4665, STL_PRICE=139.74, ORDER_KIND=sell, PROFIT=-0.2735
+# PROFIT=-0.2735
+################################
+# start_price at 2017-06-15 07:00:00, values=139.8295, current_price=141.401
+# current_price - start_price difference=1.5715
+# EXECUTE ORDER at 2017-06-16 07:59:53
+# ORDER_PRICE=141.401, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-06-16 14:59:03
+# ORDER_PRICE=141.401, STL_PRICE=141.868, ORDER_KIND=buy, PROFIT=0.467
+# PROFIT=0.467
+################################
+# start_price at 2017-06-16 07:00:00, values=141.427, current_price=141.609
+# current_price - start_price difference=0.182
+# EXECUTE ORDER at 2017-06-19 07:59:00
+# ORDER_PRICE=141.609, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-06-19 14:59:10
+# ORDER_PRICE=141.609, STL_PRICE=141.759, ORDER_KIND=buy, PROFIT=0.15
+# PROFIT=0.15
+################################
+# start_price at 2017-06-19 07:00:00, values=141.461, current_price=142.2095
+# current_price - start_price difference=0.7485
+# EXECUTE ORDER at 2017-06-20 07:59:20
+# ORDER_PRICE=142.2095, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-06-20 14:59:30
+# ORDER_PRICE=142.2095, STL_PRICE=142.1185, ORDER_KIND=buy, PROFIT=-0.091
+# PROFIT=-0.091
+################################
+# start_price at 2017-06-20 07:00:00, values=142.0985, current_price=140.6295
+# current_price - start_price difference=-1.469
+# EXECUTE ORDER at 2017-06-21 07:59:31
+# ORDER_PRICE=140.6295, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-06-21 14:59:41
+# ORDER_PRICE=140.6295, STL_PRICE=140.409, ORDER_KIND=sell, PROFIT=0.2205
+# PROFIT=0.2205
+################################
+# start_price at 2017-06-21 07:00:00, values=140.722, current_price=141.148
+# current_price - start_price difference=0.426
+# EXECUTE ORDER at 2017-06-22 07:59:51
+# ORDER_PRICE=141.148, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-06-22 11:16:01
+# ORDER_PRICE=141.148, STL_PRICE=140.6155, ORDER_KIND=buy, PROFIT=-0.5325
+# PROFIT=-0.5325
+################################
+# start_price at 2017-06-22 07:00:00, values=141.2385, current_price=141.117
+# current_price - start_price difference=-0.1215
+# EXECUTE ORDER at 2017-06-23 07:59:02
+# ORDER_PRICE=141.117, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-06-23 14:59:12
+# ORDER_PRICE=141.117, STL_PRICE=141.4135, ORDER_KIND=sell, PROFIT=-0.2965
+# PROFIT=-0.2965
+################################
+# start_price at 2017-06-23 07:00:00, values=141.0985, current_price=141.7125
+# current_price - start_price difference=0.614
+# EXECUTE ORDER at 2017-06-26 07:59:00
+# ORDER_PRICE=141.7125, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-06-26 14:59:10
+# ORDER_PRICE=141.7125, STL_PRICE=141.8525, ORDER_KIND=buy, PROFIT=0.14
+# PROFIT=0.14
+################################
+# start_price at 2017-06-26 07:00:00, values=141.8, current_price=142.3
+# current_price - start_price difference=0.5
+# EXECUTE ORDER at 2017-06-27 07:59:20
+# ORDER_PRICE=142.3, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-06-27 14:59:30
+# ORDER_PRICE=142.3, STL_PRICE=142.354, ORDER_KIND=buy, PROFIT=0.054
+# PROFIT=0.054
+################################
+# start_price at 2017-06-27 07:00:00, values=142.3175, current_price=143.883
+# current_price - start_price difference=1.5655
+# EXECUTE ORDER at 2017-06-28 07:59:40
+# ORDER_PRICE=143.883, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-06-28 14:59:50
+# ORDER_PRICE=143.883, STL_PRICE=143.655, ORDER_KIND=buy, PROFIT=-0.228
+# PROFIT=-0.228
+################################
+# start_price at 2017-06-28 07:00:00, values=143.8715, current_price=145.302
+# current_price - start_price difference=1.4305
+# EXECUTE ORDER at 2017-06-29 07:59:51
+# ORDER_PRICE=145.302, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-06-29 14:59:01
+# ORDER_PRICE=145.302, STL_PRICE=145.4495, ORDER_KIND=buy, PROFIT=0.1475
+# PROFIT=0.1475
+################################
+# start_price at 2017-06-29 07:00:00, values=145.177, current_price=145.676
+# current_price - start_price difference=0.499
+# EXECUTE ORDER at 2017-06-30 07:59:11
+# ORDER_PRICE=145.676, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-06-30 14:59:21
+# ORDER_PRICE=145.676, STL_PRICE=145.6965, ORDER_KIND=buy, PROFIT=0.0205
+# PROFIT=0.0205
+################################
+# start_price at 2017-06-30 07:00:00, values=145.831, current_price=146.1645
+# current_price - start_price difference=0.3335
+# EXECUTE ORDER at 2017-07-03 07:59:00
+# ORDER_PRICE=146.1645, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-07-03 14:59:10
+# ORDER_PRICE=146.1645, STL_PRICE=146.205, ORDER_KIND=buy, PROFIT=0.0405
+# PROFIT=0.0405
+################################
+# start_price at 2017-07-03 07:00:00, values=146.086, current_price=146.692
+# current_price - start_price difference=0.606
+# EXECUTE ORDER at 2017-07-04 07:59:20
+# ORDER_PRICE=146.692, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-07-04 14:30:30
+# ORDER_PRICE=146.692, STL_PRICE=146.164, ORDER_KIND=buy, PROFIT=-0.528
+# PROFIT=-0.528
+################################
+# start_price at 2017-07-04 07:00:00, values=146.7495, current_price=146.1635
+# current_price - start_price difference=-0.586
+# EXECUTE ORDER at 2017-07-05 07:59:31
+# ORDER_PRICE=146.1635, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-07-05 14:59:41
+# ORDER_PRICE=146.1635, STL_PRICE=146.2265, ORDER_KIND=sell, PROFIT=-0.063
+# PROFIT=-0.063
+################################
+# start_price at 2017-07-05 07:00:00, values=146.408, current_price=146.3155
+# current_price - start_price difference=-0.0925
+# EXECUTE ORDER at 2017-07-06 07:59:42
+# ORDER_PRICE=146.3155, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-07-06 14:59:52
+# ORDER_PRICE=146.3155, STL_PRICE=146.426, ORDER_KIND=sell, PROFIT=-0.1105
+# PROFIT=-0.1105
+################################
+# start_price at 2017-07-06 07:00:00, values=146.424, current_price=146.685
+# current_price - start_price difference=0.261
+# EXECUTE ORDER at 2017-07-07 07:59:53
+# ORDER_PRICE=146.685, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-07-07 14:59:03
+# ORDER_PRICE=146.685, STL_PRICE=147.283, ORDER_KIND=buy, PROFIT=0.598
+# PROFIT=0.598
+################################
+# start_price at 2017-07-07 07:00:00, values=146.811, current_price=146.9195
+# current_price - start_price difference=0.1085
+# EXECUTE ORDER at 2017-07-10 07:59:00
+# ORDER_PRICE=146.9195, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-07-10 14:59:10
+# ORDER_PRICE=146.9195, STL_PRICE=147.328, ORDER_KIND=buy, PROFIT=0.4085
+# PROFIT=0.4085
+################################
+# start_price at 2017-07-10 07:00:00, values=146.9235, current_price=146.9035
+# current_price - start_price difference=-0.02
+# EXECUTE ORDER at 2017-07-11 07:59:20
+# ORDER_PRICE=146.9035, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-07-11 14:59:30
+# ORDER_PRICE=146.9035, STL_PRICE=147.224, ORDER_KIND=sell, PROFIT=-0.3205
+# PROFIT=-0.3205
+################################
+# start_price at 2017-07-11 07:00:00, values=146.915, current_price=146.399
+# current_price - start_price difference=-0.516
+# EXECUTE ORDER at 2017-07-12 07:59:31
+# ORDER_PRICE=146.399, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-07-12 14:59:41
+# ORDER_PRICE=146.399, STL_PRICE=145.8555, ORDER_KIND=sell, PROFIT=0.5435
+# PROFIT=0.5435
+################################
+# start_price at 2017-07-12 07:00:00, values=146.4345, current_price=146.08
+# current_price - start_price difference=-0.3545
+# EXECUTE ORDER at 2017-07-13 07:59:51
+# ORDER_PRICE=146.08, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-07-13 14:59:01
+# ORDER_PRICE=146.08, STL_PRICE=145.833, ORDER_KIND=sell, PROFIT=0.247
+# PROFIT=0.247
+################################
+# start_price at 2017-07-13 07:00:00, values=145.9285, current_price=146.7015
+# current_price - start_price difference=0.773
+# EXECUTE ORDER at 2017-07-14 07:59:11
+# ORDER_PRICE=146.7015, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-07-14 14:59:21
+# ORDER_PRICE=146.7015, STL_PRICE=146.8865, ORDER_KIND=buy, PROFIT=0.185
+# PROFIT=0.185
+################################
+# start_price at 2017-07-14 07:00:00, values=146.593, current_price=147.57
+# current_price - start_price difference=0.977
+# EXECUTE ORDER at 2017-07-17 07:59:00
+# ORDER_PRICE=147.57, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-07-17 14:59:10
+# ORDER_PRICE=147.57, STL_PRICE=147.458, ORDER_KIND=buy, PROFIT=-0.112
+# PROFIT=-0.112
+################################
+# start_price at 2017-07-17 07:00:00, values=147.423, current_price=146.99
+# current_price - start_price difference=-0.433
+# EXECUTE ORDER at 2017-07-18 07:59:11
+# ORDER_PRICE=146.99, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-07-18 14:59:21
+# ORDER_PRICE=146.99, STL_PRICE=146.827, ORDER_KIND=sell, PROFIT=0.163
+# PROFIT=0.163
+################################
+# start_price at 2017-07-18 07:00:00, values=147.0715, current_price=146.1145
+# current_price - start_price difference=-0.957
+# EXECUTE ORDER at 2017-07-19 07:59:31
+# ORDER_PRICE=146.1145, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-07-19 14:59:41
+# ORDER_PRICE=146.1145, STL_PRICE=146.271, ORDER_KIND=sell, PROFIT=-0.1565
+# PROFIT=-0.1565
+################################
+# start_price at 2017-07-19 07:00:00, values=146.1315, current_price=145.7285
+# current_price - start_price difference=-0.403
+# EXECUTE ORDER at 2017-07-20 07:59:42
+# ORDER_PRICE=145.7285, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-07-20 14:59:52
+# ORDER_PRICE=145.7285, STL_PRICE=146.135, ORDER_KIND=sell, PROFIT=-0.4065
+# PROFIT=-0.4065
+################################
+# start_price at 2017-07-20 07:00:00, values=145.7265, current_price=145.0445
+# current_price - start_price difference=-0.682
+# EXECUTE ORDER at 2017-07-21 07:59:53
+# ORDER_PRICE=145.0445, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-07-21 14:59:03
+# ORDER_PRICE=145.0445, STL_PRICE=145.2675, ORDER_KIND=sell, PROFIT=-0.223
+# PROFIT=-0.223
+################################
+# start_price at 2017-07-21 07:00:00, values=145.1375, current_price=144.513
+# current_price - start_price difference=-0.6245
+# EXECUTE ORDER at 2017-07-24 07:59:00
+# ORDER_PRICE=144.513, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-07-24 14:59:10
+# ORDER_PRICE=144.513, STL_PRICE=144.596, ORDER_KIND=sell, PROFIT=-0.083
+# PROFIT=-0.083
+################################
+# start_price at 2017-07-24 07:00:00, values=144.4875, current_price=144.804
+# current_price - start_price difference=0.3165
+# EXECUTE ORDER at 2017-07-25 07:59:11
+# ORDER_PRICE=144.804, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-07-25 14:59:21
+# ORDER_PRICE=144.804, STL_PRICE=144.7325, ORDER_KIND=buy, PROFIT=-0.0715
+# PROFIT=-0.0715
+################################
+# start_price at 2017-07-25 07:00:00, values=144.817, current_price=145.767
+# current_price - start_price difference=0.95
+# EXECUTE ORDER at 2017-07-26 07:59:22
+# ORDER_PRICE=145.767, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-07-26 14:59:32
+# ORDER_PRICE=145.767, STL_PRICE=145.741, ORDER_KIND=buy, PROFIT=-0.026
+# PROFIT=-0.026
+################################
+# start_price at 2017-07-26 07:00:00, values=145.754, current_price=145.7415
+# current_price - start_price difference=-0.0125
+# EXECUTE ORDER at 2017-07-27 07:59:33
+# ORDER_PRICE=145.7415, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-07-27 14:59:43
+# ORDER_PRICE=145.7415, STL_PRICE=145.918, ORDER_KIND=sell, PROFIT=-0.1765
+# PROFIT=-0.1765
+################################
+# start_price at 2017-07-27 07:00:00, values=145.807, current_price=145.4275
+# current_price - start_price difference=-0.3795
+# EXECUTE ORDER at 2017-07-28 07:59:44
+# ORDER_PRICE=145.4275, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-07-28 14:59:54
+# ORDER_PRICE=145.4275, STL_PRICE=145.1425, ORDER_KIND=sell, PROFIT=0.285
+# PROFIT=0.285
+################################
+# start_price at 2017-07-28 07:00:00, values=145.4385, current_price=145.3225
+# current_price - start_price difference=-0.116
+# EXECUTE ORDER at 2017-07-31 07:59:00
+# ORDER_PRICE=145.3225, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-07-31 14:59:10
+# ORDER_PRICE=145.3225, STL_PRICE=145.0955, ORDER_KIND=sell, PROFIT=0.227
+# PROFIT=0.227
+################################
+# start_price at 2017-07-31 07:00:00, values=145.3365, current_price=145.5855
+# current_price - start_price difference=0.249
+# EXECUTE ORDER at 2017-08-01 07:59:20
+# ORDER_PRICE=145.5855, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-08-01 14:59:30
+# ORDER_PRICE=145.5855, STL_PRICE=145.659, ORDER_KIND=buy, PROFIT=0.0735
+# PROFIT=0.0735
+################################
+# start_price at 2017-08-01 07:00:00, values=145.61, current_price=145.75
+# current_price - start_price difference=0.14
+# EXECUTE ORDER at 2017-08-02 07:59:40
+# ORDER_PRICE=145.75, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-08-02 14:59:50
+# ORDER_PRICE=145.75, STL_PRICE=146.291, ORDER_KIND=buy, PROFIT=0.541
+# PROFIT=0.541
+################################
+# start_price at 2017-08-02 07:00:00, values=145.812, current_price=146.431
+# current_price - start_price difference=0.619
+# EXECUTE ORDER at 2017-08-03 07:59:00
+# ORDER_PRICE=146.431, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-08-03 14:59:10
+# ORDER_PRICE=146.431, STL_PRICE=146.388, ORDER_KIND=buy, PROFIT=-0.043
+# PROFIT=-0.043
+################################
+# start_price at 2017-08-03 07:00:00, values=146.4825, current_price=144.492
+# current_price - start_price difference=-1.9905
+# EXECUTE ORDER at 2017-08-04 07:59:11
+# ORDER_PRICE=144.492, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-08-04 14:59:21
+# ORDER_PRICE=144.492, STL_PRICE=144.6775, ORDER_KIND=sell, PROFIT=-0.1855
+# PROFIT=-0.1855
+################################
+# start_price at 2017-08-04 07:00:00, values=144.474, current_price=144.519
+# current_price - start_price difference=0.045
+# EXECUTE ORDER at 2017-08-07 07:59:00
+# ORDER_PRICE=144.519, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-08-07 14:59:10
+# ORDER_PRICE=144.519, STL_PRICE=144.4895, ORDER_KIND=buy, PROFIT=-0.0295
+# PROFIT=-0.0295
+################################
+# start_price at 2017-08-07 07:00:00, values=144.4705, current_price=144.3415
+# current_price - start_price difference=-0.129
+# EXECUTE ORDER at 2017-08-08 07:59:11
+# ORDER_PRICE=144.3415, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-08-08 14:59:21
+# ORDER_PRICE=144.3415, STL_PRICE=144.21, ORDER_KIND=sell, PROFIT=0.1315
+# PROFIT=0.1315
+################################
+# start_price at 2017-08-08 07:00:00, values=144.395, current_price=143.086
+# current_price - start_price difference=-1.309
+# EXECUTE ORDER at 2017-08-09 07:59:31
+# ORDER_PRICE=143.086, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-08-09 14:59:41
+# ORDER_PRICE=143.086, STL_PRICE=142.8805, ORDER_KIND=sell, PROFIT=0.2055
+# PROFIT=0.2055
+################################
+# start_price at 2017-08-09 07:00:00, values=143.3345, current_price=143.0705
+# current_price - start_price difference=-0.264
+# EXECUTE ORDER at 2017-08-10 07:59:51
+# ORDER_PRICE=143.0705, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-08-10 14:59:01
+# ORDER_PRICE=143.0705, STL_PRICE=142.7185, ORDER_KIND=sell, PROFIT=0.352
+# PROFIT=0.352
+################################
+# start_price at 2017-08-10 07:00:00, values=142.971, current_price=141.6405
+# current_price - start_price difference=-1.3305
+# EXECUTE ORDER at 2017-08-11 07:59:11
+# ORDER_PRICE=141.6405, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-08-11 14:59:21
+# ORDER_PRICE=141.6405, STL_PRICE=141.7725, ORDER_KIND=sell, PROFIT=-0.132
+# PROFIT=-0.132
+################################
+# start_price at 2017-08-11 07:00:00, values=141.6155, current_price=142.009
+# current_price - start_price difference=0.3935
+# EXECUTE ORDER at 2017-08-14 07:59:00
+# ORDER_PRICE=142.009, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-08-14 14:59:10
+# ORDER_PRICE=142.009, STL_PRICE=142.5355, ORDER_KIND=buy, PROFIT=0.5265
+# PROFIT=0.5265
+################################
+# start_price at 2017-08-14 07:00:00, values=141.901, current_price=142.253
+# current_price - start_price difference=0.352
+# EXECUTE ORDER at 2017-08-15 07:59:20
+# ORDER_PRICE=142.253, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-08-15 14:59:30
+# ORDER_PRICE=142.253, STL_PRICE=143.1145, ORDER_KIND=buy, PROFIT=0.8615
+# PROFIT=0.8615
+################################
+# start_price at 2017-08-15 07:00:00, values=142.09, current_price=142.3595
+# current_price - start_price difference=0.2695
+# EXECUTE ORDER at 2017-08-16 07:59:40
+# ORDER_PRICE=142.3595, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-08-16 14:59:50
+# ORDER_PRICE=142.3595, STL_PRICE=142.3795, ORDER_KIND=buy, PROFIT=0.02
+# PROFIT=0.02
+################################
+# start_price at 2017-08-16 07:00:00, values=142.315, current_price=141.948
+# current_price - start_price difference=-0.367
+# EXECUTE ORDER at 2017-08-17 07:59:00
+# ORDER_PRICE=141.948, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-08-17 14:59:10
+# ORDER_PRICE=141.948, STL_PRICE=141.6835, ORDER_KIND=sell, PROFIT=0.2645
+# PROFIT=0.2645
+################################
+# start_price at 2017-08-17 07:00:00, values=141.9345, current_price=140.905
+# current_price - start_price difference=-1.0295
+# EXECUTE ORDER at 2017-08-18 07:59:20
+# ORDER_PRICE=140.905, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-08-18 14:59:30
+# ORDER_PRICE=140.905, STL_PRICE=140.9835, ORDER_KIND=sell, PROFIT=-0.0785
+# PROFIT=-0.0785
+################################
+# start_price at 2017-08-18 07:00:00, values=140.84, current_price=140.8255
+# current_price - start_price difference=-0.0145
+# EXECUTE ORDER at 2017-08-21 07:59:00
+# ORDER_PRICE=140.8255, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-08-21 14:59:10
+# ORDER_PRICE=140.8255, STL_PRICE=140.647, ORDER_KIND=sell, PROFIT=0.1785
+# PROFIT=0.1785
+################################
+# start_price at 2017-08-21 07:00:00, values=140.6385, current_price=140.6235
+# current_price - start_price difference=-0.015
+# EXECUTE ORDER at 2017-08-22 07:59:20
+# ORDER_PRICE=140.6235, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-08-22 14:59:30
+# ORDER_PRICE=140.6235, STL_PRICE=140.804, ORDER_KIND=sell, PROFIT=-0.1805
+# PROFIT=-0.1805
+################################
+# start_price at 2017-08-22 07:00:00, values=140.5485, current_price=140.657
+# current_price - start_price difference=0.1085
+# EXECUTE ORDER at 2017-08-23 07:59:31
+# ORDER_PRICE=140.657, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-08-23 14:59:41
+# ORDER_PRICE=140.657, STL_PRICE=140.405, ORDER_KIND=buy, PROFIT=-0.252
+# PROFIT=-0.252
+################################
+# start_price at 2017-08-23 07:00:00, values=140.542, current_price=139.454
+# current_price - start_price difference=-1.088
+# EXECUTE ORDER at 2017-08-24 07:59:42
+# ORDER_PRICE=139.454, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-08-24 14:59:52
+# ORDER_PRICE=139.454, STL_PRICE=139.4925, ORDER_KIND=sell, PROFIT=-0.0385
+# PROFIT=-0.0385
+################################
+# start_price at 2017-08-24 07:00:00, values=139.456, current_price=140.269
+# current_price - start_price difference=0.813
+# EXECUTE ORDER at 2017-08-25 07:59:53
+# ORDER_PRICE=140.269, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-08-25 14:59:03
+# ORDER_PRICE=140.269, STL_PRICE=140.384, ORDER_KIND=buy, PROFIT=0.115
+# PROFIT=0.115
+################################
+# start_price at 2017-08-25 07:00:00, values=140.2525, current_price=141.0315
+# current_price - start_price difference=0.779
+# EXECUTE ORDER at 2017-08-28 07:59:00
+# ORDER_PRICE=141.0315, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-08-28 13:40:10
+# ORDER_PRICE=141.0315, STL_PRICE=140.453, ORDER_KIND=buy, PROFIT=-0.5785
+# PROFIT=-0.5785
+################################
+# start_price at 2017-08-28 07:00:00, values=141.0965, current_price=140.5095
+# current_price - start_price difference=-0.587
+# EXECUTE ORDER at 2017-08-29 07:59:11
+# ORDER_PRICE=140.5095, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-08-29 14:59:21
+# ORDER_PRICE=140.5095, STL_PRICE=140.8785, ORDER_KIND=sell, PROFIT=-0.369
+# PROFIT=-0.369
+################################
+# start_price at 2017-08-29 07:00:00, values=140.659, current_price=141.648
+# current_price - start_price difference=0.989
+# EXECUTE ORDER at 2017-08-30 07:59:22
+# ORDER_PRICE=141.648, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-08-30 14:59:32
+# ORDER_PRICE=141.648, STL_PRICE=141.9105, ORDER_KIND=buy, PROFIT=0.2625
+# PROFIT=0.2625
+################################
+# start_price at 2017-08-30 07:00:00, values=141.6465, current_price=142.5375
+# current_price - start_price difference=0.891
+# EXECUTE ORDER at 2017-08-31 07:59:42
+# ORDER_PRICE=142.5375, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-08-31 14:59:52
+# ORDER_PRICE=142.5375, STL_PRICE=142.774, ORDER_KIND=buy, PROFIT=0.2365
+# PROFIT=0.2365
+################################
+# start_price at 2017-08-31 07:00:00, values=142.481, current_price=142.4265
+# current_price - start_price difference=-0.0545
+# EXECUTE ORDER at 2017-09-01 07:59:02
+# ORDER_PRICE=142.4265, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-09-01 14:59:12
+# ORDER_PRICE=142.4265, STL_PRICE=142.1855, ORDER_KIND=sell, PROFIT=0.241
+# PROFIT=0.241
+################################
+# start_price at 2017-09-01 07:00:00, values=142.1275, current_price=142.3685
+# current_price - start_price difference=0.241
+# EXECUTE ORDER at 2017-09-04 07:59:00
+# ORDER_PRICE=142.3685, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-09-04 14:59:10
+# ORDER_PRICE=142.3685, STL_PRICE=142.2115, ORDER_KIND=buy, PROFIT=-0.157
+# PROFIT=-0.157
+################################
+# start_price at 2017-09-04 07:00:00, values=142.1295, current_price=141.8055
+# current_price - start_price difference=-0.324
+# EXECUTE ORDER at 2017-09-05 07:59:11
+# ORDER_PRICE=141.8055, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-09-05 14:59:21
+# ORDER_PRICE=141.8055, STL_PRICE=141.297, ORDER_KIND=sell, PROFIT=0.5085
+# PROFIT=0.5085
+################################
+# start_price at 2017-09-05 07:00:00, values=141.808, current_price=141.6045
+# current_price - start_price difference=-0.2035
+# EXECUTE ORDER at 2017-09-06 07:59:31
+# ORDER_PRICE=141.6045, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-09-06 14:59:41
+# ORDER_PRICE=141.6045, STL_PRICE=141.7685, ORDER_KIND=sell, PROFIT=-0.164
+# PROFIT=-0.164
+################################
+# start_price at 2017-09-06 07:00:00, values=141.743, current_price=142.4525
+# current_price - start_price difference=0.7095
+# EXECUTE ORDER at 2017-09-07 07:59:42
+# ORDER_PRICE=142.4525, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-09-07 14:59:52
+# ORDER_PRICE=142.4525, STL_PRICE=142.259, ORDER_KIND=buy, PROFIT=-0.1935
+# PROFIT=-0.1935
+################################
+# start_price at 2017-09-07 07:00:00, values=142.4655, current_price=142.0005
+# current_price - start_price difference=-0.465
+# EXECUTE ORDER at 2017-09-08 07:59:53
+# ORDER_PRICE=142.0005, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-09-08 14:59:03
+# ORDER_PRICE=142.0005, STL_PRICE=141.616, ORDER_KIND=sell, PROFIT=0.3845
+# PROFIT=0.3845
+################################
+# start_price at 2017-09-08 07:00:00, values=141.9705, current_price=142.9265
+# current_price - start_price difference=0.956
+# EXECUTE ORDER at 2017-09-11 07:59:00
+# ORDER_PRICE=142.9265, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-09-11 14:59:10
+# ORDER_PRICE=142.9265, STL_PRICE=142.757, ORDER_KIND=buy, PROFIT=-0.1695
+# PROFIT=-0.1695
+################################
+# start_price at 2017-09-11 07:00:00, values=142.775, current_price=143.9655
+# current_price - start_price difference=1.1905
+# EXECUTE ORDER at 2017-09-12 07:59:11
+# ORDER_PRICE=143.9655, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-09-12 14:59:21
+# ORDER_PRICE=143.9655, STL_PRICE=144.155, ORDER_KIND=buy, PROFIT=0.1895
+# PROFIT=0.1895
+################################
+# start_price at 2017-09-12 07:00:00, values=144.047, current_price=146.5615
+# current_price - start_price difference=2.5145
+# EXECUTE ORDER at 2017-09-13 07:59:31
+# ORDER_PRICE=146.5615, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-09-13 14:59:41
+# ORDER_PRICE=146.5615, STL_PRICE=146.4385, ORDER_KIND=buy, PROFIT=-0.123
+# PROFIT=-0.123
+################################
+# start_price at 2017-09-13 07:00:00, values=146.3635, current_price=146.031
+# current_price - start_price difference=-0.3325
+# EXECUTE ORDER at 2017-09-14 07:59:42
+# ORDER_PRICE=146.031, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-09-14 14:59:52
+# ORDER_PRICE=146.031, STL_PRICE=145.902, ORDER_KIND=sell, PROFIT=0.129
+# PROFIT=0.129
+################################
+# start_price at 2017-09-14 07:00:00, values=145.9295, current_price=147.302
+# current_price - start_price difference=1.3725
+# EXECUTE ORDER at 2017-09-15 07:59:02
+# ORDER_PRICE=147.302, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-09-15 14:59:12
+# ORDER_PRICE=147.302, STL_PRICE=148.1205, ORDER_KIND=buy, PROFIT=0.8185
+# PROFIT=0.8185
+################################
+# start_price at 2017-09-15 07:00:00, values=147.704, current_price=150.7885
+# current_price - start_price difference=3.0845
+# EXECUTE ORDER at 2017-09-18 07:59:00
+# ORDER_PRICE=150.7885, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-09-18 14:59:10
+# ORDER_PRICE=150.7885, STL_PRICE=151.0145, ORDER_KIND=buy, PROFIT=0.226
+# PROFIT=0.226
+################################
+# start_price at 2017-09-18 07:00:00, values=151.011, current_price=150.6525
+# current_price - start_price difference=-0.3585
+# EXECUTE ORDER at 2017-09-19 07:59:20
+# ORDER_PRICE=150.6525, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-09-19 13:53:30
+# ORDER_PRICE=150.6525, STL_PRICE=151.158, ORDER_KIND=sell, PROFIT=-0.5055
+# PROFIT=-0.5055
+################################
+# start_price at 2017-09-19 07:00:00, values=150.557, current_price=150.738
+# current_price - start_price difference=0.181
+# EXECUTE ORDER at 2017-09-20 07:59:31
+# ORDER_PRICE=150.738, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-09-20 14:59:41
+# ORDER_PRICE=150.738, STL_PRICE=150.662, ORDER_KIND=buy, PROFIT=-0.076
+# PROFIT=-0.076
+################################
+# start_price at 2017-09-20 07:00:00, values=150.7065, current_price=151.752
+# current_price - start_price difference=1.0455
+# EXECUTE ORDER at 2017-09-21 07:59:42
+# ORDER_PRICE=151.752, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-09-21 14:59:52
+# ORDER_PRICE=151.752, STL_PRICE=151.654, ORDER_KIND=buy, PROFIT=-0.098
+# PROFIT=-0.098
+################################
+# start_price at 2017-09-21 07:00:00, values=151.5855, current_price=152.6595
+# current_price - start_price difference=1.074
+# EXECUTE ORDER at 2017-09-22 07:59:53
+# ORDER_PRICE=152.6595, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-09-22 10:24:03
+# ORDER_PRICE=152.6595, STL_PRICE=152.11, ORDER_KIND=buy, PROFIT=-0.5495
+# PROFIT=-0.5495
+################################
+# start_price at 2017-09-22 07:00:00, values=152.6585, current_price=151.6965
+# current_price - start_price difference=-0.962
+# EXECUTE ORDER at 2017-09-25 07:59:00
+# ORDER_PRICE=151.6965, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-09-25 14:59:10
+# ORDER_PRICE=151.6965, STL_PRICE=151.9935, ORDER_KIND=sell, PROFIT=-0.297
+# PROFIT=-0.297
+################################
+# start_price at 2017-09-25 07:00:00, values=151.346, current_price=150.587
+# current_price - start_price difference=-0.759
+# EXECUTE ORDER at 2017-09-26 07:59:11
+# ORDER_PRICE=150.587, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-09-26 14:59:21
+# ORDER_PRICE=150.587, STL_PRICE=150.3505, ORDER_KIND=sell, PROFIT=0.2365
+# PROFIT=0.2365
+################################
+# start_price at 2017-09-26 07:00:00, values=150.4155, current_price=151.058
+# current_price - start_price difference=0.6425
+# EXECUTE ORDER at 2017-09-27 07:59:31
+# ORDER_PRICE=151.058, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-09-27 14:59:41
+# ORDER_PRICE=151.058, STL_PRICE=150.846, ORDER_KIND=buy, PROFIT=-0.212
+# PROFIT=-0.212
+################################
+# start_price at 2017-09-27 07:00:00, values=151.079, current_price=151.226
+# current_price - start_price difference=0.147
+# EXECUTE ORDER at 2017-09-28 07:59:42
+# ORDER_PRICE=151.226, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-09-28 14:59:52
+# ORDER_PRICE=151.226, STL_PRICE=151.2385, ORDER_KIND=buy, PROFIT=0.0125
+# PROFIT=0.0125
+################################
+# start_price at 2017-09-28 07:00:00, values=151.1075, current_price=151.0705
+# current_price - start_price difference=-0.037
+# EXECUTE ORDER at 2017-09-29 07:59:02
+# ORDER_PRICE=151.0705, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-09-29 14:59:12
+# ORDER_PRICE=151.0705, STL_PRICE=151.0885, ORDER_KIND=sell, PROFIT=-0.018
+# PROFIT=-0.018
+################################
+# start_price at 2017-09-29 07:00:00, values=150.9425, current_price=150.8875
+# current_price - start_price difference=-0.055
+# EXECUTE ORDER at 2017-10-02 07:59:00
+# ORDER_PRICE=150.8875, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-10-02 14:59:10
+# ORDER_PRICE=150.8875, STL_PRICE=150.786, ORDER_KIND=sell, PROFIT=0.1015
+# PROFIT=0.1015
+################################
+# start_price at 2017-10-02 07:00:00, values=150.54, current_price=149.585
+# current_price - start_price difference=-0.955
+# EXECUTE ORDER at 2017-10-03 07:59:20
+# ORDER_PRICE=149.585, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-10-03 14:59:30
+# ORDER_PRICE=149.585, STL_PRICE=149.8655, ORDER_KIND=sell, PROFIT=-0.2805
+# PROFIT=-0.2805
+################################
+# start_price at 2017-10-03 07:00:00, values=149.677, current_price=149.3635
+# current_price - start_price difference=-0.3135
+# EXECUTE ORDER at 2017-10-04 07:59:31
+# ORDER_PRICE=149.3635, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-10-04 14:59:41
+# ORDER_PRICE=149.3635, STL_PRICE=149.4165, ORDER_KIND=sell, PROFIT=-0.053
+# PROFIT=-0.053
+################################
+# start_price at 2017-10-04 07:00:00, values=149.429, current_price=149.3455
+# current_price - start_price difference=-0.0835
+# EXECUTE ORDER at 2017-10-05 07:59:42
+# ORDER_PRICE=149.3455, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-10-05 14:59:52
+# ORDER_PRICE=149.3455, STL_PRICE=149.233, ORDER_KIND=sell, PROFIT=0.1125
+# PROFIT=0.1125
+################################
+# start_price at 2017-10-05 07:00:00, values=149.339, current_price=147.9725
+# current_price - start_price difference=-1.3665
+# EXECUTE ORDER at 2017-10-06 07:59:02
+# ORDER_PRICE=147.9725, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-10-06 14:59:12
+# ORDER_PRICE=147.9725, STL_PRICE=147.7715, ORDER_KIND=sell, PROFIT=0.201
+# PROFIT=0.201
+################################
+# start_price at 2017-10-06 07:00:00, values=147.9905, current_price=147.154
+# current_price - start_price difference=-0.8365
+# EXECUTE ORDER at 2017-10-09 07:59:00
+# ORDER_PRICE=147.154, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-10-09 14:59:10
+# ORDER_PRICE=147.154, STL_PRICE=147.5635, ORDER_KIND=sell, PROFIT=-0.4095
+# PROFIT=-0.4095
+################################
+# start_price at 2017-10-09 07:00:00, values=147.372, current_price=148.0075
+# current_price - start_price difference=0.6355
+# EXECUTE ORDER at 2017-10-10 07:59:11
+# ORDER_PRICE=148.0075, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-10-10 14:59:21
+# ORDER_PRICE=148.0075, STL_PRICE=148.364, ORDER_KIND=buy, PROFIT=0.3565
+# PROFIT=0.3565
+################################
+# start_price at 2017-10-10 07:00:00, values=148.053, current_price=148.407
+# current_price - start_price difference=0.354
+# EXECUTE ORDER at 2017-10-11 07:59:31
+# ORDER_PRICE=148.407, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-10-11 14:59:41
+# ORDER_PRICE=148.407, STL_PRICE=148.248, ORDER_KIND=buy, PROFIT=-0.159
+# PROFIT=-0.159
+################################
+# start_price at 2017-10-11 07:00:00, values=148.359, current_price=148.7825
+# current_price - start_price difference=0.4235
+# EXECUTE ORDER at 2017-10-12 07:59:42
+# ORDER_PRICE=148.7825, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-10-12 14:59:52
+# ORDER_PRICE=148.7825, STL_PRICE=148.889, ORDER_KIND=buy, PROFIT=0.1065
+# PROFIT=0.1065
+################################
+# start_price at 2017-10-12 07:00:00, values=148.785, current_price=148.9565
+# current_price - start_price difference=0.1715
+# EXECUTE ORDER at 2017-10-13 07:59:02
+# ORDER_PRICE=148.9565, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-10-13 14:59:12
+# ORDER_PRICE=148.9565, STL_PRICE=148.8945, ORDER_KIND=buy, PROFIT=-0.062
+# PROFIT=-0.062
+################################
+# start_price at 2017-10-13 07:00:00, values=148.916, current_price=148.653
+# current_price - start_price difference=-0.263
+# EXECUTE ORDER at 2017-10-16 07:59:00
+# ORDER_PRICE=148.653, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-10-16 14:59:10
+# ORDER_PRICE=148.653, STL_PRICE=148.6615, ORDER_KIND=sell, PROFIT=-0.0085
+# PROFIT=-0.0085
+################################
+# start_price at 2017-10-16 07:00:00, values=148.791, current_price=148.589
+# current_price - start_price difference=-0.202
+# EXECUTE ORDER at 2017-10-17 07:59:11
+# ORDER_PRICE=148.589, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-10-17 14:59:21
+# ORDER_PRICE=148.589, STL_PRICE=148.6315, ORDER_KIND=sell, PROFIT=-0.0425
+# PROFIT=-0.0425
+################################
+# start_price at 2017-10-17 07:00:00, values=148.598, current_price=147.982
+# current_price - start_price difference=-0.616
+# EXECUTE ORDER at 2017-10-18 07:59:22
+# ORDER_PRICE=147.982, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-10-18 14:59:32
+# ORDER_PRICE=147.982, STL_PRICE=148.0175, ORDER_KIND=sell, PROFIT=-0.0355
+# PROFIT=-0.0355
+################################
+# start_price at 2017-10-18 07:00:00, values=147.9985, current_price=149.3455
+# current_price - start_price difference=1.347
+# EXECUTE ORDER at 2017-10-19 07:59:33
+# ORDER_PRICE=149.3455, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-10-19 14:59:43
+# ORDER_PRICE=149.3455, STL_PRICE=149.2745, ORDER_KIND=buy, PROFIT=-0.071
+# PROFIT=-0.071
+################################
+# start_price at 2017-10-19 07:00:00, values=149.1545, current_price=148.137
+# current_price - start_price difference=-1.0175
+# EXECUTE ORDER at 2017-10-20 07:59:44
+# ORDER_PRICE=148.137, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-10-20 14:59:54
+# ORDER_PRICE=148.137, STL_PRICE=148.3615, ORDER_KIND=sell, PROFIT=-0.2245
+# PROFIT=-0.2245
+################################
+# start_price at 2017-10-20 07:00:00, values=148.0635, current_price=150.13
+# current_price - start_price difference=2.0665
+# EXECUTE ORDER at 2017-10-23 07:59:00
+# ORDER_PRICE=150.13, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-10-23 14:59:10
+# ORDER_PRICE=150.13, STL_PRICE=150.226, ORDER_KIND=buy, PROFIT=0.096
+# PROFIT=0.096
+################################
+# start_price at 2017-10-23 07:00:00, values=150.112, current_price=149.6945
+# current_price - start_price difference=-0.4175
+# EXECUTE ORDER at 2017-10-24 07:59:20
+# ORDER_PRICE=149.6945, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-10-24 14:59:30
+# ORDER_PRICE=149.6945, STL_PRICE=149.9865, ORDER_KIND=sell, PROFIT=-0.292
+# PROFIT=-0.292
+################################
+# start_price at 2017-10-24 07:00:00, values=149.754, current_price=149.6545
+# current_price - start_price difference=-0.0995
+# EXECUTE ORDER at 2017-10-25 07:59:31
+# ORDER_PRICE=149.6545, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-10-25 14:59:41
+# ORDER_PRICE=149.6545, STL_PRICE=149.4815, ORDER_KIND=sell, PROFIT=0.173
+# PROFIT=0.173
+################################
+# start_price at 2017-10-25 07:00:00, values=149.562, current_price=150.7505
+# current_price - start_price difference=1.1885
+# EXECUTE ORDER at 2017-10-26 07:59:51
+# ORDER_PRICE=150.7505, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-10-26 14:59:01
+# ORDER_PRICE=150.7505, STL_PRICE=150.5475, ORDER_KIND=buy, PROFIT=-0.203
+# PROFIT=-0.203
+################################
+# start_price at 2017-10-26 07:00:00, values=150.7875, current_price=149.908
+# current_price - start_price difference=-0.8795
+# EXECUTE ORDER at 2017-10-27 07:59:02
+# ORDER_PRICE=149.908, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-10-27 14:59:12
+# ORDER_PRICE=149.908, STL_PRICE=149.876, ORDER_KIND=sell, PROFIT=0.032
+# PROFIT=0.032
+################################
+# start_price at 2017-10-27 07:00:00, values=149.947, current_price=149.289
+# current_price - start_price difference=-0.658
+# EXECUTE ORDER at 2017-10-30 07:59:00
+# ORDER_PRICE=149.289, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-10-30 14:59:10
+# ORDER_PRICE=149.289, STL_PRICE=149.346, ORDER_KIND=sell, PROFIT=-0.057
+# PROFIT=-0.057
+################################
+# start_price at 2017-10-30 07:00:00, values=149.334, current_price=149.3955
+# current_price - start_price difference=0.0615
+# EXECUTE ORDER at 2017-10-31 07:59:11
+# ORDER_PRICE=149.3955, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-10-31 14:59:21
+# ORDER_PRICE=149.3955, STL_PRICE=149.471, ORDER_KIND=buy, PROFIT=0.0755
+# PROFIT=0.0755
+################################
+# start_price at 2017-10-31 07:00:00, values=149.449, current_price=151.01
+# current_price - start_price difference=1.561
+# EXECUTE ORDER at 2017-11-01 07:59:31
+# ORDER_PRICE=151.01, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-11-01 14:59:41
+# ORDER_PRICE=151.01, STL_PRICE=151.2545, ORDER_KIND=buy, PROFIT=0.2445
+# PROFIT=0.2445
+################################
+# start_price at 2017-11-01 07:00:00, values=151.0015, current_price=151.2445
+# current_price - start_price difference=0.243
+# EXECUTE ORDER at 2017-11-02 07:59:51
+# ORDER_PRICE=151.2445, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-11-02 14:59:01
+# ORDER_PRICE=151.2445, STL_PRICE=151.3755, ORDER_KIND=buy, PROFIT=0.131
+# PROFIT=0.131
+################################
+# start_price at 2017-11-02 07:00:00, values=151.2305, current_price=148.87
+# current_price - start_price difference=-2.3605
+# EXECUTE ORDER at 2017-11-03 07:59:11
+# ORDER_PRICE=148.87, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-11-03 14:59:21
+# ORDER_PRICE=148.87, STL_PRICE=148.996, ORDER_KIND=sell, PROFIT=-0.126
+# PROFIT=-0.126
+################################
+# start_price at 2017-11-03 06:00:00, values=148.9865, current_price=149.236
+# current_price - start_price difference=0.2495
+# EXECUTE ORDER at 2017-11-06 07:59:00
+# ORDER_PRICE=149.236, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-11-06 14:59:10
+# ORDER_PRICE=149.236, STL_PRICE=149.377, ORDER_KIND=buy, PROFIT=0.141
+# PROFIT=0.141
+################################
+# start_price at 2017-11-06 07:00:00, values=149.072, current_price=149.887
+# current_price - start_price difference=0.815
+# EXECUTE ORDER at 2017-11-07 07:59:20
+# ORDER_PRICE=149.887, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-11-07 14:59:30
+# ORDER_PRICE=149.887, STL_PRICE=150.0675, ORDER_KIND=buy, PROFIT=0.1805
+# PROFIT=0.1805
+################################
+# start_price at 2017-11-07 07:00:00, values=149.7735, current_price=149.9235
+# current_price - start_price difference=0.15
+# EXECUTE ORDER at 2017-11-08 07:59:40
+# ORDER_PRICE=149.9235, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-11-08 14:59:50
+# ORDER_PRICE=149.9235, STL_PRICE=149.833, ORDER_KIND=buy, PROFIT=-0.0905
+# PROFIT=-0.0905
+################################
+# start_price at 2017-11-08 07:00:00, values=150.0885, current_price=149.3325
+# current_price - start_price difference=-0.756
+# EXECUTE ORDER at 2017-11-09 07:59:51
+# ORDER_PRICE=149.3325, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-11-09 14:59:01
+# ORDER_PRICE=149.3325, STL_PRICE=149.1995, ORDER_KIND=sell, PROFIT=0.133
+# PROFIT=0.133
+################################
+# start_price at 2017-11-09 07:00:00, values=149.3525, current_price=149.116
+# current_price - start_price difference=-0.2365
+# EXECUTE ORDER at 2017-11-10 07:59:11
+# ORDER_PRICE=149.116, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-11-10 14:59:21
+# ORDER_PRICE=149.116, STL_PRICE=149.2045, ORDER_KIND=sell, PROFIT=-0.0885
+# PROFIT=-0.0885
+################################
+# start_price at 2017-11-10 07:00:00, values=149.1615, current_price=149.598
+# current_price - start_price difference=0.4365
+# EXECUTE ORDER at 2017-11-13 07:59:00
+# ORDER_PRICE=149.598, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-11-13 09:15:10
+# ORDER_PRICE=149.598, STL_PRICE=149.0845, ORDER_KIND=buy, PROFIT=-0.5135
+# PROFIT=-0.5135
+################################
+# start_price at 2017-11-13 07:00:00, values=149.391, current_price=148.979
+# current_price - start_price difference=-0.412
+# EXECUTE ORDER at 2017-11-14 07:59:11
+# ORDER_PRICE=148.979, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-11-14 14:59:21
+# ORDER_PRICE=148.979, STL_PRICE=149.0645, ORDER_KIND=sell, PROFIT=-0.0855
+# PROFIT=-0.0855
+################################
+# start_price at 2017-11-14 07:00:00, values=149.0315, current_price=149.341
+# current_price - start_price difference=0.3095
+# EXECUTE ORDER at 2017-11-15 07:59:22
+# ORDER_PRICE=149.341, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-11-15 10:25:32
+# ORDER_PRICE=149.341, STL_PRICE=148.8345, ORDER_KIND=buy, PROFIT=-0.5065
+# PROFIT=-0.5065
+################################
+# start_price at 2017-11-15 07:00:00, values=149.37, current_price=148.691
+# current_price - start_price difference=-0.679
+# EXECUTE ORDER at 2017-11-16 07:59:33
+# ORDER_PRICE=148.691, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-11-16 14:59:43
+# ORDER_PRICE=148.691, STL_PRICE=148.9495, ORDER_KIND=sell, PROFIT=-0.2585
+# PROFIT=-0.2585
+################################
+# start_price at 2017-11-16 07:00:00, values=148.6745, current_price=149.2195
+# current_price - start_price difference=0.545
+# EXECUTE ORDER at 2017-11-17 07:59:44
+# ORDER_PRICE=149.2195, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-11-17 14:59:54
+# ORDER_PRICE=149.2195, STL_PRICE=148.949, ORDER_KIND=buy, PROFIT=-0.2705
+# PROFIT=-0.2705
+################################
+# start_price at 2017-11-17 07:00:00, values=149.168, current_price=148.255
+# current_price - start_price difference=-0.913
+# EXECUTE ORDER at 2017-11-20 07:59:00
+# ORDER_PRICE=148.255, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-11-20 14:59:10
+# ORDER_PRICE=148.255, STL_PRICE=147.993, ORDER_KIND=sell, PROFIT=0.262
+# PROFIT=0.262
+################################
+# start_price at 2017-11-20 07:00:00, values=148.252, current_price=149.0225
+# current_price - start_price difference=0.7705
+# EXECUTE ORDER at 2017-11-21 07:59:20
+# ORDER_PRICE=149.0225, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-11-21 14:59:30
+# ORDER_PRICE=149.0225, STL_PRICE=149.101, ORDER_KIND=buy, PROFIT=0.0785
+# PROFIT=0.0785
+################################
+# start_price at 2017-11-21 07:00:00, values=149.0465, current_price=148.945
+# current_price - start_price difference=-0.1015
+# EXECUTE ORDER at 2017-11-22 07:59:40
+# ORDER_PRICE=148.945, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-11-22 14:59:50
+# ORDER_PRICE=148.945, STL_PRICE=148.7155, ORDER_KIND=sell, PROFIT=0.2295
+# PROFIT=0.2295
+################################
+# start_price at 2017-11-22 07:00:00, values=148.852, current_price=148.2305
+# current_price - start_price difference=-0.6215
+# EXECUTE ORDER at 2017-11-23 07:59:00
+# ORDER_PRICE=148.2305, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-11-23 14:59:10
+# ORDER_PRICE=148.2305, STL_PRICE=148.3225, ORDER_KIND=sell, PROFIT=-0.092
+# PROFIT=-0.092
+################################
+# start_price at 2017-11-23 07:00:00, values=148.203, current_price=148.0675
+# current_price - start_price difference=-0.1355
+# EXECUTE ORDER at 2017-11-24 07:59:11
+# ORDER_PRICE=148.0675, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-11-24 14:59:21
+# ORDER_PRICE=148.0675, STL_PRICE=148.192, ORDER_KIND=sell, PROFIT=-0.1245
+# PROFIT=-0.1245
+################################
+# start_price at 2017-11-24 07:00:00, values=148.002, current_price=148.718
+# current_price - start_price difference=0.716
+# EXECUTE ORDER at 2017-11-27 07:59:00
+# ORDER_PRICE=148.718, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-11-27 14:59:10
+# ORDER_PRICE=148.718, STL_PRICE=148.351, ORDER_KIND=buy, PROFIT=-0.367
+# PROFIT=-0.367
+################################
+# start_price at 2017-11-27 07:00:00, values=148.588, current_price=147.959
+# current_price - start_price difference=-0.629
+# EXECUTE ORDER at 2017-11-28 07:59:11
+# ORDER_PRICE=147.959, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-11-28 14:59:21
+# ORDER_PRICE=147.959, STL_PRICE=148.183, ORDER_KIND=sell, PROFIT=-0.224
+# PROFIT=-0.224
+################################
+# start_price at 2017-11-28 07:00:00, values=147.9745, current_price=148.981
+# current_price - start_price difference=1.0065
+# EXECUTE ORDER at 2017-11-29 07:59:22
+# ORDER_PRICE=148.981, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-11-29 14:59:32
+# ORDER_PRICE=148.981, STL_PRICE=149.0785, ORDER_KIND=buy, PROFIT=0.0975
+# PROFIT=0.0975
+################################
+# start_price at 2017-11-29 07:00:00, values=148.72, current_price=150.231
+# current_price - start_price difference=1.511
+# EXECUTE ORDER at 2017-11-30 07:59:42
+# ORDER_PRICE=150.231, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-11-30 14:59:52
+# ORDER_PRICE=150.231, STL_PRICE=151.0195, ORDER_KIND=buy, PROFIT=0.7885
+# PROFIT=0.7885
+################################
+# start_price at 2017-11-30 07:00:00, values=150.1, current_price=152.2545
+# current_price - start_price difference=2.1545
+# EXECUTE ORDER at 2017-12-01 07:59:02
+# ORDER_PRICE=152.2545, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-12-01 14:59:12
+# ORDER_PRICE=152.2545, STL_PRICE=152.334, ORDER_KIND=buy, PROFIT=0.0795
+# PROFIT=0.0795
+################################
+# start_price at 2017-12-01 07:00:00, values=152.227, current_price=151.9135
+# current_price - start_price difference=-0.3135
+# EXECUTE ORDER at 2017-12-04 07:59:00
+# ORDER_PRICE=151.9135, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-12-04 14:59:10
+# ORDER_PRICE=151.9135, STL_PRICE=151.8845, ORDER_KIND=sell, PROFIT=0.029
+# PROFIT=0.029
+################################
+# start_price at 2017-12-04 07:00:00, values=151.572, current_price=151.601
+# current_price - start_price difference=0.029
+# EXECUTE ORDER at 2017-12-05 07:59:20
+# ORDER_PRICE=151.601, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-12-05 14:59:30
+# ORDER_PRICE=151.601, STL_PRICE=151.667, ORDER_KIND=buy, PROFIT=0.066
+# PROFIT=0.066
+################################
+# start_price at 2017-12-05 07:00:00, values=151.5195, current_price=151.098
+# current_price - start_price difference=-0.4215
+# EXECUTE ORDER at 2017-12-06 07:59:40
+# ORDER_PRICE=151.098, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-12-06 14:59:50
+# ORDER_PRICE=151.098, STL_PRICE=150.5185, ORDER_KIND=sell, PROFIT=0.5795
+# PROFIT=0.5795
+################################
+# start_price at 2017-12-06 07:00:00, values=151.362, current_price=150.176
+# current_price - start_price difference=-1.186
+# EXECUTE ORDER at 2017-12-07 07:59:00
+# ORDER_PRICE=150.176, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-12-07 14:59:10
+# ORDER_PRICE=150.176, STL_PRICE=150.406, ORDER_KIND=sell, PROFIT=-0.23
+# PROFIT=-0.23
+################################
+# start_price at 2017-12-07 07:00:00, values=150.3735, current_price=152.4105
+# current_price - start_price difference=2.037
+# EXECUTE ORDER at 2017-12-08 07:59:11
+# ORDER_PRICE=152.4105, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-12-08 14:59:21
+# ORDER_PRICE=152.4105, STL_PRICE=153.205, ORDER_KIND=buy, PROFIT=0.7945
+# PROFIT=0.7945
+################################
+# start_price at 2017-12-08 07:00:00, values=152.375, current_price=152.0565
+# current_price - start_price difference=-0.3185
+# EXECUTE ORDER at 2017-12-11 07:59:00
+# ORDER_PRICE=152.0565, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-12-11 14:59:10
+# ORDER_PRICE=152.0565, STL_PRICE=152.151, ORDER_KIND=sell, PROFIT=-0.0945
+# PROFIT=-0.0945
+################################
+# start_price at 2017-12-11 07:00:00, values=151.939, current_price=151.4745
+# current_price - start_price difference=-0.4645
+# EXECUTE ORDER at 2017-12-12 07:59:11
+# ORDER_PRICE=151.4745, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-12-12 14:59:21
+# ORDER_PRICE=151.4745, STL_PRICE=151.3775, ORDER_KIND=sell, PROFIT=0.097
+# PROFIT=0.097
+################################
+# start_price at 2017-12-12 07:00:00, values=151.485, current_price=151.2025
+# current_price - start_price difference=-0.2825
+# EXECUTE ORDER at 2017-12-13 07:59:31
+# ORDER_PRICE=151.2025, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-12-13 14:59:41
+# ORDER_PRICE=151.2025, STL_PRICE=151.0585, ORDER_KIND=sell, PROFIT=0.144
+# PROFIT=0.144
+################################
+# start_price at 2017-12-13 07:00:00, values=151.227, current_price=151.114
+# current_price - start_price difference=-0.113
+# EXECUTE ORDER at 2017-12-14 07:59:51
+# ORDER_PRICE=151.114, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-12-14 14:59:01
+# ORDER_PRICE=151.114, STL_PRICE=151.23, ORDER_KIND=sell, PROFIT=-0.116
+# PROFIT=-0.116
+################################
+# start_price at 2017-12-14 07:00:00, values=150.993, current_price=150.859
+# current_price - start_price difference=-0.134
+# EXECUTE ORDER at 2017-12-15 07:59:02
+# ORDER_PRICE=150.859, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-12-15 14:59:12
+# ORDER_PRICE=150.859, STL_PRICE=150.885, ORDER_KIND=sell, PROFIT=-0.026
+# PROFIT=-0.026
+################################
+# start_price at 2017-12-15 07:00:00, values=150.9635, current_price=150.0165
+# current_price - start_price difference=-0.947
+# EXECUTE ORDER at 2017-12-18 07:59:00
+# ORDER_PRICE=150.0165, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-12-18 14:59:10
+# ORDER_PRICE=150.0165, STL_PRICE=150.3025, ORDER_KIND=sell, PROFIT=-0.286
+# PROFIT=-0.286
+################################
+# start_price at 2017-12-18 07:00:00, values=150.097, current_price=150.6205
+# current_price - start_price difference=0.5235
+# EXECUTE ORDER at 2017-12-19 07:59:11
+# ORDER_PRICE=150.6205, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-12-19 14:59:21
+# ORDER_PRICE=150.6205, STL_PRICE=150.6615, ORDER_KIND=buy, PROFIT=0.041
+# PROFIT=0.041
+################################
+# start_price at 2017-12-19 07:00:00, values=150.607, current_price=151.087
+# current_price - start_price difference=0.48
+# EXECUTE ORDER at 2017-12-20 07:59:31
+# ORDER_PRICE=151.087, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-12-20 14:59:41
+# ORDER_PRICE=151.087, STL_PRICE=151.2715, ORDER_KIND=buy, PROFIT=0.1845
+# PROFIT=0.1845
+################################
+# start_price at 2017-12-20 07:00:00, values=151.1075, current_price=151.571
+# current_price - start_price difference=0.4635
+# EXECUTE ORDER at 2017-12-21 07:59:51
+# ORDER_PRICE=151.571, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-12-21 14:59:01
+# ORDER_PRICE=151.571, STL_PRICE=151.529, ORDER_KIND=buy, PROFIT=-0.042
+# PROFIT=-0.042
+################################
+# start_price at 2017-12-21 07:00:00, values=151.6675, current_price=151.705
+# current_price - start_price difference=0.0375
+# EXECUTE ORDER at 2017-12-22 07:59:02
+# ORDER_PRICE=151.705, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-12-22 14:59:12
+# ORDER_PRICE=151.705, STL_PRICE=151.622, ORDER_KIND=buy, PROFIT=-0.083
+# PROFIT=-0.083
+################################
+# start_price at 2017-12-22 07:00:00, values=151.693, current_price=151.368
+# current_price - start_price difference=-0.325
+# EXECUTE ORDER at 2017-12-25 07:59:00
+# ORDER_PRICE=151.368, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-12-25 14:59:10
+# ORDER_PRICE=151.368, STL_PRICE=151.368, ORDER_KIND=sell, PROFIT=0.0
+# PROFIT=0.0
+################################
+# start_price at 2017-12-25 07:00:00, values=151.368, current_price=151.5375
+# current_price - start_price difference=0.1695
+# EXECUTE ORDER at 2017-12-26 07:59:20
+# ORDER_PRICE=151.5375, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-12-26 14:59:30
+# ORDER_PRICE=151.5375, STL_PRICE=151.4925, ORDER_KIND=buy, PROFIT=-0.045
+# PROFIT=-0.045
+################################
+# start_price at 2017-12-26 07:00:00, values=151.418, current_price=151.39
+# current_price - start_price difference=-0.028
+# EXECUTE ORDER at 2017-12-27 07:59:31
+# ORDER_PRICE=151.39, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-12-27 14:59:41
+# ORDER_PRICE=151.39, STL_PRICE=151.443, ORDER_KIND=sell, PROFIT=-0.053
+# PROFIT=-0.053
+################################
+# start_price at 2017-12-27 07:00:00, values=151.448, current_price=151.7985
+# current_price - start_price difference=0.3505
+# EXECUTE ORDER at 2017-12-28 07:59:42
+# ORDER_PRICE=151.7985, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-12-28 14:59:52
+# ORDER_PRICE=151.7985, STL_PRICE=151.558, ORDER_KIND=buy, PROFIT=-0.2405
+# PROFIT=-0.2405
+################################
+# start_price at 2017-12-28 07:00:00, values=151.887, current_price=151.6215
+# current_price - start_price difference=-0.2655
+# EXECUTE ORDER at 2017-12-29 07:59:53
+# ORDER_PRICE=151.6215, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2017-12-29 14:59:03
+# ORDER_PRICE=151.6215, STL_PRICE=151.749, ORDER_KIND=sell, PROFIT=-0.1275
+# PROFIT=-0.1275
+################################
+# start_price at 2017-12-29 07:00:00, values=151.7225, current_price=152.213
+# current_price - start_price difference=0.4905
+# EXECUTE ORDER at 2018-01-02 07:59:00
+# ORDER_PRICE=152.213, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-01-02 14:59:10
+# ORDER_PRICE=152.213, STL_PRICE=152.334, ORDER_KIND=buy, PROFIT=0.121
+# PROFIT=0.121
+################################
+# start_price at 2018-01-02 07:00:00, values=152.14, current_price=152.5335
+# current_price - start_price difference=0.3935
+# EXECUTE ORDER at 2018-01-03 07:59:20
+# ORDER_PRICE=152.5335, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-01-03 14:59:30
+# ORDER_PRICE=152.5335, STL_PRICE=152.7805, ORDER_KIND=buy, PROFIT=0.247
+# PROFIT=0.247
+################################
+# start_price at 2018-01-03 07:00:00, values=152.6075, current_price=152.083
+# current_price - start_price difference=-0.5245
+# EXECUTE ORDER at 2018-01-04 07:59:40
+# ORDER_PRICE=152.083, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-01-04 14:59:50
+# ORDER_PRICE=152.083, STL_PRICE=152.2755, ORDER_KIND=sell, PROFIT=-0.1925
+# PROFIT=-0.1925
+################################
+# start_price at 2018-01-04 07:00:00, values=152.071, current_price=152.8055
+# current_price - start_price difference=0.7345
+# EXECUTE ORDER at 2018-01-05 07:59:51
+# ORDER_PRICE=152.8055, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-01-05 14:59:01
+# ORDER_PRICE=152.8055, STL_PRICE=153.3425, ORDER_KIND=buy, PROFIT=0.537
+# PROFIT=0.537
+################################
+# start_price at 2018-01-05 07:00:00, values=152.793, current_price=153.493
+# current_price - start_price difference=0.7
+# EXECUTE ORDER at 2018-01-08 07:59:00
+# ORDER_PRICE=153.493, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-01-08 14:59:10
+# ORDER_PRICE=153.493, STL_PRICE=153.478, ORDER_KIND=buy, PROFIT=-0.015
+# PROFIT=-0.015
+################################
+# start_price at 2018-01-08 07:00:00, values=153.455, current_price=153.553
+# current_price - start_price difference=0.098
+# EXECUTE ORDER at 2018-01-09 07:59:11
+# ORDER_PRICE=153.553, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-01-09 10:39:21
+# ORDER_PRICE=153.553, STL_PRICE=153.0135, ORDER_KIND=buy, PROFIT=-0.5395
+# PROFIT=-0.5395
+################################
+# start_price at 2018-01-09 07:00:00, values=153.4385, current_price=152.5055
+# current_price - start_price difference=-0.933
+# EXECUTE ORDER at 2018-01-10 07:59:22
+# ORDER_PRICE=152.5055, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-01-10 14:59:32
+# ORDER_PRICE=152.5055, STL_PRICE=151.894, ORDER_KIND=sell, PROFIT=0.6115
+# PROFIT=0.6115
+################################
+# start_price at 2018-01-10 07:00:00, values=152.531, current_price=150.4635
+# current_price - start_price difference=-2.0675
+# EXECUTE ORDER at 2018-01-11 07:59:42
+# ORDER_PRICE=150.4635, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-01-11 14:55:52
+# ORDER_PRICE=150.4635, STL_PRICE=150.937, ORDER_KIND=sell, PROFIT=-0.4735
+# PROFIT=-0.4735
+################################
+# start_price at 2018-01-11 07:00:00, values=150.513, current_price=150.594
+# current_price - start_price difference=0.081
+# EXECUTE ORDER at 2018-01-12 07:59:53
+# ORDER_PRICE=150.594, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-01-12 14:59:03
+# ORDER_PRICE=150.594, STL_PRICE=150.655, ORDER_KIND=buy, PROFIT=0.061
+# PROFIT=0.061
+################################
+# start_price at 2018-01-12 07:00:01, values=150.633, current_price=152.639
+# current_price - start_price difference=2.006
+# EXECUTE ORDER at 2018-01-15 07:59:00
+# ORDER_PRICE=152.639, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-01-15 09:43:10
+# ORDER_PRICE=152.639, STL_PRICE=152.171, ORDER_KIND=buy, PROFIT=-0.468
+# PROFIT=-0.468
+################################
+# start_price at 2018-01-15 07:00:00, values=152.473, current_price=152.491
+# current_price - start_price difference=0.018
+# EXECUTE ORDER at 2018-01-16 07:59:11
+# ORDER_PRICE=152.491, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-01-16 14:59:21
+# ORDER_PRICE=152.491, STL_PRICE=152.856, ORDER_KIND=buy, PROFIT=0.365
+# PROFIT=0.365
+################################
+# start_price at 2018-01-16 07:00:00, values=152.468, current_price=152.2935
+# current_price - start_price difference=-0.1745
+# EXECUTE ORDER at 2018-01-17 07:59:31
+# ORDER_PRICE=152.2935, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-01-17 11:46:41
+# ORDER_PRICE=152.2935, STL_PRICE=152.752, ORDER_KIND=sell, PROFIT=-0.4585
+# PROFIT=-0.4585
+################################
+# start_price at 2018-01-17 07:00:00, values=152.3355, current_price=153.759
+# current_price - start_price difference=1.4235
+# EXECUTE ORDER at 2018-01-18 07:59:42
+# ORDER_PRICE=153.759, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-01-18 14:59:52
+# ORDER_PRICE=153.759, STL_PRICE=153.7375, ORDER_KIND=buy, PROFIT=-0.0215
+# PROFIT=-0.0215
+################################
+# start_price at 2018-01-18 07:00:00, values=153.912, current_price=154.277
+# current_price - start_price difference=0.365
+# EXECUTE ORDER at 2018-01-19 07:59:53
+# ORDER_PRICE=154.277, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-01-19 14:59:03
+# ORDER_PRICE=154.277, STL_PRICE=154.2095, ORDER_KIND=buy, PROFIT=-0.0675
+# PROFIT=-0.0675
+################################
+# start_price at 2018-01-19 07:00:01, values=154.378, current_price=153.6915
+# current_price - start_price difference=-0.6865
+# EXECUTE ORDER at 2018-01-22 07:59:00
+# ORDER_PRICE=153.6915, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-01-22 14:59:10
+# ORDER_PRICE=153.6915, STL_PRICE=153.647, ORDER_KIND=sell, PROFIT=0.0445
+# PROFIT=0.0445
+################################
+# start_price at 2018-01-22 07:00:00, values=153.614, current_price=155.1485
+# current_price - start_price difference=1.5345
+# EXECUTE ORDER at 2018-01-23 07:59:20
+# ORDER_PRICE=155.1485, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-01-23 14:59:30
+# ORDER_PRICE=155.1485, STL_PRICE=154.9585, ORDER_KIND=buy, PROFIT=-0.19
+# PROFIT=-0.19
+################################
+# start_price at 2018-01-23 07:00:00, values=155.181, current_price=154.417
+# current_price - start_price difference=-0.764
+# EXECUTE ORDER at 2018-01-24 07:59:31
+# ORDER_PRICE=154.417, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-01-24 14:59:41
+# ORDER_PRICE=154.417, STL_PRICE=154.281, ORDER_KIND=sell, PROFIT=0.136
+# PROFIT=0.136
+################################
+# start_price at 2018-01-24 07:00:00, values=154.419, current_price=155.4905
+# current_price - start_price difference=1.0715
+# EXECUTE ORDER at 2018-01-25 07:59:51
+# ORDER_PRICE=155.4905, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-01-25 14:59:01
+# ORDER_PRICE=155.4905, STL_PRICE=155.772, ORDER_KIND=buy, PROFIT=0.2815
+# PROFIT=0.2815
+################################
+# start_price at 2018-01-25 07:00:00, values=155.538, current_price=154.77
+# current_price - start_price difference=-0.768
+# EXECUTE ORDER at 2018-01-26 07:59:11
+# ORDER_PRICE=154.77, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-01-26 08:58:21
+# ORDER_PRICE=154.77, STL_PRICE=155.2275, ORDER_KIND=sell, PROFIT=-0.4575
+# PROFIT=-0.4575
+################################
+# start_price at 2018-01-26 07:00:01, values=154.707, current_price=153.686
+# current_price - start_price difference=-1.021
+# EXECUTE ORDER at 2018-01-29 07:59:00
+# ORDER_PRICE=153.686, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-01-29 14:59:10
+# ORDER_PRICE=153.686, STL_PRICE=153.757, ORDER_KIND=sell, PROFIT=-0.071
+# PROFIT=-0.071
+################################
+# start_price at 2018-01-29 07:00:00, values=153.8295, current_price=153.3665
+# current_price - start_price difference=-0.463
+# EXECUTE ORDER at 2018-01-30 07:59:11
+# ORDER_PRICE=153.3665, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-01-30 14:59:21
+# ORDER_PRICE=153.3665, STL_PRICE=152.607, ORDER_KIND=sell, PROFIT=0.7595
+# PROFIT=0.7595
+################################
+# start_price at 2018-01-30 07:00:00, values=153.353, current_price=153.922
+# current_price - start_price difference=0.569
+# EXECUTE ORDER at 2018-01-31 07:59:31
+# ORDER_PRICE=153.922, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-01-31 14:59:41
+# ORDER_PRICE=153.922, STL_PRICE=154.232, ORDER_KIND=buy, PROFIT=0.31
+# PROFIT=0.31
+################################
+# start_price at 2018-01-31 07:00:00, values=153.931, current_price=155.031
+# current_price - start_price difference=1.1
+# EXECUTE ORDER at 2018-02-01 07:59:51
+# ORDER_PRICE=155.031, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-02-01 14:59:01
+# ORDER_PRICE=155.031, STL_PRICE=155.1395, ORDER_KIND=buy, PROFIT=0.1085
+# PROFIT=0.1085
+################################
+# start_price at 2018-02-01 07:00:00, values=154.9555, current_price=156.1325
+# current_price - start_price difference=1.177
+# EXECUTE ORDER at 2018-02-02 07:59:11
+# ORDER_PRICE=156.1325, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-02-02 14:59:21
+# ORDER_PRICE=156.1325, STL_PRICE=156.3615, ORDER_KIND=buy, PROFIT=0.229
+# PROFIT=0.229
+################################
+# start_price at 2018-02-02 07:00:01, values=156.046, current_price=155.4465
+# current_price - start_price difference=-0.5995
+# EXECUTE ORDER at 2018-02-05 07:59:00
+# ORDER_PRICE=155.4465, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-02-05 14:59:10
+# ORDER_PRICE=155.4465, STL_PRICE=155.3075, ORDER_KIND=sell, PROFIT=0.139
+# PROFIT=0.139
+################################
+# start_price at 2018-02-05 07:00:00, values=155.537, current_price=152.4565
+# current_price - start_price difference=-3.0805
+# EXECUTE ORDER at 2018-02-06 07:59:20
+# ORDER_PRICE=152.4565, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-06 13:37:30
+# ORDER_PRICE=152.4565, STL_PRICE=151.3715, ORDER_KIND=sell, PROFIT=1.085
+# PROFIT=1.085
+################################
+# start_price at 2018-02-06 07:00:00, values=152.346, current_price=153.0945
+# current_price - start_price difference=0.7485
+# EXECUTE ORDER at 2018-02-07 07:59:40
+# ORDER_PRICE=153.0945, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-02-07 09:17:50
+# ORDER_PRICE=153.0945, STL_PRICE=152.628, ORDER_KIND=buy, PROFIT=-0.4665
+# PROFIT=-0.4665
+################################
+# start_price at 2018-02-07 07:00:00, values=152.852, current_price=151.724
+# current_price - start_price difference=-1.128
+# EXECUTE ORDER at 2018-02-08 07:59:51
+# ORDER_PRICE=151.724, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-08 14:08:01
+# ORDER_PRICE=151.724, STL_PRICE=152.2, ORDER_KIND=sell, PROFIT=-0.476
+# PROFIT=-0.476
+################################
+# start_price at 2018-02-08 07:00:00, values=151.7765, current_price=151.41
+# current_price - start_price difference=-0.3665
+# EXECUTE ORDER at 2018-02-09 07:59:02
+# ORDER_PRICE=151.41, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-09 10:17:12
+# ORDER_PRICE=151.41, STL_PRICE=151.921, ORDER_KIND=sell, PROFIT=-0.511
+# PROFIT=-0.511
+################################
+# start_price at 2018-02-09 07:00:01, values=151.294, current_price=150.4825
+# current_price - start_price difference=-0.8115
+# EXECUTE ORDER at 2018-02-12 07:59:00
+# ORDER_PRICE=150.4825, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-02-12 14:59:10
+# ORDER_PRICE=150.4825, STL_PRICE=150.6875, ORDER_KIND=sell, PROFIT=-0.205
+# PROFIT=-0.205
+################################
+# start_price at 2018-02-12 07:00:00, values=150.467, current_price=150.441
+# current_price - start_price difference=-0.026
+# EXECUTE ORDER at 2018-02-13 07:59:11
+# ORDER_PRICE=150.441, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-02-13 14:59:21
+# ORDER_PRICE=150.441, STL_PRICE=150.027, ORDER_KIND=sell, PROFIT=0.414
+# PROFIT=0.414
+################################
+# start_price at 2018-02-13 07:00:00, values=150.344, current_price=149.7105
+# current_price - start_price difference=-0.6335
+# EXECUTE ORDER at 2018-02-14 07:59:31
+# ORDER_PRICE=149.7105, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-14 13:15:41
+# ORDER_PRICE=149.7105, STL_PRICE=148.671, ORDER_KIND=sell, PROFIT=1.0395
+# PROFIT=1.0395
+################################
+# start_price at 2018-02-14 07:00:00, values=149.7915, current_price=149.8205
+# current_price - start_price difference=0.029
+# EXECUTE ORDER at 2018-02-15 07:59:51
+# ORDER_PRICE=149.8205, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-02-15 08:43:01
+# ORDER_PRICE=149.8205, STL_PRICE=149.2865, ORDER_KIND=buy, PROFIT=-0.534
+# PROFIT=-0.534
+################################
+# start_price at 2018-02-15 07:00:00, values=149.806, current_price=149.598
+# current_price - start_price difference=-0.208
+# EXECUTE ORDER at 2018-02-16 07:59:02
+# ORDER_PRICE=149.598, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-02-16 14:59:12
+# ORDER_PRICE=149.598, STL_PRICE=149.5025, ORDER_KIND=sell, PROFIT=0.0955
+# PROFIT=0.0955
+################################
+# start_price at 2018-02-16 07:00:01, values=149.6185, current_price=149.196
+# current_price - start_price difference=-0.4225
+# EXECUTE ORDER at 2018-02-19 07:59:00
+# ORDER_PRICE=149.196, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-02-19 14:59:10
+# ORDER_PRICE=149.196, STL_PRICE=149.268, ORDER_KIND=sell, PROFIT=-0.072
+# PROFIT=-0.072
+################################
+# start_price at 2018-02-19 07:00:00, values=149.133, current_price=149.227
+# current_price - start_price difference=0.094
+# EXECUTE ORDER at 2018-02-20 07:59:11
+# ORDER_PRICE=149.227, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-02-20 14:59:21
+# ORDER_PRICE=149.227, STL_PRICE=149.329, ORDER_KIND=buy, PROFIT=0.102
+# PROFIT=0.102
+################################
+# start_price at 2018-02-20 07:00:00, values=149.2275, current_price=150.2095
+# current_price - start_price difference=0.982
+# EXECUTE ORDER at 2018-02-21 07:59:31
+# ORDER_PRICE=150.2095, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-02-21 14:59:41
+# ORDER_PRICE=150.2095, STL_PRICE=150.681, ORDER_KIND=buy, PROFIT=0.4715
+# PROFIT=0.4715
+################################
+# start_price at 2018-02-21 07:00:00, values=150.2235, current_price=149.875
+# current_price - start_price difference=-0.3485
+# EXECUTE ORDER at 2018-02-22 07:59:51
+# ORDER_PRICE=149.875, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-02-22 14:59:01
+# ORDER_PRICE=149.875, STL_PRICE=149.427, ORDER_KIND=sell, PROFIT=0.448
+# PROFIT=0.448
+################################
+# start_price at 2018-02-22 07:00:00, values=149.9965, current_price=148.955
+# current_price - start_price difference=-1.0415
+# EXECUTE ORDER at 2018-02-23 07:59:11
+# ORDER_PRICE=148.955, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-02-23 14:59:21
+# ORDER_PRICE=148.955, STL_PRICE=149.1525, ORDER_KIND=sell, PROFIT=-0.1975
+# PROFIT=-0.1975
+################################
+# start_price at 2018-02-23 07:00:01, values=148.986, current_price=149.582
+# current_price - start_price difference=0.596
+# EXECUTE ORDER at 2018-02-26 07:59:00
+# ORDER_PRICE=149.582, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-02-26 10:46:10
+# ORDER_PRICE=149.582, STL_PRICE=149.091, ORDER_KIND=buy, PROFIT=-0.491
+# PROFIT=-0.491
+################################
+# start_price at 2018-02-26 07:00:00, values=149.302, current_price=149.4285
+# current_price - start_price difference=0.1265
+# EXECUTE ORDER at 2018-02-27 07:59:11
+# ORDER_PRICE=149.4285, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-02-27 14:59:21
+# ORDER_PRICE=149.4285, STL_PRICE=149.2145, ORDER_KIND=buy, PROFIT=-0.214
+# PROFIT=-0.214
+################################
+# start_price at 2018-02-27 07:00:00, values=149.3535, current_price=149.318
+# current_price - start_price difference=-0.0355
+# EXECUTE ORDER at 2018-02-28 07:59:22
+# ORDER_PRICE=149.318, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-02-28 14:59:32
+# ORDER_PRICE=149.318, STL_PRICE=148.897, ORDER_KIND=sell, PROFIT=0.421
+# PROFIT=0.421
+################################
+# start_price at 2018-02-28 07:00:00, values=149.2825, current_price=146.7145
+# current_price - start_price difference=-2.568
+# EXECUTE ORDER at 2018-03-01 07:59:42
+# ORDER_PRICE=146.7145, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-03-01 14:59:52
+# ORDER_PRICE=146.7145, STL_PRICE=146.936, ORDER_KIND=sell, PROFIT=-0.2215
+# PROFIT=-0.2215
+################################
+# start_price at 2018-03-01 07:00:00, values=146.784, current_price=146.157
+# current_price - start_price difference=-0.627
+# EXECUTE ORDER at 2018-03-02 07:59:53
+# ORDER_PRICE=146.157, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-03-02 14:59:03
+# ORDER_PRICE=146.157, STL_PRICE=145.8765, ORDER_KIND=sell, PROFIT=0.2805
+# PROFIT=0.2805
+################################
+# start_price at 2018-03-02 07:00:01, values=146.3575, current_price=145.8115
+# current_price - start_price difference=-0.546
+# EXECUTE ORDER at 2018-03-05 07:59:00
+# ORDER_PRICE=145.8115, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-03-05 14:59:10
+# ORDER_PRICE=145.8115, STL_PRICE=145.568, ORDER_KIND=sell, PROFIT=0.2435
+# PROFIT=0.2435
+################################
+# start_price at 2018-03-05 07:00:00, values=145.95, current_price=147.072
+# current_price - start_price difference=1.122
+# EXECUTE ORDER at 2018-03-06 07:59:20
+# ORDER_PRICE=147.072, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-03-06 14:59:30
+# ORDER_PRICE=147.072, STL_PRICE=147.075, ORDER_KIND=buy, PROFIT=0.00299999999999
+# PROFIT=0.00299999999999
+################################
+# start_price at 2018-03-06 07:00:00, values=147.077, current_price=146.8245
+# current_price - start_price difference=-0.2525
+# EXECUTE ORDER at 2018-03-07 07:59:40
+# ORDER_PRICE=146.8245, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-03-07 14:59:50
+# ORDER_PRICE=146.8245, STL_PRICE=146.673, ORDER_KIND=sell, PROFIT=0.1515
+# PROFIT=0.1515
+################################
+# start_price at 2018-03-07 07:00:00, values=147.377, current_price=147.542
+# current_price - start_price difference=0.165
+# EXECUTE ORDER at 2018-03-08 07:59:00
+# ORDER_PRICE=147.542, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-03-08 14:59:10
+# ORDER_PRICE=147.542, STL_PRICE=147.317, ORDER_KIND=buy, PROFIT=-0.225
+# PROFIT=-0.225
+################################
+# start_price at 2018-03-08 07:00:00, values=147.456, current_price=146.831
+# current_price - start_price difference=-0.625
+# EXECUTE ORDER at 2018-03-09 07:59:11
+# ORDER_PRICE=146.831, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-03-09 10:05:21
+# ORDER_PRICE=146.831, STL_PRICE=147.334, ORDER_KIND=sell, PROFIT=-0.503
+# PROFIT=-0.503
+################################
+# start_price at 2018-03-09 08:00:01, values=146.828, current_price=148.1255
+# current_price - start_price difference=1.2975
+# EXECUTE ORDER at 2018-03-12 07:59:00
+# ORDER_PRICE=148.1255, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-12 13:34:10
+# ORDER_PRICE=148.1255, STL_PRICE=147.627, ORDER_KIND=buy, PROFIT=-0.4985
+# PROFIT=-0.4985
+################################
+# start_price at 2018-03-12 07:00:00, values=147.914, current_price=147.951
+# current_price - start_price difference=0.037
+# EXECUTE ORDER at 2018-03-13 07:59:11
+# ORDER_PRICE=147.951, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-03-13 14:59:21
+# ORDER_PRICE=147.951, STL_PRICE=148.314, ORDER_KIND=buy, PROFIT=0.363
+# PROFIT=0.363
+################################
+# start_price at 2018-03-13 07:00:00, values=148.0055, current_price=148.7695
+# current_price - start_price difference=0.764
+# EXECUTE ORDER at 2018-03-14 07:59:31
+# ORDER_PRICE=148.7695, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-03-14 14:59:41
+# ORDER_PRICE=148.7695, STL_PRICE=148.791, ORDER_KIND=buy, PROFIT=0.0215
+# PROFIT=0.0215
+################################
+# start_price at 2018-03-14 07:00:00, values=148.6995, current_price=148.4715
+# current_price - start_price difference=-0.228
+# EXECUTE ORDER at 2018-03-15 07:59:51
+# ORDER_PRICE=148.4715, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-03-15 14:59:01
+# ORDER_PRICE=148.4715, STL_PRICE=148.046, ORDER_KIND=sell, PROFIT=0.4255
+# PROFIT=0.4255
+################################
+# start_price at 2018-03-15 07:00:00, values=148.4725, current_price=148.146
+# current_price - start_price difference=-0.3265
+# EXECUTE ORDER at 2018-03-16 07:59:11
+# ORDER_PRICE=148.146, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-03-16 14:59:21
+# ORDER_PRICE=148.146, STL_PRICE=147.5455, ORDER_KIND=sell, PROFIT=0.6005
+# PROFIT=0.6005
+################################
+# start_price at 2018-03-16 07:00:00, values=148.224, current_price=147.7725
+# current_price - start_price difference=-0.4515
+# EXECUTE ORDER at 2018-03-19 07:59:00
+# ORDER_PRICE=147.7725, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-03-19 14:59:10
+# ORDER_PRICE=147.7725, STL_PRICE=147.202, ORDER_KIND=sell, PROFIT=0.5705
+# PROFIT=0.5705
+################################
+# start_price at 2018-03-19 07:00:00, values=147.8605, current_price=148.73
+# current_price - start_price difference=0.8695
+# EXECUTE ORDER at 2018-03-20 07:59:20
+# ORDER_PRICE=148.73, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-03-20 14:59:30
+# ORDER_PRICE=148.73, STL_PRICE=149.121, ORDER_KIND=buy, PROFIT=0.391
+# PROFIT=0.391
+################################
+# start_price at 2018-03-20 07:00:00, values=148.7245, current_price=149.16
+# current_price - start_price difference=0.4355
+# EXECUTE ORDER at 2018-03-21 07:59:40
+# ORDER_PRICE=149.16, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-03-21 14:59:50
+# ORDER_PRICE=149.16, STL_PRICE=149.078, ORDER_KIND=buy, PROFIT=-0.082
+# PROFIT=-0.082
+################################
+# start_price at 2018-03-21 07:00:00, values=149.154, current_price=149.8205
+# current_price - start_price difference=0.6665
+# EXECUTE ORDER at 2018-03-22 07:59:51
+# ORDER_PRICE=149.8205, TRADE_FLAG=buy
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-03-22 14:59:01
+# ORDER_PRICE=149.8205, STL_PRICE=149.797, ORDER_KIND=buy, PROFIT=-0.0235
+# PROFIT=-0.0235
+################################
+# start_price at 2018-03-22 07:00:00, values=149.9605, current_price=148.0075
+# current_price - start_price difference=-1.953
+# EXECUTE ORDER at 2018-03-23 07:59:02
+# ORDER_PRICE=148.0075, TRADE_FLAG=sell
+# Execute Settlemnt: daytime algorithm timeup
+# EXECUTE SETTLEMENT at 2018-03-23 14:59:12
+# ORDER_PRICE=148.0075, STL_PRICE=147.899, ORDER_KIND=sell, PROFIT=0.1085
+# PROFIT=0.1085
+################################
+# start_price at 2018-03-23 07:00:00, values=148.5265, current_price=148.236
+# current_price - start_price difference=-0.2905
+# EXECUTE ORDER at 2018-03-26 07:59:00
+# ORDER_PRICE=148.236, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-03-26 10:19:10
+# ORDER_PRICE=148.236, STL_PRICE=148.751, ORDER_KIND=sell, PROFIT=-0.515
+# PROFIT=-0.515

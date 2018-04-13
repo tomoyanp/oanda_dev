@@ -53,7 +53,7 @@ class DaytimeAlgo(SuperAlgo):
                     current_price = self.getCurrentPrice()
                     trade_flag = self.decideDaytimeTrade(trade_flag, current_price, start_price)
                     self.result_logger.info("################################")
-                    self.result_logger.info("# start_price at %s, values=%s, current_price=%s" % (insert_time, start_price))
+                    self.result_logger.info("# start_price at %s, values=%s, current_price=%s" % (insert_time, start_price, current_price))
                     self.result_logger.info("# current_price - start_price difference=%s" % (float(current_price) - float(start_price)))
 
             return trade_flag
