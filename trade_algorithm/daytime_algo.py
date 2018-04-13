@@ -48,6 +48,7 @@ class DaytimeAlgo(SuperAlgo):
                 seconds = base_time.second
 #                if hour == 9 and minutes == 59:
                 if hour == 7 and minutes == 59:
+                    self.setHighlowPrice(base_time, 24)
                     self.debug_logger.info("%s :DaytimeLogic START" % base_time)
                     start_price, insert_time = self.getStartPrice(base_time)
                     current_price = self.getCurrentPrice()
