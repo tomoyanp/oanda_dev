@@ -87,9 +87,9 @@ class DaytimeAlgo(SuperAlgo):
 
     def decideDaytimeTrade(self, trade_flag, current_price, start_price):
 
-        if float(current_price) > float(start_price):
+        if float(current_price) > float(start_price) and self.decideHighPrice(current_price):
             trade_flag = "buy"
-        else:
+        elif float(current_price) < float(start_price) and self.decideLowPrice(current_price):
             trade_flag = "sell"
 
         return trade_flag

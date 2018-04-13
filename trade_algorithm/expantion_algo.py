@@ -225,23 +225,6 @@ class ExpantionAlgo(SuperAlgo):
 
         return trade_flag
 
-    def decideLowPrice(self, current_price):
-        lowprice_threshold = 0.5
-        flag = False
-        if current_price < (float(self.low_price) - float(lowprice_threshold)) or (float(self.low_price) + float(lowprice_threshold)) < current_price:
-            flag = True
-
-        return flag
-
-
-    def decideHighPrice(self, current_price):
-        highprice_threshold = 0.5
-        flag = False
-        if current_price > (float(self.high_price) + float(highprice_threshold)) or current_price < (float(self.high_price) - float(highprice_threshold)):
-            flag = True
-
-        return flag
-
 #    def resetFlag(self):
 #        super(ExpantionAlgo, self)
 #        self.most_high_price = 0
