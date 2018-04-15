@@ -90,11 +90,11 @@ class DaytimeAlgo(SuperAlgo):
 
         return stl_flag
 
-    def decideDaytimeTrade(self, trade_flag, current_price):
+    def decideDaytimeTrade(self, trade_flag, current_price, start_price):
 
-        if float(self.thisday_price) > float(self.start_price) and float(current_price) > float(self.thisday_price):
+        if float(start_price) < float(current_price):
             trade_flag = "buy"
-        elif float(self.thisday_price) < float(self.start_price) and float(current_price) < float(self.thisday_price):
+        elif float(start_price) > float(current_price):
             trade_flag = "sell"
 
         return trade_flag
