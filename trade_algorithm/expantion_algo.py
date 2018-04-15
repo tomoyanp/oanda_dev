@@ -141,10 +141,6 @@ class ExpantionAlgo(SuperAlgo):
                 self.result_logger.info("# current_price=%s, upper_sigma_5m3=%s" % (current_price, self.upper_sigma_5m3))
                 self.result_logger.info("# slope=%s" % (self.slope))
 
-#            # else以下本来であれば不要
-#            else:
-#                self.buy_count = 0
-#                self.sell_count = 0
 
         elif self.sell_count >= 2 and self.order_kind == "buy":
             if self.decideLowPrice(current_price):
