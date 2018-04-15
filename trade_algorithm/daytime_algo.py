@@ -42,22 +42,24 @@ class DaytimeAlgo(SuperAlgo):
             if self.order_flag:
                 pass
             else:
-                #weekday = base_time.weekday()
+                weekday = base_time.weekday()
                 hour = base_time.hour
                 minutes = base_time.minute
                 seconds = base_time.second
                 current_price = self.getCurrentPrice()
 
-                if hour == 7 and minutes == 0:
-                    self.start_price, insert_time = self.getStartPrice(base_time)
-                    self.thisday_price = current_price
-
-                if hour == 8 and minutes == 59:
+                if hour == 7 and minutes == 59:
                     self.debug_logger.info("%s :DaytimeLogic START" % base_time)
-                    trade_flag = self.decideDaytimeTrade(trade_flag, current_price)
+                    start_price, insert_time = self.getStartPrice(base_time)
+                    trade_flag = self.decideDaytimeTrade(trade_flag, current_price, start_price)
+                    if weekday == 0 and trade_flag == "buy":
+                        trade_flag = "sell"
+                    elif weekday == 0 and trade_flag == "sell":
+                        trade_flag = "buy"
+                        
                     self.result_logger.info("################################")
-                    self.result_logger.info("# start_price=%s, thisday_price=%s, current_price=%s" % (self.start_price, self.thisday_price, current_price))
-                    self.result_logger.info("# current_price - start_price difference=%s" % (float(current_price) - float(self.start_price)))
+                    self.result_logger.info("# start_price=%s, current_price=%s" % (start_price, current_price))
+                    self.result_logger.info("# current_price - start_price difference=%s" % (float(current_price) - float(start_price)))
 
             return trade_flag
         except:
@@ -100,7 +102,6 @@ class DaytimeAlgo(SuperAlgo):
     def getStartPrice(self, base_time):
         start_time = base_time.strftime("%Y-%m-%d 07:00:00")
         width = 24 * 3600
-        #start_time = base_time.strftime("%Y-%m-%d 08:00:00")
         sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time < \'%s\' order by insert_time desc limit %s" % (self.instrument, start_time, width)
         self.debug_logger.info(base_time)
         self.debug_logger.info(sql)
