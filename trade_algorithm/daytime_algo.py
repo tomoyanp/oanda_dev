@@ -46,16 +46,18 @@ class DaytimeAlgo(SuperAlgo):
                 hour = base_time.hour
                 minutes = base_time.minute
                 seconds = base_time.second
-#                if hour == 9 and minutes == 59:
-                if hour == 7 and minutes == 59:
-                    self.setHighlowPrice(base_time, 24)
+                current_price = self.getCurrentPrice()
+
+                if hour == 7 and minutes == 0:
+                    self.start_price, insert_time = self.getStartPrice(base_time)
+                    self.thisday_price = current_price
+
+                if hour == 8 and minutes == 59:
                     self.debug_logger.info("%s :DaytimeLogic START" % base_time)
-                    start_price, insert_time = self.getStartPrice(base_time)
-                    current_price = self.getCurrentPrice()
-                    trade_flag = self.decideDaytimeTrade(trade_flag, current_price, start_price)
+                    trade_flag = self.decideDaytimeTrade(trade_flag, current_price)
                     self.result_logger.info("################################")
-                    self.result_logger.info("# start_price at %s, values=%s, current_price=%s" % (insert_time, start_price, current_price))
-                    self.result_logger.info("# current_price - start_price difference=%s" % (float(current_price) - float(start_price)))
+                    self.result_logger.info("# start_price at %s, values=%s, thisday_price=%s, current_price=%s" % (insert_time, self.start_price, self.thisday_price, current_price))
+                    self.result_logger.info("# current_price - start_price difference=%s" % (float(current_price) - float(self.start_price)))
 
             return trade_flag
         except:
@@ -86,11 +88,11 @@ class DaytimeAlgo(SuperAlgo):
 
         return stl_flag
 
-    def decideDaytimeTrade(self, trade_flag, current_price, start_price):
+    def decideDaytimeTrade(self, trade_flag, current_price):
 
-        if float(current_price) > float(start_price) and self.decideHighPrice(current_price):
+        if float(self.thisday_price) > float(self.start_price) and float(current_price) > float(self.thisday_price):
             trade_flag = "buy"
-        elif float(current_price) < float(start_price) and self.decideLowPrice(current_price):
+        elif float(self.thisday_price) < float(self.start_price) and float(current_price) < float(self.thisday_price):
             trade_flag = "sell"
 
         return trade_flag
@@ -109,5 +111,3 @@ class DaytimeAlgo(SuperAlgo):
         self.debug_logger.info(insert_time)
 
         return ((ask_price + bid_price) / 2), insert_time
-
-
