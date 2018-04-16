@@ -338,6 +338,23 @@ class SuperAlgo(object):
             self.volatility_buy_price = res[0]
             self.volatility_bid_price = res[1]
 
+    def decideLowPrice(self, current_price):
+        lowprice_threshold = 0.5
+        flag = False
+        if current_price < (float(self.low_price) - float(lowprice_threshold)) or (float(self.low_price) + float(lowprice_threshold)) < current_price:
+            flag = True
+
+        return flag
+
+
+    def decideHighPrice(self, current_price):
+        highprice_threshold = 0.5
+        flag = False
+        if current_price > (float(self.high_price) + float(highprice_threshold)) or current_price < (float(self.high_price) - float(highprice_threshold)):
+            flag = True
+
+        return flag
+
     @abstractmethod
     def setIndicator(self, base_time):
         pass
