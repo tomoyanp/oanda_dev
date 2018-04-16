@@ -7,6 +7,7 @@ import json
 
 # 実行スクリプトのパスを取得して、追加
 current_path = os.path.abspath(os.path.dirname(__file__))
+current_path = current_path + "/.."
 sys.path.append(current_path)
 sys.path.append(current_path + "/trade_algorithm")
 sys.path.append(current_path + "/obj")
@@ -14,8 +15,8 @@ sys.path.append(current_path + "/lib")
 
 from datetime import datetime, timedelta
 #from trade_algo import TradeAlgo
-from price_obj import PriceObj
-from order_obj import OrderObj
+#from price_obj import PriceObj
+#from order_obj import OrderObj
 from mysql_connector import MysqlConnector
 from db_wrapper import DBWrapper
 from oanda_wrapper import OandaWrapper

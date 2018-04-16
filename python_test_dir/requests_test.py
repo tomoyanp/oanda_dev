@@ -9,5 +9,7 @@ headers = {'Content-Type': 'application/json',
            'Authorization': 'Bearer %s' % token}
 params = {'instruments': instruments}
 
-response = requests.get(url, params=params, headers, headers)
-print response
+print url
+response = requests.get(url, params=params, headers=headers)
+jsonData = response.json()
+print jsonData
