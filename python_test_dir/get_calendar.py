@@ -7,7 +7,10 @@ html = urllib2.urlopen(url)
 
 soup = BeautifulSoup(html, "html.parser")
 
+print soup
+print "##########################################################"
 for element in soup:
-    class_element = element.get("class").pop(0)
-    if class_element == "hitsuji":
-        print class_element
+    print element
+#    class_element = element.get("class").pop(0)
+#    if class_element == "hitsuji":
+#        print class_element
