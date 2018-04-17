@@ -18,7 +18,7 @@ from common import decideMarket
 import time
 
 account_id = 2542764
-token = '85abe6d9c2646b9c56fbf01f0478a511-fe9cb897da06cd6219fde9b4c2052055'
+token = 'cb570464152b22d04da3f0f5cad2ddd4-0d543f436361df398e1b2ffa6daf227d'
 env = "practice"
 
 
