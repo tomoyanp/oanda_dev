@@ -318,7 +318,8 @@ class SuperAlgo(object):
     def setHighlowPrice(self, base_time, span):
         # high low price
         ind_type = "highlow"
-        end_time = base_time - timedelta(hours=5)
+#        end_time = base_time - timedelta(hours=5)
+        end_time = base_time
         sql = "select high_price, low_price from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC limit %s" % (self.instrument, end_time, ind_type, span)
         response = self.mysql_connector.select_sql(sql)
         high_price_list = []

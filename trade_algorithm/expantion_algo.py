@@ -28,6 +28,7 @@ class ExpantionAlgo(SuperAlgo):
         self.base_price = 0
         self.setPrice(base_time)
         self.setIndicator(base_time)
+        self.setHighlowPrice(base_time, 24)
         self.debug_logger = getLogger("debug")
         self.result_logger = getLogger("result")
         self.slope = 0
@@ -162,7 +163,7 @@ class ExpantionAlgo(SuperAlgo):
         return stl_flag
 
     def decideVolatility(self, current_price):
-        volatility_value = 0.5
+        volatility_value = 0.3
         up_flag = False
         down_flag = False
 
@@ -285,47 +286,6 @@ class ExpantionAlgo(SuperAlgo):
                     self.result_logger.info("# current_ask_price=%s, order_price=%s" % (current_ask_price, order_price))
                     stl_flag = True
 
-#        if first_flag == "on":
-#            # 最小利確0.3を超えたら、トレールストップモードをONにする
-#            if self.order_kind == "buy":
-#                if (current_bid_price - order_price) > first_take_profit:
-#                    self.trail_flag = True
-#            elif self.order_kind == "sell":
-#                if (order_price - current_ask_price) > first_take_profit:
-#                    self.trail_flag = True
-#
-#
-#            # trail_flagがONで、含み益がなくなったら決済する
-#            if self.trail_flag == True and self.order_kind == "buy":
-#                if (current_bid_price - order_price) < trail_take_profit:
-#                    self.result_logger.info("# Execute Trail Stop")
-#                    self.result_logger.info("# current_bid_price=%s, order_price=%s" % (current_bid_price, order_price))
-#                    stl_flag = True
-#            elif self.trail_flag == True and self.order_kind == "sell":
-#                if (order_price - current_ask_price) < trail_take_profit:
-#                    self.result_logger.info("# Execute Trail Stop")
-#                    self.result_logger.info("# current_ask_price=%s, order_price=%s" % (current_ask_price, order_price))
-#                    stl_flag = True
-#
-#
-#        if second_flag == "on":
-#            # 含み益0.5超えたら、トレールストップの二段階目をONにする
-#            if self.order_kind == "buy":
-#                if (current_bid_price - order_price) > second_take_profit:
-#                    self.trail_second_flag = True
-#            elif self.order_kind == "sell":
-#                if (order_price - current_ask_price) > second_take_profit:
-#                    self.trail_second_flag = True
-#
-#
-#            # second_flagがTrueで且つ、含み益が0.3以下になったら決済する
-#            if self.trail_second_flag == True and self.order_kind == "buy":
-#                if (current_bid_price - order_price) < 0.3:
-#                    stl_flag = True
-#            elif self.trail_second_flag == True and self.order_kind == "sell":
-#                if (order_price - current_ask_price) < 0.3:
-#                    stl_flag = True
-
         return stl_flag
 
     def setSlope(self, base_time):
@@ -345,4 +305,7 @@ class ExpantionAlgo(SuperAlgo):
         self.setSlopeBollinger1h3(base_time)
         self.setSlope(base_time)
         self.setVolatilityPrice(base_time)
-        self.setHighlowPrice(base_time, 24)
+        hour = base_time.hour
+        minutes = base_time.minutes
+        if hour == 7 and minutes == 0:
+            self.setHighlowPrice(base_time, 24)
