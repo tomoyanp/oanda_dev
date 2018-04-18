@@ -55,7 +55,6 @@ class ReverseAlgo(SuperAlgo):
                     # 1分足の終値付近で計算ロジックに入る
                     if minutes == 0 and seconds <= 10:
                         self.debug_logger.info("%s :TrendReverseLogic START" % base_time)
-                        # 性能的に5分に一回呼び出しに変更
                         self.setIndicator(base_time)
                         current_price = self.getCurrentPrice()
                         trade_flag = self.decideReverseTrade(trade_flag, current_price)
@@ -107,9 +106,12 @@ class ReverseAlgo(SuperAlgo):
 
         if (self.upper_sigma_1h3 - self.lower_sigma_1h3) > 3:
             if current_price > (self.upper_sigma_1h25):
+                self.result_logger("current_price=%s, upper_sigma_1h3=%s, lower_sigma_1h3=%s, upper_sigma_1h25=%s, lower_sigma_1h25=%s" % (current_price, self.upper_sigma_1h3, self.lower_sigma_1h3, self.upper_sigma_1h25, self.lower_sigma_1h25))
+
                 trade_flag = "sell"
             elif current_price < (self.lower_sigma_1h25):
                 trade_flag = "buy"
+                self.result_logger("current_price=%s, upper_sigma_1h3=%s, lower_sigma_1h3=%s, upper_sigma_1h25=%s, lower_sigma_1h25=%s" % (current_price, self.upper_sigma_1h3, self.lower_sigma_1h3, self.upper_sigma_1h25, self.lower_sigma_1h25))
 
         return trade_flag
 
@@ -117,18 +119,6 @@ class ReverseAlgo(SuperAlgo):
     def decideReverseStopLoss(self, stl_flag, current_price):
 
         return stl_flag
-
-    def decideVolatility(self, current_price):
-        volatility_value = 0.3
-        up_flag = False
-        down_flag = False
-
-        if float(self.volatility_buy_price) + float(volatility_value) < current_price:
-            up_flag = True
-        elif float(self.volatility_bid_price) - float(volatility_value) > current_price:
-            down_flag = True
-
-        return up_flag, down_flag
 
 
     def decideTrailLogic(self, stl_flag, current_ask_price, current_bid_price, current_price):
@@ -159,11 +149,13 @@ class ReverseAlgo(SuperAlgo):
             # trail_flagがONで、含み益がなくなったら決済する
             if self.trail_flag == True and self.order_kind == "buy":
                 if (self.most_high_price - 0.5) > current_bid_price:
+                    self.result_logger.info("######################################")
                     self.result_logger.info("# Execute FirstTrail Stop")
                     self.result_logger.info("# current_bid_price=%s, order_price=%s" % (current_bid_price, order_price))
                     stl_flag = True
             elif self.trail_flag == True and self.order_kind == "sell":
                 if (self.most_low_price + 0.5) < current_ask_price :
+                    self.result_logger.info("######################################")
                     self.result_logger.info("# Execute FirstTrail Stop")
                     self.result_logger.info("# current_ask_price=%s, order_price=%s" % (current_ask_price, order_price))
                     stl_flag = True
@@ -181,11 +173,13 @@ class ReverseAlgo(SuperAlgo):
             # trail_flagがONで、含み益がなくなったら決済する
             if self.trail_second_flag == True and self.order_kind == "buy":
                 if (self.most_high_price - 0.3) > current_bid_price:
+                    self.result_logger.info("######################################")
                     self.result_logger.info("# Execute SecondTrail Stop")
                     self.result_logger.info("# current_bid_price=%s, order_price=%s" % (current_bid_price, order_price))
                     stl_flag = True
             elif self.trail_second_flag == True and self.order_kind == "sell":
                 if (self.most_low_price + 0.3) < current_ask_price :
+                    self.result_logger.info("######################################")
                     self.result_logger.info("# Execute SecondTrail Stop")
                     self.result_logger.info("# current_ask_price=%s, order_price=%s" % (current_ask_price, order_price))
                     stl_flag = True
