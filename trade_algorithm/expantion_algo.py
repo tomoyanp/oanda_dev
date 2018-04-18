@@ -306,6 +306,6 @@ class ExpantionAlgo(SuperAlgo):
         self.setSlope(base_time)
         self.setVolatilityPrice(base_time)
         hour = base_time.hour
-        minutes = base_time.minutes
+        minutes = base_time.minute
         if hour == 7 and minutes == 0:
             self.setHighlowPrice(base_time, 24)
