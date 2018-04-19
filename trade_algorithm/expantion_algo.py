@@ -184,13 +184,13 @@ class ExpantionAlgo(SuperAlgo):
             if up_flag and self.order_kind == "sell":
                 stl_flag = True
                 self.result_logger.info("# Execute Volatility Settlement")
-                self.result_logger.info("# volatility_buy_price=%s,     current_price=%s" % (self.volatility_buy_price, current_price))
+                self.result_logger.info("# volatility_buy_price=%s, current_price=%s" % (self.volatility_buy_price, current_price))
                 self.buy_count = 0
                 self.sell_count = 0
             elif down_flag and self.order_kind == "buy":
                 stl_flag = True
                 self.result_logger.info("# Execute Volatility Settlement")
-                self.result_logger.info("# volatility_bid_price=%s,     current_price=%s" % (self.volatility_bid_price, current_price))
+                self.result_logger.info("# volatility_bid_price=%s, current_price=%s" % (self.volatility_bid_price, current_price))
                 self.buy_count = 0
                 self.sell_count = 0
 
@@ -198,8 +198,8 @@ class ExpantionAlgo(SuperAlgo):
                 if self.decideHighPrice(current_price):
                     stl_flag = True
                     self.result_logger.info("# Execute Reverse Settlement")
-                    self.result_logger.info("# upper_sigma_1h3=%s ,     lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
-                    self.result_logger.info("# current_price=%s,     upper_sigma_5m3=%s" % (current_price, self.upper_sigma_5m3))
+                    self.result_logger.info("# upper_sigma_1h3=%s ,lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
+                    self.result_logger.info("# current_price=%s ,upper_sigma_5m3=%s" % (current_price, self.upper_sigma_5m3))
                     self.result_logger.info("# slope=%s" % (self.slope))
 
 
@@ -208,8 +208,8 @@ class ExpantionAlgo(SuperAlgo):
                     stl_flag = True
                     self.result_logger.info("# Execute Reverse Settlement")
                     self.result_logger.info("# upper_sigma_1h3=%s ,     lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
-                self.result_logger.info("# current_price=%s, lower_sigma_5m3=%s" % (current_price, self.lower_sigma_5m3))
-                self.result_logger.info("# slope=%s" % (self.slope))
+                    self.result_logger.info("# current_price=%s, lower_sigma_5m3=%s" % (current_price, self.lower_sigma_5m3))
+                    self.result_logger.info("# slope=%s" % (self.slope))
 
 
         self.debug_logger.info("order_kind = %s" % self.order_kind)
