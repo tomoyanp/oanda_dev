@@ -104,14 +104,30 @@ class ReverseAlgo(SuperAlgo):
         # when value is bigger than 2 between upper 3sigma and lower 3sigma, bollinger band base line's slope is bigger than 0,
         # count += 1
 
-        if (self.upper_sigma_1h3 - self.lower_sigma_1h3) > 3:
-            if current_price > (self.upper_sigma_1h25):
-                self.result_logger("current_price=%s, upper_sigma_1h3=%s, lower_sigma_1h3=%s, upper_sigma_1h25=%s, lower_sigma_1h25=%s" % (current_price, self.upper_sigma_1h3, self.lower_sigma_1h3, self.upper_sigma_1h25, self.lower_sigma_1h25))
+        if self.buy_flag == False and self.sell_flag == False:
+            if (self.upper_sigma_1h3 - self.lower_sigma_1h3) > 3:
+                if current_price > self.base_line_1h3:
+                    self.difference = self.upper_sigma_1h3 - self.lower_sigma_1h3
+                    self.buy_flag = False
+                    self.sell_flag = True
 
-                trade_flag = "sell"
-            elif current_price < (self.lower_sigma_1h25):
-                trade_flag = "buy"
-                self.result_logger("current_price=%s, upper_sigma_1h3=%s, lower_sigma_1h3=%s, upper_sigma_1h25=%s, lower_sigma_1h25=%s" % (current_price, self.upper_sigma_1h3, self.lower_sigma_1h3, self.upper_sigma_1h25, self.lower_sigma_1h25))
+                else:
+                    self.buy_flag = True
+                    self.sell_flag = False
+
+
+        if self.buy_flag or self.sell_flag:
+            current_difference = self.upper_sigma_1h3 - self.lower_sigma_1h3
+            if current_difference < self.difference:
+                if self.buy_flag:
+                    trade_flag = "buy"
+                    self.buy_flag = False
+                    self.sell_flag = False
+
+                elif self.sell_flag:
+                    trade_flag = "sell"
+                    self.buy_flag = False
+                    self.sell_flag = False
 
         return trade_flag
 
