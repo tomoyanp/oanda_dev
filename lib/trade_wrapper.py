@@ -9,6 +9,7 @@ from datetime import datetime, timedelta
 from trendfollow_algo import TrendFollowAlgo
 from trendreverse_algo import TrendReverseAlgo
 from expantion_algo import ExpantionAlgo
+from reverse_algo import ReverseAlgo
 from daytime_algo import DaytimeAlgo
 from oanda_wrapper import OandaWrapper
 from common import instrument_init, account_init
@@ -63,6 +64,8 @@ class TradeWrapper:
             self.trade_algo = ExpantionAlgo(self.instrument, self.base_path, self.config_name, base_time)
         elif algo == "daytime":
             self.trade_algo = DaytimeAlgo(self.instrument, self.base_path, self.config_name, base_time)
+        elif algo == "reverse":
+            self.trade_algo = ReverseAlgo(self.instrument, self.base_path, self.config_name, base_time)
         else:
             self.trade_algo = HiLowAlgo(self.instrument, self.base_path, self.config_name, base_time)
 

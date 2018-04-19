@@ -16,9 +16,10 @@ for rf in file_list:
   out = out.split("\n")
 
   for line in out:
-    pf = line.split("PROFIT=")[1]
-    pf = float(pf)
-    profit = profit + pf
+    if re.search("PROFIT", line):
+        pf = line.split("PROFIT=")[1]
+        pf = float(pf)
+        profit = profit + pf
 
 
   write_file.write("# PROFIT=%s\n" % profit)

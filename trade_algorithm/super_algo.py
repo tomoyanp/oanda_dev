@@ -252,6 +252,17 @@ class SuperAlgo(object):
         self.base_line_5m3 = response[0][2]
 
 
+
+    def setBollinger1h25(self, base_time):
+        # bollinger 1h 3sigma
+        ind_type = "bollinger1h2.5"
+        sql = "select upper_sigma, lower_sigma, base_line from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC limit 1" % (self.instrument, base_time, ind_type)
+        response = self.mysql_connector.select_sql(sql)
+        self.upper_sigma_1h25 = response[0][0]
+        self.lower_sigma_1h25 = response[0][1]
+        self.base_line_1h25 = response[0][2]
+
+
     def setBollinger1h3(self, base_time):
         # bollinger 1h 3sigma
         ind_type = "bollinger1h3"
@@ -318,7 +329,8 @@ class SuperAlgo(object):
     def setHighlowPrice(self, base_time, span):
         # high low price
         ind_type = "highlow"
-        end_time = base_time - timedelta(hours=5)
+#        end_time = base_time - timedelta(hours=5)
+        end_time = base_time
         sql = "select high_price, low_price from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC limit %s" % (self.instrument, end_time, ind_type, span)
         response = self.mysql_connector.select_sql(sql)
         high_price_list = []
