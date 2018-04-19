@@ -37,6 +37,7 @@ class ExpantionAlgo(SuperAlgo):
         self.second_flag = self.config_data["second_trail_mode"]
         self.most_high_price = 0
         self.most_low_price = 0
+        self.mode = ""
 
     def decideTrade(self, base_time):
         trade_flag = "pass"
@@ -52,13 +53,19 @@ class ExpantionAlgo(SuperAlgo):
                 if weekday == 5 and hour >= 5:
                     trade_flag = "pass"
                 elif hour < 4 or hour > 14:
-                    # 1分足の終値付近で計算ロジックに入る
+                    # expantion algorithm start
                     if minutes % 5 == 0 and seconds <= 10:
                         self.debug_logger.info("%s :TrendExpantionLogic START" % base_time)
                         # 性能的に5分に一回呼び出しに変更
                         self.setIndicator(base_time)
                         current_price = self.getCurrentPrice()
                         trade_flag = self.decideExpantionTrade(trade_flag, current_price)
+                    # reverse algorithm start
+                    if minutes == 0 and seconds <= 10:
+                        self.debug_logger.info("%s :TrendReverseLogic START" % base_time)
+                        self.setIndicator(base_time)
+                        current_price = self.getCurrentPrice()
+                        trade_flag = self.decideReverseTrade(trade_flag, current_price)
 
                 else:
                     self.buy_count = 0
@@ -91,6 +98,7 @@ class ExpantionAlgo(SuperAlgo):
                         self.debug_logger.info("%s :ExpantionStlLogic START" % base_time)
                         self.setIndicator(base_time)
                         stl_flag = self.decideExpantionStopLoss(stl_flag, current_price)
+                        stl_flag = self.decideReverseStopLoss(stl_flag, current_price)
                         stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, current_price)
 
 
@@ -100,6 +108,55 @@ class ExpantionAlgo(SuperAlgo):
             return stl_flag
         except:
             raise
+
+
+
+    def decideReverseTrade(self, trade_flag, current_price):
+        # when current_price touch reversed sigma, count = 0
+        # when value is bigger than 2 between upper 3sigma and lower 3sigma, bollinger band base line's slope is bigger than 0,
+        # count += 1
+#        band_threshold = 3
+        band_threshold = 2
+
+        if self.buy_flag == False and self.sell_flag == False:
+            if (self.upper_sigma_1h3 - self.lower_sigma_1h3) > band_threshold:
+                if current_price > self.base_line_1h3:
+                    self.buy_flag = False
+                    self.sell_flag = True
+
+                else:
+                    self.buy_flag = True
+                    self.sell_flag = False
+                self.difference = self.upper_sigma_1h3 - self.lower_sigma_1h3
+
+
+        if self.buy_flag or self.sell_flag:
+            current_difference = self.upper_sigma_1h3 - self.lower_sigma_1h3
+            if current_difference < self.difference:
+                if self.buy_flag:
+                    self.result_logger.info("#######################################")
+                    self.result_logger.info("# current_difference=%s, self.difference=%s" % (current_difference, self.difference))
+                    trade_flag = "buy"
+                    self.buy_flag = False
+                    self.sell_flag = False
+
+                elif self.sell_flag:
+                    self.result_logger.info("#######################################")
+                    self.result_logger.info("# current_difference=%s, self.difference=%s" % (current_difference, self.difference))
+                    trade_flag = "sell"
+                    self.buy_flag = False
+                    self.sell_flag = False
+
+            elif self.difference < current_difference:
+                self.difference = current_difference
+
+
+            if trade_flag != "pass":
+                self.mode = "reverse"
+
+        return trade_flag
+
+
 
     def decideExpantion(self, current_price):
         # when current_price touch reversed sigma, count = 0
@@ -118,36 +175,37 @@ class ExpantionAlgo(SuperAlgo):
             self.buy_count = 0
 
     def decideExpantionStopLoss(self, stl_flag, current_price):
-        self.decideExpantion(current_price)
-        up_flag, down_flag = self.decideVolatility(current_price)
+        if self.mode == "expantion":
+            self.decideExpantion(current_price)
+            up_flag, down_flag = self.decideVolatility(current_price)
 
-        if up_flag and self.order_kind == "sell":
-            stl_flag = True
-            self.result_logger.info("# Execute Volatility Settlement")
-            self.result_logger.info("# volatility_buy_price=%s, current_price=%s" % (self.volatility_buy_price, current_price))
-            self.buy_count = 0
-            self.sell_count = 0
-        elif down_flag and self.order_kind == "buy":
-            stl_flag = True
-            self.result_logger.info("# Execute Volatility Settlement")
-            self.result_logger.info("# volatility_bid_price=%s, current_price=%s" % (self.volatility_bid_price, current_price))
-            self.buy_count = 0
-            self.sell_count = 0
-
-        if self.buy_count >= 2 and self.order_kind == "sell":
-            if self.decideHighPrice(current_price):
+            if up_flag and self.order_kind == "sell":
                 stl_flag = True
-                self.result_logger.info("# Execute Reverse Settlement")
-                self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
-                self.result_logger.info("# current_price=%s, upper_sigma_5m3=%s" % (current_price, self.upper_sigma_5m3))
-                self.result_logger.info("# slope=%s" % (self.slope))
-
-
-        elif self.sell_count >= 2 and self.order_kind == "buy":
-            if self.decideLowPrice(current_price):
+                self.result_logger.info("# Execute Volatility Settlement")
+                self.result_logger.info("# volatility_buy_price=%s,     current_price=%s" % (self.volatility_buy_price, current_price))
+                self.buy_count = 0
+                self.sell_count = 0
+            elif down_flag and self.order_kind == "buy":
                 stl_flag = True
-                self.result_logger.info("# Execute Reverse Settlement")
-                self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
+                self.result_logger.info("# Execute Volatility Settlement")
+                self.result_logger.info("# volatility_bid_price=%s,     current_price=%s" % (self.volatility_bid_price, current_price))
+                self.buy_count = 0
+                self.sell_count = 0
+
+            if self.buy_count >= 2 and self.order_kind == "sell":
+                if self.decideHighPrice(current_price):
+                    stl_flag = True
+                    self.result_logger.info("# Execute Reverse Settlement")
+                    self.result_logger.info("# upper_sigma_1h3=%s ,     lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
+                    self.result_logger.info("# current_price=%s,     upper_sigma_5m3=%s" % (current_price, self.upper_sigma_5m3))
+                    self.result_logger.info("# slope=%s" % (self.slope))
+
+
+            elif self.sell_count >= 2 and self.order_kind == "buy":
+                if self.decideLowPrice(current_price):
+                    stl_flag = True
+                    self.result_logger.info("# Execute Reverse Settlement")
+                    self.result_logger.info("# upper_sigma_1h3=%s ,     lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
                 self.result_logger.info("# current_price=%s, lower_sigma_5m3=%s" % (current_price, self.lower_sigma_5m3))
                 self.result_logger.info("# slope=%s" % (self.slope))
 
@@ -159,6 +217,13 @@ class ExpantionAlgo(SuperAlgo):
         self.debug_logger.info("order_kind = %s" % self.order_kind)
         self.debug_logger.info("buy_count = %s" % self.buy_count)
         self.debug_logger.info("sell_count = %s" % self.sell_count)
+
+        return stl_flag
+
+    def decideReverseStopLoss(self, stl_flag, current_price):
+        if self.mode == "reverse":
+            pass
+
 
         return stl_flag
 
@@ -220,12 +285,14 @@ class ExpantionAlgo(SuperAlgo):
         else:
             pass
 
+        if trade_flag != "pass":
+            self.mode = "expantion"
+
         return trade_flag
 
-#    def resetFlag(self):
-#        super(ExpantionAlgo, self)
-#        self.most_high_price = 0
-#        self.most_low_price = 0
+    def resetFlag(self):
+        super(ExpantionAlgo, self).resetFlag()
+        self.mode = ""
 
     def decideTrailLogic(self, stl_flag, current_ask_price, current_bid_price, current_price):
         order_price = self.getOrderPrice()
