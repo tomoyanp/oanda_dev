@@ -53,13 +53,17 @@ class ReverseAlgo(SuperAlgo):
                 # 土曜の5時以降はエントリーしない
                 if weekday == 5 and hour >= 5:
                     trade_flag = "pass"
-                else:
+                elif hour < 4 or hour > 14:
                     # 1分足の終値付近で計算ロジックに入る
                     if minutes == 0 and seconds <= 10:
                         self.debug_logger.info("%s :TrendReverseLogic START" % base_time)
                         self.setIndicator(base_time)
                         current_price = self.getCurrentPrice()
                         trade_flag = self.decideReverseTrade(trade_flag, current_price)
+
+                else:
+                    self.buy_count = 0
+                    self.sell_count = 0
 
             return trade_flag
         except:
@@ -101,39 +105,31 @@ class ReverseAlgo(SuperAlgo):
         # when current_price touch reversed sigma, count = 0
         # when value is bigger than 2 between upper 3sigma and lower 3sigma, bollinger band base line's slope is bigger than 0,
         # count += 1
-#        band_threshold = 3
-        band_threshold = 2
 
         if self.buy_flag == False and self.sell_flag == False:
-            if (self.upper_sigma_1h3 - self.lower_sigma_1h3) > band_threshold:
+            if (self.upper_sigma_1h3 - self.lower_sigma_1h3) > 3:
                 if current_price > self.base_line_1h3:
+                    self.difference = self.upper_sigma_1h3 - self.lower_sigma_1h3
                     self.buy_flag = False
                     self.sell_flag = True
 
                 else:
                     self.buy_flag = True
                     self.sell_flag = False
-                self.difference = self.upper_sigma_1h3 - self.lower_sigma_1h3
 
 
         if self.buy_flag or self.sell_flag:
             current_difference = self.upper_sigma_1h3 - self.lower_sigma_1h3
             if current_difference < self.difference:
                 if self.buy_flag:
-                    self.result_logger.info("#######################################")
-                    self.result_logger.info("# current_difference=%s, self.difference=%s" % (current_difference, self.difference))
                     trade_flag = "buy"
                     self.buy_flag = False
                     self.sell_flag = False
 
                 elif self.sell_flag:
-                    self.result_logger.info("#######################################")
-                    self.result_logger.info("# current_difference=%s, self.difference=%s" % (current_difference, self.difference))
                     trade_flag = "sell"
                     self.buy_flag = False
                     self.sell_flag = False
-            elif self.difference < current_difference:
-                self.difference = current_difference
 
         return trade_flag
 
