@@ -54,15 +54,22 @@ class ExpantionAlgo(SuperAlgo):
                 # 土曜の5時以降はエントリーしない
                 if weekday == 5 and hour >= 5:
                     trade_flag = "pass"
+                    self.buy_count = 0
+                    self.sell_count = 0
 
                 else:
-                    # expantion algorithm start
-                    if minutes % 5 == 0 and seconds <= 10:
-                        self.debug_logger.info("%s :TrendExpantionLogic START" % base_time)
-                        # 性能的に5分に一回呼び出しに変更
-                        self.setIndicator(base_time)
-                        current_price = self.getCurrentPrice()
-                        trade_flag = self.decideExpantionTrade(trade_flag, current_price)
+                    if hour >= 15 or hour < 4:
+                        # expantion algorithm start
+                        if (minutes % 5 == 0 and seconds <= 10):
+                            self.debug_logger.info("%s :TrendExpantionLogic START" % base_time)
+                            # 性能的に5分に一回呼び出しに変更
+                            self.setIndicator(base_time)
+                            current_price = self.getCurrentPrice()
+                            trade_flag = self.decideExpantionTrade(trade_flag, current_price)
+                    else:
+                        self.buy_count = 0
+                        self.sell_count = 0
+
                     # reverse algorithm start
                     if minutes == 0 and seconds <= 10:
                         self.debug_logger.info("%s :TrendReverseLogic START" % base_time)
@@ -258,7 +265,7 @@ class ExpantionAlgo(SuperAlgo):
             self.buy_count = 0
             self.sell_count = 0
 
-        if self.buy_count >= 2:
+        if self.buy_count >= 2 and trade_flag == "pass":
             if self.decideHighPrice(current_price):
                 trade_flag = "buy"
                 self.result_logger.info("#######################################################")
@@ -269,7 +276,7 @@ class ExpantionAlgo(SuperAlgo):
                 self.buy_count = 0
                 self.sell_count = 0
 
-        elif self.sell_count >= 2:
+        elif self.sell_count >= 2 and trade_flag == "pass":
             if self.decideLowPrice(current_price):
                 trade_flag = "sell"
                 self.result_logger.info("#######################################################")
