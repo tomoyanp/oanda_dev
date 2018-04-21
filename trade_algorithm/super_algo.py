@@ -354,7 +354,11 @@ class SuperAlgo(object):
     def decideLowPrice(self, current_price):
         lowprice_threshold = 0.5
         flag = False
-        if current_price < (float(self.low_price) - float(lowprice_threshold)) or (float(self.low_price) + float(lowprice_threshold)) < current_price:
+        if current_price < (float(self.low_price) - float(lowprice_threshold)):
+            self.highlow_mode = "exceed"
+            flag = True
+        elif (float(self.low_price) + float(lowprice_threshold)) < current_price:
+            self.highlow_mode = "surplus"
             flag = True
 
         return flag
@@ -363,7 +367,12 @@ class SuperAlgo(object):
     def decideHighPrice(self, current_price):
         highprice_threshold = 0.5
         flag = False
-        if current_price > (float(self.high_price) + float(highprice_threshold)) or current_price < (float(self.high_price) - float(highprice_threshold)):
+        if current_price > (float(self.high_price) + float(highprice_threshold)):
+            self.highlow_mode = "exceed"
+            flag = True
+
+        elif  current_price < (float(self.high_price) - float(highprice_threshold)):
+            self.highlow_mode = "surplus"
             flag = True
 
         return flag

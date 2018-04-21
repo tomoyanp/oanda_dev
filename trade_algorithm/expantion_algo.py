@@ -65,7 +65,7 @@ class ExpantionAlgo(SuperAlgo):
                             # 性能的に5分に一回呼び出しに変更
                             self.setIndicator(base_time)
                             current_price = self.getCurrentPrice()
-                            trade_flag = self.decideExpantionTrade(trade_flag, current_price)
+                            trade_flag = self.decideExpantionTrade(trade_flag, current_price, base_time)
                     else:
                         self.buy_count = 0
                         self.sell_count = 0
@@ -96,7 +96,7 @@ class ExpantionAlgo(SuperAlgo):
                     elif minutes % 5 == 0 and seconds <= 10:
                         self.debug_logger.info("%s :ExpantionStlLogic START" % base_time)
                         self.setIndicator(base_time)
-                        stl_flag = self.decideExpantionStopLoss(stl_flag, current_price)
+                        stl_flag = self.decideExpantionStopLoss(stl_flag, current_price, base_time)
                         stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, current_price)
 
 
@@ -109,69 +109,81 @@ class ExpantionAlgo(SuperAlgo):
 
 
 
-    def decideExpantion(self, current_price):
+    def calcBuyExpantion(self, current_price, base_time):
         # when current_price touch reversed sigma, count = 0
         # when value is bigger than 2 between upper 3sigma and lower 3sigma, bollinger band base line's slope is bigger than 0,
         # count += 1
-        if current_price > (self.upper_sigma_5m3):
-            if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2 and self.slope > 0:
-                self.buy_count = self.buy_count + 1
 
+        if self.buy_count == 2:
+            pass
+        else:
+            if current_price > (self.upper_sigma_5m3):
+                if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2 and self.slope > 0:
+                    self.buy_count = self.buy_count + 1
+    
+                self.sell_count = 0
+    
+            if self.buy_count == 2:
+                self.first_flag_time = base_time
+
+
+    def calcSellExpantion(self, current_price, base_time):
+        if self.sell_count == 2:
+            pass
+        else:
+            if current_price < (self.lower_sigma_5m3):
+                if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2 and self.slope < 0:
+                    self.sell_count = self.sell_count + 1
+    
+                self.buy_count = 0
+    
+            if self.sell_count == 2:
+                self.first_flag_time = base_time
+
+    def decideExpantionStopLoss(self, stl_flag, current_price, base_time):
+        self.calcBuyExpantion(current_price, base_time)
+        self.calcSellExpantion(current_price, base_time)
+        up_flag, down_flag = self.decideVolatility(current_price)
+
+        if up_flag and self.order_kind == "sell":
+            stl_flag = True
+            self.result_logger.info("# Execute Volatility Settlement")
+            self.result_logger.info("# volatility_buy_price=%s, current_price=%s" % (self.volatility_buy_price, current_price))
+            self.buy_count = 0
+            self.sell_count = 0
+        elif down_flag and self.order_kind == "buy":
+            stl_flag = True
+            self.result_logger.info("# Execute Volatility Settlement")
+            self.result_logger.info("# volatility_bid_price=%s, current_price=%s" % (self.volatility_bid_price, current_price))
+            self.buy_count = 0
             self.sell_count = 0
 
-        elif current_price < (self.lower_sigma_5m3) and self.slope < 0:
-            if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2 and self.slope < 0:
-                self.sell_count = self.sell_count + 1
-
-            self.buy_count = 0
-
-    def decideExpantionStopLoss(self, stl_flag, current_price):
-#        if self.mode == "expantion":
-        if 1 == 1:
-            self.decideExpantion(current_price)
-            up_flag, down_flag = self.decideVolatility(current_price)
-
-            if up_flag and self.order_kind == "sell":
+        if self.buy_count == 2 and self.order_kind == "sell":
+            if self.decideHighPrice(current_price):
                 stl_flag = True
-                self.result_logger.info("# Execute Volatility Settlement")
-                self.result_logger.info("# volatility_buy_price=%s, current_price=%s" % (self.volatility_buy_price, current_price))
-                self.buy_count = 0
-                self.sell_count = 0
-            elif down_flag and self.order_kind == "buy":
+                self.result_logger.info("# Execute Reverse Settlement")
+                self.result_logger.info("# upper_sigma_1h3=%s ,lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
+                self.result_logger.info("# current_price=%s ,upper_sigma_5m3=%s" % (current_price, self.upper_sigma_5m3))
+                self.result_logger.info("# slope=%s" % (self.slope))
+
+
+        elif self.sell_count == 2 and self.order_kind == "buy":
+            if self.decideLowPrice(current_price):
                 stl_flag = True
-                self.result_logger.info("# Execute Volatility Settlement")
-                self.result_logger.info("# volatility_bid_price=%s, current_price=%s" % (self.volatility_bid_price, current_price))
-                self.buy_count = 0
-                self.sell_count = 0
+                self.result_logger.info("# Execute Reverse Settlement")
+                self.result_logger.info("# upper_sigma_1h3=%s ,     lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
+                self.result_logger.info("# current_price=%s, lower_sigma_5m3=%s" % (current_price, self.lower_sigma_5m3))
+                self.result_logger.info("# slope=%s" % (self.slope))
 
-            if self.buy_count >= 2 and self.order_kind == "sell":
-                if self.decideHighPrice(current_price):
-                    stl_flag = True
-                    self.result_logger.info("# Execute Reverse Settlement")
-                    self.result_logger.info("# upper_sigma_1h3=%s ,lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
-                    self.result_logger.info("# current_price=%s ,upper_sigma_5m3=%s" % (current_price, self.upper_sigma_5m3))
-                    self.result_logger.info("# slope=%s" % (self.slope))
-
-
-            elif self.sell_count >= 2 and self.order_kind == "buy":
-                if self.decideLowPrice(current_price):
-                    stl_flag = True
-                    self.result_logger.info("# Execute Reverse Settlement")
-                    self.result_logger.info("# upper_sigma_1h3=%s ,     lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
-                    self.result_logger.info("# current_price=%s, lower_sigma_5m3=%s" % (current_price, self.lower_sigma_5m3))
-                    self.result_logger.info("# slope=%s" % (self.slope))
-
-
-        self.debug_logger.info("order_kind = %s" % self.order_kind)
-        self.debug_logger.info("buy_count = %s" % self.buy_count)
-        self.debug_logger.info("sell_count = %s" % self.sell_count)
 
         return stl_flag
 
 
-    def decideExpantionTrade(self, trade_flag, current_price):
-        self.decideExpantion(current_price)
+    def decideExpantionTrade(self, trade_flag, current_price, base_time):
         up_flag, down_flag = self.decideVolatility(current_price)
+
+        self.calcBuyExpantion(current_price, base_time)
+        self.calcSellExpantion(current_price, base_time)
 
         if up_flag:
             trade_flag = "buy"
@@ -190,22 +202,26 @@ class ExpantionAlgo(SuperAlgo):
             self.buy_count = 0
             self.sell_count = 0
 
-        if self.buy_count >= 2 and trade_flag == "pass":
+        if self.buy_count == 2 and trade_flag == "pass":
             if self.decideHighPrice(current_price):
                 trade_flag = "buy"
                 self.result_logger.info("#######################################################")
                 self.result_logger.info("# in Expantion Algorithm")
+                self.result_logger.info("# first_flag_time=%s" % self.first_flag_time)
+                self.result_logger.info("# highlow_mode=%s" % self.highlow_mode)
                 self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
                 self.result_logger.info("# current_price=%s, upper_sigma_5m3=%s" % (current_price, self.upper_sigma_5m3))
                 self.result_logger.info("# slope=%s" % (self.slope))
                 self.buy_count = 0
                 self.sell_count = 0
 
-        elif self.sell_count >= 2 and trade_flag == "pass":
+        elif self.sell_count == 2 and trade_flag == "pass":
             if self.decideLowPrice(current_price):
                 trade_flag = "sell"
                 self.result_logger.info("#######################################################")
                 self.result_logger.info("# in Expantion Algorithm")
+                self.result_logger.info("# first_flag_time=%s" % self.first_flag_time)
+                self.result_logger.info("# highlow_mode=%s" % self.highlow_mode)
                 self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
                 self.result_logger.info("# current_price=%s, lower_sigma_5m3=%s" % (current_price, self.lower_sigma_5m3))
                 self.result_logger.info("# slope=%s" % (self.slope))

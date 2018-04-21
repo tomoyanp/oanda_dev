@@ -219,3 +219,4 @@ class ReverseAlgo(SuperAlgo):
     def setIndicator(self, base_time):
         self.setBollinger1h3(base_time)
         self.setBollinger1h25(base_time)
+        self.setVolatilityPrice(base_time)
