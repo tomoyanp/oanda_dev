@@ -263,6 +263,7 @@ class SuperAlgo(object):
         self.base_line_1h25 = response[0][2]
 
 
+
     def setBollinger1h3(self, base_time):
         # bollinger 1h 3sigma
         ind_type = "bollinger1h3"
@@ -366,6 +367,18 @@ class SuperAlgo(object):
             flag = True
 
         return flag
+
+    def decideVolatility(self, current_price):
+        volatility_value = 0.3
+        up_flag = False
+        down_flag = False
+
+        if float(self.volatility_buy_price) + float(volatility_value) < current_price:
+            up_flag = True
+        elif float(self.volatility_bid_price) - float(volatility_value) > current_price:
+            down_flag = True
+
+        return up_flag, down_flag
 
     @abstractmethod
     def setIndicator(self, base_time):
