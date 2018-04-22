@@ -118,7 +118,8 @@ class ExpantionAlgo(SuperAlgo):
             pass
         else:
             if current_price > (self.upper_sigma_5m3):
-                if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2 and self.slope > 0:
+#                if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2 and self.slope > 0:
+                if self.slope > 0:
                     self.buy_count = self.buy_count + 1
     
                 self.sell_count = 0
@@ -132,7 +133,8 @@ class ExpantionAlgo(SuperAlgo):
             pass
         else:
             if current_price < (self.lower_sigma_5m3):
-                if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2 and self.slope < 0:
+#                if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2 and self.slope < 0:
+                if self.slope < 0:
                     self.sell_count = self.sell_count + 1
     
                 self.buy_count = 0
