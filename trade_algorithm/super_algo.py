@@ -263,6 +263,7 @@ class SuperAlgo(object):
         self.base_line_1h25 = response[0][2]
 
 
+
     def setBollinger1h3(self, base_time):
         # bollinger 1h 3sigma
         ind_type = "bollinger1h3"
@@ -353,7 +354,11 @@ class SuperAlgo(object):
     def decideLowPrice(self, current_price):
         lowprice_threshold = 0.5
         flag = False
-        if current_price < (float(self.low_price) - float(lowprice_threshold)) or (float(self.low_price) + float(lowprice_threshold)) < current_price:
+        if current_price < (float(self.low_price) - float(lowprice_threshold)):
+            self.highlow_mode = "exceed"
+            flag = True
+        elif (float(self.low_price) + float(lowprice_threshold)) < current_price:
+            self.highlow_mode = "surplus"
             flag = True
 
         return flag
@@ -362,10 +367,27 @@ class SuperAlgo(object):
     def decideHighPrice(self, current_price):
         highprice_threshold = 0.5
         flag = False
-        if current_price > (float(self.high_price) + float(highprice_threshold)) or current_price < (float(self.high_price) - float(highprice_threshold)):
+        if current_price > (float(self.high_price) + float(highprice_threshold)):
+            self.highlow_mode = "exceed"
+            flag = True
+
+        elif  current_price < (float(self.high_price) - float(highprice_threshold)):
+            self.highlow_mode = "surplus"
             flag = True
 
         return flag
+
+    def decideVolatility(self, current_price):
+        volatility_value = 0.3
+        up_flag = False
+        down_flag = False
+
+        if float(self.volatility_buy_price) + float(volatility_value) < current_price:
+            up_flag = True
+        elif float(self.volatility_bid_price) - float(volatility_value) > current_price:
+            down_flag = True
+
+        return up_flag, down_flag
 
     @abstractmethod
     def setIndicator(self, base_time):

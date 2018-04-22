@@ -139,6 +139,14 @@ class ReverseAlgo(SuperAlgo):
 
 
     def decideReverseStopLoss(self, stl_flag, current_price):
+        up_flag, down_flag = self.decideVolatility(current_price)
+        difference = self.upper_sigma_1h3 - self.lower_sigma_1h3
+
+        if up_flag or down_flag:
+            stl_flag = True
+
+        if difference < 2:
+            stl_flag = True
 
         return stl_flag
 
@@ -211,3 +219,4 @@ class ReverseAlgo(SuperAlgo):
     def setIndicator(self, base_time):
         self.setBollinger1h3(base_time)
         self.setBollinger1h25(base_time)
+        self.setVolatilityPrice(base_time)
