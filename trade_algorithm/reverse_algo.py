@@ -115,10 +115,12 @@ class ReverseAlgo(SuperAlgo):
                 if current_price > self.base_line_1h3:
                     self.buy_flag = False
                     self.sell_flag = True
+                    self.first_trade_flag = False
 
                 else:
                     self.buy_flag = True
                     self.sell_flag = False
+                    self.first_trade_flag = False
                 self.difference = self.upper_sigma_1h3 - self.lower_sigma_1h3
 
 
