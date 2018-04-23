@@ -39,6 +39,7 @@ class ReverseAlgo(SuperAlgo):
         self.most_low_price = 0
         self.buy_flag = False
         self.sell_flag = False
+        self.first_trade_flag = False
 
     def decideTrade(self, base_time):
         trade_flag = "pass"
@@ -104,15 +105,21 @@ class ReverseAlgo(SuperAlgo):
         band_threshold = 3
 #        band_threshold = 2
 
-        if self.buy_flag == False and self.sell_flag == False:
+        if self.first_trade_flag == False:
+            if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < band_threshold:
+                self.first_trade_flag == True
+
+        if self.buy_flag == False and self.sell_flag == False and self.first_trade_flag:
             if (self.upper_sigma_1h3 - self.lower_sigma_1h3) > band_threshold:
                 if current_price > self.base_line_1h3:
                     self.buy_flag = False
                     self.sell_flag = True
+                    self.first_trade_flag = False
 
                 else:
                     self.buy_flag = True
                     self.sell_flag = False
+                    self.first_trade_flag = False
                 self.difference = self.upper_sigma_1h3 - self.lower_sigma_1h3
 
 
