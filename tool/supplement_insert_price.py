@@ -22,7 +22,7 @@ if __name__ == "__main__":
     args = sys.argv
     currency = args[1].strip()
     con = MysqlConnector()
-    base_time = "2017-01-04 07:01:30"
+    base_time = "2017-01-04 07:00:00"
     end_time = "2018-04-01 00:00:00"
     #base_time = "2017-12-31 00:00:00"
     end_time = datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
