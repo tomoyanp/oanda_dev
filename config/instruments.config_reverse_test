@@ -2,7 +2,7 @@
   "GBP_JPY": {
     "__comments" : "reverse mode",
     "stop_loss": 0.2,
-    "take_profit": 2.0,
+    "take_profit": 0.5,
     "time_width": 720000,
     "stl_time_width": 720000,
     "sleep_time": 300,

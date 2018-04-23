@@ -7,6 +7,7 @@ import json
 
 # 実行スクリプトのパスを取得して、追加
 current_path = os.path.abspath(os.path.dirname(__file__))
+current_path = current_path + "/.."
 sys.path.append(current_path)
 sys.path.append(current_path + "/trade_algorithm")
 sys.path.append(current_path + "/obj")
@@ -36,7 +37,7 @@ mysql_connector = MysqlConnector()
 now = datetime.now()
 
 start_time = "2017-01-04 07:00:00"
-end_time = "2018-01-10 00:00:00"
+end_time = "2018-04-01 00:00:00"
 end_time = datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
 start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
 

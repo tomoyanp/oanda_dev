@@ -39,6 +39,7 @@ class ReverseAlgo(SuperAlgo):
         self.most_low_price = 0
         self.buy_flag = False
         self.sell_flag = False
+        self.first_trade_flag = False
 
     def decideTrade(self, base_time):
         trade_flag = "pass"
@@ -101,10 +102,15 @@ class ReverseAlgo(SuperAlgo):
         # when current_price touch reversed sigma, count = 0
         # when value is bigger than 2 between upper 3sigma and lower 3sigma, bollinger band base line's slope is bigger than 0,
         # count += 1
-#        band_threshold = 3
-        band_threshold = 2
+        band_threshold = 3
+#        band_threshold = 2
 
-        if self.buy_flag == False and self.sell_flag == False:
+        current_difference = self.upper_sigma_1h3 - self.lower_sigma_1h3
+        if self.first_trade_flag == False:
+            if current_difference < band_threshold:
+                self.first_trade_flag = True
+
+        if self.buy_flag == False and self.sell_flag == False and self.first_trade_flag:
             if (self.upper_sigma_1h3 - self.lower_sigma_1h3) > band_threshold:
                 if current_price > self.base_line_1h3:
                     self.buy_flag = False
@@ -117,7 +123,6 @@ class ReverseAlgo(SuperAlgo):
 
 
         if self.buy_flag or self.sell_flag:
-            current_difference = self.upper_sigma_1h3 - self.lower_sigma_1h3
             if current_difference < self.difference:
                 if self.buy_flag:
                     self.result_logger.info("#######################################")
@@ -125,6 +130,7 @@ class ReverseAlgo(SuperAlgo):
                     trade_flag = "buy"
                     self.buy_flag = False
                     self.sell_flag = False
+                    self.first_trade_flag = False
 
                 elif self.sell_flag:
                     self.result_logger.info("#######################################")
@@ -132,9 +138,14 @@ class ReverseAlgo(SuperAlgo):
                     trade_flag = "sell"
                     self.buy_flag = False
                     self.sell_flag = False
+                    self.first_trade_flag = False
             elif self.difference < current_difference:
                 self.difference = current_difference
 
+        self.debug_logger.info("first_trade_flag=%s" % self.first_trade_flag)
+        self.debug_logger.info("current_difference=%s" % current_difference)
+        self.debug_logger.info("buy_flag=%s" % self.buy_flag)
+        self.debug_logger.info("sell_flag=%s" % self.sell_flag)
         return trade_flag
 
 
@@ -143,9 +154,13 @@ class ReverseAlgo(SuperAlgo):
         difference = self.upper_sigma_1h3 - self.lower_sigma_1h3
 
         if up_flag or down_flag:
+            self.result_logger.info("#######################################")
+            self.result_logger.info("# volatility Settlement")
             stl_flag = True
 
         if difference < 2:
+            self.result_logger.info("#######################################")
+            self.result_logger.info("# bandwidth Settlement")
             stl_flag = True
 
         return stl_flag
