@@ -101,8 +101,8 @@ class ReverseAlgo(SuperAlgo):
         # when current_price touch reversed sigma, count = 0
         # when value is bigger than 2 between upper 3sigma and lower 3sigma, bollinger band base line's slope is bigger than 0,
         # count += 1
-#        band_threshold = 3
-        band_threshold = 2
+        band_threshold = 3
+#        band_threshold = 2
 
         if self.buy_flag == False and self.sell_flag == False:
             if (self.upper_sigma_1h3 - self.lower_sigma_1h3) > band_threshold:
