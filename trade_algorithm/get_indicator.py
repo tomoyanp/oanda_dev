@@ -88,3 +88,19 @@ def getLastPriceDifferenceWrapper(instrument, base_time, connector):
 
     return (end_price - start_price)
 
+
+def getWeekStartPrice(instrument, base_time, week_start_price, current_price):
+    weekday = base_time.weekday()
+    hour = base_time.hour
+    minutes = base_time.minute
+
+    if weekday == 0 and hour == 7 and minutes == 0:
+        week_start_price = current_price
+
+    elif week_start_price == 0:
+        week_start_price = current_price
+
+    else:
+        pass
+
+    return week_start_price
