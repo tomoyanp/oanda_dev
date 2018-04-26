@@ -48,6 +48,8 @@ class ExpantionAlgo(SuperAlgo):
             if self.order_flag:
                 pass
             else:
+                self.setDailyIndicator(base_time)
+
                 weekday = base_time.weekday()
                 hour = base_time.hour
                 minutes = base_time.minute
@@ -79,6 +81,8 @@ class ExpantionAlgo(SuperAlgo):
             stl_flag = False
             ex_stlmode = self.config_data["ex_stlmode"]
             if self.order_flag:
+
+                self.setDailyIndicator(base_time)
                 if ex_stlmode == "on":
                     minutes = base_time.minute
                     seconds = base_time.second
@@ -159,7 +163,6 @@ class ExpantionAlgo(SuperAlgo):
                 self.result_logger.info("# Execute Reverse Settlement")
                 self.result_logger.info("# upper_sigma_1h3=%s ,lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
                 self.result_logger.info("# current_price=%s ,upper_sigma_5m3=%s" % (current_price, self.upper_sigma_5m3))
-                self.result_logger.info("# last_difference=%s" % self.last_difference)
                 self.result_logger.info("# slope=%s" % (self.slope))
                 self.result_logger.info("# week_start_price=%s" % (self.week_start_price))
 
@@ -170,7 +173,6 @@ class ExpantionAlgo(SuperAlgo):
                 self.result_logger.info("# Execute Reverse Settlement")
                 self.result_logger.info("# upper_sigma_1h3=%s ,     lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
                 self.result_logger.info("# current_price=%s, lower_sigma_5m3=%s" % (current_price, self.lower_sigma_5m3))
-                self.result_logger.info("# last_difference=%s" % self.last_difference)
                 self.result_logger.info("# slope=%s" % (self.slope))
                 self.result_logger.info("# week_start_price=%s" % (self.week_start_price))
 
@@ -332,5 +334,6 @@ class ExpantionAlgo(SuperAlgo):
         upper_list, lower_list, base_list = getBollingerWrapper(base_time, self.instrument, ind_type="bollinger1h3", span=5, connector=self.mysql_connector)
         self.slope = getSlope(base_list)
         self.volatility_buy_price, self.volatility_bid_price = getVolatilityPriceWrapper(self.instrument, base_time, span=5, connector=self.mysql_connector)
+
+    def setDailyIndicator(self, base_time):
         self.week_start_price = getWeekStartPrice(self.instrument, base_time, self.week_start_price, ((self.ask_price + self.bid_price) / 2))
-        
