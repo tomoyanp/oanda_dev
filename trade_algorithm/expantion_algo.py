@@ -192,7 +192,8 @@ class ExpantionAlgo(SuperAlgo):
         self.debug_logger.info("down_flag=%s" % down_flag)
         self.debug_logger.info("self.buy_count=%s" % self.buy_count)
         self.debug_logger.info("self.sell_count=%s" % self.sell_count)
-        self.debug_logger.info("week_start_price=%s" % (self.week_start_price))
+        self.debug_logger.info("self.high_price=%s" % self.high_price)
+        self.debug_logger.info("self.low_price=%s" % self.low_price)
         self.debug_logger.info("#############################################")
 
 
