@@ -17,7 +17,7 @@
 
 from super_algo import SuperAlgo
 from common import instrument_init, account_init, decideMarket, getSlope
-from get_indicator import getBollingerWrapper, getVolatilityPriceWrapper, getHighlowPriceWrapper, getLastPriceDifferenceWrapper
+from get_indicator import getBollingerWrapper, getVolatilityPriceWrapper, getHighlowPriceWrapper, getLastPriceDifferenceWrapper, getWeekStartPrice
 from trade_calculator import decideLowExceedPrice, decideLowSurplusPrice, decideHighExceedPrice, decideHighSurplusPrice, decideVolatility, decideDailyVolatilityPrice
 from mysql_connector import MysqlConnector
 from datetime import datetime, timedelta
@@ -61,10 +61,9 @@ class ExpantionAlgo(SuperAlgo):
                         self.buy_count = 0
                         self.sell_count = 0
 
-                    else:
-                        if hour >= 15 or hour < 4:
-                            self.debug_logger.info("%s :TrendExpantionLogic START" % base_time)
-                            trade_flag = self.decideExpantionTrade(trade_flag, current_price, base_time)
+                    elif hour >= 15 or hour < 4:
+                        self.debug_logger.info("%s :TrendExpantionLogic START" % base_time)
+                        trade_flag = self.decideExpantionTrade(trade_flag, current_price, base_time)
                     else:
                         self.buy_count = 0
                         self.sell_count = 0
@@ -137,6 +136,7 @@ class ExpantionAlgo(SuperAlgo):
                 self.first_flag_time = base_time
 
     def decideExpantionStopLoss(self, stl_flag, current_price, base_time):
+        up_flag, down_flag = decideVolatility(current_price=current_price, volatility_value=0.3, volatility_buy_price=self.volatility_buy_price, volatility_bid_price=self.volatility_bid_price)
         self.calcBuyExpantion(current_price, base_time)
         self.calcSellExpantion(current_price, base_time)
 
@@ -189,11 +189,7 @@ class ExpantionAlgo(SuperAlgo):
 
 
     def decideExpantionTrade(self, trade_flag, current_price, base_time):
-        surplus_flag = False
-        exceed_flag = False
-
         up_flag, down_flag = decideVolatility(current_price=current_price, volatility_value=0.3, volatility_buy_price=self.volatility_buy_price, volatility_bid_price=self.volatility_bid_price)
-
         self.calcBuyExpantion(current_price, base_time)
         self.calcSellExpantion(current_price, base_time)
 
@@ -335,8 +331,6 @@ class ExpantionAlgo(SuperAlgo):
 
         upper_list, lower_list, base_list = getBollingerWrapper(base_time, self.instrument, ind_type="bollinger1h3", span=5, connector=self.mysql_connector)
         self.slope = getSlope(base_list)
-
         self.volatility_buy_price, self.volatility_bid_price = getVolatilityPriceWrapper(self.instrument, base_time, span=5, connector=self.mysql_connector)
-
-        self.week_start_price = getWeekStartPrice(self.instrument, base_time, self.week_star
-        , ((self.ask_price + self.bid_price) / 2))
+        self.week_start_price = getWeekStartPrice(self.instrument, base_time, self.week_start_price, ((self.ask_price + self.bid_price) / 2))
+        
