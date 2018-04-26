@@ -41,7 +41,7 @@ class ExpantionAlgo(SuperAlgo):
         self.sell_count = 0
         self.week_start_price = 0
         self.setIndicator(base_time)
-        self.high_price, self.low_price = getHighlowPriceWrapper(instrument=self.instrument, base_time=base_time, span=24, slide_span=5, connector=self.mysql_connector)
+        self.high_price, self.low_price = getHighlowPriceWrapper(instrument=self.instrument, base_time=base_time, span=24, slide_span=0, connector=self.mysql_connector)
 
     def decideTrade(self, base_time):
         trade_flag = "pass"
@@ -360,4 +360,4 @@ class ExpantionAlgo(SuperAlgo):
         minute = base_time.minute
         second = base_time.second
         if hour == 7 and minute == 0 and second <= 10:
-            self.high_price, self.low_price = getHighlowPriceWrapper(instrument=self.instrument, base_time=base_time, span=24, slide_span=5, connector=self.mysql_connector)
+            self.high_price, self.low_price = getHighlowPriceWrapper(instrument=self.instrument, base_time=base_time, span=24, slide_span=0, connector=self.mysql_connector)
