@@ -69,12 +69,13 @@ class ExpantionAlgo(SuperAlgo):
 
                     if minutes % 5 == 4:
                         self.setIndicator(base_time)
-                        if (hour >= 15 or hour < 4):
+                        elif (hour >= 15 or hour < 4):
                             trade_flag = self.decideExpantionTrade(trade_flag, current_price, base_time)
                         else:
                             self.buy_count = 0
                             self.sell_count = 0
 
+            self.debug_logger.info("Trade Logic at %s" % base_time)
             return trade_flag
         except:
             raise
@@ -112,6 +113,7 @@ class ExpantionAlgo(SuperAlgo):
             else:
                 pass
 
+            self.debug_logger.info("Settlement Logic at %s" % base_time)
             return stl_flag
         except:
             raise
@@ -140,13 +142,13 @@ class ExpantionAlgo(SuperAlgo):
 
     def calcSellExpantion(self, current_price, base_time):
         if self.sell_count == 0:
-            if current_price < self.lower_sigma_5m3:
+            if cuurent_price < self.lower_sigma_5m3:
                 self.sell_count = 1
                 self.sell_count_price = current_price
                 self.buy_count = 0
 
         elif self.sell_count == 1:
-            if current_price < self.lower_sigma_5m3 and current_price < self.sell_count_price:
+            if cuurent_price < self.lower_sigma_5m3 and current_price < self.sell_count_price:
                 self.sell_count = 2
                 self.first_flag_time = base_time
                 self.buy_count = 0
@@ -215,7 +217,7 @@ class ExpantionAlgo(SuperAlgo):
         if trade_flag != "pass":
             self.mode = "expantion"
 
-#        self.writeDebugLog(base_time, up_flag, down_flag, mode=mode)
+        self.writeDebugLog(base_time, up_flag="null", down_flag="null", mode=mode)
 
         return trade_flag
 
@@ -252,7 +254,7 @@ class ExpantionAlgo(SuperAlgo):
         else:
             pass
 
-#        self.writeDebugLog(base_time, up_flag, down_flag, mode=mode)
+        self.writeDebugLog(base_time, up_flag="null", down_flag="null", mode=mode)
 
         return stl_flag
 
@@ -369,21 +371,29 @@ class ExpantionAlgo(SuperAlgo):
         if mode == "trade":
             self.result_logger.info("#######################################################")
             self.result_logger.info("# in volatility_price Algorithm")
-        elif mode == "stl":
-            self.result_logger.info("# Execute Volatility Settlement")
+            self.result_logger.info("# volatility_buy_price=%s" % self.volatility_buy_price)
+            self.result_logger.info("# volatility_bid_price=%s" % self.volatility_bid_price)
+            self.result_logger.info("# current_price=%s" % current_price)
+#        elif mode == "stl":
+#            self.result_logger.info("# Execute Volatility Settlement")
 
-        self.result_logger.info("# volatility_buy_price=%s, current_price=%s" % (self.volatility_buy_price, current_price))
-        self.result_logger.info("# volatility_bid_price=%s, current_price=%s" % (self.volatility_bid_price, current_price))
 
     def writeExpantionLog(self, current_price, mode, highlow_mode):
         if mode == "trade":
             self.result_logger.info("#######################################################")
             self.result_logger.info("# in Expantion Algorithm")
-        elif mode == "stl":
-            self.result_logger.info("# Execute Reverse Settlement")
+            self.result_logger.info("# upper_sigma_1h3=%s" % self.upper_sigma_1h3)
+            self.result_logger.info("# lower_sigma_1h3=%s" % self.upper_sigma_1h3)
+            self.result_logger.info("# current_price=%s" % current_price)
+            self.result_logger.info("# upper_sigma_5m3=%s" % self.upper_sigma_5m3)
+            self.result_logger.info("# slope=%s" % self.slope)
+            self.result_logger.info("# first_flag_time=%s" % self.first_flag_time)
+            self.result_logger.info("# highlow_mode=%s" % highlow_mode)
+            self.result_logger.info("# self.high_price=%s" % self.high_price)
+            self.result_logger.info("# self.low_price=%s" % self.low_price)
+            self.result_logger.info("# self.first_flag_time=%s" % self.first_flag_time)
+            self.result_logger.info("# self.high_count_price=%s" % self.high_count_price)
+            self.result_logger.info("# self.low_count_price=%s" %  self.low_count_price))
 
-        self.result_logger.info("# first_flag_time=%s" % self.first_flag_time)
-        self.result_logger.info("# upper_sigma_1h3=%s , lower_sigma_1h3=%s" % (self.upper_sigma_1h3, self.lower_sigma_1h3))
-        self.result_logger.info("# current_price=%s, upper_sigma_5m3=%s" % (current_price, self.upper_sigma_5m3))
-        self.result_logger.info("# highlow_mode=%s, self.high_price=%s, self.low_price=%s" % (highlow_mode, self.high_price, self.low_price))
-        self.result_logger.info("# slope=%s" % (self.slope))
+#        elif mode == "stl":
+#            self.result_logger.info("# Execute Reverse Settlement")
