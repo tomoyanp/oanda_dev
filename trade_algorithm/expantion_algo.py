@@ -149,7 +149,7 @@ class ExpantionAlgo(SuperAlgo):
     def decideVolatilityTrade(self, trade_flag, current_price, base_time):
         mode = "trade"
         # volatility price logic
-        up_flag, down_flag = decideVolatility(current_price=current_price, volatility_value=0.1, volatility_buy_price=self.volatility_buy_price, volatility_bid_price=self.volatility_bid_price)
+        up_flag, down_flag = decideVolatility(current_price=current_price, volatility_value=0.3, volatility_buy_price=self.volatility_buy_price, volatility_bid_price=self.volatility_bid_price)
 
         if up_flag:
             trade_flag = "buy"
@@ -213,7 +213,7 @@ class ExpantionAlgo(SuperAlgo):
 
     def decideVolatilityStopLoss(self, stl_flag, current_price, base_time):
         mode = "stl"
-        up_flag, down_flag = decideVolatility(current_price=current_price, volatility_value=0.1, volatility_buy_price=self.volatility_buy_price, volatility_bid_price=self.volatility_bid_price)
+        up_flag, down_flag = decideVolatility(current_price=current_price, volatility_value=0.3, volatility_buy_price=self.volatility_buy_price, volatility_bid_price=self.volatility_bid_price)
 
         if up_flag and self.order_kind == "sell":
             stl_flag = True
