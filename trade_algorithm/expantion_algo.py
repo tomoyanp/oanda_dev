@@ -38,7 +38,9 @@ class ExpantionAlgo(SuperAlgo):
         self.most_low_price = 0
         self.mode = ""
         self.buy_count = 0
+        self.buy_count_price = 0
         self.sell_count = 0
+        self.sell_count_price = 0
         self.week_start_price = 0
         self.setIndicator(base_time)
         self.high_price, self.low_price = getHighlowPriceWrapper(instrument=self.instrument, base_time=base_time, span=24, slide_span=0, connector=self.mysql_connector)
@@ -50,30 +52,28 @@ class ExpantionAlgo(SuperAlgo):
                 pass
             else:
                 self.setDailyIndicator(base_time)
-                self.setCommonlyIndicator(base_time)
                 current_price = self.getCurrentPrice()
-
-                trade_flag = self.decideVolatilityTrade(trade_flag, current_price, base_time)
-
                 weekday = base_time.weekday()
                 hour = base_time.hour
                 minutes = base_time.minute
                 seconds = base_time.second
-                if (minutes % 5 == 4 and seconds >= 50):
-                    self.setIndicator(base_time)
 
-                    # if weekday == Saturday, will have no entry.
-                    if weekday == 5 and hour >= 5:
-                        trade_flag = "pass"
-                        self.buy_count = 0
-                        self.sell_count = 0
+                # if weekday == Saturday, will have no entry.
+                if weekday == 5 and hour >= 5:
+                    trade_flag = "pass"
+                    self.buy_count = 0
+                    self.sell_count = 0
+                elif seconds >= 50:
+                    self.setCommonlyIndicator(base_time)
+                    trade_flag = self.decideVolatilityTrade(trade_flag, current_price, base_time)
 
-                    elif hour >= 15 or hour < 4:
-                        trade_flag = self.decideExpantionTrade(trade_flag, current_price, base_time)
-                    else:
-                        self.buy_count = 0
-                        self.sell_count = 0
-
+                    if minutes % 5 == 4:
+                        self.setIndicator(base_time)
+                        elif (hour >= 15 or hour < 4):
+                            trade_flag = self.decideExpantionTrade(trade_flag, current_price, base_time)
+                        else:
+                            self.buy_count = 0
+                            self.sell_count = 0
 
             return trade_flag
         except:
@@ -86,24 +86,27 @@ class ExpantionAlgo(SuperAlgo):
             stl_flag = False
             ex_stlmode = self.config_data["ex_stlmode"]
             if self.order_flag:
-                self.setDailyIndicator(base_time)
-                self.setCommonlyIndicator(base_time)
+
+
                 if ex_stlmode == "on":
+                    self.setDailyIndicator(base_time)
                     current_price = self.getCurrentPrice()
-                    stl_flag = self.decideVolatilityStopLoss(stl_flag, current_price, base_time)
 
                     minutes = base_time.minute
                     seconds = base_time.second
                     weekday = base_time.weekday()
                     hour = base_time.hour
 
-                    if minutes % 5 == 4 and seconds >= 50:
-                        self.setIndicator(base_time)
-                        # 土曜の5時以降にポジションを持っている場合は決済する
-                        if weekday == 5 and hour >= 5:
-                            self.result_logger.info("# weekend stl logic")
-                            stl_flag = True
-                        else:
+                    # 土曜の5時以降にポジションを持っている場合は決済する
+                    if weekday == 5 and hour >= 5:
+                        self.result_logger.info("# weekend stl logic")
+                        stl_flag = True
+                    elif seconds >= 50:
+                        self.setCommonlyIndicator(base_time)
+                        stl_flag = self.decideVolatilityStopLoss(stl_flag, current_price, base_time)
+
+                        if minutes % 5 == 4:
+                            self.setIndicator(base_time)
                             stl_flag = self.decideExpantionStopLoss(stl_flag, current_price, base_time)
                             stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price)
             else:
@@ -120,31 +123,36 @@ class ExpantionAlgo(SuperAlgo):
         # when value is bigger than 2 between upper 3sigma and lower 3sigma, bollinger band base line's slope is bigger than 0,
         # count += 1
 
-        if self.buy_count == 2:
-            pass
-        else:
+        if self.buy_count == 0:
             if current_price > (self.upper_sigma_5m3):
-                if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2 and self.slope > 0:
-                    self.buy_count = self.buy_count + 2
-
+                self.buy_count = 1
+                self.buy_count_price = current_price
                 self.sell_count = 0
 
-            if self.buy_count == 2:
+        elif self.buy_count == 1:
+            if current_price > (self.upper_sigma_5m3) and current_price > self.buy_count_price:
+                self.buy_count = 2
                 self.first_flag_time = base_time
+                self.sell_count = 0
 
+        elif self.buy_count == 2:
+            pass
 
     def calcSellExpantion(self, current_price, base_time):
-        if self.sell_count == 2:
-            pass
-        else:
-            if current_price < (self.lower_sigma_5m3):
-                if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2 and self.slope < 0:
-                    self.sell_count = self.sell_count + 2
-
+        if self.sell_count == 0:
+            if cuurent_price < self.lower_sigma_5m3:
+                self.sell_count = 1
+                self.sell_count_price = current_price
                 self.buy_count = 0
 
-            if self.sell_count == 2:
+        elif self.sell_count == 1:
+            if cuurent_price < self.lower_sigma_5m3 and current_price < self.sell_count_price:
+                self.sell_count = 2
                 self.first_flag_time = base_time
+                self.buy_count = 0
+
+        elif self.sell_count == 2:
+            pass
 
     def decideVolatilityTrade(self, trade_flag, current_price, base_time):
         mode = "trade"
@@ -379,4 +387,3 @@ class ExpantionAlgo(SuperAlgo):
         self.result_logger.info("# current_price=%s, upper_sigma_5m3=%s" % (current_price, self.upper_sigma_5m3))
         self.result_logger.info("# highlow_mode=%s, self.high_price=%s, self.low_price=%s" % (highlow_mode, self.high_price, self.low_price))
         self.result_logger.info("# slope=%s" % (self.slope))
-
