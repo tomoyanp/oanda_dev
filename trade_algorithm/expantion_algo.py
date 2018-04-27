@@ -69,7 +69,7 @@ class ExpantionAlgo(SuperAlgo):
 
                     if minutes % 5 == 4:
                         self.setIndicator(base_time)
-                        elif (hour >= 15 or hour < 4):
+                        if (hour >= 15 or hour < 4):
                             trade_flag = self.decideExpantionTrade(trade_flag, current_price, base_time)
                         else:
                             self.buy_count = 0
@@ -140,13 +140,13 @@ class ExpantionAlgo(SuperAlgo):
 
     def calcSellExpantion(self, current_price, base_time):
         if self.sell_count == 0:
-            if cuurent_price < self.lower_sigma_5m3:
+            if current_price < self.lower_sigma_5m3:
                 self.sell_count = 1
                 self.sell_count_price = current_price
                 self.buy_count = 0
 
         elif self.sell_count == 1:
-            if cuurent_price < self.lower_sigma_5m3 and current_price < self.sell_count_price:
+            if current_price < self.lower_sigma_5m3 and current_price < self.sell_count_price:
                 self.sell_count = 2
                 self.first_flag_time = base_time
                 self.buy_count = 0
