@@ -39,7 +39,6 @@ def getEwmaWrapper(instrument, base_time, ind_type, span, connector):
 
 def getVolatilityPriceWrapper(instrument, base_time, span, connector):
     start_time = base_time
-    span = span * 60
     sql = "select ask_price, bid_price from %s_TABLE where insert_time < \'%s\' order by insert_time desc limit %s" % (instrument, start_time, span)
     response = connector.select_sql(sql)
     volatility_buy_price = response[-1][0]

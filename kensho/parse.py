@@ -44,13 +44,16 @@ out = out.split("\n")
 
 flag_list = out
 
-
 for i in range(0, len(profit_list)):
   algo = algo_list[i].split(" ")[2]
   order_time = order_list[i].split(" ")[4] + " " + order_list[i].split(" ")[5]
   profit = profit_list[i].split(" ")[1].split("=")[1]
   side = flag_list[i].split(" ")[2].split("=")[1]
   settle_time = settle_list[i].split(" ")[4] + " " + settle_list[i].split(" ")[5]
+
+  order_ptime = datetime.strptime(order_time, "%Y-%m-%d %H:%M:%S")
+  settle_ptime = datetime.strptime(settle_time, "%Y-%m-%d %H:%M:%S")
+  difference_time = settle_ptime - order_ptime
 
   start_time = datetime.strptime(order_time, "%Y-%m-%d %H:%M:%S")
   end_time = datetime.strptime(settle_time, "%Y-%m-%d %H:%M:%S")
@@ -61,7 +64,7 @@ for i in range(0, len(profit_list)):
   days = result.day-1
   hour = result.hour
 
-  print order_time + "," + settle_time + "," + algo + "," + side + "," + profit
+  print order_time + "," + settle_time + "," + str(difference_time.total_seconds()) + "," + algo + "," + side + "," + profit
 #  print algo_list[i].split(" ")[2], profit_list[i].split(" ")[2]
  
 write_file.close()
