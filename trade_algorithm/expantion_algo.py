@@ -329,7 +329,7 @@ class ExpantionAlgo(SuperAlgo):
 
 
     def setCommonlyIndicator(self, base_time):
-        self.volatility_buy_price, self.volatility_bid_price = getVolatilityPriceWrapper(self.instrument, base_time, span=10, connector=self.mysql_connector)
+        self.volatility_buy_price, self.volatility_bid_price = getVolatilityPriceWrapper(self.instrument, base_time, span=60, connector=self.mysql_connector)
 
 
     def setDailyIndicator(self, base_time):
