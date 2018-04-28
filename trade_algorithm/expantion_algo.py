@@ -42,6 +42,7 @@ class ExpantionAlgo(SuperAlgo):
         self.sell_count = 0
         self.sell_count_price = 0
         self.week_start_price = 0
+        self.surplus_flag = False
         self.setIndicator(base_time)
         self.high_price, self.low_price = getHighlowPriceWrapper(instrument=self.instrument, base_time=base_time, span=24, slide_span=0, connector=self.mysql_connector)
 
@@ -134,7 +135,10 @@ class ExpantionAlgo(SuperAlgo):
 
         elif self.buy_count == 1:
 #            if current_price > (self.upper_sigma_5m3) and current_price > self.buy_count_price and self.slope > 0:
+            surplus_flag, surplus_mode = decideHighSurplusPrice(current_price=current_price, high_price=self.high_price, threshold=0.5)
             if current_price > (self.upper_sigma_5m3) and current_price > self.buy_count_price:
+                if surplus_flag:
+                    self.surplus_flag = True
                 self.buy_count = 2
                 self.first_flag_time = base_time
                 self.sell_count = 0
@@ -152,7 +156,10 @@ class ExpantionAlgo(SuperAlgo):
 
         elif self.sell_count == 1:
 #            if current_price < self.lower_sigma_5m3 and current_price < self.sell_count_price and self.slope < 0:
+            surplus_flag, surplus_mode = decideLowSurplusPrice(current_price=current_price, low_price=self.low_price, threshold=0.5)
             if current_price < self.lower_sigma_5m3 and current_price < self.sell_count_price:
+                if surplus_flag:
+                    self.surplus_flag = True
                 self.sell_count = 2
                 self.first_flag_time = base_time
                 self.buy_count = 0
@@ -184,10 +191,9 @@ class ExpantionAlgo(SuperAlgo):
         self.calcBuyExpantion(current_price, base_time)
         self.calcSellExpantion(current_price, base_time)
         if self.buy_count == 2 and trade_flag == "pass":
-            surplus_flag, surplus_mode = decideHighSurplusPrice(current_price=current_price, high_price=self.high_price, threshold=0.5)
             exceed_flag, exceed_mode = decideHighExceedPrice(current_price=current_price, high_price=self.high_price, threshold=0.2)
 
-            if surplus_flag:
+            if self.surplus_flag:
                 trade_flag = "buy"
                 self.buy_count = 0
                 self.sell_count = 0
@@ -200,10 +206,9 @@ class ExpantionAlgo(SuperAlgo):
                 self.writeExpantionLog(current_price, mode=mode, highlow_mode="exceed")
 
         elif self.sell_count == 2 and trade_flag == "pass":
-            surplus_flag, surplus_mode = decideLowSurplusPrice(current_price=current_price, low_price=self.low_price, threshold=0.5)
             exceed_flag, exceed_mode = decideLowExceedPrice(current_price=current_price, low_price=self.low_price, threshold=0.2)
 
-            if surplus_flag:
+            if self.surplus_flag:
                 trade_flag = "sell"
                 self.buy_count = 0
                 self.sell_count = 0
@@ -270,6 +275,7 @@ class ExpantionAlgo(SuperAlgo):
         self.mode = ""
         self.most_high_price = 0
         self.most_low_price = 0
+        self.surplus_flag = False
         super(ExpantionAlgo, self).resetFlag()
 
     def decideTrailLogic(self, stl_flag, current_ask_price, current_bid_price):
