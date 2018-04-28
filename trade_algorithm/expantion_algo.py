@@ -274,8 +274,8 @@ class ExpantionAlgo(SuperAlgo):
 
     def decideTrailLogic(self, stl_flag, current_ask_price, current_bid_price):
         order_price = self.getOrderPrice()
-#        first_take_profit = 0.5
-        first_take_profit = 0.3
+        first_take_profit = 0.5
+#        first_take_profit = 0.3
         second_take_profit = 1.0
 
         # update the most high and low price
