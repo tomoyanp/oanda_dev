@@ -64,16 +64,16 @@ class ExpantionAlgo(SuperAlgo):
                     self.buy_count = 0
                     self.sell_count = 0
                 elif seconds >= 50:
-                    self.setCommonlyIndicator(base_time)
-                    trade_flag = self.decideVolatilityTrade(trade_flag, current_price, base_time)
+                    if (hour >= 15 or hour < 4):
+                        self.setCommonlyIndicator(base_time)
+                        trade_flag = self.decideVolatilityTrade(trade_flag, current_price, base_time)
 
-                    if minutes % 5 == 4:
-                        self.setIndicator(base_time)
-                        if (hour >= 15 or hour < 4):
+                        if minutes % 5 == 4:
+                            self.setIndicator(base_time)
                             trade_flag = self.decideExpantionTrade(trade_flag, current_price, base_time)
-                        else:
-                            self.buy_count = 0
-                            self.sell_count = 0
+                    else:
+                        self.buy_count = 0
+                        self.sell_count = 0
 
             self.debug_logger.info("Trade Logic at %s" % base_time)
             return trade_flag
@@ -126,13 +126,15 @@ class ExpantionAlgo(SuperAlgo):
         # count += 1
 
         if self.buy_count == 0:
-            if current_price > (self.upper_sigma_5m3) and self.slope > 0:
+#            if current_price > (self.upper_sigma_5m3) and self.slope > 0:
+            if current_price > (self.upper_sigma_5m3) > 0:
                 self.buy_count = 1
                 self.buy_count_price = current_price
                 self.sell_count = 0
 
         elif self.buy_count == 1:
-            if current_price > (self.upper_sigma_5m3) and current_price > self.buy_count_price and self.slope > 0:
+#            if current_price > (self.upper_sigma_5m3) and current_price > self.buy_count_price and self.slope > 0:
+            if current_price > (self.upper_sigma_5m3) and current_price > self.buy_count_price:
                 self.buy_count = 2
                 self.first_flag_time = base_time
                 self.sell_count = 0
@@ -142,13 +144,15 @@ class ExpantionAlgo(SuperAlgo):
 
     def calcSellExpantion(self, current_price, base_time):
         if self.sell_count == 0:
-            if current_price < self.lower_sigma_5m3 and self.slope < 0:
+#            if current_price < self.lower_sigma_5m3 and self.slope < 0:
+            if current_price < self.lower_sigma_5m3:
                 self.sell_count = 1
                 self.sell_count_price = current_price
                 self.buy_count = 0
 
         elif self.sell_count == 1:
-            if current_price < self.lower_sigma_5m3 and current_price < self.sell_count_price and self.slope < 0:
+#            if current_price < self.lower_sigma_5m3 and current_price < self.sell_count_price and self.slope < 0:
+            if current_price < self.lower_sigma_5m3 and current_price < self.sell_count_price:
                 self.sell_count = 2
                 self.first_flag_time = base_time
                 self.buy_count = 0
