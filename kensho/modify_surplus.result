@@ -1,0 +1,1156 @@
+#########################
+# ../main.py GBP_JPY demo expantion expantion_test test 
+# __comments = expantion mode
+# __comments1 = current master
+# enable_time = [u'00:00:00', u'01:00:00', u'02:00:00', u'03:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00', u'21:00:00', u'22:00:00', u'23:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# first_trail_mode = on
+# second_trail_mode = on
+# sleep_time = 10
+# stl_sleep_ltime = 1
+# stl_sleep_time = 10
+# stl_sleep_vtime = 1
+# stl_time_width = 720000
+# stop_loss = 0.2
+# take_profit = 2.0
+# time_width = 720000
+# trade_sleep_time = 1
+# units = 10000
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=150.341771905
+# lower_sigma_1h3=150.341771905
+# current_price=147.209
+# upper_sigma_5m3=148.410775837
+# slope=-0.514948616
+# first_flag_time=2018-03-01 00:49:50
+# highlow_mode=exceed
+# self.high_price=149.621
+# self.low_price=147.671
+# self.first_flag_time=2018-03-01 00:49:50
+# self.buy_count_price=0
+# self.sell_count_price=147.284
+# EXECUTE ORDER at 2018-03-01 00:49:50
+# ORDER_PRICE=147.209, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=146.842, order_price=147.209
+# EXECUTE SETTLEMENT at 2018-03-01 12:29:51
+# ORDER_PRICE=147.209, STL_PRICE=146.83, ORDER_KIND=sell, PROFIT=0.379
+# PROFIT=0.379
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=150.194546354
+# lower_sigma_1h3=150.194546354
+# current_price=147.134
+# upper_sigma_5m3=147.094237985
+# slope=-0.79337318
+# first_flag_time=2018-03-01 17:19:52
+# highlow_mode=surplus
+# self.high_price=149.521
+# self.low_price=146.7275
+# self.first_flag_time=2018-03-01 17:19:52
+# self.buy_count_price=147.016
+# self.sell_count_price=147.284
+# EXECUTE ORDER at 2018-03-01 17:19:52
+# ORDER_PRICE=147.134, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-01 17:39:03
+# ORDER_PRICE=147.134, STL_PRICE=146.957, ORDER_KIND=buy, PROFIT=-0.177
+# PROFIT=-0.177
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=149.143331266
+# lower_sigma_1h3=149.143331266
+# current_price=147.057
+# upper_sigma_5m3=146.960282482
+# slope=-0.752828517
+# first_flag_time=2018-03-01 22:49:54
+# highlow_mode=surplus
+# self.high_price=149.521
+# self.low_price=146.7275
+# self.first_flag_time=2018-03-01 22:49:54
+# self.buy_count_price=147.04
+# self.sell_count_price=146.736
+# EXECUTE ORDER at 2018-03-01 22:49:54
+# ORDER_PRICE=147.057, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-01 23:51:25
+# ORDER_PRICE=147.057, STL_PRICE=146.88, ORDER_KIND=buy, PROFIT=-0.177
+# PROFIT=-0.177
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=147.620200958
+# lower_sigma_1h3=147.620200958
+# current_price=145.733
+# upper_sigma_5m3=146.633117591
+# slope=-0.179248214
+# first_flag_time=2018-03-02 15:14:56
+# highlow_mode=exceed
+# self.high_price=147.49
+# self.low_price=146.0175
+# self.first_flag_time=2018-03-02 15:14:56
+# self.buy_count_price=147.04
+# self.sell_count_price=145.844
+# EXECUTE ORDER at 2018-03-02 15:29:56
+# ORDER_PRICE=145.733, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-03-02 15:43:07
+# ORDER_PRICE=145.733, STL_PRICE=145.91, ORDER_KIND=sell, PROFIT=-0.177
+# PROFIT=-0.177
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=146.368482899
+# lower_sigma_1h3=146.368482899
+# current_price=145.801
+# upper_sigma_5m3=145.799029408
+# slope=-0.252894012
+# first_flag_time=2018-03-05 17:54:50
+# highlow_mode=surplus
+# self.high_price=146.471
+# self.low_price=144.996
+# self.first_flag_time=2018-03-05 17:54:50
+# self.buy_count_price=145.781
+# self.sell_count_price=145.457
+# EXECUTE ORDER at 2018-03-05 17:54:50
+# ORDER_PRICE=145.801, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-05 18:09:51
+# ORDER_PRICE=145.801, STL_PRICE=145.624, ORDER_KIND=buy, PROFIT=-0.177
+# PROFIT=-0.177
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=146.461102607
+# lower_sigma_1h3=146.461102607
+# current_price=146.793
+# upper_sigma_5m3=146.803469595
+# slope=0.17097819
+# first_flag_time=2018-03-05 23:34:52
+# highlow_mode=exceed
+# self.high_price=146.471
+# self.low_price=144.996
+# self.first_flag_time=2018-03-05 23:34:52
+# self.buy_count_price=146.045
+# self.sell_count_price=145.457
+# EXECUTE ORDER at 2018-03-06 01:09:52
+# ORDER_PRICE=146.793, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=147.194, self.upper_sigma_5m3=147.463461542, self.lower_sigma_5m3=147.197431077, self.order_kind=buy
+# EXECUTE SETTLEMENT at 2018-03-06 13:09:53
+# ORDER_PRICE=146.793, STL_PRICE=147.194, ORDER_KIND=buy, PROFIT=0.401
+# PROFIT=0.401
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=148.598399066
+# lower_sigma_1h3=148.598399066
+# current_price=146.766
+# upper_sigma_5m3=147.209310923
+# slope=0.54281506
+# first_flag_time=2018-03-06 16:34:54
+# highlow_mode=surplus
+# self.high_price=147.123
+# self.low_price=145.091
+# self.first_flag_time=2018-03-06 16:34:54
+# self.buy_count_price=146.045
+# self.sell_count_price=146.809
+# EXECUTE ORDER at 2018-03-06 16:34:54
+# ORDER_PRICE=146.766, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-03-06 20:05:05
+# ORDER_PRICE=146.766, STL_PRICE=146.942, ORDER_KIND=sell, PROFIT=-0.176
+# PROFIT=-0.176
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=148.44826914
+# lower_sigma_1h3=148.44826914
+# current_price=147.382
+# upper_sigma_5m3=147.15327645
+# slope=0.426014386
+# first_flag_time=2018-03-06 20:14:56
+# highlow_mode=exceed
+# self.high_price=147.123
+# self.low_price=145.091
+# self.first_flag_time=2018-03-06 20:14:56
+# self.buy_count_price=147.017
+# self.sell_count_price=146.809
+# EXECUTE ORDER at 2018-03-06 20:24:56
+# ORDER_PRICE=147.382, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# current_bid_price=147.683, order_price=147.382
+# EXECUTE SETTLEMENT at 2018-03-06 22:44:57
+# ORDER_PRICE=147.382, STL_PRICE=147.695, ORDER_KIND=buy, PROFIT=0.313
+# PROFIT=0.313
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=148.177033358
+# lower_sigma_1h3=148.177033358
+# current_price=146.311
+# upper_sigma_5m3=146.969992655
+# slope=-0.205894073
+# first_flag_time=2018-03-07 18:29:58
+# highlow_mode=exceed
+# self.high_price=148.014
+# self.low_price=146.558
+# self.first_flag_time=2018-03-07 18:29:58
+# self.buy_count_price=147.017
+# self.sell_count_price=146.39
+# EXECUTE ORDER at 2018-03-07 18:34:58
+# ORDER_PRICE=146.311, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-03-07 18:51:29
+# ORDER_PRICE=146.311, STL_PRICE=146.471, ORDER_KIND=sell, PROFIT=-0.16
+# PROFIT=-0.16
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=148.263372023
+# lower_sigma_1h3=148.263372023
+# current_price=147.206
+# upper_sigma_5m3=147.198929322
+# slope=-0.0819737689999
+# first_flag_time=2018-03-07 23:39:50
+# highlow_mode=surplus
+# self.high_price=148.014
+# self.low_price=146.558
+# self.first_flag_time=2018-03-07 23:39:50
+# self.buy_count_price=147.191
+# self.sell_count_price=146.39
+# EXECUTE ORDER at 2018-03-07 23:39:50
+# ORDER_PRICE=147.206, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-08 00:05:41
+# ORDER_PRICE=147.206, STL_PRICE=147.022, ORDER_KIND=buy, PROFIT=-0.184
+# PROFIT=-0.184
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=148.09904089
+# lower_sigma_1h3=148.09904089
+# current_price=146.98
+# upper_sigma_5m3=147.547884461
+# slope=0.235331588
+# first_flag_time=2018-03-09 00:09:52
+# highlow_mode=surplus
+# self.high_price=147.572
+# self.low_price=146.238
+# self.first_flag_time=2018-03-09 00:09:52
+# self.buy_count_price=147.461
+# self.sell_count_price=147.063
+# EXECUTE ORDER at 2018-03-09 00:09:52
+# ORDER_PRICE=146.98, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-03-09 00:20:43
+# ORDER_PRICE=146.98, STL_PRICE=147.156, ORDER_KIND=sell, PROFIT=-0.176
+# PROFIT=-0.176
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=148.09904089
+# lower_sigma_1h3=148.09904089
+# current_price=146.742
+# upper_sigma_5m3=147.635193306
+# slope=0.235331588
+# first_flag_time=2018-03-09 00:49:54
+# highlow_mode=surplus
+# self.high_price=147.572
+# self.low_price=146.238
+# self.first_flag_time=2018-03-09 00:49:54
+# self.buy_count_price=147.461
+# self.sell_count_price=146.781
+# EXECUTE ORDER at 2018-03-09 00:49:54
+# ORDER_PRICE=146.742, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# current_price=146.7965, self.upper_sigma_5m3=146.785101614, self.lower_sigma_5m3=146.423010291, self.order_kind=sell
+# EXECUTE SETTLEMENT at 2018-03-09 05:59:55
+# ORDER_PRICE=146.742, STL_PRICE=146.7965, ORDER_KIND=sell, PROFIT=-0.0545
+# PROFIT=-0.0545
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=148.082129643
+# lower_sigma_1h3=148.082129643
+# current_price=147.8805
+# upper_sigma_5m3=147.928232797
+# slope=0.079961543
+# first_flag_time=2018-03-09 17:09:56
+# highlow_mode=exceed
+# self.high_price=147.667
+# self.low_price=146.3605
+# self.first_flag_time=2018-03-09 17:09:56
+# self.buy_count_price=147.55
+# self.sell_count_price=146.781
+# EXECUTE ORDER at 2018-03-09 22:34:56
+# ORDER_PRICE=147.8805, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# current_bid_price=148.082, order_price=147.8805
+# EXECUTE SETTLEMENT at 2018-03-10 01:49:57
+# ORDER_PRICE=147.8805, STL_PRICE=148.094, ORDER_KIND=buy, PROFIT=0.2135
+# PROFIT=0.2135
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=148.565115714
+# lower_sigma_1h3=148.565115714
+# current_price=147.892
+# upper_sigma_5m3=147.878236852
+# slope=0.132406886
+# first_flag_time=2018-03-12 21:14:50
+# highlow_mode=surplus
+# self.high_price=148.548
+# self.low_price=146.515
+# self.first_flag_time=2018-03-12 21:14:50
+# self.buy_count_price=147.864
+# self.sell_count_price=147.507
+# EXECUTE ORDER at 2018-03-12 21:14:50
+# ORDER_PRICE=147.892, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=147.871, self.upper_sigma_5m3=148.070615596, self.lower_sigma_5m3=147.897476785, self.order_kind=buy
+# EXECUTE SETTLEMENT at 2018-03-13 08:04:51
+# ORDER_PRICE=147.892, STL_PRICE=147.871, ORDER_KIND=buy, PROFIT=-0.021
+# PROFIT=-0.021
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=149.105313165
+# lower_sigma_1h3=149.105313165
+# current_price=149.213
+# upper_sigma_5m3=149.18129476
+# slope=0.368453605
+# first_flag_time=2018-03-13 21:59:52
+# highlow_mode=exceed
+# self.high_price=148.213
+# self.low_price=147.422
+# self.first_flag_time=2018-03-13 21:59:52
+# self.buy_count_price=148.661
+# self.sell_count_price=147.507
+# EXECUTE ORDER at 2018-03-13 21:59:52
+# ORDER_PRICE=149.213, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-14 00:34:13
+# ORDER_PRICE=149.213, STL_PRICE=149.0, ORDER_KIND=buy, PROFIT=-0.213
+# PROFIT=-0.213
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=149.694405093
+# lower_sigma_1h3=149.694405093
+# current_price=148.909
+# upper_sigma_5m3=149.477292202
+# slope=0.529684295
+# first_flag_time=2018-03-14 01:09:54
+# highlow_mode=surplus
+# self.high_price=148.213
+# self.low_price=147.422
+# self.first_flag_time=2018-03-14 01:09:54
+# self.buy_count_price=148.661
+# self.sell_count_price=149.028
+# EXECUTE ORDER at 2018-03-14 01:09:54
+# ORDER_PRICE=148.909, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-03-14 01:47:35
+# ORDER_PRICE=148.909, STL_PRICE=149.089, ORDER_KIND=sell, PROFIT=-0.18
+# PROFIT=-0.18
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=149.424295366
+# lower_sigma_1h3=149.424295366
+# current_price=148.594
+# upper_sigma_5m3=148.920605858
+# slope=0.0764436119999
+# first_flag_time=2018-03-14 23:19:56
+# highlow_mode=surplus
+# self.high_price=149.382
+# self.low_price=147.772
+# self.first_flag_time=2018-03-14 23:19:56
+# self.buy_count_price=148.661
+# self.sell_count_price=148.609
+# EXECUTE ORDER at 2018-03-14 23:19:56
+# ORDER_PRICE=148.594, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=148.122, order_price=148.594
+# EXECUTE SETTLEMENT at 2018-03-15 01:14:57
+# ORDER_PRICE=148.594, STL_PRICE=148.11, ORDER_KIND=sell, PROFIT=0.484
+# PROFIT=0.484
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=149.294442543
+# lower_sigma_1h3=149.294442543
+# current_price=147.5295
+# upper_sigma_5m3=148.668794349
+# slope=-0.27059137
+# first_flag_time=2018-03-15 18:39:58
+# highlow_mode=exceed
+# self.high_price=149.168
+# self.low_price=147.756
+# self.first_flag_time=2018-03-15 18:39:58
+# self.buy_count_price=148.661
+# self.sell_count_price=147.929
+# EXECUTE ORDER at 2018-03-15 18:44:58
+# ORDER_PRICE=147.5295, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-03-15 18:55:29
+# ORDER_PRICE=147.5295, STL_PRICE=147.73, ORDER_KIND=sell, PROFIT=-0.2005
+# PROFIT=-0.2005
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=149.287210786
+# lower_sigma_1h3=149.287210786
+# current_price=147.991
+# upper_sigma_5m3=147.94062393
+# slope=-0.404697083
+# first_flag_time=2018-03-15 22:19:50
+# highlow_mode=surplus
+# self.high_price=149.168
+# self.low_price=147.756
+# self.first_flag_time=2018-03-15 22:19:50
+# self.buy_count_price=147.922
+# self.sell_count_price=147.929
+# EXECUTE ORDER at 2018-03-15 22:19:50
+# ORDER_PRICE=147.991, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-15 22:50:51
+# ORDER_PRICE=147.991, STL_PRICE=147.806, ORDER_KIND=buy, PROFIT=-0.185
+# PROFIT=-0.185
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=148.744128071
+# lower_sigma_1h3=148.744128071
+# current_price=147.7195
+# upper_sigma_5m3=147.688678784
+# slope=-0.247517426
+# first_flag_time=2018-03-16 15:39:52
+# highlow_mode=surplus
+# self.high_price=148.5125
+# self.low_price=147.454
+# self.first_flag_time=2018-03-16 15:39:52
+# self.buy_count_price=147.706
+# self.sell_count_price=147.929
+# EXECUTE ORDER at 2018-03-16 15:39:52
+# ORDER_PRICE=147.7195, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-16 16:36:03
+# ORDER_PRICE=147.7195, STL_PRICE=147.522, ORDER_KIND=buy, PROFIT=-0.1975
+# PROFIT=-0.1975
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=148.667301755
+# lower_sigma_1h3=148.667301755
+# current_price=147.791
+# upper_sigma_5m3=147.708663929
+# slope=-0.204513799
+# first_flag_time=2018-03-16 21:39:54
+# highlow_mode=surplus
+# self.high_price=148.5125
+# self.low_price=147.454
+# self.first_flag_time=2018-03-16 21:39:54
+# self.buy_count_price=147.705
+# self.sell_count_price=147.38
+# EXECUTE ORDER at 2018-03-16 21:39:54
+# ORDER_PRICE=147.791, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-16 22:01:05
+# ORDER_PRICE=147.791, STL_PRICE=147.602, ORDER_KIND=buy, PROFIT=-0.189
+# PROFIT=-0.189
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=148.223898122
+# lower_sigma_1h3=148.223898122
+# current_price=147.481
+# upper_sigma_5m3=147.360450764
+# slope=-0.205177183
+# first_flag_time=2018-03-19 16:49:50
+# highlow_mode=surplus
+# self.high_price=148.2745
+# self.low_price=147.253
+# self.first_flag_time=2018-03-19 16:49:50
+# self.buy_count_price=147.362
+# self.sell_count_price=147.392
+# EXECUTE ORDER at 2018-03-19 16:49:50
+# ORDER_PRICE=147.481, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-19 21:13:41
+# ORDER_PRICE=147.481, STL_PRICE=149.52, ORDER_KIND=buy, PROFIT=2.039
+# PROFIT=2.039
+#######################################################
+# in volatility_price Algorithm
+# volatility_buy_price=149.597
+# volatility_bid_price=149.597
+# current_price=149.232
+# EXECUTE ORDER at 2018-03-20 18:09:52
+# ORDER_PRICE=149.232, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-03-21 18:30:03
+# ORDER_PRICE=149.232, STL_PRICE=149.344, ORDER_KIND=sell, PROFIT=-0.112
+# PROFIT=-0.112
+#######################################################
+# in volatility_price Algorithm
+# volatility_buy_price=149.079
+# volatility_bid_price=149.079
+# current_price=149.42
+# EXECUTE ORDER at 2018-03-21 18:30:54
+# ORDER_PRICE=149.42, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-21 20:43:35
+# ORDER_PRICE=149.42, STL_PRICE=149.2275, ORDER_KIND=buy, PROFIT=-0.1925
+# PROFIT=-0.1925
+#######################################################
+# in volatility_price Algorithm
+# volatility_buy_price=149.588
+# volatility_bid_price=149.588
+# current_price=149.191
+# EXECUTE ORDER at 2018-03-21 20:43:56
+# ORDER_PRICE=149.191, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-03-21 21:27:27
+# ORDER_PRICE=149.191, STL_PRICE=149.374, ORDER_KIND=sell, PROFIT=-0.183
+# PROFIT=-0.183
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=149.799037189
+# lower_sigma_1h3=149.799037189
+# current_price=150.101
+# upper_sigma_5m3=149.838071769
+# slope=0.136448729
+# first_flag_time=2018-03-22 01:09:58
+# highlow_mode=exceed
+# self.high_price=149.796
+# self.low_price=148.5825
+# self.first_flag_time=2018-03-22 01:09:58
+# self.buy_count_price=149.546
+# self.sell_count_price=148.54
+# EXECUTE ORDER at 2018-03-22 03:14:58
+# ORDER_PRICE=150.101, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-22 03:52:29
+# ORDER_PRICE=150.101, STL_PRICE=149.8915, ORDER_KIND=buy, PROFIT=-0.2095
+# PROFIT=-0.2095
+#######################################################
+# in volatility_price Algorithm
+# volatility_buy_price=149.627
+# volatility_bid_price=149.627
+# current_price=149.984
+# EXECUTE ORDER at 2018-03-22 21:00:50
+# ORDER_PRICE=149.984, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-22 21:03:51
+# ORDER_PRICE=149.984, STL_PRICE=149.7875, ORDER_KIND=buy, PROFIT=-0.1965
+# PROFIT=-0.1965
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=150.441963502
+# lower_sigma_1h3=150.441963502
+# current_price=148.646
+# upper_sigma_5m3=149.394004434
+# slope=0.045905574
+# first_flag_time=2018-03-22 21:44:52
+# highlow_mode=exceed
+# self.high_price=150.317
+# self.low_price=148.957
+# self.first_flag_time=2018-03-22 21:44:52
+# self.buy_count_price=149.8525
+# self.sell_count_price=149.023
+# EXECUTE ORDER at 2018-03-22 23:49:52
+# ORDER_PRICE=148.646, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-03-23 01:18:33
+# ORDER_PRICE=148.646, STL_PRICE=148.831, ORDER_KIND=sell, PROFIT=-0.185
+# PROFIT=-0.185
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=150.56047561
+# lower_sigma_1h3=150.56047561
+# current_price=148.27
+# upper_sigma_5m3=148.221423179
+# slope=-0.629567976
+# first_flag_time=2018-03-23 20:19:54
+# highlow_mode=surplus
+# self.high_price=150.1765
+# self.low_price=148.28
+# self.first_flag_time=2018-03-23 20:19:54
+# self.buy_count_price=148.233
+# self.sell_count_price=149.023
+# EXECUTE ORDER at 2018-03-23 20:19:54
+# ORDER_PRICE=148.27, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=148.572, self.upper_sigma_5m3=149.035688698, self.lower_sigma_5m3=148.587851183, self.order_kind=buy
+# Execute FirstTrail Stop
+# current_bid_price=148.56, order_price=148.27
+# EXECUTE SETTLEMENT at 2018-03-24 00:39:55
+# ORDER_PRICE=148.27, STL_PRICE=148.572, ORDER_KIND=buy, PROFIT=0.302
+# PROFIT=0.302
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=149.426856692
+# lower_sigma_1h3=149.426856692
+# current_price=149.426
+# upper_sigma_5m3=149.291036895
+# slope=0.292849023
+# first_flag_time=2018-03-26 16:19:50
+# highlow_mode=exceed
+# self.high_price=149.13
+# self.low_price=147.6825
+# self.first_flag_time=2018-03-26 16:19:50
+# self.buy_count_price=149.038
+# self.sell_count_price=148.575
+# EXECUTE ORDER at 2018-03-26 18:49:50
+# ORDER_PRICE=149.426, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=149.306, self.upper_sigma_5m3=149.648359724, self.lower_sigma_5m3=149.353476109, self.order_kind=buy
+# EXECUTE SETTLEMENT at 2018-03-26 21:44:51
+# ORDER_PRICE=149.426, STL_PRICE=149.306, ORDER_KIND=buy, PROFIT=-0.12
+# PROFIT=-0.12
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=149.938503534
+# lower_sigma_1h3=149.938503534
+# current_price=149.25
+# upper_sigma_5m3=149.704026125
+# slope=0.508541478
+# first_flag_time=2018-03-26 22:04:52
+# highlow_mode=surplus
+# self.high_price=149.13
+# self.low_price=147.6825
+# self.first_flag_time=2018-03-26 22:04:52
+# self.buy_count_price=149.038
+# self.sell_count_price=149.306
+# EXECUTE ORDER at 2018-03-26 22:04:52
+# ORDER_PRICE=149.25, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-03-26 22:21:03
+# ORDER_PRICE=149.25, STL_PRICE=149.428, ORDER_KIND=sell, PROFIT=-0.178
+# PROFIT=-0.178
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=151.362036552
+# lower_sigma_1h3=151.362036552
+# current_price=150.475
+# upper_sigma_5m3=150.442588492
+# slope=0.694656057
+# first_flag_time=2018-03-27 15:54:54
+# highlow_mode=exceed
+# self.high_price=150.1155
+# self.low_price=147.911
+# self.first_flag_time=2018-03-27 15:54:54
+# self.buy_count_price=150.4615
+# self.sell_count_price=149.306
+# EXECUTE ORDER at 2018-03-27 15:54:54
+# ORDER_PRICE=150.475, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-27 16:10:25
+# ORDER_PRICE=150.475, STL_PRICE=150.282, ORDER_KIND=buy, PROFIT=-0.193
+# PROFIT=-0.193
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=151.386597006
+# lower_sigma_1h3=151.386597006
+# current_price=150.089
+# upper_sigma_5m3=150.511480614
+# slope=0.657809544
+# first_flag_time=2018-03-27 16:19:56
+# highlow_mode=surplus
+# self.high_price=150.1155
+# self.low_price=147.911
+# self.first_flag_time=2018-03-27 16:19:56
+# self.buy_count_price=150.4615
+# self.sell_count_price=150.145
+# EXECUTE ORDER at 2018-03-27 16:19:56
+# ORDER_PRICE=150.089, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=149.327, order_price=150.089
+# Execute SecondTrail Stop
+# current_ask_price=149.327, order_price=150.089
+# EXECUTE SETTLEMENT at 2018-03-27 22:09:57
+# ORDER_PRICE=150.089, STL_PRICE=149.315, ORDER_KIND=sell, PROFIT=0.774
+# PROFIT=0.774
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=150.829511804
+# lower_sigma_1h3=150.829511804
+# current_price=149.9645
+# upper_sigma_5m3=149.930325342
+# slope=-0.179395144
+# first_flag_time=2018-03-28 15:14:58
+# highlow_mode=surplus
+# self.high_price=150.497
+# self.low_price=148.941
+# self.first_flag_time=2018-03-28 15:14:58
+# self.buy_count_price=149.947
+# self.sell_count_price=150.145
+# EXECUTE ORDER at 2018-03-28 15:14:58
+# ORDER_PRICE=149.9645, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-28 15:32:39
+# ORDER_PRICE=149.9645, STL_PRICE=149.7765, ORDER_KIND=buy, PROFIT=-0.188
+# PROFIT=-0.188
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=150.932210175
+# lower_sigma_1h3=150.932210175
+# current_price=150.027
+# upper_sigma_5m3=150.005652147
+# slope=0.0703192300001
+# first_flag_time=2018-03-29 18:54:50
+# highlow_mode=surplus
+# self.high_price=150.5985
+# self.low_price=149.0465
+# self.first_flag_time=2018-03-29 18:54:50
+# self.buy_count_price=150.0065
+# self.sell_count_price=149.351
+# EXECUTE ORDER at 2018-03-29 18:54:50
+# ORDER_PRICE=150.027, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-29 19:07:11
+# ORDER_PRICE=150.027, STL_PRICE=149.844, ORDER_KIND=buy, PROFIT=-0.183
+# PROFIT=-0.183
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=150.462621505
+# lower_sigma_1h3=150.462621505
+# current_price=149.3
+# upper_sigma_5m3=149.286134032
+# slope=-0.37410693
+# first_flag_time=2018-03-30 17:34:52
+# highlow_mode=surplus
+# self.high_price=150.462
+# self.low_price=149.028
+# self.first_flag_time=2018-03-30 17:34:52
+# self.buy_count_price=149.2875
+# self.sell_count_price=149.587
+# EXECUTE ORDER at 2018-03-30 17:34:52
+# ORDER_PRICE=149.3, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-30 18:04:13
+# ORDER_PRICE=149.3, STL_PRICE=149.1385, ORDER_KIND=buy, PROFIT=-0.1615
+# PROFIT=-0.1615
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=149.872835698
+# lower_sigma_1h3=149.872835698
+# current_price=148.582
+# upper_sigma_5m3=149.198813645
+# slope=-0.014353566
+# first_flag_time=2018-04-03 00:09:50
+# highlow_mode=exceed
+# self.high_price=149.528
+# self.low_price=148.8455
+# self.first_flag_time=2018-04-03 00:09:50
+# self.buy_count_price=149.4035
+# self.sell_count_price=149.352
+# EXECUTE ORDER at 2018-04-03 02:29:50
+# ORDER_PRICE=148.582, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-04-03 04:45:11
+# ORDER_PRICE=148.582, STL_PRICE=148.792, ORDER_KIND=sell, PROFIT=-0.21
+# PROFIT=-0.21
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=150.126418467
+# lower_sigma_1h3=150.126418467
+# current_price=149.123
+# upper_sigma_5m3=149.079361301
+# slope=-0.12044168
+# first_flag_time=2018-04-03 15:24:52
+# highlow_mode=surplus
+# self.high_price=149.675
+# self.low_price=148.392
+# self.first_flag_time=2018-04-03 15:24:52
+# self.buy_count_price=149.066
+# self.sell_count_price=149.352
+# EXECUTE ORDER at 2018-04-03 15:24:52
+# ORDER_PRICE=149.123, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-04-03 15:54:33
+# ORDER_PRICE=149.123, STL_PRICE=148.918, ORDER_KIND=buy, PROFIT=-0.205
+# PROFIT=-0.205
+#######################################################
+# in volatility_price Algorithm
+# volatility_buy_price=149.207
+# volatility_bid_price=149.207
+# current_price=148.897
+# EXECUTE ORDER at 2018-04-03 15:54:54
+# ORDER_PRICE=148.897, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-04-03 16:02:55
+# ORDER_PRICE=148.897, STL_PRICE=149.13, ORDER_KIND=sell, PROFIT=-0.233
+# PROFIT=-0.233
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=150.709218656
+# lower_sigma_1h3=150.709218656
+# current_price=149.796
+# upper_sigma_5m3=150.16581702
+# slope=0.469017548
+# first_flag_time=2018-04-04 16:19:56
+# highlow_mode=surplus
+# self.high_price=149.965
+# self.low_price=148.498
+# self.first_flag_time=2018-04-04 16:19:56
+# self.buy_count_price=149.066
+# self.sell_count_price=149.853
+# EXECUTE ORDER at 2018-04-04 16:19:56
+# ORDER_PRICE=149.796, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=149.188, order_price=149.796
+# EXECUTE SETTLEMENT at 2018-04-04 20:34:57
+# ORDER_PRICE=149.796, STL_PRICE=149.176, ORDER_KIND=sell, PROFIT=0.62
+# PROFIT=0.62
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=150.690818771
+# lower_sigma_1h3=150.690818771
+# current_price=150.266
+# upper_sigma_5m3=150.253938064
+# slope=0.231535361
+# first_flag_time=2018-04-04 21:54:58
+# highlow_mode=exceed
+# self.high_price=149.965
+# self.low_price=148.498
+# self.first_flag_time=2018-04-04 21:54:58
+# self.buy_count_price=149.341
+# self.sell_count_price=149.853
+# EXECUTE ORDER at 2018-04-05 03:24:58
+# ORDER_PRICE=150.266, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=150.473, self.upper_sigma_5m3=150.637801249, self.lower_sigma_5m3=150.499199703, self.order_kind=buy
+# EXECUTE SETTLEMENT at 2018-04-05 13:39:59
+# ORDER_PRICE=150.266, STL_PRICE=150.473, ORDER_KIND=buy, PROFIT=0.207
+# PROFIT=0.207
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=151.618404973
+# lower_sigma_1h3=151.618404973
+# current_price=150.214
+# upper_sigma_5m3=150.662439905
+# slope=0.159568556
+# first_flag_time=2018-04-05 20:54:50
+# highlow_mode=surplus
+# self.high_price=150.435
+# self.low_price=148.806
+# self.first_flag_time=2018-04-05 20:54:50
+# self.buy_count_price=150.676
+# self.sell_count_price=150.218
+# EXECUTE ORDER at 2018-04-05 20:54:50
+# ORDER_PRICE=150.214, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# current_price=150.283, self.upper_sigma_5m3=150.281466154, self.lower_sigma_5m3=149.98836718, self.order_kind=sell
+# EXECUTE SETTLEMENT at 2018-04-05 23:19:51
+# ORDER_PRICE=150.214, STL_PRICE=150.283, ORDER_KIND=sell, PROFIT=-0.069
+# PROFIT=-0.069
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=150.732090506
+# lower_sigma_1h3=150.732090506
+# current_price=150.916
+# upper_sigma_5m3=150.840791348
+# slope=-0.0146178860002
+# first_flag_time=2018-04-06 22:39:52
+# highlow_mode=exceed
+# self.high_price=150.692
+# self.low_price=149.974
+# self.first_flag_time=2018-04-06 22:39:52
+# self.buy_count_price=150.619
+# self.sell_count_price=150.218
+# EXECUTE ORDER at 2018-04-06 22:54:52
+# ORDER_PRICE=150.916, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-04-07 00:03:53
+# ORDER_PRICE=150.916, STL_PRICE=150.739, ORDER_KIND=buy, PROFIT=-0.177
+# PROFIT=-0.177
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=151.461574371
+# lower_sigma_1h3=151.461574371
+# current_price=151.45
+# upper_sigma_5m3=151.44739715
+# slope=0.294017291
+# first_flag_time=2018-04-09 15:19:50
+# highlow_mode=exceed
+# self.high_price=151.229
+# self.low_price=149.8945
+# self.first_flag_time=2018-04-09 15:19:50
+# self.buy_count_price=150.968
+# self.sell_count_price=150.485
+# EXECUTE ORDER at 2018-04-09 22:24:50
+# ORDER_PRICE=151.45, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-04-09 22:46:51
+# ORDER_PRICE=151.45, STL_PRICE=151.272, ORDER_KIND=buy, PROFIT=-0.178
+# PROFIT=-0.178
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=151.860366244
+# lower_sigma_1h3=151.860366244
+# current_price=151.716
+# upper_sigma_5m3=151.785869438
+# slope=0.262664018
+# first_flag_time=2018-04-10 15:49:52
+# highlow_mode=exceed
+# self.high_price=151.497
+# self.low_price=150.5005
+# self.first_flag_time=2018-04-10 15:49:52
+# self.buy_count_price=151.555
+# self.sell_count_price=150.485
+# EXECUTE ORDER at 2018-04-10 18:29:52
+# ORDER_PRICE=151.716, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-04-10 19:33:43
+# ORDER_PRICE=151.716, STL_PRICE=151.539, ORDER_KIND=buy, PROFIT=-0.177
+# PROFIT=-0.177
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=152.331007266
+# lower_sigma_1h3=152.331007266
+# current_price=151.561
+# upper_sigma_5m3=151.996991932
+# slope=0.179108571
+# first_flag_time=2018-04-11 20:09:54
+# highlow_mode=surplus
+# self.high_price=152.139
+# self.low_price=150.714
+# self.first_flag_time=2018-04-11 20:09:54
+# self.buy_count_price=152.15
+# self.sell_count_price=151.609
+# EXECUTE ORDER at 2018-04-11 20:09:54
+# ORDER_PRICE=151.561, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-04-11 22:33:35
+# ORDER_PRICE=151.561, STL_PRICE=151.746, ORDER_KIND=sell, PROFIT=-0.185
+# PROFIT=-0.185
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=152.238200966
+# lower_sigma_1h3=152.238200966
+# current_price=152.464
+# upper_sigma_5m3=152.497783529
+# slope=-0.038346592
+# first_flag_time=2018-04-12 22:24:56
+# highlow_mode=exceed
+# self.high_price=152.25
+# self.low_price=151.284
+# self.first_flag_time=2018-04-12 22:24:56
+# self.buy_count_price=151.855
+# self.sell_count_price=151.49
+# EXECUTE ORDER at 2018-04-12 22:49:56
+# ORDER_PRICE=152.464, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=152.556, self.upper_sigma_5m3=152.927556199, self.lower_sigma_5m3=152.582561896, self.order_kind=buy
+# EXECUTE SETTLEMENT at 2018-04-13 01:59:57
+# ORDER_PRICE=152.464, STL_PRICE=152.556, ORDER_KIND=buy, PROFIT=0.092
+# PROFIT=0.092
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=152.960992265
+# lower_sigma_1h3=152.960992265
+# current_price=152.533
+# upper_sigma_5m3=152.952346612
+# slope=0.35233491
+# first_flag_time=2018-04-13 02:09:58
+# highlow_mode=surplus
+# self.high_price=152.25
+# self.low_price=151.284
+# self.first_flag_time=2018-04-13 02:09:58
+# self.buy_count_price=151.855
+# self.sell_count_price=152.553
+# EXECUTE ORDER at 2018-04-13 02:09:58
+# ORDER_PRICE=152.533, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-04-13 05:52:59
+# ORDER_PRICE=152.533, STL_PRICE=152.709, ORDER_KIND=sell, PROFIT=-0.176
+# PROFIT=-0.176
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=153.89251755
+# lower_sigma_1h3=153.89251755
+# current_price=153.109
+# upper_sigma_5m3=153.099082261
+# slope=0.461258696
+# first_flag_time=2018-04-13 15:24:50
+# highlow_mode=exceed
+# self.high_price=152.881
+# self.low_price=151.176
+# self.first_flag_time=2018-04-13 15:24:50
+# self.buy_count_price=153.004
+# self.sell_count_price=152.553
+# EXECUTE ORDER at 2018-04-13 15:24:50
+# ORDER_PRICE=153.109, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# current_bid_price=153.5, order_price=153.109
+# EXECUTE SETTLEMENT at 2018-04-13 20:24:51
+# ORDER_PRICE=153.109, STL_PRICE=153.512, ORDER_KIND=buy, PROFIT=0.403
+# PROFIT=0.403
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=154.407216027
+# lower_sigma_1h3=154.407216027
+# current_price=153.344
+# upper_sigma_5m3=153.752530286
+# slope=0.738449498
+# first_flag_time=2018-04-13 23:14:52
+# highlow_mode=surplus
+# self.high_price=152.881
+# self.low_price=151.176
+# self.first_flag_time=2018-04-13 23:14:52
+# self.buy_count_price=153.004
+# self.sell_count_price=153.388
+# EXECUTE ORDER at 2018-04-13 23:14:52
+# ORDER_PRICE=153.344, TRADE_FLAG=sell
+# weekend stl logic
+# EXECUTE SETTLEMENT at 2018-04-14 05:00:03
+# ORDER_PRICE=153.344, STL_PRICE=152.949, ORDER_KIND=sell, PROFIT=0.395
+# PROFIT=0.395
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=154.239530068
+# lower_sigma_1h3=154.239530068
+# current_price=153.374
+# upper_sigma_5m3=153.875754771
+# slope=0.18035868
+# first_flag_time=2018-04-17 17:44:50
+# highlow_mode=surplus
+# self.high_price=153.764
+# self.low_price=152.659
+# self.first_flag_time=2018-04-17 17:44:50
+# self.buy_count_price=153.606
+# self.sell_count_price=153.392
+# EXECUTE ORDER at 2018-04-17 17:44:50
+# ORDER_PRICE=153.374, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-04-17 20:46:21
+# ORDER_PRICE=153.374, STL_PRICE=153.551, ORDER_KIND=sell, PROFIT=-0.177
+# PROFIT=-0.177
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=153.862902256
+# lower_sigma_1h3=153.862902256
+# current_price=153.161
+# upper_sigma_5m3=153.53610134
+# slope=0.113277465
+# first_flag_time=2018-04-18 00:29:52
+# highlow_mode=surplus
+# self.high_price=153.764
+# self.low_price=152.659
+# self.first_flag_time=2018-04-18 00:29:52
+# self.buy_count_price=153.606
+# self.sell_count_price=153.258
+# EXECUTE ORDER at 2018-04-18 00:29:52
+# ORDER_PRICE=153.161, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# current_price=153.0715, self.upper_sigma_5m3=153.062093009, self.lower_sigma_5m3=152.878421634, self.order_kind=sell
+# EXECUTE SETTLEMENT at 2018-04-18 08:49:53
+# ORDER_PRICE=153.161, STL_PRICE=153.0715, ORDER_KIND=sell, PROFIT=0.0895
+# PROFIT=0.0895
+#######################################################
+# in volatility_price Algorithm
+# volatility_buy_price=153.204
+# volatility_bid_price=153.204
+# current_price=152.6685
+# EXECUTE ORDER at 2018-04-18 17:30:54
+# ORDER_PRICE=152.6685, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=152.464, order_price=152.6685
+# EXECUTE SETTLEMENT at 2018-04-18 20:59:55
+# ORDER_PRICE=152.6685, STL_PRICE=152.452, ORDER_KIND=sell, PROFIT=0.2165
+# PROFIT=0.2165
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=153.399511167
+# lower_sigma_1h3=153.399511167
+# current_price=152.776
+# upper_sigma_5m3=152.730658984
+# slope=-0.379480841
+# first_flag_time=2018-04-19 19:44:56
+# highlow_mode=surplus
+# self.high_price=153.635
+# self.low_price=152.068
+# self.first_flag_time=2018-04-19 19:44:56
+# self.buy_count_price=152.648
+# self.sell_count_price=152.392
+# EXECUTE ORDER at 2018-04-19 19:44:56
+# ORDER_PRICE=152.776, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=152.587, self.upper_sigma_5m3=152.960420876, self.lower_sigma_5m3=152.594662577, self.order_kind=buy
+# EXECUTE SETTLEMENT at 2018-04-20 00:19:57
+# ORDER_PRICE=152.776, STL_PRICE=152.587, ORDER_KIND=buy, PROFIT=-0.189
+# PROFIT=-0.189
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=153.006041543
+# lower_sigma_1h3=153.006041543
+# current_price=151.7685
+# upper_sigma_5m3=152.87729237
+# slope=0.111076047
+# first_flag_time=2018-04-20 00:34:58
+# highlow_mode=exceed
+# self.high_price=153.635
+# self.low_price=152.068
+# self.first_flag_time=2018-04-20 00:34:58
+# self.buy_count_price=152.648
+# self.sell_count_price=152.587
+# EXECUTE ORDER at 2018-04-20 02:19:58
+# ORDER_PRICE=151.7685, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# current_price=151.527, self.upper_sigma_5m3=151.445968015, self.lower_sigma_5m3=151.173716866, self.order_kind=sell
+# Execute FirstTrail Stop
+# current_ask_price=151.539, order_price=151.7685
+# EXECUTE SETTLEMENT at 2018-04-20 10:29:59
+# ORDER_PRICE=151.7685, STL_PRICE=151.527, ORDER_KIND=sell, PROFIT=0.2415
+# PROFIT=0.2415
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=153.023627845
+# lower_sigma_1h3=153.023627845
+# current_price=150.853
+# upper_sigma_5m3=151.188774117
+# slope=-0.572616449
+# first_flag_time=2018-04-20 15:14:50
+# highlow_mode=exceed
+# self.high_price=152.961
+# self.low_price=151.096
+# self.first_flag_time=2018-04-20 15:14:50
+# self.buy_count_price=152.648
+# self.sell_count_price=151.325
+# EXECUTE ORDER at 2018-04-21 02:04:50
+# ORDER_PRICE=150.853, TRADE_FLAG=sell
+# weekend stl logic
+# EXECUTE SETTLEMENT at 2018-04-21 05:00:01
+# ORDER_PRICE=150.853, STL_PRICE=150.8405, ORDER_KIND=sell, PROFIT=0.0125
+# PROFIT=0.0125
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=152.110136554
+# lower_sigma_1h3=152.110136554
+# current_price=151.847
+# upper_sigma_5m3=151.756249272
+# slope=0.205085308
+# first_flag_time=2018-04-24 15:19:50
+# highlow_mode=exceed
+# self.high_price=151.647
+# self.low_price=150.756
+# self.first_flag_time=2018-04-24 15:19:50
+# self.buy_count_price=151.769
+# self.sell_count_price=151.325
+# EXECUTE ORDER at 2018-04-24 17:59:50
+# ORDER_PRICE=151.847, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# current_bid_price=152.224, order_price=151.847
+# EXECUTE SETTLEMENT at 2018-04-25 01:24:51
+# ORDER_PRICE=151.847, STL_PRICE=152.236, ORDER_KIND=buy, PROFIT=0.389
+# PROFIT=0.389
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=152.62713829
+# lower_sigma_1h3=152.62713829
+# current_price=152.104
+# upper_sigma_5m3=152.612940345
+# slope=0.440028348
+# first_flag_time=2018-04-25 01:34:52
+# highlow_mode=surplus
+# self.high_price=151.647
+# self.low_price=150.756
+# self.first_flag_time=2018-04-25 01:34:52
+# self.buy_count_price=151.769
+# self.sell_count_price=152.159
+# EXECUTE ORDER at 2018-04-25 01:34:52
+# ORDER_PRICE=152.104, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# current_price=152.2425, self.upper_sigma_5m3=152.236346495, self.lower_sigma_5m3=152.056312433, self.order_kind=sell
+# EXECUTE SETTLEMENT at 2018-04-25 08:19:53
+# ORDER_PRICE=152.104, STL_PRICE=152.2425, ORDER_KIND=sell, PROFIT=-0.1385
+# PROFIT=-0.1385
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=152.874551016
+# lower_sigma_1h3=152.874551016
+# current_price=152.169
+# upper_sigma_5m3=152.478503283
+# slope=0.276801131
+# first_flag_time=2018-04-25 16:19:54
+# highlow_mode=surplus
+# self.high_price=152.599
+# self.low_price=151.41
+# self.first_flag_time=2018-04-25 16:19:54
+# self.buy_count_price=151.769
+# self.sell_count_price=152.203
+# EXECUTE ORDER at 2018-04-25 16:19:54
+# ORDER_PRICE=152.169, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-04-25 17:22:15
+# ORDER_PRICE=152.169, STL_PRICE=152.346, ORDER_KIND=sell, PROFIT=-0.177
+# PROFIT=-0.177
+#######################################################
+# in Expantion Algorithm
+# upper_sigma_1h3=152.790896299
+# lower_sigma_1h3=152.790896299
+# current_price=151.757
+# upper_sigma_5m3=152.479763229
+# slope=-0.135549172
+# first_flag_time=2018-04-27 16:39:56
+# highlow_mode=exceed
+# self.high_price=152.733
+# self.low_price=151.979
+# self.first_flag_time=2018-04-27 16:39:56
+# self.buy_count_price=152.255
+# self.sell_count_price=151.875
+# EXECUTE ORDER at 2018-04-27 17:04:56
+# ORDER_PRICE=151.757, TRADE_FLAG=sell
+# weekend stl logic
+# EXECUTE SETTLEMENT at 2018-04-28 05:00:07
+# ORDER_PRICE=151.757, STL_PRICE=150.32, ORDER_KIND=sell, PROFIT=1.437
+# PROFIT=1.437
