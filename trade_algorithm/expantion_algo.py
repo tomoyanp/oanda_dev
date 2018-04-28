@@ -274,7 +274,8 @@ class ExpantionAlgo(SuperAlgo):
 
     def decideTrailLogic(self, stl_flag, current_ask_price, current_bid_price):
         order_price = self.getOrderPrice()
-        first_take_profit = 0.5
+#        first_take_profit = 0.5
+        first_take_profit = 0.3
         second_take_profit = 1.0
 
         # update the most high and low price
@@ -296,12 +297,14 @@ class ExpantionAlgo(SuperAlgo):
                 if (order_price - current_ask_price) > first_take_profit:
                     self.trail_flag = True
             if self.trail_flag == True and self.order_kind == "buy":
-                if (self.most_high_price - 0.5) > current_bid_price:
+#                if (self.most_high_price - 0.5) > current_bid_price:
+                if (self.most_high_price - 0.3) > current_bid_price:
                     self.result_logger.info("# Execute FirstTrail Stop")
                     self.result_logger.info("# current_bid_price=%s, order_price=%s" % (current_bid_price, order_price))
                     stl_flag = True
             elif self.trail_flag == True and self.order_kind == "sell":
-                if (self.most_low_price + 0.5) < current_ask_price :
+#                if (self.most_low_price + 0.5) < current_ask_price :
+                if (self.most_low_price + 0.3) < current_ask_price :
                     self.result_logger.info("# Execute FirstTrail Stop")
                     self.result_logger.info("# current_ask_price=%s, order_price=%s" % (current_ask_price, order_price))
                     stl_flag = True
