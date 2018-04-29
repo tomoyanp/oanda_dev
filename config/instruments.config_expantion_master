@@ -3,7 +3,7 @@
     "__comments" : "expantion mode",
     "__comments1" : "current master",
     "stop_loss": 0.2,
-    "take_profit": 5.0,
+    "take_profit": 2.0,
     "time_width": 720000,
     "stl_time_width": 720000,
     "sleep_time": 1,
