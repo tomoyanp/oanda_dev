@@ -137,7 +137,7 @@ class TrendReverseAlgo(SuperAlgo):
             self.result_logger.info("#######################################################")
             self.result_logger.info("# in Expantion Algorithm")
             self.result_logger.info("# upper_sigma_5m25=%s" % self.upper_sigma_5m25)
-            self.result_logger.info("# lower_sigma_5m25=%s" % self.upper_sigma_5m25)
+            self.result_logger.info("# lower_sigma_5m25=%s" % self.lower_sigma_5m25)
             self.result_logger.info("# base_line_5m25=%s" % self.base_line_5m25)
             self.result_logger.info("# current_price=%s" % current_price)
 
