@@ -68,9 +68,7 @@ class TrendReverseAlgo(SuperAlgo):
 
 
                 if ex_stlmode == "on":
-                    self.setDailyIndicator(base_time)
                     current_price = self.getCurrentPrice()
-
                     minutes = base_time.minute
                     seconds = base_time.second
                     weekday = base_time.weekday()
@@ -94,10 +92,13 @@ class TrendReverseAlgo(SuperAlgo):
 
 
     def decideReverseTrade(self, trade_flag, current_price, base_time):
-        if current_price > self.upper_sigma_5m2:
+        mode = "trade"
+        if current_price > self.upper_sigma_5m25:
+            self.writeExpantionLog(current_price, mode, highlow_mode="dummy")
             trade_flag = "sell"
 
-        elif current_price < self.lower_sigma_5m2:
+        elif current_price < self.lower_sigma_5m25:
+            self.writeExpantionLog(current_price, mode, highlow_mode="dummy")
             trade_flag = "buy"
 
         self.writeDebugLog(base_time, up_flag="null", down_flag="null", mode=mode)
@@ -111,10 +112,10 @@ class TrendReverseAlgo(SuperAlgo):
 
 
     def setIndicator(self, base_time):
-        upper_list, lower_list, base_list = getBollingerWrapper(base_time, self.instrument, ind_type="bollinger5m2", span=1, connector=self.mysql_connector)
-        self.upper_sigma_5m2 = upper_list[0]
-        self.lower_sigma_5m2 = lower_list[0]
-        self.base_line_5m2 = base_list[0]
+        upper_list, lower_list, base_list = getBollingerWrapper(base_time, self.instrument, ind_type="bollinger5m2.5", span=1, connector=self.mysql_connector)
+        self.upper_sigma_5m25 = upper_list[0]
+        self.lower_sigma_5m25 = lower_list[0]
+        self.base_line_5m25 = base_list[0]
 
 
     # log writer program
@@ -126,8 +127,8 @@ class TrendReverseAlgo(SuperAlgo):
 
         self.debug_logger.info("base time=%s" % base_time)
         self.debug_logger.info("self.order_kind=%s" % self.order_kind)
-        self.debug_logger.info("self.upper_sigma_5m2=%s" % self.upper_sigma_5m2)
-        self.debug_logger.info("self.lower_sigma_5m2=%s" % self.lower_sigma_5m2)
+        self.debug_logger.info("self.upper_sigma_5m25=%s" % self.upper_sigma_5m25)
+        self.debug_logger.info("self.lower_sigma_5m25=%s" % self.lower_sigma_5m25)
         self.debug_logger.info("#############################################")
 
 
@@ -135,8 +136,8 @@ class TrendReverseAlgo(SuperAlgo):
         if mode == "trade":
             self.result_logger.info("#######################################################")
             self.result_logger.info("# in Expantion Algorithm")
-            self.result_logger.info("# upper_sigma_5m2=%s" % self.upper_sigma_5m2)
-            self.result_logger.info("# lower_sigma_5m2=%s" % self.upper_sigma_5m2)
-            self.result_logger.info("# base_line_5m2=%s" % self.base_line_5m2)
+            self.result_logger.info("# upper_sigma_5m25=%s" % self.upper_sigma_5m25)
+            self.result_logger.info("# lower_sigma_5m25=%s" % self.upper_sigma_5m25)
+            self.result_logger.info("# base_line_5m25=%s" % self.base_line_5m25)
             self.result_logger.info("# current_price=%s" % current_price)
 
