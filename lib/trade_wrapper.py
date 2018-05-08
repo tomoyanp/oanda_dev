@@ -9,7 +9,6 @@ from datetime import datetime, timedelta
 from trendfollow_algo import TrendFollowAlgo
 from trendreverse_algo import TrendReverseAlgo
 from expantion_algo import ExpantionAlgo
-from reverse_algo import ReverseAlgo
 from daytime_algo import DaytimeAlgo
 from oanda_wrapper import OandaWrapper
 from common import instrument_init, account_init
@@ -59,14 +58,18 @@ class TradeWrapper:
         if self.test_mode:
             pass
         else:
-            balance = self.oanda_wrapper.getBalance()
-            balance = balance * 0.9 * 20
-            units = balance / current_price
-            tmp = int(units / 1000)
-            units = int(tmp * 1000)
-            self.oanda_wrapper.setUnit(units)
-            print balance
-            print units
+            if base_time.second >= 50:
+                balance = self.oanda_wrapper.getBalance()
+                #print "balance=%s" % balance
+                balance = balance * 0.9 * 20
+                #print "revalege balance=%s" % balance
+                units = balance / current_price
+                #print "simple units=%s" % units
+                tmp = int(units / 1000)
+                units = int(tmp * 1000)
+                self.oanda_wrapper.setUnit(units)
+                #print "units=%s" % units
+                self.debug_logger.info("units=%s" % units)
 
     def setTradeAlgo(self, algo, base_time):
         if algo == "trendfollow":

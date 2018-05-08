@@ -98,7 +98,7 @@ class OandaWrapper:
 
     def getBalance(self):
         try:
-            response = self.oanda.get_accounts(self.account_id)
+            response = self.oanda.get_account(self.account_id)
             balance = int(response["balance"])
 
             return balance
