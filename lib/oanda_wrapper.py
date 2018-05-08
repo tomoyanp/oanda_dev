@@ -23,6 +23,12 @@ class OandaWrapper:
         return price_obj
 
 
+    def setUnit(self, units):
+        self.units = units
+
+    def getUnit(self):
+        return self.units
+
     def order(self, l_side, currency, stop_loss, take_profit):
         try:
             while True:
@@ -86,6 +92,16 @@ class OandaWrapper:
                 if trade_id == trade["id"]:
                     response = trade
             return response
+
+        except:
+            raise
+
+    def getBalance(self):
+        try:
+            response = self.oanda.get_accounts(self.account_id)
+            balance = int(response["balance"])
+
+            return balance
 
         except:
             raise

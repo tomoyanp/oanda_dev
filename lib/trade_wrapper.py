@@ -55,6 +55,19 @@ class TradeWrapper:
         for elm in lst:
             self.result_logger.info("# %s = %s" % (elm, self.config_data[elm]))
 
+    def calculateUnits(self, current_price, base_time):
+        if self.test_mode:
+            pass
+        else:
+            balance = self.oanda_wrapper.getBalance()
+            balance = balance * 0.9 * 20
+            units = balance / current_price
+            tmp = int(units / 1000)
+            units = int(tmp * 1000)
+            self.oanda_wrapper.setUnit(units)
+            print balance
+            print units
+
     def setTradeAlgo(self, algo, base_time):
         if algo == "trendfollow":
             self.trade_algo = TrendFollowAlgo(self.instrument, self.base_path, self.config_name, base_time)
@@ -155,6 +168,8 @@ class TradeWrapper:
     def setInstrumentResponse(self, base_time):
         sleep_time = 0
         self.trade_algo.setPrice(base_time)
+        current_price = self.trade_algo.getCurrentPrice()
+        self.calculateUnits(current_price, base_time)
 
         return sleep_time
 
