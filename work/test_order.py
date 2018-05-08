@@ -37,14 +37,9 @@ instrument = "GBP_JPY"
 
 oanda = oandapy.API(environment=env, access_token=token)
 #response = oanda.get_positions(account_id)
-#response = oanda.get_account(account_id)
+response = oanda.get_account(account_id)
+print response
 #response = oanda.get_transaction_history(account_id)
-response = oanda.get_history(
-    instrument="USD_JPY",
-    start="2018-01-02T10:00:00",
-    granularity="S5",
-    candleFormat="midpoint"
-)
 #response = oanda.get_history(
 #    instrument="USD_JPY",
 #    start="2018-01-02T10:00:00",
