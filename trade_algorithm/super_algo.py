@@ -64,6 +64,15 @@ class SuperAlgo(object):
         self.bid_price = response[0][1]
         self.insert_time = response[0][2]
 
+        self.ask_price = self.ask_price + 0.02
+        self.bid_price = self.bid_price - 0.02
+
+    def getAskPrice(self):
+        return self.ask_price
+
+    def getBidPrice(self):
+        return self.bid_price
+
     def setTradeId(self, trade_id):
         self.trade_id = trade_id
 
@@ -173,11 +182,11 @@ class SuperAlgo(object):
 
 
     def calcProfit(self):
-        stl_price = self.getCurrentPrice()
-        self.setStlPrice(stl_price)
         if self.order_kind == "buy":
+            stl_price = self.bid_price
             profit = stl_price - self.order_price
         else:
+            stl_price = self.ask_price
             profit = self.order_price - stl_price
 
         if profit >= 0:
@@ -188,6 +197,7 @@ class SuperAlgo(object):
             sleep_time = self.config_data["stl_sleep_ltime"]
 
         self.order_history = self.order_kind
+        self.setStlPrice(stl_price)
 
         return profit, sleep_time
 

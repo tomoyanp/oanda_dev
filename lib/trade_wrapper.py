@@ -195,11 +195,10 @@ class TradeWrapper:
                 if stl_flag == False and self.test_mode:
                     test_stl_flag = self.trade_algo.decideReverceStl()
                     stl_flag = test_stl_flag
-                    #self.result_logger.info("# EXECUTE STOP OR LIMIT ORDER")
 
                 # stl_flagが立ってたら決済する
                 if stl_flag:
-                    self.trade_algo.setStlPrice(self.trade_algo.getCurrentPrice)
+                    #self.trade_algo.setStlPrice(self.trade_algo.getCurrentPrice)
 
                     # 決済注文
                     if self.test_mode:
@@ -243,7 +242,11 @@ class TradeWrapper:
                 sleep_time = self.config_data["sleep_time"]
             else:
                 sleep_time = self.config_data["trade_sleep_time"]
-                order_price = self.trade_algo.getCurrentPrice()
+                if trade_flag == "buy":
+                    order_price = self.trade_algo.getAskPrice()
+                elif trade_flag == "sell":
+                    order_price = self.trade_algo.getBidPrice()
+
                 if self.test_mode:
                     # dummy trade id for test mode
                     trade_id = 12345
