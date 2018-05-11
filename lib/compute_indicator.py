@@ -121,30 +121,12 @@ class ComputeIndicator:
                 # 移動平均の取得(WMA200 1h)
                 ewma200_1h = getEWMA(ask_price_list, bid_price_list, wma_length, candle_width)
 
-
-
                 # instrument, type, ewma_value, insert_time
                 sql = "insert into INDICATOR_TABLE(instrument, type, ewma_value,  insert_time) values(\'%s\', \'%s\', %s, \'%s\')" % (self.instrument, ind_type, ewma200_1h[-1], base_time)
                 self.mysql_connector.insert_sql(sql)
                 logging.info(sql)
 
-#                ind_type = "ewma1h50"
-#                wma_length = 50
-#                candle_width = 3600
-#                # 移動平均の取得(WMA50 1h)
-#                ewma50_1h = getEWMA(ask_price_list, bid_price_list, wma_length, candle_width)
-#
-#                # 短期トレンドの取得
-#                slope_length = (5 * candle_width) * -1
-#                slope_list = ewma50_1h[slope_length:]
-#                slope = getSlope(slope_list)
-#
-#                # instrument, type, ewma_value, insert_time
-#                sql = "insert into INDICATOR_TABLE(instrument, type, ewma_value,  insert_time, slope) values(\'%s\', \'%s\', %s, \'%s\', %s)" % (self.instrument, ind_type, ewma50_1h[-1], base_time, slope)
-#                self.mysql_connector.insert_sql(sql)
-#                logging.info(sql)
 
-    
                 ind_type = "bollinger1h1"
                 window_size = 28
                 candle_width = 3600
@@ -153,7 +135,16 @@ class ComputeIndicator:
                 sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(\'%s\', \'%s\', %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
                 self.mysql_connector.insert_sql(sql)
                 logging.info(sql)
-     
+
+                ind_type = "bollinger1h2"
+                window_size = 28
+                candle_width = 3600
+                sigma_valiable = 2
+                data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
+                sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(\'%s\', \'%s\', %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
+                self.mysql_connector.insert_sql(sql)
+                logging.info(sql)
+
                 ind_type = "bollinger1h2.5"
                 window_size = 28
                 candle_width = 3600
@@ -192,7 +183,18 @@ class ComputeIndicator:
             sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(\'%s\', \'%s\', %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
             self.mysql_connector.insert_sql(sql)
             logging.info(sql)
-    
+
+            # 2シグマボリンジャーバンドを取得する
+            window_size = 28
+            candle_width = 300
+            sigma_valiable = 2
+            data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
+            # instrument, type, upper_sigma, lower_sigma, base_line, insert_time
+            ind_type = "bollinger5m2"
+            sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(\'%s\', \'%s\', %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
+            self.mysql_connector.insert_sql(sql)
+            logging.info(sql)
+
             # 2.5シグマボリンジャーバンドを取得する
             window_size = 28
             candle_width = 300
@@ -257,6 +259,17 @@ class ComputeIndicator:
             data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
             # instrument, type, upper_sigma, lower_sigma, base_line, insert_time
             ind_type = "bollinger1m1"
+            sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(\'%s\', \'%s\', %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
+            self.mysql_connector.insert_sql(sql)
+            logging.info(sql)
+
+            # 2シグマボリンジャーバンドを取得する
+            window_size = 28
+            candle_width = 60
+            sigma_valiable = 2
+            data_set = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
+            # instrument, type, upper_sigma, lower_sigma, base_line, insert_time
+            ind_type = "bollinger1m2"
             sql = "insert into INDICATOR_TABLE(instrument, type, upper_sigma, lower_sigma, base_line, insert_time) values(\'%s\', \'%s\', %s, %s, %s, \'%s\')" % (self.instrument, ind_type, data_set["upper_sigmas"][-1], data_set["lower_sigmas"][-1], data_set["base_lines"][-1], base_time)
             self.mysql_connector.insert_sql(sql)
             logging.info(sql)
