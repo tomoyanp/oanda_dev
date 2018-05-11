@@ -20,7 +20,7 @@ logging.basicConfig(filename=logfilename, level=logging.INFO)
 
 if __name__ == "__main__":
     instrument = "GBP_JPY"
-    base_time = datetime.strptime("2018-02-01 00:00:00", "%Y-%m-%d %H:%M:%S")
+    base_time = datetime.strptime("2017-02-01 00:00:00", "%Y-%m-%d %H:%M:%S")
     end_time = datetime.strptime("2018-05-10 21:00:00", "%Y-%m-%d %H:%M:%S")
 #    end_time = datetime.now()
     time_width = 300 * 200
