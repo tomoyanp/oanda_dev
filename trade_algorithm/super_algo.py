@@ -64,9 +64,6 @@ class SuperAlgo(object):
         self.bid_price = response[0][1]
         self.insert_time = response[0][2]
 
-        self.ask_price = self.ask_price + 0.02
-        self.bid_price = self.bid_price - 0.02
-
     def getAskPrice(self):
         return self.ask_price
 
