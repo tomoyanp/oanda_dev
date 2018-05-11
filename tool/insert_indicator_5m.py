@@ -3,6 +3,7 @@
 ## dummy
 import os, sys
 current_path = os.path.abspath(os.path.dirname(__file__))
+current_path = current_path + "/.."
 sys.path.append(current_path)
 sys.path.append(current_path + "/lib")
 config_name = "trendfollow_dummy"
@@ -19,9 +20,8 @@ logging.basicConfig(filename=logfilename, level=logging.INFO)
 
 if __name__ == "__main__":
     instrument = "GBP_JPY"
-    base_time = datetime.strptime("2018-03-09 18:00:00", "%Y-%m-%d %H:%M:%S")
-#    base_time = datetime.strptime("2018-02-01 00:00:00", "%Y-%m-%d %H:%M:%S")
-    end_time = datetime.strptime("2018-03-10 18:00:00", "%Y-%m-%d %H:%M:%S")
+    base_time = datetime.strptime("2018-02-01 00:00:00", "%Y-%m-%d %H:%M:%S")
+    end_time = datetime.strptime("2018-05-10 21:00:00", "%Y-%m-%d %H:%M:%S")
 #    end_time = datetime.now()
     time_width = 300 * 200
     compute_indicator = ComputeIndicator(instrument, time_width, base_time)
