@@ -74,18 +74,27 @@ def getStartPriceWrapper(instrument, base_time, connector):
     return (ask_price + bid_price) / 2
 
 
-# select start price the day
-def getLastPriceDifferenceWrapper(instrument, base_time, connector):
-    span = 3600*24
-    start_time = base_time
+# select start and end price the last day
+def getLastPriceWrapper(instrument, base_time, connector):
+    if base_time.weekday() == 0:
+        start_time = base_time - timedelta(days=3)
+        end_time = base_time - timedelta(days=2)
+    else:
+        start_time = base_time - timedelta(days=1)
+        end_time = base_time
 
-    sql = "select ask_price, bid_price from %s_TABLE where insert_time < \'%s\' order by insert_time desc limit %s" % (instrument, start_time, span)
+    start_time = start_time.strftime("%Y-%m-%d 07:00:00")
+    end_time = end_time.strftime("%Y-%m-%d 07:00:00")
+
+    sql = "select ask_price, bid_price from %s_TABLE where insert_time = \'%s\'" % (instrument, start_time)
     response = connector.select_sql(sql)
+    start_price = (response[0][0] + response[0][1]) / 2
 
+    sql = "select ask_price, bid_price from %s_TABLE where insert_time = \'%s\'" % (instrument, end_time)
+    response = connector.select_sql(sql)
     end_price = (response[0][0] + response[0][1]) / 2
-    start_price = (response[-1][0] + response[-1][0]) / 2
 
-    return (end_price - start_price)
+    return start_price, end_price
 
 
 def getWeekStartPrice(instrument, base_time, week_start_price, current_price):

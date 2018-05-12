@@ -405,6 +405,7 @@ class ExpantionAlgo(SuperAlgo):
         second = base_time.second
         if hour == 7 and minute == 0 and second <= 10:
             self.high_price, self.low_price = getHighlowPriceWrapper(instrument=self.instrument, base_time=base_time, span=24, slide_span=0, connector=self.mysql_connector)
+            self.start_price, self.end_price = getLastPriceWrapper(instrument=self.instrument, base_time=base_time, connector=self.mysql_connector)
 
 
     # log writer program
@@ -451,6 +452,8 @@ class ExpantionAlgo(SuperAlgo):
             self.result_logger.info("# self.first_flag_time=%s" % self.first_flag_time)
             self.result_logger.info("# self.buy_count_price=%s" % self.buy_count_price)
             self.result_logger.info("# self.sell_count_price=%s" %  self.sell_count_price)
+            self.result_logger.info("# self.start_price=%s" %  self.start_price)
+            self.result_logger.info("# self.end_price=%s" %  self.end_price)
 
 #        elif mode == "stl":
 #            self.result_logger.info("# Execute Reverse Settlement")
