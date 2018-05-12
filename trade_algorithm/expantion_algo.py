@@ -109,8 +109,8 @@ class ExpantionAlgo(SuperAlgo):
                         if minutes % 5 == 4:
                             self.setIndicator(base_time)
                             stl_flag = self.decideExpantionStopLoss(stl_flag, current_price, base_time)
-                    stl_flag = self.decideVolatilityStopLoss(stl_flag, current_price, base_time)
-                    stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price)
+                            stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price)
+                            stl_flag = self.decideVolatilityStopLoss(stl_flag, current_price, base_time)
                     stl_flag = self.decideStopLoss(stl_flag, current_price, base_time)
             else:
                 pass
@@ -245,7 +245,7 @@ class ExpantionAlgo(SuperAlgo):
 
 
     def decideStopLoss(self, stl_flag, current_price, base_time):
-        stop_loss_threshold_list = [0.1, 0.2, 0.3]
+        stop_loss_threshold_list = [-0.1, 0.2, 0.3]
         self.debug_logger.info("#### decideStoploss Function ####")
         self.debug_logger.info("self.order_kind=%s" % self.order_kind)
         self.debug_logger.info("self.order_price=%s" % self.order_price)
