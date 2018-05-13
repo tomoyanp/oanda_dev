@@ -194,7 +194,10 @@ class SuperAlgo(object):
         else:
             self.profit_history = "l"
             sleep_time = self.config_data["stl_sleep_ltime"]
-            self.count_threshold = self.count_threshold + 1
+            if self.count_threshold >= 3:
+                pass
+            else:
+                self.count_threshold = self.count_threshold + 1
 
         self.order_history = self.order_kind
         self.setStlPrice(stl_price)

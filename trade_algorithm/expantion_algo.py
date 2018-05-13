@@ -44,6 +44,7 @@ class ExpantionAlgo(SuperAlgo):
         self.week_start_price = 0
         self.setIndicator(base_time)
         self.high_price, self.low_price = getHighlowPriceWrapper(instrument=self.instrument, base_time=base_time, span=24, slide_span=0, connector=self.mysql_connector)
+        self.stoploss_flag = False
 
     def decideTrade(self, base_time):
         trade_flag = "pass"
@@ -75,7 +76,6 @@ class ExpantionAlgo(SuperAlgo):
                         self.buy_count = 0
                         self.sell_count = 0
 
-            self.debug_logger.info("Trade Logic at %s" % base_time)
             return trade_flag
         except:
             raise
@@ -108,12 +108,12 @@ class ExpantionAlgo(SuperAlgo):
 
                         if minutes % 5 == 4:
                             self.setIndicator(base_time)
-                            stl_flag = self.decideExpantionStopLoss(stl_flag, current_price, base_time)
+#                            stl_flag = self.decideExpantionStopLoss(stl_flag, current_price, base_time)
                             stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price)
+                    stl_flag = self.decideStopLoss(stl_flag, current_price, base_time)
             else:
                 pass
 
-            self.debug_logger.info("Settlement Logic at %s" % base_time)
             return stl_flag
         except:
             raise
@@ -218,6 +218,55 @@ class ExpantionAlgo(SuperAlgo):
 
         return trade_flag
 
+    def decideStopLoss(self, stl_flag, current_price, base_time):
+        stop_loss_threshold_list = [0, 0.2, 0.3]
+        self.debug_logger.info("#### decideStoploss Function ####")
+        self.debug_logger.info("self.order_kind=%s" % self.order_kind)
+        self.debug_logger.info("self.order_price=%s" % self.order_price)
+        self.debug_logger.info("self.ask_price=%s" % self.ask_price)
+        self.debug_logger.info("self.bid_price=%s" % self.bid_price)
+
+        if self.order_kind == "buy" and self.stoploss_flag == False:
+            if float(self.order_price - self.bid_price) > float(stop_loss_threshold_list[1]):
+                self.debug_logger.info("stoploss_flag to be True")
+                self.stoploss_flag = True
+        elif self.order_kind == "sell" and self.stoploss_flag == False:
+            if float(self.ask_price - self.order_price) > float(stop_loss_threshold_list[1]):
+                self.debug_logger.info("stoploss_flag to be True")
+                self.stoploss_flag = True
+        else:
+            pass
+
+
+
+        if self.order_kind == "buy" and self.stoploss_flag:
+            if float(self.order_price - self.bid_price) < float(stop_loss_threshold_list[0]):
+                self.debug_logger.info("execute help settlement")
+                self.result_logger.info("Execute Help Settlemtn")
+                stl_flag = True
+            elif float(self.order_price - self.bid_price) > float(stop_loss_threshold_list[2]):
+                self.debug_logger.info("execute final settlement")
+                self.result_logger.info("Execute Final Settlemtn")
+                stl_flag = True
+        elif self.order_kind == "sell" and self.stoploss_flag:
+            if float(self.ask_price - self.order_price) < float(stop_loss_threshold_list[0]):
+                self.debug_logger.info("execute help settlement")
+                self.result_logger.info("Execute Help Settlemtn")
+                stl_flag = True
+            elif float(self.ask_price - self.order_price) > float(stop_loss_threshold_list[2]):
+                self.debug_logger.info("execute final settlement")
+                self.result_logger.info("Execute Final Settlemtn")
+                stl_flag = True
+        else:
+            pass
+
+
+        return stl_flag
+
+
+
+
+
     def decideVolatilityStopLoss(self, stl_flag, current_price, base_time):
         mode = "stl"
         up_flag, down_flag = decideVolatility(current_price=current_price, volatility_value=0.3, volatility_buy_price=self.volatility_buy_price, volatility_bid_price=self.volatility_bid_price)
@@ -263,6 +312,7 @@ class ExpantionAlgo(SuperAlgo):
         self.mode = ""
         self.most_high_price = 0
         self.most_low_price = 0
+        self.stoploss_flag = False
         super(ExpantionAlgo, self).resetFlag()
 
     def decideTrailLogic(self, stl_flag, current_ask_price, current_bid_price):
