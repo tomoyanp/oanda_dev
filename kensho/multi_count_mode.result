@@ -1,0 +1,2600 @@
+#########################
+# ../main.py GBP_JPY demo expantion expantion_test test 
+# __comments = expantion mode
+# __comments1 = current master
+# enable_time = [u'00:00:00', u'01:00:00', u'02:00:00', u'03:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00', u'21:00:00', u'22:00:00', u'23:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# first_trail_mode = on
+# second_trail_mode = on
+# sleep_time = 10
+# stl_sleep_ltime = 1
+# stl_sleep_time = 10
+# stl_sleep_vtime = 1
+# stl_time_width = 720000
+# stop_loss = 0.2
+# take_profit = 2.0
+# time_width = 720000
+# trade_sleep_time = 1
+# units = 10000
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-03-01 02:24:50
+# ORDER_PRICE=138.904, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-03-01 03:19:21
+# ORDER_PRICE=138.888, STL_PRICE=139.0775, ORDER_KIND=sell, PROFIT=-0.202
+# PROFIT=-0.202
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# EXECUTE ORDER at 2017-03-01 18:09:52
+# ORDER_PRICE=140.6675, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-03-01 18:30:13
+# ORDER_PRICE=140.682, STL_PRICE=140.4825, ORDER_KIND=buy, PROFIT=-0.225
+# PROFIT=-0.225
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=3
+# self.sell_count=0
+# EXECUTE ORDER at 2017-03-02 15:29:54
+# ORDER_PRICE=140.1915, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-03-02 19:03:35
+# ORDER_PRICE=140.207, STL_PRICE=140.0005, ORDER_KIND=buy, PROFIT=-0.221
+# PROFIT=-0.221
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=0
+# self.sell_count=4
+# EXECUTE ORDER at 2017-03-07 17:04:50
+# ORDER_PRICE=139.0715, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-03-08 01:50:51
+# ORDER_PRICE=139.057, STL_PRICE=139.249, ORDER_KIND=sell, PROFIT=-0.207
+# PROFIT=-0.207
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=4
+# self.buy_count=6
+# self.sell_count=0
+# EXECUTE ORDER at 2017-03-09 22:54:52
+# ORDER_PRICE=139.997, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-03-09 23:36:03
+# ORDER_PRICE=140.018, STL_PRICE=139.821, ORDER_KIND=buy, PROFIT=-0.211
+# PROFIT=-0.211
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=5
+# self.buy_count=0
+# self.sell_count=6
+# EXECUTE ORDER at 2017-03-11 00:19:54
+# ORDER_PRICE=139.688, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-03-11 00:39:15
+# ORDER_PRICE=139.675, STL_PRICE=139.862, ORDER_KIND=sell, PROFIT=-0.202
+# PROFIT=-0.202
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=6
+# self.buy_count=0
+# self.sell_count=7
+# EXECUTE ORDER at 2017-03-17 20:24:50
+# ORDER_PRICE=139.833, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=139.538, order_price=139.814
+# EXECUTE SETTLEMENT at 2017-03-18 01:39:51
+# ORDER_PRICE=139.814, STL_PRICE=139.5265, ORDER_KIND=sell, PROFIT=0.276
+# PROFIT=0.276
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2017-03-20 15:04:50
+# ORDER_PRICE=139.6055, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=139.797, self.upper_sigma_5m3=140.196696973, self.lower_sigma_5m3=139.82843636, self.order_kind=buy
+# EXECUTE SETTLEMENT at 2017-03-20 20:59:51
+# ORDER_PRICE=139.623, STL_PRICE=139.797, ORDER_KIND=buy, PROFIT=0.16
+# PROFIT=0.16
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-03-20 20:59:52
+# ORDER_PRICE=139.797, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# current_price=139.206, self.upper_sigma_5m3=139.155651588, self.lower_sigma_5m3=138.971666269, self.order_kind=sell
+# EXECUTE SETTLEMENT at 2017-03-21 08:54:53
+# ORDER_PRICE=139.783, STL_PRICE=139.206, ORDER_KIND=sell, PROFIT=0.559
+# PROFIT=0.559
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-03-21 15:59:54
+# ORDER_PRICE=139.4255, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# current_price=139.5485, self.upper_sigma_5m3=139.487455232, self.lower_sigma_5m3=139.108401911, self.order_kind=sell
+# EXECUTE SETTLEMENT at 2017-03-21 16:14:55
+# ORDER_PRICE=139.41, STL_PRICE=139.5485, ORDER_KIND=sell, PROFIT=-0.154
+# PROFIT=-0.154
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=3
+# self.sell_count=0
+# EXECUTE ORDER at 2017-03-21 19:04:56
+# ORDER_PRICE=140.3445, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-03-21 19:23:07
+# ORDER_PRICE=140.36, STL_PRICE=140.173, ORDER_KIND=buy, PROFIT=-0.201
+# PROFIT=-0.201
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=0
+# self.sell_count=3
+# EXECUTE ORDER at 2017-03-21 23:29:58
+# ORDER_PRICE=139.7785, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=139.444, order_price=139.764
+# EXECUTE SETTLEMENT at 2017-03-22 09:39:59
+# ORDER_PRICE=139.764, STL_PRICE=139.43, ORDER_KIND=sell, PROFIT=0.32
+# PROFIT=0.32
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=4
+# EXECUTE ORDER at 2017-03-22 17:59:50
+# ORDER_PRICE=138.71, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=138.29, order_price=138.698
+# EXECUTE SETTLEMENT at 2017-03-23 00:14:51
+# ORDER_PRICE=138.698, STL_PRICE=138.2765, ORDER_KIND=sell, PROFIT=0.408
+# PROFIT=0.408
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-03-23 02:59:52
+# ORDER_PRICE=138.259, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-03-23 03:26:13
+# ORDER_PRICE=138.247, STL_PRICE=138.436, ORDER_KIND=sell, PROFIT=-0.203
+# PROFIT=-0.203
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# EXECUTE ORDER at 2017-03-23 16:29:54
+# ORDER_PRICE=138.8345, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-03-23 18:30:05
+# ORDER_PRICE=138.819, STL_PRICE=138.994, ORDER_KIND=sell, PROFIT=-0.235
+# PROFIT=-0.235
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=0
+# self.sell_count=3
+# EXECUTE ORDER at 2017-03-24 18:44:56
+# ORDER_PRICE=138.814, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# current_price=138.86, self.upper_sigma_5m3=138.819670652, self.lower_sigma_5m3=138.507137086, self.order_kind=sell
+# EXECUTE SETTLEMENT at 2017-03-24 22:34:57
+# ORDER_PRICE=138.802, STL_PRICE=138.86, ORDER_KIND=sell, PROFIT=-0.071
+# PROFIT=-0.071
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=4
+# self.sell_count=0
+# EXECUTE ORDER at 2017-03-30 22:14:50
+# ORDER_PRICE=139.0895, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-03-30 22:27:11
+# ORDER_PRICE=139.104, STL_PRICE=138.87, ORDER_KIND=buy, PROFIT=-0.255
+# PROFIT=-0.255
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=4
+# self.buy_count=0
+# self.sell_count=5
+# EXECUTE ORDER at 2017-04-03 23:59:50
+# ORDER_PRICE=138.5265, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# current_price=137.6235, self.upper_sigma_5m3=137.607173914, self.lower_sigma_5m3=137.164412396, self.order_kind=sell
+# Execute FirstTrail Stop
+# current_ask_price=137.637, order_price=138.513
+# Execute SecondTrail Stop
+# current_ask_price=137.637, order_price=138.513
+# EXECUTE SETTLEMENT at 2017-04-04 18:19:51
+# ORDER_PRICE=138.513, STL_PRICE=137.6235, ORDER_KIND=sell, PROFIT=0.876
+# PROFIT=0.876
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2017-04-04 18:19:52
+# ORDER_PRICE=137.6235, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-04-04 18:33:33
+# ORDER_PRICE=137.637, STL_PRICE=137.4445, ORDER_KIND=buy, PROFIT=-0.207
+# PROFIT=-0.207
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# EXECUTE ORDER at 2017-04-04 20:19:54
+# ORDER_PRICE=137.3045, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-04-04 22:05:35
+# ORDER_PRICE=137.291, STL_PRICE=137.481, ORDER_KIND=sell, PROFIT=-0.203
+# PROFIT=-0.203
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=3
+# self.sell_count=0
+# EXECUTE ORDER at 2017-04-04 22:34:56
+# ORDER_PRICE=137.871, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-04-04 22:57:47
+# ORDER_PRICE=137.885, STL_PRICE=137.687, ORDER_KIND=buy, PROFIT=-0.211
+# PROFIT=-0.211
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=4
+# self.sell_count=0
+# EXECUTE ORDER at 2017-04-05 21:29:58
+# ORDER_PRICE=138.809, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-04-06 00:21:09
+# ORDER_PRICE=138.825, STL_PRICE=138.6335, ORDER_KIND=buy, PROFIT=-0.206
+# PROFIT=-0.206
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=4
+# self.buy_count=0
+# self.sell_count=5
+# EXECUTE ORDER at 2017-04-07 21:54:50
+# ORDER_PRICE=137.1845, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-04-07 22:10:51
+# ORDER_PRICE=137.171, STL_PRICE=137.3645, ORDER_KIND=sell, PROFIT=-0.207
+# PROFIT=-0.207
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=5
+# self.buy_count=7
+# self.sell_count=0
+# EXECUTE ORDER at 2017-04-17 21:14:50
+# ORDER_PRICE=136.1055, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=136.931, self.upper_sigma_5m3=137.185358868, self.lower_sigma_5m3=136.947566132, self.order_kind=buy
+# EXECUTE SETTLEMENT at 2017-04-18 11:09:51
+# ORDER_PRICE=136.12, STL_PRICE=136.931, ORDER_KIND=buy, PROFIT=0.797
+# PROFIT=0.797
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2017-04-18 15:44:52
+# ORDER_PRICE=137.214, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-04-18 16:38:53
+# ORDER_PRICE=137.228, STL_PRICE=137.035, ORDER_KIND=buy, PROFIT=-0.206
+# PROFIT=-0.206
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# EXECUTE ORDER at 2017-04-18 18:14:54
+# ORDER_PRICE=136.399, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-04-18 19:00:15
+# ORDER_PRICE=136.382, STL_PRICE=136.57, ORDER_KIND=sell, PROFIT=-0.204
+# PROFIT=-0.204
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=4
+# self.sell_count=0
+# EXECUTE ORDER at 2017-04-19 21:24:56
+# ORDER_PRICE=140.161, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-04-19 21:29:27
+# ORDER_PRICE=140.173, STL_PRICE=139.9855, ORDER_KIND=buy, PROFIT=-0.203
+# PROFIT=-0.203
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=0
+# self.sell_count=4
+# EXECUTE ORDER at 2017-04-21 17:44:58
+# ORDER_PRICE=139.5295, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-04-21 17:51:49
+# ORDER_PRICE=139.518, STL_PRICE=139.7205, ORDER_KIND=sell, PROFIT=-0.217
+# PROFIT=-0.217
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=4
+# self.buy_count=6
+# self.sell_count=0
+# EXECUTE ORDER at 2017-04-27 21:39:50
+# ORDER_PRICE=143.79, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-04-27 21:50:51
+# ORDER_PRICE=143.807, STL_PRICE=143.5775, ORDER_KIND=buy, PROFIT=-0.246
+# PROFIT=-0.246
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=5
+# self.buy_count=8
+# self.sell_count=0
+# EXECUTE ORDER at 2017-04-28 17:14:52
+# ORDER_PRICE=144.12, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-04-28 17:20:53
+# ORDER_PRICE=144.131, STL_PRICE=143.9315, ORDER_KIND=buy, PROFIT=-0.213
+# PROFIT=-0.213
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=6
+# self.buy_count=7
+# self.sell_count=0
+# EXECUTE ORDER at 2017-05-09 22:04:50
+# ORDER_PRICE=147.29, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=147.549, self.upper_sigma_5m3=147.833621777, self.lower_sigma_5m3=147.616499652, self.order_kind=buy
+# Execute FirstTrail Stop
+# current_bid_price=147.535, order_price=147.301
+# EXECUTE SETTLEMENT at 2017-05-10 04:34:51
+# ORDER_PRICE=147.301, STL_PRICE=147.549, ORDER_KIND=buy, PROFIT=0.234
+# PROFIT=0.234
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=4
+# self.sell_count=0
+# EXECUTE ORDER at 2017-05-10 16:19:52
+# ORDER_PRICE=148.0965, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-05-10 16:39:13
+# ORDER_PRICE=148.11, STL_PRICE=147.923, ORDER_KIND=buy, PROFIT=-0.2
+# PROFIT=-0.2
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# EXECUTE ORDER at 2017-05-10 18:04:54
+# ORDER_PRICE=147.312, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-05-10 18:14:45
+# ORDER_PRICE=147.301, STL_PRICE=147.493, ORDER_KIND=sell, PROFIT=-0.204
+# PROFIT=-0.204
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=0
+# self.sell_count=6
+# EXECUTE ORDER at 2017-05-11 20:39:56
+# ORDER_PRICE=146.9245, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=146.852, order_price=146.911
+# EXECUTE SETTLEMENT at 2017-05-11 21:49:57
+# ORDER_PRICE=146.911, STL_PRICE=146.8405, ORDER_KIND=sell, PROFIT=0.059
+# PROFIT=0.059
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-05-11 23:04:58
+# ORDER_PRICE=146.247, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-05-11 23:16:09
+# ORDER_PRICE=146.235, STL_PRICE=146.424, ORDER_KIND=sell, PROFIT=-0.203
+# PROFIT=-0.203
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=9
+# EXECUTE ORDER at 2017-05-13 00:04:50
+# ORDER_PRICE=145.9585, TRADE_FLAG=sell
+# weekend stl logic
+# EXECUTE SETTLEMENT at 2017-05-13 05:00:01
+# ORDER_PRICE=145.946, STL_PRICE=145.955, ORDER_KIND=sell, PROFIT=-0.023
+# PROFIT=-0.023
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=0
+# self.sell_count=3
+# EXECUTE ORDER at 2017-05-15 18:39:50
+# ORDER_PRICE=146.66, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-05-16 06:01:41
+# ORDER_PRICE=146.649, STL_PRICE=146.789, ORDER_KIND=sell, PROFIT=-0.24
+# PROFIT=-0.24
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=0
+# self.sell_count=6
+# EXECUTE ORDER at 2017-05-17 02:24:52
+# ORDER_PRICE=146.3115, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=145.374, order_price=146.299
+# Execute SecondTrail Stop
+# current_ask_price=145.374, order_price=146.299
+# EXECUTE SETTLEMENT at 2017-05-17 16:54:53
+# ORDER_PRICE=146.299, STL_PRICE=145.3605, ORDER_KIND=sell, PROFIT=0.925
+# PROFIT=0.925
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2017-05-17 19:49:54
+# ORDER_PRICE=145.849, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-05-17 20:36:35
+# ORDER_PRICE=145.864, STL_PRICE=145.665, ORDER_KIND=buy, PROFIT=-0.21
+# PROFIT=-0.21
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# EXECUTE ORDER at 2017-05-17 22:09:56
+# ORDER_PRICE=144.923, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=144.738, order_price=144.907
+# EXECUTE SETTLEMENT at 2017-05-17 23:24:57
+# ORDER_PRICE=144.907, STL_PRICE=144.7255, ORDER_KIND=sell, PROFIT=0.169
+# PROFIT=0.169
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2017-05-18 17:34:58
+# ORDER_PRICE=144.5655, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-05-18 17:56:29
+# ORDER_PRICE=144.577, STL_PRICE=144.3805, ORDER_KIND=buy, PROFIT=-0.209
+# PROFIT=-0.209
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# EXECUTE ORDER at 2017-05-18 22:39:50
+# ORDER_PRICE=144.7475, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-05-18 22:44:01
+# ORDER_PRICE=144.761, STL_PRICE=144.545, ORDER_KIND=buy, PROFIT=-0.228
+# PROFIT=-0.228
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=0
+# self.sell_count=3
+# EXECUTE ORDER at 2017-05-22 15:24:50
+# ORDER_PRICE=144.5845, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-05-22 15:39:01
+# ORDER_PRICE=144.571, STL_PRICE=144.777, ORDER_KIND=sell, PROFIT=-0.219
+# PROFIT=-0.219
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=0
+# self.sell_count=4
+# EXECUTE ORDER at 2017-05-23 00:09:52
+# ORDER_PRICE=144.44, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-05-23 01:16:13
+# ORDER_PRICE=144.429, STL_PRICE=144.619, ORDER_KIND=sell, PROFIT=-0.204
+# PROFIT=-0.204
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=4
+# self.buy_count=6
+# self.sell_count=0
+# EXECUTE ORDER at 2017-05-30 18:04:50
+# ORDER_PRICE=142.5455, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# current_bid_price=142.687, order_price=142.557
+# EXECUTE SETTLEMENT at 2017-05-30 22:14:51
+# ORDER_PRICE=142.557, STL_PRICE=142.701, ORDER_KIND=buy, PROFIT=0.13
+# PROFIT=0.13
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-05-31 01:49:52
+# ORDER_PRICE=142.195, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-05-31 02:40:13
+# ORDER_PRICE=142.181, STL_PRICE=142.3705, ORDER_KIND=sell, PROFIT=-0.203
+# PROFIT=-0.203
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# EXECUTE ORDER at 2017-05-31 22:49:54
+# ORDER_PRICE=142.5445, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-05-31 22:57:15
+# ORDER_PRICE=142.558, STL_PRICE=142.352, ORDER_KIND=buy, PROFIT=-0.217
+# PROFIT=-0.217
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=3
+# self.sell_count=0
+# EXECUTE ORDER at 2017-06-01 02:29:56
+# ORDER_PRICE=142.556, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=142.7425, self.upper_sigma_5m3=142.925247351, self.lower_sigma_5m3=142.754204435, self.order_kind=buy
+# EXECUTE SETTLEMENT at 2017-06-01 13:39:57
+# ORDER_PRICE=142.567, STL_PRICE=142.7425, ORDER_KIND=buy, PROFIT=0.162
+# PROFIT=0.162
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=3
+# self.sell_count=0
+# EXECUTE ORDER at 2017-06-01 17:29:58
+# ORDER_PRICE=143.123, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-06-01 18:10:59
+# ORDER_PRICE=143.148, STL_PRICE=142.96, ORDER_KIND=buy, PROFIT=-0.201
+# PROFIT=-0.201
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# EXECUTE ORDER at 2017-06-02 15:59:50
+# ORDER_PRICE=143.532, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=142.479, order_price=143.519
+# Execute SecondTrail Stop
+# current_ask_price=142.479, order_price=143.519
+# EXECUTE SETTLEMENT at 2017-06-03 00:44:51
+# ORDER_PRICE=143.519, STL_PRICE=142.4685, ORDER_KIND=sell, PROFIT=1.04
+# PROFIT=1.04
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2017-06-05 18:24:50
+# ORDER_PRICE=142.6135, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=142.641, self.upper_sigma_5m3=142.815041337, self.lower_sigma_5m3=142.665491401, self.order_kind=buy
+# EXECUTE SETTLEMENT at 2017-06-06 02:24:51
+# ORDER_PRICE=142.627, STL_PRICE=142.641, ORDER_KIND=buy, PROFIT=0.000999999999976
+# PROFIT=0.000999999999976
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-06-06 02:24:52
+# ORDER_PRICE=142.641, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=142.079, order_price=142.628
+# EXECUTE SETTLEMENT at 2017-06-06 12:49:53
+# ORDER_PRICE=142.628, STL_PRICE=142.0645, ORDER_KIND=sell, PROFIT=0.549
+# PROFIT=0.549
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-06-06 19:29:54
+# ORDER_PRICE=141.3325, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=141.07, order_price=141.32
+# EXECUTE SETTLEMENT at 2017-06-07 03:34:55
+# ORDER_PRICE=141.32, STL_PRICE=141.055, ORDER_KIND=sell, PROFIT=0.25
+# PROFIT=0.25
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-06-07 19:39:56
+# ORDER_PRICE=141.255, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-06-07 22:00:47
+# ORDER_PRICE=141.242, STL_PRICE=141.4275, ORDER_KIND=sell, PROFIT=-0.201
+# PROFIT=-0.201
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# EXECUTE ORDER at 2017-06-07 22:09:58
+# ORDER_PRICE=141.4915, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=141.4755, self.upper_sigma_5m3=141.935261048, self.lower_sigma_5m3=141.512035976, self.order_kind=buy
+# EXECUTE SETTLEMENT at 2017-06-08 01:24:59
+# ORDER_PRICE=141.503, STL_PRICE=141.4755, ORDER_KIND=buy, PROFIT=-0.039
+# PROFIT=-0.039
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=0
+# self.sell_count=3
+# EXECUTE ORDER at 2017-06-08 22:19:50
+# ORDER_PRICE=141.995, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-06-08 22:30:21
+# ORDER_PRICE=141.981, STL_PRICE=142.17, ORDER_KIND=sell, PROFIT=-0.202
+# PROFIT=-0.202
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=0
+# self.sell_count=4
+# EXECUTE ORDER at 2017-06-10 01:24:52
+# ORDER_PRICE=140.6265, TRADE_FLAG=sell
+# weekend stl logic
+# EXECUTE SETTLEMENT at 2017-06-10 05:00:03
+# ORDER_PRICE=140.613, STL_PRICE=140.346, ORDER_KIND=sell, PROFIT=0.252
+# PROFIT=0.252
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-06-12 15:49:50
+# ORDER_PRICE=140.4625, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=139.467, order_price=140.448
+# Execute SecondTrail Stop
+# current_ask_price=139.467, order_price=140.448
+# EXECUTE SETTLEMENT at 2017-06-12 22:14:51
+# ORDER_PRICE=140.448, STL_PRICE=139.454, ORDER_KIND=sell, PROFIT=0.981
+# PROFIT=0.981
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2017-06-13 15:04:52
+# ORDER_PRICE=139.371, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=139.917, self.upper_sigma_5m3=140.254648987, self.lower_sigma_5m3=139.990973632, self.order_kind=buy
+# Execute FirstTrail Stop
+# current_bid_price=139.905, order_price=139.384
+# EXECUTE SETTLEMENT at 2017-06-13 23:54:53
+# ORDER_PRICE=139.384, STL_PRICE=139.917, ORDER_KIND=buy, PROFIT=0.521
+# PROFIT=0.521
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-06-13 23:54:54
+# ORDER_PRICE=139.917, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-06-14 00:33:35
+# ORDER_PRICE=139.905, STL_PRICE=140.1035, ORDER_KIND=sell, PROFIT=-0.209
+# PROFIT=-0.209
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# EXECUTE ORDER at 2017-06-14 15:19:56
+# ORDER_PRICE=140.7075, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-06-14 17:30:27
+# ORDER_PRICE=140.725, STL_PRICE=140.526, ORDER_KIND=buy, PROFIT=-0.211
+# PROFIT=-0.211
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=0
+# self.sell_count=3
+# EXECUTE ORDER at 2017-06-14 21:39:58
+# ORDER_PRICE=139.994, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=139.582, order_price=139.98
+# EXECUTE SETTLEMENT at 2017-06-15 00:19:59
+# ORDER_PRICE=139.98, STL_PRICE=139.57, ORDER_KIND=sell, PROFIT=0.398
+# PROFIT=0.398
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2017-06-15 20:04:50
+# ORDER_PRICE=140.373, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-06-15 21:16:21
+# ORDER_PRICE=140.388, STL_PRICE=140.1825, ORDER_KIND=buy, PROFIT=-0.221
+# PROFIT=-0.221
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# EXECUTE ORDER at 2017-06-16 01:54:52
+# ORDER_PRICE=141.502, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=141.9095, self.upper_sigma_5m3=142.137984178, self.lower_sigma_5m3=141.916124156, self.order_kind=buy
+# EXECUTE SETTLEMENT at 2017-06-16 14:39:53
+# ORDER_PRICE=141.515, STL_PRICE=141.9095, ORDER_KIND=buy, PROFIT=0.381
+# PROFIT=0.381
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2017-06-16 15:44:54
+# ORDER_PRICE=142.262, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-06-16 15:56:45
+# ORDER_PRICE=142.275, STL_PRICE=142.076, ORDER_KIND=buy, PROFIT=-0.212
+# PROFIT=-0.212
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# EXECUTE ORDER at 2017-06-16 21:59:56
+# ORDER_PRICE=141.9635, TRADE_FLAG=sell
+# weekend stl logic
+# EXECUTE SETTLEMENT at 2017-06-17 05:00:07
+# ORDER_PRICE=141.951, STL_PRICE=141.682, ORDER_KIND=sell, PROFIT=0.253
+# PROFIT=0.253
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-06-19 23:44:50
+# ORDER_PRICE=141.904, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-06-20 04:36:11
+# ORDER_PRICE=141.891, STL_PRICE=142.091, ORDER_KIND=sell, PROFIT=-0.213
+# PROFIT=-0.213
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=5
+# EXECUTE ORDER at 2017-06-20 21:09:52
+# ORDER_PRICE=141.1195, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# current_price=140.6035, self.upper_sigma_5m3=140.596671, self.lower_sigma_5m3=140.453940905, self.order_kind=sell
+# EXECUTE SETTLEMENT at 2017-06-21 14:04:53
+# ORDER_PRICE=141.105, STL_PRICE=140.6035, ORDER_KIND=sell, PROFIT=0.489
+# PROFIT=0.489
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-06-21 16:09:54
+# ORDER_PRICE=140.2125, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-06-21 19:05:25
+# ORDER_PRICE=140.2, STL_PRICE=140.4, ORDER_KIND=sell, PROFIT=-0.21
+# PROFIT=-0.21
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# EXECUTE ORDER at 2017-06-21 20:04:56
+# ORDER_PRICE=141.2085, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# current_bid_price=141.383, order_price=141.223
+# EXECUTE SETTLEMENT at 2017-06-21 22:54:57
+# ORDER_PRICE=141.223, STL_PRICE=141.3945, ORDER_KIND=buy, PROFIT=0.16
+# PROFIT=0.16
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-06-22 15:14:58
+# ORDER_PRICE=140.6605, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-06-22 15:34:49
+# ORDER_PRICE=140.648, STL_PRICE=140.851, ORDER_KIND=sell, PROFIT=-0.215
+# PROFIT=-0.215
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# EXECUTE ORDER at 2017-06-22 19:19:50
+# ORDER_PRICE=140.9715, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-06-22 21:47:31
+# ORDER_PRICE=140.984, STL_PRICE=140.7945, ORDER_KIND=buy, PROFIT=-0.202
+# PROFIT=-0.202
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=0
+# self.sell_count=3
+# EXECUTE ORDER at 2017-06-22 22:04:52
+# ORDER_PRICE=140.698, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-06-22 23:24:23
+# ORDER_PRICE=140.685, STL_PRICE=140.876, ORDER_KIND=sell, PROFIT=-0.203
+# PROFIT=-0.203
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=4
+# self.sell_count=0
+# EXECUTE ORDER at 2017-06-23 16:19:54
+# ORDER_PRICE=141.829, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-06-23 16:43:45
+# ORDER_PRICE=141.841, STL_PRICE=141.6445, ORDER_KIND=buy, PROFIT=-0.209
+# PROFIT=-0.209
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=4
+# self.buy_count=5
+# self.sell_count=0
+# EXECUTE ORDER at 2017-06-26 16:09:50
+# ORDER_PRICE=142.1775, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-06-26 18:32:21
+# ORDER_PRICE=142.19, STL_PRICE=141.991, ORDER_KIND=buy, PROFIT=-0.211
+# PROFIT=-0.211
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=5
+# self.buy_count=6
+# self.sell_count=0
+# EXECUTE ORDER at 2017-06-27 03:44:52
+# ORDER_PRICE=142.2925, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=142.227, self.upper_sigma_5m3=142.468331392, self.lower_sigma_5m3=142.259780513, self.order_kind=buy
+# EXECUTE SETTLEMENT at 2017-06-27 15:09:53
+# ORDER_PRICE=142.304, STL_PRICE=142.227, ORDER_KIND=buy, PROFIT=-0.089
+# PROFIT=-0.089
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=6
+# self.buy_count=0
+# self.sell_count=9
+# EXECUTE ORDER at 2017-07-12 01:19:50
+# ORDER_PRICE=146.47, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# current_price=146.4125, self.upper_sigma_5m3=146.365958061, self.lower_sigma_5m3=146.213581224, self.order_kind=sell
+# EXECUTE SETTLEMENT at 2017-07-12 05:49:51
+# ORDER_PRICE=146.458, STL_PRICE=146.4125, ORDER_KIND=sell, PROFIT=0.03
+# PROFIT=0.03
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-07-12 15:09:52
+# ORDER_PRICE=145.5105, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-07-12 17:30:23
+# ORDER_PRICE=145.497, STL_PRICE=145.6995, ORDER_KIND=sell, PROFIT=-0.222
+# PROFIT=-0.222
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# EXECUTE ORDER at 2017-07-12 20:49:54
+# ORDER_PRICE=146.242, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-07-12 21:31:15
+# ORDER_PRICE=146.256, STL_PRICE=146.058, ORDER_KIND=buy, PROFIT=-0.232
+# PROFIT=-0.232
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=0
+# self.sell_count=3
+# EXECUTE ORDER at 2017-07-14 21:49:56
+# ORDER_PRICE=146.067, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-07-14 22:14:17
+# ORDER_PRICE=146.051, STL_PRICE=146.2555, ORDER_KIND=sell, PROFIT=-0.218
+# PROFIT=-0.218
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=0
+# self.sell_count=4
+# EXECUTE ORDER at 2017-07-15 02:44:58
+# ORDER_PRICE=147.1335, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-07-15 03:06:39
+# ORDER_PRICE=147.122, STL_PRICE=147.3105, ORDER_KIND=sell, PROFIT=-0.203
+# PROFIT=-0.203
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=4
+# self.buy_count=0
+# self.sell_count=5
+# EXECUTE ORDER at 2017-07-17 16:39:50
+# ORDER_PRICE=147.23, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# current_price=147.2165, self.upper_sigma_5m3=147.172054432, self.lower_sigma_5m3=146.764415211, self.order_kind=sell
+# EXECUTE SETTLEMENT at 2017-07-17 23:44:51
+# ORDER_PRICE=147.218, STL_PRICE=147.2165, ORDER_KIND=sell, PROFIT=-0.011
+# PROFIT=-0.011
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=5
+# self.buy_count=0
+# self.sell_count=8
+# EXECUTE ORDER at 2017-07-21 22:39:52
+# ORDER_PRICE=144.4635, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# current_price=144.391, self.upper_sigma_5m3=144.344379958, self.lower_sigma_5m3=144.061798018, self.order_kind=sell
+# EXECUTE SETTLEMENT at 2017-07-22 02:49:53
+# ORDER_PRICE=144.451, STL_PRICE=144.391, ORDER_KIND=sell, PROFIT=0.049
+# PROFIT=0.049
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2017-07-22 02:49:54
+# ORDER_PRICE=144.391, TRADE_FLAG=buy
+# weekend stl logic
+# EXECUTE SETTLEMENT at 2017-07-22 05:00:05
+# ORDER_PRICE=144.402, STL_PRICE=144.337, ORDER_KIND=buy, PROFIT=-0.081
+# PROFIT=-0.081
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# EXECUTE ORDER at 2017-07-24 20:44:50
+# ORDER_PRICE=144.484, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-07-24 22:08:41
+# ORDER_PRICE=144.498, STL_PRICE=144.307, ORDER_KIND=buy, PROFIT=-0.205
+# PROFIT=-0.205
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=3
+# self.sell_count=0
+# EXECUTE ORDER at 2017-07-25 00:09:52
+# ORDER_PRICE=144.835, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-07-25 00:27:53
+# ORDER_PRICE=144.85, STL_PRICE=144.6405, ORDER_KIND=buy, PROFIT=-0.22
+# PROFIT=-0.22
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=4
+# self.sell_count=0
+# EXECUTE ORDER at 2017-07-25 20:34:54
+# ORDER_PRICE=145.3505, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=145.667, self.upper_sigma_5m3=145.912137926, self.lower_sigma_5m3=145.673194217, self.order_kind=buy
+# Execute FirstTrail Stop
+# current_bid_price=145.655, order_price=145.362
+# EXECUTE SETTLEMENT at 2017-07-26 13:04:55
+# ORDER_PRICE=145.362, STL_PRICE=145.667, ORDER_KIND=buy, PROFIT=0.293
+# PROFIT=0.293
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-07-26 22:04:56
+# ORDER_PRICE=145.797, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-07-26 23:15:37
+# ORDER_PRICE=145.784, STL_PRICE=145.9825, ORDER_KIND=sell, PROFIT=-0.212
+# PROFIT=-0.212
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=3
+# self.sell_count=0
+# EXECUTE ORDER at 2017-07-26 23:44:58
+# ORDER_PRICE=146.0995, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=146.154, self.upper_sigma_5m3=146.415841123, self.lower_sigma_5m3=146.164610068, self.order_kind=buy
+# EXECUTE SETTLEMENT at 2017-07-27 02:54:59
+# ORDER_PRICE=146.111, STL_PRICE=146.154, ORDER_KIND=buy, PROFIT=0.03
+# PROFIT=0.03
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-07-27 03:04:50
+# ORDER_PRICE=146.111, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=145.787, order_price=146.095
+# EXECUTE SETTLEMENT at 2017-07-27 11:39:51
+# ORDER_PRICE=146.095, STL_PRICE=145.7735, ORDER_KIND=sell, PROFIT=0.308
+# PROFIT=0.308
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-07-27 22:54:52
+# ORDER_PRICE=146.1315, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# current_price=145.4135, self.upper_sigma_5m3=145.397043696, self.lower_sigma_5m3=145.103617614, self.order_kind=sell
+# EXECUTE SETTLEMENT at 2017-07-28 05:44:53
+# ORDER_PRICE=146.119, STL_PRICE=145.4135, ORDER_KIND=sell, PROFIT=0.686
+# PROFIT=0.686
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2017-07-28 17:09:54
+# ORDER_PRICE=145.3585, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-07-28 22:32:45
+# ORDER_PRICE=145.371, STL_PRICE=145.1695, ORDER_KIND=buy, PROFIT=-0.216
+# PROFIT=-0.216
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# EXECUTE ORDER at 2017-07-31 15:09:50
+# ORDER_PRICE=145.1815, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-07-31 17:45:11
+# ORDER_PRICE=145.197, STL_PRICE=145.0065, ORDER_KIND=buy, PROFIT=-0.203
+# PROFIT=-0.203
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=6
+# self.sell_count=0
+# EXECUTE ORDER at 2017-08-01 17:59:52
+# ORDER_PRICE=146.084, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-08-01 19:08:33
+# ORDER_PRICE=146.099, STL_PRICE=145.9005, ORDER_KIND=buy, PROFIT=-0.209
+# PROFIT=-0.209
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=4
+# self.sell_count=0
+# EXECUTE ORDER at 2017-08-02 17:09:54
+# ORDER_PRICE=146.7325, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-08-02 17:30:05
+# ORDER_PRICE=146.744, STL_PRICE=146.4845, ORDER_KIND=buy, PROFIT=-0.305
+# PROFIT=-0.305
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=4
+# self.buy_count=0
+# self.sell_count=5
+# EXECUTE ORDER at 2017-08-04 03:59:56
+# ORDER_PRICE=144.5285, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# current_price=144.6355, self.upper_sigma_5m3=144.603567903, self.lower_sigma_5m3=144.359930907, self.order_kind=sell
+# EXECUTE SETTLEMENT at 2017-08-04 10:09:57
+# ORDER_PRICE=144.517, STL_PRICE=144.6355, ORDER_KIND=sell, PROFIT=-0.133
+# PROFIT=-0.133
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=5
+# self.buy_count=0
+# self.sell_count=6
+# EXECUTE ORDER at 2017-08-08 20:09:50
+# ORDER_PRICE=143.7535, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=143.554, order_price=143.74
+# EXECUTE SETTLEMENT at 2017-08-09 04:24:51
+# ORDER_PRICE=143.74, STL_PRICE=143.541, ORDER_KIND=sell, PROFIT=0.186
+# PROFIT=0.186
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2017-08-09 15:19:52
+# ORDER_PRICE=143.153, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-08-09 16:31:53
+# ORDER_PRICE=143.166, STL_PRICE=142.9755, ORDER_KIND=buy, PROFIT=-0.204
+# PROFIT=-0.204
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=4
+# EXECUTE ORDER at 2017-08-10 23:14:54
+# ORDER_PRICE=142.089, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# current_price=141.9265, self.upper_sigma_5m3=141.920443307, self.lower_sigma_5m3=141.681165621, self.order_kind=sell
+# EXECUTE SETTLEMENT at 2017-08-11 03:49:55
+# ORDER_PRICE=142.078, STL_PRICE=141.9265, ORDER_KIND=sell, PROFIT=0.139
+# PROFIT=0.139
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2017-08-11 03:49:56
+# ORDER_PRICE=141.9265, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-08-11 04:36:47
+# ORDER_PRICE=141.939, STL_PRICE=141.7485, ORDER_KIND=buy, PROFIT=-0.202
+# PROFIT=-0.202
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# EXECUTE ORDER at 2017-08-11 17:24:58
+# ORDER_PRICE=141.442, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# current_price=141.479, self.upper_sigma_5m3=141.476512855, self.lower_sigma_5m3=141.228284168, self.order_kind=sell
+# EXECUTE SETTLEMENT at 2017-08-11 20:04:59
+# ORDER_PRICE=141.431, STL_PRICE=141.479, ORDER_KIND=sell, PROFIT=-0.059
+# PROFIT=-0.059
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=3
+# self.sell_count=0
+# EXECUTE ORDER at 2017-08-11 20:19:50
+# ORDER_PRICE=141.657, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-08-11 21:30:11
+# ORDER_PRICE=141.669, STL_PRICE=141.4585, ORDER_KIND=buy, PROFIT=-0.268
+# PROFIT=-0.268
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=0
+# self.sell_count=4
+# EXECUTE ORDER at 2017-08-14 23:19:50
+# ORDER_PRICE=141.9615, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-08-14 23:57:31
+# ORDER_PRICE=141.95, STL_PRICE=142.1485, ORDER_KIND=sell, PROFIT=-0.211
+# PROFIT=-0.211
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=4
+# self.buy_count=5
+# self.sell_count=0
+# EXECUTE ORDER at 2017-08-16 19:29:52
+# ORDER_PRICE=142.671, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-08-16 21:30:03
+# ORDER_PRICE=142.682, STL_PRICE=142.5415, ORDER_KIND=buy, PROFIT=-0.202
+# PROFIT=-0.202
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=5
+# self.buy_count=0
+# self.sell_count=6
+# EXECUTE ORDER at 2017-08-21 15:29:50
+# ORDER_PRICE=140.3735, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-08-21 19:21:11
+# ORDER_PRICE=140.362, STL_PRICE=140.551, ORDER_KIND=sell, PROFIT=-0.201
+# PROFIT=-0.201
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=6
+# self.buy_count=7
+# self.sell_count=0
+# EXECUTE ORDER at 2017-08-24 18:04:52
+# ORDER_PRICE=140.1375, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=140.1045, self.upper_sigma_5m3=140.436775613, self.lower_sigma_5m3=140.105422006, self.order_kind=buy
+# EXECUTE SETTLEMENT at 2017-08-24 22:34:53
+# ORDER_PRICE=140.15, STL_PRICE=140.1045, ORDER_KIND=buy, PROFIT=-0.058
+# PROFIT=-0.058
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=7
+# self.buy_count=8
+# self.sell_count=0
+# EXECUTE ORDER at 2017-08-30 03:49:50
+# ORDER_PRICE=141.6625, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=141.86, self.upper_sigma_5m3=142.313560962, self.lower_sigma_5m3=141.861857491, self.order_kind=buy
+# Execute FirstTrail Stop
+# current_bid_price=141.848, order_price=141.674
+# EXECUTE SETTLEMENT at 2017-08-30 18:04:51
+# ORDER_PRICE=141.674, STL_PRICE=141.86, ORDER_KIND=buy, PROFIT=0.174
+# PROFIT=0.174
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-08-30 18:04:52
+# ORDER_PRICE=141.86, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-08-30 18:37:43
+# ORDER_PRICE=141.848, STL_PRICE=142.038, ORDER_KIND=sell, PROFIT=-0.202
+# PROFIT=-0.202
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# EXECUTE ORDER at 2017-08-30 20:54:54
+# ORDER_PRICE=142.256, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=142.5295, self.upper_sigma_5m3=142.806967516, self.lower_sigma_5m3=142.533085461, self.order_kind=buy
+# EXECUTE SETTLEMENT at 2017-08-31 04:19:55
+# ORDER_PRICE=142.269, STL_PRICE=142.5295, ORDER_KIND=buy, PROFIT=0.248
+# PROFIT=0.248
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-08-31 15:54:56
+# ORDER_PRICE=142.669, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=142.079, order_price=142.656
+# EXECUTE SETTLEMENT at 2017-09-01 02:49:57
+# ORDER_PRICE=142.656, STL_PRICE=142.0665, ORDER_KIND=sell, PROFIT=0.577
+# PROFIT=0.577
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-09-01 17:19:58
+# ORDER_PRICE=142.1145, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-09-01 17:30:09
+# ORDER_PRICE=142.103, STL_PRICE=142.38, ORDER_KIND=sell, PROFIT=-0.345
+# PROFIT=-0.345
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# EXECUTE ORDER at 2017-09-01 21:34:50
+# ORDER_PRICE=142.3915, TRADE_FLAG=buy
+# weekend stl logic
+# EXECUTE SETTLEMENT at 2017-09-02 05:00:01
+# ORDER_PRICE=142.407, STL_PRICE=142.838, ORDER_KIND=buy, PROFIT=0.417
+# PROFIT=0.417
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=5
+# EXECUTE ORDER at 2017-09-04 15:24:50
+# ORDER_PRICE=141.768, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-09-04 15:45:11
+# ORDER_PRICE=141.755, STL_PRICE=141.9425, ORDER_KIND=sell, PROFIT=-0.2
+# PROFIT=-0.2
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# EXECUTE ORDER at 2017-09-05 01:39:52
+# ORDER_PRICE=141.646, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-09-05 03:11:53
+# ORDER_PRICE=141.63, STL_PRICE=141.791, ORDER_KIND=sell, PROFIT=-0.201
+# PROFIT=-0.201
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=3
+# self.sell_count=0
+# EXECUTE ORDER at 2017-09-05 19:29:54
+# ORDER_PRICE=141.6585, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=141.6405, self.upper_sigma_5m3=141.935444418, self.lower_sigma_5m3=141.657051415, self.order_kind=buy
+# EXECUTE SETTLEMENT at 2017-09-06 01:04:55
+# ORDER_PRICE=141.668, STL_PRICE=141.6405, ORDER_KIND=buy, PROFIT=-0.04
+# PROFIT=-0.04
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=4
+# self.sell_count=0
+# EXECUTE ORDER at 2017-09-06 22:59:56
+# ORDER_PRICE=142.332, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-09-06 23:45:17
+# ORDER_PRICE=142.362, STL_PRICE=142.0925, ORDER_KIND=buy, PROFIT=-0.282
+# PROFIT=-0.282
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=4
+# self.buy_count=5
+# self.sell_count=0
+# EXECUTE ORDER at 2017-09-12 15:59:50
+# ORDER_PRICE=144.5245, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=145.5475, self.upper_sigma_5m3=145.944911033, self.lower_sigma_5m3=145.554676467, self.order_kind=buy
+# Execute FirstTrail Stop
+# current_bid_price=145.535, order_price=144.536
+# Execute SecondTrail Stop
+# current_bid_price=145.535, order_price=144.536
+# EXECUTE SETTLEMENT at 2017-09-12 23:34:51
+# ORDER_PRICE=144.536, STL_PRICE=145.5475, ORDER_KIND=buy, PROFIT=0.999
+# PROFIT=0.999
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-09-12 23:34:52
+# ORDER_PRICE=145.5475, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-09-12 23:39:23
+# ORDER_PRICE=145.535, STL_PRICE=145.728, ORDER_KIND=sell, PROFIT=-0.205
+# PROFIT=-0.205
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# EXECUTE ORDER at 2017-09-13 17:29:54
+# ORDER_PRICE=146.2285, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# current_price=146.318, self.upper_sigma_5m3=146.27066508, self.lower_sigma_5m3=145.951529563, self.order_kind=sell
+# EXECUTE SETTLEMENT at 2017-09-13 23:29:55
+# ORDER_PRICE=146.212, STL_PRICE=146.318, ORDER_KIND=sell, PROFIT=-0.116
+# PROFIT=-0.116
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=3
+# self.sell_count=0
+# EXECUTE ORDER at 2017-09-14 20:14:56
+# ORDER_PRICE=146.9575, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# current_bid_price=147.545, order_price=146.969
+# EXECUTE SETTLEMENT at 2017-09-14 21:54:57
+# ORDER_PRICE=146.969, STL_PRICE=147.5605, ORDER_KIND=buy, PROFIT=0.576
+# PROFIT=0.576
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2017-09-15 00:09:58
+# ORDER_PRICE=148.0325, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=148.098, self.upper_sigma_5m3=148.421397904, self.lower_sigma_5m3=148.098248525, self.order_kind=buy
+# EXECUTE SETTLEMENT at 2017-09-15 02:49:59
+# ORDER_PRICE=148.048, STL_PRICE=148.098, ORDER_KIND=buy, PROFIT=0.038
+# PROFIT=0.038
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-09-15 02:54:50
+# ORDER_PRICE=148.09, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=147.545, order_price=148.08
+# EXECUTE SETTLEMENT at 2017-09-15 08:24:51
+# ORDER_PRICE=148.08, STL_PRICE=147.526, ORDER_KIND=sell, PROFIT=0.535
+# PROFIT=0.535
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=3
+# self.sell_count=0
+# EXECUTE ORDER at 2017-09-15 15:44:52
+# ORDER_PRICE=148.6825, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-09-15 16:43:33
+# ORDER_PRICE=148.694, STL_PRICE=148.505, ORDER_KIND=buy, PROFIT=-0.205
+# PROFIT=-0.205
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# EXECUTE ORDER at 2017-09-15 17:59:54
+# ORDER_PRICE=149.8225, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# current_bid_price=151.174, order_price=149.836
+# Execute SecondTrail Stop
+# current_bid_price=151.174, order_price=149.836
+# EXECUTE SETTLEMENT at 2017-09-15 19:49:55
+# ORDER_PRICE=149.836, STL_PRICE=151.1875, ORDER_KIND=buy, PROFIT=1.338
+# PROFIT=1.338
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-09-15 21:54:56
+# ORDER_PRICE=150.515, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-09-15 22:39:37
+# ORDER_PRICE=150.504, STL_PRICE=150.7025, ORDER_KIND=sell, PROFIT=-0.209
+# PROFIT=-0.209
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=3
+# self.sell_count=0
+# EXECUTE ORDER at 2017-09-18 16:19:50
+# ORDER_PRICE=150.9825, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-09-18 17:28:41
+# ORDER_PRICE=150.995, STL_PRICE=150.8055, ORDER_KIND=buy, PROFIT=-0.201
+# PROFIT=-0.201
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=0
+# self.sell_count=5
+# EXECUTE ORDER at 2017-09-19 18:19:52
+# ORDER_PRICE=150.6475, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-09-19 19:32:53
+# ORDER_PRICE=150.637, STL_PRICE=150.834, ORDER_KIND=sell, PROFIT=-0.208
+# PROFIT=-0.208
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=4
+# self.sell_count=0
+# EXECUTE ORDER at 2017-09-20 17:59:54
+# ORDER_PRICE=151.066, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-09-20 18:20:45
+# ORDER_PRICE=151.078, STL_PRICE=150.649, ORDER_KIND=buy, PROFIT=-0.446
+# PROFIT=-0.446
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=4
+# self.buy_count=5
+# self.sell_count=0
+# EXECUTE ORDER at 2017-09-21 00:04:56
+# ORDER_PRICE=151.064, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# current_bid_price=151.258, order_price=151.074
+# EXECUTE SETTLEMENT at 2017-09-21 03:34:57
+# ORDER_PRICE=151.074, STL_PRICE=151.2715, ORDER_KIND=buy, PROFIT=0.184
+# PROFIT=0.184
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-09-21 17:54:58
+# ORDER_PRICE=151.598, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-09-21 18:19:59
+# ORDER_PRICE=151.587, STL_PRICE=151.78, ORDER_KIND=sell, PROFIT=-0.203
+# PROFIT=-0.203
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# EXECUTE ORDER at 2017-09-22 00:44:50
+# ORDER_PRICE=152.414, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=152.456, self.upper_sigma_5m3=152.787679366, self.lower_sigma_5m3=152.570952181, self.order_kind=buy
+# EXECUTE SETTLEMENT at 2017-09-22 09:44:51
+# ORDER_PRICE=152.426, STL_PRICE=152.456, ORDER_KIND=buy, PROFIT=0.016
+# PROFIT=0.016
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2017-09-22 15:09:52
+# ORDER_PRICE=152.3115, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-09-22 15:35:03
+# ORDER_PRICE=152.323, STL_PRICE=152.132, ORDER_KIND=buy, PROFIT=-0.201
+# PROFIT=-0.201
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=5
+# EXECUTE ORDER at 2017-09-22 22:54:54
+# ORDER_PRICE=151.1125, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-09-22 22:57:45
+# ORDER_PRICE=151.097, STL_PRICE=151.296, ORDER_KIND=sell, PROFIT=-0.217
+# PROFIT=-0.217
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=0
+# self.sell_count=5
+# EXECUTE ORDER at 2017-09-26 00:04:50
+# ORDER_PRICE=150.7555, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-09-26 00:11:31
+# ORDER_PRICE=150.742, STL_PRICE=150.9315, ORDER_KIND=sell, PROFIT=-0.201
+# PROFIT=-0.201
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=4
+# self.sell_count=0
+# EXECUTE ORDER at 2017-09-26 16:14:52
+# ORDER_PRICE=150.8695, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-09-26 16:19:03
+# ORDER_PRICE=150.88, STL_PRICE=150.684, ORDER_KIND=buy, PROFIT=-0.208
+# PROFIT=-0.208
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=4
+# self.buy_count=0
+# self.sell_count=5
+# EXECUTE ORDER at 2017-09-27 23:54:54
+# ORDER_PRICE=150.7945, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-09-28 00:09:35
+# ORDER_PRICE=150.782, STL_PRICE=151.025, ORDER_KIND=sell, PROFIT=-0.258
+# PROFIT=-0.258
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=5
+# self.buy_count=0
+# self.sell_count=6
+# EXECUTE ORDER at 2017-10-02 21:19:50
+# ORDER_PRICE=149.67, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-10-03 06:01:31
+# ORDER_PRICE=149.659, STL_PRICE=149.779, ORDER_KIND=sell, PROFIT=-0.27
+# PROFIT=-0.27
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=6
+# self.buy_count=0
+# self.sell_count=7
+# EXECUTE ORDER at 2017-10-05 16:24:52
+# ORDER_PRICE=148.6835, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=148.049, order_price=148.673
+# EXECUTE SETTLEMENT at 2017-10-05 22:44:53
+# ORDER_PRICE=148.673, STL_PRICE=148.0385, ORDER_KIND=sell, PROFIT=0.624
+# PROFIT=0.624
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2017-10-06 01:04:54
+# ORDER_PRICE=148.139, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-10-06 02:48:35
+# ORDER_PRICE=148.15, STL_PRICE=147.9575, ORDER_KIND=buy, PROFIT=-0.204
+# PROFIT=-0.204
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=4
+# EXECUTE ORDER at 2017-10-06 19:04:56
+# ORDER_PRICE=147.461, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-10-06 20:21:17
+# ORDER_PRICE=147.449, STL_PRICE=147.6695, ORDER_KIND=sell, PROFIT=-0.233
+# PROFIT=-0.233
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=0
+# self.sell_count=3
+# EXECUTE ORDER at 2017-10-06 23:54:58
+# ORDER_PRICE=147.3325, TRADE_FLAG=sell
+# weekend stl logic
+# EXECUTE SETTLEMENT at 2017-10-07 05:00:09
+# ORDER_PRICE=147.322, STL_PRICE=147.1865, ORDER_KIND=sell, PROFIT=0.123
+# PROFIT=0.123
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=2
+# self.sell_count=0
+# EXECUTE ORDER at 2017-10-09 15:54:50
+# ORDER_PRICE=147.5505, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=148.1575, self.upper_sigma_5m3=148.586159585, self.lower_sigma_5m3=148.173862439, self.order_kind=buy
+# Execute FirstTrail Stop
+# current_bid_price=148.147, order_price=147.563
+# EXECUTE SETTLEMENT at 2017-10-09 22:44:51
+# ORDER_PRICE=147.563, STL_PRICE=148.1575, ORDER_KIND=buy, PROFIT=0.584
+# PROFIT=0.584
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-10-09 22:44:52
+# ORDER_PRICE=148.1575, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# current_price=148.161, self.upper_sigma_5m3=148.130365755, self.lower_sigma_5m3=147.935311626, self.order_kind=sell
+# EXECUTE SETTLEMENT at 2017-10-10 09:09:53
+# ORDER_PRICE=148.147, STL_PRICE=148.161, ORDER_KIND=sell, PROFIT=-0.027
+# PROFIT=-0.027
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# EXECUTE ORDER at 2017-10-10 22:19:54
+# ORDER_PRICE=148.106, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-10-11 02:24:55
+# ORDER_PRICE=148.096, STL_PRICE=148.2935, ORDER_KIND=sell, PROFIT=-0.208
+# PROFIT=-0.208
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=4
+# self.sell_count=0
+# EXECUTE ORDER at 2017-10-12 02:59:56
+# ORDER_PRICE=148.783, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-10-12 03:00:07
+# ORDER_PRICE=148.85, STL_PRICE=148.6285, ORDER_KIND=buy, PROFIT=-0.293
+# PROFIT=-0.293
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=0
+# self.sell_count=4
+# EXECUTE ORDER at 2017-10-12 15:44:58
+# ORDER_PRICE=148.715, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=147.713, order_price=148.704
+# Execute SecondTrail Stop
+# current_ask_price=147.713, order_price=148.704
+# EXECUTE SETTLEMENT at 2017-10-12 21:49:59
+# ORDER_PRICE=148.704, STL_PRICE=147.7025, ORDER_KIND=sell, PROFIT=0.991
+# PROFIT=0.991
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2017-10-12 23:19:50
+# ORDER_PRICE=147.9705, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=148.818, self.upper_sigma_5m3=149.021422983, self.lower_sigma_5m3=148.824085945, self.order_kind=buy
+# EXECUTE SETTLEMENT at 2017-10-13 09:14:51
+# ORDER_PRICE=147.982, STL_PRICE=148.818, ORDER_KIND=buy, PROFIT=0.822
+# PROFIT=0.822
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-10-13 15:29:52
+# ORDER_PRICE=148.7025, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-10-13 15:51:53
+# ORDER_PRICE=148.691, STL_PRICE=148.94, ORDER_KIND=sell, PROFIT=-0.265
+# PROFIT=-0.265
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# EXECUTE ORDER at 2017-10-13 19:04:54
+# ORDER_PRICE=148.677, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-10-13 19:35:45
+# ORDER_PRICE=148.667, STL_PRICE=148.8605, ORDER_KIND=sell, PROFIT=-0.204
+# PROFIT=-0.204
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=0
+# self.sell_count=3
+# EXECUTE ORDER at 2017-10-14 02:19:56
+# ORDER_PRICE=148.6675, TRADE_FLAG=sell
+# weekend stl logic
+# EXECUTE SETTLEMENT at 2017-10-14 05:00:07
+# ORDER_PRICE=148.656, STL_PRICE=148.68, ORDER_KIND=sell, PROFIT=-0.035
+# PROFIT=-0.035
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=0
+# self.sell_count=4
+# EXECUTE ORDER at 2017-10-17 23:44:50
+# ORDER_PRICE=147.789, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-10-18 00:08:11
+# ORDER_PRICE=147.778, STL_PRICE=147.994, ORDER_KIND=sell, PROFIT=-0.229
+# PROFIT=-0.229
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=4
+# self.buy_count=5
+# self.sell_count=0
+# EXECUTE ORDER at 2017-10-18 17:04:52
+# ORDER_PRICE=148.3855, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-10-18 18:05:23
+# ORDER_PRICE=148.397, STL_PRICE=148.2035, ORDER_KIND=buy, PROFIT=-0.204
+# PROFIT=-0.204
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=5
+# self.buy_count=0
+# self.sell_count=6
+# EXECUTE ORDER at 2017-10-19 16:29:54
+# ORDER_PRICE=148.8895, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=148.574, order_price=148.878
+# EXECUTE SETTLEMENT at 2017-10-19 17:29:55
+# ORDER_PRICE=148.878, STL_PRICE=148.473, ORDER_KIND=sell, PROFIT=0.304
+# PROFIT=0.304
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2017-10-19 23:54:56
+# ORDER_PRICE=148.581, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-10-20 00:53:37
+# ORDER_PRICE=148.59, STL_PRICE=148.3955, ORDER_KIND=buy, PROFIT=-0.206
+# PROFIT=-0.206
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# EXECUTE ORDER at 2017-10-20 16:04:58
+# ORDER_PRICE=148.755, TRADE_FLAG=buy
+# weekend stl logic
+# EXECUTE SETTLEMENT at 2017-10-21 05:00:09
+# ORDER_PRICE=148.767, STL_PRICE=149.6835, ORDER_KIND=buy, PROFIT=0.902
+# PROFIT=0.902
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2017-10-23 15:04:50
+# ORDER_PRICE=150.2845, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-10-23 16:07:11
+# ORDER_PRICE=150.297, STL_PRICE=150.108, ORDER_KIND=buy, PROFIT=-0.201
+# PROFIT=-0.201
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# EXECUTE ORDER at 2017-10-23 17:19:52
+# ORDER_PRICE=149.782, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-10-23 17:35:03
+# ORDER_PRICE=149.77, STL_PRICE=149.9645, ORDER_KIND=sell, PROFIT=-0.206
+# PROFIT=-0.206
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=0
+# self.sell_count=4
+# EXECUTE ORDER at 2017-10-25 03:49:54
+# ORDER_PRICE=149.2645, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-10-25 04:50:35
+# ORDER_PRICE=149.254, STL_PRICE=149.445, ORDER_KIND=sell, PROFIT=-0.204
+# PROFIT=-0.204
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=4
+# self.sell_count=0
+# EXECUTE ORDER at 2017-10-25 18:04:56
+# ORDER_PRICE=150.4655, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=151.0795, self.upper_sigma_5m3=151.381567738, self.lower_sigma_5m3=151.096050119, self.order_kind=buy
+# EXECUTE SETTLEMENT at 2017-10-25 22:19:57
+# ORDER_PRICE=150.478, STL_PRICE=151.0795, ORDER_KIND=buy, PROFIT=0.592
+# PROFIT=0.592
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-10-25 22:19:58
+# ORDER_PRICE=151.0795, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=150.843, order_price=151.07
+# EXECUTE SETTLEMENT at 2017-10-26 03:04:59
+# ORDER_PRICE=151.07, STL_PRICE=150.8295, ORDER_KIND=sell, PROFIT=0.227
+# PROFIT=0.227
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-10-26 17:39:50
+# ORDER_PRICE=150.287, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=149.416, order_price=150.274
+# Execute SecondTrail Stop
+# current_ask_price=149.416, order_price=150.274
+# EXECUTE SETTLEMENT at 2017-10-27 18:54:51
+# ORDER_PRICE=150.274, STL_PRICE=149.402, ORDER_KIND=sell, PROFIT=0.858
+# PROFIT=0.858
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-10-27 22:39:52
+# ORDER_PRICE=149.2615, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-10-28 01:24:43
+# ORDER_PRICE=149.249, STL_PRICE=149.4495, ORDER_KIND=sell, PROFIT=-0.211
+# PROFIT=-0.211
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=3
+# self.sell_count=0
+# EXECUTE ORDER at 2017-10-30 17:19:50
+# ORDER_PRICE=149.6005, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-10-30 18:21:41
+# ORDER_PRICE=149.613, STL_PRICE=149.4155, ORDER_KIND=buy, PROFIT=-0.21
+# PROFIT=-0.21
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=3
+# self.sell_count=0
+# EXECUTE ORDER at 2017-10-31 22:04:52
+# ORDER_PRICE=150.2565, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=151.567, self.upper_sigma_5m3=151.948342109, self.lower_sigma_5m3=151.594459081, self.order_kind=buy
+# Execute FirstTrail Stop
+# current_bid_price=151.553, order_price=150.268
+# Execute SecondTrail Stop
+# current_bid_price=151.553, order_price=150.268
+# EXECUTE SETTLEMENT at 2017-11-01 23:24:53
+# ORDER_PRICE=150.268, STL_PRICE=151.567, ORDER_KIND=buy, PROFIT=1.285
+# PROFIT=1.285
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2017-11-01 23:24:54
+# ORDER_PRICE=151.567, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# current_price=151.3765, self.upper_sigma_5m3=151.370560875, self.lower_sigma_5m3=151.030681982, self.order_kind=sell
+# EXECUTE SETTLEMENT at 2017-11-02 03:49:55
+# ORDER_PRICE=151.553, STL_PRICE=151.3765, ORDER_KIND=sell, PROFIT=0.161
+# PROFIT=0.161
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2017-11-02 03:49:56
+# ORDER_PRICE=151.3765, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-11-02 04:33:27
+# ORDER_PRICE=151.392, STL_PRICE=151.2045, ORDER_KIND=buy, PROFIT=-0.205
+# PROFIT=-0.205
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# EXECUTE ORDER at 2017-11-02 20:39:58
+# ORDER_PRICE=150.636, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-11-02 20:51:39
+# ORDER_PRICE=150.622, STL_PRICE=150.814, ORDER_KIND=sell, PROFIT=-0.203
+# PROFIT=-0.203
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=0
+# self.sell_count=3
+# EXECUTE ORDER at 2017-11-02 21:19:50
+# ORDER_PRICE=149.7275, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-11-02 21:25:51
+# ORDER_PRICE=149.714, STL_PRICE=149.9245, ORDER_KIND=sell, PROFIT=-0.226
+# PROFIT=-0.226
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=0
+# self.sell_count=5
+# EXECUTE ORDER at 2017-11-03 20:19:52
+# ORDER_PRICE=149.1875, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-11-03 20:40:23
+# ORDER_PRICE=149.174, STL_PRICE=149.3875, ORDER_KIND=sell, PROFIT=-0.224
+# PROFIT=-0.224
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=4
+# self.buy_count=0
+# self.sell_count=5
+# EXECUTE ORDER at 2017-11-08 17:34:50
+# ORDER_PRICE=149.3795, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-11-08 18:36:31
+# ORDER_PRICE=149.368, STL_PRICE=149.5665, ORDER_KIND=sell, PROFIT=-0.211
+# PROFIT=-0.211
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=5
+# self.buy_count=0
+# self.sell_count=10
+# EXECUTE ORDER at 2017-11-17 23:04:50
+# ORDER_PRICE=148.2905, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-11-18 00:23:41
+# ORDER_PRICE=148.276, STL_PRICE=148.4715, ORDER_KIND=sell, PROFIT=-0.208
+# PROFIT=-0.208
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=6
+# self.buy_count=0
+# self.sell_count=7
+# EXECUTE ORDER at 2017-11-29 00:59:50
+# ORDER_PRICE=147.2895, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-11-29 02:44:11
+# ORDER_PRICE=147.277, STL_PRICE=147.599, ORDER_KIND=sell, PROFIT=-0.375
+# PROFIT=-0.375
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=7
+# self.buy_count=0
+# self.sell_count=8
+# EXECUTE ORDER at 2017-12-05 01:04:50
+# ORDER_PRICE=151.717, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-12-05 01:20:51
+# ORDER_PRICE=151.701, STL_PRICE=151.885, ORDER_KIND=sell, PROFIT=-0.2
+# PROFIT=-0.2
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=8
+# self.buy_count=9
+# self.sell_count=0
+# EXECUTE ORDER at 2018-01-12 22:34:50
+# ORDER_PRICE=151.92, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# current_bid_price=152.315, order_price=151.934
+# EXECUTE SETTLEMENT at 2018-01-12 23:34:51
+# ORDER_PRICE=151.934, STL_PRICE=152.329, ORDER_KIND=buy, PROFIT=0.381
+# PROFIT=0.381
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2018-01-13 01:19:52
+# ORDER_PRICE=152.155, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-01-13 02:24:33
+# ORDER_PRICE=152.141, STL_PRICE=152.344, ORDER_KIND=sell, PROFIT=-0.22
+# PROFIT=-0.22
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# EXECUTE ORDER at 2018-01-15 17:39:50
+# ORDER_PRICE=152.1065, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-01-15 18:52:21
+# ORDER_PRICE=152.095, STL_PRICE=152.3375, ORDER_KIND=sell, PROFIT=-0.26
+# PROFIT=-0.26
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=0
+# self.sell_count=3
+# EXECUTE ORDER at 2018-01-16 16:19:52
+# ORDER_PRICE=152.646, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=152.39, order_price=152.63
+# EXECUTE SETTLEMENT at 2018-01-16 21:59:53
+# ORDER_PRICE=152.63, STL_PRICE=152.3775, ORDER_KIND=sell, PROFIT=0.24
+# PROFIT=0.24
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2018-01-17 17:09:54
+# ORDER_PRICE=152.604, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-01-17 18:17:55
+# ORDER_PRICE=152.591, STL_PRICE=152.781, ORDER_KIND=sell, PROFIT=-0.203
+# PROFIT=-0.203
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=4
+# self.sell_count=0
+# EXECUTE ORDER at 2018-01-18 01:14:56
+# ORDER_PRICE=153.325, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-01-18 01:28:17
+# ORDER_PRICE=153.337, STL_PRICE=153.1495, ORDER_KIND=buy, PROFIT=-0.201
+# PROFIT=-0.201
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=3
+# self.sell_count=0
+# EXECUTE ORDER at 2018-01-18 03:19:58
+# ORDER_PRICE=153.7595, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# current_bid_price=154.232, order_price=153.773
+# EXECUTE SETTLEMENT at 2018-01-18 21:49:59
+# ORDER_PRICE=153.773, STL_PRICE=154.2445, ORDER_KIND=buy, PROFIT=0.459
+# PROFIT=0.459
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2018-01-19 00:24:50
+# ORDER_PRICE=153.7625, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-01-19 00:32:41
+# ORDER_PRICE=153.749, STL_PRICE=153.937, ORDER_KIND=sell, PROFIT=-0.2
+# PROFIT=-0.2
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=4
+# EXECUTE ORDER at 2018-01-19 16:34:52
+# ORDER_PRICE=154.1455, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=153.548, order_price=154.13
+# EXECUTE SETTLEMENT at 2018-01-19 23:34:53
+# ORDER_PRICE=154.13, STL_PRICE=153.535, ORDER_KIND=sell, PROFIT=0.582
+# PROFIT=0.582
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2018-01-22 16:09:50
+# ORDER_PRICE=153.793, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=155.086, self.upper_sigma_5m3=155.270533616, self.lower_sigma_5m3=155.086674122, self.order_kind=buy
+# EXECUTE SETTLEMENT at 2018-01-23 07:14:51
+# ORDER_PRICE=153.808, STL_PRICE=155.086, ORDER_KIND=buy, PROFIT=1.225
+# PROFIT=1.225
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2018-01-23 17:34:52
+# ORDER_PRICE=154.5385, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=154.135, order_price=154.527
+# EXECUTE SETTLEMENT at 2018-01-23 21:54:53
+# ORDER_PRICE=154.527, STL_PRICE=154.122, ORDER_KIND=sell, PROFIT=0.392
+# PROFIT=0.392
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2018-01-24 15:29:54
+# ORDER_PRICE=154.3535, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=154.291, self.upper_sigma_5m3=154.651427387, self.lower_sigma_5m3=154.299523803, self.order_kind=buy
+# EXECUTE SETTLEMENT at 2018-01-24 20:19:55
+# ORDER_PRICE=154.369, STL_PRICE=154.291, ORDER_KIND=buy, PROFIT=-0.091
+# PROFIT=-0.091
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# EXECUTE ORDER at 2018-01-24 20:59:56
+# ORDER_PRICE=154.8585, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# current_bid_price=155.21, order_price=154.871
+# EXECUTE SETTLEMENT at 2018-01-25 01:09:57
+# ORDER_PRICE=154.871, STL_PRICE=155.224, ORDER_KIND=buy, PROFIT=0.339
+# PROFIT=0.339
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2018-01-25 15:14:58
+# ORDER_PRICE=155.6625, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-01-25 15:30:59
+# ORDER_PRICE=155.648, STL_PRICE=155.837, ORDER_KIND=sell, PROFIT=-0.207
+# PROFIT=-0.207
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# EXECUTE ORDER at 2018-01-25 16:24:50
+# ORDER_PRICE=155.6465, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-01-25 17:39:11
+# ORDER_PRICE=155.632, STL_PRICE=155.829, ORDER_KIND=sell, PROFIT=-0.214
+# PROFIT=-0.214
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=3
+# self.sell_count=0
+# EXECUTE ORDER at 2018-01-26 16:09:52
+# ORDER_PRICE=155.41, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-01-26 17:18:53
+# ORDER_PRICE=155.425, STL_PRICE=155.235, ORDER_KIND=buy, PROFIT=-0.205
+# PROFIT=-0.205
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=0
+# self.sell_count=7
+# EXECUTE ORDER at 2018-01-27 00:14:54
+# ORDER_PRICE=154.195, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=153.959, order_price=154.181
+# EXECUTE SETTLEMENT at 2018-01-27 02:54:55
+# ORDER_PRICE=154.181, STL_PRICE=153.9435, ORDER_KIND=sell, PROFIT=0.222
+# PROFIT=0.222
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2018-01-29 15:04:50
+# ORDER_PRICE=153.814, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-01-29 18:21:01
+# ORDER_PRICE=153.83, STL_PRICE=153.63, ORDER_KIND=buy, PROFIT=-0.215
+# PROFIT=-0.215
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# EXECUTE ORDER at 2018-01-30 18:54:52
+# ORDER_PRICE=152.88, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# current_bid_price=153.466, order_price=152.896
+# EXECUTE SETTLEMENT at 2018-01-30 22:54:53
+# ORDER_PRICE=152.896, STL_PRICE=153.4815, ORDER_KIND=buy, PROFIT=0.57
+# PROFIT=0.57
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2018-01-31 16:04:54
+# ORDER_PRICE=154.3965, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-01-31 16:22:45
+# ORDER_PRICE=154.412, STL_PRICE=154.2215, ORDER_KIND=buy, PROFIT=-0.206
+# PROFIT=-0.206
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# EXECUTE ORDER at 2018-01-31 18:44:56
+# ORDER_PRICE=153.8795, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-01-31 21:01:07
+# ORDER_PRICE=153.866, STL_PRICE=154.058, ORDER_KIND=sell, PROFIT=-0.204
+# PROFIT=-0.204
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=3
+# self.sell_count=0
+# EXECUTE ORDER at 2018-02-01 00:44:58
+# ORDER_PRICE=154.7195, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# current_bid_price=154.963, order_price=154.734
+# EXECUTE SETTLEMENT at 2018-02-01 03:49:59
+# ORDER_PRICE=154.734, STL_PRICE=154.9785, ORDER_KIND=buy, PROFIT=0.229
+# PROFIT=0.229
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=5
+# self.sell_count=0
+# EXECUTE ORDER at 2018-02-01 16:59:50
+# ORDER_PRICE=155.601, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# current_bid_price=156.058, order_price=155.616
+# EXECUTE SETTLEMENT at 2018-02-01 19:54:51
+# ORDER_PRICE=155.616, STL_PRICE=156.072, ORDER_KIND=buy, PROFIT=0.442
+# PROFIT=0.442
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2018-02-01 20:59:52
+# ORDER_PRICE=155.96, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=155.724, order_price=155.946
+# EXECUTE SETTLEMENT at 2018-02-02 00:19:53
+# ORDER_PRICE=155.946, STL_PRICE=155.71, ORDER_KIND=sell, PROFIT=0.222
+# PROFIT=0.222
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2018-02-02 17:39:54
+# ORDER_PRICE=156.1955, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-02 20:21:55
+# ORDER_PRICE=156.182, STL_PRICE=156.382, ORDER_KIND=sell, PROFIT=-0.214
+# PROFIT=-0.214
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# EXECUTE ORDER at 2018-02-03 00:04:56
+# ORDER_PRICE=155.9445, TRADE_FLAG=sell
+# weekend stl logic
+# EXECUTE SETTLEMENT at 2018-02-03 05:00:07
+# ORDER_PRICE=155.933, STL_PRICE=155.7675, ORDER_KIND=sell, PROFIT=0.149
+# PROFIT=0.149
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2018-02-05 16:24:50
+# ORDER_PRICE=155.07, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-05 17:47:21
+# ORDER_PRICE=155.056, STL_PRICE=155.2515, ORDER_KIND=sell, PROFIT=-0.209
+# PROFIT=-0.209
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# EXECUTE ORDER at 2018-02-05 20:49:52
+# ORDER_PRICE=154.4425, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# current_price=154.5725, self.upper_sigma_5m3=154.56515357, self.lower_sigma_5m3=153.816058335, self.order_kind=sell
+# EXECUTE SETTLEMENT at 2018-02-06 00:24:53
+# ORDER_PRICE=154.428, STL_PRICE=154.5725, ORDER_KIND=sell, PROFIT=-0.158
+# PROFIT=-0.158
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=0
+# self.sell_count=3
+# EXECUTE ORDER at 2018-02-07 17:09:54
+# ORDER_PRICE=151.8635, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-07 17:45:25
+# ORDER_PRICE=151.849, STL_PRICE=152.0625, ORDER_KIND=sell, PROFIT=-0.228
+# PROFIT=-0.228
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=4
+# self.sell_count=0
+# EXECUTE ORDER at 2018-02-08 21:09:56
+# ORDER_PRICE=153.437, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-02-08 21:12:47
+# ORDER_PRICE=153.453, STL_PRICE=153.26, ORDER_KIND=buy, PROFIT=-0.209
+# PROFIT=-0.209
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=4
+# self.buy_count=0
+# self.sell_count=5
+# EXECUTE ORDER at 2018-02-09 01:14:58
+# ORDER_PRICE=152.4085, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=152.104, order_price=152.391
+# EXECUTE SETTLEMENT at 2018-02-09 01:34:59
+# ORDER_PRICE=152.391, STL_PRICE=152.089, ORDER_KIND=sell, PROFIT=0.287
+# PROFIT=0.287
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2018-02-09 15:39:50
+# ORDER_PRICE=152.2905, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-02-09 15:49:21
+# ORDER_PRICE=152.308, STL_PRICE=152.1235, ORDER_KIND=buy, PROFIT=-0.201
+# PROFIT=-0.201
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# EXECUTE ORDER at 2018-02-09 18:54:52
+# ORDER_PRICE=151.7955, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=150.401, order_price=151.778
+# Execute SecondTrail Stop
+# current_ask_price=150.401, order_price=151.778
+# EXECUTE SETTLEMENT at 2018-02-09 22:04:53
+# ORDER_PRICE=151.778, STL_PRICE=150.386, ORDER_KIND=sell, PROFIT=1.377
+# PROFIT=1.377
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2018-02-12 15:39:50
+# ORDER_PRICE=150.5235, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-12 17:42:51
+# ORDER_PRICE=150.51, STL_PRICE=150.752, ORDER_KIND=sell, PROFIT=-0.256
+# PROFIT=-0.256
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=4
+# EXECUTE ORDER at 2018-02-13 17:04:52
+# ORDER_PRICE=149.2025, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-13 18:04:43
+# ORDER_PRICE=149.19, STL_PRICE=149.382, ORDER_KIND=sell, PROFIT=-0.204
+# PROFIT=-0.204
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=0
+# self.sell_count=5
+# EXECUTE ORDER at 2018-02-13 22:29:54
+# ORDER_PRICE=149.238, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-13 23:15:45
+# ORDER_PRICE=149.225, STL_PRICE=149.4345, ORDER_KIND=sell, PROFIT=-0.225
+# PROFIT=-0.225
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=0
+# self.sell_count=4
+# EXECUTE ORDER at 2018-02-14 22:49:56
+# ORDER_PRICE=148.21, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-14 22:58:07
+# ORDER_PRICE=148.195, STL_PRICE=148.388, ORDER_KIND=sell, PROFIT=-0.208
+# PROFIT=-0.208
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=4
+# self.buy_count=0
+# self.sell_count=5
+# EXECUTE ORDER at 2018-02-21 17:24:50
+# ORDER_PRICE=150.3515, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# current_price=149.849, self.upper_sigma_5m3=149.844627925, self.lower_sigma_5m3=149.548442909, self.order_kind=sell
+# Execute FirstTrail Stop
+# current_ask_price=149.864, order_price=150.337
+# EXECUTE SETTLEMENT at 2018-02-21 23:29:51
+# ORDER_PRICE=150.337, STL_PRICE=149.849, ORDER_KIND=sell, PROFIT=0.473
+# PROFIT=0.473
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2018-02-21 23:29:52
+# ORDER_PRICE=149.849, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# current_bid_price=150.085, order_price=149.864
+# EXECUTE SETTLEMENT at 2018-02-22 01:49:53
+# ORDER_PRICE=149.864, STL_PRICE=150.098, ORDER_KIND=buy, PROFIT=0.221
+# PROFIT=0.221
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2018-02-22 17:04:54
+# ORDER_PRICE=149.097, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-22 17:40:05
+# ORDER_PRICE=149.082, STL_PRICE=149.276, ORDER_KIND=sell, PROFIT=-0.208
+# PROFIT=-0.208
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# EXECUTE ORDER at 2018-02-23 20:39:56
+# ORDER_PRICE=149.0525, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-23 20:55:37
+# ORDER_PRICE=149.039, STL_PRICE=149.24, ORDER_KIND=sell, PROFIT=-0.215
+# PROFIT=-0.215
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=0
+# self.sell_count=3
+# EXECUTE ORDER at 2018-02-24 01:14:58
+# ORDER_PRICE=149.0735, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# current_price=149.056, self.upper_sigma_5m3=149.04533049, self.lower_sigma_5m3=148.862704629, self.order_kind=sell
+# EXECUTE SETTLEMENT at 2018-02-24 04:54:59
+# ORDER_PRICE=149.058, STL_PRICE=149.056, ORDER_KIND=sell, PROFIT=-0.012
+# PROFIT=-0.012
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=4
+# self.sell_count=0
+# EXECUTE ORDER at 2018-02-26 17:24:50
+# ORDER_PRICE=149.753, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-02-26 22:59:11
+# ORDER_PRICE=149.766, STL_PRICE=149.56, ORDER_KIND=buy, PROFIT=-0.217
+# PROFIT=-0.217
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=4
+# self.buy_count=8
+# self.sell_count=0
+# EXECUTE ORDER at 2018-02-27 18:29:52
+# ORDER_PRICE=149.4995, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-02-27 18:37:23
+# ORDER_PRICE=149.512, STL_PRICE=149.317, ORDER_KIND=buy, PROFIT=-0.21
+# PROFIT=-0.21
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=5
+# self.buy_count=0
+# self.sell_count=6
+# EXECUTE ORDER at 2018-03-01 00:49:54
+# ORDER_PRICE=147.211, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# current_ask_price=146.849, order_price=147.199
+# EXECUTE SETTLEMENT at 2018-03-01 12:29:55
+# ORDER_PRICE=147.199, STL_PRICE=146.8365, ORDER_KIND=sell, PROFIT=0.35
+# PROFIT=0.35
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=1
+# self.sell_count=0
+# EXECUTE ORDER at 2018-03-01 15:29:56
+# ORDER_PRICE=147.0105, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-01 16:59:37
+# ORDER_PRICE=147.024, STL_PRICE=146.832, ORDER_KIND=buy, PROFIT=-0.204
+# PROFIT=-0.204
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# EXECUTE ORDER at 2018-03-01 22:49:58
+# ORDER_PRICE=147.0575, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-01 23:51:29
+# ORDER_PRICE=147.07, STL_PRICE=146.878, ORDER_KIND=buy, PROFIT=-0.207
+# PROFIT=-0.207
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=0
+# self.sell_count=3
+# EXECUTE ORDER at 2018-03-02 15:29:50
+# ORDER_PRICE=145.733, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-03-02 15:41:11
+# ORDER_PRICE=145.716, STL_PRICE=145.906, ORDER_KIND=sell, PROFIT=-0.204
+# PROFIT=-0.204
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=0
+# self.sell_count=4
+# EXECUTE ORDER at 2018-03-05 17:24:50
+# ORDER_PRICE=145.515, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-03-05 17:46:11
+# ORDER_PRICE=145.501, STL_PRICE=145.696, ORDER_KIND=sell, PROFIT=-0.207
+# PROFIT=-0.207
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=4
+# self.buy_count=7
+# self.sell_count=0
+# EXECUTE ORDER at 2018-03-06 01:09:52
+# ORDER_PRICE=146.786, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=147.191, self.upper_sigma_5m3=147.463122444, self.lower_sigma_5m3=147.197616247, self.order_kind=buy
+# EXECUTE SETTLEMENT at 2018-03-06 13:09:53
+# ORDER_PRICE=146.8, STL_PRICE=147.191, ORDER_KIND=buy, PROFIT=0.377
+# PROFIT=0.377
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2018-03-06 16:24:54
+# ORDER_PRICE=146.804, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-03-06 20:05:35
+# ORDER_PRICE=146.79, STL_PRICE=146.9765, ORDER_KIND=sell, PROFIT=-0.201
+# PROFIT=-0.201
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=4
+# self.sell_count=0
+# EXECUTE ORDER at 2018-03-06 20:24:56
+# ORDER_PRICE=147.38, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# current_bid_price=147.533, order_price=147.393
+# EXECUTE SETTLEMENT at 2018-03-06 22:49:57
+# ORDER_PRICE=147.393, STL_PRICE=147.5455, ORDER_KIND=buy, PROFIT=0.14
+# PROFIT=0.14
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=3
+# EXECUTE ORDER at 2018-03-07 18:34:58
+# ORDER_PRICE=146.2835, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-03-07 19:07:19
+# ORDER_PRICE=146.269, STL_PRICE=146.4655, ORDER_KIND=sell, PROFIT=-0.211
+# PROFIT=-0.211
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# EXECUTE ORDER at 2018-03-07 23:39:50
+# ORDER_PRICE=147.2085, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-08 00:05:41
+# ORDER_PRICE=147.222, STL_PRICE=147.0225, ORDER_KIND=buy, PROFIT=-0.212
+# PROFIT=-0.212
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=0
+# self.sell_count=3
+# EXECUTE ORDER at 2018-03-09 00:39:52
+# ORDER_PRICE=146.7695, TRADE_FLAG=sell
+# Execute Reverse Settlement
+# current_price=146.793, self.upper_sigma_5m3=146.785060687, self.lower_sigma_5m3=146.422812528, self.order_kind=sell
+# EXECUTE SETTLEMENT at 2018-03-09 05:59:53
+# ORDER_PRICE=146.756, STL_PRICE=146.793, ORDER_KIND=sell, PROFIT=-0.053
+# PROFIT=-0.053
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=5
+# self.sell_count=0
+# EXECUTE ORDER at 2018-03-09 22:49:54
+# ORDER_PRICE=147.917, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# current_bid_price=148.08, order_price=147.931
+# EXECUTE SETTLEMENT at 2018-03-10 01:49:55
+# ORDER_PRICE=147.931, STL_PRICE=148.092, ORDER_KIND=buy, PROFIT=0.149
+# PROFIT=0.149
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=0
+# self.buy_count=0
+# self.sell_count=1
+# EXECUTE ORDER at 2018-03-12 20:29:50
+# ORDER_PRICE=147.505, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-03-12 20:59:51
+# ORDER_PRICE=147.494, STL_PRICE=147.714, ORDER_KIND=sell, PROFIT=-0.234
+# PROFIT=-0.234
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# EXECUTE ORDER at 2018-03-12 21:14:52
+# ORDER_PRICE=147.8935, TRADE_FLAG=buy
+# Execute Reverse Settlement
+# current_price=147.8685, self.upper_sigma_5m3=148.070526365, self.lower_sigma_5m3=147.89708435, self.order_kind=buy
+# EXECUTE SETTLEMENT at 2018-03-13 08:04:53
+# ORDER_PRICE=147.908, STL_PRICE=147.8685, ORDER_KIND=buy, PROFIT=-0.055
+# PROFIT=-0.055
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=2
+# self.buy_count=3
+# self.sell_count=0
+# EXECUTE ORDER at 2018-03-13 21:59:54
+# ORDER_PRICE=149.2085, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-14 00:34:05
+# ORDER_PRICE=149.222, STL_PRICE=149.0315, ORDER_KIND=buy, PROFIT=-0.202
+# PROFIT=-0.202
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=3
+# self.buy_count=0
+# self.sell_count=4
+# EXECUTE ORDER at 2018-03-15 00:14:56
+# ORDER_PRICE=148.311, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-03-15 02:41:57
+# ORDER_PRICE=148.299, STL_PRICE=148.487, ORDER_KIND=sell, PROFIT=-0.206
+# PROFIT=-0.206
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=4
+# self.buy_count=5
+# self.sell_count=0
+# EXECUTE ORDER at 2018-03-19 17:09:50
+# ORDER_PRICE=147.6355, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-19 17:21:41
+# ORDER_PRICE=147.649, STL_PRICE=147.4575, ORDER_KIND=buy, PROFIT=-0.205
+# PROFIT=-0.205
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=5
+# self.buy_count=7
+# self.sell_count=0
+# EXECUTE ORDER at 2018-03-20 18:34:52
+# ORDER_PRICE=149.1755, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-20 21:58:43
+# ORDER_PRICE=149.189, STL_PRICE=148.993, ORDER_KIND=buy, PROFIT=-0.21
+# PROFIT=-0.21
+#######################################################
+# in Expantion Algorithm
+# self.count_threshold=6
+# self.buy_count=7
+# self.sell_count=0
+# EXECUTE ORDER at 2018-03-22 03:24:54
+# ORDER_PRICE=150.1295, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-22 03:51:15
+# ORDER_PRICE=150.143, STL_PRICE=149.9565, ORDER_KIND=buy, PROFIT=-0.203
+# PROFIT=-0.203
