@@ -72,7 +72,7 @@ class ExpantionAlgo(SuperAlgo):
                         pass
 
                     else:
-                        trade_flag = self.decideVolatilityTrade(trade_flag, current_price, base_time)
+#                        trade_flag = self.decideVolatilityTrade(trade_flag, current_price, base_time)
                         trade_flag = self.decideExpantionTrade(trade_flag, current_price, base_time)
 
                     self.setOriginalStoploss(trade_flag)
@@ -105,7 +105,7 @@ class ExpantionAlgo(SuperAlgo):
                         stl_flag = True
 
                     else:
-                        stl_flag = self.decideVolatilityStopLoss(stl_flag, current_price, base_time)
+#                        stl_flag = self.decideVolatilityStopLoss(stl_flag, current_price, base_time)
                         stl_flag = self.decideExpantionStopLoss(stl_flag, current_price, base_time)
                         stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, base_time)
 #                        stl_flag = self.decideStopLoss(stl_flag, current_price, base_time)
@@ -230,13 +230,13 @@ class ExpantionAlgo(SuperAlgo):
     def setOriginalStoploss(self, trade_flag):
         if trade_flag != "pass":
             if trade_flag == "buy" and self.daily_slope > 0:
-                self.original_stoploss_rate = 1.0
+                self.original_stoploss_rate = 0.5
                 self.result_logger.info("# self.original_stoploss_rate=%s" %  self.original_stoploss_rate)
             elif trade_flag == "buy" and self.daily_slope < 0:
                 self.original_stoploss_rate = 0.2
                 self.result_logger.info("# self.original_stoploss_rate=%s" %  self.original_stoploss_rate)
             elif trade_flag == "sell" and self.daily_slope < 0:
-                self.original_stoploss_rate = 1.0
+                self.original_stoploss_rate = 0.5
                 self.result_logger.info("# self.original_stoploss_rate=%s" %  self.original_stoploss_rate)
             elif trade_flag == "sell" and self.daily_slope > 0:
                 self.original_stoploss_rate = 0.2
