@@ -37,7 +37,7 @@ class SuperAlgo(object):
         self.trail_price = 0
         self.order_history = "pass"
         self.profit_history = "pass"
-        self.count_threshold = 0
+        self.count_threshold = 1
 
 ################################################
 # listは、要素数が大きいほうが古い。
@@ -190,11 +190,14 @@ class SuperAlgo(object):
         if profit >= 0:
             self.profit_history = "v"
             sleep_time = self.config_data["stl_sleep_vtime"]
-            self.count_threshold = 0
+#            self.count_threshold = 0
+            self.count_threshold = 1
+
         else:
             self.profit_history = "l"
             sleep_time = self.config_data["stl_sleep_ltime"]
-            if self.count_threshold >= 3:
+#            if self.count_threshold >= 3:
+            if self.count_threshold >= 1:
                 pass
             else:
                 self.count_threshold = self.count_threshold + 1
