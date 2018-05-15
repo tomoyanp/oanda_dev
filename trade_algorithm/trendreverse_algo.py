@@ -156,12 +156,12 @@ class TrendReverseAlgo(SuperAlgo):
 
 
     def setIndicator(self, base_time):
-        upper_list, lower_list, base_list = getBollingerWrapper(base_time, self.instrument, ind_type="bollinger5m2.5", span=1, connector=self.mysql_connector)
+        upper_list, lower_list, base_list = getBollingerWrapper(base_time, self.instrument, ind_type="bollinger5m2.5", span=5, connector=self.mysql_connector)
         self.upper_sigma_5m25 = upper_list[-1]
         self.lower_sigma_5m25 = lower_list[-1]
         self.base_line_5m25 = base_list[-1]
 
-#        self.slope = getSlope(base_list)
+        self.slope = getSlope(base_list)
 
 #    def decideTrailLogic(self, stl_flag, current_ask_price, current_bid_price):
 #        self.first_flag = "off"
