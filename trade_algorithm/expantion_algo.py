@@ -125,13 +125,13 @@ class ExpantionAlgo(SuperAlgo):
         # count += 1
 
         if self.buy_count == 0:
-            if current_price > (self.upper_sigma_5m3) > 0 and (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2 and self.slope > 0:
+            if current_price > (self.upper_sigma_5m3) > 0 and (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
                 self.buy_count = self.buy_count + 1
                 self.buy_count_price = current_price
                 self.sell_count = 0
 
         else:
-            if current_price > (self.upper_sigma_5m3) and current_price > self.buy_count_price and (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2 and self.slope > 0:
+            if current_price > (self.upper_sigma_5m3) and current_price > self.buy_count_price and (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
                 self.buy_count = self.buy_count + 1
                 self.first_flag_time = base_time
                 self.sell_count = 0
@@ -140,13 +140,13 @@ class ExpantionAlgo(SuperAlgo):
 
     def calcSellExpantion(self, current_price, base_time):
         if self.sell_count == 0:
-            if current_price < self.lower_sigma_5m3 and (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2 and self.slope < 0:
+            if current_price < self.lower_sigma_5m3 and (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
                 self.sell_count = self.sell_count + 1
                 self.sell_count_price = current_price
                 self.buy_count = 0
 
         else:
-            if current_price < self.lower_sigma_5m3 and current_price < self.sell_count_price and (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2 and self.slope < 0:
+            if current_price < self.lower_sigma_5m3 and current_price < self.sell_count_price and (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
                 self.sell_count = self.sell_count + 1
                 self.first_flag_time = base_time
                 self.buy_count = 0
@@ -230,13 +230,13 @@ class ExpantionAlgo(SuperAlgo):
     def setOriginalStoploss(self, trade_flag):
         if trade_flag != "pass":
             if trade_flag == "buy" and self.daily_slope > 0:
-                self.original_stoploss_rate = 0.5
+                self.original_stoploss_rate = 1.0 
                 self.result_logger.info("# self.original_stoploss_rate=%s" %  self.original_stoploss_rate)
             elif trade_flag == "buy" and self.daily_slope < 0:
                 self.original_stoploss_rate = 0.2
                 self.result_logger.info("# self.original_stoploss_rate=%s" %  self.original_stoploss_rate)
             elif trade_flag == "sell" and self.daily_slope < 0:
-                self.original_stoploss_rate = 0.5
+                self.original_stoploss_rate = 1.0
                 self.result_logger.info("# self.original_stoploss_rate=%s" %  self.original_stoploss_rate)
             elif trade_flag == "sell" and self.daily_slope > 0:
                 self.original_stoploss_rate = 0.2
