@@ -65,6 +65,11 @@ class TrendReverseAlgo(SuperAlgo):
     def decideStl(self, base_time):
         try:
             stl_flag = False
+            if hour == 15 and minutes == 0:
+                stl_flag = True
+            elif weekday == 5 and hour >= 5:
+                stl_flag = True
+
             self.writeDebugLog(base_time, self.getCurrentPrice())
             return stl_flag
         except:

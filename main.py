@@ -38,6 +38,8 @@ result_logger.addHandler(result_fh)
 debug_logger.setLevel(DEBUG)
 result_logger.setLevel(DEBUG)
 
+sendmail = SendMail("tomoyanpy@gmail.com", "tomoyanpy@softbank.ne.jp", property_path)
+
 if __name__ == '__main__':
 
     args = sys.argv
@@ -69,7 +71,7 @@ if __name__ == '__main__':
     # ポーリング時間
     sleep_time = 10
 
-    trade_wrapper = TradeWrapper(instrument, mode, test_mode, current_path, config_name, args)
+    trade_wrapper = TradeWrapper(instrument, mode, test_mode, current_path, config_name, args, sendmail)
     trade_wrapper.setTradeAlgo(algo, base_time)
 
     try:
@@ -124,6 +126,5 @@ if __name__ == '__main__':
     except:
         message = traceback.format_exc()
         debug_logger.info(message)
-        sendmail = SendMail("tomoyanpy@gmail.com", "tomoyanpy@softbank.ne.jp", property_path)
         sendmail.set_msg(message)
         sendmail.send_mail()
