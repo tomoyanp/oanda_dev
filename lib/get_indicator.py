@@ -7,23 +7,20 @@
 ####################################################
 
 from datetime import datetime, timedelta
+from common import getBollingerDataSet
 
-def getBollingerWrapper(base_time, instrument, ind_type, span, connector):
-    sql = "select upper_sigma, lower_sigma, base_line from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC limit %s" % (instrument, base_time, ind_type, span)
+def getBollingerWrapper(base_time, instrument, table_type, window_size, connector, sigma_valiable):
+    sql = "select end_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time DESC limit %s" % (instrument, table_type, base_time, window_size)
+    print sql
     response = connector.select_sql(sql)
-    upper_list = []
-    lower_list = []
-    base_list = []
+    price_list = []
     for res in response:
-        upper_list.append(res[0])
-        lower_list.append(res[1])
-        base_list.append(res[2])
+        price_list.append(res[0])
 
-    upper_list.reverse()
-    lower_list.reverse()
-    base_list.reverse()
+    price_list.reverse()
+    data_set = getBollingerDataSet(price_list, window_size=window_size, sigma_valiable=sigma_valiable)
 
-    return upper_list, lower_list, base_list
+    return data_set
 
 
 def getEwmaWrapper(instrument, base_time, ind_type, span, connector):
@@ -46,10 +43,8 @@ def getVolatilityPriceWrapper(instrument, base_time, span, connector):
 
     return volatility_buy_price, volatility_bid_price
 
-def getHighlowPriceWrapper(instrument, base_time, span, slide_span, connector):
-    ind_type = "highlow"
-    end_time = base_time - timedelta(hours=slide_span)
-    sql = "select high_price, low_price from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC limit %s" % (instrument, end_time, ind_type, span)
+def getHighlowPriceWrapper(instrument, base_time, span, table_type, connector):
+    sql = "select max_price, min_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time DESC limit %s" % (instrument, table_type, base_time, span)
     response = connector.select_sql(sql)
     high_price_list = []
     low_price_list = []
@@ -74,18 +69,27 @@ def getStartPriceWrapper(instrument, base_time, connector):
     return (ask_price + bid_price) / 2
 
 
-# select start price the day
-def getLastPriceDifferenceWrapper(instrument, base_time, connector):
-    span = 3600*24
-    start_time = base_time
+# select start and end price the last day
+def getLastPriceWrapper(instrument, base_time, connector):
+    if base_time.weekday() == 0:
+        start_time = base_time - timedelta(days=3)
+        end_time = base_time - timedelta(days=2)
+    else:
+        start_time = base_time - timedelta(days=1)
+        end_time = base_time
 
-    sql = "select ask_price, bid_price from %s_TABLE where insert_time < \'%s\' order by insert_time desc limit %s" % (instrument, start_time, span)
+    start_time = start_time.strftime("%Y-%m-%d 07:00:00")
+    end_time = end_time.strftime("%Y-%m-%d 07:00:00")
+
+    sql = "select ask_price, bid_price from %s_TABLE where insert_time = \'%s\'" % (instrument, start_time)
     response = connector.select_sql(sql)
+    start_price = (response[0][0] + response[0][1]) / 2
 
+    sql = "select ask_price, bid_price from %s_TABLE where insert_time = \'%s\'" % (instrument, end_time)
+    response = connector.select_sql(sql)
     end_price = (response[0][0] + response[0][1]) / 2
-    start_price = (response[-1][0] + response[-1][0]) / 2
 
-    return (end_price - start_price)
+    return start_price, end_price
 
 
 def getWeekStartPrice(instrument, base_time, week_start_price, current_price):

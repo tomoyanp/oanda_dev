@@ -63,6 +63,7 @@ if __name__ == '__main__':
 #        base_time = datetime.strptime("2018-03-01 00:00:00", "%Y-%m-%d %H:%M:%S")
         test_mode = True
     else:
+        base_time = datetime.now()
         test_mode = False
 
     # ポーリング時間
@@ -78,10 +79,15 @@ if __name__ == '__main__':
           if test_mode:
               pass
           else:
-              base_time = datetime.now()
+              now = datetime.now()
+
           flag = decideMarket(base_time)
 
           if flag == False:
+              sleep_time = 1
+              base_time = sleepTransaction(sleep_time, test_mode, base_time)
+
+          elif test_mode == False and base_time > now:
               sleep_time = 1
               base_time = sleepTransaction(sleep_time, test_mode, base_time)
 

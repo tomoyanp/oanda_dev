@@ -17,7 +17,7 @@
 
 from super_algo import SuperAlgo
 from common import instrument_init, account_init, decideMarket, getSlope
-from get_indicator import getBollingerWrapper, getVolatilityPriceWrapper, getHighlowPriceWrapper, getLastPriceDifferenceWrapper, getWeekStartPrice
+from get_indicator import getBollingerWrapper, getVolatilityPriceWrapper, getHighlowPriceWrapper, getLastPriceWrapper, getWeekStartPrice
 from trade_calculator import decideLowExceedPrice, decideLowSurplusPrice, decideHighExceedPrice, decideHighSurplusPrice, decideVolatility, decideDailyVolatilityPrice
 from mysql_connector import MysqlConnector
 from datetime import datetime, timedelta
@@ -48,19 +48,14 @@ class TrendReverseAlgo(SuperAlgo):
                 current_price = self.getCurrentPrice()
                 weekday = base_time.weekday()
                 hour = base_time.hour
-                minutes = base_time.minute
-                seconds = base_time.second
 
                 # if weekday == Saturday, will have no entry.
                 if weekday == 5 and hour >= 5:
                     trade_flag = "pass"
-                    self.buy_count = 0
-                    self.sell_count = 0
-                elif (hour < 15 and hour > 4):
-                        self.setIndicator(base_time)
-                        trade_flag = self.decideReverseTrade(trade_flag, current_price, base_time)
+                else:
+                    trade_flag = self.decideReverseTrade(trade_flag, current_price, base_time)
 
-            self.debug_logger.info("Trade Logic at %s" % base_time)
+                self.writeDebugLog(base_time, current_price)
             return trade_flag
         except:
             raise
@@ -70,78 +65,26 @@ class TrendReverseAlgo(SuperAlgo):
     def decideStl(self, base_time):
         try:
             stl_flag = False
-            ex_stlmode = self.config_data["ex_stlmode"]
-            if self.order_flag:
-
-
-                if ex_stlmode == "on":
-                    current_price = self.getCurrentPrice()
-                    minutes = base_time.minute
-                    seconds = base_time.second
-                    weekday = base_time.weekday()
-                    hour = base_time.hour
-
-                    # 土曜の5時以降にポジションを持っている場合は決済する
-                    if weekday == 5 and hour >= 5:
-                        self.result_logger.info("# weekend stl logic")
-                        stl_flag = True
-                    elif hour == 15:
-                        self.result_logger.info("# reverse time up stl logic")
-                        stl_flag = True
-
-                    stl_flag = self.decideTakeprofit(stl_flag, self.ask_price, self.bid_price)
-                    stl_flag = self.decideStoploss(stl_flag, self.ask_price, self.bid_price)
-            else:
-                pass
-
-            self.debug_logger.info("Settlement Logic at %s" % base_time)
+            self.writeDebugLog(base_time, self.getCurrentPrice())
             return stl_flag
         except:
             raise
 
 
-    def decideTakeprofit(self, stl_flag, ask_price, bid_price):
-        if self.order_kind == "buy" and bid_price > self.take_profit_price:
-            self.result_logger.info("Execute TakeProfit")
-            stl_flag = True
-
-        elif self.order_kind == "sell" and ask_price < self.take_profit_price:
-            self.result_logger.info("Execute TakeProfit")
-            stl_flag = True
-
-        return stl_flag
-
-
-    def decideStoploss(self, stl_flag, ask_price, bid_price):
-        if self.order_kind == "buy" and bid_price < self.stop_loss_price:
-            self.result_logger.info("Execute StopLoss")
-            stl_flag = True
-
-        elif self.order_kind == "sell" and ask_price > self.stop_loss_price:
-            self.result_logger.info("Execute StopLoss")
-            stl_flag = True
-
-        return stl_flag
-
-
     def decideReverseTrade(self, trade_flag, current_price, base_time):
-        mode = "trade"
+        hour = base_time.hour
+        seconds = base_time.second
+        if (hour < 15 and hour > 4) and seconds <= 10:
+            self.setIndicator(base_time)
+            if current_price > self.upper_sigma_1m2:
+                trade_flag = "sell"
+                self.writeResultLog(current_price)
 
-        if current_price > self.upper_sigma_5m25:
-            trade_flag = "sell"
-            self.take_profit_price = self.lower_sigma_5m25
-            difference = float(current_price) - float(self.take_profit_price)
-            self.stop_loss_price = float(current_price) + float(difference)
-            self.writeExpantionLog(current_price, mode, highlow_mode="dummy")
+            elif current_price < self.lower_sigma_1m2:
+                trade_flag = "buy"
+                self.writeResultLog(current_price)
 
-        elif current_price < self.lower_sigma_5m25:
-            trade_flag = "buy"
-            self.take_profit_price = self.upper_sigma_5m25
-            difference = float(self.take_profit_price) - float(current_price)
-            self.stop_loss_price = float(current_price) - float(difference)
-            self.writeExpantionLog(current_price, mode, highlow_mode="dummy")
-
-        self.writeDebugLog(base_time, up_flag="null", down_flag="null", mode=mode)
+        self.writeDebugLog(base_time, current_price)
 
         return trade_flag
 
@@ -156,82 +99,38 @@ class TrendReverseAlgo(SuperAlgo):
 
 
     def setIndicator(self, base_time):
-        upper_list, lower_list, base_list = getBollingerWrapper(base_time, self.instrument, ind_type="bollinger5m2.5", span=1, connector=self.mysql_connector)
-        self.upper_sigma_5m25 = upper_list[-1]
-        self.lower_sigma_5m25 = lower_list[-1]
-        self.base_line_5m25 = base_list[-1]
+        dataset = getBollingerWrapper(base_time, self.instrument, table_type="1m", window_size=28, connector=self.mysql_connector, sigma_valiable=2)
+        self.upper_sigma_1m2 = dataset["upper_sigmas"][-1]
+        self.lower_sigma_1m2 = dataset["lower_sigmas"][-1]
+        self.base_line_1m2 = dataset["base_lines"][-1]
 
-#        self.slope = getSlope(base_list)
-
-#    def decideTrailLogic(self, stl_flag, current_ask_price, current_bid_price):
-#        self.first_flag = "off"
-#        order_price = self.getOrderPrice()
-#        first_take_profit = 0.1
-#
-#        # update the most high and low price
-#        if self.most_high_price == 0 and self.most_low_price == 0:
-#            self.most_high_price = order_price
-#            self.most_low_price = order_price
-#
-#        if self.most_high_price < current_bid_price:
-#            self.most_high_price = current_bid_price
-#        if self.most_low_price > current_ask_price:
-#            self.most_low_price = current_ask_price
-#
-#        # first trailing stop logic
-#        if self.first_flag == "on":
-#            if self.order_kind == "buy":
-#                if (current_bid_price - order_price) > first_take_profit:
-#                    self.trail_flag = True
-#            elif self.order_kind == "sell":
-#                if (order_price - current_ask_price) > first_take_profit:
-#                    self.trail_flag = True
-#
-#            if self.trail_flag == True and self.order_kind == "buy":
-#                if (current_bid_price - order_price) < 0:
-#                    self.result_logger.info("# Execute FirstTrail Stop")
-#                    self.result_logger.info("# current_bid_price=%s, order_price=%s" % (current_bid_price, order_price))
-#                    stl_flag = True
-#            elif self.trail_flag == True and self.order_kind == "sell":
-#                if (order_price - current_ask_price) < 0:
-#                    self.result_logger.info("# Execute FirstTrail Stop")
-#                    self.result_logger.info("# current_bid_price=%s, order_price=%s" % (current_bid_price, order_price))
-#                    stl_flag = True
-#                if (self.most_high_price - 0.1) > current_bid_price:
-#                    self.result_logger.info("# Execute FirstTrail Stop")
-#                    self.result_logger.info("# current_bid_price=%s, order_price=%s" % (current_bid_price, order_price))
-#                    stl_flag = True
-#            elif self.trail_flag == True and self.order_kind == "sell":
-#                if (self.most_low_price + 0.1) < current_ask_price :
-#                    self.result_logger.info("# Execute FirstTrail Stop")
-#                    self.result_logger.info("# current_ask_price=%s, order_price=%s" % (current_ask_price, order_price))
-#                    stl_flag = True
-#        return stl_flag
+        response = self.mysql_connector.select_sql("select start_price, end_price, max_price, min_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 1" % (self.instrument, "1m", base_time))
+        self.start_price = response[0][0]
+        self.end_price = response[0][1]
+        self.max_price = response[0][2]
+        self.min_price = response[0][3]
 
 
-    # log writer program
-    def writeDebugLog(self, base_time, up_flag, down_flag, mode):
-        if mode == "trade":
-            self.debug_logger.info("%s :TrendExpantionLogic" % base_time)
-        elif mode == "stl":
-            self.debug_logger.info("%s :ExpantionStlLogic START" % base_time)
+    def writeDebugLog(self, base_time, current_price):
+        self.debug_logger.info("# in TrendReverse Algorithm : %s" % base_time)
+        self.debug_logger.info("# current_price=%s" % current_price)
+        self.debug_logger.info("# upper_sigma_1m2=%s" % self.upper_sigma_1m2)
+        self.debug_logger.info("# lower_sigma_1m2=%s" % self.lower_sigma_1m2)
+        self.debug_logger.info("# base_line_1m2=%s" % self.base_line_1m2)
+        self.debug_logger.info("# self.start_price=%s" % self.start_price)
+        self.debug_logger.info("# self.end_price=%s" % self.end_price)
+        self.debug_logger.info("# self.max_price=%s" % self.max_price)
+        self.debug_logger.info("# self.min_price=%s" % self.min_price)
 
-        self.debug_logger.info("base time=%s" % base_time)
-        self.debug_logger.info("self.order_kind=%s" % self.order_kind)
-        self.debug_logger.info("self.upper_sigma_5m25=%s" % self.upper_sigma_5m25)
-        self.debug_logger.info("self.lower_sigma_5m25=%s" % self.lower_sigma_5m25)
-        self.debug_logger.info("#############################################")
-
-
-    def writeExpantionLog(self, current_price, mode, highlow_mode):
-        if mode == "trade":
-            self.result_logger.info("#######################################################")
-            self.result_logger.info("# in TrendReverse Algorithm")
-            self.result_logger.info("# upper_sigma_5m25=%s" % self.upper_sigma_5m25)
-            self.result_logger.info("# lower_sigma_5m25=%s" % self.lower_sigma_5m25)
-            self.result_logger.info("# base_line_5m25=%s" % self.base_line_5m25)
-            self.result_logger.info("# current_price=%s" % current_price)
-            self.result_logger.info("# self.slope=%s" % self.slope)
-            self.result_logger.info("# self.stop_loss_price=%s" % self.stop_loss_price)
-            self.result_logger.info("# self.take_profit_price=%s" % self.take_profit_price)
+    def writeResultLog(self, current_price):
+        self.result_logger.info("#######################################################")
+        self.result_logger.info("# in TrendReverse Algorithm")
+        self.result_logger.info("# current_price=%s" % current_price)
+        self.result_logger.info("# upper_sigma_1m2=%s" % self.upper_sigma_1m2)
+        self.result_logger.info("# lower_sigma_1m2=%s" % self.lower_sigma_1m2)
+        self.result_logger.info("# base_line_1m2=%s" % self.base_line_1m2)
+        self.result_logger.info("# self.start_price=%s" % self.start_price)
+        self.result_logger.info("# self.end_price=%s" % self.end_price)
+        self.result_logger.info("# self.max_price=%s" % self.max_price)
+        self.result_logger.info("# self.min_price=%s" % self.min_price)
 
