@@ -67,7 +67,7 @@ if __name__ == "__main__":
         end_time = datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
     else:
         base_time = datetime.now()
-        end_time = datetim.now()
+        end_time = datetime.now()
 
     while True:
         try:
@@ -86,6 +86,7 @@ if __name__ == "__main__":
                         break
                     else:
                         time.sleep(1)
+                        base_time = base_time - timedelta(seconds=1)
 
                 else:
                     if seconds == 0:
