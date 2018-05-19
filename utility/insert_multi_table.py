@@ -89,13 +89,13 @@ if __name__ == "__main__":
                         base_time = base_time - timedelta(seconds=1)
 
                 else:
-                    if seconds == 0:
+                    if seconds == 59:
                         insertTable(base_time, currency, con, table_type="1m", span=60)
-                    if seconds == 0 and minutes % 5 == 0:
+                    if seconds == 59 and minutes % 5 == 4:
                         insertTable(base_time, currency, con, table_type="5m", span=300)
-                    if seconds == 0 and minutes == 0:
+                    if seconds == 59 and minutes == 59:
                         insertTable(base_time, currency, con, table_type="1h", span=3600)
-                    if seconds == 0 and minutes == 0 and hour == 7:
+                    if seconds == 59 and minutes == 59 and hour == 5:
                         insertTable(base_time, currency, con, table_type="day", span=(3600*24))
 
             base_time = base_time + timedelta(seconds=1)
