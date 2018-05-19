@@ -36,8 +36,8 @@ env = 'live'
 mysql_connector = MysqlConnector()
 now = datetime.now()
 
-start_time = "2017-01-04 07:00:00"
-end_time = "2018-05-19 00:00:00"
+start_time = "2018-05-19 00:31:00"
+end_time = "2018-05-19 07:00:00"
 end_time = datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
 start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
 
@@ -70,7 +70,8 @@ while start_time < end_time:
                 print candle
                 ask_price = candle["openAsk"]
                 bid_price = candle["openBid"]
-                sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\');" % (instrument, ask_price, bid_price, insert_time)
+                sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\')" % (instrument, ask_price, bid_price, insert_time)
+                mysql_connector.insert_sql(sql)
                 sql_file.write("%s\n" % sql)
                 print sql
             print "============================================================="
