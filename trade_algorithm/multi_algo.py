@@ -42,6 +42,7 @@ class MultiAlgo(SuperAlgo):
         self.sell_count_price = 0
         self.original_stoploss_rate = 0
         self.week_start_price = 0
+        self.count_threshold = 1
         self.stoploss_flag = False
         self.algorithm = ""
         self.setExpantionIndicator(base_time)
