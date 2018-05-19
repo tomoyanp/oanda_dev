@@ -91,6 +91,13 @@ class SuperAlgo(object):
     def getStlPrice(self):
         return self.stl_price
 
+    def getBidPrice(self):
+        return self.bid_price
+
+
+    def getAskPrice(self):
+        return self.ask_price
+
     def getCurrentPrice(self):
         price = (self.ask_price + self.bid_price) / 2
         return price
