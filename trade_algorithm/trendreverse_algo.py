@@ -64,6 +64,9 @@ class TrendReverseAlgo(SuperAlgo):
     # ここでは、急に逆方向に動いた時に決済出来るようにしている
     def decideStl(self, base_time):
         try:
+            hour = base_time.hour
+            minutes = base_time.minute
+            weekday = base_time.weekday()
             stl_flag = False
             if hour == 15 and minutes == 0:
                 stl_flag = True
