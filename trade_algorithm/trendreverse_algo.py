@@ -51,7 +51,7 @@ class TrendReverseAlgo(SuperAlgo):
                 # if weekday == Saturday, will have no entry.
                 if weekday == 5 and hour >= 5:
                     trade_flag = "pass"
-                else:
+                elif 4 < hour < 15:
                     trade_flag = self.decideReverseTrade(trade_flag, current_price, base_time)
 
                 self.writeDebugLog(base_time, current_price)
@@ -67,15 +67,20 @@ class TrendReverseAlgo(SuperAlgo):
             weekday = base_time.weekday()
             stl_flag = False
 
-            self.setIndicator(base_time)
-            current_price = self.getCurrentPrice()
-            if current_price > self.upper_sigma_1m3:
+            if hour == 15:
                 stl_flag = True
-                self.writeResultLog(current_price)
-
-            elif current_price < self.lower_sigma_1m3:
-                stl_flag = True
-                self.writeResultLog(current_price)
+            else:
+                self.setIndicator(base_time)
+                current_price = self.getCurrentPrice()
+                #if self.order_kind == "buy" and current_price > self.upper_sigma_1m3:
+                if current_price > self.upper_sigma_1m3:
+                    stl_flag = True
+                    self.writeResultLog(current_price)
+    
+                #elif self.order_kind == "sell" and current_price < self.lower_sigma_1m3:
+                elif current_price < self.lower_sigma_1m3:
+                    stl_flag = True
+                    self.writeResultLog(current_price)
 
             self.writeDebugLog(base_time, self.getCurrentPrice())
             return stl_flag
@@ -85,6 +90,7 @@ class TrendReverseAlgo(SuperAlgo):
 
     def decideReverseTrade(self, trade_flag, current_price, base_time):
         hour = base_time.hour
+        self.setIndicator(base_time)
 
         if self.first_flag == "pass":
             if current_price < self.base_line_1m3:
@@ -99,6 +105,7 @@ class TrendReverseAlgo(SuperAlgo):
                 trade_flag = "sell"
                 self.writeResultLog(current_price)
 
+        self.debug_logger.info("self.first_flag=%s" % self.first_flag)
         self.writeDebugLog(base_time, current_price)
 
         return trade_flag
