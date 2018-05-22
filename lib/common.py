@@ -138,21 +138,11 @@ def getOriginalEWMA(ask_price_list, bid_price_list, wma_length, candle_width):
     return wma_value
 
 
-def getEWMA(ask_price_list, bid_price_list, wma_length, candle_width):
-    index = wma_length * candle_width * -1
-    ask_price_list = ask_price_list[index:]
-    bid_price_list = bid_price_list[index:]
-    
-    ask_price_list = pd.Series(ask_price_list)
-    bid_price_list = pd.Series(bid_price_list)
-    average_price_list = (ask_price_list + bid_price_list) / 2
+def getEWMA(price_list):
 
-    #wma_length = (candle_width * wma_length)
-    wma_length = len(average_price_list)
-
-    wma_value_list = average_price_list.ewm(ignore_na=False, span=wma_length, min_periods=0, adjust=True).mean()
-
-    average_price_list = average_price_list.values.tolist()
+    price_list = pd.Series(price_list)
+    wma_length = len(price_list)
+    wma_value_list = price_list.ewm(ignore_na=False, span=wma_length, min_periods=0, adjust=True).mean()
     wma_value_list = wma_value_list.values.tolist()
 
     return wma_value_list
