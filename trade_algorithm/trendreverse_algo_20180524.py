@@ -60,8 +60,37 @@ class TrendReverseAlgo(SuperAlgo):
 
     def decideStl(self, base_time):
         try:
+            hour = base_time.hour
+            weekday = base_time.weekday()
+            seconds = base_time.second
             stl_flag = False
 
+            if seconds <= 10:
+                self.setIndicator(base_time)
+            current_price = self.getCurrentPrice()
+
+
+
+            if current_price > self.upper_sigma_1m3:
+                stl_flag = True
+            elif current_price < self.lower_sigma_1m3:
+                stl_flag = True
+
+#            if self.first_flag == False:
+#                if current_price < self.lower_sigma_1m2:
+#                    self.first_flag = True
+#                elif current_price > self.upper_sigma_1m2:
+#                    self.first_flag = True
+#
+#            if self.first_flag:
+#                if (self.base_line_1m3 - 0.01) <= current_price <= (self.base_line_1m3 + 0.01):
+#                    stl_flag = True
+#                    self.writeResultLog(current_price)
+#                elif (self.base_line_1m3 - 0.01) <= current_price <= (self.base_line_1m3 + 0.01):
+#                    stl_flag = True
+#                    self.writeResultLog(current_price)
+
+            self.writeDebugLog(base_time, self.getCurrentPrice())
             return stl_flag
         except:
             raise
@@ -73,18 +102,19 @@ class TrendReverseAlgo(SuperAlgo):
         if (self.ask_price - self.bid_price) < 0.02:
             if seconds <= 10:
                 self.setIndicator(base_time)
+            if self.wma_value < current_price and (self.base_line_1m3 - 0.01) <= current_price <= (self.base_line_1m3 + 0.01):
+#                trade_flag = "buy"
+                trade_flag = "sell"
+                self.result_logger.info("###################################")
+                self.result_logger.info("in TradeFollow Algorithm")
+                self.writeResultLog(current_price)
+            elif self.wma_value > current_price and (self.base_line_1m3 - 0.01) <= current_price <= (self.base_line_1m3 + 0.01):
+#                trade_flag = "sell"
+                trade_flag = "buy"
+                self.result_logger.info("###################################")
+                self.result_logger.info("in TradeFollow Algorithm")
+                self.writeResultLog(current_price)
 
-                if self.max_price > self.upper_sigma_1m2 and self.start_price > self.end_price:
-                    trade_flag = "sell"
-                    self.result_logger.info("###################################")
-                    self.result_logger.info("in TradeReverse Algorithm")
-                    self.writeResultLog(current_price)
-
-                elif self.min_price < self.lower_sigma_1m2 and self.start_price < self.end_price:
-                    trade_flag = "buy"
-                    self.result_logger.info("###################################")
-                    self.result_logger.info("in TradeReverse Algorithm")
-                    self.writeResultLog(current_price)
 
         self.writeDebugLog(base_time, current_price)
 
@@ -102,17 +132,20 @@ class TrendReverseAlgo(SuperAlgo):
 
     def setIndicator(self, base_time):
         slope_length = 0
-        dataset = getBollingerWrapper(base_time, self.instrument, table_type="1m", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=slope_length)
-        self.upper_sigma_1m2 = dataset["upper_sigmas"][-1]
-        self.lower_sigma_1m2 = dataset["lower_sigmas"][-1]
-        self.base_line_1m2 = dataset["base_lines"][-1]
+        dataset = getBollingerWrapper(base_time, self.instrument, table_type="1m", window_size=28, connector=self.mysql_connector, sigma_valiable=3, length=slope_length)
+        self.upper_sigma_1m3 = dataset["upper_sigmas"][-1]
+        self.lower_sigma_1m3 = dataset["lower_sigmas"][-1]
+        self.base_line_1m3 = dataset["base_lines"][-1]
 
-        sql = "select start_price, max_price, min_price, end_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 1" % (self.instrument, "1m", base_time)
+        sql = "select end_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 200" % (self.instrument, "1m", base_time)
         response = self.mysql_connector.select_sql(sql)
-        self.start_price = response[0][0]
-        self.max_price = response[0][1]
-        self.min_price = response[0][2]
-        self.end_price = response[0][3]
+        price_list = []
+        for res in response:
+            price_list.append(res[0])
+        price_list.reverse()
+        wma_list = getEWMA(price_list)
+        self.wma_value = wma_list[-1]
+        self.debug_logger.info("self.wma=%s" % self.wma_value)
 
     def writeDebugLog(self, base_time, current_price):
         self.debug_logger.info("# in TrendReverse Algorithm : %s" % base_time)
@@ -120,10 +153,7 @@ class TrendReverseAlgo(SuperAlgo):
 
     def writeResultLog(self, current_price):
         self.result_logger.info("# current_price=%s" % current_price)
-        self.result_logger.info("# self.upper_sigma_1m2=%s" % self.upper_sigma_1m2)
-        self.result_logger.info("# self.lower_sigma_1m2=%s" % self.lower_sigma_1m2)
-        self.result_logger.info("# self.base_line_1m2=%s" % self.base_line_1m2)
-        self.result_logger.info("# self.start_price=%s" % self.start_price)
-        self.result_logger.info("# self.end_price=%s" % self.end_price)
-        self.result_logger.info("# self.max_price=%s" % self.max_price)
-        self.result_logger.info("# self.min_price=%s" % self.min_price)
+        self.result_logger.info("# self.upper_sigma_1m3=%s" % self.upper_sigma_1m3)
+        self.result_logger.info("# self.lower_sigma_1m3=%s" % self.lower_sigma_1m3)
+        self.result_logger.info("# self.base_line_1m3=%s" % self.base_line_1m3)
+        self.result_logger.info("# self.wma=%s" % self.wma_value)
