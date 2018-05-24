@@ -65,7 +65,7 @@ class TrendReverseAlgo(SuperAlgo):
             seconds = base_time.second
             stl_flag = False
 
-            if seconds == 1:
+            if seconds <= 10:
                 self.setIndicator(base_time)
             current_price = self.getCurrentPrice()
 
@@ -73,10 +73,8 @@ class TrendReverseAlgo(SuperAlgo):
 
             if current_price > self.upper_sigma_1m3:
                 stl_flag = True
-#                self.writeResultLog(current_price)
             elif current_price < self.lower_sigma_1m3:
                 stl_flag = True
-#                self.writeResultLog(current_price)
 
 #            if self.first_flag == False:
 #                if current_price < self.lower_sigma_1m2:
@@ -102,15 +100,17 @@ class TrendReverseAlgo(SuperAlgo):
         hour = base_time.hour
         seconds = base_time.second
         if (self.ask_price - self.bid_price) < 0.02:
-            if seconds == 1:
+            if seconds <= 10:
                 self.setIndicator(base_time)
             if self.wma_value < current_price and (self.base_line_1m3 - 0.01) <= current_price <= (self.base_line_1m3 + 0.01):
-                trade_flag = "buy"
+#                trade_flag = "buy"
+                trade_flag = "sell"
                 self.result_logger.info("###################################")
                 self.result_logger.info("in TradeFollow Algorithm")
                 self.writeResultLog(current_price)
             elif self.wma_value > current_price and (self.base_line_1m3 - 0.01) <= current_price <= (self.base_line_1m3 + 0.01):
-                trade_flag = "sell"
+#                trade_flag = "sell"
+                trade_flag = "buy"
                 self.result_logger.info("###################################")
                 self.result_logger.info("in TradeFollow Algorithm")
                 self.writeResultLog(current_price)
