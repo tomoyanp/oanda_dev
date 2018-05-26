@@ -70,21 +70,22 @@ class TrendReverseAlgo(SuperAlgo):
     def decideReverseTrade(self, trade_flag, current_price, base_time):
         hour = base_time.hour
         seconds = base_time.second
-        if (self.ask_price - self.bid_price) < 0.02:
-            if seconds <= 10:
-                self.setIndicator(base_time)
-
-                if self.max_price > self.upper_sigma_1m2 and self.start_price > self.end_price:
-                    trade_flag = "sell"
-                    self.result_logger.info("###################################")
-                    self.result_logger.info("in TradeReverse Algorithm")
-                    self.writeResultLog(current_price)
-
-                elif self.min_price < self.lower_sigma_1m2 and self.start_price < self.end_price:
-                    trade_flag = "buy"
-                    self.result_logger.info("###################################")
-                    self.result_logger.info("in TradeReverse Algorithm")
-                    self.writeResultLog(current_price)
+        if hour > 4 and hour < 15:
+            if (self.ask_price - self.bid_price) < 0.02:
+                if seconds >= 50:
+                    self.setIndicator(base_time)
+    
+                    if self.max_price > self.upper_sigma_1m2 and self.start_price > self.end_price and self.end_price < self.upper_sigma_1m2:
+                        trade_flag = "sell"
+                        self.result_logger.info("###################################")
+                        self.result_logger.info("in TradeReverse Algorithm")
+                        self.writeResultLog(current_price)
+    
+                    elif self.min_price < self.lower_sigma_1m2 and self.start_price < self.end_price and self.end_price > self.lower_sigma_1m2:
+                        trade_flag = "buy"
+                        self.result_logger.info("###################################")
+                        self.result_logger.info("in TradeReverse Algorithm")
+                        self.writeResultLog(current_price)
 
         self.writeDebugLog(base_time, current_price)
 
