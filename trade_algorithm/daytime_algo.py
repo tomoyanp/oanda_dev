@@ -116,9 +116,10 @@ class DaytimeAlgo(SuperAlgo):
             minutes = base_time.minute
             seconds = base_time.second
 
-            if  hour == 6 or hour == 7 or hour == 8 or hour == 9 or hour == 10:
+#            if  hour == 6 or hour == 7 or hour == 8 or hour == 9 or hour == 10:
+            if hour == 7 or hour == 8 or hour == 9 or hour == 10:
                 if minutes < 15:
-                    if seconds <= 10:
+                    if minutes % 5 == 4 and seconds <= 10:
                         self.setVolatilityIndicator(base_time)
                         up_flag, down_flag = decideVolatility(current_price=current_price, volatility_value=0.1, volatility_buy_price=self.volatility_buy_price, volatility_bid_price=self.volatility_bid_price)
         
@@ -187,7 +188,7 @@ class DaytimeAlgo(SuperAlgo):
 
 
     def setVolatilityIndicator(self, base_time):
-        self.volatility_buy_price, self.volatility_bid_price = getVolatilityPriceWrapper(self.instrument, base_time, span=60, connector=self.mysql_connector)
+        self.volatility_buy_price, self.volatility_bid_price = getVolatilityPriceWrapper(self.instrument, base_time, span=300, connector=self.mysql_connector)
 
 # write log function
 
