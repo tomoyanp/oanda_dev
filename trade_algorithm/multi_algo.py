@@ -346,23 +346,23 @@ class MultiAlgo(SuperAlgo):
 
 
     def decideVolatilityStoploss(self, stl_flag, current_price, base_time):
-        if self.algorithm == "expantion" or self.algorithm == "volatility":
-            mode = "stl"
-            seconds = base_time.second
-            if seconds >= 50:
-                self.setVolatilityIndicator(base_time)
-                up_flag, down_flag = decideVolatility(current_price=current_price, volatility_value=0.3, volatility_buy_price=self.volatility_buy_price,     volatility_bid_price=self.volatility_bid_price)
-
-                if up_flag and self.order_kind == "sell":
-                    stl_flag = True
-                    self.buy_count = 0
-                    self.sell_count = 0
-                    self.result_logger.info("# execute volatility stoploss")
-                elif down_flag and self.order_kind == "buy":
-                    stl_flag = True
-                    self.buy_count = 0
-                    self.sell_count = 0
-                    self.result_logger.info("# execute volatility stoploss")
+#        if self.algorithm == "expantion" or self.algorithm == "volatility":
+#            mode = "stl"
+#            seconds = base_time.second
+#            if seconds >= 50:
+#                self.setVolatilityIndicator(base_time)
+#                up_flag, down_flag = decideVolatility(current_price=current_price, volatility_value=0.3, volatility_buy_price=self.volatility_buy_price,     volatility_bid_price=self.volatility_bid_price)
+#
+#                if up_flag and self.order_kind == "sell":
+#                    stl_flag = True
+#                    self.buy_count = 0
+#                    self.sell_count = 0
+#                    self.result_logger.info("# execute volatility stoploss")
+#                elif down_flag and self.order_kind == "buy":
+#                    stl_flag = True
+#                    self.buy_count = 0
+#                    self.sell_count = 0
+#                    self.result_logger.info("# execute volatility stoploss")
 
         return stl_flag
 
@@ -500,6 +500,12 @@ class MultiAlgo(SuperAlgo):
             self.daily_slope = self.getDailySlope(self.instrument, base_time, span=10, connector=self.mysql_connector)
             base_ftime = base_time.strftime("%Y-%m-%d 07:00:00")
             self.high_price, self.low_price = getHighlowPriceWrapper(instrument=self.instrument, base_time=base_ftime, span=1, table_type="day", connector=self.mysql_connector)
+            dataset = getBollingerWrapper(base_time, self.instrument, table_type="day", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=0)
+            self.upper_sigma_1d2 = dataset["upper_sigmas"][-1]
+            self.lower_sigma_1d2 = dataset["lower_sigmas"][-1]
+            self.base_line_1d2 = dataset["base_lines"][-1]
+
+
 
 
 # write log function
@@ -527,6 +533,8 @@ class MultiAlgo(SuperAlgo):
         self.result_logger.info("# self.base_line_5m3=%s" % self.base_line_5m3)
         self.result_logger.info("# self.upper_sigma_1h3=%s" % self.upper_sigma_1h3)
         self.result_logger.info("# self.lower_sigma_1h3=%s" % self.lower_sigma_1h3)
-        self.result_logger.info("# self.base_line_1h3=%s" % self.base_line_1h3)
+        self.result_logger.info("# self.base_line_1d2=%s" % self.base_line_1d2)
+        self.result_logger.info("# self.upper_sigma_1d2=%s" % self.upper_sigma_1d2)
+        self.result_logger.info("# self.lower_sigma_1d2=%s" % self.lower_sigma_1d2)
         self.result_logger.info("# self.original_stoploss_rate=%s" % self.original_stoploss_rate)
 
