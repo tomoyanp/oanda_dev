@@ -1,0 +1,1251 @@
+#########################
+# ../main.py GBP_JPY demo daytime daytime_test test 
+# __comments = daytime mode
+# enable_time = [u'00:00:00', u'01:00:00', u'02:00:00', u'03:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00', u'21:00:00', u'22:00:00', u'23:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# first_trail_mode = on
+# second_trail_mode = on
+# sleep_time = 10
+# stl_sleep_ltime = 1
+# stl_sleep_time = 10
+# stl_sleep_vtime = 1
+# stl_time_width = 720000
+# stop_loss = 0.2
+# take_profit = 1.0
+# time_width = 720000
+# trade_sleep_time = 1
+# units = 10000
+# entry buy flag on At 2017-02-01 08:04:00, self.ask_price=141.819, self.bid_price=141.819
+# entry buy flag on At 2017-02-01 09:04:00, self.ask_price=142.035, self.bid_price=142.035
+#######################################################
+# in volatility Algorithm
+# self.ask_price=142.035
+# self.bid_price=142.035
+# volatility_buy_price=141.929
+# volatility_bid_price=141.929
+# EXECUTE ORDER at 2017-02-01 09:04:00
+# ORDER_PRICE=142.035, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-02-01 10:23:41
+# ORDER_PRICE=142.035, STL_PRICE=142.0655, ORDER_KIND=buy, PROFIT=0.0305
+# PROFIT=0.0305
+# entry sell flag on At 2017-02-02 09:04:02, self.ask_price=143.296, self.bid_price=143.296
+# entry flag is reset
+# entry sell flag on At 2017-02-03 10:14:02, self.ask_price=141.196, self.bid_price=141.196
+# entry flag is reset
+# entry sell flag on At 2017-02-06 09:09:00, self.ask_price=140.517, self.bid_price=140.517
+# entry flag is reset
+# entry buy flag on At 2017-02-13 07:04:00, self.ask_price=141.659, self.bid_price=141.659
+# entry buy flag on At 2017-02-13 07:09:00, self.ask_price=141.788, self.bid_price=141.788
+#######################################################
+# in volatility Algorithm
+# self.ask_price=141.788
+# self.bid_price=141.788
+# volatility_buy_price=141.659
+# volatility_bid_price=141.659
+# EXECUTE ORDER at 2017-02-13 07:09:00
+# ORDER_PRICE=141.788, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-02-13 09:36:51
+# ORDER_PRICE=141.788, STL_PRICE=142.4095, ORDER_KIND=buy, PROFIT=0.6215
+# PROFIT=0.6215
+# entry buy flag on At 2017-02-17 07:14:02, self.ask_price=141.4745, self.bid_price=141.4745
+# entry flag is reset
+# entry sell flag on At 2017-02-20 09:04:00, self.ask_price=140.258, self.bid_price=140.258
+#######################################################
+# in volatility Algorithm
+# self.ask_price=140.471
+# self.bid_price=140.471
+# volatility_buy_price=140.167
+# volatility_bid_price=140.167
+# EXECUTE ORDER at 2017-02-20 11:28:20
+# ORDER_PRICE=140.471, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-02-20 15:29:21
+# ORDER_PRICE=140.471, STL_PRICE=140.6835, ORDER_KIND=sell, PROFIT=-0.2125
+# PROFIT=-0.2125
+# entry sell flag on At 2017-02-23 10:04:02, self.ask_price=140.82, self.bid_price=140.82
+# entry flag is reset
+# entry sell flag on At 2017-02-27 08:04:00, self.ask_price=139.6265, self.bid_price=139.6265
+# entry buy flag on At 2017-02-27 09:04:00, self.ask_price=139.2375, self.bid_price=139.2375
+# entry buy flag on At 2017-02-27 09:09:00, self.ask_price=139.3665, self.bid_price=139.3665
+#######################################################
+# in volatility Algorithm
+# self.ask_price=139.3665
+# self.bid_price=139.3665
+# volatility_buy_price=139.2375
+# volatility_bid_price=139.2375
+# EXECUTE ORDER at 2017-02-27 09:09:00
+# ORDER_PRICE=139.3665, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-02-27 09:13:51
+# ORDER_PRICE=139.3665, STL_PRICE=139.1505, ORDER_KIND=buy, PROFIT=-0.216
+# PROFIT=-0.216
+# entry sell flag on At 2017-02-27 09:14:02, self.ask_price=139.1615, self.bid_price=139.1615
+# entry flag is reset
+# entry buy flag on At 2017-03-01 08:04:02, self.ask_price=139.7985, self.bid_price=139.7985
+# entry flag is reset
+# entry buy flag on At 2017-03-02 08:04:02, self.ask_price=140.0075, self.bid_price=140.0075
+# entry sell flag on At 2017-03-02 08:14:02, self.ask_price=139.92, self.bid_price=139.92
+#######################################################
+# in volatility Algorithm
+# self.ask_price=140.1305
+# self.bid_price=140.1305
+# volatility_buy_price=140.0225
+# volatility_bid_price=140.0225
+# EXECUTE ORDER at 2017-03-02 08:51:12
+# ORDER_PRICE=140.1305, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-03-02 15:15:43
+# ORDER_PRICE=140.1305, STL_PRICE=140.107, ORDER_KIND=sell, PROFIT=0.0235
+# PROFIT=0.0235
+# entry sell flag on At 2017-03-03 10:04:04, self.ask_price=140.2105, self.bid_price=140.2105
+# entry flag is reset
+# entry sell flag on At 2017-03-06 07:04:00, self.ask_price=140.058, self.bid_price=140.058
+#######################################################
+# in volatility Algorithm
+# self.ask_price=140.264
+# self.bid_price=140.264
+# volatility_buy_price=140.127
+# volatility_bid_price=140.127
+# EXECUTE ORDER at 2017-03-06 07:52:50
+# ORDER_PRICE=140.264, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-03-06 14:13:41
+# ORDER_PRICE=140.264, STL_PRICE=139.9595, ORDER_KIND=sell, PROFIT=0.3045
+# PROFIT=0.3045
+# entry buy flag on At 2017-03-13 09:09:00, self.ask_price=139.785, self.bid_price=139.785
+# entry flag is reset
+# entry sell flag on At 2017-03-16 08:04:00, self.ask_price=139.352, self.bid_price=139.352
+# entry sell flag on At 2017-03-16 09:04:00, self.ask_price=139.1745, self.bid_price=139.1745
+#######################################################
+# in volatility Algorithm
+# self.ask_price=139.1745
+# self.bid_price=139.1745
+# volatility_buy_price=139.282
+# volatility_bid_price=139.282
+# EXECUTE ORDER at 2017-03-16 09:04:00
+# ORDER_PRICE=139.1745, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-03-16 12:03:41
+# ORDER_PRICE=139.1745, STL_PRICE=139.161, ORDER_KIND=sell, PROFIT=0.0135
+# PROFIT=0.0135
+# entry buy flag on At 2017-03-22 09:09:00, self.ask_price=139.318, self.bid_price=139.318
+#######################################################
+# in volatility Algorithm
+# self.ask_price=139.0975
+# self.bid_price=139.0975
+# volatility_buy_price=139.3435
+# volatility_bid_price=139.3435
+# EXECUTE ORDER at 2017-03-22 11:10:40
+# ORDER_PRICE=139.0975, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-03-22 14:52:31
+# ORDER_PRICE=139.0975, STL_PRICE=139.178, ORDER_KIND=buy, PROFIT=0.0805
+# PROFIT=0.0805
+# entry sell flag on At 2017-03-24 09:04:02, self.ask_price=138.776, self.bid_price=138.776
+# entry buy flag on At 2017-03-24 09:09:02, self.ask_price=138.901, self.bid_price=138.901
+# entry flag is reset
+# entry sell flag on At 2017-03-27 07:09:00, self.ask_price=138.464, self.bid_price=138.464
+# entry buy flag on At 2017-03-27 08:04:00, self.ask_price=138.4605, self.bid_price=138.4605
+#######################################################
+# in volatility Algorithm
+# self.ask_price=138.2535
+# self.bid_price=138.2535
+# volatility_buy_price=138.434
+# volatility_bid_price=138.434
+# EXECUTE ORDER at 2017-03-27 08:47:30
+# ORDER_PRICE=138.2535, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-03-27 16:46:51
+# ORDER_PRICE=138.2535, STL_PRICE=138.411, ORDER_KIND=buy, PROFIT=0.1575
+# PROFIT=0.1575
+# entry sell flag on At 2017-03-29 09:09:02, self.ask_price=137.769, self.bid_price=137.769
+# entry sell flag on At 2017-03-29 09:14:02, self.ask_price=137.653, self.bid_price=137.653
+#######################################################
+# in volatility Algorithm
+# self.ask_price=137.653
+# self.bid_price=137.653
+# volatility_buy_price=137.769
+# volatility_bid_price=137.769
+# EXECUTE ORDER at 2017-03-29 09:14:02
+# ORDER_PRICE=137.653, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-03-29 09:23:23
+# ORDER_PRICE=137.653, STL_PRICE=137.8625, ORDER_KIND=sell, PROFIT=-0.2095
+# PROFIT=-0.2095
+# entry sell flag on At 2017-04-03 09:09:00, self.ask_price=139.4565, self.bid_price=139.4565
+#######################################################
+# in volatility Algorithm
+# self.ask_price=139.659
+# self.bid_price=139.659
+# volatility_buy_price=139.6145
+# volatility_bid_price=139.6145
+# EXECUTE ORDER at 2017-04-03 11:58:00
+# ORDER_PRICE=139.659, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-04-03 14:25:41
+# ORDER_PRICE=139.659, STL_PRICE=139.872, ORDER_KIND=sell, PROFIT=-0.213
+# PROFIT=-0.213
+# entry sell flag on At 2017-04-04 10:04:02, self.ask_price=138.0605, self.bid_price=138.0605
+#######################################################
+# in volatility Algorithm
+# self.ask_price=138.2605
+# self.bid_price=138.2605
+# volatility_buy_price=138.016
+# volatility_bid_price=138.016
+# EXECUTE ORDER at 2017-04-04 10:36:02
+# ORDER_PRICE=138.2605, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-04-04 14:01:23
+# ORDER_PRICE=138.2605, STL_PRICE=137.8275, ORDER_KIND=sell, PROFIT=0.433
+# PROFIT=0.433
+# entry sell flag on At 2017-04-07 10:14:04, self.ask_price=137.9715, self.bid_price=137.9715
+# entry flag is reset
+# entry buy flag on At 2017-04-10 10:04:00, self.ask_price=138.113, self.bid_price=138.113
+#######################################################
+# in volatility Algorithm
+# self.ask_price=137.912
+# self.bid_price=137.912
+# volatility_buy_price=138.0495
+# volatility_bid_price=138.0495
+# EXECUTE ORDER at 2017-04-10 11:54:00
+# ORDER_PRICE=137.912, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-04-10 18:06:11
+# ORDER_PRICE=137.912, STL_PRICE=137.9435, ORDER_KIND=buy, PROFIT=0.0315
+# PROFIT=0.0315
+# entry sell flag on At 2017-04-17 08:04:00, self.ask_price=135.994, self.bid_price=135.994
+# entry flag is reset
+# entry sell flag on At 2017-04-18 07:04:00, self.ask_price=136.89, self.bid_price=136.89
+#######################################################
+# in volatility Algorithm
+# self.ask_price=137.095
+# self.bid_price=137.095
+# volatility_buy_price=136.937
+# volatility_bid_price=136.937
+# EXECUTE ORDER at 2017-04-18 09:02:30
+# ORDER_PRICE=137.095, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-04-18 13:21:11
+# ORDER_PRICE=137.095, STL_PRICE=137.016, ORDER_KIND=sell, PROFIT=0.079
+# PROFIT=0.079
+# entry buy flag on At 2017-04-19 09:04:02, self.ask_price=139.4875, self.bid_price=139.4875
+# entry buy flag on At 2017-04-19 09:14:02, self.ask_price=139.551, self.bid_price=139.551
+#######################################################
+# in volatility Algorithm
+# self.ask_price=139.551
+# self.bid_price=139.551
+# volatility_buy_price=139.4495
+# volatility_bid_price=139.4495
+# EXECUTE ORDER at 2017-04-19 09:14:02
+# ORDER_PRICE=139.551, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-04-19 09:59:53
+# ORDER_PRICE=139.551, STL_PRICE=139.3275, ORDER_KIND=buy, PROFIT=-0.2235
+# PROFIT=-0.2235
+# entry sell flag on At 2017-04-24 07:04:00, self.ask_price=141.414, self.bid_price=141.414
+# entry sell flag on At 2017-04-24 07:14:00, self.ask_price=141.1985, self.bid_price=141.1985
+#######################################################
+# in volatility Algorithm
+# self.ask_price=141.1985
+# self.bid_price=141.1985
+# volatility_buy_price=141.3905
+# volatility_bid_price=141.3905
+# EXECUTE ORDER at 2017-04-24 07:14:00
+# ORDER_PRICE=141.1985, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-04-24 08:10:31
+# ORDER_PRICE=141.1985, STL_PRICE=141.13, ORDER_KIND=sell, PROFIT=0.0685
+# PROFIT=0.0685
+# entry buy flag on At 2017-04-24 08:14:02, self.ask_price=141.1775, self.bid_price=141.1775
+#######################################################
+# in volatility Algorithm
+# self.ask_price=140.962
+# self.bid_price=140.962
+# volatility_buy_price=141.089
+# volatility_bid_price=141.089
+# EXECUTE ORDER at 2017-04-24 09:07:22
+# ORDER_PRICE=140.962, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-04-24 10:29:13
+# ORDER_PRICE=140.962, STL_PRICE=140.7615, ORDER_KIND=buy, PROFIT=-0.2005
+# PROFIT=-0.2005
+# entry buy flag on At 2017-04-25 09:04:04, self.ask_price=140.243, self.bid_price=140.243
+# entry flag is reset
+# entry buy flag on At 2017-04-26 09:04:04, self.ask_price=142.6275, self.bid_price=142.6275
+# entry buy flag on At 2017-04-26 09:14:04, self.ask_price=142.7315, self.bid_price=142.7315
+#######################################################
+# in volatility Algorithm
+# self.ask_price=142.7315
+# self.bid_price=142.7315
+# volatility_buy_price=142.63
+# volatility_bid_price=142.63
+# EXECUTE ORDER at 2017-04-26 09:14:04
+# ORDER_PRICE=142.7315, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-04-26 10:13:55
+# ORDER_PRICE=142.7315, STL_PRICE=142.7865, ORDER_KIND=buy, PROFIT=0.055
+# PROFIT=0.055
+# entry buy flag on At 2017-04-27 07:09:06, self.ask_price=142.8005, self.bid_price=142.8005
+# entry buy flag on At 2017-04-27 10:04:06, self.ask_price=143.0565, self.bid_price=143.0565
+#######################################################
+# in volatility Algorithm
+# self.ask_price=143.0565
+# self.bid_price=143.0565
+# volatility_buy_price=142.93
+# volatility_bid_price=142.93
+# EXECUTE ORDER at 2017-04-27 10:04:06
+# ORDER_PRICE=143.0565, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-04-27 16:21:57
+# ORDER_PRICE=143.0565, STL_PRICE=143.478, ORDER_KIND=buy, PROFIT=0.4215
+# PROFIT=0.4215
+# entry buy flag on At 2017-04-28 09:04:08, self.ask_price=143.476, self.bid_price=143.476
+# entry flag is reset
+# entry sell flag on At 2017-05-01 07:09:00, self.ask_price=144.041, self.bid_price=144.041
+#######################################################
+# in volatility Algorithm
+# self.ask_price=144.246
+# self.bid_price=144.246
+# volatility_buy_price=143.9215
+# volatility_bid_price=143.9215
+# EXECUTE ORDER at 2017-05-01 11:05:40
+# ORDER_PRICE=144.246, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-05-01 15:26:41
+# ORDER_PRICE=144.246, STL_PRICE=144.5125, ORDER_KIND=sell, PROFIT=-0.2665
+# PROFIT=-0.2665
+# entry buy flag on At 2017-05-02 09:04:02, self.ask_price=144.3275, self.bid_price=144.3275
+# entry flag is reset
+# entry buy flag on At 2017-05-09 10:04:00, self.ask_price=146.7435, self.bid_price=146.7435
+#######################################################
+# in volatility Algorithm
+# self.ask_price=146.5435
+# self.bid_price=146.5435
+# volatility_buy_price=146.715
+# volatility_bid_price=146.715
+# EXECUTE ORDER at 2017-05-09 10:55:30
+# ORDER_PRICE=146.5435, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-05-09 17:29:51
+# ORDER_PRICE=146.5435, STL_PRICE=147.0545, ORDER_KIND=buy, PROFIT=0.511
+# PROFIT=0.511
+# entry sell flag on At 2017-05-10 07:14:02, self.ask_price=147.4385, self.bid_price=147.4385
+# entry buy flag on At 2017-05-10 08:04:02, self.ask_price=147.3565, self.bid_price=147.3565
+# entry buy flag on At 2017-05-10 09:04:02, self.ask_price=147.3195, self.bid_price=147.3195
+#######################################################
+# in volatility Algorithm
+# self.ask_price=147.3195
+# self.bid_price=147.3195
+# volatility_buy_price=147.2125
+# volatility_bid_price=147.2125
+# EXECUTE ORDER at 2017-05-10 09:04:02
+# ORDER_PRICE=147.3195, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-05-10 11:29:23
+# ORDER_PRICE=147.3195, STL_PRICE=147.3555, ORDER_KIND=buy, PROFIT=0.036
+# PROFIT=0.036
+# entry buy flag on At 2017-05-18 07:04:00, self.ask_price=143.8005, self.bid_price=143.8005
+# entry flag is reset
+# entry sell flag on At 2017-05-19 10:04:00, self.ask_price=144.0265, self.bid_price=144.0265
+# entry flag is reset
+# entry buy flag on At 2017-05-22 07:04:00, self.ask_price=144.8485, self.bid_price=144.8485
+# entry sell flag on At 2017-05-22 07:14:00, self.ask_price=144.747, self.bid_price=144.747
+#######################################################
+# in volatility Algorithm
+# self.ask_price=144.961
+# self.bid_price=144.961
+# volatility_buy_price=144.858
+# volatility_bid_price=144.858
+# EXECUTE ORDER at 2017-05-22 09:11:50
+# ORDER_PRICE=144.961, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-05-22 10:06:01
+# ORDER_PRICE=144.961, STL_PRICE=144.8395, ORDER_KIND=sell, PROFIT=0.1215
+# PROFIT=0.1215
+# entry buy flag on At 2017-05-23 09:04:02, self.ask_price=144.207, self.bid_price=144.207
+# entry flag is reset
+# entry buy flag on At 2017-06-01 10:14:00, self.ask_price=143.0035, self.bid_price=143.0035
+# entry flag is reset
+# entry buy flag on At 2017-06-02 09:09:00, self.ask_price=143.79, self.bid_price=143.79
+# entry buy flag on At 2017-06-02 09:14:00, self.ask_price=143.946, self.bid_price=143.946
+#######################################################
+# in volatility Algorithm
+# self.ask_price=143.946
+# self.bid_price=143.946
+# volatility_buy_price=143.79
+# volatility_bid_price=143.79
+# EXECUTE ORDER at 2017-06-02 09:14:00
+# ORDER_PRICE=143.946, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-06-02 11:31:01
+# ORDER_PRICE=143.946, STL_PRICE=143.7445, ORDER_KIND=buy, PROFIT=-0.2015
+# PROFIT=-0.2015
+# entry sell flag on At 2017-06-06 10:09:00, self.ask_price=142.181, self.bid_price=142.181
+# entry flag is reset
+# entry buy flag on At 2017-06-08 09:04:00, self.ask_price=142.5635, self.bid_price=142.5635
+#######################################################
+# in volatility Algorithm
+# self.ask_price=142.3605
+# self.bid_price=142.3605
+# volatility_buy_price=142.467
+# volatility_bid_price=142.467
+# EXECUTE ORDER at 2017-06-08 10:30:20
+# ORDER_PRICE=142.3605, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-06-08 13:47:11
+# ORDER_PRICE=142.3605, STL_PRICE=142.099, ORDER_KIND=buy, PROFIT=-0.2615
+# PROFIT=-0.2615
+# entry sell flag on At 2017-06-09 07:04:02, self.ask_price=140.0095, self.bid_price=140.0095
+# entry buy flag on At 2017-06-09 07:09:02, self.ask_price=140.1305, self.bid_price=140.1305
+# entry buy flag on At 2017-06-09 07:14:02, self.ask_price=140.4955, self.bid_price=140.4955
+#######################################################
+# in volatility Algorithm
+# self.ask_price=140.4955
+# self.bid_price=140.4955
+# volatility_buy_price=140.1305
+# volatility_bid_price=140.1305
+# EXECUTE ORDER at 2017-06-09 07:14:02
+# ORDER_PRICE=140.4955, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-06-09 07:33:53
+# ORDER_PRICE=140.4955, STL_PRICE=140.912, ORDER_KIND=buy, PROFIT=0.4165
+# PROFIT=0.4165
+# entry sell flag on At 2017-06-09 08:04:04, self.ask_price=140.6825, self.bid_price=140.6825
+# entry sell flag on At 2017-06-09 08:14:04, self.ask_price=140.4375, self.bid_price=140.4375
+#######################################################
+# in volatility Algorithm
+# self.ask_price=140.4375
+# self.bid_price=140.4375
+# volatility_buy_price=140.6455
+# volatility_bid_price=140.6455
+# EXECUTE ORDER at 2017-06-09 08:14:04
+# ORDER_PRICE=140.4375, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-06-09 09:00:15
+# ORDER_PRICE=140.4375, STL_PRICE=139.905, ORDER_KIND=sell, PROFIT=0.5325
+# PROFIT=0.5325
+# entry buy flag on At 2017-06-09 09:04:06, self.ask_price=140.134, self.bid_price=140.134
+# entry buy flag on At 2017-06-09 09:09:06, self.ask_price=140.324, self.bid_price=140.324
+#######################################################
+# in volatility Algorithm
+# self.ask_price=140.324
+# self.bid_price=140.324
+# volatility_buy_price=140.134
+# volatility_bid_price=140.134
+# EXECUTE ORDER at 2017-06-09 09:09:06
+# ORDER_PRICE=140.324, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-06-09 09:15:17
+# ORDER_PRICE=140.324, STL_PRICE=140.1215, ORDER_KIND=buy, PROFIT=-0.2025
+# PROFIT=-0.2025
+# entry buy flag on At 2017-06-09 10:09:08, self.ask_price=140.2985, self.bid_price=140.2985
+# entry sell flag on At 2017-06-09 10:14:08, self.ask_price=140.193, self.bid_price=140.193
+#######################################################
+# in volatility Algorithm
+# self.ask_price=140.413
+# self.bid_price=140.413
+# volatility_buy_price=140.2985
+# volatility_bid_price=140.2985
+# EXECUTE ORDER at 2017-06-09 10:17:48
+# ORDER_PRICE=140.413, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-06-09 10:19:19
+# ORDER_PRICE=140.413, STL_PRICE=140.641, ORDER_KIND=sell, PROFIT=-0.228
+# PROFIT=-0.228
+# entry buy flag on At 2017-06-13 10:09:00, self.ask_price=139.3945, self.bid_price=139.3945
+#######################################################
+# in volatility Algorithm
+# self.ask_price=139.1795
+# self.bid_price=139.1795
+# volatility_buy_price=139.3945
+# volatility_bid_price=139.3945
+# EXECUTE ORDER at 2017-06-13 10:23:20
+# ORDER_PRICE=139.1795, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-06-13 15:56:11
+# ORDER_PRICE=139.1795, STL_PRICE=139.3965, ORDER_KIND=buy, PROFIT=0.217
+# PROFIT=0.217
+# entry buy flag on At 2017-06-16 09:04:02, self.ask_price=141.8455, self.bid_price=141.8455
+# entry buy flag on At 2017-06-16 09:14:02, self.ask_price=141.911, self.bid_price=141.911
+#######################################################
+# in volatility Algorithm
+# self.ask_price=141.911
+# self.bid_price=141.911
+# volatility_buy_price=141.798
+# volatility_bid_price=141.798
+# EXECUTE ORDER at 2017-06-16 09:14:02
+# ORDER_PRICE=141.911, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-06-16 11:48:43
+# ORDER_PRICE=141.911, STL_PRICE=141.974, ORDER_KIND=buy, PROFIT=0.063
+# PROFIT=0.063
+# entry buy flag on At 2017-06-19 07:09:00, self.ask_price=141.5705, self.bid_price=141.5705
+# entry flag is reset
+# entry buy flag on At 2017-06-30 09:09:00, self.ask_price=145.766, self.bid_price=145.766
+# entry buy flag on At 2017-06-30 10:04:00, self.ask_price=145.842, self.bid_price=145.842
+#######################################################
+# in volatility Algorithm
+# self.ask_price=145.842
+# self.bid_price=145.842
+# volatility_buy_price=145.7015
+# volatility_bid_price=145.7015
+# EXECUTE ORDER at 2017-06-30 10:04:00
+# ORDER_PRICE=145.842, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-06-30 10:13:11
+# ORDER_PRICE=145.842, STL_PRICE=145.64, ORDER_KIND=buy, PROFIT=-0.202
+# PROFIT=-0.202
+# entry buy flag on At 2017-07-03 07:04:00, self.ask_price=146.1885, self.bid_price=146.1885
+#######################################################
+# in volatility Algorithm
+# self.ask_price=145.9865
+# self.bid_price=145.9865
+# volatility_buy_price=146.194
+# volatility_bid_price=146.194
+# EXECUTE ORDER at 2017-07-03 09:46:20
+# ORDER_PRICE=145.9865, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-07-03 14:52:01
+# ORDER_PRICE=145.9865, STL_PRICE=146.1265, ORDER_KIND=buy, PROFIT=0.14
+# PROFIT=0.14
+# entry buy flag on At 2017-07-07 10:14:02, self.ask_price=147.0555, self.bid_price=147.0555
+# entry flag is reset
+# entry buy flag on At 2017-07-13 09:09:00, self.ask_price=146.2685, self.bid_price=146.2685
+#######################################################
+# in volatility Algorithm
+# self.ask_price=146.0545
+# self.bid_price=146.0545
+# volatility_buy_price=146.2685
+# volatility_bid_price=146.2685
+# EXECUTE ORDER at 2017-07-13 09:54:10
+# ORDER_PRICE=146.0545, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-07-13 11:51:11
+# ORDER_PRICE=146.0545, STL_PRICE=145.8245, ORDER_KIND=buy, PROFIT=-0.23
+# PROFIT=-0.23
+# entry sell flag on At 2017-08-09 07:09:00, self.ask_price=143.153, self.bid_price=143.153
+# entry sell flag on At 2017-08-09 10:04:00, self.ask_price=142.643, self.bid_price=142.643
+#######################################################
+# in volatility Algorithm
+# self.ask_price=142.643
+# self.bid_price=142.643
+# volatility_buy_price=142.7485
+# volatility_bid_price=142.7485
+# EXECUTE ORDER at 2017-08-09 10:04:00
+# ORDER_PRICE=142.643, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-08-09 14:38:41
+# ORDER_PRICE=142.643, STL_PRICE=142.8485, ORDER_KIND=sell, PROFIT=-0.2055
+# PROFIT=-0.2055
+# entry buy flag on At 2017-08-10 09:09:02, self.ask_price=143.26, self.bid_price=143.26
+#######################################################
+# in volatility Algorithm
+# self.ask_price=143.0575
+# self.bid_price=143.0575
+# volatility_buy_price=143.2745
+# volatility_bid_price=143.2745
+# EXECUTE ORDER at 2017-08-10 11:24:52
+# ORDER_PRICE=143.0575, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-08-10 13:21:03
+# ORDER_PRICE=143.0575, STL_PRICE=142.8525, ORDER_KIND=buy, PROFIT=-0.205
+# PROFIT=-0.205
+# entry buy flag on At 2017-08-14 07:04:00, self.ask_price=142.056, self.bid_price=142.056
+# entry flag is reset
+# entry sell flag on At 2017-08-17 10:04:00, self.ask_price=141.5505, self.bid_price=141.5505
+#######################################################
+# in volatility Algorithm
+# self.ask_price=141.7735
+# self.bid_price=141.7735
+# volatility_buy_price=141.581
+# volatility_bid_price=141.581
+# EXECUTE ORDER at 2017-08-17 11:33:40
+# ORDER_PRICE=141.7735, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-08-17 16:17:01
+# ORDER_PRICE=141.7735, STL_PRICE=141.795, ORDER_KIND=sell, PROFIT=-0.0215
+# PROFIT=-0.0215
+# entry buy flag on At 2017-08-18 09:04:02, self.ask_price=140.7845, self.bid_price=140.7845
+# entry flag is reset
+# entry sell flag on At 2017-08-21 10:04:00, self.ask_price=140.638, self.bid_price=140.638
+# entry flag is reset
+# entry buy flag on At 2017-08-22 09:09:00, self.ask_price=140.8505, self.bid_price=140.8505
+# entry buy flag on At 2017-08-22 10:04:00, self.ask_price=140.923, self.bid_price=140.923
+#######################################################
+# in volatility Algorithm
+# self.ask_price=140.923
+# self.bid_price=140.923
+# volatility_buy_price=140.791
+# volatility_bid_price=140.791
+# EXECUTE ORDER at 2017-08-22 10:04:00
+# ORDER_PRICE=140.923, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-08-22 14:13:21
+# ORDER_PRICE=140.923, STL_PRICE=140.72, ORDER_KIND=buy, PROFIT=-0.203
+# PROFIT=-0.203
+# entry sell flag on At 2017-08-28 09:09:00, self.ask_price=141.029, self.bid_price=141.029
+# entry flag is reset
+# entry sell flag on At 2017-08-29 07:04:00, self.ask_price=140.5015, self.bid_price=140.5015
+# entry sell flag on At 2017-08-29 07:14:00, self.ask_price=140.346, self.bid_price=140.346
+#######################################################
+# in volatility Algorithm
+# self.ask_price=140.346
+# self.bid_price=140.346
+# volatility_buy_price=140.5025
+# volatility_bid_price=140.5025
+# EXECUTE ORDER at 2017-08-29 07:14:00
+# ORDER_PRICE=140.346, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-08-29 07:25:51
+# ORDER_PRICE=140.346, STL_PRICE=140.239, ORDER_KIND=sell, PROFIT=0.107
+# PROFIT=0.107
+# entry sell flag on At 2017-08-29 08:09:02, self.ask_price=140.442, self.bid_price=140.442
+#######################################################
+# in volatility Algorithm
+# self.ask_price=140.6445
+# self.bid_price=140.6445
+# volatility_buy_price=140.442
+# volatility_bid_price=140.442
+# EXECUTE ORDER at 2017-08-29 08:19:32
+# ORDER_PRICE=140.6445, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-08-29 09:10:23
+# ORDER_PRICE=140.6445, STL_PRICE=140.658, ORDER_KIND=sell, PROFIT=-0.0135
+# PROFIT=-0.0135
+# entry buy flag on At 2017-09-04 07:04:00, self.ask_price=142.1725, self.bid_price=142.1725
+# entry buy flag on At 2017-09-04 07:09:00, self.ask_price=142.2785, self.bid_price=142.2785
+#######################################################
+# in volatility Algorithm
+# self.ask_price=142.2785
+# self.bid_price=142.2785
+# volatility_buy_price=142.1725
+# volatility_bid_price=142.1725
+# EXECUTE ORDER at 2017-09-04 07:09:00
+# ORDER_PRICE=142.2785, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-09-04 09:52:21
+# ORDER_PRICE=142.2785, STL_PRICE=142.267, ORDER_KIND=buy, PROFIT=-0.0115
+# PROFIT=-0.0115
+# entry buy flag on At 2017-09-11 07:09:00, self.ask_price=142.9695, self.bid_price=142.9695
+#######################################################
+# in volatility Algorithm
+# self.ask_price=142.7695
+# self.bid_price=142.7695
+# volatility_buy_price=142.842
+# volatility_bid_price=142.842
+# EXECUTE ORDER at 2017-09-11 08:46:10
+# ORDER_PRICE=142.7695, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-09-11 10:59:01
+# ORDER_PRICE=142.7695, STL_PRICE=142.85, ORDER_KIND=buy, PROFIT=0.0805
+# PROFIT=0.0805
+# entry sell flag on At 2017-09-13 08:09:02, self.ask_price=146.4335, self.bid_price=146.4335
+# entry flag is reset
+# entry sell flag on At 2017-09-15 07:04:02, self.ask_price=147.0685, self.bid_price=147.0685
+#######################################################
+# in volatility Algorithm
+# self.ask_price=147.3175
+# self.bid_price=147.3175
+# volatility_buy_price=147.6715
+# volatility_bid_price=147.6715
+# EXECUTE ORDER at 2017-09-15 07:04:22
+# ORDER_PRICE=147.3175, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-09-15 07:09:23
+# ORDER_PRICE=147.3175, STL_PRICE=147.534, ORDER_KIND=sell, PROFIT=-0.2165
+# PROFIT=-0.2165
+# entry buy flag on At 2017-09-15 08:04:04, self.ask_price=147.4245, self.bid_price=147.4245
+# entry buy flag on At 2017-09-15 08:09:04, self.ask_price=147.556, self.bid_price=147.556
+#######################################################
+# in volatility Algorithm
+# self.ask_price=147.556
+# self.bid_price=147.556
+# volatility_buy_price=147.4245
+# volatility_bid_price=147.4245
+# EXECUTE ORDER at 2017-09-15 08:09:04
+# ORDER_PRICE=147.556, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-09-15 08:40:55
+# ORDER_PRICE=147.556, STL_PRICE=147.352, ORDER_KIND=buy, PROFIT=-0.204
+# PROFIT=-0.204
+# entry buy flag on At 2017-09-15 09:04:06, self.ask_price=147.4315, self.bid_price=147.4315
+# entry flag is reset
+# entry buy flag on At 2017-09-21 10:14:00, self.ask_price=151.8385, self.bid_price=151.8385
+#######################################################
+# in volatility Algorithm
+# self.ask_price=151.6335
+# self.bid_price=151.6335
+# volatility_buy_price=151.715
+# volatility_bid_price=151.715
+# EXECUTE ORDER at 2017-09-21 10:26:30
+# ORDER_PRICE=151.6335, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-09-21 16:01:51
+# ORDER_PRICE=151.6335, STL_PRICE=152.03, ORDER_KIND=buy, PROFIT=0.3965
+# PROFIT=0.3965
+# entry buy flag on At 2017-09-25 07:14:00, self.ask_price=151.4835, self.bid_price=151.4835
+# entry buy flag on At 2017-09-25 09:09:00, self.ask_price=152.0215, self.bid_price=152.0215
+#######################################################
+# in volatility Algorithm
+# self.ask_price=152.0215
+# self.bid_price=152.0215
+# volatility_buy_price=151.915
+# volatility_bid_price=151.915
+# EXECUTE ORDER at 2017-09-25 09:09:00
+# ORDER_PRICE=152.0215, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-09-25 10:08:51
+# ORDER_PRICE=152.0215, STL_PRICE=152.0165, ORDER_KIND=buy, PROFIT=-0.005
+# PROFIT=-0.005
+# entry sell flag on At 2017-09-25 10:09:02, self.ask_price=152.014, self.bid_price=152.014
+# entry flag is reset
+# entry sell flag on At 2017-09-26 09:04:02, self.ask_price=150.479, self.bid_price=150.479
+# entry flag is reset
+# entry buy flag on At 2017-10-02 07:04:00, self.ask_price=150.707, self.bid_price=150.707
+# entry flag is reset
+# entry sell flag on At 2017-10-09 07:04:00, self.ask_price=147.2685, self.bid_price=147.2685
+# entry flag is reset
+# entry sell flag on At 2017-10-23 09:04:00, self.ask_price=150.293, self.bid_price=150.293
+# entry flag is reset
+# entry buy flag on At 2017-11-01 09:14:00, self.ask_price=151.175, self.bid_price=151.175
+# entry flag is reset
+# entry buy flag on At 2017-11-06 10:04:00, self.ask_price=149.812, self.bid_price=149.812
+#######################################################
+# in volatility Algorithm
+# self.ask_price=149.61
+# self.bid_price=149.61
+# volatility_buy_price=149.7665
+# volatility_bid_price=149.7665
+# EXECUTE ORDER at 2017-11-06 11:33:50
+# ORDER_PRICE=149.61, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-11-06 13:17:11
+# ORDER_PRICE=149.61, STL_PRICE=149.4085, ORDER_KIND=buy, PROFIT=-0.2015
+# PROFIT=-0.2015
+# entry sell flag on At 2017-11-13 07:04:00, self.ask_price=149.509, self.bid_price=149.509
+# entry flag is reset
+# entry buy flag on At 2017-11-14 09:09:00, self.ask_price=149.208, self.bid_price=149.208
+# entry flag is reset
+# entry sell flag on At 2017-11-15 09:14:00, self.ask_price=149.139, self.bid_price=149.139
+# entry flag is reset
+# entry buy flag on At 2017-11-16 09:04:00, self.ask_price=148.7915, self.bid_price=148.7915
+# entry flag is reset
+# entry sell flag on At 2017-11-20 08:09:00, self.ask_price=148.055, self.bid_price=148.055
+# entry buy flag on At 2017-11-20 09:14:00, self.ask_price=148.05, self.bid_price=148.05
+#######################################################
+# in volatility Algorithm
+# self.ask_price=147.85
+# self.bid_price=147.85
+# volatility_buy_price=148.026
+# volatility_bid_price=148.026
+# EXECUTE ORDER at 2017-11-20 11:01:00
+# ORDER_PRICE=147.85, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-11-20 11:29:51
+# ORDER_PRICE=147.85, STL_PRICE=147.6485, ORDER_KIND=buy, PROFIT=-0.2015
+# PROFIT=-0.2015
+# entry sell flag on At 2017-11-27 07:04:00, self.ask_price=148.5655, self.bid_price=148.5655
+#######################################################
+# in volatility Algorithm
+# self.ask_price=148.769
+# self.bid_price=148.769
+# volatility_buy_price=148.6295
+# volatility_bid_price=148.6295
+# EXECUTE ORDER at 2017-11-27 08:00:30
+# ORDER_PRICE=148.769, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-11-27 17:00:31
+# ORDER_PRICE=148.769, STL_PRICE=148.457, ORDER_KIND=sell, PROFIT=0.312
+# PROFIT=0.312
+# entry buy flag on At 2017-12-04 07:04:00, self.ask_price=151.568, self.bid_price=151.568
+# entry buy flag on At 2017-12-04 08:14:00, self.ask_price=152.202, self.bid_price=152.202
+#######################################################
+# in volatility Algorithm
+# self.ask_price=152.202
+# self.bid_price=152.202
+# volatility_buy_price=152.0745
+# volatility_bid_price=152.0745
+# EXECUTE ORDER at 2017-12-04 08:14:00
+# ORDER_PRICE=152.202, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-12-04 08:35:41
+# ORDER_PRICE=152.202, STL_PRICE=152.197, ORDER_KIND=buy, PROFIT=-0.005
+# PROFIT=-0.005
+# entry sell flag on At 2017-12-04 09:04:02, self.ask_price=152.196, self.bid_price=152.196
+# entry flag is reset
+# entry buy flag on At 2017-12-11 07:04:00, self.ask_price=151.944, self.bid_price=151.944
+# entry buy flag on At 2017-12-11 08:04:00, self.ask_price=152.1835, self.bid_price=152.1835
+#######################################################
+# in volatility Algorithm
+# self.ask_price=152.1835
+# self.bid_price=152.1835
+# volatility_buy_price=152.0565
+# volatility_bid_price=152.0565
+# EXECUTE ORDER at 2017-12-11 08:04:00
+# ORDER_PRICE=152.1835, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-12-11 16:41:01
+# ORDER_PRICE=152.1835, STL_PRICE=151.9735, ORDER_KIND=buy, PROFIT=-0.21
+# PROFIT=-0.21
+# entry sell flag on At 2017-12-14 07:04:02, self.ask_price=150.88, self.bid_price=150.88
+# entry buy flag on At 2017-12-14 07:09:02, self.ask_price=151.009, self.bid_price=151.009
+# entry flag is reset
+# entry buy flag on At 2018-01-08 08:04:00, self.ask_price=153.6005, self.bid_price=153.6005
+# entry flag is reset
+# entry buy flag on At 2018-01-11 10:04:00, self.ask_price=150.759, self.bid_price=150.733
+# entry flag is reset
+# entry sell flag on At 2018-01-12 07:04:00, self.ask_price=150.625, self.bid_price=150.5
+#######################################################
+# in volatility Algorithm
+# self.ask_price=150.736
+# self.bid_price=150.71
+# volatility_buy_price=150.641
+# volatility_bid_price=150.641
+# EXECUTE ORDER at 2018-01-12 08:36:30
+# ORDER_PRICE=150.723, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-01-12 16:26:11
+# ORDER_PRICE=150.71, STL_PRICE=150.901, ORDER_KIND=sell, PROFIT=-0.191
+# PROFIT=-0.191
+# entry sell flag on At 2018-01-15 09:04:00, self.ask_price=152.492, self.bid_price=152.465
+# entry flag is reset
+# entry sell flag on At 2018-01-16 07:09:00, self.ask_price=152.516, self.bid_price=152.42
+#######################################################
+# in volatility Algorithm
+# self.ask_price=152.653
+# self.bid_price=152.629
+# volatility_buy_price=152.529
+# volatility_bid_price=152.529
+# EXECUTE ORDER at 2018-01-16 09:02:20
+# ORDER_PRICE=152.641, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-01-16 09:43:01
+# ORDER_PRICE=152.629, STL_PRICE=152.819, ORDER_KIND=sell, PROFIT=-0.19
+# PROFIT=-0.19
+# entry sell flag on At 2018-01-18 07:09:02, self.ask_price=153.973, self.bid_price=153.848
+# entry flag is reset
+# entry sell flag on At 2018-01-22 08:04:00, self.ask_price=153.637, self.bid_price=153.597
+# entry buy flag on At 2018-01-22 08:14:00, self.ask_price=153.783, self.bid_price=153.743
+# entry sell flag on At 2018-01-22 09:04:00, self.ask_price=153.665, self.bid_price=153.638
+# entry flag is reset
+# entry sell flag on At 2018-01-23 07:14:00, self.ask_price=155.11, self.bid_price=155.026
+#######################################################
+# in volatility Algorithm
+# self.ask_price=155.259
+# self.bid_price=155.234
+# volatility_buy_price=155.192
+# volatility_bid_price=155.192
+# EXECUTE ORDER at 2018-01-23 09:38:20
+# ORDER_PRICE=155.2465, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2018-01-23 12:17:51
+# ORDER_PRICE=155.234, STL_PRICE=154.908, ORDER_KIND=sell, PROFIT=0.326
+# PROFIT=0.326
+# entry sell flag on At 2018-01-25 07:09:02, self.ask_price=155.577, self.bid_price=155.453
+# entry sell flag on At 2018-01-25 07:14:02, self.ask_price=155.46, self.bid_price=155.386
+#######################################################
+# in volatility Algorithm
+# self.ask_price=155.46
+# self.bid_price=155.386
+# volatility_buy_price=155.577
+# volatility_bid_price=155.577
+# EXECUTE ORDER at 2018-01-25 07:14:02
+# ORDER_PRICE=155.423, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-01-25 07:22:03
+# ORDER_PRICE=155.386, STL_PRICE=155.54, ORDER_KIND=sell, PROFIT=-0.154
+# PROFIT=-0.154
+# entry sell flag on At 2018-01-29 07:04:00, self.ask_price=153.761, self.bid_price=153.617
+# entry sell flag on At 2018-01-29 07:09:00, self.ask_price=153.72, self.bid_price=153.583
+#######################################################
+# in volatility Algorithm
+# self.ask_price=153.72
+# self.bid_price=153.583
+# volatility_buy_price=153.761
+# volatility_bid_price=153.761
+# EXECUTE ORDER at 2018-01-29 07:09:00
+# ORDER_PRICE=153.6515, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-01-29 07:18:51
+# ORDER_PRICE=153.583, STL_PRICE=153.713, ORDER_KIND=sell, PROFIT=-0.13
+# PROFIT=-0.13
+# entry sell flag on At 2018-01-29 09:04:02, self.ask_price=153.631, self.bid_price=153.603
+# entry sell flag on At 2018-01-29 09:09:02, self.ask_price=153.526, self.bid_price=153.495
+#######################################################
+# in volatility Algorithm
+# self.ask_price=153.526
+# self.bid_price=153.495
+# volatility_buy_price=153.631
+# volatility_bid_price=153.631
+# EXECUTE ORDER at 2018-01-29 09:09:02
+# ORDER_PRICE=153.5105, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-01-29 09:30:13
+# ORDER_PRICE=153.495, STL_PRICE=153.687, ORDER_KIND=sell, PROFIT=-0.192
+# PROFIT=-0.192
+# entry sell flag on At 2018-01-30 10:09:04, self.ask_price=153.132, self.bid_price=153.104
+#######################################################
+# in volatility Algorithm
+# self.ask_price=153.352
+# self.bid_price=153.323
+# volatility_buy_price=153.132
+# volatility_bid_price=153.132
+# EXECUTE ORDER at 2018-01-30 11:27:34
+# ORDER_PRICE=153.3375, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2018-01-30 14:12:15
+# ORDER_PRICE=153.323, STL_PRICE=152.8, ORDER_KIND=sell, PROFIT=0.523
+# PROFIT=0.523
+# entry buy flag on At 2018-01-31 10:04:06, self.ask_price=154.171, self.bid_price=154.14
+# entry buy flag on At 2018-01-31 10:14:06, self.ask_price=154.338, self.bid_price=154.312
+#######################################################
+# in volatility Algorithm
+# self.ask_price=154.338
+# self.bid_price=154.312
+# volatility_buy_price=154.187
+# volatility_bid_price=154.187
+# EXECUTE ORDER at 2018-01-31 10:14:06
+# ORDER_PRICE=154.325, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-01-31 10:30:17
+# ORDER_PRICE=154.338, STL_PRICE=154.147, ORDER_KIND=buy, PROFIT=-0.191
+# PROFIT=-0.191
+# entry buy flag on At 2018-02-02 10:14:08, self.ask_price=156.283, self.bid_price=156.251
+#######################################################
+# in volatility Algorithm
+# self.ask_price=156.075
+# self.bid_price=156.051
+# volatility_buy_price=156.126
+# volatility_bid_price=156.126
+# EXECUTE ORDER at 2018-02-02 10:25:28
+# ORDER_PRICE=156.063, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2018-02-02 12:59:29
+# ORDER_PRICE=156.075, STL_PRICE=156.303, ORDER_KIND=buy, PROFIT=0.228
+# PROFIT=0.228
+# entry sell flag on At 2018-02-05 07:04:00, self.ask_price=155.481, self.bid_price=155.339
+# entry sell flag on At 2018-02-05 08:04:00, self.ask_price=155.348, self.bid_price=155.304
+#######################################################
+# in volatility Algorithm
+# self.ask_price=155.348
+# self.bid_price=155.304
+# volatility_buy_price=155.473
+# volatility_bid_price=155.473
+# EXECUTE ORDER at 2018-02-05 08:04:00
+# ORDER_PRICE=155.326, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2018-02-05 08:41:41
+# ORDER_PRICE=155.304, STL_PRICE=155.2615, ORDER_KIND=sell, PROFIT=0.0425
+# PROFIT=0.0425
+# entry sell flag on At 2018-02-06 07:04:02, self.ask_price=152.366, self.bid_price=152.224
+#######################################################
+# in volatility Algorithm
+# self.ask_price=152.511
+# self.bid_price=152.427
+# volatility_buy_price=152.409
+# volatility_bid_price=152.409
+# EXECUTE ORDER at 2018-02-06 07:30:22
+# ORDER_PRICE=152.469, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2018-02-06 09:03:53
+# ORDER_PRICE=152.427, STL_PRICE=152.197, ORDER_KIND=sell, PROFIT=0.23
+# PROFIT=0.23
+# entry buy flag on At 2018-02-06 09:04:04, self.ask_price=152.217, self.bid_price=152.186
+# entry buy flag on At 2018-02-06 09:09:04, self.ask_price=152.354, self.bid_price=152.32
+#######################################################
+# in volatility Algorithm
+# self.ask_price=152.354
+# self.bid_price=152.32
+# volatility_buy_price=152.217
+# volatility_bid_price=152.217
+# EXECUTE ORDER at 2018-02-06 09:09:04
+# ORDER_PRICE=152.337, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2018-02-06 09:32:25
+# ORDER_PRICE=152.354, STL_PRICE=152.37, ORDER_KIND=buy, PROFIT=0.016
+# PROFIT=0.016
+# entry sell flag on At 2018-02-07 07:04:06, self.ask_price=152.828, self.bid_price=152.717
+#######################################################
+# in volatility Algorithm
+# self.ask_price=152.969
+# self.bid_price=152.919
+# volatility_buy_price=152.875
+# volatility_bid_price=152.875
+# EXECUTE ORDER at 2018-02-07 07:53:26
+# ORDER_PRICE=152.944, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-07 07:57:37
+# ORDER_PRICE=152.919, STL_PRICE=153.09, ORDER_KIND=sell, PROFIT=-0.171
+# PROFIT=-0.171
+# entry sell flag on At 2018-02-07 09:09:08, self.ask_price=152.856, self.bid_price=152.829
+# entry flag is reset
+# entry sell flag on At 2018-02-08 07:14:08, self.ask_price=151.706, self.bid_price=151.649
+#######################################################
+# in volatility Algorithm
+# self.ask_price=151.881
+# self.bid_price=151.854
+# volatility_buy_price=151.703
+# volatility_bid_price=151.703
+# EXECUTE ORDER at 2018-02-08 09:25:48
+# ORDER_PRICE=151.8675, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-08 13:48:19
+# ORDER_PRICE=151.854, STL_PRICE=152.052, ORDER_KIND=sell, PROFIT=-0.198
+# PROFIT=-0.198
+# entry buy flag on At 2018-02-09 07:09:00, self.ask_price=151.501, self.bid_price=151.44
+# entry sell flag on At 2018-02-09 07:14:00, self.ask_price=151.432, self.bid_price=151.358
+#######################################################
+# in volatility Algorithm
+# self.ask_price=151.588
+# self.bid_price=151.564
+# volatility_buy_price=151.344
+# volatility_bid_price=151.344
+# EXECUTE ORDER at 2018-02-09 09:44:20
+# ORDER_PRICE=151.576, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-09 10:11:31
+# ORDER_PRICE=151.564, STL_PRICE=151.762, ORDER_KIND=sell, PROFIT=-0.198
+# PROFIT=-0.198
+# entry sell flag on At 2018-02-12 07:04:00, self.ask_price=150.418, self.bid_price=150.274
+#######################################################
+# in volatility Algorithm
+# self.ask_price=150.548
+# self.bid_price=150.49
+# volatility_buy_price=150.362
+# volatility_bid_price=150.362
+# EXECUTE ORDER at 2018-02-12 08:00:00
+# ORDER_PRICE=150.519, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2018-02-12 08:42:31
+# ORDER_PRICE=150.49, STL_PRICE=150.433, ORDER_KIND=sell, PROFIT=0.057
+# PROFIT=0.057
+# entry sell flag on At 2018-02-13 09:04:02, self.ask_price=150.457, self.bid_price=150.428
+# entry flag is reset
+# entry sell flag on At 2018-02-14 07:04:02, self.ask_price=149.726, self.bid_price=149.659
+#######################################################
+# in volatility Algorithm
+# self.ask_price=149.887
+# self.bid_price=149.863
+# volatility_buy_price=149.726
+# volatility_bid_price=149.726
+# EXECUTE ORDER at 2018-02-14 09:46:02
+# ORDER_PRICE=149.875, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-14 12:56:13
+# ORDER_PRICE=149.863, STL_PRICE=148.834, ORDER_KIND=sell, PROFIT=1.029
+# PROFIT=1.029
+# entry sell flag on At 2018-02-15 07:04:04, self.ask_price=149.757, self.bid_price=149.702
+# entry buy flag on At 2018-02-15 07:09:04, self.ask_price=149.915, self.bid_price=149.838
+#######################################################
+# in volatility Algorithm
+# self.ask_price=149.707
+# self.bid_price=149.652
+# volatility_buy_price=149.858
+# volatility_bid_price=149.858
+# EXECUTE ORDER at 2018-02-15 08:06:14
+# ORDER_PRICE=149.6795, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-02-15 08:09:55
+# ORDER_PRICE=149.707, STL_PRICE=149.53, ORDER_KIND=buy, PROFIT=-0.177
+# PROFIT=-0.177
+# entry buy flag on At 2018-02-15 10:14:06, self.ask_price=149.75, self.bid_price=149.75
+#######################################################
+# in volatility Algorithm
+# self.ask_price=149.543
+# self.bid_price=149.543
+# volatility_buy_price=149.577
+# volatility_bid_price=149.577
+# EXECUTE ORDER at 2018-02-15 10:24:56
+# ORDER_PRICE=149.543, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-02-15 10:28:47
+# ORDER_PRICE=149.543, STL_PRICE=149.33, ORDER_KIND=buy, PROFIT=-0.213
+# PROFIT=-0.213
+# entry sell flag on At 2018-02-19 07:04:00, self.ask_price=149.088, self.bid_price=148.944
+#######################################################
+# in volatility Algorithm
+# self.ask_price=149.236
+# self.bid_price=149.166
+# volatility_buy_price=149.184
+# volatility_bid_price=149.184
+# EXECUTE ORDER at 2018-02-19 07:37:10
+# ORDER_PRICE=149.201, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-19 13:40:51
+# ORDER_PRICE=149.166, STL_PRICE=149.362, ORDER_KIND=sell, PROFIT=-0.196
+# PROFIT=-0.196
+# entry sell flag on At 2018-02-20 10:14:02, self.ask_price=149.238, self.bid_price=149.214
+# entry flag is reset
+# entry sell flag on At 2018-02-21 09:09:02, self.ask_price=150.263, self.bid_price=150.238
+#######################################################
+# in volatility Algorithm
+# self.ask_price=150.476
+# self.bid_price=150.452
+# volatility_buy_price=150.263
+# volatility_bid_price=150.263
+# EXECUTE ORDER at 2018-02-21 09:32:22
+# ORDER_PRICE=150.464, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-02-21 10:46:23
+# ORDER_PRICE=150.452, STL_PRICE=150.6415, ORDER_KIND=sell, PROFIT=-0.1895
+# PROFIT=-0.1895
+# entry sell flag on At 2018-02-22 07:14:04, self.ask_price=149.871, self.bid_price=149.798
+# entry buy flag on At 2018-02-22 09:04:04, self.ask_price=149.767, self.bid_price=149.741
+#######################################################
+# in volatility Algorithm
+# self.ask_price=149.54
+# self.bid_price=149.515
+# volatility_buy_price=149.697
+# volatility_bid_price=149.697
+# EXECUTE ORDER at 2018-02-22 09:44:44
+# ORDER_PRICE=149.5275, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-02-22 10:18:55
+# ORDER_PRICE=149.54, STL_PRICE=149.345, ORDER_KIND=buy, PROFIT=-0.195
+# PROFIT=-0.195
+# entry buy flag on At 2018-02-26 07:04:00, self.ask_price=149.809, self.bid_price=149.732
+# entry sell flag on At 2018-02-26 07:09:00, self.ask_price=149.655, self.bid_price=149.595
+# entry sell flag on At 2018-02-26 08:04:00, self.ask_price=149.499, self.bid_price=149.457
+#######################################################
+# in volatility Algorithm
+# self.ask_price=149.499
+# self.bid_price=149.457
+# volatility_buy_price=149.607
+# volatility_bid_price=149.607
+# EXECUTE ORDER at 2018-02-26 08:04:00
+# ORDER_PRICE=149.478, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2018-02-26 12:51:11
+# ORDER_PRICE=149.457, STL_PRICE=149.2635, ORDER_KIND=sell, PROFIT=0.1935
+# PROFIT=0.1935
+# entry sell flag on At 2018-02-28 10:14:02, self.ask_price=149.123, self.bid_price=149.099
+# entry flag is reset
+# entry sell flag on At 2018-03-01 10:14:02, self.ask_price=146.618, self.bid_price=146.594
+#######################################################
+# in volatility Algorithm
+# self.ask_price=146.82
+# self.bid_price=146.796
+# volatility_buy_price=146.735
+# volatility_bid_price=146.735
+# EXECUTE ORDER at 2018-03-01 11:44:52
+# ORDER_PRICE=146.808, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-03-01 15:28:53
+# ORDER_PRICE=146.796, STL_PRICE=147.012, ORDER_KIND=sell, PROFIT=-0.216
+# PROFIT=-0.216
+# entry sell flag on At 2018-03-05 07:04:00, self.ask_price=145.65, self.bid_price=145.51
+#######################################################
+# in volatility Algorithm
+# self.ask_price=145.83
+# self.bid_price=145.715
+# volatility_buy_price=145.65
+# volatility_bid_price=145.65
+# EXECUTE ORDER at 2018-03-05 07:10:00
+# ORDER_PRICE=145.7725, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-03-05 07:40:41
+# ORDER_PRICE=145.715, STL_PRICE=145.878, ORDER_KIND=sell, PROFIT=-0.163
+# PROFIT=-0.163
+# entry buy flag on At 2018-03-05 09:04:02, self.ask_price=145.739, self.bid_price=145.712
+#######################################################
+# in volatility Algorithm
+# self.ask_price=145.534
+# self.bid_price=145.506
+# volatility_buy_price=145.57
+# volatility_bid_price=145.57
+# EXECUTE ORDER at 2018-03-05 10:04:52
+# ORDER_PRICE=145.52, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-05 12:04:43
+# ORDER_PRICE=145.534, STL_PRICE=145.344, ORDER_KIND=buy, PROFIT=-0.19
+# PROFIT=-0.19
+# entry sell flag on At 2018-03-07 08:04:04, self.ask_price=146.655, self.bid_price=146.598
+# entry buy flag on At 2018-03-07 08:09:04, self.ask_price=146.787, self.bid_price=146.729
+#######################################################
+# in volatility Algorithm
+# self.ask_price=146.585
+# self.bid_price=146.558
+# volatility_buy_price=146.787
+# volatility_bid_price=146.787
+# EXECUTE ORDER at 2018-03-07 08:45:44
+# ORDER_PRICE=146.5715, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2018-03-07 09:09:15
+# ORDER_PRICE=146.585, STL_PRICE=146.6865, ORDER_KIND=buy, PROFIT=0.1015
+# PROFIT=0.1015
+# entry buy flag on At 2018-03-12 07:14:00, self.ask_price=148.128, self.bid_price=148.082
+#######################################################
+# in volatility Algorithm
+# self.ask_price=147.91
+# self.bid_price=147.884
+# volatility_buy_price=148.168
+# volatility_bid_price=148.168
+# EXECUTE ORDER at 2018-03-12 10:31:50
+# ORDER_PRICE=147.897, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-12 10:54:51
+# ORDER_PRICE=147.91, STL_PRICE=147.709, ORDER_KIND=buy, PROFIT=-0.201
+# PROFIT=-0.201
+# entry buy flag on At 2018-03-14 09:04:02, self.ask_price=149.025, self.bid_price=149.0
+# entry flag is reset
+# entry sell flag on At 2018-03-16 07:04:02, self.ask_price=148.219, self.bid_price=148.175
+# entry sell flag on At 2018-03-16 10:04:02, self.ask_price=147.738, self.bid_price=147.713
+#######################################################
+# in volatility Algorithm
+# self.ask_price=147.738
+# self.bid_price=147.713
+# volatility_buy_price=147.972
+# volatility_bid_price=147.972
+# EXECUTE ORDER at 2018-03-16 10:04:02
+# ORDER_PRICE=147.7255, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2018-03-16 11:06:03
+# ORDER_PRICE=147.713, STL_PRICE=147.685, ORDER_KIND=sell, PROFIT=0.028
+# PROFIT=0.028
+# entry sell flag on At 2018-03-19 07:04:00, self.ask_price=147.824, self.bid_price=147.767
+# entry flag is reset
+# entry sell flag on At 2018-03-23 07:14:00, self.ask_price=148.336, self.bid_price=148.295
+# entry sell flag on At 2018-03-23 08:04:00, self.ask_price=147.867, self.bid_price=147.83
+#######################################################
+# in volatility Algorithm
+# self.ask_price=147.867
+# self.bid_price=147.83
+# volatility_buy_price=148.013
+# volatility_bid_price=148.013
+# EXECUTE ORDER at 2018-03-23 08:04:00
+# ORDER_PRICE=147.8485, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-03-23 08:49:01
+# ORDER_PRICE=147.83, STL_PRICE=148.014, ORDER_KIND=sell, PROFIT=-0.184
+# PROFIT=-0.184
+# entry buy flag on At 2018-03-23 09:09:02, self.ask_price=148.294, self.bid_price=148.263
+# entry sell flag on At 2018-03-23 09:14:02, self.ask_price=148.132, self.bid_price=148.106
+# entry flag is reset
+# entry buy flag on At 2018-03-28 08:14:00, self.ask_price=149.469, self.bid_price=149.432
+# entry buy flag on At 2018-03-28 09:09:00, self.ask_price=149.677, self.bid_price=149.637
+#######################################################
+# in volatility Algorithm
+# self.ask_price=149.677
+# self.bid_price=149.637
+# volatility_buy_price=149.537
+# volatility_bid_price=149.537
+# EXECUTE ORDER at 2018-03-28 09:09:00
+# ORDER_PRICE=149.657, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-28 09:40:21
+# ORDER_PRICE=149.677, STL_PRICE=149.479, ORDER_KIND=buy, PROFIT=-0.198
+# PROFIT=-0.198
+# entry sell flag on At 2018-04-09 08:04:00, self.ask_price=150.521, self.bid_price=150.495
+#######################################################
+# in volatility Algorithm
+# self.ask_price=150.743
+# self.bid_price=150.719
+# volatility_buy_price=150.568
+# volatility_bid_price=150.568
+# EXECUTE ORDER at 2018-04-09 08:43:30
+# ORDER_PRICE=150.731, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-04-09 12:36:11
+# ORDER_PRICE=150.719, STL_PRICE=150.9065, ORDER_KIND=sell, PROFIT=-0.1875
+# PROFIT=-0.1875
+# entry sell flag on At 2018-04-20 07:04:00, self.ask_price=151.271, self.bid_price=151.232
+# entry sell flag on At 2018-04-20 09:09:00, self.ask_price=151.233, self.bid_price=151.209
+#######################################################
+# in volatility Algorithm
+# self.ask_price=151.233
+# self.bid_price=151.209
+# volatility_buy_price=151.336
+# volatility_bid_price=151.336
+# EXECUTE ORDER at 2018-04-20 09:09:00
+# ORDER_PRICE=151.221, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-04-20 09:50:31
+# ORDER_PRICE=151.209, STL_PRICE=151.442, ORDER_KIND=sell, PROFIT=-0.233
+# PROFIT=-0.233
+# entry sell flag on At 2018-04-23 07:04:00, self.ask_price=150.877, self.bid_price=150.806
+#######################################################
+# in volatility Algorithm
+# self.ask_price=151.033
+# self.bid_price=151.009
+# volatility_buy_price=150.989
+# volatility_bid_price=150.989
+# EXECUTE ORDER at 2018-04-23 08:37:20
+# ORDER_PRICE=151.021, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2018-04-23 10:40:21
+# ORDER_PRICE=151.009, STL_PRICE=151.202, ORDER_KIND=sell, PROFIT=-0.193
+# PROFIT=-0.193
+# entry buy flag on At 2018-05-09 10:04:00, self.ask_price=148.275, self.bid_price=148.25
+# entry buy flag on At 2018-05-09 10:14:00, self.ask_price=148.403, self.bid_price=148.379
+#######################################################
+# in volatility Algorithm
+# self.ask_price=148.403
+# self.bid_price=148.379
+# volatility_buy_price=148.246
+# volatility_bid_price=148.246
+# EXECUTE ORDER at 2018-05-09 10:14:00
+# ORDER_PRICE=148.391, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-05-09 11:55:21
+# ORDER_PRICE=148.403, STL_PRICE=148.214, ORDER_KIND=buy, PROFIT=-0.189
+# PROFIT=-0.189
+# entry buy flag on At 2018-05-17 08:09:00, self.ask_price=149.505, self.bid_price=149.481
+# entry sell flag on At 2018-05-17 08:14:00, self.ask_price=149.414, self.bid_price=149.39
+# entry flag is reset

@@ -13,8 +13,6 @@
 # Special Trail mode
 # if current profit is higher than 50Pips, 50Pips trail mode
 # if current profit is higher than 100Pips, 30Pips trail mode
-#
-# 押し目バージョン(閾値0.1）
 ####################################################
 
 from super_algo import SuperAlgo
@@ -47,29 +45,26 @@ class DaytimeAlgo(SuperAlgo):
         self.algorithm = ""
         self.high_price = 0
         self.low_price = 500
-        self.entry_buy_count = 0
-        self.entry_sell_count = 0
         self.setVolatilityIndicator(base_time)
         self.update_price_flag = False
 
 
     def updatePrice(self, base_time):
-        pass
-#        if base_time.hour > 4 and base_time.hour < 15:
-#            self.update_price_flag = True
-#            if self.ask_price > self.high_price:
-#                self.high_price = self.ask_price
-#                self.high_basetime = base_time
-#            if self.bid_price < self.low_price:
-#                self.low_price = self.bid_price
-#                self.low_basetime = base_time
-#
-#        if base_time.hour == 15 and self.update_price_flag:
-#            self.update_price_flag = False
-#            self.result_logger.info("# self.high_price_time=%s, self.high_price=%s" % (self.high_basetime, self.high_price))
-#            self.result_logger.info("# self.low_price_time=%s, self.low_price=%s" % (self.low_basetime, self.low_price))
-#            self.low_price = 500
-#            self.high_price = 0
+        if base_time.hour > 4 and base_time.hour < 13:
+            self.update_price_flag = True
+            if self.ask_price > self.high_price:
+                self.high_price = self.ask_price
+                self.high_basetime = base_time
+            if self.bid_price < self.low_price:
+                self.low_price = self.bid_price
+                self.low_basetime = base_time
+
+        if base_time.hour == 13 and self.update_price_flag:
+            self.update_price_flag = False
+            self.result_logger.info("# self.high_price_time=%s, self.high_price=%s" % (self.high_basetime, self.high_price))
+            self.result_logger.info("# self.low_price_time=%s, self.low_price=%s" % (self.low_basetime, self.low_price))
+            self.low_price = 500
+            self.high_price = 0
              
 
 
@@ -122,10 +117,11 @@ class DaytimeAlgo(SuperAlgo):
                         self.result_logger.info("# weekend stl logic")
                         stl_flag = True
 
-#                    elif hour == 15:
-#                        self.result_logger.info("# timeup stl logic")
-#                        stl_flag = True
+                    elif hour == 13:
+                        self.result_logger.info("# timeup stl logic")
+                        stl_flag = True
                     else:
+                        pass
                         stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, base_time)
 
             else:
@@ -145,50 +141,22 @@ class DaytimeAlgo(SuperAlgo):
             hour = base_time.hour
             minutes = base_time.minute
             seconds = base_time.second
-            self.algorithm = "volatility"
 
 #            if  hour == 6 or hour == 7 or hour == 8 or hour == 9 or hour == 10:
             if hour == 7 or hour == 8 or hour == 9 or hour == 10:
                 if minutes < 15:
-                    if minutes % 5 == 4 and seconds < 10:
+                    if minutes % 5 == 4 and seconds <= 10:
                         self.setVolatilityIndicator(base_time)
                         up_flag, down_flag = decideVolatility(current_price=current_price, volatility_value=0.1, volatility_buy_price=self.volatility_buy_price, volatility_bid_price=self.volatility_bid_price)
         
-#                        if up_flag and self.entry_flag == False:
                         if up_flag:
-                            self.entry_buy_count = self.entry_buy_count + 1
-                            self.entry_sell_count = 0
-                            self.threshold_price = self.ask_price
-                            self.threshold_side = "buy"
-                            self.result_logger.info("# entry buy flag on At %s, self.ask_price=%s, self.bid_price=%s" % (base_time, self.ask_price, self.bid_price))
-#                        elif down_flag and self.entry_flag == False:
+                            trade_flag = "buy"
+                            self.algorithm = "volatility"
+                            self.writeResultLog()
                         elif down_flag:
-                            self.entry_sell_count = self.entry_sell_count + 1
-                            self.entry_buy_count = 0
-                            self.threshold_price = self.bid_price
-                            self.threshold_side = "sell"
-                            self.result_logger.info("# entry sell flag on At %s, self.ask_price=%s, self.bid_price=%s" % (base_time, self.ask_price, self.bid_price))
-
-            if self.entry_buy_count == 1:
-                if self.ask_price < self.threshold_price - 0.2 and self.threshold_side == "buy":
-                    trade_flag = "buy"
-                    self.writeResultLog()
-            elif self.entry_sell_count == 1:
-                if self.bid_price > self.threshold_price + 0.2 and self.threshold_side == "sell":
-                    trade_flag = "sell"
-                    self.writeResultLog()
-            elif self.entry_buy_count > 1:
-                    trade_flag = "buy"
-                    self.writeResultLog()
-            elif self.entry_sell_count > 1:
-                    trade_flag = "sell"
-                    self.writeResultLog()
-                 
-
-            if hour == 12 and (self.entry_buy_count > 0 or self.entry_sell_count > 0):
-                self.result_logger.info("# entry flag is reset")
-                self.entry_buy_count = 0
-                self.entry_sell_count = 0
+                            trade_flag = "sell"
+                            self.algorithm = "volatility"
+                            self.writeResultLog()
 
         return trade_flag
 
@@ -242,8 +210,6 @@ class DaytimeAlgo(SuperAlgo):
         self.most_low_price = 0
         self.stoploss_flag = False
         self.algorithm = ""
-        self.entry_buy_count = 0
-        self.entry_sell_count = 0
         super(DaytimeAlgo, self).resetFlag()
 
 
