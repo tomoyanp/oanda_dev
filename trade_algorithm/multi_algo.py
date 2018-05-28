@@ -473,18 +473,18 @@ class MultiAlgo(SuperAlgo):
         return slope
 
     def setReverseIndicator(self, base_time):
-        dataset = getBollingerWrapper(base_time, self.instrument, table_type="1m", window_size=28, connector=self.mysql_connector, sigma_valiable=2)
+        dataset = getBollingerWrapper(base_time, self.instrument, table_type="1m", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=0)
         self.upper_sigma_1m3 = dataset["upper_sigmas"][-1]
         self.lower_sigma_1m3 = dataset["lower_sigmas"][-1]
         self.base_line_1m3 = dataset["base_lines"][-1]
 
     def setExpantionIndicator(self, base_time):
-        dataset = getBollingerWrapper(base_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=3)
+        dataset = getBollingerWrapper(base_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=3, length=0)
         self.upper_sigma_5m3 = dataset["upper_sigmas"][-1]
         self.lower_sigma_5m3 = dataset["lower_sigmas"][-1]
         self.base_line_5m3 = dataset["base_lines"][-1]
 
-        dataset = getBollingerWrapper(base_time, self.instrument, table_type="1h", window_size=28, connector=self.mysql_connector, sigma_valiable=3)
+        dataset = getBollingerWrapper(base_time, self.instrument, table_type="1h", window_size=28, connector=self.mysql_connector, sigma_valiable=3, length=0)
         self.upper_sigma_1h3 = dataset["upper_sigmas"][-1]
         self.lower_sigma_1h3 = dataset["lower_sigmas"][-1]
         self.base_line_1h3 = dataset["base_lines"][-1]
