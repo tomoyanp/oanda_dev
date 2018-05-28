@@ -43,9 +43,33 @@ class DaytimeAlgo(SuperAlgo):
         self.original_stoploss_rate = 0
         self.stoploss_flag = False
         self.algorithm = ""
+        self.high_price = 0
+        self.low_price = 500
         self.setVolatilityIndicator(base_time)
+        self.update_price_flag = False
+
+
+    def updatePrice(self, base_time):
+        if base_time.hour > 4 and base_time.hour < 13:
+            self.update_price_flag = True
+            if self.ask_price > self.high_price:
+                self.high_price = self.ask_price
+                self.high_basetime = base_time
+            if self.bid_price < self.low_price:
+                self.low_price = self.bid_price
+                self.low_basetime = base_time
+
+        if base_time.hour == 13 and self.update_price_flag:
+            self.update_price_flag = False
+            self.result_logger.info("# self.high_price_time=%s, self.high_price=%s" % (self.high_basetime, self.high_price))
+            self.result_logger.info("# self.low_price_time=%s, self.low_price=%s" % (self.low_basetime, self.low_price))
+            self.low_price = 500
+            self.high_price = 0
+             
+
 
     def decideTrade(self, base_time):
+        self.updatePrice(base_time)
         trade_flag = "pass"
         try:
             if self.order_flag:
@@ -76,6 +100,7 @@ class DaytimeAlgo(SuperAlgo):
     # 損切り、利確はオーダー時に出している
     # ここでは、急に逆方向に動いた時に決済出来るようにしている
     def decideStl(self, base_time):
+        self.updatePrice(base_time)
         try:
             stl_flag = False
             ex_stlmode = self.config_data["ex_stlmode"]
@@ -92,10 +117,11 @@ class DaytimeAlgo(SuperAlgo):
                         self.result_logger.info("# weekend stl logic")
                         stl_flag = True
 
-                    elif hour == 15:
+                    elif hour == 13:
                         self.result_logger.info("# timeup stl logic")
                         stl_flag = True
                     else:
+                        pass
                         stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, base_time)
 
             else:

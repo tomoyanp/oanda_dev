@@ -63,7 +63,7 @@ if __name__ == '__main__':
 #        base_time = datetime.strptime("2018-03-01 00:00:00", "%Y-%m-%d %H:%M:%S")
 #        base_time = datetime.strptime("2018-05-01 07:00:00", "%Y-%m-%d %H:%M:%S")
 #        base_time = datetime.strptime("2018-03-01 00:00:00", "%Y-%m-%d %H:%M:%S")
-        base_time = datetime.strptime("2018-05-20 00:00:00", "%Y-%m-%d %H:%M:%S")
+        base_time = datetime.strptime("2017-02-01 00:00:00", "%Y-%m-%d %H:%M:%S")
         test_mode = True
     else:
         base_time = datetime.now()
