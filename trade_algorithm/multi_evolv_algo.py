@@ -220,8 +220,7 @@ class MultiEvolvAlgo(SuperAlgo):
             seconds = base_time.second
             common_stoploss = 0.2
 
-#            if  (hour >= 15 or hour < 4) and seconds >= 50:
-            if 1==1:
+            if  (hour >= 15 or hour < 4) and seconds >= 50:
                 self.setVolatilityIndicator(base_time)
                 up_flag, down_flag = decideVolatility(current_price=current_price, volatility_value=0.3, volatility_buy_price=self.volatility_buy_price,         volatility_bid_price=self.volatility_bid_price)
 
