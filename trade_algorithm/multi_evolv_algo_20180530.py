@@ -203,12 +203,6 @@ class MultiEvolvAlgo(SuperAlgo):
                             self.buy_count = 0
                             self.sell_count = 0
 
-                    if trade_flag != "pass":
-                        self.first_take_profit = 0.5
-                        self.second_take_profit = 1.0
-                        self.first_trail_threshold = 0.3
-                        self.second_trail_threshold = 0.3
-    
 
             else:
                 self.buy_count = 0
@@ -258,29 +252,39 @@ class MultiEvolvAlgo(SuperAlgo):
     def decideReverseTrade(self, trade_flag, current_price, base_time):
         minutes = base_time.minute
         seconds = base_time.second
-        if minutes == 00 and seconds < 10:
+        if minutes == 59 and seconds >= 50:
             common_stoploss = 0.2
             self.setReverseIndicator(base_time)
             if self.sell_count > self.count_threshold or self.buy_count > self.count_threshold:
                 pass
             elif (self.upper_sigma_1h3 - self.lower_sigma_1h3) > 2:
-
-                for i in range(0, len(self.start_price_list)):
-                    if self.max_price_list[i] > self.upper_sigma_1h3_list[i]:
-                        self.reverse_sell_flag = True
-                        self.result_logger.info("# reverse sell flag on At %s" % base_time)
-
-                    elif self.min_price_list[i] < self.lower_sigma_1h3_list[i]:
-                        self.reverse_buy_flag = True
-                        self.result_logger.info("# reverse buy flag on At %s" % base_time)
-
-
-                if self.reverse_sell_flag and self.end_price_list[-1] < self.upper_sigma_1h2:
+                if self.upper_sigma_1h2 < self.end_price:
+                    self.reverse_sell_flag = True
+                    self.result_logger.info("# reverse sell flag on at %s " % base_time)
+    
+                elif self.lower_sigma_1h2 > self.end_price:
+                    self.reverse_buy_flag = True
+                    self.result_logger.info("# reverse buy flag on at %s " % base_time)
+    
+                if self.reverse_sell_flag:
+                    if self.end_price < self.upper_sigma_1h2:
+                        self.reverse_sell_count = self.reverse_sell_count + 1
+                        self.result_logger.info("# reverse sell count increment at %s " % base_time)
+                    else:
+                        self.reverse_sell_count = 0
+                if self.reverse_buy_flag:
+                    if self.end_price > self.lower_sigma_1h2:
+                        self.reverse_buy_count = self.reverse_buy_count + 1
+                        self.result_logger.info("# reverse buy count increment at %s " % base_time)
+                    else:
+                        self.reverse_buy_count = 0
+    
+                if self.reverse_sell_count == 2:
                     trade_flag = "sell"
                     self.original_stoploss_rate = common_stoploss
                     self.algorithm = "reverse"
                     self.writeResultLog()
-                if self.reverse_buy_flag and self.end_price_list[-1] > self.lower_sigma_1h2:
+                if self.reverse_buy_count == 2:
                     trade_flag = "buy"
                     self.algorithm = "reverse"
                     self.original_stoploss_rate = common_stoploss
@@ -472,33 +476,19 @@ class MultiEvolvAlgo(SuperAlgo):
         return slope
 
     def setReverseIndicator(self, base_time):
-        target_time = base_time - timedelta(hours=1)
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=28, connector=self.mysql_connector, sigma_valiable=3, length=4)
-        self.upper_sigma_1h3_list = dataset["upper_sigmas"][-4:]
-        self.lower_sigma_1h3_list = dataset["lower_sigmas"][-4:]
-        self.base_line_1h3_list = dataset["base_lines"][-4:]
+        dataset = getBollingerWrapper(base_time, self.instrument, table_type="1h", window_size=28, connector=self.mysql_connector, sigma_valiable=3, length=0)
+        self.upper_sigma_1h3 = dataset["upper_sigmas"][-1]
+        self.lower_sigma_1h3 = dataset["lower_sigmas"][-1]
+        self.base_line_1h3 = dataset["base_lines"][-1]
 
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=0)
+        dataset = getBollingerWrapper(base_time, self.instrument, table_type="1h", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=0)
         self.upper_sigma_1h2 = dataset["upper_sigmas"][-1]
         self.lower_sigma_1h2 = dataset["lower_sigmas"][-1]
         self.base_line_1h2 = dataset["base_lines"][-1]
 
-        sql = "select start_price, end_price, max_price, min_price from %s_%s_TABLE where insert_time < '%s' order by insert_time desc limit 4" % (self.instrument, "1h", target_time)
+        sql = "select end_price from %s_%s_TABLE where insert_time < '%s' order by insert_time desc limit 1" % (self.instrument, "1h", base_time)
         response = self.mysql_connector.select_sql(sql)
-        self.start_price_list = []
-        self.end_price_list = []
-        self.max_price_list = []
-        self.min_price_list = []
-        for res in response:
-            self.start_price_list.append(res[0])
-            self.end_price_list.append(res[1])
-            self.max_price_list.append(res[2])
-            self.min_price_list.append(res[3])
-
-        self.start_price_list.reverse()
-        self.end_price_list.reverse()
-        self.max_price_list.reverse()
-        self.min_price_list.reverse()
+        self.end_price = response[0][0]
 
 
     def setExpantionIndicator(self, base_time):
@@ -559,7 +549,5 @@ class MultiEvolvAlgo(SuperAlgo):
         self.result_logger.info("# self.base_line_5m3=%s" % self.base_line_5m3)
         self.result_logger.info("# self.upper_sigma_1h3=%s" % self.upper_sigma_1h3)
         self.result_logger.info("# self.lower_sigma_1h3=%s" % self.lower_sigma_1h3)
-        self.result_logger.info("# self.upper_sigma_1h2=%s" % self.upper_sigma_1h2)
-        self.result_logger.info("# self.lower_sigma_1h2=%s" % self.lower_sigma_1h2)
         self.result_logger.info("# self.original_stoploss_rate=%s" % self.original_stoploss_rate)
 
