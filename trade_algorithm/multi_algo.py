@@ -158,7 +158,8 @@ class MultiAlgo(SuperAlgo):
             hour = base_time.hour
             minutes = base_time.minute
             seconds = base_time.second
-            if hour >= 15 or hour < 4:
+#            if hour >= 15 or hour < 4:
+            if 1==1:
                 if minutes % 5 == 4 and seconds >= 50:
                     self.setExpantionIndicator(base_time)
                     self.calcBuyExpantion(current_price, base_time)
