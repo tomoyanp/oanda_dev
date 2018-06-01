@@ -289,6 +289,7 @@ class MultiEvolvAlgo(SuperAlgo):
                 if trade_flag != "pass":
                     self.first_take_profit = 0.3
                     self.second_take_profit = 0.5
+
                     self.first_trail_threshold = 0.3
                     self.second_trail_threshold = 0.01
 
@@ -305,6 +306,14 @@ class MultiEvolvAlgo(SuperAlgo):
                 if (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
                     stl_flag = True
                     self.result_logger.info("# band width < 2 settlment execution")
+
+                elif self.order_kind == "buy" and self.bid_price < self.lower_sigma_1h25:
+                    stl_flag = True
+                    self.result_logger.info("# current_price < self.lower_sigma_1h2")
+
+                elif self.order_kind == "sell" and self.ask_price > self.upper_sigma_1h25:
+                    stl_flag = True
+                    self.result_logger.info("# current_price > self.upper_sigma_1h2")
         
         return stl_flag
 
@@ -379,34 +388,34 @@ class MultiEvolvAlgo(SuperAlgo):
         minutes = base_time.minute
         seconds = base_time.second
 
+        order_price = self.getOrderPrice()
+        # update the most high and low price
+        if self.most_high_price == 0 and self.most_low_price == 0:
+            self.most_high_price = order_price
+            self.most_low_price = order_price
+
+        if self.most_high_price < current_bid_price:
+            self.most_high_price = current_bid_price
+        if self.most_low_price > current_ask_price:
+            self.most_low_price = current_ask_price
+
+        # first trailing stop logic
+        if self.order_kind == "buy":
+            if (current_bid_price - order_price) > self.first_take_profit:
+                self.trail_flag = True
+        elif self.order_kind == "sell":
+            if (order_price - current_ask_price) > self.first_take_profit:
+                self.trail_flag = True
+
+        # second trailing stop logic
+        if self.order_kind == "buy":
+            if (current_bid_price - order_price) > self.second_take_profit:
+                self.trail_second_flag = True
+        elif self.order_kind == "sell":
+            if (order_price - current_ask_price) > self.second_take_profit:
+                self.trail_second_flag = True
+
         if minutes % 5 == 4 and seconds >= 50:
-            order_price = self.getOrderPrice()
-
-
-#####            first_take_profit = 0.5
-#####            second_take_profit = 1.0
-#####            first_trail_threshold = 0.3
-#####            second_trail_threshold = 0.3
-
-            # update the most high and low price
-            if self.most_high_price == 0 and self.most_low_price == 0:
-                self.most_high_price = order_price
-                self.most_low_price = order_price
-
-            if self.most_high_price < current_bid_price:
-                self.most_high_price = current_bid_price
-            if self.most_low_price > current_ask_price:
-                self.most_low_price = current_ask_price
-
-            # first trailing stop logic
-            if self.order_kind == "buy":
-                if (current_bid_price - order_price) > self.first_take_profit:
-                    self.trail_flag = True
-            elif self.order_kind == "sell":
-                if (order_price - current_ask_price) > self.first_take_profit:
-                    self.trail_flag = True
-
-
             if self.trail_flag == True and self.order_kind == "buy":
                 if (self.most_high_price - self.first_trail_threshold) > current_bid_price:
                     self.result_logger.info("# Execute FirstTrail Stop")
@@ -416,13 +425,6 @@ class MultiEvolvAlgo(SuperAlgo):
                     self.result_logger.info("# Execute FirstTrail Stop")
                     stl_flag = True
 
-            # second trailing stop logic
-            if self.order_kind == "buy":
-                if (current_bid_price - order_price) > self.second_take_profit:
-                    self.trail_second_flag = True
-            elif self.order_kind == "sell":
-                if (order_price - current_ask_price) > self.second_take_profit:
-                    self.trail_second_flag = True
             if self.trail_second_flag == True and self.order_kind == "buy":
                 if (self.most_high_price - self.second_trail_threshold) > current_bid_price:
                     self.result_logger.info("# Execute SecondTrail Stop")
@@ -473,17 +475,21 @@ class MultiEvolvAlgo(SuperAlgo):
 
     def setReverseIndicator(self, base_time):
         target_time = base_time - timedelta(hours=1)
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=28, connector=self.mysql_connector, sigma_valiable=3, length=4)
-        self.upper_sigma_1h3_list = dataset["upper_sigmas"][-4:]
-        self.lower_sigma_1h3_list = dataset["lower_sigmas"][-4:]
-        self.base_line_1h3_list = dataset["base_lines"][-4:]
+#        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=28, connector=self.mysql_connector, sigma_valiable=3, length=4)
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=28, connector=self.mysql_connector, sigma_valiable=2.5, length=2)
+        self.upper_sigma_1h3_list = dataset["upper_sigmas"][-2:]
+        self.lower_sigma_1h3_list = dataset["lower_sigmas"][-2:]
+        self.base_line_1h3_list = dataset["base_lines"][-2:]
+
+        self.upper_sigma_1h25 = dataset["upper_sigmas"][-1]
+        self.lower_sigma_1h25 = dataset["lower_sigmas"][-1]
 
         dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=0)
         self.upper_sigma_1h2 = dataset["upper_sigmas"][-1]
         self.lower_sigma_1h2 = dataset["lower_sigmas"][-1]
         self.base_line_1h2 = dataset["base_lines"][-1]
 
-        sql = "select start_price, end_price, max_price, min_price from %s_%s_TABLE where insert_time < '%s' order by insert_time desc limit 4" % (self.instrument, "1h", target_time)
+        sql = "select start_price, end_price, max_price, min_price from %s_%s_TABLE where insert_time < '%s' order by insert_time desc limit 2" % (self.instrument, "1h", target_time)
         response = self.mysql_connector.select_sql(sql)
         self.start_price_list = []
         self.end_price_list = []
