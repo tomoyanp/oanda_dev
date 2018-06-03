@@ -105,7 +105,7 @@ class MultiAlgo(SuperAlgo):
 
                     else:
                         stl_flag = self.decideCommonStoploss(stl_flag, current_price, base_time)
-                        stl_flag = self.decideVolatilityStoploss(stl_flag, current_price, base_time)
+#                        stl_flag = self.decideVolatilityStoploss(stl_flag, current_price, base_time)
 #                        stl_flag = self.decideReverseStoploss(stl_flag, base_time)
                         stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, base_time)
 #                        stl_flag = self.decideStopLoss(stl_flag, current_price, base_time)
@@ -158,7 +158,8 @@ class MultiAlgo(SuperAlgo):
             hour = base_time.hour
             minutes = base_time.minute
             seconds = base_time.second
-            if hour >= 15 or hour < 4:
+#            if hour >= 15 or hour < 4:
+            if 1==1:
                 if minutes % 5 == 4 and seconds >= 50:
                     self.setExpantionIndicator(base_time)
                     self.calcBuyExpantion(current_price, base_time)
