@@ -50,6 +50,7 @@ class MultiEvolvAlgo(SuperAlgo):
         self.setReverseIndicator(base_time)
         self.high_price, self.low_price = getHighlowPriceWrapper(instrument=self.instrument, base_time=base_time, span=1, table_type="day", connector=self.mysql_connector)
         self.daily_slope = self.getDailySlope(self.instrument, base_time, span=10, connector=self.mysql_connector)
+        self.setDailyStartPrice(base_time)
         self.reverse_sell_flag = False
         self.reverse_buy_flag = False
         self.reverse_sell_count = 0
@@ -320,7 +321,13 @@ class MultiEvolvAlgo(SuperAlgo):
 
     def setExpantionStoploss(self, trade_flag):
         if trade_flag != "pass" and self.algorithm == "expantion":
-            if trade_flag == "buy" and self.daily_slope > 0:
+            if trade_flag == "buy" and (self.ask_price - self.daily_start_price) > 1.0:
+                self.original_stoploss_rate = 0.2
+                self.result_logger.info("# self.daily_start_price < self.ask_price exceeded by 1.0 volatility, self.daily_start_price=%s, self.ask_price=%s" %  (self.daily_start_price, self.ask_price))
+            elif trade_flag == "sell" and (self.daily_start_price - self.bid_price) > 1.0:
+                self.original_stoploss_rate = 0.2
+                self.result_logger.info("# self.daily_start_price > self.bid_price exceeded by 1.0 volatility, self.daily_start_price=%s, self.bid_price=%s" %  (self.daily_start_price, self.ask_price))
+            elif trade_flag == "buy" and self.daily_slope > 0:
                 self.original_stoploss_rate = 1.0 
                 self.result_logger.info("# self.original_stoploss_rate=%s" %  self.original_stoploss_rate)
             elif trade_flag == "buy" and self.daily_slope < 0:
@@ -332,6 +339,8 @@ class MultiEvolvAlgo(SuperAlgo):
             elif trade_flag == "sell" and self.daily_slope > 0:
                 self.original_stoploss_rate = 0.2
                 self.result_logger.info("# self.original_stoploss_rate=%s" %  self.original_stoploss_rate)
+
+
 
     def decideStoploss(self, stl_flag, base_time):
         minutes = base_time.minute
@@ -388,34 +397,34 @@ class MultiEvolvAlgo(SuperAlgo):
         minutes = base_time.minute
         seconds = base_time.second
 
-        order_price = self.getOrderPrice()
-        # update the most high and low price
-        if self.most_high_price == 0 and self.most_low_price == 0:
-            self.most_high_price = order_price
-            self.most_low_price = order_price
-
-        if self.most_high_price < current_bid_price:
-            self.most_high_price = current_bid_price
-        if self.most_low_price > current_ask_price:
-            self.most_low_price = current_ask_price
-
-        # first trailing stop logic
-        if self.order_kind == "buy":
-            if (current_bid_price - order_price) > self.first_take_profit:
-                self.trail_flag = True
-        elif self.order_kind == "sell":
-            if (order_price - current_ask_price) > self.first_take_profit:
-                self.trail_flag = True
-
-        # second trailing stop logic
-        if self.order_kind == "buy":
-            if (current_bid_price - order_price) > self.second_take_profit:
-                self.trail_second_flag = True
-        elif self.order_kind == "sell":
-            if (order_price - current_ask_price) > self.second_take_profit:
-                self.trail_second_flag = True
-
         if minutes % 5 == 4 and seconds >= 50:
+            order_price = self.getOrderPrice()
+            # update the most high and low price
+            if self.most_high_price == 0 and self.most_low_price == 0:
+                self.most_high_price = order_price
+                self.most_low_price = order_price
+
+            if self.most_high_price < current_bid_price:
+                self.most_high_price = current_bid_price
+            if self.most_low_price > current_ask_price:
+                self.most_low_price = current_ask_price
+
+            # first trailing stop logic
+            if self.order_kind == "buy":
+                if (current_bid_price - order_price) > self.first_take_profit:
+                    self.trail_flag = True
+            elif self.order_kind == "sell":
+                if (order_price - current_ask_price) > self.first_take_profit:
+                    self.trail_flag = True
+
+            # second trailing stop logic
+            if self.order_kind == "buy":
+                if (current_bid_price - order_price) > self.second_take_profit:
+                    self.trail_second_flag = True
+            elif self.order_kind == "sell":
+                if (order_price - current_ask_price) > self.second_take_profit:
+                    self.trail_second_flag = True
+
             if self.trail_flag == True and self.order_kind == "buy":
                 if (self.most_high_price - self.first_trail_threshold) > current_bid_price:
                     self.result_logger.info("# Execute FirstTrail Stop")
@@ -476,10 +485,11 @@ class MultiEvolvAlgo(SuperAlgo):
     def setReverseIndicator(self, base_time):
         target_time = base_time - timedelta(hours=1)
 #        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=28, connector=self.mysql_connector, sigma_valiable=3, length=4)
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=28, connector=self.mysql_connector, sigma_valiable=2.5, length=2)
-        self.upper_sigma_1h3_list = dataset["upper_sigmas"][-2:]
-        self.lower_sigma_1h3_list = dataset["lower_sigmas"][-2:]
-        self.base_line_1h3_list = dataset["base_lines"][-2:]
+        dataset_length = 4
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=28, connector=self.mysql_connector, sigma_valiable=2.5, length=dataset_length)
+        self.upper_sigma_1h3_list = dataset["upper_sigmas"][(dataset_length * -1):]
+        self.lower_sigma_1h3_list = dataset["lower_sigmas"][(dataset_length * -1):]
+        self.base_line_1h3_list = dataset["base_lines"][(dataset_length) * -1:]
 
         self.upper_sigma_1h25 = dataset["upper_sigmas"][-1]
         self.lower_sigma_1h25 = dataset["lower_sigmas"][-1]
@@ -489,7 +499,7 @@ class MultiEvolvAlgo(SuperAlgo):
         self.lower_sigma_1h2 = dataset["lower_sigmas"][-1]
         self.base_line_1h2 = dataset["base_lines"][-1]
 
-        sql = "select start_price, end_price, max_price, min_price from %s_%s_TABLE where insert_time < '%s' order by insert_time desc limit 2" % (self.instrument, "1h", target_time)
+        sql = "select start_price, end_price, max_price, min_price from %s_%s_TABLE where insert_time < '%s' order by insert_time desc limit %s" % (self.instrument, "1h", target_time, dataset_length)
         response = self.mysql_connector.select_sql(sql)
         self.start_price_list = []
         self.end_price_list = []
@@ -534,7 +544,14 @@ class MultiEvolvAlgo(SuperAlgo):
             self.lower_sigma_1d2 = dataset["lower_sigmas"][-1]
             self.base_line_1d2 = dataset["base_lines"][-1]
 
+        if hour == 7 and minute == 10 and second <= 10:
+            self.setDailyStartPrice(base_time)
 
+
+    def setDailyStartPrice(self, base_time):
+            target_time = base_time.strftime("%Y-%m-%d 07:05:00")
+            sql = "select start_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit %s" % (self.instrument, "5m", target_time, "1")
+            self.daily_start_price = float(self.mysql_connector.select_sql(sql)[0][0])
 
 # write log function
 
@@ -555,8 +572,6 @@ class MultiEvolvAlgo(SuperAlgo):
         self.result_logger.info("#######################################################")
         self.result_logger.info("# in %s Algorithm" % self.algorithm)
         self.result_logger.info("# self.count_threshold=%s" %  self.count_threshold)
-        self.result_logger.info("# self.buy_count=%s" %  self.buy_count)
-        self.result_logger.info("# self.sell_count=%s" %  self.sell_count)
         self.result_logger.info("# self.daily_slope=%s" % self.daily_slope)
         self.result_logger.info("# volatility_buy_price=%s" % self.volatility_buy_price)
         self.result_logger.info("# volatility_bid_price=%s" % self.volatility_bid_price)
@@ -568,4 +583,7 @@ class MultiEvolvAlgo(SuperAlgo):
         self.result_logger.info("# self.upper_sigma_1h2=%s" % self.upper_sigma_1h2)
         self.result_logger.info("# self.lower_sigma_1h2=%s" % self.lower_sigma_1h2)
         self.result_logger.info("# self.original_stoploss_rate=%s" % self.original_stoploss_rate)
+        self.result_logger.info("# self.ask_price=%s" % self.ask_price)
+        self.result_logger.info("# self.bid_price=%s" % self.bid_price)
+        self.result_logger.info("# self.daily_start_price=%s" % self.daily_start_price)
 
