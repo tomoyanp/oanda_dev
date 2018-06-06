@@ -43,13 +43,13 @@ def decideHighExceedPrice(current_price, high_price, threshold):
 
     return flag, mode
 
-def decideVolatility(current_price, volatility_value, volatility_buy_price, volatility_bid_price):
+def decideVolatility(volatility_value, start_price, end_price):
     up_flag = False
     down_flag = False
 
-    if float(volatility_buy_price) + float(volatility_value) < current_price:
+    if float(start_price) + float(volatility_value) < end_price:
         up_flag = True
-    elif float(volatility_bid_price) - float(volatility_value) > current_price:
+    elif float(start_price) - float(volatility_value) > end_price:
         down_flag = True
 
     return up_flag, down_flag
