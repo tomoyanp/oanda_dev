@@ -45,6 +45,8 @@ class MultiAlgo(SuperAlgo):
         self.count_threshold = 1
         self.stoploss_flag = False
         self.algorithm = ""
+        self.log_max_price = 0
+        self.log_min_price = 0
         self.setExpantionIndicator(base_time)
         self.setVolatilityIndicator(base_time)
         self.setDailyIndicator(base_time)
@@ -101,6 +103,8 @@ class MultiAlgo(SuperAlgo):
                     seconds = base_time.second
                     current_price = self.getCurrentPrice()
 
+                    self.updatePrice(current_price)
+
                     if hour == 7 and minutes == 0 and seconds < 10:
                         self.setDailyIndicator(base_time)
 
@@ -113,6 +117,9 @@ class MultiAlgo(SuperAlgo):
                         stl_flag = self.decideCommonStoploss(stl_flag, current_price, base_time)
                         stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, base_time)
 
+                if stl_flag:
+                    self.result_logger.info("# self.log_max_price=%s" % self.log_max_price)
+                    self.result_logger.info("# self.log_min_price=%s" % self.log_min_price)
             else:
                 pass
 
@@ -236,12 +243,14 @@ class MultiAlgo(SuperAlgo):
         if trade_flag != "pass" and self.algorithm == "expantion":
             if trade_flag == "buy" and self.daily_slope > 0:
                 self.original_stoploss_rate = 1.0 
+#                self.original_stoploss_rate = 0.2 
                 self.result_logger.info("# self.original_stoploss_rate=%s" %  self.original_stoploss_rate)
             elif trade_flag == "buy" and self.daily_slope < 0:
                 self.original_stoploss_rate = 0.2
                 self.result_logger.info("# self.original_stoploss_rate=%s" %  self.original_stoploss_rate)
             elif trade_flag == "sell" and self.daily_slope < 0:
                 self.original_stoploss_rate = 1.0
+#                self.original_stoploss_rate = 0.2
                 self.result_logger.info("# self.original_stoploss_rate=%s" %  self.original_stoploss_rate)
             elif trade_flag == "sell" and self.daily_slope > 0:
                 self.original_stoploss_rate = 0.2
@@ -266,6 +275,19 @@ class MultiAlgo(SuperAlgo):
 
         return stl_flag
 
+
+    def updatePrice(self, current_price):
+        if self.log_max_price == 0:
+            self.log_max_price = current_price
+        elif self.log_max_price < current_price:
+            self.log_max_price = current_price
+        if self.log_min_price == 0:
+            self.log_min_price = current_price
+        elif self.log_min_price > current_price:
+            self.log_min_price = current_price
+
+        self.debug_logger.info("log_max_price = %s" % self.log_max_price)
+        self.debug_logger.info("log_min_price = %s" % self.log_min_price)
 
 # trail settlement function
     def decideTrailLogic(self, stl_flag, current_ask_price, current_bid_price, base_time):
@@ -332,6 +354,8 @@ class MultiAlgo(SuperAlgo):
         self.most_low_price = 0
         self.stoploss_flag = False
         self.algorithm = ""
+        self.log_max_price = 0
+        self.log_min_price = 0
         super(MultiAlgo, self).resetFlag()
 
 
@@ -421,3 +445,4 @@ class MultiAlgo(SuperAlgo):
         self.result_logger.info("# self.end_price_5m=%s" % self.end_price_5m)
         self.result_logger.info("# self.start_price_1m=%s" % self.start_price_1m)
         self.result_logger.info("# self.end_price_1m=%s" % self.end_price_1m)
+   
