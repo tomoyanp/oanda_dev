@@ -38,6 +38,8 @@ result_logger.addHandler(result_fh)
 debug_logger.setLevel(DEBUG)
 result_logger.setLevel(DEBUG)
 
+sendmail = SendMail("tomoyanpy@gmail.com", "tomoyanpy@softbank.ne.jp", property_path)
+
 if __name__ == '__main__':
 
     args = sys.argv
@@ -55,20 +57,19 @@ if __name__ == '__main__':
 
     if test_args == "test":
         end_time = base_time - timedelta(days=0)
-        end_time = datetime.strptime("2018-03-27 00:00:00", "%Y-%m-%d %H:%M:%S")
-#        end_time = datetime.strptime("2018-04-29 00:00:00", "%Y-%m-%d %H:%M:%S")
-#        base_time = datetime.strptime("2018-03-01 00:00:00", "%Y-%m-%d %H:%M:%S")
+        end_time = datetime.strptime("2018-03-26 00:00:00", "%Y-%m-%d %H:%M:%S")
         base_time = datetime.strptime("2017-03-01 00:00:00", "%Y-%m-%d %H:%M:%S")
-#        base_time = datetime.strptime("2018-03-01 00:00:00", "%Y-%m-%d %H:%M:%S")
-#        base_time = datetime.strptime("2018-03-01 00:00:00", "%Y-%m-%d %H:%M:%S")
+#        end_time = datetime.strptime("2018-06-07 00:00:00", "%Y-%m-%d %H:%M:%S")
+#        base_time = datetime.strptime("2018-05-01 00:00:00", "%Y-%m-%d %H:%M:%S")
         test_mode = True
     else:
+        base_time = datetime.now()
         test_mode = False
 
     # ポーリング時間
     sleep_time = 10
 
-    trade_wrapper = TradeWrapper(instrument, mode, test_mode, current_path, config_name, args)
+    trade_wrapper = TradeWrapper(instrument, mode, test_mode, current_path, config_name, args, sendmail)
     trade_wrapper.setTradeAlgo(algo, base_time)
 
     try:
@@ -78,10 +79,15 @@ if __name__ == '__main__':
           if test_mode:
               pass
           else:
-              base_time = datetime.now()
+              now = datetime.now()
+
           flag = decideMarket(base_time)
 
           if flag == False:
+              sleep_time = 1
+              base_time = sleepTransaction(sleep_time, test_mode, base_time)
+
+          elif test_mode == False and base_time > now:
               sleep_time = 1
               base_time = sleepTransaction(sleep_time, test_mode, base_time)
 
@@ -118,6 +124,5 @@ if __name__ == '__main__':
     except:
         message = traceback.format_exc()
         debug_logger.info(message)
-        sendmail = SendMail("tomoyanpy@gmail.com", "tomoyanpy@softbank.ne.jp", property_path)
         sendmail.set_msg(message)
         sendmail.send_mail()

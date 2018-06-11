@@ -1,0 +1,2 @@
+setReverseIndicatorのlengthを長めにした
+当日値動きが1.0以上であれば、stoploss_rateを0.2にするように変更した

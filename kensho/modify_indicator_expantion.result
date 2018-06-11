@@ -1,0 +1,2548 @@
+#########################
+# ../main.py GBP_JPY demo multi multi_test test 
+# __comments = expantion mode
+# __comments1 = current master
+# enable_time = [u'00:00:00', u'01:00:00', u'02:00:00', u'03:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00', u'21:00:00', u'22:00:00', u'23:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# first_trail_mode = on
+# second_trail_mode = on
+# sleep_time = 10
+# stl_sleep_ltime = 1
+# stl_sleep_time = 10
+# stl_sleep_vtime = 1
+# stl_time_width = 720000
+# stop_loss = 1.0
+# take_profit = 2.0
+# time_width = 720000
+# trade_sleep_time = 1
+# units = 10000
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-1.8240000000000023
+# volatility_buy_price=140.116
+# volatility_bid_price=140.116
+# self.upper_sigma_5m3=140.24569278
+# self.lower_sigma_5m3=139.883128649
+# self.base_line_5m3=140.064410714
+# self.upper_sigma_1h3=140.847841942
+# self.lower_sigma_1h3=139.666729487
+# self.base_line_1h3=140.257285714
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-03-03 18:30:50
+# ORDER_PRICE=139.753, TRADE_FLAG=sell
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-03-03 20:14:51
+# ORDER_PRICE=139.753, STL_PRICE=139.9745, ORDER_KIND=sell, PROFIT=-0.2215
+# PROFIT=-0.2215
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# self.daily_slope=-0.48939393939391895
+# volatility_buy_price=139.5505
+# volatility_bid_price=139.5505
+# self.upper_sigma_5m3=140.298259291
+# self.lower_sigma_5m3=139.20841928
+# self.base_line_5m3=139.753339286
+# self.upper_sigma_1h3=139.981896037
+# self.lower_sigma_1h3=138.732639677
+# self.base_line_1h3=139.357267857
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-03-10 00:29:50
+# ORDER_PRICE=139.524, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-03-10 20:54:51
+# ORDER_PRICE=139.524, STL_PRICE=140.1075, ORDER_KIND=buy, PROFIT=0.5835
+# PROFIT=0.5835
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-0.519636363636367
+# volatility_buy_price=140.0425
+# volatility_bid_price=140.0425
+# self.upper_sigma_5m3=140.465629286
+# self.lower_sigma_5m3=140.038942143
+# self.base_line_5m3=140.252285714
+# self.upper_sigma_1h3=140.868558651
+# self.lower_sigma_1h3=139.13236992
+# self.base_line_1h3=140.000464286
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-03-10 23:58:52
+# ORDER_PRICE=139.7325, TRADE_FLAG=sell
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-03-10 23:59:53
+# ORDER_PRICE=139.7325, STL_PRICE=139.9415, ORDER_KIND=sell, PROFIT=-0.209
+# PROFIT=-0.209
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# self.daily_slope=0.24754545454554552
+# volatility_buy_price=139.9715
+# volatility_bid_price=139.9715
+# self.upper_sigma_5m3=139.936601868
+# self.lower_sigma_5m3=139.608469561
+# self.base_line_5m3=139.772535714
+# self.upper_sigma_1h3=140.780780424
+# self.lower_sigma_1h3=139.153291004
+# self.base_line_1h3=139.967035714
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2017-03-13 15:49:50
+# ORDER_PRICE=139.9455, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-03-14 09:44:51
+# ORDER_PRICE=139.9455, STL_PRICE=140.176, ORDER_KIND=buy, PROFIT=0.2305
+# PROFIT=0.2305
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=-0.08242424242424111
+# volatility_buy_price=139.7135
+# volatility_bid_price=139.7135
+# self.upper_sigma_5m3=140.500188442
+# self.lower_sigma_5m3=139.785275843
+# self.base_line_5m3=140.142732143
+# self.upper_sigma_1h3=140.738897382
+# self.lower_sigma_1h3=139.528816903
+# self.base_line_1h3=140.133857143
+# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2017-03-14 15:14:52
+# ORDER_PRICE=139.708, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-03-15 02:59:53
+# ORDER_PRICE=139.708, STL_PRICE=139.497, ORDER_KIND=sell, PROFIT=0.211
+# PROFIT=0.211
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# self.daily_slope=-0.3333333333333285
+# volatility_buy_price=140.016
+# volatility_bid_price=140.016
+# self.upper_sigma_5m3=139.920106479
+# self.lower_sigma_5m3=139.388107807
+# self.base_line_5m3=139.654107143
+# self.upper_sigma_1h3=140.419648432
+# self.lower_sigma_1h3=138.840815854
+# self.base_line_1h3=139.630232143
+# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-03-15 15:09:54
+# ORDER_PRICE=139.98, TRADE_FLAG=buy
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-03-15 18:34:55
+# ORDER_PRICE=139.98, STL_PRICE=139.7725, ORDER_KIND=buy, PROFIT=-0.2075
+# PROFIT=-0.2075
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-0.3333333333333285
+# volatility_buy_price=139.797
+# volatility_bid_price=139.797
+# self.upper_sigma_5m3=140.335482142
+# self.lower_sigma_5m3=139.667267858
+# self.base_line_5m3=140.001375
+# self.upper_sigma_1h3=140.560747901
+# self.lower_sigma_1h3=138.876930671
+# self.base_line_1h3=139.718839286
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-03-16 03:00:56
+# ORDER_PRICE=139.206, TRADE_FLAG=sell
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-03-16 03:04:57
+# ORDER_PRICE=139.206, STL_PRICE=139.586, ORDER_KIND=sell, PROFIT=-0.38
+# PROFIT=-0.38
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=0.3130000000000397
+# volatility_buy_price=138.9985
+# volatility_bid_price=138.9985
+# self.upper_sigma_5m3=139.352629524
+# self.lower_sigma_5m3=138.829941905
+# self.base_line_5m3=139.091285714
+# self.upper_sigma_1h3=140.668139752
+# self.lower_sigma_1h3=138.213503105
+# self.base_line_1h3=139.440821429
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-03-16 21:00:58
+# ORDER_PRICE=139.3235, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-03-16 22:44:59
+# ORDER_PRICE=139.3235, STL_PRICE=139.856, ORDER_KIND=buy, PROFIT=0.5325
+# PROFIT=0.5325
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-1.2024545454546085
+# volatility_buy_price=138.615
+# volatility_bid_price=138.615
+# self.upper_sigma_5m3=139.24205772
+# self.lower_sigma_5m3=138.281906566
+# self.base_line_5m3=138.761982143
+# self.upper_sigma_1h3=139.663349814
+# self.lower_sigma_1h3=137.869043043
+# self.base_line_1h3=138.766196429
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-03-23 18:30:50
+# ORDER_PRICE=139.038, TRADE_FLAG=buy
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-03-23 18:54:51
+# ORDER_PRICE=139.038, STL_PRICE=138.737, ORDER_KIND=buy, PROFIT=-0.301
+# PROFIT=-0.301
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# self.daily_slope=-0.783030303030334
+# volatility_buy_price=138.2515
+# volatility_bid_price=138.2515
+# self.upper_sigma_5m3=138.276123868
+# self.lower_sigma_5m3=137.604447561
+# self.base_line_5m3=137.940285714
+# self.upper_sigma_1h3=138.83051343
+# self.lower_sigma_1h3=137.353379427
+# self.base_line_1h3=138.091946429
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-03-30 18:34:50
+# ORDER_PRICE=138.32, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-03-31 01:59:51
+# ORDER_PRICE=138.32, STL_PRICE=138.9285, ORDER_KIND=buy, PROFIT=0.6085
+# PROFIT=0.6085
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-0.6390606060606256
+# volatility_buy_price=137.6425
+# volatility_bid_price=137.6425
+# self.upper_sigma_5m3=137.845025533
+# self.lower_sigma_5m3=137.457724467
+# self.base_line_5m3=137.651375
+# self.upper_sigma_1h3=138.2807581
+# self.lower_sigma_1h3=137.040384757
+# self.base_line_1h3=137.660571429
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-04-05 17:30:50
+# ORDER_PRICE=138.1155, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-04-05 23:59:51
+# ORDER_PRICE=138.1155, STL_PRICE=138.703, ORDER_KIND=buy, PROFIT=0.5875
+# PROFIT=0.5875
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-1.3131818181818389
+# volatility_buy_price=137.5115
+# volatility_bid_price=137.5115
+# self.upper_sigma_5m3=137.6157919
+# self.lower_sigma_5m3=137.2912081
+# self.base_line_5m3=137.4535
+# self.upper_sigma_1h3=139.019570575
+# self.lower_sigma_1h3=136.932286567
+# self.base_line_1h3=137.975928571
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-04-07 21:30:52
+# ORDER_PRICE=137.16, TRADE_FLAG=sell
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-04-07 22:14:53
+# ORDER_PRICE=137.16, STL_PRICE=137.5415, ORDER_KIND=sell, PROFIT=-0.3815
+# PROFIT=-0.3815
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=-2.167181818181837
+# volatility_buy_price=137.4275
+# volatility_bid_price=137.4275
+# self.upper_sigma_5m3=137.561368068
+# self.lower_sigma_5m3=136.984631932
+# self.base_line_5m3=137.273
+# self.upper_sigma_1h3=138.525229462
+# self.lower_sigma_1h3=136.935234823
+# self.base_line_1h3=137.730232143
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2017-04-11 17:34:50
+# ORDER_PRICE=137.4795, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-04-12 15:54:51
+# ORDER_PRICE=137.4795, STL_PRICE=136.877, ORDER_KIND=sell, PROFIT=0.6025
+# PROFIT=0.6025
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# self.daily_slope=-2.1224545454545423
+# volatility_buy_price=136.0405
+# volatility_bid_price=136.0405
+# self.upper_sigma_5m3=136.027235432
+# self.lower_sigma_5m3=135.781835997
+# self.base_line_5m3=135.904535714
+# self.upper_sigma_1h3=136.521693447
+# self.lower_sigma_1h3=135.461842267
+# self.base_line_1h3=135.991767857
+# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-04-17 20:49:50
+# ORDER_PRICE=136.0355, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# Execute SecondTrail Stop
+# EXECUTE SETTLEMENT at 2017-04-18 12:44:51
+# ORDER_PRICE=136.0355, STL_PRICE=136.844, ORDER_KIND=buy, PROFIT=0.8085
+# PROFIT=0.8085
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-0.6705454545455022
+# volatility_buy_price=136.4785
+# volatility_bid_price=136.4785
+# self.upper_sigma_5m3=137.88741601
+# self.lower_sigma_5m3=135.685691133
+# self.base_line_5m3=136.786553571
+# self.upper_sigma_1h3=138.096085102
+# self.lower_sigma_1h3=135.281057756
+# self.base_line_1h3=136.688571429
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-04-18 19:05:52
+# ORDER_PRICE=136.882, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# Execute SecondTrail Stop
+# EXECUTE SETTLEMENT at 2017-04-19 00:44:53
+# ORDER_PRICE=136.882, STL_PRICE=138.4465, ORDER_KIND=buy, PROFIT=1.5645
+# PROFIT=1.5645
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-0.6705454545455022
+# volatility_buy_price=138.8475
+# volatility_bid_price=138.8475
+# self.upper_sigma_5m3=138.874281361
+# self.lower_sigma_5m3=138.178075782
+# self.base_line_5m3=138.526178571
+# self.upper_sigma_1h3=139.62439513
+# self.lower_sigma_1h3=135.005569156
+# self.base_line_1h3=137.314982143
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-04-19 02:41:54
+# ORDER_PRICE=139.8145, TRADE_FLAG=buy
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-04-19 02:44:55
+# ORDER_PRICE=139.8145, STL_PRICE=139.3325, ORDER_KIND=buy, PROFIT=-0.482
+# PROFIT=-0.482
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=3.750090909090845
+# volatility_buy_price=139.727
+# volatility_bid_price=139.727
+# self.upper_sigma_5m3=140.302561697
+# self.lower_sigma_5m3=139.26983116
+# self.base_line_5m3=139.786196429
+# self.upper_sigma_1h3=140.51128707
+# self.lower_sigma_1h3=139.321248645
+# self.base_line_1h3=139.916267857
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-04-21 18:39:56
+# ORDER_PRICE=139.7365, TRADE_FLAG=sell
+# weekend stl logic
+# EXECUTE SETTLEMENT at 2017-04-22 05:00:07
+# ORDER_PRICE=139.7365, STL_PRICE=139.624, ORDER_KIND=sell, PROFIT=0.1125
+# PROFIT=0.1125
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=3
+# self.sell_count=0
+# self.daily_slope=7.826939393939393
+# volatility_buy_price=143.398
+# volatility_bid_price=143.398
+# self.upper_sigma_5m3=143.965434484
+# self.lower_sigma_5m3=143.262565516
+# self.base_line_5m3=143.614
+# self.upper_sigma_1h3=144.106753179
+# self.lower_sigma_1h3=142.248996821
+# self.base_line_1h3=143.177875
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2017-04-27 23:54:50
+# ORDER_PRICE=143.3875, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-04-28 23:04:51
+# ORDER_PRICE=143.3875, STL_PRICE=144.023, ORDER_KIND=buy, PROFIT=0.6355
+# PROFIT=0.6355
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# self.daily_slope=6.6443333333333285
+# volatility_buy_price=144.123
+# volatility_bid_price=144.123
+# self.upper_sigma_5m3=144.640008772
+# self.lower_sigma_5m3=144.066776943
+# self.base_line_5m3=144.353392857
+# self.upper_sigma_1h3=144.745236543
+# self.lower_sigma_1h3=143.759727743
+# self.base_line_1h3=144.252482143
+# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2017-05-01 23:14:50
+# ORDER_PRICE=144.0875, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# Execute SecondTrail Stop
+# EXECUTE SETTLEMENT at 2017-05-02 22:54:51
+# ORDER_PRICE=144.0875, STL_PRICE=144.7805, ORDER_KIND=buy, PROFIT=0.693
+# PROFIT=0.693
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# self.daily_slope=6.414848484848485
+# volatility_buy_price=144.872
+# volatility_bid_price=144.872
+# self.upper_sigma_5m3=145.19714915
+# self.lower_sigma_5m3=144.766636564
+# self.base_line_5m3=144.981892857
+# self.upper_sigma_1h3=145.404113816
+# self.lower_sigma_1h3=144.325993327
+# self.base_line_1h3=144.865053571
+# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2017-05-03 18:44:52
+# ORDER_PRICE=144.8515, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-05-04 21:24:53
+# ORDER_PRICE=144.8515, STL_PRICE=145.364, ORDER_KIND=buy, PROFIT=0.5125
+# PROFIT=0.5125
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=6.029727272727202
+# volatility_buy_price=145.2835
+# volatility_bid_price=145.2835
+# self.upper_sigma_5m3=145.819186005
+# self.lower_sigma_5m3=145.274028281
+# self.base_line_5m3=145.546607143
+# self.upper_sigma_1h3=145.921408265
+# self.lower_sigma_1h3=144.59830602
+# self.base_line_1h3=145.259857143
+# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-05-05 01:19:54
+# ORDER_PRICE=145.2305, TRADE_FLAG=sell
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-05-05 06:54:55
+# ORDER_PRICE=145.2305, STL_PRICE=145.436, ORDER_KIND=sell, PROFIT=-0.2055
+# PROFIT=-0.2055
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# self.daily_slope=5.318575757575732
+# volatility_buy_price=145.2085
+# volatility_bid_price=145.2085
+# self.upper_sigma_5m3=145.201912589
+# self.lower_sigma_5m3=144.77340884
+# self.base_line_5m3=144.987660714
+# self.upper_sigma_1h3=145.972581218
+# self.lower_sigma_1h3=144.694347354
+# self.base_line_1h3=145.333464286
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2017-05-05 15:44:56
+# ORDER_PRICE=145.2105, TRADE_FLAG=buy
+# weekend stl logic
+# EXECUTE SETTLEMENT at 2017-05-06 05:00:07
+# ORDER_PRICE=145.2105, STL_PRICE=146.005, ORDER_KIND=buy, PROFIT=0.7945
+# PROFIT=0.7945
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=3.9302727272726914
+# volatility_buy_price=147.0635
+# volatility_bid_price=147.0635
+# self.upper_sigma_5m3=147.664883313
+# self.lower_sigma_5m3=147.148902401
+# self.base_line_5m3=147.406892857
+# self.upper_sigma_1h3=148.495629237
+# self.lower_sigma_1h3=146.705835048
+# self.base_line_1h3=147.600732143
+# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-05-11 20:04:50
+# ORDER_PRICE=147.0975, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-05-11 21:49:51
+# ORDER_PRICE=147.0975, STL_PRICE=146.8515, ORDER_KIND=sell, PROFIT=0.246
+# PROFIT=0.246
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-2.9345757575757307
+# volatility_buy_price=144.001
+# volatility_bid_price=144.001
+# self.upper_sigma_5m3=144.544435614
+# self.lower_sigma_5m3=143.503064386
+# self.base_line_5m3=144.02375
+# self.upper_sigma_1h3=146.523674115
+# self.lower_sigma_1h3=142.362575885
+# self.base_line_1h3=144.443125
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-05-18 17:30:50
+# ORDER_PRICE=144.399, TRADE_FLAG=buy
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-05-18 18:14:51
+# ORDER_PRICE=144.399, STL_PRICE=144.1855, ORDER_KIND=buy, PROFIT=-0.2135
+# PROFIT=-0.2135
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-2.9345757575757307
+# volatility_buy_price=144.3915
+# volatility_bid_price=144.3915
+# self.upper_sigma_5m3=144.53673977
+# self.lower_sigma_5m3=143.848403088
+# self.base_line_5m3=144.192571429
+# self.upper_sigma_1h3=145.799584696
+# self.lower_sigma_1h3=142.625165304
+# self.base_line_1h3=144.212375
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-05-18 22:34:52
+# ORDER_PRICE=144.699, TRADE_FLAG=buy
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-05-18 23:39:53
+# ORDER_PRICE=144.699, STL_PRICE=144.468, ORDER_KIND=buy, PROFIT=-0.231
+# PROFIT=-0.231
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=-3.394909090909064
+# volatility_buy_price=144.335
+# volatility_bid_price=144.335
+# self.upper_sigma_5m3=144.662570253
+# self.lower_sigma_5m3=144.10103689
+# self.base_line_5m3=144.381803571
+# self.upper_sigma_1h3=145.142915733
+# self.lower_sigma_1h3=143.828155696
+# self.base_line_1h3=144.485535714
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2017-05-23 19:44:50
+# ORDER_PRICE=144.3565, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-05-24 16:23:41
+# ORDER_PRICE=144.3565, STL_PRICE=145.366, ORDER_KIND=sell, PROFIT=-1.0095
+# PROFIT=-1.0095
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-1.7809090909091336
+# volatility_buy_price=145.4125
+# volatility_bid_price=145.4125
+# self.upper_sigma_5m3=145.420509489
+# self.lower_sigma_5m3=144.86856194
+# self.base_line_5m3=145.144535714
+# self.upper_sigma_1h3=145.520354478
+# self.lower_sigma_1h3=144.400288379
+# self.base_line_1h3=144.960321429
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-05-25 17:30:52
+# ORDER_PRICE=145.0865, TRADE_FLAG=sell
+# EXECUTE SETTLEMENT at 2017-05-26 17:14:03
+# ORDER_PRICE=145.0865, STL_PRICE=143.0655, ORDER_KIND=sell, PROFIT=2.021
+# PROFIT=2.021
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=-2.858515151515134
+# volatility_buy_price=142.847
+# volatility_bid_price=142.847
+# self.upper_sigma_5m3=143.641689089
+# self.lower_sigma_5m3=142.937453768
+# self.base_line_5m3=143.289571429
+# self.upper_sigma_1h3=144.380873472
+# self.lower_sigma_1h3=142.467269385
+# self.base_line_1h3=143.424071429
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2017-06-02 21:39:50
+# ORDER_PRICE=142.876, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-06-03 00:44:51
+# ORDER_PRICE=142.876, STL_PRICE=142.4685, ORDER_KIND=sell, PROFIT=0.4075
+# PROFIT=0.4075
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# self.daily_slope=-1.9733030303030668
+# volatility_buy_price=141.5775
+# volatility_bid_price=141.5775
+# self.upper_sigma_5m3=141.580158551
+# self.lower_sigma_5m3=141.013948592
+# self.base_line_5m3=141.297053571
+# self.upper_sigma_1h3=141.722821651
+# self.lower_sigma_1h3=140.66260692
+# self.base_line_1h3=141.192714286
+# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-06-07 22:24:50
+# ORDER_PRICE=141.603, TRADE_FLAG=buy
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-06-08 01:29:51
+# ORDER_PRICE=141.603, STL_PRICE=141.403, ORDER_KIND=buy, PROFIT=-0.2
+# PROFIT=-0.2
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-3.9562121212121295
+# volatility_buy_price=140.481
+# volatility_bid_price=140.481
+# self.upper_sigma_5m3=140.618998385
+# self.lower_sigma_5m3=140.222644473
+# self.base_line_5m3=140.420821429
+# self.upper_sigma_1h3=140.878152918
+# self.lower_sigma_1h3=139.680632796
+# self.base_line_1h3=140.279392857
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-06-14 21:30:50
+# ORDER_PRICE=140.158, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-06-15 00:09:51
+# ORDER_PRICE=140.158, STL_PRICE=139.489, ORDER_KIND=sell, PROFIT=0.669
+# PROFIT=0.669
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-2.5705151515151075
+# volatility_buy_price=139.2375
+# volatility_bid_price=139.2375
+# self.upper_sigma_5m3=139.56890034
+# self.lower_sigma_5m3=139.128242517
+# self.base_line_5m3=139.348571429
+# self.upper_sigma_1h3=140.898534587
+# self.lower_sigma_1h3=138.663179698
+# self.base_line_1h3=139.780857143
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-06-15 20:00:52
+# ORDER_PRICE=140.2495, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# Execute SecondTrail Stop
+# EXECUTE SETTLEMENT at 2017-06-16 14:54:53
+# ORDER_PRICE=140.2495, STL_PRICE=141.837, ORDER_KIND=buy, PROFIT=1.5875
+# PROFIT=1.5875
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-0.3566363636364512
+# volatility_buy_price=142.3845
+# volatility_bid_price=142.3845
+# self.upper_sigma_5m3=142.565472088
+# self.lower_sigma_5m3=141.948956484
+# self.base_line_5m3=142.257214286
+# self.upper_sigma_1h3=142.545710094
+# self.lower_sigma_1h3=141.550254192
+# self.base_line_1h3=142.047982143
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-06-20 16:30:50
+# ORDER_PRICE=141.762, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# Execute SecondTrail Stop
+# EXECUTE SETTLEMENT at 2017-06-21 18:04:51
+# ORDER_PRICE=141.762, STL_PRICE=140.3145, ORDER_KIND=sell, PROFIT=1.4475
+# PROFIT=1.4475
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=0.5049999999999751
+# volatility_buy_price=140.665
+# volatility_bid_price=140.665
+# self.upper_sigma_5m3=140.746751564
+# self.lower_sigma_5m3=139.811641293
+# self.base_line_5m3=140.279196429
+# self.upper_sigma_1h3=142.022064298
+# self.lower_sigma_1h3=139.501007131
+# self.base_line_1h3=140.761535714
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-06-21 20:00:52
+# ORDER_PRICE=141.1925, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-06-21 22:54:53
+# ORDER_PRICE=141.1925, STL_PRICE=141.3935, ORDER_KIND=buy, PROFIT=0.201
+# PROFIT=0.201
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=1.7150303030303156
+# volatility_buy_price=140.998
+# volatility_bid_price=140.998
+# self.upper_sigma_5m3=141.13899151
+# self.lower_sigma_5m3=140.45275849
+# self.base_line_5m3=140.795875
+# self.upper_sigma_1h3=141.828670208
+# self.lower_sigma_1h3=140.138579792
+# self.base_line_1h3=140.983625
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-06-22 23:39:54
+# ORDER_PRICE=140.992, TRADE_FLAG=sell
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-06-23 04:34:55
+# ORDER_PRICE=140.992, STL_PRICE=141.2035, ORDER_KIND=sell, PROFIT=-0.2115
+# PROFIT=-0.2115
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=3.1904848484848727
+# volatility_buy_price=144.0395
+# volatility_bid_price=144.0395
+# self.upper_sigma_5m3=144.173605747
+# self.lower_sigma_5m3=143.516144253
+# self.base_line_5m3=143.844875
+# self.upper_sigma_1h3=144.984590171
+# self.lower_sigma_1h3=142.304302686
+# self.base_line_1h3=143.644446429
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-06-28 22:35:50
+# ORDER_PRICE=144.7655, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-06-28 23:59:51
+# ORDER_PRICE=144.7655, STL_PRICE=145.1105, ORDER_KIND=buy, PROFIT=0.345
+# PROFIT=0.345
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=6.731848484848401
+# volatility_buy_price=146.517
+# volatility_bid_price=146.517
+# self.upper_sigma_5m3=146.867593318
+# self.lower_sigma_5m3=146.407085254
+# self.base_line_5m3=146.637339286
+# self.upper_sigma_1h3=146.900228127
+# self.lower_sigma_1h3=145.838629016
+# self.base_line_1h3=146.369428571
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-07-05 22:54:50
+# ORDER_PRICE=146.5215, TRADE_FLAG=sell
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-07-06 18:24:51
+# ORDER_PRICE=146.5215, STL_PRICE=146.7545, ORDER_KIND=sell, PROFIT=-0.233
+# PROFIT=-0.233
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=4.15963636363633
+# volatility_buy_price=147.3885
+# volatility_bid_price=147.3885
+# self.upper_sigma_5m3=147.530397977
+# self.lower_sigma_5m3=147.21074488
+# self.base_line_5m3=147.370571429
+# self.upper_sigma_1h3=147.914408349
+# self.lower_sigma_1h3=145.859948794
+# self.base_line_1h3=146.887178571
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-07-07 17:30:52
+# ORDER_PRICE=147.048, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-07-08 00:04:53
+# ORDER_PRICE=147.048, STL_PRICE=146.8195, ORDER_KIND=sell, PROFIT=0.2285
+# PROFIT=0.2285
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=1.2420909090909125
+# volatility_buy_price=146.954
+# volatility_bid_price=146.954
+# self.upper_sigma_5m3=148.013128529
+# self.lower_sigma_5m3=146.989764328
+# self.base_line_5m3=147.501446429
+# self.upper_sigma_1h3=147.776476608
+# self.lower_sigma_1h3=146.450523392
+# self.base_line_1h3=147.1135
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-07-11 22:09:50
+# ORDER_PRICE=146.96, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# Execute SecondTrail Stop
+# EXECUTE SETTLEMENT at 2017-07-12 17:34:51
+# ORDER_PRICE=146.96, STL_PRICE=145.8155, ORDER_KIND=sell, PROFIT=1.1445
+# PROFIT=1.1445
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=0.22984848484851417
+# volatility_buy_price=146.6745
+# volatility_bid_price=146.6745
+# self.upper_sigma_5m3=146.977461537
+# self.lower_sigma_5m3=146.626931321
+# self.base_line_5m3=146.802196429
+# self.upper_sigma_1h3=147.377045582
+# self.lower_sigma_1h3=145.88406156
+# self.base_line_1h3=146.630553571
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-07-14 21:30:52
+# ORDER_PRICE=146.2795, TRADE_FLAG=sell
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-07-14 22:59:53
+# ORDER_PRICE=146.2795, STL_PRICE=146.642, ORDER_KIND=sell, PROFIT=-0.3625
+# PROFIT=-0.3625
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-0.014000000000028939
+# volatility_buy_price=146.859
+# volatility_bid_price=146.859
+# self.upper_sigma_5m3=147.353210187
+# self.lower_sigma_5m3=146.670039813
+# self.base_line_5m3=147.011625
+# self.upper_sigma_1h3=147.766961627
+# self.lower_sigma_1h3=146.255038373
+# self.base_line_1h3=147.011
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-07-18 17:30:50
+# ORDER_PRICE=146.3865, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-07-18 22:54:51
+# ORDER_PRICE=146.3865, STL_PRICE=145.929, ORDER_KIND=sell, PROFIT=0.4575
+# PROFIT=0.4575
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-1.1331818181818496
+# volatility_buy_price=145.912
+# volatility_bid_price=145.912
+# self.upper_sigma_5m3=146.224560559
+# self.lower_sigma_5m3=145.631546584
+# self.base_line_5m3=145.928053571
+# self.upper_sigma_1h3=146.497490896
+# self.lower_sigma_1h3=145.144366247
+# self.base_line_1h3=145.820928571
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-07-20 17:30:52
+# ORDER_PRICE=146.226, TRADE_FLAG=buy
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-07-20 17:44:53
+# ORDER_PRICE=146.226, STL_PRICE=146.0145, ORDER_KIND=buy, PROFIT=-0.2115
+# PROFIT=-0.2115
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=-2.0055151515151985
+# volatility_buy_price=146.099
+# volatility_bid_price=146.099
+# self.upper_sigma_5m3=146.750048002
+# self.lower_sigma_5m3=146.09413057
+# self.base_line_5m3=146.422089286
+# self.upper_sigma_1h3=146.784875932
+# self.lower_sigma_1h3=145.207981211
+# self.base_line_1h3=145.996428571
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2017-07-27 22:59:50
+# ORDER_PRICE=146.074, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-07-28 06:54:51
+# ORDER_PRICE=146.074, STL_PRICE=145.4565, ORDER_KIND=sell, PROFIT=0.6175
+# PROFIT=0.6175
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# self.daily_slope=-0.040909090909160235
+# volatility_buy_price=145.1765
+# volatility_bid_price=145.1765
+# self.upper_sigma_5m3=145.186043478
+# self.lower_sigma_5m3=144.980920808
+# self.base_line_5m3=145.083482143
+# self.upper_sigma_1h3=145.851669972
+# self.lower_sigma_1h3=144.769115743
+# self.base_line_1h3=145.310392857
+# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-07-31 15:14:50
+# ORDER_PRICE=145.1945, TRADE_FLAG=buy
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-07-31 17:59:51
+# ORDER_PRICE=145.1945, STL_PRICE=144.9575, ORDER_KIND=buy, PROFIT=-0.237
+# PROFIT=-0.237
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# self.daily_slope=0.5968787878788263
+# volatility_buy_price=145.659
+# volatility_bid_price=145.659
+# self.upper_sigma_5m3=146.336827853
+# self.lower_sigma_5m3=145.491172147
+# self.base_line_5m3=145.914
+# self.upper_sigma_1h3=146.39149374
+# self.lower_sigma_1h3=144.85100626
+# self.base_line_1h3=145.62125
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2017-08-01 23:24:52
+# ORDER_PRICE=145.6135, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# Execute SecondTrail Stop
+# EXECUTE SETTLEMENT at 2017-08-02 22:19:53
+# ORDER_PRICE=145.6135, STL_PRICE=146.367, ORDER_KIND=buy, PROFIT=0.7535
+# PROFIT=0.7535
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=0.7893333333333254
+# volatility_buy_price=146.477
+# volatility_bid_price=146.477
+# self.upper_sigma_5m3=146.874727122
+# self.lower_sigma_5m3=146.175772878
+# self.base_line_5m3=146.52525
+# self.upper_sigma_1h3=146.854069678
+# self.lower_sigma_1h3=145.906644607
+# self.base_line_1h3=146.380357143
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-08-03 20:00:54
+# ORDER_PRICE=145.8115, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# Execute SecondTrail Stop
+# EXECUTE SETTLEMENT at 2017-08-04 11:49:55
+# ORDER_PRICE=145.8115, STL_PRICE=144.726, ORDER_KIND=sell, PROFIT=1.0855
+# PROFIT=1.0855
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-0.42933333333328894
+# volatility_buy_price=144.646
+# volatility_bid_price=144.646
+# self.upper_sigma_5m3=144.808678783
+# self.lower_sigma_5m3=144.537821217
+# self.base_line_5m3=144.67325
+# self.upper_sigma_1h3=146.234701296
+# self.lower_sigma_1h3=143.391084419
+# self.base_line_1h3=144.812892857
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-08-04 21:30:56
+# ORDER_PRICE=145.0725, TRADE_FLAG=buy
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-08-04 21:49:57
+# ORDER_PRICE=145.0725, STL_PRICE=144.8265, ORDER_KIND=buy, PROFIT=-0.246
+# PROFIT=-0.246
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=-4.210969696969765
+# volatility_buy_price=142.2485
+# volatility_bid_price=142.2485
+# self.upper_sigma_5m3=142.879517444
+# self.lower_sigma_5m3=142.295839699
+# self.base_line_5m3=142.587678571
+# self.upper_sigma_1h3=143.617504324
+# self.lower_sigma_1h3=142.081602819
+# self.base_line_1h3=142.849553571
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2017-08-10 23:09:50
+# ORDER_PRICE=142.262, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-08-11 14:49:51
+# ORDER_PRICE=142.262, STL_PRICE=141.7165, ORDER_KIND=sell, PROFIT=0.5455
+# PROFIT=0.5455
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-4.407757575757586
+# volatility_buy_price=143.0115
+# volatility_bid_price=143.0115
+# self.upper_sigma_5m3=143.276964781
+# self.lower_sigma_5m3=142.557820934
+# self.base_line_5m3=142.917392857
+# self.upper_sigma_1h3=143.413759604
+# self.lower_sigma_1h3=141.52452611
+# self.base_line_1h3=142.469142857
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-08-15 17:30:50
+# ORDER_PRICE=142.612, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-08-15 21:44:51
+# ORDER_PRICE=142.612, STL_PRICE=142.4635, ORDER_KIND=sell, PROFIT=0.1485
+# PROFIT=0.1485
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-3.180454545454625
+# volatility_buy_price=142.5775
+# volatility_bid_price=142.5775
+# self.upper_sigma_5m3=142.943356356
+# self.lower_sigma_5m3=142.09735793
+# self.base_line_5m3=142.520357143
+# self.upper_sigma_1h3=143.189247301
+# self.lower_sigma_1h3=141.627145556
+# self.base_line_1h3=142.408196429
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-08-16 17:30:52
+# ORDER_PRICE=143.0225, TRADE_FLAG=buy
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-08-16 18:59:53
+# ORDER_PRICE=143.0225, STL_PRICE=142.8175, ORDER_KIND=buy, PROFIT=-0.205
+# PROFIT=-0.205
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=6
+# self.daily_slope=-2.7976666666666534
+# volatility_buy_price=140.6365
+# volatility_bid_price=140.6365
+# self.upper_sigma_5m3=140.661743548
+# self.lower_sigma_5m3=140.077970738
+# self.base_line_5m3=140.369857143
+# self.upper_sigma_1h3=141.201637805
+# self.lower_sigma_1h3=139.868755052
+# self.base_line_1h3=140.535196429
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2017-08-21 19:24:50
+# ORDER_PRICE=140.6445, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-08-22 20:39:51
+# ORDER_PRICE=140.6445, STL_PRICE=140.397, ORDER_KIND=sell, PROFIT=0.2475
+# PROFIT=0.2475
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# self.daily_slope=-0.06415151515152866
+# volatility_buy_price=141.3275
+# volatility_bid_price=141.3275
+# self.upper_sigma_5m3=141.344618051
+# self.lower_sigma_5m3=140.918381949
+# self.base_line_5m3=141.1315
+# self.upper_sigma_1h3=141.794694443
+# self.lower_sigma_1h3=140.000591271
+# self.base_line_1h3=140.897642857
+# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-08-30 03:09:50
+# ORDER_PRICE=141.36, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-08-30 06:44:51
+# ORDER_PRICE=141.36, STL_PRICE=141.567, ORDER_KIND=buy, PROFIT=0.207
+# PROFIT=0.207
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=2.419939393939433
+# volatility_buy_price=142.609
+# volatility_bid_price=142.609
+# self.upper_sigma_5m3=142.985706224
+# self.lower_sigma_5m3=142.599400918
+# self.base_line_5m3=142.792553571
+# self.upper_sigma_1h3=143.299241703
+# self.lower_sigma_1h3=141.590544011
+# self.base_line_1h3=142.444892857
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-08-31 16:14:52
+# ORDER_PRICE=142.5815, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-09-01 02:14:53
+# ORDER_PRICE=142.5815, STL_PRICE=142.0445, ORDER_KIND=sell, PROFIT=0.537
+# PROFIT=0.537
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=3.066878787878736
+# volatility_buy_price=142.125
+# volatility_bid_price=142.125
+# self.upper_sigma_5m3=142.30209488
+# self.lower_sigma_5m3=141.602369406
+# self.base_line_5m3=141.952232143
+# self.upper_sigma_1h3=143.503923753
+# self.lower_sigma_1h3=141.26343339
+# self.base_line_1h3=142.383678571
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-09-04 20:44:50
+# ORDER_PRICE=142.1245, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-09-05 19:14:51
+# ORDER_PRICE=142.1245, STL_PRICE=141.578, ORDER_KIND=sell, PROFIT=0.5465
+# PROFIT=0.5465
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# self.daily_slope=2.7280909090908905
+# volatility_buy_price=141.471
+# volatility_bid_price=141.471
+# self.upper_sigma_5m3=142.003622823
+# self.lower_sigma_5m3=141.295841463
+# self.base_line_5m3=141.649732143
+# self.upper_sigma_1h3=142.233203781
+# self.lower_sigma_1h3=141.06172479
+# self.base_line_1h3=141.647464286
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2017-09-06 02:29:52
+# ORDER_PRICE=141.422, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# Execute SecondTrail Stop
+# EXECUTE SETTLEMENT at 2017-09-07 09:29:53
+# ORDER_PRICE=141.422, STL_PRICE=142.274, ORDER_KIND=buy, PROFIT=0.852
+# PROFIT=0.852
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=1.1002727272726873
+# volatility_buy_price=142.176
+# volatility_bid_price=142.176
+# self.upper_sigma_5m3=142.789881273
+# self.lower_sigma_5m3=142.190083013
+# self.base_line_5m3=142.489982143
+# self.upper_sigma_1h3=142.819487058
+# self.lower_sigma_1h3=141.877548656
+# self.base_line_1h3=142.348517857
+# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-09-07 23:04:54
+# ORDER_PRICE=142.1785, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-09-08 02:34:55
+# ORDER_PRICE=142.1785, STL_PRICE=141.8575, ORDER_KIND=sell, PROFIT=0.321
+# PROFIT=0.321
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=2.7864545454546157
+# volatility_buy_price=144.811
+# volatility_bid_price=144.811
+# self.upper_sigma_5m3=145.081750072
+# self.lower_sigma_5m3=144.010714214
+# self.base_line_5m3=144.546232143
+# self.upper_sigma_1h3=145.541645608
+# self.lower_sigma_1h3=142.151568678
+# self.base_line_1h3=143.846607143
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-09-12 17:30:50
+# ORDER_PRICE=145.268, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-09-12 23:34:51
+# ORDER_PRICE=145.268, STL_PRICE=145.5475, ORDER_KIND=buy, PROFIT=0.2795
+# PROFIT=0.2795
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=6.0388181818180975
+# volatility_buy_price=145.8595
+# volatility_bid_price=145.8595
+# self.upper_sigma_5m3=145.955187266
+# self.lower_sigma_5m3=145.558419877
+# self.base_line_5m3=145.756803571
+# self.upper_sigma_1h3=146.475525785
+# self.lower_sigma_1h3=145.541974215
+# self.base_line_1h3=146.00875
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-09-14 20:00:52
+# ORDER_PRICE=146.2115, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# Execute SecondTrail Stop
+# EXECUTE SETTLEMENT at 2017-09-14 21:44:53
+# ORDER_PRICE=146.2115, STL_PRICE=147.626, ORDER_KIND=buy, PROFIT=1.4145
+# PROFIT=1.4145
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=6.0388181818180975
+# volatility_buy_price=147.6735
+# volatility_bid_price=147.6735
+# self.upper_sigma_5m3=148.01689842
+# self.lower_sigma_5m3=147.507708723
+# self.base_line_5m3=147.762303571
+# self.upper_sigma_1h3=148.467440782
+# self.lower_sigma_1h3=144.158952075
+# self.base_line_1h3=146.313196429
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-09-15 00:09:54
+# ORDER_PRICE=147.9905, TRADE_FLAG=buy
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-09-15 05:39:55
+# ORDER_PRICE=147.9905, STL_PRICE=147.7185, ORDER_KIND=buy, PROFIT=-0.272
+# PROFIT=-0.272
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=9.195363636363693
+# volatility_buy_price=148.937
+# volatility_bid_price=148.937
+# self.upper_sigma_5m3=149.058758249
+# self.lower_sigma_5m3=148.378920323
+# self.base_line_5m3=148.718839286
+# self.upper_sigma_1h3=150.504973412
+# self.lower_sigma_1h3=144.520848017
+# self.base_line_1h3=147.512910714
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-09-15 17:50:56
+# ORDER_PRICE=149.3685, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-09-15 19:24:07
+# ORDER_PRICE=149.3685, STL_PRICE=151.4755, ORDER_KIND=buy, PROFIT=2.107
+# PROFIT=2.107
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=10.758363636363649
+# volatility_buy_price=151.24
+# volatility_bid_price=151.24
+# self.upper_sigma_5m3=151.360919033
+# self.lower_sigma_5m3=150.819973825
+# self.base_line_5m3=151.090446429
+# self.upper_sigma_1h3=151.683206182
+# self.lower_sigma_1h3=150.025722389
+# self.base_line_1h3=150.854464286
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-09-19 00:00:50
+# ORDER_PRICE=150.8535, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-09-19 02:39:51
+# ORDER_PRICE=150.8535, STL_PRICE=150.529, ORDER_KIND=sell, PROFIT=0.3245
+# PROFIT=0.3245
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=11.325636363636361
+# volatility_buy_price=150.665
+# volatility_bid_price=150.665
+# self.upper_sigma_5m3=151.854214369
+# self.lower_sigma_5m3=149.85160706
+# self.base_line_5m3=150.852910714
+# self.upper_sigma_1h3=151.715912641
+# self.lower_sigma_1h3=149.86551593
+# self.base_line_1h3=150.790714286
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-09-19 18:34:52
+# ORDER_PRICE=150.66, TRADE_FLAG=sell
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-09-19 21:34:53
+# ORDER_PRICE=150.66, STL_PRICE=150.8805, ORDER_KIND=sell, PROFIT=-0.2205
+# PROFIT=-0.2205
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# self.daily_slope=11.573909090909076
+# volatility_buy_price=150.822
+# volatility_bid_price=150.822
+# self.upper_sigma_5m3=150.834682096
+# self.lower_sigma_5m3=150.469710761
+# self.base_line_5m3=150.652196429
+# self.upper_sigma_1h3=151.426037964
+# self.lower_sigma_1h3=150.074104893
+# self.base_line_1h3=150.750071429
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2017-09-20 16:09:54
+# ORDER_PRICE=150.84, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-09-20 17:54:55
+# ORDER_PRICE=150.84, STL_PRICE=151.19, ORDER_KIND=buy, PROFIT=0.35
+# PROFIT=0.35
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=11.573909090909076
+# volatility_buy_price=151.011
+# volatility_bid_price=151.011
+# self.upper_sigma_5m3=151.669202953
+# self.lower_sigma_5m3=150.056511332
+# self.base_line_5m3=150.862857143
+# self.upper_sigma_1h3=151.284905581
+# self.lower_sigma_1h3=150.175237277
+# self.base_line_1h3=150.730071429
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-09-20 18:20:56
+# ORDER_PRICE=150.686, TRADE_FLAG=sell
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-09-20 22:39:57
+# ORDER_PRICE=150.686, STL_PRICE=150.906, ORDER_KIND=sell, PROFIT=-0.22
+# PROFIT=-0.22
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=11.573909090909076
+# volatility_buy_price=151.428
+# volatility_bid_price=151.428
+# self.upper_sigma_5m3=151.52129009
+# self.lower_sigma_5m3=151.016995624
+# self.base_line_5m3=151.269142857
+# self.upper_sigma_1h3=151.491701146
+# self.lower_sigma_1h3=150.153905997
+# self.base_line_1h3=150.822803571
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-09-21 03:00:58
+# ORDER_PRICE=151.965, TRADE_FLAG=buy
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-09-21 03:04:59
+# ORDER_PRICE=151.965, STL_PRICE=151.605, ORDER_KIND=buy, PROFIT=-0.36
+# PROFIT=-0.36
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=6.201666666666641
+# volatility_buy_price=150.802
+# volatility_bid_price=150.802
+# self.upper_sigma_5m3=152.219517812
+# self.lower_sigma_5m3=151.027482188
+# self.base_line_5m3=151.6235
+# self.upper_sigma_1h3=152.612760104
+# self.lower_sigma_1h3=150.693811325
+# self.base_line_1h3=151.653285714
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-09-25 23:59:50
+# ORDER_PRICE=150.7955, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# Execute SecondTrail Stop
+# EXECUTE SETTLEMENT at 2017-09-26 01:39:51
+# ORDER_PRICE=150.7955, STL_PRICE=150.121, ORDER_KIND=sell, PROFIT=0.6745
+# PROFIT=0.6745
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=2.1169393939393437
+# volatility_buy_price=151.118
+# volatility_bid_price=151.118
+# self.upper_sigma_5m3=151.164284838
+# self.lower_sigma_5m3=150.518893734
+# self.base_line_5m3=150.841589286
+# self.upper_sigma_1h3=151.616354151
+# self.lower_sigma_1h3=149.96707442
+# self.base_line_1h3=150.791714286
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-09-27 17:39:52
+# ORDER_PRICE=151.105, TRADE_FLAG=sell
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-09-27 19:04:53
+# ORDER_PRICE=151.105, STL_PRICE=151.4095, ORDER_KIND=sell, PROFIT=-0.3045
+# PROFIT=-0.3045
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=2.1169393939393437
+# volatility_buy_price=150.9965
+# volatility_bid_price=150.9965
+# self.upper_sigma_5m3=152.103051612
+# self.lower_sigma_5m3=150.502448388
+# self.base_line_5m3=151.30275
+# self.upper_sigma_1h3=151.793813344
+# self.lower_sigma_1h3=150.210686656
+# self.base_line_1h3=151.00225
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-09-28 00:19:54
+# ORDER_PRICE=151.0505, TRADE_FLAG=sell
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-09-28 07:54:55
+# ORDER_PRICE=151.0505, STL_PRICE=151.2685, ORDER_KIND=sell, PROFIT=-0.218
+# PROFIT=-0.218
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=-0.32615151515153634
+# volatility_buy_price=150.7005
+# volatility_bid_price=150.7005
+# self.upper_sigma_5m3=151.432526906
+# self.lower_sigma_5m3=150.67218738
+# self.base_line_5m3=151.052357143
+# self.upper_sigma_1h3=151.617304334
+# self.lower_sigma_1h3=150.588588523
+# self.base_line_1h3=151.102946429
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2017-09-29 16:39:56
+# ORDER_PRICE=150.7475, TRADE_FLAG=sell
+# weekend stl logic
+# EXECUTE SETTLEMENT at 2017-09-30 05:00:07
+# ORDER_PRICE=150.7475, STL_PRICE=150.7395, ORDER_KIND=sell, PROFIT=0.00800000000001
+# PROFIT=0.00800000000001
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# self.daily_slope=-2.9249393939394226
+# volatility_buy_price=149.405
+# volatility_bid_price=149.405
+# self.upper_sigma_5m3=150.056421881
+# self.lower_sigma_5m3=149.184899548
+# self.base_line_5m3=149.620660714
+# self.upper_sigma_1h3=149.851655757
+# self.lower_sigma_1h3=149.004022814
+# self.base_line_1h3=149.427839286
+# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-10-05 03:24:50
+# ORDER_PRICE=149.3985, TRADE_FLAG=buy
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-10-05 16:04:51
+# ORDER_PRICE=149.3985, STL_PRICE=149.044, ORDER_KIND=buy, PROFIT=-0.3545
+# PROFIT=-0.3545
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=-2.994121212121289
+# volatility_buy_price=148.803
+# volatility_bid_price=148.803
+# self.upper_sigma_5m3=149.626563214
+# self.lower_sigma_5m3=148.855151072
+# self.base_line_5m3=149.240857143
+# self.upper_sigma_1h3=149.960628999
+# self.lower_sigma_1h3=148.709263858
+# self.base_line_1h3=149.334946429
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2017-10-05 16:09:52
+# ORDER_PRICE=148.6725, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-10-05 22:44:53
+# ORDER_PRICE=148.6725, STL_PRICE=148.0385, ORDER_KIND=sell, PROFIT=0.634
+# PROFIT=0.634
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-3.8986060606060446
+# volatility_buy_price=147.527
+# volatility_bid_price=147.527
+# self.upper_sigma_5m3=147.880051016
+# self.lower_sigma_5m3=147.312484699
+# self.base_line_5m3=147.596267857
+# self.upper_sigma_1h3=148.678451565
+# self.lower_sigma_1h3=147.17226272
+# self.base_line_1h3=147.925357143
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-10-06 20:21:54
+# ORDER_PRICE=147.837, TRADE_FLAG=buy
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-10-06 21:19:55
+# ORDER_PRICE=147.837, STL_PRICE=147.6155, ORDER_KIND=buy, PROFIT=-0.2215
+# PROFIT=-0.2215
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-1.9469696969696166
+# volatility_buy_price=148.4925
+# volatility_bid_price=148.4925
+# self.upper_sigma_5m3=148.857961749
+# self.lower_sigma_5m3=148.42385968
+# self.base_line_5m3=148.640910714
+# self.upper_sigma_1h3=149.528492371
+# self.lower_sigma_1h3=147.554293343
+# self.base_line_1h3=148.541392857
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-10-12 19:36:50
+# ORDER_PRICE=148.0675, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-10-12 21:49:51
+# ORDER_PRICE=148.0675, STL_PRICE=147.7055, ORDER_KIND=sell, PROFIT=0.362
+# PROFIT=0.362
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-1.9469696969696166
+# volatility_buy_price=148.1345
+# volatility_bid_price=148.1345
+# self.upper_sigma_5m3=148.218168995
+# self.lower_sigma_5m3=147.588331005
+# self.base_line_5m3=147.90325
+# self.upper_sigma_1h3=149.78142714
+# self.lower_sigma_1h3=147.227215717
+# self.base_line_1h3=148.504321429
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-10-13 01:13:52
+# ORDER_PRICE=148.66, TRADE_FLAG=buy
+# execute volatility stoploss
+# EXECUTE SETTLEMENT at 2017-10-13 18:46:53
+# ORDER_PRICE=148.66, STL_PRICE=148.58, ORDER_KIND=buy, PROFIT=-0.08
+# PROFIT=-0.08
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-0.8683030303030308
+# volatility_buy_price=148.9565
+# volatility_bid_price=148.9565
+# self.upper_sigma_5m3=148.218168995
+# self.lower_sigma_5m3=147.588331005
+# self.base_line_5m3=147.90325
+# self.upper_sigma_1h3=149.78142714
+# self.lower_sigma_1h3=147.227215717
+# self.base_line_1h3=148.504321429
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-10-13 18:46:54
+# ORDER_PRICE=148.58, TRADE_FLAG=sell
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-10-13 18:59:55
+# ORDER_PRICE=148.58, STL_PRICE=148.7895, ORDER_KIND=sell, PROFIT=-0.2095
+# PROFIT=-0.2095
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-0.1469393939393685
+# volatility_buy_price=148.6575
+# volatility_bid_price=148.6575
+# self.upper_sigma_5m3=148.758111319
+# self.lower_sigma_5m3=148.550852967
+# self.base_line_5m3=148.654482143
+# self.upper_sigma_1h3=149.191905666
+# self.lower_sigma_1h3=148.286237191
+# self.base_line_1h3=148.739071429
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-10-16 21:33:50
+# ORDER_PRICE=148.272, TRADE_FLAG=sell
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-10-16 22:44:51
+# ORDER_PRICE=148.272, STL_PRICE=148.5355, ORDER_KIND=sell, PROFIT=-0.2635
+# PROFIT=-0.2635
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# self.daily_slope=1.1492424242423391
+# volatility_buy_price=148.2445
+# volatility_bid_price=148.2445
+# self.upper_sigma_5m3=148.222199717
+# self.lower_sigma_5m3=147.875550283
+# self.base_line_5m3=148.048875
+# self.upper_sigma_1h3=149.075271632
+# self.lower_sigma_1h3=147.278692654
+# self.base_line_1h3=148.176982143
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2017-10-18 16:39:52
+# ORDER_PRICE=148.238, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# Execute SecondTrail Stop
+# EXECUTE SETTLEMENT at 2017-10-19 16:09:53
+# ORDER_PRICE=148.238, STL_PRICE=149.094, ORDER_KIND=buy, PROFIT=0.856
+# PROFIT=0.856
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=0.7088484848484707
+# volatility_buy_price=148.4955
+# volatility_bid_price=148.4955
+# self.upper_sigma_5m3=150.073477212
+# self.lower_sigma_5m3=147.798308502
+# self.base_line_5m3=148.935892857
+# self.upper_sigma_1h3=150.076144096
+# self.lower_sigma_1h3=147.607034475
+# self.base_line_1h3=148.841589286
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-10-19 17:30:54
+# ORDER_PRICE=148.064, TRADE_FLAG=sell
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-10-19 18:14:55
+# ORDER_PRICE=148.064, STL_PRICE=148.3245, ORDER_KIND=sell, PROFIT=-0.2605
+# PROFIT=-0.2605
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=2.044151515151599
+# volatility_buy_price=149.407
+# volatility_bid_price=149.407
+# self.upper_sigma_5m3=149.673028384
+# self.lower_sigma_5m3=149.226293045
+# self.base_line_5m3=149.449660714
+# self.upper_sigma_1h3=150.423536981
+# self.lower_sigma_1h3=148.895998734
+# self.base_line_1h3=149.659767857
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-10-25 17:30:50
+# ORDER_PRICE=149.88, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# Execute SecondTrail Stop
+# EXECUTE SETTLEMENT at 2017-10-25 22:24:51
+# ORDER_PRICE=149.88, STL_PRICE=150.866, ORDER_KIND=buy, PROFIT=0.986
+# PROFIT=0.986
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=1.9870606060606288
+# volatility_buy_price=149.309
+# volatility_bid_price=149.309
+# self.upper_sigma_5m3=149.789814026
+# self.lower_sigma_5m3=149.114507403
+# self.base_line_5m3=149.452160714
+# self.upper_sigma_1h3=150.690170198
+# self.lower_sigma_1h3=148.941508373
+# self.base_line_1h3=149.815839286
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-10-27 23:01:52
+# ORDER_PRICE=149.0045, TRADE_FLAG=sell
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-10-27 23:04:53
+# ORDER_PRICE=149.0045, STL_PRICE=149.273, ORDER_KIND=sell, PROFIT=-0.2685
+# PROFIT=-0.2685
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=3
+# self.sell_count=0
+# self.daily_slope=1.6704545454546096
+# volatility_buy_price=149.49
+# volatility_bid_price=149.49
+# self.upper_sigma_5m3=149.896550863
+# self.lower_sigma_5m3=149.062913423
+# self.base_line_5m3=149.479732143
+# self.upper_sigma_1h3=149.699371352
+# self.lower_sigma_1h3=149.034664363
+# self.base_line_1h3=149.367017857
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2017-10-30 18:14:50
+# ORDER_PRICE=149.4975, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2017-11-01 16:50:51
+# ORDER_PRICE=149.4975, STL_PRICE=151.502, ORDER_KIND=buy, PROFIT=2.0045
+# PROFIT=2.0045
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=2.0907575757575256
+# volatility_buy_price=151.457
+# volatility_bid_price=151.457
+# self.upper_sigma_5m3=151.960070869
+# self.lower_sigma_5m3=151.560107703
+# self.base_line_5m3=151.760089286
+# self.upper_sigma_1h3=152.582480178
+# self.lower_sigma_1h3=149.612805536
+# self.base_line_1h3=151.097642857
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-11-01 23:27:52
+# ORDER_PRICE=151.1515, TRADE_FLAG=sell
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-11-02 03:49:53
+# ORDER_PRICE=151.1515, STL_PRICE=151.3705, ORDER_KIND=sell, PROFIT=-0.219
+# PROFIT=-0.219
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=0.37784848484843936
+# volatility_buy_price=151.0015
+# volatility_bid_price=151.0015
+# self.upper_sigma_5m3=151.273135031
+# self.lower_sigma_5m3=150.525079255
+# self.base_line_5m3=150.899107143
+# self.upper_sigma_1h3=152.030820071
+# self.lower_sigma_1h3=150.620037071
+# self.base_line_1h3=151.325428571
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-11-02 21:00:54
+# ORDER_PRICE=149.816, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# Execute SecondTrail Stop
+# EXECUTE SETTLEMENT at 2017-11-03 01:39:55
+# ORDER_PRICE=149.816, STL_PRICE=149.078, ORDER_KIND=sell, PROFIT=0.738
+# PROFIT=0.738
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# self.daily_slope=-0.9783333333333613
+# volatility_buy_price=149.3875
+# volatility_bid_price=149.3875
+# self.upper_sigma_5m3=149.421012477
+# self.lower_sigma_5m3=148.987308951
+# self.base_line_5m3=149.204160714
+# self.upper_sigma_1h3=149.629099142
+# self.lower_sigma_1h3=148.349936572
+# self.base_line_1h3=148.989517857
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-11-10 21:09:50
+# ORDER_PRICE=149.437, TRADE_FLAG=buy
+# weekend stl logic
+# EXECUTE SETTLEMENT at 2017-11-11 05:00:01
+# ORDER_PRICE=149.437, STL_PRICE=149.9115, ORDER_KIND=buy, PROFIT=0.4745
+# PROFIT=0.4745
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=-1.5865454545455167
+# volatility_buy_price=148.9325
+# volatility_bid_price=148.9325
+# self.upper_sigma_5m3=149.314782827
+# self.lower_sigma_5m3=148.957181459
+# self.base_line_5m3=149.135982143
+# self.upper_sigma_1h3=150.363484413
+# self.lower_sigma_1h3=148.377158444
+# self.base_line_1h3=149.370321429
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2017-11-13 15:09:50
+# ORDER_PRICE=148.9075, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-11-13 20:49:51
+# ORDER_PRICE=148.9075, STL_PRICE=148.4535, ORDER_KIND=sell, PROFIT=0.454
+# PROFIT=0.454
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-1.030121212121258
+# volatility_buy_price=149.343
+# volatility_bid_price=149.343
+# self.upper_sigma_5m3=149.713507202
+# self.lower_sigma_5m3=148.632492798
+# self.base_line_5m3=149.173
+# self.upper_sigma_1h3=149.757506866
+# self.lower_sigma_1h3=147.897993134
+# self.base_line_1h3=148.82775
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-11-14 18:30:52
+# ORDER_PRICE=148.974, TRADE_FLAG=sell
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-11-15 02:04:53
+# ORDER_PRICE=148.974, STL_PRICE=149.3125, ORDER_KIND=sell, PROFIT=-0.3385
+# PROFIT=-0.3385
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# self.daily_slope=-0.4773333333333778
+# volatility_buy_price=148.8655
+# volatility_bid_price=148.8655
+# self.upper_sigma_5m3=148.92023366
+# self.lower_sigma_5m3=148.655659197
+# self.base_line_5m3=148.787946429
+# self.upper_sigma_1h3=149.738138918
+# self.lower_sigma_1h3=148.294182511
+# self.base_line_1h3=149.016160714
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-11-15 16:24:54
+# ORDER_PRICE=148.819, TRADE_FLAG=buy
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-11-15 18:44:55
+# ORDER_PRICE=148.819, STL_PRICE=148.45, ORDER_KIND=buy, PROFIT=-0.369
+# PROFIT=-0.369
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=3
+# self.daily_slope=-0.4773333333333778
+# volatility_buy_price=148.588
+# volatility_bid_price=148.588
+# self.upper_sigma_5m3=148.672650875
+# self.lower_sigma_5m3=148.148527697
+# self.base_line_5m3=148.410589286
+# self.upper_sigma_1h3=149.915821327
+# self.lower_sigma_1h3=147.807500101
+# self.base_line_1h3=148.861660714
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2017-11-16 00:09:56
+# ORDER_PRICE=148.6245, TRADE_FLAG=sell
+# weekend stl logic
+# EXECUTE SETTLEMENT at 2017-11-18 05:00:07
+# ORDER_PRICE=148.6245, STL_PRICE=148.218, ORDER_KIND=sell, PROFIT=0.4065
+# PROFIT=0.4065
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=-1.0979393939394626
+# volatility_buy_price=148.509
+# volatility_bid_price=148.509
+# self.upper_sigma_5m3=148.845576594
+# self.lower_sigma_5m3=148.489887691
+# self.base_line_5m3=148.667732143
+# self.upper_sigma_1h3=149.351658027
+# self.lower_sigma_1h3=148.366020544
+# self.base_line_1h3=148.858839286
+# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2017-11-22 16:39:50
+# ORDER_PRICE=148.5265, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-11-23 12:09:51
+# ORDER_PRICE=148.5265, STL_PRICE=148.34, ORDER_KIND=sell, PROFIT=0.1865
+# PROFIT=0.1865
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=-0.40166666666667716
+# volatility_buy_price=147.753
+# volatility_bid_price=147.753
+# self.upper_sigma_5m3=148.256085726
+# self.lower_sigma_5m3=147.752199988
+# self.base_line_5m3=148.004142857
+# self.upper_sigma_1h3=148.762285481
+# self.lower_sigma_1h3=147.527285948
+# self.base_line_1h3=148.144785714
+# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2017-11-28 21:59:50
+# ORDER_PRICE=147.738, TRADE_FLAG=sell
+# execute volatility stoploss
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-11-29 02:44:51
+# ORDER_PRICE=147.738, STL_PRICE=147.6855, ORDER_KIND=sell, PROFIT=0.0525
+# PROFIT=0.0525
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-0.40166666666667716
+# volatility_buy_price=147.3555
+# volatility_bid_price=147.3555
+# self.upper_sigma_5m3=148.256085726
+# self.lower_sigma_5m3=147.752199988
+# self.base_line_5m3=148.004142857
+# self.upper_sigma_1h3=148.762285481
+# self.lower_sigma_1h3=147.527285948
+# self.base_line_1h3=148.144785714
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-11-29 02:44:52
+# ORDER_PRICE=147.6855, TRADE_FLAG=buy
+# execute volatility stoploss
+# EXECUTE SETTLEMENT at 2017-11-29 03:20:53
+# ORDER_PRICE=147.6855, STL_PRICE=148.0235, ORDER_KIND=buy, PROFIT=0.338
+# PROFIT=0.338
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-0.40166666666667716
+# volatility_buy_price=148.8325
+# volatility_bid_price=148.8325
+# self.upper_sigma_5m3=148.256085726
+# self.lower_sigma_5m3=147.752199988
+# self.base_line_5m3=148.004142857
+# self.upper_sigma_1h3=148.762285481
+# self.lower_sigma_1h3=147.527285948
+# self.base_line_1h3=148.144785714
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-11-29 03:20:54
+# ORDER_PRICE=148.0235, TRADE_FLAG=sell
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-11-29 03:34:55
+# ORDER_PRICE=148.0235, STL_PRICE=148.259, ORDER_KIND=sell, PROFIT=-0.2355
+# PROFIT=-0.2355
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=0.423757575757582
+# volatility_buy_price=150.015
+# volatility_bid_price=150.015
+# self.upper_sigma_5m3=150.460023226
+# self.lower_sigma_5m3=149.63094106
+# self.base_line_5m3=150.045482143
+# self.upper_sigma_1h3=151.315339427
+# self.lower_sigma_1h3=146.543982002
+# self.base_line_1h3=148.929660714
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-11-30 00:32:56
+# ORDER_PRICE=149.6595, TRADE_FLAG=sell
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-11-30 00:39:57
+# ORDER_PRICE=149.6595, STL_PRICE=149.9175, ORDER_KIND=sell, PROFIT=-0.258
+# PROFIT=-0.258
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=3.2001212121212532
+# volatility_buy_price=152.051
+# volatility_bid_price=152.051
+# self.upper_sigma_5m3=152.275510581
+# self.lower_sigma_5m3=151.446632276
+# self.base_line_5m3=151.861071429
+# self.upper_sigma_1h3=153.132732458
+# self.lower_sigma_1h3=150.737124685
+# self.base_line_1h3=151.934928571
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-12-02 01:08:58
+# ORDER_PRICE=151.72, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-12-02 01:39:59
+# ORDER_PRICE=151.72, STL_PRICE=151.059, ORDER_KIND=sell, PROFIT=0.661
+# PROFIT=0.661
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=4.2451515151515515
+# volatility_buy_price=151.7625
+# volatility_bid_price=151.7625
+# self.upper_sigma_5m3=151.888515748
+# self.lower_sigma_5m3=151.443841395
+# self.base_line_5m3=151.666178571
+# self.upper_sigma_1h3=152.813517599
+# self.lower_sigma_1h3=150.621625259
+# self.base_line_1h3=151.717571429
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-12-04 20:16:50
+# ORDER_PRICE=152.2275, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-12-04 21:59:51
+# ORDER_PRICE=152.2275, STL_PRICE=152.587, ORDER_KIND=buy, PROFIT=0.3595
+# PROFIT=0.3595
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=4.2451515151515515
+# volatility_buy_price=152.341
+# volatility_bid_price=152.341
+# self.upper_sigma_5m3=153.100356449
+# self.lower_sigma_5m3=152.041750693
+# self.base_line_5m3=152.571053571
+# self.upper_sigma_1h3=153.19055261
+# self.lower_sigma_1h3=150.455233104
+# self.base_line_1h3=151.822892857
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-12-05 00:52:52
+# ORDER_PRICE=151.534, TRADE_FLAG=sell
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-12-05 00:54:53
+# ORDER_PRICE=151.534, STL_PRICE=151.831, ORDER_KIND=sell, PROFIT=-0.297
+# PROFIT=-0.297
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=3.8942424242424396
+# volatility_buy_price=150.565
+# volatility_bid_price=150.565
+# self.upper_sigma_5m3=151.507437189
+# self.lower_sigma_5m3=149.962777097
+# self.base_line_5m3=150.735107143
+# self.upper_sigma_1h3=151.08377529
+# self.lower_sigma_1h3=149.610367567
+# self.base_line_1h3=150.347071429
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-12-07 21:46:54
+# ORDER_PRICE=151.006, TRADE_FLAG=buy
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-12-07 21:54:55
+# ORDER_PRICE=151.006, STL_PRICE=150.8, ORDER_KIND=buy, PROFIT=-0.206
+# PROFIT=-0.206
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=3.8942424242424396
+# volatility_buy_price=151.4045
+# volatility_bid_price=151.4045
+# self.upper_sigma_5m3=151.559140581
+# self.lower_sigma_5m3=151.015645134
+# self.base_line_5m3=151.287392857
+# self.upper_sigma_1h3=151.992393094
+# self.lower_sigma_1h3=149.245964049
+# self.base_line_1h3=150.619178571
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-12-08 03:22:56
+# ORDER_PRICE=151.8165, TRADE_FLAG=buy
+# execute volatility stoploss
+# EXECUTE SETTLEMENT at 2017-12-08 15:37:57
+# ORDER_PRICE=151.8165, STL_PRICE=152.968, ORDER_KIND=buy, PROFIT=1.1515
+# PROFIT=1.1515
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=3.617575757575728
+# volatility_buy_price=153.325
+# volatility_bid_price=153.325
+# self.upper_sigma_5m3=151.559140581
+# self.lower_sigma_5m3=151.015645134
+# self.base_line_5m3=151.287392857
+# self.upper_sigma_1h3=151.992393094
+# self.lower_sigma_1h3=149.245964049
+# self.base_line_1h3=150.619178571
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-12-08 15:37:58
+# ORDER_PRICE=152.968, TRADE_FLAG=sell
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2017-12-08 17:04:59
+# ORDER_PRICE=152.968, STL_PRICE=153.297, ORDER_KIND=sell, PROFIT=-0.329
+# PROFIT=-0.329
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=-0.39969696969702223
+# volatility_buy_price=151.0785
+# volatility_bid_price=151.0785
+# self.upper_sigma_5m3=151.531456595
+# self.lower_sigma_5m3=150.641686262
+# self.base_line_5m3=151.086571429
+# self.upper_sigma_1h3=151.738721993
+# self.lower_sigma_1h3=150.749028007
+# self.base_line_1h3=151.243875
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2017-12-13 23:44:50
+# ORDER_PRICE=151.125, TRADE_FLAG=sell
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2017-12-15 18:04:51
+# ORDER_PRICE=151.125, STL_PRICE=150.8025, ORDER_KIND=sell, PROFIT=0.3225
+# PROFIT=0.3225
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=3
+# self.sell_count=0
+# self.daily_slope=-1.1153333333333308
+# volatility_buy_price=150.4765
+# volatility_bid_price=150.4765
+# self.upper_sigma_5m3=151.157744169
+# self.lower_sigma_5m3=150.351505831
+# self.base_line_5m3=150.754625
+# self.upper_sigma_1h3=151.030124455
+# self.lower_sigma_1h3=149.464768402
+# self.base_line_1h3=150.247446429
+# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2017-12-19 01:19:50
+# ORDER_PRICE=150.5065, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# Execute SecondTrail Stop
+# EXECUTE SETTLEMENT at 2017-12-21 02:39:51
+# ORDER_PRICE=150.5065, STL_PRICE=151.657, ORDER_KIND=buy, PROFIT=1.1505
+# PROFIT=1.1505
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# self.daily_slope=1.3869393939393782
+# volatility_buy_price=152.361
+# volatility_bid_price=152.361
+# self.upper_sigma_5m3=152.349319928
+# self.lower_sigma_5m3=152.1087515
+# self.base_line_5m3=152.229035714
+# self.upper_sigma_1h3=153.043114248
+# self.lower_sigma_1h3=151.456600038
+# self.base_line_1h3=152.249857143
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2018-01-04 17:19:50
+# ORDER_PRICE=152.351, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# Execute SecondTrail Stop
+# EXECUTE SETTLEMENT at 2018-01-05 18:19:51
+# ORDER_PRICE=152.351, STL_PRICE=153.161, ORDER_KIND=buy, PROFIT=0.81
+# PROFIT=0.81
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# self.daily_slope=-1.2300000000000304
+# volatility_buy_price=151.438
+# volatility_bid_price=151.438
+# self.upper_sigma_5m3=151.420236384
+# self.lower_sigma_5m3=151.107227902
+# self.base_line_5m3=151.263732143
+# self.upper_sigma_1h3=151.588774538
+# self.lower_sigma_1h3=149.931154033
+# self.base_line_1h3=150.759964286
+# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2018-01-12 20:29:50
+# ORDER_PRICE=151.445, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# Execute SecondTrail Stop
+# EXECUTE SETTLEMENT at 2018-01-12 23:34:51
+# ORDER_PRICE=151.457, STL_PRICE=152.339, ORDER_KIND=buy, PROFIT=0.882
+# PROFIT=0.882
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=2.251878787878751
+# volatility_buy_price=153.724
+# volatility_bid_price=153.724
+# self.upper_sigma_5m3=154.231582828
+# self.lower_sigma_5m3=153.447595743
+# self.base_line_5m3=153.839589286
+# self.upper_sigma_1h3=154.671232797
+# self.lower_sigma_1h3=153.600838632
+# self.base_line_1h3=154.136035714
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2018-01-19 20:54:50
+# ORDER_PRICE=153.686, TRADE_FLAG=sell
+# weekend stl logic
+# EXECUTE SETTLEMENT at 2018-01-20 05:00:01
+# ORDER_PRICE=153.674, STL_PRICE=153.411, ORDER_KIND=sell, PROFIT=0.263
+# PROFIT=0.263
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# self.daily_slope=4.3845757575757105
+# volatility_buy_price=155.066
+# volatility_bid_price=155.066
+# self.upper_sigma_5m3=155.00736378
+# self.lower_sigma_5m3=154.007707648
+# self.base_line_5m3=154.507535714
+# self.upper_sigma_1h3=154.994385196
+# self.lower_sigma_1h3=153.769436233
+# self.base_line_1h3=154.381910714
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2018-01-24 21:09:50
+# ORDER_PRICE=155.037, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2018-01-25 16:39:51
+# ORDER_PRICE=155.049, STL_PRICE=155.519, ORDER_KIND=buy, PROFIT=0.47
+# PROFIT=0.47
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-2.807757575757554
+# volatility_buy_price=152.326
+# volatility_bid_price=152.326
+# self.upper_sigma_5m3=152.714405408
+# self.lower_sigma_5m3=151.751701735
+# self.base_line_5m3=152.233053571
+# self.upper_sigma_1h3=152.728415524
+# self.lower_sigma_1h3=151.161941619
+# self.base_line_1h3=151.945178571
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2018-02-08 21:00:50
+# ORDER_PRICE=153.205, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# EXECUTE SETTLEMENT at 2018-02-08 23:49:51
+# ORDER_PRICE=153.237, STL_PRICE=153.533, ORDER_KIND=buy, PROFIT=0.296
+# PROFIT=0.296
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-4.457060606060654
+# volatility_buy_price=150.661
+# volatility_bid_price=150.661
+# self.upper_sigma_5m3=151.705886667
+# self.lower_sigma_5m3=149.539541904
+# self.base_line_5m3=150.622714286
+# self.upper_sigma_1h3=154.352250843
+# self.lower_sigma_1h3=149.441999157
+# self.base_line_1h3=151.897125
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2018-02-09 22:45:52
+# ORDER_PRICE=151.0465, TRADE_FLAG=buy
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2018-02-09 22:49:53
+# ORDER_PRICE=151.065, STL_PRICE=150.794, ORDER_KIND=buy, PROFIT=-0.271
+# PROFIT=-0.271
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-6.049575757575745
+# volatility_buy_price=150.407
+# volatility_bid_price=150.407
+# self.upper_sigma_5m3=150.921388698
+# self.lower_sigma_5m3=149.947039873
+# self.base_line_5m3=150.434214286
+# self.upper_sigma_1h3=153.211889072
+# self.lower_sigma_1h3=148.203289499
+# self.base_line_1h3=150.707589286
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2018-02-12 17:42:50
+# ORDER_PRICE=150.748, TRADE_FLAG=buy
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2018-02-12 17:54:51
+# ORDER_PRICE=150.76, STL_PRICE=150.546, ORDER_KIND=buy, PROFIT=-0.214
+# PROFIT=-0.214
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# self.daily_slope=-6.980333333333299
+# volatility_buy_price=149.359
+# volatility_bid_price=149.359
+# self.upper_sigma_5m3=149.310019741
+# self.lower_sigma_5m3=148.786123116
+# self.base_line_5m3=149.048071429
+# self.upper_sigma_1h3=150.437844328
+# self.lower_sigma_1h3=148.4664771
+# self.base_line_1h3=149.452160714
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2018-02-14 16:39:52
+# ORDER_PRICE=149.334, TRADE_FLAG=buy
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2018-02-14 17:19:53
+# ORDER_PRICE=149.346, STL_PRICE=149.06, ORDER_KIND=buy, PROFIT=-0.286
+# PROFIT=-0.286
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=-6.980333333333299
+# volatility_buy_price=148.91
+# volatility_bid_price=148.91
+# self.upper_sigma_5m3=148.954948114
+# self.lower_sigma_5m3=148.569159029
+# self.base_line_5m3=148.762053571
+# self.upper_sigma_1h3=150.403951179
+# self.lower_sigma_1h3=148.156477393
+# self.base_line_1h3=149.280214286
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2018-02-14 22:30:54
+# ORDER_PRICE=148.316, TRADE_FLAG=sell
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2018-02-14 23:44:55
+# ORDER_PRICE=148.291, STL_PRICE=148.488, ORDER_KIND=sell, PROFIT=-0.197
+# PROFIT=-0.197
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=3
+# self.sell_count=0
+# self.daily_slope=-0.4316969696969415
+# volatility_buy_price=149.32
+# volatility_bid_price=149.32
+# self.upper_sigma_5m3=149.981541156
+# self.lower_sigma_5m3=149.143601701
+# self.base_line_5m3=149.562571429
+# self.upper_sigma_1h3=150.152594946
+# self.lower_sigma_1h3=148.779726482
+# self.base_line_1h3=149.466160714
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2018-02-27 19:14:50
+# ORDER_PRICE=149.294, TRADE_FLAG=buy
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2018-02-27 21:34:51
+# ORDER_PRICE=149.306, STL_PRICE=149.116, ORDER_KIND=buy, PROFIT=-0.19
+# PROFIT=-0.19
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# self.daily_slope=-4.6107878787879475
+# volatility_buy_price=146.101
+# volatility_bid_price=146.101
+# self.upper_sigma_5m3=146.157974168
+# self.lower_sigma_5m3=145.707382975
+# self.base_line_5m3=145.932678571
+# self.upper_sigma_1h3=146.402675045
+# self.lower_sigma_1h3=144.785610669
+# self.base_line_1h3=145.594142857
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2018-03-05 23:39:50
+# ORDER_PRICE=146.178, TRADE_FLAG=buy
+# Execute FirstTrail Stop
+# Execute SecondTrail Stop
+# EXECUTE SETTLEMENT at 2018-03-06 13:49:51
+# ORDER_PRICE=146.19, STL_PRICE=147.144, ORDER_KIND=buy, PROFIT=0.954
+# PROFIT=0.954
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=2
+# self.daily_slope=2.468181818181786
+# volatility_buy_price=147.989
+# volatility_bid_price=147.989
+# self.upper_sigma_5m3=148.012968884
+# self.lower_sigma_5m3=147.386388259
+# self.base_line_5m3=147.699678571
+# self.upper_sigma_1h3=149.267037522
+# self.lower_sigma_1h3=147.203462478
+# self.base_line_1h3=148.23525
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2018-03-15 22:19:50
+# ORDER_PRICE=147.991, TRADE_FLAG=sell
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2018-03-15 23:59:51
+# ORDER_PRICE=147.979, STL_PRICE=148.201, ORDER_KIND=sell, PROFIT=-0.222
+# PROFIT=-0.222
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# self.daily_slope=1.3827272727272752
+# volatility_buy_price=147.731
+# volatility_bid_price=147.731
+# self.upper_sigma_5m3=147.862536126
+# self.lower_sigma_5m3=147.359356731
+# self.base_line_5m3=147.610946429
+# self.upper_sigma_1h3=148.735631307
+# self.lower_sigma_1h3=147.04876155
+# self.base_line_1h3=147.892196429
+# self.original_stoploss_rate=0.2
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2018-03-16 16:04:52
+# ORDER_PRICE=147.693, TRADE_FLAG=buy
+# weekend stl logic
+# EXECUTE SETTLEMENT at 2018-03-17 05:00:03
+# ORDER_PRICE=147.706, STL_PRICE=147.8875, ORDER_KIND=buy, PROFIT=0.1815
+# PROFIT=0.1815
+#######################################################
+# in expantion Algorithm
+# self.count_threshold=1
+# self.buy_count=2
+# self.sell_count=0
+# self.daily_slope=1.397303030303101
+# volatility_buy_price=147.498
+# volatility_bid_price=147.498
+# self.upper_sigma_5m3=147.497486403
+# self.lower_sigma_5m3=146.994513597
+# self.base_line_5m3=147.246
+# self.upper_sigma_1h3=148.263704527
+# self.lower_sigma_1h3=146.922224045
+# self.base_line_1h3=147.592964286
+# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=1.0
+# EXECUTE ORDER at 2018-03-19 16:54:50
+# ORDER_PRICE=147.5025, TRADE_FLAG=buy
+# EXECUTE SETTLEMENT at 2018-03-19 21:14:21
+# ORDER_PRICE=147.515, STL_PRICE=149.529, ORDER_KIND=buy, PROFIT=2.014
+# PROFIT=2.014
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=1.7240909090907977
+# volatility_buy_price=149.597
+# volatility_bid_price=149.597
+# self.upper_sigma_5m3=150.048627357
+# self.lower_sigma_5m3=148.964372643
+# self.base_line_5m3=149.5065
+# self.upper_sigma_1h3=150.512640518
+# self.lower_sigma_1h3=147.116002339
+# self.base_line_1h3=148.814321429
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2018-03-20 18:09:52
+# ORDER_PRICE=149.232, TRADE_FLAG=sell
+# execute volatility stoploss
+# EXECUTE SETTLEMENT at 2018-03-21 18:30:53
+# ORDER_PRICE=149.219, STL_PRICE=149.3965, ORDER_KIND=sell, PROFIT=-0.1775
+# PROFIT=-0.1775
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=2.2984545454545255
+# volatility_buy_price=149.079
+# volatility_bid_price=149.079
+# self.upper_sigma_5m3=150.048627357
+# self.lower_sigma_5m3=148.964372643
+# self.base_line_5m3=149.5065
+# self.upper_sigma_1h3=150.512640518
+# self.lower_sigma_1h3=147.116002339
+# self.base_line_1h3=148.814321429
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2018-03-21 18:30:54
+# ORDER_PRICE=149.42, TRADE_FLAG=buy
+# execute volatility stoploss
+# EXECUTE SETTLEMENT at 2018-03-21 20:43:55
+# ORDER_PRICE=149.434, STL_PRICE=149.1845, ORDER_KIND=buy, PROFIT=-0.2495
+# PROFIT=-0.2495
+#######################################################
+# in volatility Algorithm
+# self.count_threshold=1
+# self.buy_count=0
+# self.sell_count=0
+# self.daily_slope=2.2984545454545255
+# volatility_buy_price=149.588
+# volatility_bid_price=149.588
+# self.upper_sigma_5m3=150.048627357
+# self.lower_sigma_5m3=148.964372643
+# self.base_line_5m3=149.5065
+# self.upper_sigma_1h3=150.512640518
+# self.lower_sigma_1h3=147.116002339
+# self.base_line_1h3=148.814321429
+# self.original_stoploss_rate=0.2
+# EXECUTE ORDER at 2018-03-21 20:43:56
+# ORDER_PRICE=149.191, TRADE_FLAG=sell
+# execute common stoploss
+# EXECUTE SETTLEMENT at 2018-03-21 21:29:57
+# ORDER_PRICE=149.176, STL_PRICE=149.4665, ORDER_KIND=sell, PROFIT=-0.2905
+# PROFIT=-0.2905

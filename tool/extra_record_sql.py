@@ -37,7 +37,7 @@ mysql_connector = MysqlConnector()
 now = datetime.now()
 
 start_time = "2017-01-04 07:00:00"
-end_time = "2018-04-01 00:00:00"
+end_time = "2018-05-19 00:00:00"
 end_time = datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
 start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
 
@@ -54,8 +54,7 @@ while start_time < end_time:
             response = oanda.get_history(
                 instrument=instrument,
                 start=start_ftime,
-                granularity="S5",
-                candleFormat="midpoint"
+                granularity="S5"
             )
         except ValueError as e:
             print e
@@ -68,8 +67,9 @@ while start_time < end_time:
                 time = time.split(".")[0]
                 insert_time = datetime.strptime(time, "%Y-%m-%dT%H:%M:%S")
                 insert_time = insert_time + timedelta(hours=9)
-                ask_price = candle["openMid"]
-                bid_price = candle["openMid"]
+                print candle
+                ask_price = candle["openAsk"]
+                bid_price = candle["openBid"]
                 sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\');" % (instrument, ask_price, bid_price, insert_time)
                 sql_file.write("%s\n" % sql)
                 print sql

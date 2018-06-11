@@ -17,7 +17,7 @@
 
 from super_algo import SuperAlgo
 from common import instrument_init, account_init, decideMarket, getSlope
-from get_indicator import getBollingerWrapper, getVolatilityPriceWrapper, getHighlowPriceWrapper, getLastPriceWrapper, getWeekStartPrice
+from get_indicator import getBollingerWrapper, getVolatilityPriceWrapper, getHighlowPriceWrapper,  getWeekStartPrice
 from trade_calculator import decideLowExceedPrice, decideLowSurplusPrice, decideHighExceedPrice, decideHighSurplusPrice, decideVolatility, decideDailyVolatilityPrice
 from mysql_connector import MysqlConnector
 from datetime import datetime, timedelta

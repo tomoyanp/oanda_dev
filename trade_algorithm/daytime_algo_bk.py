@@ -27,7 +27,6 @@ class DaytimeAlgo(SuperAlgo):
         super(DaytimeAlgo, self).__init__(instrument, base_path, config_name, base_time)
         self.base_price = 0
         self.setPrice(base_time)
-        self.setIndicator(base_time)
         self.debug_logger = getLogger("debug")
         self.result_logger = getLogger("result")
         self.slope = 0
@@ -43,19 +42,19 @@ class DaytimeAlgo(SuperAlgo):
             if self.order_flag:
                 pass
             else:
-                #weekday = base_time.weekday()
+                weekday = base_time.weekday()
                 hour = base_time.hour
                 minutes = base_time.minute
                 seconds = base_time.second
-                if hour < 4 or hour > 14 or (hour == 14 and minutes > 50):
-                    pass
-                else:
-                    # 1分足の終値付近で計算ロジックに入る
-                    if seconds <= 10:
-                        self.debug_logger.info("%s :DaytimeLogic START" % base_time)
-                        self.setIndicator(base_time)
-                        current_price = self.getCurrentPrice()
-                        trade_flag = self.decideDaytimeTrade(trade_flag, current_price)
+                current_price = self.getCurrentPrice()
+
+                if hour == 7 and minutes == 59:
+                    self.debug_logger.info("%s :DaytimeLogic START" % base_time)
+                    start_price, insert_time = self.getStartPrice(base_time)
+                    trade_flag = self.decideDaytimeTrade(trade_flag, current_price, start_price)
+                    self.result_logger.info("################################")
+                    self.result_logger.info("# start_price=%s, current_price=%s" % (start_price, current_price))
+                    self.result_logger.info("# current_price - start_price difference=%s" % (float(current_price) - float(start_price)))
 
             return trade_flag
         except:
@@ -66,20 +65,11 @@ class DaytimeAlgo(SuperAlgo):
     def decideStl(self, base_time):
         try:
             stl_flag = False
-            ex_stlmode = self.config_data["ex_stlmode"]
             if self.order_flag:
                 minutes = base_time.minute
-                seconds = base_time.second
-                weekday = base_time.weekday()
                 hour = base_time.hour
-                if ex_stlmode == "on":
-                    current_price = self.getCurrentPrice()
-                    if minutes % 5 == 0 and seconds <= 10:
-                        self.debug_logger.info("%s :DaytimeStlLogic START" % base_time)
-                        self.setIndicator(base_time)
-                        stl_flag = self.decideDaytimeStopLoss(stl_flag, current_price)
 
-                if hour == 14 and minutes > 50:
+                if hour == 14 and minutes == 59:
                     self.result_logger.info("# Execute Settlemnt: daytime algorithm timeup")
                     stl_flag = True
 
@@ -95,20 +85,25 @@ class DaytimeAlgo(SuperAlgo):
 
         return stl_flag
 
-    def decideDaytimeTrade(self, trade_flag, current_price):
+    def decideDaytimeTrade(self, trade_flag, current_price, start_price):
 
-        if self.upper_sigma_1m3 < current_price:
-            self.result_logger.info("# current_price higher than upper_sigma_1m3")
+        if float(start_price) < float(current_price):
             trade_flag = "buy"
-        elif self.lower_sigma_1m3 > current_price:
-            self.result_logger.info("# current_price lower than upper_sigma_1m3")
+        elif float(start_price) > float(current_price):
             trade_flag = "sell"
-
-        else:
-            pass
 
         return trade_flag
 
+    def getStartPrice(self, base_time):
+        start_time = base_time.strftime("%Y-%m-%d 07:00:00")
+        width = 24 * 3600
+        sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time < \'%s\' order by insert_time desc limit %s" % (self.instrument, start_time, width)
+        self.debug_logger.info(base_time)
+        self.debug_logger.info(sql)
+        response = self.mysql_connector.select_sql(sql)
+        ask_price = response[-1][0]
+        bid_price = response[-1][1]
+        insert_time = response[-1][2]
+        self.debug_logger.info(insert_time)
 
-    def setIndicator(self, base_time):
-        self.setBollinger1m3(base_time)
+        return ((ask_price + bid_price) / 2), insert_time

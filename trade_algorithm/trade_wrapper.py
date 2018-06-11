@@ -10,6 +10,7 @@ from trendfollow_algo import TrendFollowAlgo
 from trendreverse_algo import TrendReverseAlgo
 from expantion_algo import ExpantionAlgo
 from multi_algo import MultiAlgo
+from multi_evolv_algo import MultiEvolvAlgo
 from daytime_algo import DaytimeAlgo
 from oanda_wrapper import OandaWrapper
 from common import instrument_init, account_init
@@ -18,7 +19,8 @@ import time
 from logging import getLogger, FileHandler, DEBUG
 
 class TradeWrapper:
-    def __init__(self, instrument, mode, test_mode, base_path, config_name, args):
+    def __init__(self, instrument, mode, test_mode, base_path, config_name, args, sendmail):
+        self.sendmail = sendmail
         # trueであれば、テストモードにする
         self.test_mode = test_mode
 
@@ -86,6 +88,8 @@ class TradeWrapper:
             self.trade_algo = ReverseAlgo(self.instrument, self.base_path, self.config_name, base_time)
         elif algo == "multi":
             self.trade_algo = MultiAlgo(self.instrument, self.base_path, self.config_name, base_time)
+        elif algo == "multi_evolv":
+            self.trade_algo = MultiEvolvAlgo(self.instrument, self.base_path, self.config_name, base_time)
         else:
             self.trade_algo = HiLowAlgo(self.instrument, self.base_path, self.config_name, base_time)
 
@@ -152,23 +156,31 @@ class TradeWrapper:
         if self.test_mode:
             pass
         else:
-            position_flag = self.oanda_wrapper.get_trade_position(self.instrument)
-            onfile_flag = self.checkOnfile()
+            while True:
+                try:
+                    position_flag = self.oanda_wrapper.get_trade_position(self.instrument)
+                    onfile_flag = self.checkOnfile()
 
-            # positionがないのに、onfileがあった場合、決済されたと判断
-            if position_flag == False and onfile_flag:
-                # 決済した直後であればスリープする
-                trade_id = self.trade_algo.getTradeId()
-                if self.stl_sleep_flag and trade_id != 0:
-                    profit, sleep_time = self.trade_algo.calcProfit()
+                    # positionがないのに、onfileがあった場合、決済されたと判断
+                    if position_flag == False and onfile_flag:
+                        # 決済した直後であればスリープする
+                        trade_id = self.trade_algo.getTradeId()
+                        if self.stl_sleep_flag and trade_id != 0:
+                            profit, sleep_time = self.trade_algo.calcProfit()
 
-                    msg = "# EXECUTE SETTLEMENT STOP OR LIMIT ORDER "
-                    self.settlementLogWrite(profit, msg)
-                    self.stl_sleep_flag = False
-                    self.trade_algo.resetFlag()
-                    self.removeOnfile()
-            else:
-                self.stl_sleep_flag = True
+                            msg = "# EXECUTE SETTLEMENT STOP OR LIMIT ORDER "
+                            self.settlementLogWrite(profit, msg)
+                            self.stl_sleep_flag = False
+                            self.trade_algo.resetFlag()
+                            self.removeOnfile()
+                    else:
+                        self.stl_sleep_flag = True
+
+                    break
+                except:
+                    self.send_msg("trade_wrapper.checkPosition() is failed")
+                    self.sendmail()
+                    self.debbug_logger.info("Error trade_wrapper.checkPosition()")
 
         return sleep_time
 
