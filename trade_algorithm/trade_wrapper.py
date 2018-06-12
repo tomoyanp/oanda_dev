@@ -149,8 +149,9 @@ class TradeWrapper:
                         trade_id = self.trade_algo.getTradeId()
                         if self.stl_sleep_flag and trade_id != 0:
                             profit, sleep_time = self.trade_algo.calcProfit()
+                            stl_price = self.trade_algo.getCurrentPrice()
 
-                            self.settlementLogWrite(profit, base_time)
+                            self.settlementLogWrite(profit, base_time, stl_price)
                             self.stl_sleep_flag = False
                             self.trade_algo.resetFlag()
                             self.removeOnfile()
@@ -175,7 +176,7 @@ class TradeWrapper:
 
     def executeSettlement(self, base_time):
         if self.test_mode:
-            pass
+            stl_price = self.trade_algo.getCurrentPrice()
         else:
             trade_id = self.trade_algo.getTradeId()
             response = self.oanda_wrapper.close_trade(trade_id)
@@ -185,7 +186,7 @@ class TradeWrapper:
         profit, sleep_time = self.trade_algo.calcProfit()
 
         # 計算した利益を結果ファイルに出力
-        self.trade_algo.settlementLogWrite(profit, base_time)
+        self.trade_algo.settlementLogWrite(profit, base_time, stl_price)
 
         # flagの初期化
         self.trade_algo.resetFlag()
