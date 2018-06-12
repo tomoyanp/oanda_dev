@@ -123,6 +123,9 @@ class MultiAlgo(SuperAlgo):
                         stl_flag = self.decideCommonStoploss(stl_flag, current_price, base_time)
                         stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, base_time)
 
+                if stl_flag:
+                    self.result_logger.info("# self.log_max_price=%s" % self.log_max_price)
+                    self.result_logger.info("# self.log_min_price=%s" % self.log_min_price)
             else:
                 pass
 
@@ -237,13 +240,18 @@ class MultiAlgo(SuperAlgo):
     def setExpantionStoploss(self, trade_flag):
         if trade_flag != "pass" and self.algorithm == "expantion":
             if trade_flag == "buy" and self.daily_slope > 0:
-                self.original_stoploss_rate = 1.0
+                self.original_stoploss_rate = 1.0 
+                self.result_logger.info("# self.original_stoploss_rate=%s" %  self.original_stoploss_rate)
             elif trade_flag == "buy" and self.daily_slope < 0:
                 self.original_stoploss_rate = 0.2
+                self.result_logger.info("# self.original_stoploss_rate=%s" %  self.original_stoploss_rate)
             elif trade_flag == "sell" and self.daily_slope < 0:
                 self.original_stoploss_rate = 1.0
+                self.result_logger.info("# self.original_stoploss_rate=%s" %  self.original_stoploss_rate)
             elif trade_flag == "sell" and self.daily_slope > 0:
                 self.original_stoploss_rate = 0.2
+                self.result_logger.info("# self.original_stoploss_rate=%s" %  self.original_stoploss_rate)
+
 
     def decideCommonStoploss(self, stl_flag, current_price, base_time):
         if self.algorithm == "expantion" or self.algorithm == "volatility" or self.algorithm == "reverse":
@@ -274,6 +282,8 @@ class MultiAlgo(SuperAlgo):
         elif self.log_min_price > current_price:
             self.log_min_price = current_price
 
+        self.debug_logger.info("log_max_price = %s" % self.log_max_price)
+        self.debug_logger.info("log_min_price = %s" % self.log_min_price)
 
 # trail settlement function
     def decideTrailLogic(self, stl_flag, current_ask_price, current_bid_price, base_time):
@@ -365,6 +375,7 @@ class MultiAlgo(SuperAlgo):
         # set dataset 5minutes
         target_time = base_time - timedelta(minutes=5)
         dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=3, length=0)
+        #dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=2.5, length=0)
         self.upper_sigma_5m3 = dataset["upper_sigmas"][-1]
         self.lower_sigma_5m3 = dataset["lower_sigmas"][-1]
         self.base_line_5m3 = dataset["base_lines"][-1]
@@ -399,6 +410,7 @@ class MultiAlgo(SuperAlgo):
 
 
 # write log function
+
     def writeDebugLog(self, base_time, mode):
         self.debug_logger.info("%s: %s Logic START" % (base_time, mode))
         self.debug_logger.info("# self.buy_count=%s" % self.buy_count)
@@ -414,11 +426,9 @@ class MultiAlgo(SuperAlgo):
         self.debug_logger.info("# self.end_price_1m=%s" % self.end_price_1m)
         self.debug_logger.info("#############################################")
 
-    def entryLogWrite(self, base_time):
+    def writeEntryLog(self):
         self.result_logger.info("#######################################################")
         self.result_logger.info("# in %s Algorithm" % self.algorithm)
-        self.result_logger.info("# EXECUTE ORDER at %s" % base_time)
-        self.result_logger.info("# ORDER_PRICE=%s, TRADE_FLAG=%s" % (self.order_price, self.order_kind))
         self.result_logger.info("# self.daily_slope=%s" % self.daily_slope)
         self.result_logger.info("# self.upper_sigma_1h3=%s" % self.upper_sigma_1h3)
         self.result_logger.info("# self.lower_sigma_1h3=%s" % self.lower_sigma_1h3)
@@ -428,11 +438,4 @@ class MultiAlgo(SuperAlgo):
         self.result_logger.info("# self.end_price_5m=%s" % self.end_price_5m)
         self.result_logger.info("# self.start_price_1m=%s" % self.start_price_1m)
         self.result_logger.info("# self.end_price_1m=%s" % self.end_price_1m)
-        self.result_logger.info("# self.original_stoploss_rate=%s" %  self.original_stoploss_rate)
-
-    def settlementLogWrite(self, profit, base_time):
-        self.result_logger.info("# self.log_max_price=%s" % self.log_max_price)
-        self.result_logger.info("# self.log_min_price=%s" % self.log_min_price)
-        self.result_logger.info("# EXECUTE SETTLEMENT at %s" % base_time)
-        self.result_logger.info("# STL_PRICE=%s" % stl_price)
-        self.result_logger.info("# PROFIT=%s" % profit)
+   

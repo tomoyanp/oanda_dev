@@ -110,7 +110,7 @@ if __name__ == '__main__':
               # StopLossの時はstl_sleep_ltimeを返す
               # LimitOrderの時はstl_sleep_vtimeを返す
               # その他はsleep_time = 0を返す
-              sleep_time = trade_wrapper.checkPosition()
+              sleep_time = trade_wrapper.checkPosition(base_time)
               base_time = sleepTransaction(sleep_time, test_mode, base_time)
 
           if test_mode:
