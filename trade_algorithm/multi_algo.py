@@ -430,7 +430,7 @@ class MultiAlgo(SuperAlgo):
         self.result_logger.info("# self.end_price_1m=%s" % self.end_price_1m)
         self.result_logger.info("# self.original_stoploss_rate=%s" %  self.original_stoploss_rate)
 
-    def settlementLogWrite(self, profit, base_time):
+    def settlementLogWrite(self, profit, base_time, stl_price):
         self.result_logger.info("# self.log_max_price=%s" % self.log_max_price)
         self.result_logger.info("# self.log_min_price=%s" % self.log_min_price)
         self.result_logger.info("# EXECUTE SETTLEMENT at %s" % base_time)
