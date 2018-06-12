@@ -245,11 +245,11 @@ class TradeWrapper:
             elif trade_flag == "sell":
                 order_price = self.trade_algo.getBidPrice()
 
+            threshold_list = self.trade_algo.calcThreshold(trade_flag)
             if self.test_mode:
                 # dummy trade id for test mode
                 trade_id = 12345
             else:
-                threshold_list = self.trade_algo.calcThreshold(trade_flag)
                 response = self.oanda_wrapper.order(trade_flag, self.instrument, threshold_list["stoploss"], threshold_list["takeprofit"])
                 order_price = response["price"]
                 trade_id = response["tradeOpened"]["id"]

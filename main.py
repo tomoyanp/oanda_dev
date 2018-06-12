@@ -57,8 +57,8 @@ if __name__ == '__main__':
 
     if test_args == "test":
         end_time = base_time - timedelta(days=0)
-        end_time = datetime.strptime("2018-06-12 00:00:00", "%Y-%m-%d %H:%M:%S")
-        base_time = datetime.strptime("2018-06-01 00:00:00", "%Y-%m-%d %H:%M:%S")
+        end_time = datetime.strptime("2018-03-26 00:00:00", "%Y-%m-%d %H:%M:%S")
+        base_time = datetime.strptime("2017-03-01 00:00:00", "%Y-%m-%d %H:%M:%S")
 #        end_time = datetime.strptime("2018-06-07 00:00:00", "%Y-%m-%d %H:%M:%S")
 #        base_time = datetime.strptime("2018-05-01 00:00:00", "%Y-%m-%d %H:%M:%S")
         test_mode = True
