@@ -248,33 +248,51 @@ class TradeWrapper:
         sleep_time = 0
         order_flag = self.trade_algo.getOrderFlag()
 
-        if order_flag:
-            pass
+        trade_flag = self.trade_algo.decideTrade(base_time)
+        trade_flag = self.trade_algo.decideTradeTime(base_time, trade_flag)
+
+        if trade_flag == "pass":
+            sleep_time = self.config_data["sleep_time"]
         else:
-            trade_flag = self.trade_algo.decideTrade(base_time)
-            trade_flag = self.trade_algo.decideTradeTime(base_time, trade_flag)
-
-            if trade_flag == "pass":
-                sleep_time = self.config_data["sleep_time"]
-            else:
-                sleep_time = self.config_data["trade_sleep_time"]
-                if trade_flag == "buy":
-                    order_price = self.trade_algo.getAskPrice()
-                elif trade_flag == "sell":
-                    order_price = self.trade_algo.getBidPrice()
-
+            # if trade_flag == buy or sell and order_flag == True, execute settlement
+            if order_flag:
                 if self.test_mode:
-                    # dummy trade id for test mode
-                    trade_id = 12345
+                    pass
                 else:
-                    threshold_list = self.trade_algo.calcThreshold(trade_flag)
-                    response = self.oanda_wrapper.order(trade_flag, self.instrument, threshold_list["stoploss"], threshold_list["takeprofit"])
-                    order_price = response["price"]
-                    trade_id = response["tradeOpened"]["id"]
+                    trade_id = self.trade_algo.getTradeId()
+                    response = self.oanda_wrapper.close_trade(trade_id)
+                    stl_price = response["price"]
+                    self.trade_algo.setStlPrice(stl_price)
 
-                self.tradeLogWrite(trade_flag)
-                order_flag = True
-                self.trade_algo.setOrderData(trade_flag, order_price, order_flag, trade_id)
-                self.createOnfile()
+                profit, sleep_time = self.trade_algo.calcProfit()
+
+                # 計算した利益を結果ファイルに出力
+                msg = "# EXECUTE SETTLEMENT "
+                self.settlementLogWrite(profit, msg)
+
+                # flagの初期化
+                self.trade_algo.resetFlag()
+                self.removeOnfile()
+                self.stl_sleep_flag = False
+           
+            sleep_time = self.config_data["trade_sleep_time"]
+            if trade_flag == "buy":
+                order_price = self.trade_algo.getAskPrice()
+            elif trade_flag == "sell":
+                order_price = self.trade_algo.getBidPrice()
+
+            if self.test_mode:
+                # dummy trade id for test mode
+                trade_id = 12345
+            else:
+                threshold_list = self.trade_algo.calcThreshold(trade_flag)
+                response = self.oanda_wrapper.order(trade_flag, self.instrument, threshold_list["stoploss"], threshold_list["takeprofit"])
+                order_price = response["price"]
+                trade_id = response["tradeOpened"]["id"]
+
+            self.tradeLogWrite(trade_flag)
+            order_flag = True
+            self.trade_algo.setOrderData(trade_flag, order_price, order_flag, trade_id)
+            self.createOnfile()
 
         return sleep_time
