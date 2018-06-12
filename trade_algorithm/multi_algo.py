@@ -55,32 +55,38 @@ class MultiAlgo(SuperAlgo):
     def decideTrade(self, base_time):
         trade_flag = "pass"
         try:
-            if self.order_flag:
-                pass
+            weekday = base_time.weekday()
+            hour = base_time.hour
+            minutes = base_time.minute
+            seconds = base_time.second
+            current_price = self.getCurrentPrice()
+
+            if hour == 7 and minutes == 0 and seconds < 10:
+                self.setDailyIndicator(base_time)
+
+            # if weekday == Saturday, we will have no entry.
+            if weekday == 5 and hour >= 5:
+                trade_flag = "pass"
+                self.buy_count = 0
+                self.sell_count = 0
+
             else:
-                weekday = base_time.weekday()
-                hour = base_time.hour
-                minutes = base_time.minute
-                seconds = base_time.second
-                current_price = self.getCurrentPrice()
-
-                if hour == 7 and minutes == 0 and seconds < 10:
-                    self.setDailyIndicator(base_time)
-
-                # if weekday == Saturday, we will have no entry.
-                if weekday == 5 and hour >= 5:
-                    trade_flag = "pass"
-                    self.buy_count = 0
-                    self.sell_count = 0
+                # if spread rate is greater than 0.5, we will have no entry
+                if (self.ask_price - self.bid_price) >= 0.5:
+                    pass
 
                 else:
-                    # if spread rate is greater than 0.5, we will have no entry
-                    if (self.ask_price - self.bid_price) >= 0.5:
-                        pass
+                    trade_flag = self.decideVolatilityTrade(trade_flag, current_price, base_time)
+                    trade_flag = self.decideExpantionTrade(trade_flag, current_price, base_time)
 
-                    else:
-                        trade_flag = self.decideVolatilityTrade(trade_flag, current_price, base_time)
-                        trade_flag = self.decideExpantionTrade(trade_flag, current_price, base_time)
+
+            if trade_flag != "pass" and self.order_flag:
+                if trade_flag == "buy" and self.order_kind == "buy":
+                    trade_flag = "pass"
+                elif trade_flag == "sell" and self.order_kind == "sell":
+                    trade_flag = "pass"
+                else:
+                    self.result_logger.info("execute all over the world")
 
             self.writeDebugLog(base_time, mode="trade")
 
@@ -169,8 +175,6 @@ class MultiAlgo(SuperAlgo):
             seconds = base_time.second
             if minutes % 5 == 0 and seconds < 10:
                 self.setExpantionIndicator(base_time)
-#                self.calcBuyExpantion(current_price, base_time)
-#                self.calcSellExpantion(current_price, base_time)
                 self.calcBuyExpantion(self.end_price_5m, base_time)
                 self.calcSellExpantion(self.end_price_5m, base_time)
                 if self.buy_count > self.count_threshold and trade_flag == "pass":
@@ -180,14 +184,12 @@ class MultiAlgo(SuperAlgo):
                     if surplus_flag:
                         trade_flag = "buy"
                         self.algorithm = "expantion"
-                        self.writeResultLog()
                         self.buy_count = 0
                         self.sell_count = 0
 
                     elif exceed_flag:
                         trade_flag = "buy"
                         self.algorithm = "expantion"
-                        self.writeResultLog()
                         self.buy_count = 0
                         self.sell_count = 0
 
@@ -198,14 +200,12 @@ class MultiAlgo(SuperAlgo):
                     if surplus_flag:
                         trade_flag = "sell"
                         self.algorithm = "expantion"
-                        self.writeResultLog()
                         self.buy_count = 0
                         self.sell_count = 0
 
                     elif exceed_flag:
                         trade_flag = "sell"
                         self.algorithm = "expantion"
-                        self.writeResultLog()
                         self.buy_count = 0
                         self.sell_count = 0
 
@@ -228,14 +228,12 @@ class MultiAlgo(SuperAlgo):
                     self.sell_count = 0
                     self.original_stoploss_rate = common_stoploss
                     self.algorithm = "volatility"
-                    self.writeResultLog()
                 elif down_flag:
                     trade_flag = "sell"
                     self.buy_count = 0
                     self.sell_count = 0
                     self.original_stoploss_rate = common_stoploss
                     self.algorithm = "volatility"
-                    self.writeResultLog()
 
         return trade_flag
 
@@ -243,14 +241,12 @@ class MultiAlgo(SuperAlgo):
         if trade_flag != "pass" and self.algorithm == "expantion":
             if trade_flag == "buy" and self.daily_slope > 0:
                 self.original_stoploss_rate = 1.0 
-#                self.original_stoploss_rate = 0.2 
                 self.result_logger.info("# self.original_stoploss_rate=%s" %  self.original_stoploss_rate)
             elif trade_flag == "buy" and self.daily_slope < 0:
                 self.original_stoploss_rate = 0.2
                 self.result_logger.info("# self.original_stoploss_rate=%s" %  self.original_stoploss_rate)
             elif trade_flag == "sell" and self.daily_slope < 0:
                 self.original_stoploss_rate = 1.0
-#                self.original_stoploss_rate = 0.2
                 self.result_logger.info("# self.original_stoploss_rate=%s" %  self.original_stoploss_rate)
             elif trade_flag == "sell" and self.daily_slope > 0:
                 self.original_stoploss_rate = 0.2
@@ -419,9 +415,6 @@ class MultiAlgo(SuperAlgo):
         self.debug_logger.info("%s: %s Logic START" % (base_time, mode))
         self.debug_logger.info("# self.buy_count=%s" % self.buy_count)
         self.debug_logger.info("# self.sell_count=%s" % self.sell_count)
-#        self.debug_logger.info("self.high_price=%s" % self.high_price)
-#        self.debug_logger.info("self.low_price=%s" % self.low_price)
-#        self.debug_logger.info("self.daily_slope=%s" % self.daily_slope)
         self.debug_logger.info("# self.daily_slope=%s" % self.daily_slope)
         self.debug_logger.info("# self.upper_sigma_1h3=%s" % self.upper_sigma_1h3)
         self.debug_logger.info("# self.lower_sigma_1h3=%s" % self.lower_sigma_1h3)
@@ -433,7 +426,7 @@ class MultiAlgo(SuperAlgo):
         self.debug_logger.info("# self.end_price_1m=%s" % self.end_price_1m)
         self.debug_logger.info("#############################################")
 
-    def writeResultLog(self):
+    def writeEntryLog(self):
         self.result_logger.info("#######################################################")
         self.result_logger.info("# in %s Algorithm" % self.algorithm)
         self.result_logger.info("# self.daily_slope=%s" % self.daily_slope)
