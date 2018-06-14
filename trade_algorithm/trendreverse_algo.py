@@ -25,7 +25,7 @@ from logging import getLogger, FileHandler, DEBUG
 
 class TrendReverseAlgo(SuperAlgo):
     def __init__(self, instrument, base_path, config_name, base_time):
-        super(TrendreverseAlgo, self).__init__(instrument, base_path, config_name, base_time)
+        super(TrendReverseAlgo, self).__init__(instrument, base_path, config_name, base_time)
         self.base_price = 0
         self.setPrice(base_time)
         self.debug_logger = getLogger("debug")
@@ -47,9 +47,7 @@ class TrendReverseAlgo(SuperAlgo):
         self.algorithm = ""
         self.log_max_price = 0
         self.log_min_price = 0
-        self.setExpantionIndicator(base_time)
-        self.setVolatilityIndicator(base_time)
-        self.setDailyIndicator(base_time)
+        self.setReverseIndicator(base_time)
 
     # decide trade entry timing
     def decideTrade(self, base_time):
@@ -84,7 +82,7 @@ class TrendReverseAlgo(SuperAlgo):
 #                    elif trade_flag == "sell" and self.order_kind == "sell":
 #                        trade_flag = "pass"
 #                    else:
-#                        self.result_logger.info("# execute all over the world at TrendreverseAlgo")
+#                        self.result_logger.info("# execute all over the world at TrendReverseAlgo")
 
                 self.writeDebugLog(base_time, mode="trade")
 
@@ -109,9 +107,6 @@ class TrendReverseAlgo(SuperAlgo):
 
                     self.updatePrice(current_price)
 
-                    if hour == 7 and minutes == 0 and seconds < 10:
-                        self.setDailyIndicator(base_time)
-
                     # if weekday == Saturday, we will settle one's position.
                     if weekday == 5 and hour >= 5:
                         self.result_logger.info("# weekend stl logic")
@@ -130,22 +125,22 @@ class TrendReverseAlgo(SuperAlgo):
             raise
 
     def decideReverseStl(self, stl_flag, base_time):
-        if trade_flag == "pass":
-        hour = base_time.hour
-        minutes = base_time.minute
-        seconds = base_time.second
-        if seconds < 10:
-            self.setReverseIndicator(base_time)
-            if self.order_kind == "buy":
-                if self.end_price_1m < self.lower_sigma_1m3:
-                    stl_flag = True
-                elif self.end_price_1m > self.base_line_1m3:
-                    stl_flag = True
-            elif self.order_kind == "sell":
-                if self.end_price_1m > self.upper_sigma_1m3:
-                    stl_flag = True
-                elif self.end_price_1m < self.base_line_1m3:
-                    stl_flag = True
+        if self.order_flag:
+            hour = base_time.hour
+            minutes = base_time.minute
+            seconds = base_time.second
+            if seconds < 10:
+                self.setReverseIndicator(base_time)
+                if self.order_kind == "buy":
+                    if self.end_price_1m < self.lower_sigma_1m3:
+                        stl_flag = True
+                    elif self.end_price_1m > self.base_line_1m3:
+                        stl_flag = True
+                elif self.order_kind == "sell":
+                    if self.end_price_1m > self.upper_sigma_1m3:
+                        stl_flag = True
+                    elif self.end_price_1m < self.base_line_1m3:
+                        stl_flag = True
 
         return stl_flag
 
@@ -157,11 +152,13 @@ class TrendReverseAlgo(SuperAlgo):
             seconds = base_time.second
             if seconds < 10:
                 self.setReverseIndicator(base_time)
-                if self.slope > 0:
-                    if self.end_price_1m < self.lower_sigma_1m2:
+                if self.slope_5m > 0:
+                    #if self.end_price_1m < self.lower_sigma_1m2:
+                    if self.min_price_1m < self.lower_sigma_1m2:
                         trade_flag = "buy"
                 else:
-                    if self.end_price_1m > self.upper_sigma_1m2:
+                    #if self.end_price_1m > self.upper_sigma_1m2:
+                    if self.max_price_1m > self.upper_sigma_1m2:
                         trade_flag = "sell"
 
         return trade_flag
@@ -189,7 +186,7 @@ class TrendReverseAlgo(SuperAlgo):
         self.algorithm = ""
         self.log_max_price = 0
         self.log_min_price = 0
-        super(TrendreverseAlgo, self).resetFlag()
+        super(TrendReverseAlgo, self).resetFlag()
 
 
     def setReverseIndicator(self, base_time):
@@ -206,14 +203,16 @@ class TrendReverseAlgo(SuperAlgo):
         self.lower_sigma_1m2 = dataset["lower_sigmas"][-1]
         self.base_line_1m2 = dataset["base_lines"][-1]
 
-        sql = "select start_price, end_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 1" % (self.instrument, "1m", target_time)
+        sql = "select start_price, end_price, max_price, min_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 1" % (self.instrument, "1m", target_time)
         response = self.mysql_connector.select_sql(sql)
         self.start_price_1m = response[0][0]
         self.end_price_1m = response[0][1]
+        self.max_price_1m = response[0][2]
+        self.min_price_1m = response[0][3]
 
         target_time = base_time - timedelta(minutes=5)
         dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=3, length=11)
-        base_lines = dataset["base_lines"]
+        base_lines = dataset["base_lines"][-12:]
 
         self.slope_5m = getSlope(base_lines)
 
@@ -244,6 +243,8 @@ class TrendReverseAlgo(SuperAlgo):
 
     def settlementLogWrite(self, profit, base_time, stl_price):
         self.result_logger.info("# EXECUTE SETTLEMENT at %s" % base_time)
+        self.result_logger.info("# self.ask_price=%s" % self.ask_price)
+        self.result_logger.info("# self.bid_price=%s" % self.bid_price)
         self.result_logger.info("# self.log_max_price=%s" % self.log_max_price)
         self.result_logger.info("# self.log_min_price=%s" % self.log_max_price)
         self.result_logger.info("# STL_PRICE=%s" % stl_price)
