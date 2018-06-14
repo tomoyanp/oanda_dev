@@ -55,44 +55,40 @@ class MultiAlgo(SuperAlgo):
     def decideTrade(self, base_time):
         trade_flag = "pass"
         try:
-#            if self.order_flag:
-#                pass
-#            else:
-            if 1 == 1:
-                weekday = base_time.weekday()
-                hour = base_time.hour
-                minutes = base_time.minute
-                seconds = base_time.second
-                current_price = self.getCurrentPrice()
-    
-                if hour == 7 and minutes == 0 and seconds < 10:
-                    self.setDailyIndicator(base_time)
-    
-                # if weekday == Saturday, we will have no entry.
-                if weekday == 5 and hour >= 5:
-                    trade_flag = "pass"
-                    self.buy_count = 0
-                    self.sell_count = 0
-    
+            weekday = base_time.weekday()
+            hour = base_time.hour
+            minutes = base_time.minute
+            seconds = base_time.second
+            current_price = self.getCurrentPrice()
+
+            if hour == 7 and minutes == 0 and seconds < 10:
+                self.setDailyIndicator(base_time)
+
+            # if weekday == Saturday, we will have no entry.
+            if weekday == 5 and hour >= 5:
+                trade_flag = "pass"
+                self.buy_count = 0
+                self.sell_count = 0
+
+            else:
+                # if spread rate is greater than 0.5, we will have no entry
+                if (self.ask_price - self.bid_price) >= 0.5:
+                    pass
+
                 else:
-                    # if spread rate is greater than 0.5, we will have no entry
-                    if (self.ask_price - self.bid_price) >= 0.5:
-                        pass
-    
-                    else:
-                        trade_flag = self.decideVolatilityTrade(trade_flag, current_price, base_time)
-                        trade_flag = self.decideExpantionTrade(trade_flag, current_price, base_time)
-    
-    
-                if trade_flag != "pass" and self.order_flag:
-                    if trade_flag == "buy" and self.order_kind == "buy":
-                        trade_flag = "pass"
-                    elif trade_flag == "sell" and self.order_kind == "sell":
-                        trade_flag = "pass"
-                    else:
-                        self.result_logger.info("# execute all over the world at MultiAlgo")
-    
-                self.writeDebugLog(base_time, mode="trade")
+                    trade_flag = self.decideVolatilityTrade(trade_flag, current_price, base_time)
+                    trade_flag = self.decideExpantionTrade(trade_flag, current_price, base_time)
+
+
+            if trade_flag != "pass" and self.order_flag:
+                if trade_flag == "buy" and self.order_kind == "buy":
+                    trade_flag = "pass"
+                elif trade_flag == "sell" and self.order_kind == "sell":
+                    trade_flag = "pass"
+                else:
+                    self.result_logger.info("execute all over the world")
+
+            self.writeDebugLog(base_time, mode="trade")
 
             return trade_flag
         except:
