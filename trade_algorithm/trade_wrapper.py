@@ -237,6 +237,7 @@ class TradeWrapper:
         else:
             # if trade_flag == buy or sell and order_flag == True, execute settlement
             if order_flag:
+                self.result_logger.info("# execute all over the world at TradeWrapper")
                 self.executeSettlement(base_time)
 
             sleep_time = self.config_data["trade_sleep_time"]
