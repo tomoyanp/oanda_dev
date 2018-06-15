@@ -129,14 +129,15 @@ class TrendReverseAlgo(SuperAlgo):
             hour = base_time.hour
             minutes = base_time.minute
             seconds = base_time.second
-            self.setReverseIndicator(base_time)
-            if self.order_kind == "buy":
-                if self.bid_price > self.upper_sigma_1m2:
-                    stl_flag = True
-            elif self.order_kind == "sell":
-                if self.ask_price < self.lower_sigma_1m2:
-                    stl_flag = True
-
+            if seconds < 10:
+                self.setReverseIndicator(base_time)
+                if self.order_kind == "buy":
+                    if self.max_price_1m > self.upper_sigma_1m2:
+                        stl_flag = True
+                elif self.order_kind == "sell":
+                    if self.min_price_1m < self.lower_sigma_1m2:
+                        stl_flag = True
+    
 
         return stl_flag
 
