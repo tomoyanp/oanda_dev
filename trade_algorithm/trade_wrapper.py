@@ -65,7 +65,7 @@ class TradeWrapper:
                 balance = self.oanda_wrapper.getBalance()
                 #print "balance=%s" % balance
                 #balance = balance * 0.9 * 20
-                balance = balance * 0.8 * 20
+                balance = balance * 0.2 * 20
                 #print "revalege balance=%s" % balance
                 units = balance / current_price
                 #print "simple units=%s" % units
@@ -163,6 +163,8 @@ class TradeWrapper:
                     #self.send_msg("trade_wrapper.checkPosition() is failed")
                     #self.sendmail()
                     self.debug_logger.info("Error trade_wrapper.checkPosition()")
+                    message = traceback.format_exc()
+                    self.debug_logger.info(message)
 
         return sleep_time
 
