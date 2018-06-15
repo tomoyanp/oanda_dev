@@ -160,8 +160,8 @@ class TradeWrapper:
 
                     break
                 except:
-                    self.send_msg("trade_wrapper.checkPosition() is failed")
-                    self.sendmail()
+                    self.sendmail.set_msg("trade_wrapper.checkPosition() is failed")
+                    self.sendmail.send_mail()
                     self.debbug_logger.info("Error trade_wrapper.checkPosition()")
 
         return sleep_time
