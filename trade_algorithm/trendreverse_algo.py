@@ -131,11 +131,27 @@ class TrendReverseAlgo(SuperAlgo):
             seconds = base_time.second
             if seconds < 10:
                 self.setReverseIndicator(base_time)
+                self.debug_logger.info("SSSSSSSSSSSSSSSSSS")
                 if self.order_kind == "buy":
                     if self.max_price_1m > self.upper_sigma_1m2:
+                        self.result_logger.info("max_price > upper_sigma")
                         stl_flag = True
+                      
                 elif self.order_kind == "sell":
                     if self.min_price_1m < self.lower_sigma_1m2:
+                        self.result_logger.info("min_price < upper_sigma")
+                        stl_flag = True
+
+                if self.order_kind == "buy":
+                    self.debug_logger.info("order_price=%s, ask_price=%s, bid_price=%s" % (self.order_price, self.ask_price, self.bid_price))
+                    #if self.order_price > self.ask_price:
+                    if self.stop_threshold > self.ask_price:
+                        self.result_logger.info("end_price[0] > end_price[1]")
+                        stl_flag = True
+                elif self.order_kind == "sell":
+                    #if self.order_price < self.bid_price:
+                    if self.stop_threshold < self.bid_price:
+                        self.result_logger.info("end_price[0] < end_price[1]")
                         stl_flag = True
     
 
@@ -150,9 +166,13 @@ class TrendReverseAlgo(SuperAlgo):
             if seconds < 10:
                 self.setReverseIndicator(base_time)
                 if self.min_price_1m < self.lower_sigma_1m2 and self.end_price_1m > self.lower_sigma_1m2 and self.start_price_1m < self.end_price_1m:
-                    trade_flag = "buy"
+                    if self.slope_5m > 0:
+                        trade_flag = "buy"
+                        self.stop_threshold = self.min_price_1m
                 elif self.max_price_1m > self.upper_sigma_1m2 and self.end_price_1m < self.upper_sigma_1m2 and self.start_price_1m > self.end_price_1m:
-                    trade_flag = "sell"
+                    if self.slope_5m < 0:
+                        trade_flag = "sell"
+                        self.stop_threshold = self.max_price_1m
 
 #                if self.slope_5m > 0:
 #                    #if self.end_price_1m < self.lower_sigma_1m2:
@@ -214,10 +234,23 @@ class TrendReverseAlgo(SuperAlgo):
         self.min_price_1m = response[0][3]
 
         target_time = base_time - timedelta(minutes=5)
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=3, length=11)
-        base_lines = dataset["base_lines"][-12:]
+        sql = "select end_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 12" % (self.instrument, "5m", target_time)
+        response = self.mysql_connector.select_sql(sql)
 
-        self.slope_5m = getSlope(base_lines)
+        tmp = []
+        for res in response:
+            tmp.append(res[0])
+        tmp.reverse() 
+        self.slope_5m = getSlope(tmp)
+
+
+
+
+#        target_time = base_time - timedelta(minutes=5)
+#        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=3, length=11)
+#        base_lines = dataset["base_lines"][-12:]
+#
+#        self.slope_5m = getSlope(base_lines)
 
 # write log function
     def writeDebugLog(self, base_time, mode):
@@ -241,6 +274,7 @@ class TrendReverseAlgo(SuperAlgo):
         self.result_logger.info("# self.base_line_1m3=%s" % self.base_line_1m3)
         self.result_logger.info("# self.upper_sigma_1m2=%s" % self.upper_sigma_1m2)
         self.result_logger.info("# self.lower_sigma_1m2=%s" % self.lower_sigma_1m2)
+        self.result_logger.info("# self.start_price_1m=%s" % self.start_price_1m)
         self.result_logger.info("# self.end_price_1m=%s" % self.end_price_1m)
         self.result_logger.info("# self.max_price_1m=%s" % self.max_price_1m)
         self.result_logger.info("# self.min_price_1m=%s" % self.min_price_1m)
