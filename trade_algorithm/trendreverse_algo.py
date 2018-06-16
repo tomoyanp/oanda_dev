@@ -53,9 +53,10 @@ class TrendReverseAlgo(SuperAlgo):
     def decideTrade(self, base_time):
         trade_flag = "pass"
         try:
-            if self.order_flag:
-                pass
-            else:
+#            if self.order_flag:
+#                pass
+#            else:
+            if 1==1:
                 weekday = base_time.weekday()
                 hour = base_time.hour
                 minutes = base_time.minute
@@ -74,15 +75,19 @@ class TrendReverseAlgo(SuperAlgo):
                         pass
                     else:
                         trade_flag = self.decideReverseTrade(trade_flag, current_price, base_time)
+                        self.debug_logger.info("# self.order_flag=%s" % self.order_flag)
+                        self.debug_logger.info("# trade_flag=%s" % trade_flag)
 
-
-#                if trade_flag != "pass" and self.order_flag:
-#                    if trade_flag == "buy" and self.order_kind == "buy":
-#                        trade_flag = "pass"
-#                    elif trade_flag == "sell" and self.order_kind == "sell":
-#                        trade_flag = "pass"
-#                    else:
-#                        self.result_logger.info("# execute all over the world at TrendReverseAlgo")
+                if trade_flag != "pass" and self.order_flag:
+                    self.debug_logger.info("# allovertheworld logic")
+                    self.debug_logger.info("# trade_flag=%s" % trade_flag)
+                    self.debug_logger.info("# self.order_flag=%s" % self.order_flag)
+                    if trade_flag == "buy" and self.order_kind == "buy":
+                        trade_flag = "pass"
+                    elif trade_flag == "sell" and self.order_kind == "sell":
+                        trade_flag = "pass"
+                    else:
+                        self.result_logger.info("# execute all over the world at TrendReverseAlgo")
 
                 self.writeDebugLog(base_time, mode="trade")
 
@@ -96,8 +101,6 @@ class TrendReverseAlgo(SuperAlgo):
             stl_flag = False
             ex_stlmode = self.config_data["ex_stlmode"]
             if self.order_flag:
-
-
                 if ex_stlmode == "on":
                     weekday = base_time.weekday()
                     hour = base_time.hour
@@ -131,28 +134,27 @@ class TrendReverseAlgo(SuperAlgo):
             seconds = base_time.second
             if seconds < 10:
                 self.setReverseIndicator(base_time)
-                self.debug_logger.info("SSSSSSSSSSSSSSSSSS")
-                if self.order_kind == "buy":
-                    if self.max_price_1m > self.upper_sigma_1m2:
-                        self.result_logger.info("max_price > upper_sigma")
-                        stl_flag = True
-                      
-                elif self.order_kind == "sell":
-                    if self.min_price_1m < self.lower_sigma_1m2:
-                        self.result_logger.info("min_price < upper_sigma")
-                        stl_flag = True
+#                if self.order_kind == "buy":
+#                    if self.max_price_1m > self.upper_sigma_1m2:
+#                        self.result_logger.info("max_price > upper_sigma")
+#                        stl_flag = True
+#                      
+#                elif self.order_kind == "sell":
+#                    if self.min_price_1m < self.lower_sigma_1m2:
+#                        self.result_logger.info("min_price < upper_sigma")
+#                        stl_flag = True
 
-                if self.order_kind == "buy":
-                    self.debug_logger.info("order_price=%s, ask_price=%s, bid_price=%s" % (self.order_price, self.ask_price, self.bid_price))
-                    #if self.order_price > self.ask_price:
-                    if self.stop_threshold > self.ask_price:
-                        self.result_logger.info("end_price[0] > end_price[1]")
-                        stl_flag = True
-                elif self.order_kind == "sell":
-                    #if self.order_price < self.bid_price:
-                    if self.stop_threshold < self.bid_price:
-                        self.result_logger.info("end_price[0] < end_price[1]")
-                        stl_flag = True
+#                if self.order_kind == "buy":
+#                    self.debug_logger.info("order_price=%s, ask_price=%s, bid_price=%s" % (self.order_price, self.ask_price, self.bid_price))
+#                    #if self.order_price > self.ask_price:
+#                    if self.stop_threshold > self.ask_price:
+#                        self.result_logger.info("end_price[0] > end_price[1]")
+#                        stl_flag = True
+#                elif self.order_kind == "sell":
+#                    #if self.order_price < self.bid_price:
+#                    if self.stop_threshold < self.bid_price:
+#                        self.result_logger.info("end_price[0] < end_price[1]")
+#                        stl_flag = True
     
 
         return stl_flag
@@ -163,27 +165,19 @@ class TrendReverseAlgo(SuperAlgo):
             hour = base_time.hour
             minutes = base_time.minute
             seconds = base_time.second
-#            if seconds < 10 and (float(self.upper_sigma_1h3) - float(self.lower_sigma_1h3)) < 2:
             if seconds < 10:
+                self.debug_logger.info("# Reverse Trade Start Logic")
                 self.setReverseIndicator(base_time)
                 if self.min_price_1m < self.lower_sigma_1m2 and self.end_price_1m > self.lower_sigma_1m2 and self.start_price_1m < self.end_price_1m:
-                    if self.slope_5m > 0:
+#                    if self.slope_5m > 0:
+                    if 1==1:
                         trade_flag = "buy"
                         self.stop_threshold = self.min_price_1m
                 elif self.max_price_1m > self.upper_sigma_1m2 and self.end_price_1m < self.upper_sigma_1m2 and self.start_price_1m > self.end_price_1m:
-                    if self.slope_5m < 0:
+#                    if self.slope_5m < 0:
+                    if 1==1:
                         trade_flag = "sell"
                         self.stop_threshold = self.max_price_1m
-
-#                if self.slope_5m > 0:
-#                    #if self.end_price_1m < self.lower_sigma_1m2:
-#                    if self.min_price_1m < self.lower_sigma_1m2:
-#                        trade_flag = "buy"
-#                else:
-#                    #if self.end_price_1m > self.upper_sigma_1m2:
-#                    if self.max_price_1m > self.upper_sigma_1m2:
-#                        trade_flag = "sell"
-
 
         return trade_flag
 

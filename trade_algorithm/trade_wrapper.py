@@ -201,7 +201,8 @@ class TradeWrapper:
 
         # 建玉があれば、決済するかどうか判断
         if order_flag:
-            sleep_time = self.config_data["stl_sleep_time"]
+#            sleep_time = self.config_data["stl_sleep_time"]
+            sleep_time = 0
             stl_flag = self.trade_algo.decideStl(base_time)
             trade_id = self.trade_algo.getTradeId()
             onfile_flag = self.checkOnfile()
