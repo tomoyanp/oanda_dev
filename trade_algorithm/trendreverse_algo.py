@@ -132,17 +132,20 @@ class TrendReverseAlgo(SuperAlgo):
             hour = base_time.hour
             minutes = base_time.minute
             seconds = base_time.second
-            if seconds < 10:
+#            if seconds < 10:
+            if 1==1:
                 self.setReverseIndicator(base_time)
-#                if self.order_kind == "buy":
-#                    if self.max_price_1m > self.upper_sigma_1m2:
-#                        self.result_logger.info("max_price > upper_sigma")
-#                        stl_flag = True
-#                      
-#                elif self.order_kind == "sell":
-#                    if self.min_price_1m < self.lower_sigma_1m2:
-#                        self.result_logger.info("min_price < upper_sigma")
-#                        stl_flag = True
+                if self.order_kind == "buy":
+                    if (self.ask_price + self.bid_price)/2 > self.upper_sigma_1m2:
+                    #if (self.ask_price + self.bid_price)/2 > self.base_line_1m2:
+                        self.result_logger.info("max_price > upper_sigma")
+                        stl_flag = True
+                      
+                elif self.order_kind == "sell":
+                    #if (self.ask_price + self.bid_price)/2 < self.base_line_1m2:
+                    if (self.ask_price + self.bid_price)/2 < self.lower_sigma_1m2:
+                        self.result_logger.info("min_price < upper_sigma")
+                        stl_flag = True
 
 #                if self.order_kind == "buy":
 #                    self.debug_logger.info("order_price=%s, ask_price=%s, bid_price=%s" % (self.order_price, self.ask_price, self.bid_price))
@@ -169,13 +172,13 @@ class TrendReverseAlgo(SuperAlgo):
                 self.debug_logger.info("# Reverse Trade Start Logic")
                 self.setReverseIndicator(base_time)
                 if self.min_price_1m < self.lower_sigma_1m2 and self.end_price_1m > self.lower_sigma_1m2 and self.start_price_1m < self.end_price_1m:
-#                    if self.slope_5m > 0:
-                    if 1==1:
+                    if self.slope_5m > 0:
+#                    if 1==1:
                         trade_flag = "buy"
                         self.stop_threshold = self.min_price_1m
                 elif self.max_price_1m > self.upper_sigma_1m2 and self.end_price_1m < self.upper_sigma_1m2 and self.start_price_1m > self.end_price_1m:
-#                    if self.slope_5m < 0:
-                    if 1==1:
+                    if self.slope_5m < 0:
+#                    if 1==1:
                         trade_flag = "sell"
                         self.stop_threshold = self.max_price_1m
 
