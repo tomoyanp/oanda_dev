@@ -1,6 +1,6 @@
 {
   "GBP_JPY": {
-    "stop_loss": 0.1,
+    "stop_loss": 0.3,
     "take_profit": 0.3,
     "time_width": 720000,
     "stl_time_width": 720000,

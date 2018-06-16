@@ -163,6 +163,7 @@ class TrendReverseAlgo(SuperAlgo):
             hour = base_time.hour
             minutes = base_time.minute
             seconds = base_time.second
+#            if seconds < 10 and (float(self.upper_sigma_1h3) - float(self.lower_sigma_1h3)) < 2:
             if seconds < 10:
                 self.setReverseIndicator(base_time)
                 if self.min_price_1m < self.lower_sigma_1m2 and self.end_price_1m > self.lower_sigma_1m2 and self.start_price_1m < self.end_price_1m:
@@ -213,6 +214,12 @@ class TrendReverseAlgo(SuperAlgo):
 
 
     def setReverseIndicator(self, base_time):
+        target_time = base_time - timedelta(hours=1)
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=28, connector=self.mysql_connector, sigma_valiable=3, length=0)
+        self.upper_sigma_1h3 = dataset["upper_sigmas"][-1]
+        self.lower_sigma_1h3 = dataset["lower_sigmas"][-1]
+        self.base_line_1h3 = dataset["base_lines"][-1]
+
         # set dataset 5minutes
         target_time = base_time - timedelta(minutes=1)
         dataset = getBollingerWrapper(target_time, self.instrument, table_type="1m", window_size=28, connector=self.mysql_connector, sigma_valiable=3, length=0)
@@ -268,7 +275,9 @@ class TrendReverseAlgo(SuperAlgo):
         self.result_logger.info("# in %s Algorithm" % self.algorithm)
         self.result_logger.info("# EXECUTE ORDER at %s" % base_time)
         self.result_logger.info("# ORDER_PRICE=%s, TRADE_FLAG=%s" % (self.order_price, self.order_kind))
-#        self.result_logger.info("# self.slope_5m=%s" % self.slope_5m)
+        self.result_logger.info("# self.slope_5m=%s" % self.slope_5m)
+        self.result_logger.info("# self.upper_sigma_1h3=%s" % self.upper_sigma_1h3)
+        self.result_logger.info("# self.lower_sigma_1h3=%s" % self.lower_sigma_1h3)
         self.result_logger.info("# self.upper_sigma_1m3=%s" % self.upper_sigma_1m3)
         self.result_logger.info("# self.lower_sigma_1m3=%s" % self.lower_sigma_1m3)
         self.result_logger.info("# self.base_line_1m3=%s" % self.base_line_1m3)
