@@ -151,7 +151,8 @@ class TradeWrapper:
                             profit, sleep_time = self.trade_algo.calcProfit()
                             stl_price = self.trade_algo.getCurrentPrice()
 
-                            self.settlementLogWrite(profit, base_time, stl_price)
+                            stl_method = "EXECUTE Stop Loss or Take Profit SETTLEMENT"
+                            self.settlementLogWrite(profit, base_time, stl_price, stl_method)
                             self.stl_sleep_flag = False
                             self.trade_algo.resetFlag()
                             self.removeOnfile()
@@ -176,7 +177,7 @@ class TradeWrapper:
 
         return sleep_time
 
-    def executeSettlement(self, base_time):
+    def executeSettlement(self, base_time, stl_method):
         if self.test_mode:
             stl_price = self.trade_algo.getCurrentPrice()
         else:
@@ -188,7 +189,7 @@ class TradeWrapper:
         profit, sleep_time = self.trade_algo.calcProfit()
 
         # 計算した利益を結果ファイルに出力
-        self.trade_algo.settlementLogWrite(profit, base_time, stl_price)
+        self.trade_algo.settlementLogWrite(profit, base_time, stl_price, stl_method)
 
         # flagの初期化
         self.trade_algo.resetFlag()
@@ -218,7 +219,8 @@ class TradeWrapper:
 
                 # stl_flagが立ってたら決済する
                 if stl_flag:
-                    self.executeSettlement(base_time)
+                    stl_method = "EXECUTE stl logic SETTLEMENT"
+                    self.executeSettlement(base_time, stl_method)
                 else:
                     pass
             else:
@@ -240,8 +242,9 @@ class TradeWrapper:
         else:
             # if trade_flag == buy or sell and order_flag == True, execute settlement
             if order_flag:
-                self.result_logger.info("# execute all over the world at TradeWrapper")
-                self.executeSettlement(base_time)
+#                self.result_logger.info("# execute all over the world at TradeWrapper")
+                stl_method = "EXECUTE all over the world SETTLEMENT"
+                self.executeSettlement(base_time, stl_method)
 
             sleep_time = self.config_data["trade_sleep_time"]
             if trade_flag == "buy":

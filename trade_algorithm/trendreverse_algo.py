@@ -138,10 +138,18 @@ class TrendReverseAlgo(SuperAlgo):
             if seconds < 10:
                 self.setReverseIndicator(base_time)
                 if self.order_kind == "buy":
+                    # takeprofit
                     if self.max_price_1m > self.upper_sigma_1m2:
                         self.stl_first_flag = True
+                    # stoploss
+                    elif self.end_price_1m < self.lower_sigma_1m2:
+                        self.stl_first_flag = True
                 elif self.order_kind == "sell":
+                    # takeprofit
                     if self.min_price_1m < self.lower_sigma_1m2:
+                        self.stl_first_flag = True
+                    # stoploss
+                    elif self.end_price_1m > self.upper_sigma_1m2:
                         self.stl_first_flag = True
 
                 if self.order_kind == "buy" and self.stl_first_flag:
@@ -279,6 +287,9 @@ class TrendReverseAlgo(SuperAlgo):
         #self.slope_5m = getSlope(base_lines)
         self.slope_5m = getSlope(tmp)
 
+        self.upper_sigma_5m3 = dataset["upper_sigmas"][-1]
+        self.lower_sigma_5m3 = dataset["lower_sigmas"][-1]
+
 
 #        sql = "select end_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 12" % (self.instrument, "5m", target_time)
 #        response = self.mysql_connector.select_sql(sql)
@@ -310,6 +321,8 @@ class TrendReverseAlgo(SuperAlgo):
         self.result_logger.info("# self.slope_5m=%s" % self.slope_5m)
         self.result_logger.info("# self.upper_sigma_1h3=%s" % self.upper_sigma_1h3)
         self.result_logger.info("# self.lower_sigma_1h3=%s" % self.lower_sigma_1h3)
+        self.result_logger.info("# self.upper_sigma_5m3=%s" % self.upper_sigma_5m3)
+        self.result_logger.info("# self.lower_sigma_5m3=%s" % self.lower_sigma_5m3)
         self.result_logger.info("# self.upper_sigma_1m3=%s" % self.upper_sigma_1m3)
         self.result_logger.info("# self.lower_sigma_1m3=%s" % self.lower_sigma_1m3)
         self.result_logger.info("# self.base_line_1m3=%s" % self.base_line_1m3)
@@ -323,8 +336,8 @@ class TrendReverseAlgo(SuperAlgo):
         self.result_logger.info("# self.ewma100_1mvalue=%s" % self.ewma100_1mvalue)
         self.result_logger.info("# self.ewma200_5mvalue=%s" % self.ewma200_5mvalue)
 
-    def settlementLogWrite(self, profit, base_time, stl_price):
-        self.result_logger.info("# EXECUTE SETTLEMENT at %s" % base_time)
+    def settlementLogWrite(self, profit, base_time, stl_price, stl_method):
+        self.result_logger.info("# %s at %s" % (stl_method, base_time))
         self.result_logger.info("# self.ask_price=%s" % self.ask_price)
         self.result_logger.info("# self.bid_price=%s" % self.bid_price)
         self.result_logger.info("# self.log_max_price=%s" % self.log_max_price)

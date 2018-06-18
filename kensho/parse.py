@@ -25,9 +25,10 @@ out = out.split("\n")
 
 order_list = out
 
-cmd = "cat %s | grep \"EXECUTE SETTLE\"" % filename
+cmd = "cat %s | grep \"EXECUTE\" | grep \"SETTLE\"" % filename
 out = commands.getoutput(cmd)
 out = out.split("\n")
+#print out
 
 settle_list = out
 
@@ -49,7 +50,9 @@ for i in range(0, len(profit_list)):
   order_time = order_list[i].split(" ")[4] + " " + order_list[i].split(" ")[5]
   profit = profit_list[i].split(" ")[1].split("=")[1]
   side = flag_list[i].split(" ")[2].split("=")[1]
-  settle_time = settle_list[i].split(" ")[4] + " " + settle_list[i].split(" ")[5]
+#  settle_time = settle_list[i].split(" ")[4] + " " + settle_list[i].split(" ")[5]
+  settle_time = settle_list[i].split("at ")[-1]
+#  print settle_time
 
   order_ptime = datetime.strptime(order_time, "%Y-%m-%d %H:%M:%S")
   settle_ptime = datetime.strptime(settle_time, "%Y-%m-%d %H:%M:%S")
