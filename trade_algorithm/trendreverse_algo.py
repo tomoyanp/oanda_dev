@@ -48,6 +48,7 @@ class TrendReverseAlgo(SuperAlgo):
         self.log_max_price = 0
         self.log_min_price = 0
         self.trade_first_flag = "pass"
+        self.stl_first_flag = False
         self.setReverseIndicator(base_time)
 
     # decide trade entry timing
@@ -137,20 +138,20 @@ class TrendReverseAlgo(SuperAlgo):
             if seconds < 10:
                 self.setReverseIndicator(base_time)
                 if self.order_kind == "buy":
-#                    if self.ewma20_1mvalue < self.ewma100_1mvalue:
-                    if current_price < self.ewma20_1mvalue:
-                        #stl_flag = True
-                        pass
-                    elif current_price > self.upper_sigma_1m2:
-                        stl_flag = True
+                    if self.max_price_1m > self.upper_sigma_1m2:
+                        self.stl_first_flag = True
                 elif self.order_kind == "sell":
-#                    if self.ewma20_1mvalue > self.ewma100_1mvalue:
-                    if current_price > self.ewma20_1mvalue:
-                        pass
-                        #stl_flag = True
-                    elif current_price < self.lower_sigma_1m2:
-                        stl_flag = True
+                    if self.min_price_1m < self.lower_sigma_1m2:
+                        self.stl_first_flag = True
 
+                if self.order_kind == "buy" and self.stl_first_flag:
+#                    if self.start_price_1m > self.end_price_1m:
+                    if self.end_price_1m < self.upper_sigma_1m2:
+                        stl_flag = True
+                elif self.order_kind == "sell" and self.stl_first_flag:
+#                    if self.start_price_1m < self.end_price_1m:
+                    if self.end_price_1m > self.lower_sigma_1m2:
+                        stl_flag = True
 
         return stl_flag
 
@@ -163,9 +164,11 @@ class TrendReverseAlgo(SuperAlgo):
             if seconds < 10:
                 self.setReverseIndicator(base_time)
                 if self.trade_first_flag == "pass":
-                    if self.ewma20_1mvalue < self.ewma100_1mvalue and current_price > self.ewma200_5mvalue and current_price < self.ewma20_1mvalue:
+#                    if self.ewma20_1mvalue < self.ewma100_1mvalue and current_price > self.ewma200_5mvalue and current_price < self.ewma20_1mvalue:
+                    if self.ewma20_1mvalue < self.ewma100_1mvalue and current_price < self.ewma20_1mvalue:
                         self.trade_first_flag = "buy"
-                    elif self.ewma20_1mvalue > self.ewma100_1mvalue and current_price < self.ewma200_5mvalue and current_price > self.ewma20_1mvalue:
+#                    elif self.ewma20_1mvalue > self.ewma100_1mvalue and current_price < self.ewma200_5mvalue and current_price > self.ewma20_1mvalue:
+                    elif self.ewma20_1mvalue > self.ewma100_1mvalue and current_price > self.ewma20_1mvalue:
                         self.trade_first_flag = "sell"
     
                 elif self.trade_first_flag == "buy":
@@ -210,6 +213,7 @@ class TrendReverseAlgo(SuperAlgo):
         self.log_max_price = 0
         self.log_min_price = 0
         self.trade_first_flag = "pass"
+        self.stl_first_flag = False
         super(TrendReverseAlgo, self).resetFlag()
 
 
