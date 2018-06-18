@@ -152,7 +152,7 @@ class TradeWrapper:
                             stl_price = self.trade_algo.getCurrentPrice()
 
                             stl_method = "EXECUTE Stop Loss or Take Profit SETTLEMENT"
-                            self.settlementLogWrite(profit, base_time, stl_price, stl_method)
+                            self.trade_algo.settlementLogWrite(profit, base_time, stl_price, stl_method)
                             self.stl_sleep_flag = False
                             self.trade_algo.resetFlag()
                             self.removeOnfile()
