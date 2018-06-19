@@ -137,34 +137,17 @@ class TrendReverseAlgo(SuperAlgo):
             current_price = (self.ask_price + self.bid_price) / 2
 
             self.setReverseIndicator(base_time)
-#            if self.order_kind == "buy" and current_price > self.upper_sigma_1m2:
-#                stl_flag = True
-#
-#            elif self.order_kind == "sell" and current_price < self.lower_sigma_1m2:
-#                stl_flag = True
+            if self.order_kind == "buy" and current_price > self.upper_sigma_1m2:
+                self.stl_first_flag = True
+
+            elif self.order_kind == "sell" and current_price < self.lower_sigma_1m2:
+                self.stl_first_flag = True
 
             if seconds < 10:
-                if self.order_kind == "buy":
-                    # takeprofit
-                    if self.max_price_1m > self.upper_sigma_1m2:
-                        self.stl_first_flag = True
-                    # stoploss
-                    elif self.end_price_1m < self.lower_sigma_1m2:
-                        stl_flag = True
-                elif self.order_kind == "sell":
-                    # takeprofit
-                    if self.min_price_1m < self.lower_sigma_1m2:
-                        self.stl_first_flag = True
-                    # stoploss
-                    elif self.end_price_1m > self.upper_sigma_1m2:
-                        stl_flag = True
-
                 if self.order_kind == "buy" and self.stl_first_flag:
-#                    if self.start_price_1m > self.end_price_1m:
                     if self.end_price_1m < self.upper_sigma_1m2:
                         stl_flag = True
                 elif self.order_kind == "sell" and self.stl_first_flag:
-#                    if self.start_price_1m < self.end_price_1m:
                     if self.end_price_1m > self.lower_sigma_1m2:
                         stl_flag = True
 
@@ -172,8 +155,7 @@ class TrendReverseAlgo(SuperAlgo):
 
 
     def decideReverseTrade(self, trade_flag, current_price, base_time):
-#        if trade_flag == "pass":
-        if 1 == 1:
+        if trade_flag == "pass" and self.order_flag != True:
             hour = base_time.hour
             minutes = base_time.minute
             seconds = base_time.second
@@ -370,6 +352,6 @@ class TrendReverseAlgo(SuperAlgo):
         self.result_logger.info("# self.ask_price=%s" % self.ask_price)
         self.result_logger.info("# self.bid_price=%s" % self.bid_price)
         self.result_logger.info("# self.log_max_price=%s" % self.log_max_price)
-        self.result_logger.info("# self.log_min_price=%s" % self.log_max_price)
+        self.result_logger.info("# self.log_min_price=%s" % self.log_min_price)
         self.result_logger.info("# STL_PRICE=%s" % stl_price)
         self.result_logger.info("# PROFIT=%s" % profit)
