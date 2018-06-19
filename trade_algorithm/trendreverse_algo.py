@@ -137,11 +137,11 @@ class TrendReverseAlgo(SuperAlgo):
             current_price = (self.ask_price + self.bid_price) / 2
 
             self.setReverseIndicator(base_time)
-            if self.order_kind == "buy" and current_price > self.upper_sigma_1m2:
-                stl_flag = True
-
-            elif self.order_kind == "sell" and current_price < self.lower_sigma_1m2:
-                stl_flag = True
+#            if self.order_kind == "buy" and current_price > self.upper_sigma_1m2:
+#                stl_flag = True
+#
+#            elif self.order_kind == "sell" and current_price < self.lower_sigma_1m2:
+#                stl_flag = True
 
             if seconds < 10:
                 if self.order_kind == "buy":
@@ -150,14 +150,14 @@ class TrendReverseAlgo(SuperAlgo):
                         self.stl_first_flag = True
                     # stoploss
                     elif self.end_price_1m < self.lower_sigma_1m2:
-                        self.stl_first_flag = True
+                        stl_flag = True
                 elif self.order_kind == "sell":
                     # takeprofit
                     if self.min_price_1m < self.lower_sigma_1m2:
                         self.stl_first_flag = True
                     # stoploss
                     elif self.end_price_1m > self.upper_sigma_1m2:
-                        self.stl_first_flag = True
+                        stl_flag = True
 
                 if self.order_kind == "buy" and self.stl_first_flag:
 #                    if self.start_price_1m > self.end_price_1m:
@@ -179,15 +179,18 @@ class TrendReverseAlgo(SuperAlgo):
             seconds = base_time.second
             if seconds < 10:
                 self.setReverseIndicator(base_time)
-                if (self.upper_sigma_1m3 - self.lower_sigma_1m3) > 0.1:
-                    if self.ewma200_1mvalue < current_price and self.slope_1m > 0:
+                #if (self.upper_sigma_1m3 - self.lower_sigma_1m3) > 0.1:
+                if 1==1:
+                    #if self.ewma200_1mvalue < current_price and self.slope_1m > 0:
+                    if self.ewma200_1mvalue < current_price:
                         if self.min_price_1m <= self.base_line_1m2 <= self.max_price_1m:
                             trade_flag = "buy"
                             self.algorithm = "cross_over_base_line"
                         elif self.min_price_1m < self.lower_sigma_1m2 and self.end_price_1m > self.lower_sigma_1m2:
                             trade_flag = "buy"
                             self.algorithm = "cross_over_lower_sigma"
-                    elif self.ewma200_1mvalue > current_price and self.slope_1m < 0:
+                    #elif self.ewma200_1mvalue > current_price and self.slope_1m < 0:
+                    elif self.ewma200_1mvalue > current_price:
                         if self.min_price_1m <= self.base_line_1m2 <= self.max_price_1m:
                             trade_flag = "sell"
                             self.algorithm = "cross_over_base_line"
