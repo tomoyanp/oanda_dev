@@ -181,11 +181,15 @@ class TrendReverseAlgo(SuperAlgo):
             hour = base_time.hour
             minutes = base_time.minute
             seconds = base_time.second
-            if seconds < 10 and hour != 6:
+            if seconds < 10:
                 self.setReverseIndicator(base_time)
+#            if seconds < 10 and hour != 6:
+            if hour != 6:
+                #self.setReverseIndicator(base_time)
                 #if (self.upper_sigma_1m3 - self.lower_sigma_1m3) > 0.1:
                 if 1==1:
-                    if self.min_price_1m <= self.base_line_1m2 <= self.max_price_1m:
+                #    if self.min_price_1m <= self.base_line_1m2 <= self.max_price_1m:
+                    if (current_price - 0.01) <= self.ewma20_1mvalue <= (current_price + 0.01):
                         if self.slope_1m > 0 and self.decideBollingerCrossOver("upper") == False:
                             trade_flag = "buy"
                             self.algorithm = "cross_over_base_line"
