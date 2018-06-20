@@ -17,8 +17,8 @@
     "second_trail_mode": "on"
   },
   "USD_JPY": {
-    "stop_loss": 0.05,
-    "take_profit": 0.05,
+    "stop_loss": 0.03,
+    "take_profit": 0.3,
     "time_width": 720000,
     "stl_time_width": 720000,
     "sleep_time": 10,
