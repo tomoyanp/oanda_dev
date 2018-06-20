@@ -189,19 +189,21 @@ class TrendReverseAlgo(SuperAlgo):
                 #if (self.upper_sigma_1m3 - self.lower_sigma_1m3) > 0.1:
                 if 1==1:
                 #    if self.min_price_1m <= self.base_line_1m2 <= self.max_price_1m:
-                    if (current_price - 0.01) <= self.ewma20_1mvalue <= (current_price + 0.01):
+                    if current_price <= self.ewma20_1mvalue <= (current_price + 0.01):
                         if self.slope_1m > 0 and self.decideBollingerCrossOver("upper") == False:
                             trade_flag = "buy"
                             self.algorithm = "cross_over_base_line"
                             self.stop_loss_rate = self.lower_sigma_1m2
-                        elif self.slope_1m < 0 and self.decideBollingerCrossOver("lower") == False:
-                            trade_flag = "sell"
-                            self.algorithm = "cross_over_base_line"
-                            self.stop_loss_rate = self.upper_sigma_1m2
                         elif self.decideBollingerCrossOver("lower"):
                             trade_flag = "buy"
                             self.algorithm = "cross_over_lower_sigma"
                             self.stop_loss_rate = self.lower_sigma_1m2
+
+                    elif (current_price - 0.01) <= self.ewma20_1mvalue <= current_price:
+                        if self.slope_1m < 0 and self.decideBollingerCrossOver("lower") == False:
+                            trade_flag = "sell"
+                            self.algorithm = "cross_over_base_line"
+                            self.stop_loss_rate = self.upper_sigma_1m2
                         elif self.decideBollingerCrossOver("upper"):
                             trade_flag = "sell"
                             self.algorithm = "cross_over_upper_sigma"
