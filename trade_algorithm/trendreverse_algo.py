@@ -177,8 +177,8 @@ class TrendReverseAlgo(SuperAlgo):
             
 
     def decideReverseTrade(self, trade_flag, current_price, base_time):
-#        if trade_flag == "pass" and self.order_flag != True:
-        if trade_flag == "pass":
+        if trade_flag == "pass" and self.order_flag != True:
+#        if trade_flag == "pass":
             hour = base_time.hour
             minutes = base_time.minute
             seconds = base_time.second
@@ -195,20 +195,20 @@ class TrendReverseAlgo(SuperAlgo):
                             trade_flag = "buy"
                             self.algorithm = "cross_over_base_line"
                             self.stop_loss_rate = self.lower_sigma_1m2
-                        elif self.decideBollingerCrossOver("lower"):
-                            trade_flag = "buy"
-                            self.algorithm = "cross_over_lower_sigma"
-                            self.stop_loss_rate = self.lower_sigma_1m2
+#                        elif self.decideBollingerCrossOver("lower"):
+#                            trade_flag = "buy"
+#                            self.algorithm = "cross_over_lower_sigma"
+#                            self.stop_loss_rate = self.lower_sigma_1m2
 
                     elif (current_price - 0.01) <= self.ewma20_1mvalue <= current_price:
                         if self.slope_1m < 0 and self.decideBollingerCrossOver("lower") == False:
                             trade_flag = "sell"
                             self.algorithm = "cross_over_base_line"
                             self.stop_loss_rate = self.upper_sigma_1m2
-                        elif self.decideBollingerCrossOver("upper"):
-                            trade_flag = "sell"
-                            self.algorithm = "cross_over_upper_sigma"
-                            self.stop_loss_rate = self.upper_sigma_1m2
+#                        elif self.decideBollingerCrossOver("upper"):
+#                            trade_flag = "sell"
+#                            self.algorithm = "cross_over_upper_sigma"
+#                            self.stop_loss_rate = self.upper_sigma_1m2
 
 
 #                if self.trade_first_flag == "pass":
@@ -361,12 +361,12 @@ class TrendReverseAlgo(SuperAlgo):
         self.lower_sigma_5m3 = dataset["lower_sigmas"][-1]
 
         dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=5)
-#        self.upper_sigma_5m2_list = dataset["upper_sigmas"][-6:]
-#        self.lower_sigma_5m2_list = dataset["lower_sigmas"][-6:]
-        self.upper_sigma_5m2_list = dataset["upper_sigmas"][-1:]
-        self.lower_sigma_5m2_list = dataset["lower_sigmas"][-1:]
-#        sql = "select max_price, min_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 6" % (self.instrument, "5m", target_time)
-        sql = "select max_price, min_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 1" % (self.instrument, "5m", target_time)
+        self.upper_sigma_5m2_list = dataset["upper_sigmas"][-6:]
+        self.lower_sigma_5m2_list = dataset["lower_sigmas"][-6:]
+#        self.upper_sigma_5m2_list = dataset["upper_sigmas"][-1:]
+#        self.lower_sigma_5m2_list = dataset["lower_sigmas"][-1:]
+        sql = "select max_price, min_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 6" % (self.instrument, "5m", target_time)
+#        sql = "select max_price, min_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 1" % (self.instrument, "5m", target_time)
         response = self.mysql_connector.select_sql(sql)
         self.max_price_5m_list = []
         self.min_price_5m_list = []

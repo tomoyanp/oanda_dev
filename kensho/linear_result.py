@@ -15,7 +15,7 @@ for rf in file_list:
   out = out.split("\n")
 
 
-  cmd = "cat %s | grep EXECUTE\ SETTLE" % rf
+  cmd = "cat %s | grep EXECUTE|grep SETTLE" % rf
   stl_day = commands.getoutput(cmd)
   stl_day = stl_day.split("\n")
 
@@ -24,7 +24,7 @@ for rf in file_list:
     pf = float(pf)
     profit = profit + pf
 
-    temp = stl_day[i].split(" ")
-    write_file.write("%s, %s, %s\n" % (temp[4], temp[5], profit))
+    temp = stl_day[i].split("at ")[-1]
+    write_file.write("%s, %s\n" % (temp, profit))
  
   write_file.close()
