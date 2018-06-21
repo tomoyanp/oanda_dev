@@ -177,7 +177,8 @@ class TrendReverseAlgo(SuperAlgo):
             
 
     def decideReverseTrade(self, trade_flag, current_price, base_time):
-        if trade_flag == "pass" and self.order_flag != True:
+#        if trade_flag == "pass" and self.order_flag != True:
+        if trade_flag == "pass":
             hour = base_time.hour
             minutes = base_time.minute
             seconds = base_time.second
