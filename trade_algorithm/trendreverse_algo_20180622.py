@@ -49,8 +49,6 @@ class TrendReverseAlgo(SuperAlgo):
         self.log_min_price = 0
         self.trade_first_flag = "pass"
         self.stl_first_flag = False
-        self.buy_flag = False
-        self.sell_flag = False
         self.setReverseIndicator(base_time)
 
     # decide trade entry timing
@@ -146,6 +144,11 @@ class TrendReverseAlgo(SuperAlgo):
                 elif self.order_kind == "sell" and self.min_price_1m < self.lower_sigma_1m2:
                     self.stl_first_flag = True
 
+                if self.order_kind == "buy" and self.end_price_1m < self.stop_loss_rate:
+                    stl_flag = True
+                elif self.order_kind == "sell" and self.end_price_1m > self.stop_loss_rate:
+                    stl_flag = True
+
                 if self.order_kind == "buy" and self.stl_first_flag:
                     #if self.end_price_1m < self.upper_sigma_1m2:
                     if self.end_price_1m < self.upper_sigma_1m15:
@@ -179,32 +182,58 @@ class TrendReverseAlgo(SuperAlgo):
             hour = base_time.hour
             minutes = base_time.minute
             seconds = base_time.second
-            if seconds < 10 and hour != 6:
+            if seconds < 10:
                 self.setReverseIndicator(base_time)
+#            if seconds < 10 and hour != 6:
+            if hour != 6:
+                #self.setReverseIndicator(base_time)
+                #if (self.upper_sigma_1m3 - self.lower_sigma_1m3) > 0.1:
+                if 1==1:
+                #    if self.min_price_1m <= self.base_line_1m2 <= self.max_price_1m:
+                    if current_price <= self.ewma20_1mvalue <= (current_price + 0.01):
+                        if self.slope_1m > 0 and self.decideBollingerCrossOver("upper") == False:
+                            trade_flag = "buy"
+                            self.algorithm = "cross_over_base_line"
+                            self.stop_loss_rate = self.lower_sigma_1m2
+#                        elif self.decideBollingerCrossOver("lower"):
+#                            trade_flag = "buy"
+#                            self.algorithm = "cross_over_lower_sigma"
+#                            self.stop_loss_rate = self.lower_sigma_1m2
 
-                if self.buy_flag == False and self.sell_flag == False:
-                    if self.end_price_1m < self.ewma20_1mvalue and self.start_price_1m > self.end_price_1m and self.min_price_1m <= self.ewma20_1mvalue <= self.max_price_1m and self.slope_1m > 0 and self.decideBollingerCrossOver("up") == False:
-                        self.buy_flag = True
-                        self.set_time = base_time
-    
-                    if self.end_price_1m > self.ewma20_1mvalue and self.start_price_1m < self.end_price_1m and self.min_price_1m <= self.ewma20_1mvalue <= self.max_price_1m and self.slope_1m < 0 and self.decideBollingerCrossOver("down") == False:
-                        self.sell_flag = True
-                        self.set_time = base_time
+                    elif (current_price - 0.01) <= self.ewma20_1mvalue <= current_price:
+                        if self.slope_1m < 0 and self.decideBollingerCrossOver("lower") == False:
+                            trade_flag = "sell"
+                            self.algorithm = "cross_over_base_line"
+                            self.stop_loss_rate = self.upper_sigma_1m2
+#                        elif self.decideBollingerCrossOver("upper"):
+#                            trade_flag = "sell"
+#                            self.algorithm = "cross_over_upper_sigma"
+#                            self.stop_loss_rate = self.upper_sigma_1m2
 
-                if self.buy_flag:
-                    if self.end_price_1m > self.ewma20_1mvalue and self.start_price_1m < self.end_price_1m:
-                        trade_flag = "buy"
-                        self.algorithm = "cross_over_base_line"
 
-                elif self.sell_flag:
-                    if self.end_price_1m < self.ewma20_1mvalue and self.start_price_1m > self.end_price_1m:
-                        trade_flag = "sell"
-                        self.algorithm = "cross_over_base_line"
-
-                if self.buy_flag or self.sell_flag:
-                    if self.set_time + timedelta(minutes=5) < base_time:
-                        self.buy_flag = False
-                        self.sell_flag = False
+#                if self.trade_first_flag == "pass":
+##                    if self.ewma20_1mvalue < self.ewma100_1mvalue and current_price > self.ewma200_5mvalue and current_price < self.ewma20_1mvalue:
+#                    if self.ewma20_1mvalue < self.ewma100_1mvalue and current_price < self.ewma20_1mvalue:
+#                        self.trade_first_flag = "buy"
+##                    elif self.ewma20_1mvalue > self.ewma100_1mvalue and current_price < self.ewma200_5mvalue and current_price > self.ewma20_1mvalue:
+#                    elif self.ewma20_1mvalue > self.ewma100_1mvalue and current_price > self.ewma20_1mvalue:
+#                        self.trade_first_flag = "sell"
+#    
+#                elif self.trade_first_flag == "buy":
+##                    if self.ewma20_1mvalue > self.ewma100_1mvalue:
+#                    if current_price > self.ewma20_1mvalue:
+#                        if current_price > self.ewma200_5mvalue:
+#                            trade_flag = "buy"
+#                        else:
+#                            self.trade_first_flag = "pass"
+#
+#                elif self.trade_first_flag == "sell":
+##                    if self.ewma20_1mvalue < self.ewma100_1mvalue:
+#                    if current_price < self.ewma20_1mvalue:
+#                        if current_price < self.ewma200_5mvalue:
+#                            trade_flag = "sell"
+#                        else:
+#                            self.trade_first_flag = "pass"
 
         return trade_flag
 
@@ -233,8 +262,6 @@ class TrendReverseAlgo(SuperAlgo):
         self.log_min_price = 0
         self.trade_first_flag = "pass"
         self.stl_first_flag = False
-        self.buy_flag = False
-        self.sell_flag = False
         super(TrendReverseAlgo, self).resetFlag()
 
 
