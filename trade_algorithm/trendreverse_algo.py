@@ -170,6 +170,9 @@ class TrendReverseAlgo(SuperAlgo):
                 if self.min_price_5m_list[i] < self.lower_sigma_5m2_list[i]:
                     state = True
 
+        else:
+            raise
+
         return state
             
 
@@ -182,27 +185,30 @@ class TrendReverseAlgo(SuperAlgo):
             if seconds < 10 and hour != 6:
                 self.setReverseIndicator(base_time)
 
-                if self.buy_flag == False and self.sell_flag == False:
-                    if self.end_price_1m < self.ewma20_1mvalue and self.start_price_1m > self.end_price_1m and self.min_price_1m <= self.ewma20_1mvalue <= self.max_price_1m and self.slope_1m > 0 and self.decideBollingerCrossOver("up") == False:
-                        self.buy_flag = True
-                        self.set_time = base_time
+                if (self.upper_sigma_1m2 - self.lower_sigma_1m2) < 0.05:
+                    pass
+                else:
+                    if self.buy_flag == False and self.sell_flag == False:
+                        if self.end_price_1m < self.ewma20_1mvalue and self.start_price_1m > self.end_price_1m and self.min_price_1m <= self.ewma20_1mvalue <= self.max_price_1m and self.slope_1m > 0 and self.decideBollingerCrossOver("upper") == False:
+                            self.buy_flag = True
+                            self.set_time = base_time
+        
+                        if self.end_price_1m > self.ewma20_1mvalue and self.start_price_1m < self.end_price_1m and self.min_price_1m <= self.ewma20_1mvalue <= self.max_price_1m and self.slope_1m < 0 and self.decideBollingerCrossOver("lower") == False:
+                            self.sell_flag = True
+                            self.set_time = base_time
     
-                    if self.end_price_1m > self.ewma20_1mvalue and self.start_price_1m < self.end_price_1m and self.min_price_1m <= self.ewma20_1mvalue <= self.max_price_1m and self.slope_1m < 0 and self.decideBollingerCrossOver("down") == False:
-                        self.sell_flag = True
-                        self.set_time = base_time
-
-                if self.buy_flag:
-                    if self.end_price_1m > self.ewma20_1mvalue and self.start_price_1m < self.end_price_1m:
-                        trade_flag = "buy"
-                        self.algorithm = "cross_over_base_line"
-
-                elif self.sell_flag:
-                    if self.end_price_1m < self.ewma20_1mvalue and self.start_price_1m > self.end_price_1m:
-                        trade_flag = "sell"
-                        self.algorithm = "cross_over_base_line"
+                    if self.buy_flag:
+                        if self.end_price_1m > self.ewma20_1mvalue and self.start_price_1m < self.end_price_1m and self.slope_1m > 0 and self.decideBollingerCrossOver("upper") == False:
+                            trade_flag = "buy"
+                            self.algorithm = "cross_over_base_line"
+    
+                    elif self.sell_flag:
+                        if self.end_price_1m < self.ewma20_1mvalue and self.start_price_1m > self.end_price_1m and self.slope_1m < 0 and self.decideBollingerCrossOver("lower") == False:
+                            trade_flag = "sell"
+                            self.algorithm = "cross_over_base_line"
 
                 if self.buy_flag or self.sell_flag:
-                    if self.set_time + timedelta(minutes=5) < base_time:
+                    if self.set_time + timedelta(minutes=3) < base_time:
                         self.buy_flag = False
                         self.sell_flag = False
 
