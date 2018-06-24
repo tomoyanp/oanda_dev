@@ -189,11 +189,13 @@ class TrendReverseAlgo(SuperAlgo):
                     pass
                 else:
                     if self.buy_flag == False and self.sell_flag == False:
-                        if self.end_price_1m < self.ewma20_1mvalue and self.start_price_1m > self.end_price_1m and self.min_price_1m <= self.ewma20_1mvalue <= self.max_price_1m and self.slope_1m > 0 and self.decideBollingerCrossOver("upper") == False:
+#                        if self.end_price_1m < self.ewma20_1mvalue and self.start_price_1m > self.end_price_1m and self.min_price_1m <= self.ewma20_1mvalue <= self.max_price_1m and self.slope_1m > 0 and self.decideBollingerCrossOver("upper") == False:
+                        if self.min_price_1m <= self.ewma20_1mvalue <= self.max_price_1m and self.slope_1m > 0 and self.decideBollingerCrossOver("upper") == False:
                             self.buy_flag = True
                             self.set_time = base_time
         
-                        if self.end_price_1m > self.ewma20_1mvalue and self.start_price_1m < self.end_price_1m and self.min_price_1m <= self.ewma20_1mvalue <= self.max_price_1m and self.slope_1m < 0 and self.decideBollingerCrossOver("lower") == False:
+#                        if self.end_price_1m > self.ewma20_1mvalue and self.start_price_1m < self.end_price_1m and self.min_price_1m <= self.ewma20_1mvalue <= self.max_price_1m and self.slope_1m < 0 and self.decideBollingerCrossOver("lower") == False:
+                        if self.min_price_1m <= self.ewma20_1mvalue <= self.max_price_1m and self.slope_1m < 0 and self.decideBollingerCrossOver("lower") == False:
                             self.sell_flag = True
                             self.set_time = base_time
     
@@ -286,15 +288,19 @@ class TrendReverseAlgo(SuperAlgo):
         self.ewma200_1mvalue = getEWMA(ewma200_rawdata, len(ewma200_rawdata))[-1]
 
         
-        # get ewma20 slope
-        sql = "select end_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 30" % (self.instrument, "1m", target_time)
-        response = self.mysql_connector.select_sql(sql)
-        tmp = []
-        for res in response:
-            tmp.append(res[0])
-        tmp.reverse()
-        ewma20_1mvalue_list = getEWMA(tmp[-30:], 20)[-10:]
-        self.slope_1m = getSlope(ewma20_1mvalue_list)
+#        # get ewma20 slope
+#        sql = "select end_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 30" % (self.instrument, "1m", target_time)
+#        response = self.mysql_connector.select_sql(sql)
+#        tmp = []
+#        for res in response:
+#            tmp.append(res[0])
+#        tmp.reverse()
+#        ewma20_1mvalue_list = getEWMA(tmp[-30:], 20)[-10:]
+#        self.slope_1m = getSlope(ewma20_1mvalue_list)
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1m", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=9)
+        base_line_1m2_list = dataset["base_lines"][-10:]
+        self.slope_1m = getSlope(base_line_1m2_list)
+
 
 
         ### get 5m dataset
