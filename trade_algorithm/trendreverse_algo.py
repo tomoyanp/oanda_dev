@@ -140,6 +140,14 @@ class TrendReverseAlgo(SuperAlgo):
 
             self.setReverseIndicator(base_time)
             if seconds < 10:
+                original_stoploss = 0.03
+                if self.order_kind == "buy":
+                    if (self.order_price - self.end_price_1m) > original_stoploss:
+                        stl_flag = True
+                elif self.order_kind == "sell":
+                    if (self.end_price_1m - self.order_price) > original_stoploss:
+                        stl_flag = True
+
                 if self.order_kind == "buy" and self.max_price_1m > self.upper_sigma_1m2:
                     self.stl_first_flag = True
     
