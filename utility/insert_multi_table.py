@@ -36,8 +36,7 @@ def insertTable(base_time, currency, connector, table_type, span):
     end_price = (ask_price_list[-1] + bid_price_list[-1]) / 2
     max_price = (max(ask_price_list) + max(bid_price_list)) / 2
     min_price = (min(ask_price_list) + min(bid_price_list)) / 2
-    target_time = base_time - timedelta(seconds=span)
-
+    target_time = base_time - timedelta(seconds=(span-1))
 
     print "==================="
     print "table_type=%s" % table_type

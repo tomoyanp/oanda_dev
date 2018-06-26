@@ -80,8 +80,9 @@ class MultiAlgo(SuperAlgo):
                         pass
     
                     else:
-                        trade_flag = self.decideVolatilityTrade(trade_flag, current_price, base_time)
-                        trade_flag = self.decideExpantionTrade(trade_flag, current_price, base_time)
+                        if hour >= 13 or hour <= 4:
+                            trade_flag = self.decideVolatilityTrade(trade_flag, current_price, base_time)
+                            trade_flag = self.decideExpantionTrade(trade_flag, current_price, base_time)
     
     
                 if trade_flag != "pass" and self.order_flag:
@@ -434,7 +435,7 @@ class MultiAlgo(SuperAlgo):
         self.result_logger.info("# self.end_price_1m=%s" % self.end_price_1m)
         self.result_logger.info("# self.original_stoploss_rate=%s" %  self.original_stoploss_rate)
 
-    def settlementLogWrite(self, profit, base_time, stl_price):
+    def settlementLogWrite(self, profit, base_time, stl_price, stl_method):
         self.result_logger.info("# self.log_max_price=%s" % self.log_max_price)
         self.result_logger.info("# self.log_min_price=%s" % self.log_min_price)
         self.result_logger.info("# EXECUTE SETTLEMENT at %s" % base_time)
