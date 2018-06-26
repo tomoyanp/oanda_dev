@@ -79,8 +79,9 @@ class MultiAlgo(SuperAlgo):
                         pass
 
                     else:
-                        trade_flag = self.decideVolatilityTrade(trade_flag, current_price, base_time)
-                        trade_flag = self.decideExpantionTrade(trade_flag, current_price, base_time)
+                        if hour >= 13 or hour <= 4:
+                            trade_flag = self.decideVolatilityTrade(trade_flag, current_price, base_time)
+                            trade_flag = self.decideExpantionTrade(trade_flag, current_price, base_time)
 
             self.writeDebugLog(base_time, mode="trade")
 
