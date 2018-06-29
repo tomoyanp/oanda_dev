@@ -11,6 +11,7 @@ from trendreverse_algo import TrendReverseAlgo
 from expantion_algo import ExpantionAlgo
 from multi_algo import MultiAlgo
 from multi_evolv_algo import MultiEvolvAlgo
+from volatility_algo import VolatilityAlgo
 from daytime_algo import DaytimeAlgo
 from oanda_wrapper import OandaWrapper
 from common import instrument_init, account_init
@@ -88,8 +89,8 @@ class TradeWrapper:
             self.trade_algo = ReverseAlgo(self.instrument, self.base_path, self.config_name, base_time)
         elif algo == "multi":
             self.trade_algo = MultiAlgo(self.instrument, self.base_path, self.config_name, base_time)
-        elif algo == "multi_evolv":
-            self.trade_algo = MultiEvolvAlgo(self.instrument, self.base_path, self.config_name, base_time)
+        elif algo == "volatility":
+            self.trade_algo = VolatilityAlgo(self.instrument, self.base_path, self.config_name, base_time)
         else:
             self.trade_algo = HiLowAlgo(self.instrument, self.base_path, self.config_name, base_time)
 
