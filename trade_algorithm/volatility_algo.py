@@ -287,6 +287,13 @@ class VolatilityAlgo(SuperAlgo):
         self.high_price = response[0][0]
         self.low_price = response[0][1]
 
+        target_time = base_time.strftime("%Y-%m-%d %H:00:00")
+        sql = "select ask_price, bid_price from %s_TABLE where insert_time = \'%s\'" % (self.instrument, target_time)
+        response = self.mysql_connector.select_sql(sql)
+        ask_price = response[0][0]
+        bid_price = response[0][1]
+
+        self.daily_start_price = (ask_price + bid_price) / 2
 
 # write log function
     def writeDebugLog(self, base_time, mode):
@@ -304,6 +311,7 @@ class VolatilityAlgo(SuperAlgo):
         self.result_logger.info("# self.daily_slope=%s" % self.daily_slope)
         self.result_logger.info("# self.start_price_1m=%s" % self.start_price_1m)
         self.result_logger.info("# self.end_price_1m=%s" % self.end_price_1m)
+        self.result_logger.info("# self.daily_start_price=%s" % self.daily_start_price)
         self.result_logger.info("# self.original_stoploss_rate=%s" %  self.original_stoploss_rate)
 
     def settlementLogWrite(self, profit, base_time, stl_price, stl_method):
