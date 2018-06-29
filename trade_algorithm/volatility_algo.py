@@ -55,7 +55,9 @@ class VolatilityAlgo(SuperAlgo):
         trade_flag = "pass"
         try:
             if self.order_flag == False:
+                month = base_time.month
                 weekday = base_time.weekday()
+                day = base_time.day
                 hour = base_time.hour
                 minutes = base_time.minute
                 seconds = base_time.second
@@ -71,10 +73,17 @@ class VolatilityAlgo(SuperAlgo):
                     self.sell_count = 0
     
                 else:
-                    # if spread rate is greater than 0.5, we will have no entry
-                    if (self.ask_price - self.bid_price) >= 0.5:
+                    mode = ""
+                    if ((month == 11 and day > 5) or month == 12 or month == 1 or month == 2 or (month == 3 and day < 12)):
+                        mode = "winter"
+                    else :
+                        mode = "summer"
+
+
+                    if (mode == "winter" and hour == 7) or (mode == "summer" and hour == 6):
                         pass
-    
+                    elif (self.ask_price - self.bid_price) >= 0.1:
+                        pass
                     else:
                         trade_flag = self.decideVolatilityTrade(trade_flag, current_price, base_time)
     
