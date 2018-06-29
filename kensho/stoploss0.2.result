@@ -150,13 +150,13 @@
 # self.end_price_5m=139.819
 # self.start_price_1m=139.819
 # self.end_price_1m=139.8095
-# self.original_stoploss_rate=1.0
-# weekend stl logic
-# self.log_max_price=140.108
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=140.007
 # self.log_min_price=139.5925
-# EXECUTE SETTLEMENT at 2017-03-11 05:00:04
-# STL_PRICE=139.8155
-# PROFIT=-0.053
+# EXECUTE SETTLEMENT at 2017-03-11 00:50:04
+# STL_PRICE=139.9755
+# PROFIT=-0.212
 #######################################################
 # in expantion Algorithm
 # EXECUTE ORDER at 2017-03-13 17:25:00
@@ -190,15 +190,15 @@
 # self.end_price_5m=139.328
 # self.start_price_1m=139.328
 # self.end_price_1m=139.3525
-# self.original_stoploss_rate=1.0
-# execute all over the world at MultiAlgo
-# self.log_max_price=139.703
-# self.log_min_price=139.17
-# EXECUTE SETTLEMENT at 2017-03-15 14:10:02
-# STL_PRICE=139.674
-# PROFIT=-0.333
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=139.646
+# self.log_min_price=139.342
+# EXECUTE SETTLEMENT at 2017-03-14 22:40:02
+# STL_PRICE=139.644
+# PROFIT=-0.302
 #######################################################
-# in  Algorithm
+# in expantion Algorithm
 # EXECUTE ORDER at 2017-03-15 14:10:02
 # ORDER_PRICE=139.689, TRADE_FLAG=buy
 # self.daily_slope=0.24754545454554552
@@ -210,7 +210,7 @@
 # self.end_price_5m=139.7005
 # self.start_price_1m=139.4915
 # self.end_price_1m=139.5225
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # execute all over the world at MultiAlgo
 # self.log_max_price=140.5965
 # self.log_min_price=139.6045
@@ -270,16 +270,36 @@
 # self.end_price_5m=139.6065
 # self.start_price_1m=139.6065
 # self.end_price_1m=139.603
-# self.original_stoploss_rate=1.0
-# Execute FirstTrail Stop
-# self.log_max_price=140.411
-# self.log_min_price=138.9045
-# EXECUTE SETTLEMENT at 2017-03-21 23:10:01
-# STL_PRICE=140.043
-# PROFIT=0.411
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=140.144
+# self.log_min_price=139.3825
+# EXECUTE SETTLEMENT at 2017-03-21 00:25:01
+# STL_PRICE=139.3825
+# PROFIT=-0.248
 #######################################################
 # in volatility Algorithm
-# EXECUTE ORDER at 2017-03-23 00:17:01
+# EXECUTE ORDER at 2017-03-21 18:32:01
+# ORDER_PRICE=140.337, TRADE_FLAG=buy
+# self.daily_slope=0.6297272727272778
+# self.upper_sigma_1h3=140.34802641
+# self.lower_sigma_1h3=138.47522359
+# self.upper_sigma_5m3=140.118210245
+# self.lower_sigma_5m3=139.156111183
+# self.start_price_5m=139.904
+# self.end_price_5m=139.8455
+# self.start_price_1m=139.9585
+# self.end_price_1m=140.3015
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=140.411
+# self.log_min_price=140.089
+# EXECUTE SETTLEMENT at 2017-03-21 22:15:02
+# STL_PRICE=140.133
+# PROFIT=-0.215
+#######################################################
+# in volatility Algorithm
+# EXECUTE ORDER at 2017-03-23 00:17:02
 # ORDER_PRICE=138.535, TRADE_FLAG=buy
 # self.daily_slope=0.16693939393942847
 # self.upper_sigma_1h3=140.939748962
@@ -294,12 +314,12 @@
 # execute common stoploss
 # self.log_max_price=138.6735
 # self.log_min_price=138.259
-# EXECUTE SETTLEMENT at 2017-03-23 03:00:02
+# EXECUTE SETTLEMENT at 2017-03-23 03:00:03
 # STL_PRICE=138.259
 # PROFIT=-0.288
 #######################################################
 # in volatility Algorithm
-# EXECUTE ORDER at 2017-03-23 18:32:02
+# EXECUTE ORDER at 2017-03-23 18:32:03
 # ORDER_PRICE=139.057, TRADE_FLAG=buy
 # self.daily_slope=-0.23487878787888095
 # self.upper_sigma_1h3=139.761396444
@@ -314,12 +334,12 @@
 # execute common stoploss
 # self.log_max_price=139.1205
 # self.log_min_price=138.8225
-# EXECUTE SETTLEMENT at 2017-03-23 18:50:03
+# EXECUTE SETTLEMENT at 2017-03-23 18:50:04
 # STL_PRICE=138.845
 # PROFIT=-0.226
 #######################################################
 # in expantion Algorithm
-# EXECUTE ORDER at 2017-03-25 04:25:03
+# EXECUTE ORDER at 2017-03-25 04:25:04
 # ORDER_PRICE=138.4, TRADE_FLAG=sell
 # self.daily_slope=-1.0176060606060373
 # self.upper_sigma_1h3=139.450299961
@@ -330,13 +350,13 @@
 # self.end_price_5m=138.3325
 # self.start_price_1m=138.522
 # self.end_price_1m=138.474
-# self.original_stoploss_rate=1.0
-# weekend stl logic
-# self.log_max_price=138.8845
-# self.log_min_price=138.379
-# EXECUTE SETTLEMENT at 2017-03-25 05:00:04
-# STL_PRICE=138.8845
-# PROFIT=-0.502
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=138.61
+# self.log_min_price=138.382
+# EXECUTE SETTLEMENT at 2017-03-25 04:35:05
+# STL_PRICE=138.585
+# PROFIT=-0.203
 #######################################################
 # in expantion Algorithm
 # EXECUTE ORDER at 2017-03-30 16:45:00
@@ -350,13 +370,13 @@
 # self.end_price_5m=137.853
 # self.start_price_1m=137.853
 # self.end_price_1m=137.846
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # execute common stoploss
-# self.log_max_price=138.8335
+# self.log_max_price=138.04
 # self.log_min_price=137.7565
-# EXECUTE SETTLEMENT at 2017-03-30 22:10:01
-# STL_PRICE=138.8335
-# PROFIT=-1.013
+# EXECUTE SETTLEMENT at 2017-03-30 18:10:01
+# STL_PRICE=138.023
+# PROFIT=-0.203
 #######################################################
 # in expantion Algorithm
 # EXECUTE ORDER at 2017-03-31 13:00:01
@@ -451,7 +471,7 @@
 # self.end_price_5m=136.142
 # self.start_price_1m=136.142
 # self.end_price_1m=136.2105
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # weekend stl logic
 # self.log_max_price=136.3535
 # self.log_min_price=135.981
@@ -593,13 +613,33 @@
 # self.end_price_5m=143.788
 # self.start_price_1m=143.788
 # self.end_price_1m=143.8095
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=143.846
+# self.log_min_price=143.5565
+# EXECUTE SETTLEMENT at 2017-04-27 22:05:01
+# STL_PRICE=143.5565
+# PROFIT=-0.279
+#######################################################
+# in expantion Algorithm
+# EXECUTE ORDER at 2017-04-28 16:30:01
+# ORDER_PRICE=143.827, TRADE_FLAG=buy
+# self.daily_slope=7.455242424242371
+# self.upper_sigma_1h3=143.945547797
+# self.lower_sigma_1h3=142.944880774
+# self.upper_sigma_5m3=143.71574048
+# self.lower_sigma_5m3=143.28525952
+# self.start_price_5m=143.681
+# self.end_price_5m=143.7265
+# self.start_price_1m=143.7265
+# self.end_price_1m=143.824
+# self.original_stoploss_rate=0.2
 # weekend stl logic
 # self.log_max_price=144.5025
-# self.log_min_price=143.1515
-# EXECUTE SETTLEMENT at 2017-04-29 05:00:01
+# self.log_min_price=143.737
+# EXECUTE SETTLEMENT at 2017-04-29 05:00:02
 # STL_PRICE=144.3705
-# PROFIT=0.533
+# PROFIT=0.528
 #######################################################
 # in expantion Algorithm
 # EXECUTE ORDER at 2017-05-04 15:45:00
@@ -653,13 +693,13 @@
 # self.end_price_5m=145.5725
 # self.start_price_1m=145.5725
 # self.end_price_1m=145.599
-# self.original_stoploss_rate=1.0
-# weekend stl logic
-# self.log_max_price=146.1445
-# self.log_min_price=145.48
-# EXECUTE SETTLEMENT at 2017-05-06 05:00:03
-# STL_PRICE=146.005
-# PROFIT=0.369
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=145.522
+# self.log_min_price=145.522
+# EXECUTE SETTLEMENT at 2017-05-05 21:30:03
+# STL_PRICE=145.522
+# PROFIT=-0.2
 #######################################################
 # in expantion Algorithm
 # EXECUTE ORDER at 2017-05-11 20:10:00
@@ -794,13 +834,13 @@
 # self.end_price_5m=144.3525
 # self.start_price_1m=144.3525
 # self.end_price_1m=144.367
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # execute common stoploss
-# self.log_max_price=145.4065
+# self.log_max_price=144.794
 # self.log_min_price=144.0905
-# EXECUTE SETTLEMENT at 2017-05-24 16:50:01
-# STL_PRICE=145.3655
-# PROFIT=-1.026
+# EXECUTE SETTLEMENT at 2017-05-24 00:10:01
+# STL_PRICE=144.622
+# PROFIT=-0.283
 #######################################################
 # in volatility Algorithm
 # EXECUTE ORDER at 2017-05-26 21:37:01
@@ -834,13 +874,13 @@
 # self.end_price_5m=141.5785
 # self.start_price_1m=141.5785
 # self.end_price_1m=141.622
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # execute common stoploss
-# self.log_max_price=142.645
+# self.log_max_price=141.8275
 # self.log_min_price=141.6095
-# EXECUTE SETTLEMENT at 2017-05-31 23:35:01
-# STL_PRICE=142.607
-# PROFIT=-1.003
+# EXECUTE SETTLEMENT at 2017-05-31 18:30:01
+# STL_PRICE=141.8275
+# PROFIT=-0.227
 #######################################################
 # in volatility Algorithm
 # EXECUTE ORDER at 2017-06-02 21:32:01
@@ -874,7 +914,7 @@
 # self.end_price_5m=141.7985
 # self.start_price_1m=142.6465
 # self.end_price_1m=142.596
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # Execute FirstTrail Stop
 # self.log_max_price=141.963
 # self.log_min_price=140.8585
@@ -1015,17 +1055,37 @@
 # self.end_price_5m=141.888
 # self.start_price_1m=141.888
 # self.end_price_1m=141.8495
-# self.original_stoploss_rate=1.0
-# Execute FirstTrail Stop
-# Execute SecondTrail Stop
-# self.log_max_price=142.519
-# self.log_min_price=139.8595
-# EXECUTE SETTLEMENT at 2017-06-21 18:05:01
-# STL_PRICE=140.3145
-# PROFIT=1.511
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=142.0535
+# self.log_min_price=141.8205
+# EXECUTE SETTLEMENT at 2017-06-20 02:40:01
+# STL_PRICE=142.04
+# PROFIT=-0.216
 #######################################################
 # in volatility Algorithm
-# EXECUTE ORDER at 2017-06-21 20:02:01
+# EXECUTE ORDER at 2017-06-20 16:32:01
+# ORDER_PRICE=141.716, TRADE_FLAG=sell
+# self.daily_slope=-1.610030303030323
+# self.upper_sigma_1h3=142.495879142
+# self.lower_sigma_1h3=141.582299429
+# self.upper_sigma_5m3=142.55148353
+# self.lower_sigma_5m3=141.953159327
+# self.start_price_5m=142.434
+# self.end_price_5m=142.4665
+# self.start_price_1m=142.386
+# self.end_price_1m=141.5275
+# self.original_stoploss_rate=0.2
+# Execute FirstTrail Stop
+# Execute SecondTrail Stop
+# self.log_max_price=141.794
+# self.log_min_price=139.8595
+# EXECUTE SETTLEMENT at 2017-06-21 18:05:02
+# STL_PRICE=140.3145
+# PROFIT=1.389
+#######################################################
+# in volatility Algorithm
+# EXECUTE ORDER at 2017-06-21 20:02:02
 # ORDER_PRICE=141.204, TRADE_FLAG=buy
 # self.daily_slope=-0.22218181818186097
 # self.upper_sigma_1h3=142.32932083
@@ -1040,7 +1100,7 @@
 # Execute FirstTrail Stop
 # self.log_max_price=141.7575
 # self.log_min_price=141.081
-# EXECUTE SETTLEMENT at 2017-06-21 22:55:02
+# EXECUTE SETTLEMENT at 2017-06-21 22:55:03
 # STL_PRICE=141.3935
 # PROFIT=0.177
 #######################################################
@@ -1056,7 +1116,7 @@
 # self.end_price_5m=142.1015
 # self.start_price_1m=142.1015
 # self.end_price_1m=142.0485
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # Execute FirstTrail Stop
 # Execute SecondTrail Stop
 # self.log_max_price=143.856
@@ -1177,15 +1237,15 @@
 # self.end_price_5m=147.087
 # self.start_price_1m=147.087
 # self.end_price_1m=147.0755
-# self.original_stoploss_rate=1.0
-# execute all over the world at MultiAlgo
-# self.log_max_price=147.614
-# self.log_min_price=146.1345
-# EXECUTE SETTLEMENT at 2017-07-07 17:32:02
-# STL_PRICE=146.9895
-# PROFIT=-0.11
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=147.0725
+# self.log_min_price=146.8845
+# EXECUTE SETTLEMENT at 2017-07-06 19:50:02
+# STL_PRICE=146.885
+# PROFIT=-0.213
 #######################################################
-# in  Algorithm
+# in volatility Algorithm
 # EXECUTE ORDER at 2017-07-07 17:32:02
 # ORDER_PRICE=146.975, TRADE_FLAG=sell
 # self.daily_slope=6.731848484848401
@@ -1377,7 +1437,7 @@
 # self.end_price_5m=145.991
 # self.start_price_1m=145.991
 # self.end_price_1m=146.0205
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # Execute FirstTrail Stop
 # self.log_max_price=146.0305
 # self.log_min_price=145.4655
@@ -1457,15 +1517,15 @@
 # self.end_price_5m=146.694
 # self.start_price_1m=146.694
 # self.end_price_1m=146.684
-# self.original_stoploss_rate=1.0
-# execute all over the world at MultiAlgo
+# self.original_stoploss_rate=0.2
+# execute common stoploss
 # self.log_max_price=146.7415
-# self.log_min_price=145.6515
-# EXECUTE SETTLEMENT at 2017-08-03 20:02:04
-# STL_PRICE=145.7995
-# PROFIT=-0.906
+# self.log_min_price=146.4395
+# EXECUTE SETTLEMENT at 2017-08-03 18:40:04
+# STL_PRICE=146.4735
+# PROFIT=-0.229
 #######################################################
-# in  Algorithm
+# in volatility Algorithm
 # EXECUTE ORDER at 2017-08-03 20:02:04
 # ORDER_PRICE=145.786, TRADE_FLAG=sell
 # self.daily_slope=0.5968787878788263
@@ -1498,7 +1558,7 @@
 # self.end_price_5m=144.0275
 # self.start_price_1m=144.0275
 # self.end_price_1m=144.0515
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # Execute FirstTrail Stop
 # self.log_max_price=144.1265
 # self.log_min_price=143.189
@@ -1518,7 +1578,7 @@
 # self.end_price_5m=142.248
 # self.start_price_1m=142.248
 # self.end_price_1m=142.093
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # Execute FirstTrail Stop
 # self.log_max_price=142.266
 # self.log_min_price=141.3855
@@ -1638,17 +1698,36 @@
 # self.end_price_5m=140.5755
 # self.start_price_1m=140.5755
 # self.end_price_1m=140.558
-# self.original_stoploss_rate=1.0
-# Execute FirstTrail Stop
-# Execute SecondTrail Stop
-# self.log_max_price=141.041
-# self.log_min_price=139.4395
-# EXECUTE SETTLEMENT at 2017-08-24 02:15:01
-# STL_PRICE=139.766
-# PROFIT=0.768
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=140.737
+# self.log_min_price=140.124
+# EXECUTE SETTLEMENT at 2017-08-22 09:05:01
+# STL_PRICE=140.737
+# PROFIT=-0.207
 #######################################################
 # in expantion Algorithm
-# EXECUTE ORDER at 2017-08-24 21:10:01
+# EXECUTE ORDER at 2017-08-22 16:50:01
+# ORDER_PRICE=140.485, TRADE_FLAG=sell
+# self.daily_slope=-3.2299999999999724
+# self.upper_sigma_1h3=141.131481588
+# self.lower_sigma_1h3=139.971411269
+# self.upper_sigma_5m3=141.000640175
+# self.lower_sigma_5m3=140.467324111
+# self.start_price_5m=140.5635
+# self.end_price_5m=140.4515
+# self.start_price_1m=140.4515
+# self.end_price_1m=140.4985
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=140.729
+# self.log_min_price=140.0665
+# EXECUTE SETTLEMENT at 2017-08-23 07:10:02
+# STL_PRICE=140.6605
+# PROFIT=-0.201
+#######################################################
+# in expantion Algorithm
+# EXECUTE ORDER at 2017-08-24 21:10:02
 # ORDER_PRICE=140.273, TRADE_FLAG=buy
 # self.daily_slope=-2.5965757575758657
 # self.upper_sigma_1h3=140.485030808
@@ -1663,7 +1742,7 @@
 # execute common stoploss
 # self.log_max_price=140.379
 # self.log_min_price=140.0215
-# EXECUTE SETTLEMENT at 2017-08-24 22:40:02
+# EXECUTE SETTLEMENT at 2017-08-24 22:40:03
 # STL_PRICE=140.05
 # PROFIT=-0.235
 #######################################################
@@ -1699,7 +1778,7 @@
 # self.end_price_5m=142.583
 # self.start_price_1m=142.583
 # self.end_price_1m=142.608
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # Execute FirstTrail Stop
 # self.log_max_price=142.73
 # self.log_min_price=141.5945
@@ -1739,16 +1818,36 @@
 # self.end_price_5m=141.6455
 # self.start_price_1m=141.6455
 # self.end_price_1m=141.67
-# self.original_stoploss_rate=1.0
-# Execute FirstTrail Stop
-# self.log_max_price=142.6865
-# self.log_min_price=141.367
-# EXECUTE SETTLEMENT at 2017-09-07 09:30:02
-# STL_PRICE=142.274
-# PROFIT=0.594
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=141.9065
+# self.log_min_price=141.4335
+# EXECUTE SETTLEMENT at 2017-09-06 02:05:02
+# STL_PRICE=141.455
+# PROFIT=-0.222
 #######################################################
 # in expantion Algorithm
-# EXECUTE ORDER at 2017-09-08 20:40:02
+# EXECUTE ORDER at 2017-09-07 13:00:02
+# ORDER_PRICE=142.336, TRADE_FLAG=buy
+# self.daily_slope=2.7280909090908905
+# self.upper_sigma_1h3=143.142456487
+# self.lower_sigma_1h3=141.01993637
+# self.upper_sigma_5m3=142.419800837
+# self.lower_sigma_5m3=142.251734877
+# self.start_price_5m=142.323
+# self.end_price_5m=142.313
+# self.start_price_1m=142.536
+# self.end_price_1m=142.5855
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=142.338
+# self.log_min_price=142.1405
+# EXECUTE SETTLEMENT at 2017-09-07 16:10:03
+# STL_PRICE=142.1475
+# PROFIT=-0.201
+#######################################################
+# in expantion Algorithm
+# EXECUTE ORDER at 2017-09-08 20:40:03
 # ORDER_PRICE=141.933, TRADE_FLAG=sell
 # self.daily_slope=1.967515151515089
 # self.upper_sigma_1h3=142.926686491
@@ -1763,12 +1862,12 @@
 # execute common stoploss
 # self.log_max_price=142.247
 # self.log_min_price=141.8125
-# EXECUTE SETTLEMENT at 2017-09-08 21:35:03
+# EXECUTE SETTLEMENT at 2017-09-08 21:35:04
 # STL_PRICE=142.247
 # PROFIT=-0.326
 #######################################################
 # in expantion Algorithm
-# EXECUTE ORDER at 2017-09-09 04:30:03
+# EXECUTE ORDER at 2017-09-09 04:30:04
 # ORDER_PRICE=142.165, TRADE_FLAG=sell
 # self.daily_slope=1.967515151515089
 # self.upper_sigma_1h3=142.708244661
@@ -1781,11 +1880,11 @@
 # self.end_price_1m=142.31
 # self.original_stoploss_rate=0.2
 # weekend stl logic
-# self.log_max_price=142.315
-# self.log_min_price=142.095
-# EXECUTE SETTLEMENT at 2017-09-09 05:00:04
-# STL_PRICE=142.255
-# PROFIT=-0.102
+# self.log_max_price=142.3105
+# self.log_min_price=142.0955
+# EXECUTE SETTLEMENT at 2017-09-09 05:00:05
+# STL_PRICE=142.28
+# PROFIT=-0.125
 #######################################################
 # in volatility Algorithm
 # EXECUTE ORDER at 2017-09-12 17:32:00
@@ -1921,16 +2020,36 @@
 # self.end_price_5m=150.843
 # self.start_price_1m=150.843
 # self.end_price_1m=150.887
-# self.original_stoploss_rate=1.0
-# Execute FirstTrail Stop
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=150.906
+# self.log_min_price=150.642
+# EXECUTE SETTLEMENT at 2017-09-20 16:35:03
+# STL_PRICE=150.65
+# PROFIT=-0.244
+#######################################################
+# in volatility Algorithm
+# EXECUTE ORDER at 2017-09-20 17:32:03
+# ORDER_PRICE=151.352, TRADE_FLAG=buy
+# self.daily_slope=10.758363636363649
+# self.upper_sigma_1h3=151.425079787
+# self.lower_sigma_1h3=150.081920213
+# self.upper_sigma_5m3=150.925558153
+# self.lower_sigma_5m3=150.401156132
+# self.start_price_5m=150.6415
+# self.end_price_5m=150.7395
+# self.start_price_1m=150.572
+# self.end_price_1m=151.4975
+# self.original_stoploss_rate=0.2
+# execute common stoploss
 # self.log_max_price=151.5025
-# self.log_min_price=150.5135
-# EXECUTE SETTLEMENT at 2017-09-20 18:00:03
+# self.log_min_price=151.043
+# EXECUTE SETTLEMENT at 2017-09-20 18:00:04
 # STL_PRICE=151.066
-# PROFIT=0.171
+# PROFIT=-0.298
 #######################################################
 # in expantion Algorithm
-# EXECUTE ORDER at 2017-09-21 15:35:03
+# EXECUTE ORDER at 2017-09-21 15:35:04
 # ORDER_PRICE=151.93, TRADE_FLAG=buy
 # self.daily_slope=11.325636363636361
 # self.upper_sigma_1h3=152.491356996
@@ -1941,17 +2060,37 @@
 # self.end_price_5m=151.819
 # self.start_price_1m=151.819
 # self.end_price_1m=151.922
-# self.original_stoploss_rate=1.0
-# Execute FirstTrail Stop
-# self.log_max_price=152.8635
-# self.log_min_price=151.467
-# EXECUTE SETTLEMENT at 2017-09-22 09:45:04
-# STL_PRICE=152.456
-# PROFIT=0.512
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=152.2395
+# self.log_min_price=151.68
+# EXECUTE SETTLEMENT at 2017-09-21 17:45:05
+# STL_PRICE=151.701
+# PROFIT=-0.24
 #######################################################
 # in volatility Algorithm
-# EXECUTE ORDER at 2017-09-22 22:47:04
-# ORDER_PRICE=151.189, TRADE_FLAG=sell
+# EXECUTE ORDER at 2017-09-21 23:57:05
+# ORDER_PRICE=152.004, TRADE_FLAG=buy
+# self.daily_slope=11.325636363636361
+# self.upper_sigma_1h3=152.632513071
+# self.lower_sigma_1h3=150.315022643
+# self.upper_sigma_5m3=151.954495119
+# self.lower_sigma_5m3=151.440719166
+# self.start_price_5m=151.785
+# self.end_price_5m=151.905
+# self.start_price_1m=151.97
+# self.end_price_1m=152.286
+# self.original_stoploss_rate=0.2
+# Execute FirstTrail Stop
+# self.log_max_price=152.865
+# self.log_min_price=151.9945
+# EXECUTE SETTLEMENT at 2017-09-22 09:45:06
+# STL_PRICE=152.4575
+# PROFIT=0.438
+#######################################################
+# in volatility Algorithm
+# EXECUTE ORDER at 2017-09-22 22:47:06
+# ORDER_PRICE=151.213, TRADE_FLAG=sell
 # self.daily_slope=11.573909090909076
 # self.upper_sigma_1h3=153.413932938
 # self.lower_sigma_1h3=150.886459919
@@ -1965,9 +2104,9 @@
 # execute common stoploss
 # self.log_max_price=151.5115
 # self.log_min_price=150.995
-# EXECUTE SETTLEMENT at 2017-09-22 23:20:05
+# EXECUTE SETTLEMENT at 2017-09-22 23:20:07
 # STL_PRICE=151.5115
-# PROFIT=-0.335
+# PROFIT=-0.311
 #######################################################
 # in volatility Algorithm
 # EXECUTE ORDER at 2017-09-25 23:52:00
@@ -2022,15 +2161,15 @@
 # self.end_price_5m=151.556
 # self.start_price_1m=151.556
 # self.end_price_1m=151.4775
-# self.original_stoploss_rate=1.0
-# execute all over the world at MultiAlgo
-# self.log_max_price=151.5815
-# self.log_min_price=150.4775
-# EXECUTE SETTLEMENT at 2017-09-29 17:32:03
-# STL_PRICE=150.4585
-# PROFIT=-1.049
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=151.486
+# self.log_min_price=151.2635
+# EXECUTE SETTLEMENT at 2017-09-29 00:20:03
+# STL_PRICE=151.2635
+# PROFIT=-0.242
 #######################################################
-# in  Algorithm
+# in volatility Algorithm
 # EXECUTE ORDER at 2017-09-29 17:32:03
 # ORDER_PRICE=150.447, TRADE_FLAG=sell
 # self.daily_slope=2.1169393939393437
@@ -2062,13 +2201,13 @@
 # self.end_price_5m=150.982
 # self.start_price_1m=150.982
 # self.end_price_1m=150.985
-# self.original_stoploss_rate=1.0
-# weekend stl logic
+# self.original_stoploss_rate=0.2
+# execute common stoploss
 # self.log_max_price=151.078
-# self.log_min_price=150.6305
-# EXECUTE SETTLEMENT at 2017-09-30 05:00:05
-# STL_PRICE=150.8055
-# PROFIT=-0.221
+# self.log_min_price=150.8135
+# EXECUTE SETTLEMENT at 2017-09-30 00:45:05
+# STL_PRICE=150.8175
+# PROFIT=-0.207
 #######################################################
 # in expantion Algorithm
 # EXECUTE ORDER at 2017-10-02 21:30:00
@@ -2082,17 +2221,17 @@
 # self.end_price_5m=149.549
 # self.start_price_1m=149.549
 # self.end_price_1m=149.6095
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # execute common stoploss
-# self.log_max_price=150.248
+# self.log_max_price=149.7685
 # self.log_min_price=149.293
-# EXECUTE SETTLEMENT at 2017-10-03 17:35:01
-# STL_PRICE=149.8585
-# PROFIT=-0.271
+# EXECUTE SETTLEMENT at 2017-10-03 06:00:01
+# STL_PRICE=149.7035
+# PROFIT=-0.208
 #######################################################
 # in volatility Algorithm
-# EXECUTE ORDER at 2017-10-03 17:35:01
-# ORDER_PRICE=149.831, TRADE_FLAG=sell
+# EXECUTE ORDER at 2017-10-03 17:32:01
+# ORDER_PRICE=149.903, TRADE_FLAG=sell
 # self.daily_slope=-0.32615151515153634
 # self.upper_sigma_1h3=151.232932651
 # self.lower_sigma_1h3=148.673567349
@@ -2108,7 +2247,7 @@
 # self.log_min_price=149.047
 # EXECUTE SETTLEMENT at 2017-10-04 17:35:02
 # STL_PRICE=149.436
-# PROFIT=0.386
+# PROFIT=0.458
 #######################################################
 # in expantion Algorithm
 # EXECUTE ORDER at 2017-10-05 01:25:02
@@ -2163,7 +2302,7 @@
 # self.end_price_5m=147.2865
 # self.start_price_1m=147.2865
 # self.end_price_1m=147.235
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # weekend stl logic
 # self.log_max_price=147.3085
 # self.log_min_price=147.046
@@ -2183,16 +2322,36 @@
 # self.end_price_5m=147.983
 # self.start_price_1m=147.983
 # self.end_price_1m=148.0135
-# self.original_stoploss_rate=1.0
-# execute all over the world at MultiAlgo
-# self.log_max_price=148.769
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=148.2125
 # self.log_min_price=147.7645
-# EXECUTE SETTLEMENT at 2017-10-12 03:05:01
-# STL_PRICE=148.626
-# PROFIT=-0.638
+# EXECUTE SETTLEMENT at 2017-10-11 00:10:01
+# STL_PRICE=148.1945
+# PROFIT=-0.205
 #######################################################
-# in  Algorithm
-# EXECUTE ORDER at 2017-10-12 03:05:01
+# in expantion Algorithm
+# EXECUTE ORDER at 2017-10-11 18:10:01
+# ORDER_PRICE=148.05, TRADE_FLAG=sell
+# self.daily_slope=-4.396454545454554
+# self.upper_sigma_1h3=148.654696805
+# self.lower_sigma_1h3=147.954267481
+# self.upper_sigma_5m3=148.370141816
+# self.lower_sigma_5m3=148.089108184
+# self.start_price_5m=148.1455
+# self.end_price_5m=148.0825
+# self.start_price_1m=148.0825
+# self.end_price_1m=148.062
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=148.3245
+# self.log_min_price=147.8555
+# EXECUTE SETTLEMENT at 2017-10-12 00:30:02
+# STL_PRICE=148.3245
+# PROFIT=-0.285
+#######################################################
+# in expantion Algorithm
+# EXECUTE ORDER at 2017-10-12 03:05:02
 # ORDER_PRICE=148.638, TRADE_FLAG=buy
 # self.daily_slope=-4.396454545454554
 # self.upper_sigma_1h3=148.740050932
@@ -2207,12 +2366,12 @@
 # execute all over the world at MultiAlgo
 # self.log_max_price=149.0665
 # self.log_min_price=148.0675
-# EXECUTE SETTLEMENT at 2017-10-12 19:37:02
+# EXECUTE SETTLEMENT at 2017-10-12 19:37:03
 # STL_PRICE=148.0815
 # PROFIT=-0.572
 #######################################################
 # in  Algorithm
-# EXECUTE ORDER at 2017-10-12 19:37:02
+# EXECUTE ORDER at 2017-10-12 19:37:03
 # ORDER_PRICE=148.066, TRADE_FLAG=sell
 # self.daily_slope=-4.00512121212123
 # self.upper_sigma_1h3=149.510636835
@@ -2227,12 +2386,12 @@
 # Execute FirstTrail Stop
 # self.log_max_price=148.259
 # self.log_min_price=147.307
-# EXECUTE SETTLEMENT at 2017-10-12 21:50:03
+# EXECUTE SETTLEMENT at 2017-10-12 21:50:04
 # STL_PRICE=147.7055
 # PROFIT=0.35
 #######################################################
 # in volatility Algorithm
-# EXECUTE ORDER at 2017-10-13 01:12:03
+# EXECUTE ORDER at 2017-10-13 01:12:04
 # ORDER_PRICE=148.047, TRADE_FLAG=buy
 # self.daily_slope=-4.00512121212123
 # self.upper_sigma_1h3=149.761588713
@@ -2246,11 +2405,11 @@
 # self.original_stoploss_rate=0.2
 # Execute FirstTrail Stop
 # Execute SecondTrail Stop
-# self.log_max_price=149.1355
+# self.log_max_price=149.131
 # self.log_min_price=148.03
-# EXECUTE SETTLEMENT at 2017-10-13 09:30:04
-# STL_PRICE=148.7765
-# PROFIT=0.715
+# EXECUTE SETTLEMENT at 2017-10-13 06:05:05
+# STL_PRICE=148.862
+# PROFIT=0.732
 #######################################################
 # in volatility Algorithm
 # EXECUTE ORDER at 2017-10-16 21:32:00
@@ -2284,13 +2443,13 @@
 # self.end_price_5m=149.266
 # self.start_price_1m=149.0245
 # self.end_price_1m=149.0175
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # execute common stoploss
 # self.log_max_price=149.442
-# self.log_min_price=148.2195
-# EXECUTE SETTLEMENT at 2017-10-19 17:10:02
-# STL_PRICE=148.251
-# PROFIT=-1.028
+# self.log_min_price=149.0675
+# EXECUTE SETTLEMENT at 2017-10-19 16:20:02
+# STL_PRICE=149.0765
+# PROFIT=-0.204
 #######################################################
 # in volatility Algorithm
 # EXECUTE ORDER at 2017-10-19 17:32:02
@@ -2345,17 +2504,37 @@
 # self.end_price_5m=149.5185
 # self.start_price_1m=149.5185
 # self.end_price_1m=149.5185
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=150.008
+# self.log_min_price=149.3035
+# EXECUTE SETTLEMENT at 2017-10-31 01:05:01
+# STL_PRICE=149.3215
+# PROFIT=-0.212
+#######################################################
+# in expantion Algorithm
+# EXECUTE ORDER at 2017-10-31 22:15:01
+# ORDER_PRICE=150.263, TRADE_FLAG=buy
+# self.daily_slope=1.9870606060606288
+# self.upper_sigma_1h3=149.995634206
+# self.lower_sigma_1h3=148.981865794
+# self.upper_sigma_5m3=150.266017698
+# self.lower_sigma_5m3=149.400696588
+# self.start_price_5m=150.255
+# self.end_price_5m=150.322
+# self.start_price_1m=150.322
+# self.end_price_1m=150.2575
+# self.original_stoploss_rate=0.2
 # Execute FirstTrail Stop
 # Execute SecondTrail Stop
 # self.log_max_price=151.9195
-# self.log_min_price=149.178
-# EXECUTE SETTLEMENT at 2017-11-01 23:25:01
+# self.log_min_price=150.132
+# EXECUTE SETTLEMENT at 2017-11-01 23:25:02
 # STL_PRICE=151.567
-# PROFIT=2.034
+# PROFIT=1.29
 #######################################################
 # in volatility Algorithm
-# EXECUTE ORDER at 2017-11-01 23:27:01
+# EXECUTE ORDER at 2017-11-01 23:27:02
 # ORDER_PRICE=151.441, TRADE_FLAG=sell
 # self.daily_slope=1.6704545454546096
 # self.upper_sigma_1h3=152.754331985
@@ -2370,12 +2549,12 @@
 # Execute FirstTrail Stop
 # self.log_max_price=151.453
 # self.log_min_price=150.62
-# EXECUTE SETTLEMENT at 2017-11-02 21:00:02
+# EXECUTE SETTLEMENT at 2017-11-02 21:00:03
 # STL_PRICE=151.0015
 # PROFIT=0.36
 #######################################################
 # in volatility Algorithm
-# EXECUTE ORDER at 2017-11-02 21:02:02
+# EXECUTE ORDER at 2017-11-02 21:02:03
 # ORDER_PRICE=149.815, TRADE_FLAG=sell
 # self.daily_slope=1.6010909090908858
 # self.upper_sigma_1h3=152.043895979
@@ -2391,7 +2570,7 @@
 # Execute SecondTrail Stop
 # self.log_max_price=150.0075
 # self.log_min_price=148.686
-# EXECUTE SETTLEMENT at 2017-11-03 01:40:03
+# EXECUTE SETTLEMENT at 2017-11-03 01:40:04
 # STL_PRICE=149.0835
 # PROFIT=0.718
 #######################################################
@@ -2407,13 +2586,13 @@
 # self.end_price_5m=148.7495
 # self.start_price_1m=148.7495
 # self.end_price_1m=148.67
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # execute common stoploss
-# self.log_max_price=149.6925
+# self.log_max_price=148.901
 # self.log_min_price=148.5605
-# EXECUTE SETTLEMENT at 2017-11-09 11:50:01
-# STL_PRICE=149.6925
-# PROFIT=-1.044
+# EXECUTE SETTLEMENT at 2017-11-09 01:05:01
+# STL_PRICE=148.8975
+# PROFIT=-0.247
 #######################################################
 # in expantion Algorithm
 # EXECUTE ORDER at 2017-11-10 21:10:01
@@ -2447,17 +2626,17 @@
 # self.end_price_5m=148.633
 # self.start_price_1m=148.633
 # self.end_price_1m=148.586
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # execute common stoploss
-# self.log_max_price=149.432
+# self.log_max_price=148.7615
 # self.log_min_price=148.0695
-# EXECUTE SETTLEMENT at 2017-11-14 18:35:01
-# STL_PRICE=148.9205
-# PROFIT=-0.362
+# EXECUTE SETTLEMENT at 2017-11-14 00:15:01
+# STL_PRICE=148.7615
+# PROFIT=-0.201
 #######################################################
 # in volatility Algorithm
-# EXECUTE ORDER at 2017-11-14 18:35:01
-# ORDER_PRICE=148.954, TRADE_FLAG=sell
+# EXECUTE ORDER at 2017-11-14 18:32:01
+# ORDER_PRICE=148.891, TRADE_FLAG=sell
 # self.daily_slope=-0.9783333333333613
 # self.upper_sigma_1h3=149.728732498
 # self.lower_sigma_1h3=147.917517502
@@ -2473,7 +2652,7 @@
 # self.log_min_price=148.6255
 # EXECUTE SETTLEMENT at 2017-11-15 02:05:02
 # STL_PRICE=149.3125
-# PROFIT=-0.373
+# PROFIT=-0.436
 #######################################################
 # in expantion Algorithm
 # EXECUTE ORDER at 2017-11-15 02:15:02
@@ -2527,13 +2706,53 @@
 # self.end_price_5m=148.582
 # self.start_price_1m=148.582
 # self.end_price_1m=148.548
-# self.original_stoploss_rate=1.0
-# weekend stl logic
-# self.log_max_price=149.459
-# self.log_min_price=147.944
-# EXECUTE SETTLEMENT at 2017-11-18 05:00:05
-# STL_PRICE=148.195
-# PROFIT=0.323
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=148.772
+# self.log_min_price=148.216
+# EXECUTE SETTLEMENT at 2017-11-16 00:35:05
+# STL_PRICE=148.772
+# PROFIT=-0.256
+#######################################################
+# in expantion Algorithm
+# EXECUTE ORDER at 2017-11-17 13:00:05
+# ORDER_PRICE=148.865, TRADE_FLAG=sell
+# self.daily_slope=-0.4773333333333778
+# self.upper_sigma_1h3=149.601827606
+# self.lower_sigma_1h3=148.416208108
+# self.upper_sigma_5m3=149.144265633
+# self.lower_sigma_5m3=148.750734367
+# self.start_price_5m=148.9655
+# self.end_price_5m=148.899
+# self.start_price_1m=148.9105
+# self.end_price_1m=148.959
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=149.1225
+# self.log_min_price=148.8295
+# EXECUTE SETTLEMENT at 2017-11-17 16:20:06
+# STL_PRICE=149.1225
+# PROFIT=-0.272
+#######################################################
+# in volatility Algorithm
+# EXECUTE ORDER at 2017-11-17 19:57:06
+# ORDER_PRICE=149.022, TRADE_FLAG=sell
+# self.daily_slope=-0.4773333333333778
+# self.upper_sigma_1h3=149.523370225
+# self.lower_sigma_1h3=148.57616549
+# self.upper_sigma_5m3=149.283025075
+# self.lower_sigma_5m3=148.917260639
+# self.start_price_5m=149.081
+# self.end_price_5m=149.048
+# self.start_price_1m=149.0535
+# self.end_price_1m=148.7045
+# self.original_stoploss_rate=0.2
+# Execute FirstTrail Stop
+# self.log_max_price=149.038
+# self.log_min_price=148.3695
+# EXECUTE SETTLEMENT at 2017-11-17 21:20:07
+# STL_PRICE=148.759
+# PROFIT=0.248
 #######################################################
 # in volatility Algorithm
 # EXECUTE ORDER at 2017-11-20 17:42:00
@@ -2567,7 +2786,7 @@
 # self.end_price_5m=148.536
 # self.start_price_1m=148.536
 # self.end_price_1m=148.504
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # Execute FirstTrail Stop
 # self.log_max_price=148.604
 # self.log_min_price=147.819
@@ -2587,7 +2806,7 @@
 # self.end_price_5m=147.689
 # self.start_price_1m=147.689
 # self.end_price_1m=147.693
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # execute all over the world at MultiAlgo
 # self.log_max_price=147.846
 # self.log_min_price=146.9875
@@ -2889,13 +3108,13 @@
 # self.end_price_5m=151.589
 # self.start_price_1m=151.589
 # self.end_price_1m=151.57
-# self.original_stoploss_rate=1.0
-# weekend stl logic
-# self.log_max_price=151.8555
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=151.7595
 # self.log_min_price=151.313
-# EXECUTE SETTLEMENT at 2017-12-23 05:00:02
-# STL_PRICE=151.493
-# PROFIT=0.051
+# EXECUTE SETTLEMENT at 2017-12-22 03:15:02
+# STL_PRICE=151.7595
+# PROFIT=-0.211
 #######################################################
 # in expantion Algorithm
 # EXECUTE ORDER at 2017-12-27 18:45:00
@@ -2929,13 +3148,13 @@
 # self.end_price_5m=151.9025
 # self.start_price_1m=151.9025
 # self.end_price_1m=151.9065
-# self.original_stoploss_rate=1.0
-# weekend stl logic
-# self.log_max_price=152.5085
-# self.log_min_price=151.5425
-# EXECUTE SETTLEMENT at 2017-12-30 05:00:02
-# STL_PRICE=152.2545
-# PROFIT=0.308
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=151.9875
+# self.log_min_price=151.659
+# EXECUTE SETTLEMENT at 2017-12-29 01:00:02
+# STL_PRICE=151.6655
+# PROFIT=-0.276
 #######################################################
 # in expantion Algorithm
 # EXECUTE ORDER at 2018-01-03 00:00:00
@@ -2969,7 +3188,7 @@
 # self.end_price_5m=152.21
 # self.start_price_1m=152.21
 # self.end_price_1m=152.202
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # Execute FirstTrail Stop
 # Execute SecondTrail Stop
 # self.log_max_price=153.488
@@ -3011,7 +3230,7 @@
 # self.end_price_5m=151.4545
 # self.start_price_1m=151.4545
 # self.end_price_1m=151.489
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # Execute FirstTrail Stop
 # Execute SecondTrail Stop
 # self.log_max_price=152.644
@@ -3032,7 +3251,7 @@
 # self.end_price_5m=152.63
 # self.start_price_1m=152.63
 # self.end_price_1m=152.646
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # Execute FirstTrail Stop
 # self.log_max_price=152.7665
 # self.log_min_price=152.0555
@@ -3073,7 +3292,7 @@
 # self.end_price_5m=153.8705
 # self.start_price_1m=153.8705
 # self.end_price_1m=153.906
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # Execute FirstTrail Stop
 # self.log_max_price=154.168
 # self.log_min_price=153.1925
@@ -3093,7 +3312,7 @@
 # self.end_price_5m=154.5765
 # self.start_price_1m=154.5765
 # self.end_price_1m=154.408
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # Execute FirstTrail Stop
 # Execute SecondTrail Stop
 # self.log_max_price=155.6195
@@ -3154,7 +3373,7 @@
 # self.end_price_5m=155.9445
 # self.start_price_1m=155.9445
 # self.end_price_1m=155.8855
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # weekend stl logic
 # self.log_max_price=156.06
 # self.log_min_price=155.735
@@ -3417,13 +3636,33 @@
 # self.end_price_5m=149.3775
 # self.start_price_1m=149.6945
 # self.end_price_1m=149.7475
-# self.original_stoploss_rate=1.0
-# weekend stl logic
-# self.log_max_price=149.7185
-# self.log_min_price=148.803
-# EXECUTE SETTLEMENT at 2018-02-17 05:00:06
-# STL_PRICE=149.061
-# PROFIT=0.206
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=149.492
+# self.log_min_price=149.206
+# EXECUTE SETTLEMENT at 2018-02-16 14:05:06
+# STL_PRICE=149.4715
+# PROFIT=-0.204
+#######################################################
+# in expantion Algorithm
+# EXECUTE ORDER at 2018-02-16 22:15:06
+# ORDER_PRICE=149.026, TRADE_FLAG=sell
+# self.daily_slope=-6.976636363636325
+# self.upper_sigma_1h3=150.248438432
+# self.lower_sigma_1h3=149.04224014
+# self.upper_sigma_5m3=149.505235757
+# self.lower_sigma_5m3=149.051799957
+# self.start_price_5m=149.1905
+# self.end_price_5m=149.0435
+# self.start_price_1m=149.0435
+# self.end_price_1m=149.017
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=149.2455
+# self.log_min_price=148.812
+# EXECUTE SETTLEMENT at 2018-02-16 23:55:07
+# STL_PRICE=149.238
+# PROFIT=-0.224
 #######################################################
 # in volatility Algorithm
 # EXECUTE ORDER at 2018-02-20 18:47:00
@@ -3497,13 +3736,33 @@
 # self.end_price_5m=148.9575
 # self.start_price_1m=148.9575
 # self.end_price_1m=149.0295
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=149.3635
+# self.log_min_price=148.9785
+# EXECUTE SETTLEMENT at 2018-02-23 21:00:04
+# STL_PRICE=149.308
+# PROFIT=-0.309
+#######################################################
+# in expantion Algorithm
+# EXECUTE ORDER at 2018-02-24 01:00:04
+# ORDER_PRICE=148.946, TRADE_FLAG=sell
+# self.daily_slope=-1.271000000000054
+# self.upper_sigma_1h3=149.68683149
+# self.lower_sigma_1h3=148.501882796
+# self.upper_sigma_5m3=149.594436951
+# self.lower_sigma_5m3=149.022420192
+# self.start_price_5m=149.1035
+# self.end_price_5m=148.906
+# self.start_price_1m=148.906
+# self.end_price_1m=148.9455
+# self.original_stoploss_rate=0.2
 # weekend stl logic
-# self.log_max_price=149.472
-# self.log_min_price=148.855
-# EXECUTE SETTLEMENT at 2018-02-24 05:00:04
-# STL_PRICE=149.115
-# PROFIT=-0.117
+# self.log_max_price=149.187
+# self.log_min_price=148.875
+# EXECUTE SETTLEMENT at 2018-02-24 05:00:05
+# STL_PRICE=149.12
+# PROFIT=-0.189
 #######################################################
 # in expantion Algorithm
 # EXECUTE ORDER at 2018-02-26 17:25:00
@@ -3537,15 +3796,15 @@
 # self.end_price_5m=149.4225
 # self.start_price_1m=149.4225
 # self.end_price_1m=149.426
-# self.original_stoploss_rate=1.0
-# execute all over the world at MultiAlgo
-# self.log_max_price=149.813
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=149.672
 # self.log_min_price=149.0055
-# EXECUTE SETTLEMENT at 2018-02-27 17:10:02
-# STL_PRICE=149.669
-# PROFIT=-0.273
+# EXECUTE SETTLEMENT at 2018-02-27 17:00:02
+# STL_PRICE=149.672
+# PROFIT=-0.276
 #######################################################
-# in  Algorithm
+# in expantion Algorithm
 # EXECUTE ORDER at 2018-02-27 17:10:02
 # ORDER_PRICE=149.682, TRADE_FLAG=buy
 # self.daily_slope=-0.8101212121212648
@@ -3558,11 +3817,12 @@
 # self.start_price_1m=149.742
 # self.end_price_1m=149.671
 # self.original_stoploss_rate=0.2
+# execute common stoploss
 # self.log_max_price=149.7735
-# self.log_min_price=147.6905
-# EXECUTE SETTLEMENT at 2018-02-28 21:45:13
-# STL_PRICE=147.6905
-# PROFIT=-2.004
+# self.log_min_price=149.437
+# EXECUTE SETTLEMENT at 2018-02-27 18:35:03
+# STL_PRICE=149.446
+# PROFIT=-0.249
 #######################################################
 # in volatility Algorithm
 # EXECUTE ORDER at 2018-03-02 00:32:03
@@ -3596,7 +3856,7 @@
 # self.end_price_5m=145.9065
 # self.start_price_1m=145.9065
 # self.end_price_1m=145.8445
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # Execute FirstTrail Stop
 # self.log_max_price=146.019
 # self.log_min_price=145.004
@@ -3636,15 +3896,15 @@
 # self.end_price_5m=147.2735
 # self.start_price_1m=146.5715
 # self.end_price_1m=146.611
-# self.original_stoploss_rate=1.0
-# execute all over the world at MultiAlgo
-# self.log_max_price=148.1545
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=147.554
 # self.log_min_price=147.0655
-# EXECUTE SETTLEMENT at 2018-03-09 23:25:02
-# STL_PRICE=147.9835
-# PROFIT=-0.691
+# EXECUTE SETTLEMENT at 2018-03-09 17:05:02
+# STL_PRICE=147.5505
+# PROFIT=-0.257
 #######################################################
-# in  Algorithm
+# in expantion Algorithm
 # EXECUTE ORDER at 2018-03-09 23:25:02
 # ORDER_PRICE=147.996, TRADE_FLAG=buy
 # self.daily_slope=-2.853606060606058
@@ -3696,13 +3956,33 @@
 # self.end_price_5m=147.8335
 # self.start_price_1m=147.8335
 # self.end_price_1m=147.786
-# self.original_stoploss_rate=1.0
-# weekend stl logic
-# self.log_max_price=147.9755
-# self.log_min_price=147.257
-# EXECUTE SETTLEMENT at 2018-03-17 05:00:02
-# STL_PRICE=147.8985
-# PROFIT=0.084
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=147.799
+# self.log_min_price=147.51
+# EXECUTE SETTLEMENT at 2018-03-16 16:40:02
+# STL_PRICE=147.543
+# PROFIT=-0.271
+#######################################################
+# in expantion Algorithm
+# EXECUTE ORDER at 2018-03-16 21:45:02
+# ORDER_PRICE=147.73, TRADE_FLAG=buy
+# self.daily_slope=2.7792424242423954
+# self.upper_sigma_1h3=148.669983497
+# self.lower_sigma_1h3=147.010445075
+# self.upper_sigma_5m3=147.755891465
+# self.lower_sigma_5m3=147.348179964
+# self.start_price_5m=147.7025
+# self.end_price_5m=147.784
+# self.start_price_1m=147.784
+# self.end_price_1m=147.7225
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=147.7175
+# self.log_min_price=147.483
+# EXECUTE SETTLEMENT at 2018-03-16 22:10:03
+# STL_PRICE=147.505
+# PROFIT=-0.237
 #######################################################
 # in expantion Algorithm
 # EXECUTE ORDER at 2018-03-19 17:00:00
@@ -3716,7 +3996,7 @@
 # self.end_price_5m=147.5
 # self.start_price_1m=147.5
 # self.end_price_1m=147.459
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # Execute FirstTrail Stop
 # Execute SecondTrail Stop
 # self.log_max_price=149.676
@@ -3818,14 +4098,14 @@
 # self.start_price_1m=149.505
 # self.end_price_1m=149.8445
 # self.original_stoploss_rate=0.2
-# execute all over the world at MultiAlgo
+# execute common stoploss
 # self.log_max_price=150.3025
-# self.log_min_price=149.3245
-# EXECUTE SETTLEMENT at 2018-03-22 19:00:06
-# STL_PRICE=149.4185
-# PROFIT=-0.44
+# self.log_min_price=149.606
+# EXECUTE SETTLEMENT at 2018-03-22 09:55:06
+# STL_PRICE=149.647
+# PROFIT=-0.214
 #######################################################
-# in  Algorithm
+# in expantion Algorithm
 # EXECUTE ORDER at 2018-03-22 19:00:06
 # ORDER_PRICE=149.405, TRADE_FLAG=sell
 # self.daily_slope=1.7234242424242385
@@ -3838,12 +4118,12 @@
 # self.start_price_1m=149.33
 # self.end_price_1m=149.4015
 # self.original_stoploss_rate=0.2
-# Execute FirstTrail Stop
-# self.log_max_price=150.112
-# self.log_min_price=148.71
-# EXECUTE SETTLEMENT at 2018-03-22 23:15:07
-# STL_PRICE=149.2275
-# PROFIT=0.165
+# execute common stoploss
+# self.log_max_price=149.629
+# self.log_min_price=149.306
+# EXECUTE SETTLEMENT at 2018-03-22 20:35:07
+# STL_PRICE=149.618
+# PROFIT=-0.226
 #######################################################
 # in volatility Algorithm
 # EXECUTE ORDER at 2018-03-23 01:17:07
@@ -3897,13 +4177,13 @@
 # self.end_price_5m=150.75
 # self.start_price_1m=150.75
 # self.end_price_1m=150.8065
-# self.original_stoploss_rate=1.0
-# weekend stl logic
+# self.original_stoploss_rate=0.2
+# execute common stoploss
 # self.log_max_price=151.2185
-# self.log_min_price=150.4235
-# EXECUTE SETTLEMENT at 2018-04-07 05:00:01
-# STL_PRICE=150.583
-# PROFIT=-0.258
+# self.log_min_price=150.4745
+# EXECUTE SETTLEMENT at 2018-04-07 02:55:01
+# STL_PRICE=150.481
+# PROFIT=-0.36
 #######################################################
 # in expantion Algorithm
 # EXECUTE ORDER at 2018-04-09 22:30:00
@@ -3917,16 +4197,36 @@
 # self.end_price_5m=151.458
 # self.start_price_1m=151.458
 # self.end_price_1m=151.3735
-# self.original_stoploss_rate=1.0
-# Execute FirstTrail Stop
-# self.log_max_price=152.132
-# self.log_min_price=150.6495
-# EXECUTE SETTLEMENT at 2018-04-11 02:00:01
-# STL_PRICE=151.7065
-# PROFIT=0.31
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=151.4925
+# self.log_min_price=151.14
+# EXECUTE SETTLEMENT at 2018-04-10 02:00:01
+# STL_PRICE=151.147
+# PROFIT=-0.25
 #######################################################
 # in expantion Algorithm
-# EXECUTE ORDER at 2018-04-11 20:15:01
+# EXECUTE ORDER at 2018-04-10 20:55:01
+# ORDER_PRICE=151.832, TRADE_FLAG=buy
+# self.daily_slope=1.0104848484847824
+# self.upper_sigma_1h3=151.930949817
+# self.lower_sigma_1h3=150.414514468
+# self.upper_sigma_5m3=151.837766639
+# self.lower_sigma_5m3=151.375590503
+# self.start_price_5m=151.7235
+# self.end_price_5m=151.865
+# self.start_price_1m=151.865
+# self.end_price_1m=151.8235
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=151.819
+# self.log_min_price=151.5875
+# EXECUTE SETTLEMENT at 2018-04-10 22:10:02
+# STL_PRICE=151.6105
+# PROFIT=-0.235
+#######################################################
+# in expantion Algorithm
+# EXECUTE ORDER at 2018-04-11 20:15:02
 # ORDER_PRICE=151.518, TRADE_FLAG=sell
 # self.daily_slope=1.7724242424242023
 # self.upper_sigma_1h3=152.317382846
@@ -3941,7 +4241,7 @@
 # execute common stoploss
 # self.log_max_price=151.7975
 # self.log_min_price=151.2865
-# EXECUTE SETTLEMENT at 2018-04-11 22:40:02
+# EXECUTE SETTLEMENT at 2018-04-11 22:40:03
 # STL_PRICE=151.7965
 # PROFIT=-0.29
 #######################################################
@@ -4218,7 +4518,7 @@
 # self.end_price_5m=148.64
 # self.start_price_1m=148.64
 # self.end_price_1m=148.6235
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # weekend stl logic
 # self.log_max_price=150.009
 # self.log_min_price=148.1895
@@ -4238,13 +4538,13 @@
 # self.end_price_5m=149.383
 # self.start_price_1m=149.383
 # self.end_price_1m=149.346
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # execute common stoploss
 # self.log_max_price=149.7145
-# self.log_min_price=148.291
-# EXECUTE SETTLEMENT at 2018-05-23 10:40:01
-# STL_PRICE=148.296
-# PROFIT=-1.061
+# self.log_min_price=149.138
+# EXECUTE SETTLEMENT at 2018-05-22 20:55:01
+# STL_PRICE=149.141
+# PROFIT=-0.214
 #######################################################
 # in volatility Algorithm
 # EXECUTE ORDER at 2018-05-23 17:32:01
@@ -4298,7 +4598,7 @@
 # self.end_price_5m=144.878
 # self.start_price_1m=144.771
 # self.end_price_1m=144.821
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # Execute FirstTrail Stop
 # Execute SecondTrail Stop
 # self.log_max_price=144.83
@@ -4419,7 +4719,7 @@
 # self.end_price_5m=147.6545
 # self.start_price_1m=147.6545
 # self.end_price_1m=147.686
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # execute all over the world at MultiAlgo
 # self.log_max_price=147.846
 # self.log_min_price=147.234
@@ -4459,16 +4759,36 @@
 # self.end_price_5m=147.652
 # self.start_price_1m=147.652
 # self.end_price_1m=147.699
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # execute common stoploss
 # self.log_max_price=147.986
-# self.log_min_price=147.162
-# EXECUTE SETTLEMENT at 2018-06-14 21:00:03
-# STL_PRICE=147.376
-# PROFIT=-0.359
+# self.log_min_price=147.515
+# EXECUTE SETTLEMENT at 2018-06-12 19:05:03
+# STL_PRICE=147.534
+# PROFIT=-0.201
+#######################################################
+# in volatility Algorithm
+# EXECUTE ORDER at 2018-06-14 17:32:03
+# ORDER_PRICE=147.769, TRADE_FLAG=buy
+# self.daily_slope=3.1353939393939565
+# self.upper_sigma_1h3=148.010829642
+# self.lower_sigma_1h3=147.136777501
+# self.upper_sigma_5m3=147.577489964
+# self.lower_sigma_5m3=147.195438607
+# self.start_price_5m=147.428
+# self.end_price_5m=147.461
+# self.start_price_1m=147.4575
+# self.end_price_1m=147.7855
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=147.841
+# self.log_min_price=147.385
+# EXECUTE SETTLEMENT at 2018-06-14 21:00:04
+# STL_PRICE=147.385
+# PROFIT=-0.396
 #######################################################
 # in expantion Algorithm
-# EXECUTE ORDER at 2018-06-14 22:05:03
+# EXECUTE ORDER at 2018-06-14 22:05:04
 # ORDER_PRICE=146.978, TRADE_FLAG=sell
 # self.daily_slope=3.1353939393939565
 # self.upper_sigma_1h3=147.969014019
@@ -4481,11 +4801,11 @@
 # self.end_price_1m=146.991
 # self.original_stoploss_rate=0.2
 # execute common stoploss
-# self.log_max_price=147.32
-# self.log_min_price=146.87
-# EXECUTE SETTLEMENT at 2018-06-15 00:30:04
-# STL_PRICE=147.32
-# PROFIT=-0.354
+# self.log_max_price=147.322
+# self.log_min_price=146.875
+# EXECUTE SETTLEMENT at 2018-06-15 00:30:05
+# STL_PRICE=147.322
+# PROFIT=-0.356
 #######################################################
 # in expantion Algorithm
 # EXECUTE ORDER at 2018-06-19 13:00:00
@@ -4519,7 +4839,7 @@
 # self.end_price_5m=145.358
 # self.start_price_1m=145.356
 # self.end_price_1m=145.353
-# self.original_stoploss_rate=1.0
+# self.original_stoploss_rate=0.2
 # Execute FirstTrail Stop
 # self.log_max_price=145.461
 # self.log_min_price=144.615
@@ -4559,15 +4879,15 @@
 # self.end_price_5m=145.676
 # self.start_price_1m=145.681
 # self.end_price_1m=145.731
-# self.original_stoploss_rate=1.0
-# execute all over the world at MultiAlgo
-# self.log_max_price=146.418
+# self.original_stoploss_rate=0.2
+# execute common stoploss
+# self.log_max_price=145.934
 # self.log_min_price=145.4945
-# EXECUTE SETTLEMENT at 2018-06-22 16:10:04
-# STL_PRICE=146.425
-# PROFIT=-0.714
+# EXECUTE SETTLEMENT at 2018-06-22 10:50:04
+# STL_PRICE=145.934
+# PROFIT=-0.223
 #######################################################
-# in  Algorithm
+# in expantion Algorithm
 # EXECUTE ORDER at 2018-06-22 16:10:04
 # ORDER_PRICE=146.437, TRADE_FLAG=buy
 # self.daily_slope=-2.2402121212120774
