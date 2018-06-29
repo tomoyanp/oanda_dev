@@ -242,11 +242,11 @@ class MultiAlgo(SuperAlgo):
     def setExpantionStoploss(self, trade_flag):
         if trade_flag != "pass" and self.algorithm == "expantion":
             if trade_flag == "buy" and self.daily_slope > 0:
-                self.original_stoploss_rate = 1.0
+                self.original_stoploss_rate = 0.2
             elif trade_flag == "buy" and self.daily_slope < 0:
                 self.original_stoploss_rate = 0.2
             elif trade_flag == "sell" and self.daily_slope < 0:
-                self.original_stoploss_rate = 1.0
+                self.original_stoploss_rate = 0.2
             elif trade_flag == "sell" and self.daily_slope > 0:
                 self.original_stoploss_rate = 0.2
 
@@ -368,7 +368,7 @@ class MultiAlgo(SuperAlgo):
 
     def setExpantionIndicator(self, base_time):
         # set dataset 5minutes
-        target_time = base_time - timedelta(minutes=5)
+        target_time = base_time - timedelta(minutes=10)
         dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=3, length=0)
         self.upper_sigma_5m3 = dataset["upper_sigmas"][-1]
         self.lower_sigma_5m3 = dataset["lower_sigmas"][-1]
@@ -381,21 +381,21 @@ class MultiAlgo(SuperAlgo):
 
 
         # set dataset 1hour
-        target_time = base_time - timedelta(hours=1)
+        target_time = base_time - timedelta(hours=2)
         dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=28, connector=self.mysql_connector, sigma_valiable=3, length=0)
         self.upper_sigma_1h3 = dataset["upper_sigmas"][-1]
         self.lower_sigma_1h3 = dataset["lower_sigmas"][-1]
         self.base_line_1h3 = dataset["base_lines"][-1]
 
     def setVolatilityIndicator(self, base_time):
-        target_time = base_time - timedelta(minutes=1)
+        target_time = base_time - timedelta(minutes=2)
         sql = "select start_price, end_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 1" % (self.instrument, "5m", target_time)
         response = self.mysql_connector.select_sql(sql)
         self.start_price_1m = response[0][0]
         self.end_price_1m = response[0][1]
 
     def setDailyIndicator(self, base_time):
-        target_time = base_time - timedelta(days=1)
+        target_time = base_time - timedelta(days=2)
         self.daily_slope = self.getDailySlope(self.instrument, target_time, span=10, connector=self.mysql_connector)
         sql = "select max_price, min_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 1" % (self.instrument, "day", target_time)
         response = self.mysql_connector.select_sql(sql)
