@@ -273,14 +273,14 @@ class VolatilityAlgo(SuperAlgo):
         return slope
 
     def setVolatilityIndicator(self, base_time):
-        target_time = base_time - timedelta(minutes=2)
+        target_time = base_time - timedelta(minutes=1)
         sql = "select start_price, end_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 1" % (self.instrument, "5m", target_time)
         response = self.mysql_connector.select_sql(sql)
         self.start_price_1m = response[0][0]
         self.end_price_1m = response[0][1]
 
     def setDailyIndicator(self, base_time):
-        target_time = base_time - timedelta(days=2)
+        target_time = base_time - timedelta(days=1)
         self.daily_slope = self.getDailySlope(self.instrument, target_time, span=10, connector=self.mysql_connector)
         sql = "select max_price, min_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 1" % (self.instrument, "day", target_time)
         response = self.mysql_connector.select_sql(sql)
