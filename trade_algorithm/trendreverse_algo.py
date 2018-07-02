@@ -298,7 +298,7 @@ class TrendReverseAlgo(SuperAlgo):
         response = self.mysql_connector.select_sql(sql)
         tmp = []
         for res in response:
-            tmp.append((res[0]+res[1])/2)
+            tmp.append(res[0])
         tmp.reverse()
         self.ewma20_5mvalue = getEWMA(tmp, len(tmp))[-1]
 
