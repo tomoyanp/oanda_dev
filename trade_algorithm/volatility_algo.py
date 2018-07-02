@@ -274,10 +274,11 @@ class VolatilityAlgo(SuperAlgo):
 
     def setVolatilityIndicator(self, base_time):
         target_time = base_time - timedelta(minutes=1)
-        sql = "select start_price, end_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 1" % (self.instrument, "5m", target_time)
+        sql = "select start_price, end_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 1" % (self.instrument, "1m", target_time)
         response = self.mysql_connector.select_sql(sql)
         self.start_price_1m = response[0][0]
         self.end_price_1m = response[0][1]
+        self.target_time = target_time
 
     def setDailyIndicator(self, base_time):
         target_time = base_time - timedelta(days=1)
@@ -311,6 +312,7 @@ class VolatilityAlgo(SuperAlgo):
         self.result_logger.info("# self.daily_slope=%s" % self.daily_slope)
         self.result_logger.info("# self.start_price_1m=%s" % self.start_price_1m)
         self.result_logger.info("# self.end_price_1m=%s" % self.end_price_1m)
+        self.result_logger.info("# self.target_time=%s" % self.target_time)
         self.result_logger.info("# self.daily_start_price=%s" % self.daily_start_price)
         self.result_logger.info("# self.original_stoploss_rate=%s" %  self.original_stoploss_rate)
 
