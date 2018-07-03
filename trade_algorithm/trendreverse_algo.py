@@ -198,20 +198,24 @@ class TrendReverseAlgo(SuperAlgo):
                     pass
                 else:
                     if self.min_price_1m <= self.ewma20_1mvalue <= self.max_price_1m and self.slope_1m > 0 and self.ewma20_5mvalue > self.base_line_5m2:
-                        if self.decideBollingerCrossOver("upper") == False:
+                        #if self.decideBollingerCrossOver("upper") == False:
+                        if 1==1:
                             trade_flag = "buy"
                             self.algorithm = "cross over base_line"
                         else:
-                            trade_flag = "sell"
-                            self.algorithm = "decideBollinger CrossOver true"
+                            pass
+                            #trade_flag = "sell"
+                            #self.algorithm = "decideBollinger CrossOver true"
     
                     if self.min_price_1m <= self.ewma20_1mvalue <= self.max_price_1m and self.slope_1m < 0 and self.ewma20_5mvalue < self.base_line_5m2:
-                        if self.decideBollingerCrossOver("lower") == False:
+                        #if self.decideBollingerCrossOver("lower") == False:
+                        if 1==1:
                             trade_flag = "sell"
                             self.algorithm = "cross over base_line"
                         else:
-                            trade_flag = "buy"
-                            self.algorithm = "decideBollinger CrossOver true"
+                            pass
+                            #trade_flag = "buy"
+                            #self.algorithm = "decideBollinger CrossOver true"
 
         return trade_flag
 
@@ -311,12 +315,12 @@ class TrendReverseAlgo(SuperAlgo):
         self.min_price_5m = response[0][3]
 
 
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=5)
-        self.upper_sigma_5m2_list = dataset["upper_sigmas"][-6:]
-        self.lower_sigma_5m2_list = dataset["lower_sigmas"][-6:]
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=2)
+        self.upper_sigma_5m2_list = dataset["upper_sigmas"][-3:]
+        self.lower_sigma_5m2_list = dataset["lower_sigmas"][-3:]
         self.base_line_5m2 = dataset["base_lines"][-1]
 
-        sql = "select max_price, min_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 6" % (self.instrument, "5m", target_time)
+        sql = "select max_price, min_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 3" % (self.instrument, "5m", target_time)
         response = self.mysql_connector.select_sql(sql)
         self.max_price_5m_list = []
         self.min_price_5m_list = []
