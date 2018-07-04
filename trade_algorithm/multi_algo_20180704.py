@@ -385,7 +385,7 @@ class MultiAlgo(SuperAlgo):
         # set dataset 5minutes
 
         target_time = base_time - timedelta(minutes=5)
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=1)
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=3, length=1)
         self.upper_sigma_5m3_list = dataset["upper_sigmas"][-2:]
         self.lower_sigma_5m3_list = dataset["lower_sigmas"][-2:]
         self.base_line_5m3_list = dataset["base_lines"][-2:]

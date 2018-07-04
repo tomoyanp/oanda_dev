@@ -194,10 +194,12 @@ class TrendReverseAlgo(SuperAlgo):
             if seconds < 10 and hour != 6:
                 self.setReverseIndicator(base_time)
 
+            if 1 == 1:
                 if (self.upper_sigma_1m2 - self.lower_sigma_1m2) < 0.05:
                     pass
                 else:
-                    if self.min_price_1m <= self.ewma20_1mvalue <= self.max_price_1m and self.slope_1m > 0 and self.ewma20_5mvalue > self.base_line_5m2:
+#                    if self.min_price_1m <= self.ewma20_1mvalue <= self.max_price_1m and self.slope_1m > 0 and self.ewma20_5mvalue > self.base_line_5m2:
+                    if (current_price) <= self.ewma20_1mvalue <= (current_price + 0.01) and self.slope_1m > 0 and self.ewma20_5mvalue > self.base_line_5m2:
                         #if self.decideBollingerCrossOver("upper") == False:
                         if 1==1:
                             trade_flag = "buy"
@@ -207,7 +209,7 @@ class TrendReverseAlgo(SuperAlgo):
                             #trade_flag = "sell"
                             #self.algorithm = "decideBollinger CrossOver true"
     
-                    if self.min_price_1m <= self.ewma20_1mvalue <= self.max_price_1m and self.slope_1m < 0 and self.ewma20_5mvalue < self.base_line_5m2:
+                    if (current_price - 0.01) <= self.ewma20_1mvalue <= (current_price) and self.slope_1m < 0 and self.ewma20_5mvalue < self.base_line_5m2:
                         #if self.decideBollingerCrossOver("lower") == False:
                         if 1==1:
                             trade_flag = "sell"
@@ -253,12 +255,6 @@ class TrendReverseAlgo(SuperAlgo):
         target_time = base_time - timedelta(minutes=1)
 
         ### get 1m dataset
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1m", window_size=28, connector=self.mysql_connector, sigma_valiable=1.5, length=0)
-        self.upper_sigma_1m15 = dataset["upper_sigmas"][-1]
-        self.lower_sigma_1m15 = dataset["lower_sigmas"][-1]
-        self.base_line_1m15 = dataset["base_lines"][-1]
-
-
         dataset = getBollingerWrapper(target_time, self.instrument, table_type="1m", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=0)
         self.upper_sigma_1m2 = dataset["upper_sigmas"][-1]
         self.lower_sigma_1m2 = dataset["lower_sigmas"][-1]
@@ -279,7 +275,7 @@ class TrendReverseAlgo(SuperAlgo):
 
         target_time = base_time
 
-        width = 60*200
+        width = 60*20
         sql = "select ask_price, bid_price from %s_TABLE where insert_time < \'%s\' order by insert_time desc limit %s" % (self.instrument, target_time, width)
         response = self.mysql_connector.select_sql(sql)
         tmp = []
@@ -288,11 +284,7 @@ class TrendReverseAlgo(SuperAlgo):
         tmp.reverse()
 
         ewma20_rawdata = tmp[-1*60*20:]
-        ewma100_rawdata = tmp[-1*60*100:]
-        ewma200_rawdata = tmp[-1*60*200:]
         self.ewma20_1mvalue = getEWMA(ewma20_rawdata, len(ewma20_rawdata))[-1]
-        self.ewma100_1mvalue = getEWMA(ewma100_rawdata, len(ewma100_rawdata))[-1]
-        self.ewma200_1mvalue = getEWMA(ewma200_rawdata, len(ewma200_rawdata))[-1]
 
 
         ### get 5m dataset
@@ -307,30 +299,8 @@ class TrendReverseAlgo(SuperAlgo):
         tmp.reverse()
         self.ewma20_5mvalue = getEWMA(tmp, len(tmp))[-1]
 
-        sql = "select start_price, end_price, max_price, min_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 200" % (self.instrument, "5m", target_time)
-        response = self.mysql_connector.select_sql(sql)
-        self.start_price_5m = response[0][0]
-        self.end_price_5m = response[0][1]
-        self.max_price_5m = response[0][2]
-        self.min_price_5m = response[0][3]
-
-
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=2)
-        self.upper_sigma_5m2_list = dataset["upper_sigmas"][-3:]
-        self.lower_sigma_5m2_list = dataset["lower_sigmas"][-3:]
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=0)
         self.base_line_5m2 = dataset["base_lines"][-1]
-
-        sql = "select max_price, min_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 3" % (self.instrument, "5m", target_time)
-        response = self.mysql_connector.select_sql(sql)
-        self.max_price_5m_list = []
-        self.min_price_5m_list = []
-
-        for res in response:
-            self.max_price_5m_list.append(res[0])
-            self.min_price_5m_list.append(res[1])
-
-        self.max_price_5m_list.reverse()
-        self.min_price_5m_list.reverse()
 
 
 
@@ -355,8 +325,6 @@ class TrendReverseAlgo(SuperAlgo):
         self.result_logger.info("# self.max_price_1m=%s" % self.max_price_1m)
         self.result_logger.info("# self.min_price_1m=%s" % self.min_price_1m)
         self.result_logger.info("# self.ewma20_1mvalue=%s" % self.ewma20_1mvalue)
-        self.result_logger.info("# self.ewma100_1mvalue=%s" % self.ewma100_1mvalue)
-        self.result_logger.info("# self.ewma200_1mvalue=%s" % self.ewma200_1mvalue)
 
     def settlementLogWrite(self, profit, base_time, stl_price, stl_method):
         self.result_logger.info("# %s at %s" % (stl_method, base_time))
