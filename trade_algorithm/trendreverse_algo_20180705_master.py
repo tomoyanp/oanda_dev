@@ -91,8 +91,7 @@ class TrendReverseAlgo(SuperAlgo):
                     elif trade_flag == "sell" and self.order_kind == "sell":
                         trade_flag = "pass"
                     else:
-                        self.algorithm = self.algorithm + " by allovertheworld"
-                        #self.result_logger.info("# execute all over the world at TrendReverseAlgo")
+                        self.result_logger.info("# execute all over the world at TrendReverseAlgo")
 
                 self.writeDebugLog(base_time, mode="trade")
 
@@ -187,8 +186,8 @@ class TrendReverseAlgo(SuperAlgo):
             
 
     def decideReverseTrade(self, trade_flag, current_price, base_time):
-#        if trade_flag == "pass" and self.order_flag != True:
-        if trade_flag == "pass":
+        if trade_flag == "pass" and self.order_flag != True:
+#        if trade_flag == "pass":
             hour = base_time.hour
             minutes = base_time.minute
             seconds = base_time.second
@@ -200,7 +199,7 @@ class TrendReverseAlgo(SuperAlgo):
                     pass
                 else:
 #                    if self.min_price_1m <= self.ewma20_1mvalue <= self.max_price_1m and self.slope_1m > 0 and self.ewma20_5mvalue > self.base_line_5m2:
-                    if (current_price) <= self.ewma20_1mvalue <= (current_price + 0.01) and self.slope_1m > 0 and current_price > self.ewma20_5mvalue :
+                    if (current_price) <= self.ewma20_1mvalue <= (current_price + 0.01) and self.slope_1m > 0 and self.ewma20_5mvalue > self.base_line_5m2:
                         #if self.decideBollingerCrossOver("upper") == False:
                         if 1==1:
                             trade_flag = "buy"
@@ -210,7 +209,7 @@ class TrendReverseAlgo(SuperAlgo):
                             #trade_flag = "sell"
                             #self.algorithm = "decideBollinger CrossOver true"
     
-                    if (current_price - 0.01) <= self.ewma20_1mvalue <= (current_price) and self.slope_1m < 0 and current_price < self.ewma20_5mvalue:
+                    if (current_price - 0.01) <= self.ewma20_1mvalue <= (current_price) and self.slope_1m < 0 and self.ewma20_5mvalue < self.base_line_5m2:
                         #if self.decideBollingerCrossOver("lower") == False:
                         if 1==1:
                             trade_flag = "sell"
@@ -302,6 +301,7 @@ class TrendReverseAlgo(SuperAlgo):
 
         dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=0)
         self.base_line_5m2 = dataset["base_lines"][-1]
+
 
 
 # write log function
