@@ -225,7 +225,7 @@ class MultiAlgo(SuperAlgo):
          
 
     def decideExpantionStoploss(self, stl_flag, current_price, base_time):
-        target_time = self.entry_time + timedelta(minutes=31)
+        target_time = self.entry_time + timedelta(minutes=11)
         base_ftime = base_time.strftime("%Y-%m-%d %H:%M:00")
         target_ftime = target_time.strftime("%Y-%m-%d %H:%M:00")
 
@@ -247,10 +247,10 @@ class MultiAlgo(SuperAlgo):
 
 
         if self.stl_first_flag and  self.order_kind == "buy":
-            if self.order_price < self.bid_price or (self.order_price - 0.1) > self.bid_price:
+            if self.order_price < self.bid_price:
                 stl_flag = True
         elif self.stl_first_flag and self.order_kind == "sell":
-            if self.order_price > self.ask_price or (self.order_price + 0.1) < self.ask_price:
+            if self.order_price > self.ask_price:
                 stl_flag = True
 
 #        target_time = self.entry_time + timedelta(hours=3)
@@ -368,19 +368,19 @@ class MultiAlgo(SuperAlgo):
         target_time = base_time - timedelta(minutes=5)
 
         # set 5m 2sigma bollinger band
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=5)
-        self.upper_sigma_5m2_list = dataset["upper_sigmas"][-5:]
-        self.lower_sigma_5m2_list = dataset["lower_sigmas"][-5:]
-        self.base_line_5m2_list = dataset["base_lines"][-5:]
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=1)
+        self.upper_sigma_5m2_list = dataset["upper_sigmas"][-2:]
+        self.lower_sigma_5m2_list = dataset["lower_sigmas"][-2:]
+        self.base_line_5m2_list = dataset["base_lines"][-2:]
 
         # set 5m 3sigma bollinger band
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=3, length=5)
-        self.upper_sigma_5m3_list = dataset["upper_sigmas"][-5:]
-        self.lower_sigma_5m3_list = dataset["lower_sigmas"][-5:]
-        self.base_line_5m3_list = dataset["base_lines"][-5:]
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=3, length=1)
+        self.upper_sigma_5m3_list = dataset["upper_sigmas"][-2:]
+        self.lower_sigma_5m3_list = dataset["lower_sigmas"][-2:]
+        self.base_line_5m3_list = dataset["base_lines"][-2:]
 
         # set 5m end price list
-        sql = "select end_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 6" % (self.instrument, "5m", target_time)
+        sql = "select end_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 2" % (self.instrument, "5m", target_time)
         response = self.mysql_connector.select_sql(sql)
         tmp = []
         for res in response:
