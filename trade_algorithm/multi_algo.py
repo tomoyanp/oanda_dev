@@ -1,18 +1,11 @@
 # coding: utf-8
 ####################################################
 # Trade Decision
-# if trade timing is between 14:00 - 04:00
-# if upper and lower sigma value difference is smaller than 2 yen
-# if current price is higher or lower than bollinger band 5m 3sigma
-# if current_price is higher or lower than max(min) price last day
-#
-# Stop Loss Decision
-# Same Method Above
-#
-# Take Profit Decision
-# Special Trail mode
-# if current profit is higher than 50Pips, 50Pips trail mode
-# if current profit is higher than 100Pips, 30Pips trail mode
+# trade timing: at 13, 14, 15, 20, 21 o'clock
+# if endprice over bollinger band 2sigma 2 times
+# if oshime and modori at ema 20, execute entry
+# stoploss rate: 20pips
+# takeprofit rate: 50pips
 ####################################################
 
 
@@ -85,11 +78,7 @@ class MultiAlgo(SuperAlgo):
                         pass
     
                     else:
-                        #if ((hour == 9 or hour == 10 or hour == 13 or hour == 14 or hour == 15 or hour == 18 or hour == 20 or hour == 21) and minutes <= 10):
-#                        if (hour == 13 or hour == 14 or hour == 15 or hour == 18 or hour == 20 or hour == 21) and (minutes == 10 or minutes == 40):
-                        if (hour == 13 or hour == 14 or hour == 15 or hour == 20 or hour == 21) and (minutes == 10):
-#                        if 1==1:
-#                            trade_flag = self.decideVolatilityTrade(trade_flag, current_price, base_time)
+                        if 1==1:
                             trade_flag = self.decideExpantionTrade(trade_flag, current_price, base_time)
     
     
@@ -146,50 +135,6 @@ class MultiAlgo(SuperAlgo):
             raise
 
 
-#    def calcBuyExpantion(self, current_price, base_time):
-    def calcBuyExpantion(self, base_time):
-        # when current_price touch reversed sigma, count = 0
-        # when value is bigger than 2 between upper 3sigma and lower 3sigma, bollinger band base line's slope is bigger than 0,
-        # count += 1
-
-        self.buy_count = 0
-        for i in range(0, len(self.upper_sigma_5m3_list)):
-            if self.end_price_5m_list[i] > self.upper_sigma_5m3_list[i]:
-                self.buy_count = self.buy_count + 1
-        
-#        if self.buy_count == 0:
-#            if float(current_price) > float(self.upper_sigma_5m3) and (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
-#                self.buy_count = self.buy_count + 1
-#                self.buy_count_price = current_price
-#                self.sell_count = 0
-#
-#        else:
-#            if float(current_price) > float(self.upper_sigma_5m3) and float(current_price) > float(self.buy_count_price) and (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
-#                self.buy_count = self.buy_count + 1
-#                self.first_flag_time = base_time
-#                self.sell_count = 0
-#                self.buy_count_price = current_price
-
-
-#    def calcSellExpantion(self, current_price, base_time):
-    def calcSellExpantion(self, base_time):
-        self.sell_count = 0
-        for i in range(0, len(self.lower_sigma_5m3_list)):
-            if self.end_price_5m_list[i] < self.lower_sigma_5m3_list[i]:
-                self.sell_count = self.sell_count + 1
-
-#        if self.sell_count == 0:
-#            if float(current_price) < float(self.lower_sigma_5m3) and (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
-#                self.sell_count = self.sell_count + 1
-#                self.sell_count_price = current_price
-#                self.buy_count = 0
-#
-#        else:
-#            if float(current_price) < float(self.lower_sigma_5m3) and float(current_price) < float(self.sell_count_price) and (self.upper_sigma_1h3 - self.lower_sigma_1h3) < 2:
-#                self.sell_count = self.sell_count + 1
-#                self.first_flag_time = base_time
-#                self.buy_count = 0
-
     def decideHighLowPrice(self, current_price, exceed_th, surplus_th, high_price, low_price, mode):
         flag = False
 
@@ -215,15 +160,54 @@ class MultiAlgo(SuperAlgo):
             seconds = base_time.second
 
             expantion_timelimit = 3    # 3hours
-#            if minutes == 10 and seconds < 10:
-            if seconds < 10:
+            if (hour == 13 or hour == 14 or hour == 15 or hour == 20 or hour == 21) and (minutes == 10) and seconds < 10:
                 self.setExpantionIndicator(base_time)
                 if self.upper_sigma_5m2_list[0] < self.end_price_5m_list[0] and self.upper_sigma_5m2_list[1] < self.end_price_5m_list[1]:
-                    trade_flag = "buy"
-                    self.algorithm = "expantion"
+                    self.first_flag = "buy"
+                    self.first_flag_time = base_time
+                    self.first_flag_price = current_price
+                    self.debug_logger.info("first flag Buy at %s" % base_time)
                 elif self.lower_sigma_5m2_list[0] > self.end_price_5m_list[0] and self.lower_sigma_5m2_list[1] > self.end_price_5m_list[1]:
-                    trade_flag = "sell"
-                    self.algorithm = "expantion"
+                    self.first_flag = "sell"
+                    self.first_flag_time = base_time
+                    self.first_flag_price = current_price
+                    self.debug_logger.info("first flag Sell at %s" % base_time)
+
+
+            if 1 == 1:
+                if self.second_flag == "pass":
+                    if self.first_flag == "buy":
+                        if current_price < self.ewma20_5mvalue:
+                            self.second_flag = "buy"
+                            self.second_flag_time = base_time
+                            self.second_flag_price = current_price
+                            self.debug_logger.info("second flag On at %s" % base_time)
+
+                    elif self.first_flag == "sell":
+                        if current_price > self.ewma20_5mvalue:
+                            self.second_flag = "sell"
+                            self.second_flag_time = base_time
+                            self.second_flag_price = current_price
+                            self.debug_logger.info("second flag On at %s" % base_time)
+
+            if minutes % 5 == 0 and seconds < 10:
+                if self.second_flag == "buy":
+                    if self.end_price_5m_list[-1] > self.ewma20_5mvalue:
+                        trade_flag  = "buy"
+                        self.algorithm = "expantion"
+                        self.debug_logger.info("third flag On at %s" % base_time)
+
+                elif self.second_flag == "sell":
+                    if self.end_price_5m_list[-1] < self.ewma20_5mvalue:
+                        trade_flag = "sell"
+                        self.algorithm = "expantion"
+                        self.debug_logger.info("third flag On at %s" % base_time)
+
+            if self.first_flag != "pass":
+                comp_time = self.first_flag_time + timedelta(hours=expantion_timelimit)
+                if comp_time < base_time:
+                    self.debug_logger.info("flag reset at %s" % base_time)
+                    self.resetFlag()
 
         self.setExpantionStoploss(trade_flag)
         return trade_flag
@@ -384,7 +368,7 @@ class MultiAlgo(SuperAlgo):
         # set dataset 5minutes
         target_time = base_time - timedelta(minutes=5)
 
-        # set 5m 3sigma bollinger band
+        # set 5m 2sigma bollinger band
         dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=1)
         self.upper_sigma_5m2_list = dataset["upper_sigmas"][-2:]
         self.lower_sigma_5m2_list = dataset["lower_sigmas"][-2:]
@@ -445,7 +429,8 @@ class MultiAlgo(SuperAlgo):
 
 # write log function
     def writeDebugLog(self, base_time, mode):
-        self.debug_logger.info("%s: %s Logic START" % (base_time, mode))
+        pass
+#        self.debug_logger.info("%s: %s Logic START" % (base_time, mode))
 #        self.debug_logger.info("# self.buy_count=%s" % self.buy_count)
 #        self.debug_logger.info("# self.sell_count=%s" % self.sell_count)
 #        self.debug_logger.info("# self.daily_slope=%s" % self.daily_slope)
@@ -465,16 +450,14 @@ class MultiAlgo(SuperAlgo):
         self.result_logger.info("# EXECUTE ORDER at %s" % base_time)
         self.result_logger.info("# ORDER_PRICE=%s, TRADE_FLAG=%s" % (self.order_price, self.order_kind))
         self.result_logger.info("# self.first_flag_time=%s" % self.first_flag_time)
+        self.result_logger.info("# self.first_flag_price=%s" % self.first_flag_price)
         self.result_logger.info("# self.second_flag_time=%s" % self.second_flag_time)
+        self.result_logger.info("# self.second_flag_price=%s" % self.second_flag_price)
         self.result_logger.info("# self.daily_slope=%s" % self.daily_slope)
         self.result_logger.info("# self.upper_sigma_1h3=%s" % self.upper_sigma_1h3)
         self.result_logger.info("# self.lower_sigma_1h3=%s" % self.lower_sigma_1h3)
-#        self.result_logger.info("# self.upper_sigma_5m3=%s" % self.upper_sigma_5m3)
-#        self.result_logger.info("# self.lower_sigma_5m3=%s" % self.lower_sigma_5m3)
-#        self.result_logger.info("# self.start_price_5m=%s" % self.start_price_5m)
-#        self.result_logger.info("# self.end_price_5m=%s" % self.end_price_5m)
-#        self.result_logger.info("# self.start_price_1m=%s" % self.start_price_1m)
-#        self.result_logger.info("# self.end_price_1m=%s" % self.end_price_1m)
+        self.result_logger.info("# self.upper_sigma_5m3=%s" % self.upper_sigma_5m3_list[-1])
+        self.result_logger.info("# self.lower_sigma_5m3=%s" % self.lower_sigma_5m3_list[-1])
         self.result_logger.info("# self.original_stoploss_rate=%s" %  self.original_stoploss_rate)
 
     def settlementLogWrite(self, profit, base_time, stl_price, stl_method):
