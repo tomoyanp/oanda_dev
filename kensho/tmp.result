@@ -1,0 +1,333 @@
+#########################
+# ../main.py USD_JPY demo trendreverse trendreverse_test 
+# enable_time = [u'00:00:00', u'01:00:00', u'02:00:00', u'03:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00', u'21:00:00', u'22:00:00', u'23:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# first_trail_mode = on
+# second_trail_mode = on
+# sleep_time = 10
+# stl_sleep_ltime = 0
+# stl_sleep_time = 10
+# stl_sleep_vtime = 0
+# stl_time_width = 720000
+# stop_loss = 0.05
+# take_profit = 0.05
+# time_width = 720000
+# trade_sleep_time = 60
+# units = 15000
+#######################################################
+# in cross over base_line Algorithm
+# EXECUTE ORDER at 2018-07-09 21:55:56.948074
+# ORDER_PRICE=110.474, TRADE_FLAG=buy
+# self.slope_1m=0.0157489177489
+# self.upper_sigma_1m2=110.491613975
+# self.lower_sigma_1m2=110.435600311
+# self.start_price_1m=110.484
+# self.end_price_1m=110.481
+# self.max_price_1m=110.484
+# self.min_price_1m=110.479
+# self.ewma20_1mvalue=110.474729801
+# EXECUTE Stop Loss or Take Profit SETTLEMENT at 2018-07-09 22:04:54.324863
+# self.ask_price=110.516
+# self.bid_price=110.512
+# self.log_max_price=110.516
+# self.log_min_price=110.472
+# STL_PRICE=110.514
+# PROFIT=0.038
+#######################################################
+# in cross over base_line Algorithm
+# EXECUTE ORDER at 2018-07-09 22:21:17.485039
+# ORDER_PRICE=110.567, TRADE_FLAG=buy
+# self.slope_1m=0.0330930735931
+# self.upper_sigma_1m2=110.615954956
+# self.lower_sigma_1m2=110.458330758
+# self.start_price_1m=110.588
+# self.end_price_1m=110.57
+# self.max_price_1m=110.588
+# self.min_price_1m=110.57
+# self.ewma20_1mvalue=110.56645107
+# EXECUTE Stop Loss or Take Profit SETTLEMENT at 2018-07-09 22:43:37.085656
+# self.ask_price=110.604
+# self.bid_price=110.6
+# self.log_max_price=110.602
+# self.log_min_price=110.565
+# STL_PRICE=110.602
+# PROFIT=0.033
+#######################################################
+# in cross over base_line Algorithm
+# EXECUTE ORDER at 2018-07-09 22:55:03.546122
+# ORDER_PRICE=110.64, TRADE_FLAG=buy
+# self.slope_1m=0.0251385281385
+# self.upper_sigma_1m2=110.675560644
+# self.lower_sigma_1m2=110.542510784
+# self.start_price_1m=110.656
+# self.end_price_1m=110.639
+# self.max_price_1m=110.656
+# self.min_price_1m=110.638
+# self.ewma20_1mvalue=110.63681963
+# EXECUTE Stop Loss or Take Profit SETTLEMENT at 2018-07-09 23:07:57.378350
+# self.ask_price=110.666
+# self.bid_price=110.662
+# self.log_max_price=110.675
+# self.log_min_price=110.631
+# STL_PRICE=110.664
+# PROFIT=0.022
+#######################################################
+# in cross over base_line Algorithm
+# EXECUTE ORDER at 2018-07-09 23:10:51.826603
+# ORDER_PRICE=110.651, TRADE_FLAG=buy
+# self.slope_1m=0.0223571428571
+# self.upper_sigma_1m2=110.687809622
+# self.lower_sigma_1m2=110.602690378
+# self.start_price_1m=110.672
+# self.end_price_1m=110.67
+# self.max_price_1m=110.681
+# self.min_price_1m=110.651
+# self.ewma20_1mvalue=110.652534549
+# EXECUTE Stop Loss or Take Profit SETTLEMENT at 2018-07-09 23:27:11.258518
+# self.ask_price=110.692
+# self.bid_price=110.688
+# self.log_max_price=110.702
+# self.log_min_price=110.652
+# STL_PRICE=110.69
+# PROFIT=0.037
+#######################################################
+# in cross over base_line Algorithm
+# EXECUTE ORDER at 2018-07-09 23:28:02.652179
+# ORDER_PRICE=110.688, TRADE_FLAG=buy
+# self.slope_1m=0.0144372294372
+# self.upper_sigma_1m2=110.709400881
+# self.lower_sigma_1m2=110.631813405
+# self.start_price_1m=110.69
+# self.end_price_1m=110.69
+# self.max_price_1m=110.707
+# self.min_price_1m=110.686
+# self.ewma20_1mvalue=110.686518957
+# EXECUTE Stop Loss or Take Profit SETTLEMENT at 2018-07-10 00:10:54.991603
+# self.ask_price=110.738
+# self.bid_price=110.734
+# self.log_max_price=110.738
+# self.log_min_price=110.672
+# STL_PRICE=110.736
+# PROFIT=0.046
+#######################################################
+# in cross over base_line Algorithm
+# EXECUTE ORDER at 2018-07-10 00:21:30.070734
+# ORDER_PRICE=110.746, TRADE_FLAG=buy
+# self.slope_1m=0.0177575757576
+# self.upper_sigma_1m2=110.77345772
+# self.lower_sigma_1m2=110.697113708
+# self.start_price_1m=110.764
+# self.end_price_1m=110.762
+# self.max_price_1m=110.765
+# self.min_price_1m=110.759
+# self.ewma20_1mvalue=110.748385295
+# EXECUTE Stop Loss or Take Profit SETTLEMENT at 2018-07-10 00:59:54.024343
+# self.ask_price=110.765
+# self.bid_price=110.761
+# self.log_max_price=110.765
+# self.log_min_price=110.718
+# STL_PRICE=110.763
+# PROFIT=0.015
+#######################################################
+# in cross over base_line Algorithm
+# EXECUTE ORDER at 2018-07-10 01:12:52.497559
+# ORDER_PRICE=110.755, TRADE_FLAG=buy
+# self.slope_1m=0.00037445887442
+# self.upper_sigma_1m2=110.779950566
+# self.lower_sigma_1m2=110.715906576
+# self.start_price_1m=110.755
+# self.end_price_1m=110.76
+# self.max_price_1m=110.762
+# self.min_price_1m=110.755
+# self.ewma20_1mvalue=110.754855619
+# EXECUTE Stop Loss or Take Profit SETTLEMENT at 2018-07-10 01:39:59.585078
+# self.ask_price=110.801
+# self.bid_price=110.797
+# self.log_max_price=110.8
+# self.log_min_price=110.749
+# STL_PRICE=110.799
+# PROFIT=0.042
+#######################################################
+# in cross over base_line Algorithm
+# EXECUTE ORDER at 2018-07-10 01:41:01.366151
+# ORDER_PRICE=110.791, TRADE_FLAG=buy
+# self.slope_1m=0.0141168831169
+# self.upper_sigma_1m2=110.810439097
+# self.lower_sigma_1m2=110.74220376
+# self.start_price_1m=110.807
+# self.end_price_1m=110.789
+# self.max_price_1m=110.807
+# self.min_price_1m=110.789
+# self.ewma20_1mvalue=110.789866704
+# EXECUTE Stop Loss or Take Profit SETTLEMENT at 2018-07-10 01:53:14.109874
+# self.ask_price=110.844
+# self.bid_price=110.84
+# self.log_max_price=110.842
+# self.log_min_price=110.789
+# STL_PRICE=110.842
+# PROFIT=0.049
+#######################################################
+# in cross over base_line Algorithm
+# EXECUTE ORDER at 2018-07-10 01:57:19.994967
+# ORDER_PRICE=110.831, TRADE_FLAG=buy
+# self.slope_1m=0.0260086580087
+# self.upper_sigma_1m2=110.860448207
+# self.lower_sigma_1m2=110.770266079
+# self.start_price_1m=110.842
+# self.end_price_1m=110.841
+# self.max_price_1m=110.842
+# self.min_price_1m=110.838
+# self.ewma20_1mvalue=110.83226457
+# EXECUTE Stop Loss or Take Profit SETTLEMENT at 2018-07-10 02:32:08.523984
+# self.ask_price=110.88
+# self.bid_price=110.876
+# self.log_max_price=110.88
+# self.log_min_price=110.809
+# STL_PRICE=110.878
+# PROFIT=0.045
+#######################################################
+# in cross over base_line Algorithm
+# EXECUTE ORDER at 2018-07-10 02:40:30.282873
+# ORDER_PRICE=110.879, TRADE_FLAG=buy
+# self.slope_1m=0.0177878787879
+# self.upper_sigma_1m2=110.915387522
+# self.lower_sigma_1m2=110.808041049
+# self.start_price_1m=110.898
+# self.end_price_1m=110.891
+# self.max_price_1m=110.9
+# self.min_price_1m=110.891
+# self.ewma20_1mvalue=110.884299459
+# EXECUTE Stop Loss or Take Profit SETTLEMENT at 2018-07-10 02:41:35.614609
+# self.ask_price=110.879
+# self.bid_price=110.875
+# self.log_max_price=110.877
+# self.log_min_price=110.877
+# STL_PRICE=110.877
+# PROFIT=-0.004
+#######################################################
+# in cross over base_line Algorithm
+# EXECUTE ORDER at 2018-07-10 02:57:37.904103
+# ORDER_PRICE=110.816, TRADE_FLAG=sell
+# self.slope_1m=-0.0206558441559
+# self.upper_sigma_1m2=110.918716616
+# self.lower_sigma_1m2=110.769854812
+# self.start_price_1m=110.811
+# self.end_price_1m=110.805
+# self.max_price_1m=110.818
+# self.min_price_1m=110.803
+# self.ewma20_1mvalue=110.816936484
+# EXECUTE all over the world SETTLEMENT at 2018-07-10 04:40:14.440328
+# self.ask_price=110.838
+# self.bid_price=110.834
+# self.log_max_price=110.859
+# self.log_min_price=110.783
+# STL_PRICE=110.838
+# PROFIT=-0.022
+#######################################################
+# in cross over base_line by allovertheworld Algorithm
+# EXECUTE ORDER at 2018-07-10 04:40:14.440328
+# ORDER_PRICE=110.838, TRADE_FLAG=buy
+# self.slope_1m=0.0108961038961
+# self.upper_sigma_1m2=110.859977973
+# self.lower_sigma_1m2=110.784664885
+# self.start_price_1m=110.841
+# self.end_price_1m=110.838
+# self.max_price_1m=110.841
+# self.min_price_1m=110.838
+# self.ewma20_1mvalue=110.836554298
+# EXECUTE Stop Loss or Take Profit SETTLEMENT at 2018-07-10 06:01:34.748677
+# self.ask_price=110.86
+# self.bid_price=110.831
+# self.log_max_price=110.846
+# self.log_min_price=110.809
+# STL_PRICE=110.8455
+# PROFIT=-0.00699999999999
+#######################################################
+# in cross over base_line Algorithm
+# EXECUTE ORDER at 2018-07-10 07:20:14.066361
+# ORDER_PRICE=110.868, TRADE_FLAG=buy
+# self.slope_1m=0.0145248917749
+# self.upper_sigma_1m2=110.888158901
+# self.lower_sigma_1m2=110.833126814
+# self.start_price_1m=110.879
+# self.end_price_1m=110.877
+# self.max_price_1m=110.879
+# self.min_price_1m=110.877
+# self.ewma20_1mvalue=110.871879464
+# EXECUTE Stop Loss or Take Profit SETTLEMENT at 2018-07-10 08:23:18.009046
+# self.ask_price=110.916
+# self.bid_price=110.912
+# self.log_max_price=110.914
+# self.log_min_price=110.837
+# STL_PRICE=110.914
+# PROFIT=0.044
+#######################################################
+# in cross over base_line Algorithm
+# EXECUTE ORDER at 2018-07-10 08:55:22.687009
+# ORDER_PRICE=110.96, TRADE_FLAG=buy
+# self.slope_1m=0.0200952380952
+# self.upper_sigma_1m2=110.983556957
+# self.lower_sigma_1m2=110.909800186
+# self.start_price_1m=110.975
+# self.end_price_1m=110.968
+# self.max_price_1m=110.975
+# self.min_price_1m=110.966
+# self.ewma20_1mvalue=110.96174442
+# EXECUTE Stop Loss or Take Profit SETTLEMENT at 2018-07-10 09:52:47.892581
+# self.ask_price=111.0
+# self.bid_price=110.996
+# self.log_max_price=111.008
+# self.log_min_price=110.923
+# STL_PRICE=110.998
+# PROFIT=0.036
+#######################################################
+# in cross over base_line Algorithm
+# EXECUTE ORDER at 2018-07-10 10:01:20.073006
+# ORDER_PRICE=111.002, TRADE_FLAG=buy
+# self.slope_1m=0.00907792207792
+# self.upper_sigma_1m2=111.019057216
+# self.lower_sigma_1m2=110.965942784
+# self.start_price_1m=111.019
+# self.end_price_1m=111.003
+# self.max_price_1m=111.022
+# self.min_price_1m=111.0
+# self.ewma20_1mvalue=111.000495654
+# EXECUTE Stop Loss or Take Profit SETTLEMENT at 2018-07-10 10:17:19.016327
+# self.ask_price=110.964
+# self.bid_price=110.96
+# self.log_max_price=111.029
+# self.log_min_price=110.955
+# STL_PRICE=110.962
+# PROFIT=-0.042
+#######################################################
+# in cross over base_line Algorithm
+# EXECUTE ORDER at 2018-07-10 10:20:23.288805
+# ORDER_PRICE=110.979, TRADE_FLAG=sell
+# self.slope_1m=-0.00656493506493
+# self.upper_sigma_1m2=111.03742801
+# self.lower_sigma_1m2=110.953357704
+# self.start_price_1m=110.976
+# self.end_price_1m=110.978
+# self.max_price_1m=110.979
+# self.min_price_1m=110.967
+# self.ewma20_1mvalue=110.980431923
+# EXECUTE Stop Loss or Take Profit SETTLEMENT at 2018-07-10 10:47:09.175949
+# self.ask_price=111.022
+# self.bid_price=111.018
+# self.log_max_price=111.024
+# self.log_min_price=110.978
+# STL_PRICE=111.02
+# PROFIT=-0.043
+#######################################################
+# in cross over base_line Algorithm
+# EXECUTE ORDER at 2018-07-10 10:51:35.502204
+# ORDER_PRICE=111.014, TRADE_FLAG=buy
+# self.slope_1m=0.0167056277056
+# self.upper_sigma_1m2=111.032762378
+# self.lower_sigma_1m2=110.979166193
+# self.start_price_1m=111.027
+# self.end_price_1m=111.022
+# self.max_price_1m=111.027
+# self.min_price_1m=111.022
+# self.ewma20_1mvalue=111.014990373
