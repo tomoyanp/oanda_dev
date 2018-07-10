@@ -165,30 +165,40 @@ class MultiAlgo(SuperAlgo):
             #if (hour == 8 or hour == 9 or hour == 10 or hour == 12 or hour == 13 or hour == 14 or hour == 15 or hour == 16 or hour == 17 or hour == 19 or hour == 20 or hour == 21) and (minutes == 59) and seconds < 10:
             if (hour == 12 or hour == 13 or hour == 14 or hour == 19) and (minutes == 59) and seconds < 10:
                 self.setExpantionIndicator(base_time)
-                if self.sma20_1h > self.sma40_1h > self.sma80_1h:
-                    if self.max_price_1h > self.upper_sigma_1h2:
-                        trade_flag = "sell"
-                        self.result_logger.info("trendreverse trade")
-                        self.algorithm = "trendreverse"
-
-                    else:
-                        trade_flag  = "buy"
-                        self.result_logger.info("trendfollow trade")
-                        self.algorithm = "trendfollow"
-
-                    self.entry_time = base_time
-
-                elif self.sma20_1h < self.sma40_1h < self.sma80_1h:
-                    if self.min_price_1h < self.lower_sigma_1h2:
+                if self.daily_slope > 0:
+                    if (current_price - 0.1) < self.sma20_1h < (current_price + 0.1):
                         trade_flag = "buy"
-                        self.result_logger.info("trendreverse trade")
-                        self.algorithm = "trendreverse"
-                    else:
-                        trade_flag = "sell"
-                        self.result_logger.info("trendfollow trade")
-                        self.algorithm = "trendfollow"
+                        self.algorithm = "expantion"
+                        self.entry_time = base_time
 
-                    self.entry_time = base_time
+                else:
+                    if (current_price + 0.1) > self.sma20_1h > (current_price - 0.1):
+                        trade_flag = "sell"
+                        self.algorithm = "expantion"
+                        self.entry_time = base_time
+
+#                if self.sma20_1h > self.sma40_1h > self.sma80_1h:
+#                    if self.max_price_1h > self.upper_sigma_1h2:
+#                        trade_flag = "sell"
+#                        self.result_logger.info("trendreverse trade")
+#
+#                    else:
+#                        trade_flag  = "buy"
+#                        self.result_logger.info("trendfollow trade")
+#
+#                    self.algorithm = "expantion"
+#                    self.entry_time = base_time
+#
+#                elif self.sma20_1h < self.sma40_1h < self.sma80_1h:
+#                    if self.min_price_1h < self.lower_sigma_1h2:
+#                        trade_flag = "buy"
+#                        self.result_logger.info("trendreverse trade")
+#                    else:
+#                        trade_flag = "sell"
+#                        self.result_logger.info("trendfollow trade")
+#
+#                    self.algorithm = "expantion"
+#                    self.entry_time = base_time
 
         self.setExpantionStoploss(trade_flag)
         return trade_flag
@@ -198,17 +208,16 @@ class MultiAlgo(SuperAlgo):
 #        if trade_flag != "pass" and self.algorithm == "expantion":
         if trade_flag != "pass":
             if trade_flag == "buy" and self.daily_slope > 0:
-                self.original_stoploss_rate = 0.1
+                self.original_stoploss_rate = 0.2
             elif trade_flag == "buy" and self.daily_slope < 0:
-                self.original_stoploss_rate = 0.1
+                self.original_stoploss_rate = 0.2
             elif trade_flag == "sell" and self.daily_slope < 0:
-                self.original_stoploss_rate = 0.1
+                self.original_stoploss_rate = 0.2
             elif trade_flag == "sell" and self.daily_slope > 0:
-                self.original_stoploss_rate = 0.1
+                self.original_stoploss_rate = 0.2
 
     def decideCommonStoploss(self, stl_flag, current_price, base_time):
-#        if self.algorithm == "expantion" or self.algorithm == "volatility" or self.algorithm == "reverse":
-        if 1 == 1:
+        if self.algorithm == "expantion" or self.algorithm == "volatility" or self.algorithm == "reverse":
             minutes = base_time.minute
             seconds = base_time.second
 
@@ -241,7 +250,7 @@ class MultiAlgo(SuperAlgo):
          
 
     def decideExpantionStoploss(self, stl_flag, current_price, base_time):
-        target_time = self.entry_time + timedelta(minutes=16)
+        target_time = self.entry_time + timedelta(minutes=31)
         base_ftime = base_time.strftime("%Y-%m-%d %H:%M:00")
         target_ftime = target_time.strftime("%Y-%m-%d %H:%M:00")
 
@@ -251,24 +260,15 @@ class MultiAlgo(SuperAlgo):
             self.debug_logger.info("target_time=%s" % target_time)
             self.debug_logger.info("base_time=%s" % base_time)
             self.setExpantionIndicator(base_time)
-            if self.order_kind == "buy" and (self.end_price_5m_list[-1] - self.start_price_5m_list[0]) < 0.1:
-#                self.stl_first_flag = True
-                stl_flag = True
-            elif self.order_kind == "sell" and (self.start_price_5m_list[0] - self.end_price_5m_list[-1]) < 0.1:
-#                self.stl_first_flag = True
-                stl_flag = True
-            else:
-                self.original_stoploss_rate = 0.2
-
-#            if self.order_kind == "buy" and self.decideTouchBollinger("upper") == False:
-#                self.result_logger.info("bollinger stoploss")
-#                self.stl_first_flag = True
-##                stl_flag = True
-#    
-#            elif self.order_kind == "sell" and self.decideTouchBollinger("lower") == False:
-#                self.result_logger.info("bollinger stoploss")
-#                self.stl_first_flag = True
-##                stl_flag = True
+            if self.order_kind == "buy" and self.decideTouchBollinger("upper") == False:
+                self.result_logger.info("bollinger stoploss")
+                self.stl_first_flag = True
+#                stl_flag = True
+    
+            elif self.order_kind == "sell" and self.decideTouchBollinger("lower") == False:
+                self.result_logger.info("bollinger stoploss")
+                self.stl_first_flag = True
+#                stl_flag = True
 
 
         if self.stl_first_flag and  self.order_kind == "buy":
@@ -405,19 +405,14 @@ class MultiAlgo(SuperAlgo):
         self.base_line_5m3_list = dataset["base_lines"][-5:]
 
         # set 5m end price list
-        sql = "select start_price, end_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 6" % (self.instrument, "5m", target_time)
+        sql = "select end_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 6" % (self.instrument, "5m", target_time)
         response = self.mysql_connector.select_sql(sql)
-        start_tmp = []
-        end_tmp = []
+        tmp = []
         for res in response:
-            start_tmp.append(res[0])
-            end_tmp.append(res[1])
+            tmp.append(res[0])
 
-        start_tmp.reverse()
-        end_tmp.reverse()
-
-        self.start_price_5m_list = start_tmp
-        self.end_price_5m_list = end_tmp
+        tmp.reverse()
+        self.end_price_5m_list = tmp
 
         # set dataset 1hour
         target_time = base_time - timedelta(hours=1)
