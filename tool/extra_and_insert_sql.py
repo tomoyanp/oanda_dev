@@ -29,15 +29,19 @@ import time
 args = sys.argv
 instrument = args[1]
 
-account_id = 4093685
-token = 'e93bdc312be2c3e0a4a18f5718db237a-32ca3b9b94401fca447d4049ab046fad'
-env = 'live'
+#account_id = 4093685
+#token = 'e93bdc312be2c3e0a4a18f5718db237a-32ca3b9b94401fca447d4049ab046fad'
+#env = 'live'
+
+account_id = 2542764
+token = 'cb570464152b22d04da3f0f5cad2ddd4-0d543f436361df398e1b2ffa6daf227d'
+env = "practice"
 
 mysql_connector = MysqlConnector()
 now = datetime.now()
 
-start_time = "2018-05-19 00:31:00"
-end_time = "2018-05-19 07:00:00"
+start_time = "2018-01-01 00:00:00"
+end_time = "2018-07-11 12:00:00"
 end_time = datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
 start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
 
