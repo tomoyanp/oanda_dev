@@ -199,11 +199,11 @@ class TrendReverseAlgo(SuperAlgo):
             if 1 == 1:
                 if 1 == 1:
                     if self.first_trade_flag == "pass":
-                        if self.slope_1m > 0 and current_price > self.ewma20_5mvalue and current_price < self.ewma20_1mvalue:
+                        if self.slope_1m > 0 and current_price > self.ewma20_5mvalue and current_price < self.ewma20_1mvalue and (self.ask_price - self.bid_price) < 0.01:
                             self.first_trade_flag = "buy"
                             self.first_trade_time = base_time
     
-                        elif self.slope_1m < 0 and current_price < self.ewma20_5mvalue and current_price > self.ewma20_1mvalue:
+                        elif self.slope_1m < 0 and current_price < self.ewma20_5mvalue and current_price > self.ewma20_1mvalue and (self.ask_price - self.bid_price) < 0.01:
                             self.first_trade_flag = "sell"
                             self.first_trade_time = base_time
                    
