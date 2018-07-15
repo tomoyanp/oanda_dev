@@ -281,7 +281,18 @@ class TrendReverseAlgo(SuperAlgo):
 
         target_time = base_time
 
-        width = 60*20
+#        width = 60*20
+#        sql = "select ask_price, bid_price from %s_TABLE where insert_time < \'%s\' order by insert_time desc limit %s" % (self.instrument, target_time, width)
+#        response = self.mysql_connector.select_sql(sql)
+#        tmp = []
+#        for res in response:
+#            tmp.append((res[0]+res[1])/2)
+#        tmp.reverse()
+#
+#        ewma20_rawdata = tmp[-1*60*20:]
+#        self.ewma20_1mvalue = getEWMA(ewma20_rawdata, len(ewma20_rawdata))[-1]
+
+        width = 60*40
         sql = "select ask_price, bid_price from %s_TABLE where insert_time < \'%s\' order by insert_time desc limit %s" % (self.instrument, target_time, width)
         response = self.mysql_connector.select_sql(sql)
         tmp = []
@@ -289,8 +300,9 @@ class TrendReverseAlgo(SuperAlgo):
             tmp.append((res[0]+res[1])/2)
         tmp.reverse()
 
-        ewma20_rawdata = tmp[-1*60*20:]
+        ewma20_rawdata = tmp[-1*60*40:]
         self.ewma20_1mvalue = getEWMA(ewma20_rawdata, len(ewma20_rawdata))[-1]
+
 
 
         ### get 5m dataset
