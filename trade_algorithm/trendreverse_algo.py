@@ -47,7 +47,8 @@ class TrendReverseAlgo(SuperAlgo):
         self.algorithm = ""
         self.log_max_price = 0
         self.log_min_price = 0
-        self.trade_first_flag = "pass"
+        self.first_trade_flag = "pass"
+        self.first_trade_time = base_time
         self.stl_first_flag = False
         self.buy_flag = False
         self.sell_flag = False
@@ -91,7 +92,8 @@ class TrendReverseAlgo(SuperAlgo):
                     elif trade_flag == "sell" and self.order_kind == "sell":
                         trade_flag = "pass"
                     else:
-                        self.result_logger.info("# execute all over the world at TrendReverseAlgo")
+                        self.algorithm = self.algorithm + " by allovertheworld"
+                        #self.result_logger.info("# execute all over the world at TrendReverseAlgo")
 
                 self.writeDebugLog(base_time, mode="trade")
 
@@ -121,6 +123,7 @@ class TrendReverseAlgo(SuperAlgo):
 
                     else:
                         stl_flag = self.decideReverseStl(stl_flag, base_time)
+#                        stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, base_time)
 
             else:
                 pass
@@ -140,7 +143,8 @@ class TrendReverseAlgo(SuperAlgo):
 
             self.setReverseIndicator(base_time)
             if seconds < 10:
-                original_stoploss = 0.01
+                original_stoploss = 0.05
+                #original_stoploss = 0.1
                 if self.order_kind == "buy":
                     if (self.order_price - self.end_price_1m) > original_stoploss:
                         stl_flag = True
@@ -148,20 +152,20 @@ class TrendReverseAlgo(SuperAlgo):
                     if (self.end_price_1m - self.order_price) > original_stoploss:
                         stl_flag = True
 
-                if self.order_kind == "buy" and self.max_price_1m > self.upper_sigma_1m2:
-                    self.stl_first_flag = True
-    
-                elif self.order_kind == "sell" and self.min_price_1m < self.lower_sigma_1m2:
-                    self.stl_first_flag = True
-
-                if self.order_kind == "buy" and self.stl_first_flag:
-                    #if self.end_price_1m < self.upper_sigma_1m2:
-                    if self.end_price_1m < self.upper_sigma_1m15:
-                        stl_flag = True
-                elif self.order_kind == "sell" and self.stl_first_flag:
-                    #if self.end_price_1m > self.lower_sigma_1m2:
-                    if self.end_price_1m > self.lower_sigma_1m15:
-                        stl_flag = True
+#                if self.order_kind == "buy" and self.max_price_1m > self.upper_sigma_1m2:
+#                    self.stl_first_flag = True
+#    
+#                elif self.order_kind == "sell" and self.min_price_1m < self.lower_sigma_1m2:
+#                    self.stl_first_flag = True
+#
+#                if self.order_kind == "buy" and self.stl_first_flag:
+#                    #if self.end_price_1m < self.upper_sigma_1m2:
+#                    if self.end_price_1m < self.upper_sigma_1m15:
+#                        stl_flag = True
+#                elif self.order_kind == "sell" and self.stl_first_flag:
+#                    #if self.end_price_1m > self.lower_sigma_1m2:
+#                    if self.end_price_1m > self.lower_sigma_1m15:
+#                        stl_flag = True
 
         return stl_flag
 
@@ -185,25 +189,41 @@ class TrendReverseAlgo(SuperAlgo):
             
 
     def decideReverseTrade(self, trade_flag, current_price, base_time):
-        if trade_flag == "pass" and self.order_flag != True:
-#        if trade_flag == "pass":
+#        if trade_flag == "pass" and self.order_flag != True:
+        if trade_flag == "pass" and self.order_flag == False:
             hour = base_time.hour
             minutes = base_time.minute
             seconds = base_time.second
             if seconds < 10 and hour != 6:
                 self.setReverseIndicator(base_time)
+            if 1 == 1:
+                if 1 == 1:
+                    if self.first_trade_flag == "pass":
+                        if self.slope_1m > 0 and current_price > self.ewma20_5mvalue and current_price < self.ewma20_1mvalue and (self.ask_price - self.bid_price) < 0.01 and (self.upper_sigma_5m2 - self.lower_sigma_5m2) > 0.1:
+                            self.first_trade_flag = "buy"
+                            self.first_trade_time = base_time
+    
+                        elif self.slope_1m < 0 and current_price < self.ewma20_5mvalue and current_price > self.ewma20_1mvalue and (self.ask_price - self.bid_price) < 0.01 and (self.upper_sigma_5m2 - self.lower_sigma_5m2) > 0.1:
+                            self.first_trade_flag = "sell"
+                            self.first_trade_time = base_time
+                   
+                    if seconds < 10:
+                        #if self.first_trade_flag == "buy" and self.first_trade_time + timedelta(minutes=1) < base_time:
+                        if self.first_trade_flag == "buy":
+                            if self.end_price_1m > self.ewma20_1mvalue:
+                                trade_flag = "buy"
+                                self.algorithm = "cross over base_line"
+                        #elif self.first_trade_flag == "sell" and self.first_trade_time + timedelta(minutes=1) < base_time:
+                        elif self.first_trade_flag == "sell":
+                            if self.end_price_1m < self.ewma20_1mvalue:
+                                trade_flag = "sell"
+                                self.algorithm = "cross over base_line"
 
-                if (self.upper_sigma_1m2 - self.lower_sigma_1m2) < 0.05:
-                    pass
-                else:
-                    if self.min_price_1m <= self.ewma20_1mvalue <= self.max_price_1m and self.ewma20_1mvalue > self.base_line_1m2 and self.decideBollingerCrossOver("upper") == False:
-    
-                        trade_flag = "buy"
-                        self.algorithm = "cross_over_base_line"
-                    if self.min_price_1m <= self.ewma20_1mvalue <= self.max_price_1m and self.ewma20_1mvalue < self.base_line_1m2 and self.decideBollingerCrossOver("lower") == False:
-                        trade_flag = "sell"
-                        self.algorithm = "cross_over_base_line"
-    
+                if self.first_trade_time + timedelta(minutes=10) < base_time and self.first_trade_flag != "pass":
+                    self.debug_logger.info("reset first trade time: %s" % self.first_trade_time)
+                    self.debug_logger.info("reset first trade flag: %s" % self.first_trade_flag)
+                    self.debug_logger.info("reset first trade: %s" % base_time)
+                    self.resetFlag()
 
         return trade_flag
 
@@ -230,7 +250,7 @@ class TrendReverseAlgo(SuperAlgo):
         #self.algorithm = ""
         self.log_max_price = 0
         self.log_min_price = 0
-        self.trade_first_flag = "pass"
+        self.first_trade_flag = "pass"
         self.stl_first_flag = False
         self.buy_flag = False
         self.sell_flag = False
@@ -238,15 +258,9 @@ class TrendReverseAlgo(SuperAlgo):
 
 
     def setReverseIndicator(self, base_time):
-        target_time = base_time - timedelta(minutes=2)
+        target_time = base_time - timedelta(minutes=1)
 
         ### get 1m dataset
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1m", window_size=28, connector=self.mysql_connector, sigma_valiable=1.5, length=0)
-        self.upper_sigma_1m15 = dataset["upper_sigmas"][-1]
-        self.lower_sigma_1m15 = dataset["lower_sigmas"][-1]
-        self.base_line_1m15 = dataset["base_lines"][-1]
-
-
         dataset = getBollingerWrapper(target_time, self.instrument, table_type="1m", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=0)
         self.upper_sigma_1m2 = dataset["upper_sigmas"][-1]
         self.lower_sigma_1m2 = dataset["lower_sigmas"][-1]
@@ -261,10 +275,24 @@ class TrendReverseAlgo(SuperAlgo):
         self.min_price_1m = response[0][3]
 
 
-#        sql = "select end_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 200" % (self.instrument, "1m", target_time)
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1m", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=9)
+        base_line_1m2_list = dataset["base_lines"][-10:]
+        self.slope_1m = getSlope(base_line_1m2_list)
 
         target_time = base_time
-        width = 60*200
+
+#        width = 60*20
+#        sql = "select ask_price, bid_price from %s_TABLE where insert_time < \'%s\' order by insert_time desc limit %s" % (self.instrument, target_time, width)
+#        response = self.mysql_connector.select_sql(sql)
+#        tmp = []
+#        for res in response:
+#            tmp.append((res[0]+res[1])/2)
+#        tmp.reverse()
+#
+#        ewma20_rawdata = tmp[-1*60*20:]
+#        self.ewma20_1mvalue = getEWMA(ewma20_rawdata, len(ewma20_rawdata))[-1]
+
+        width = 60*40
         sql = "select ask_price, bid_price from %s_TABLE where insert_time < \'%s\' order by insert_time desc limit %s" % (self.instrument, target_time, width)
         response = self.mysql_connector.select_sql(sql)
         tmp = []
@@ -272,55 +300,81 @@ class TrendReverseAlgo(SuperAlgo):
             tmp.append((res[0]+res[1])/2)
         tmp.reverse()
 
-        ewma20_rawdata = tmp[-1*60*20:]
-        ewma100_rawdata = tmp[-1*60*100:]
-        ewma200_rawdata = tmp[-1*60*200:]
+        ewma20_rawdata = tmp[-1*60*40:]
         self.ewma20_1mvalue = getEWMA(ewma20_rawdata, len(ewma20_rawdata))[-1]
-        self.ewma100_1mvalue = getEWMA(ewma100_rawdata, len(ewma100_rawdata))[-1]
-        self.ewma200_1mvalue = getEWMA(ewma200_rawdata, len(ewma200_rawdata))[-1]
-
-        
-#        # get ewma20 slope
-#        sql = "select end_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 30" % (self.instrument, "1m", target_time)
-#        response = self.mysql_connector.select_sql(sql)
-#        tmp = []
-#        for res in response:
-#            tmp.append(res[0])
-#        tmp.reverse()
-#        ewma20_1mvalue_list = getEWMA(tmp[-30:], 20)[-10:]
-#        self.slope_1m = getSlope(ewma20_1mvalue_list)
-        target_time = base_time - timedelta(minutes=2)
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1m", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=9)
-        base_line_1m2_list = dataset["base_lines"][-10:]
-        self.slope_1m = getSlope(base_line_1m2_list)
 
 
 
         ### get 5m dataset
-        target_time = base_time - timedelta(minutes=10)
-        sql = "select start_price, end_price, max_price, min_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 200" % (self.instrument, "5m", target_time)
+        target_time = base_time - timedelta(minutes=5)
+
+        width = 20
+        sql = "select end_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit %s" % (self.instrument, "5m", target_time, width)
         response = self.mysql_connector.select_sql(sql)
-        self.start_price_5m = response[0][0]
-        self.end_price_5m = response[0][1]
-        self.max_price_5m = response[0][2]
-        self.min_price_5m = response[0][3]
-
-
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=5)
-        self.upper_sigma_5m2_list = dataset["upper_sigmas"][-6:]
-        self.lower_sigma_5m2_list = dataset["lower_sigmas"][-6:]
-        sql = "select max_price, min_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 6" % (self.instrument, "5m", target_time)
-        response = self.mysql_connector.select_sql(sql)
-        self.max_price_5m_list = []
-        self.min_price_5m_list = []
-
+        tmp = []
         for res in response:
-            self.max_price_5m_list.append(res[0])
-            self.min_price_5m_list.append(res[1])
+            tmp.append(res[0])
+        tmp.reverse()
+        self.ewma20_5mvalue = getEWMA(tmp, len(tmp))[-1]
 
-        self.max_price_5m_list.reverse()
-        self.min_price_5m_list.reverse()
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=0)
+        self.base_line_5m2 = dataset["base_lines"][-1]
+        self.upper_sigma_5m2 = dataset["upper_sigmas"][-1]
+        self.lower_sigma_5m2 = dataset["lower_sigmas"][-1]
 
+    def decideTrailLogic(self, stl_flag, current_ask_price, current_bid_price, base_time):
+        minutes = base_time.minute
+        seconds = base_time.second
+
+        if minutes % 5 == 0 and seconds < 10:
+            order_price = self.getOrderPrice()
+            first_take_profit = 0.02
+            second_take_profit = 1.0
+
+            # update the most high and low price
+            if self.most_high_price == 0 and self.most_low_price == 0:
+                self.most_high_price = order_price
+                self.most_low_price = order_price
+
+            if self.most_high_price < current_bid_price:
+                self.most_high_price = current_bid_price
+            if self.most_low_price > current_ask_price:
+                self.most_low_price = current_ask_price
+
+            # first trailing stop logic
+            if self.order_kind == "buy":
+                if (current_bid_price - order_price) > first_take_profit:
+                    self.trail_flag = True
+            elif self.order_kind == "sell":
+                if (order_price - current_ask_price) > first_take_profit:
+                    self.trail_flag = True
+
+            if self.trail_flag == True and self.order_kind == "buy":
+                if (self.most_high_price - 0.02) > current_bid_price:
+                    self.result_logger.info("# Execute FirstTrail Stop")
+                    stl_flag = True
+            elif self.trail_flag == True and self.order_kind == "sell":
+                if (self.most_low_price + 0.02) < current_ask_price :
+                    self.result_logger.info("# Execute FirstTrail Stop")
+                    stl_flag = True
+
+            # second trailing stop logic
+            if self.order_kind == "buy":
+                if (current_bid_price - order_price) > second_take_profit:
+                    self.trail_second_flag = True
+            elif self.order_kind == "sell":
+                if (order_price - current_ask_price) > second_take_profit:
+                    self.trail_second_flag = True
+            if self.trail_second_flag == True and self.order_kind == "buy":
+                if (self.most_high_price - 0.3) > current_bid_price:
+                    self.result_logger.info("# Execute SecondTrail Stop")
+                    stl_flag = True
+            elif self.trail_second_flag == True and self.order_kind == "sell":
+                if (self.most_low_price + 0.3) < current_ask_price :
+                    self.result_logger.info("# Execute SecondTrail Stop")
+                    stl_flag = True
+
+        return stl_flag
 
 
 # write log function
@@ -334,6 +388,7 @@ class TrendReverseAlgo(SuperAlgo):
     def entryLogWrite(self, base_time):
         self.result_logger.info("#######################################################")
         self.result_logger.info("# in %s Algorithm" % self.algorithm)
+        self.result_logger.info("# First trade time at %s" % self.first_trade_time)
         self.result_logger.info("# EXECUTE ORDER at %s" % base_time)
         self.result_logger.info("# ORDER_PRICE=%s, TRADE_FLAG=%s" % (self.order_price, self.order_kind))
         self.result_logger.info("# self.slope_1m=%s" % self.slope_1m)
@@ -344,8 +399,6 @@ class TrendReverseAlgo(SuperAlgo):
         self.result_logger.info("# self.max_price_1m=%s" % self.max_price_1m)
         self.result_logger.info("# self.min_price_1m=%s" % self.min_price_1m)
         self.result_logger.info("# self.ewma20_1mvalue=%s" % self.ewma20_1mvalue)
-        self.result_logger.info("# self.ewma100_1mvalue=%s" % self.ewma100_1mvalue)
-        self.result_logger.info("# self.ewma200_1mvalue=%s" % self.ewma200_1mvalue)
 
     def settlementLogWrite(self, profit, base_time, stl_price, stl_method):
         self.result_logger.info("# %s at %s" % (stl_method, base_time))

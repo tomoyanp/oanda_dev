@@ -39,6 +39,7 @@ now = datetime.now()
 
 start_time = "2018-01-10 00:00:00"
 end_time = "2018-07-15 00:00:00"
+
 end_time = datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
 start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
 

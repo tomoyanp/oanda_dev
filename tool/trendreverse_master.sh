@@ -1,1 +1,1 @@
-nohup python ../main.py "GBP_JPY" "production" "trendreverse" "trendreverse_master" > /dev/null &
+nohup python ../main.py "USD_JPY" "production" "trendreverse" "trendreverse_test" > /dev/null &
