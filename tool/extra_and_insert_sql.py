@@ -13,7 +13,7 @@ sys.path.append(current_path + "/trade_algorithm")
 sys.path.append(current_path + "/obj")
 sys.path.append(current_path + "/lib")
 
-from common import decideMarket
+from common import decideMarket, account_init
 from datetime import datetime, timedelta
 from price_obj import PriceObj
 from order_obj import OrderObj
@@ -29,15 +29,16 @@ import time
 args = sys.argv
 instrument = args[1]
 
-account_id = 4093685
-token = 'e93bdc312be2c3e0a4a18f5718db237a-32ca3b9b94401fca447d4049ab046fad'
-env = 'live'
-
+account_data = account_init("production", current_path)
+account_id = account_data["account_id"]
+token = account_data["token"]
+env = account_data["env"]
+ 
 mysql_connector = MysqlConnector()
 now = datetime.now()
 
-start_time = "2018-05-19 00:31:00"
-end_time = "2018-05-19 07:00:00"
+start_time = "2018-01-10 00:00:00"
+end_time = "2018-07-15 00:00:00"
 end_time = datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
 start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
 
@@ -67,9 +68,11 @@ while start_time < end_time:
                 time = time.split(".")[0]
                 insert_time = datetime.strptime(time, "%Y-%m-%dT%H:%M:%S")
                 insert_time = insert_time + timedelta(hours=9)
-                print candle
                 ask_price = candle["openAsk"]
-                bid_price = candle["openBid"]
+                if instrument == "USD_JPY":
+                    bid_price = ask_price - 0.008
+                else:
+                    bid_price = candle["openBid"]
                 sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\')" % (instrument, ask_price, bid_price, insert_time)
                 mysql_connector.insert_sql(sql)
                 sql_file.write("%s\n" % sql)

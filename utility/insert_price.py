@@ -14,14 +14,14 @@ from mysql_connector import MysqlConnector
 from oanda_wrapper import OandaWrapper
 from price_obj import PriceObj
 from datetime import datetime, timedelta
-from common import decideMarket
+from common import decideMarket, account_init
 import time
 
-account_id = 2542764
-token = 'cb570464152b22d04da3f0f5cad2ddd4-0d543f436361df398e1b2ffa6daf227d'
-env = "practice"
-
-
+account_data = account_init("production", current_path)
+account_id = account_data["account_id"]
+token = account_data["token"]
+env = account_data["env"]
+ 
 if __name__ == "__main__":
     args = sys.argv
     currency = args[1].strip()
