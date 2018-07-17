@@ -407,7 +407,8 @@ class TrendReverseAlgo(SuperAlgo):
         self.result_logger.info("# self.end_price_1m=%s" % self.end_price_1m)
         self.result_logger.info("# self.max_price_1m=%s" % self.max_price_1m)
         self.result_logger.info("# self.min_price_1m=%s" % self.min_price_1m)
-        self.result_logger.info("# self.ewma20_1mvalue=%s" % self.ewma20_1mvalue)
+        self.result_logger.info("# self.ewma30_1mvalue=%s" % self.ewma30_1mvalue)
+        self.result_logger.info("# self.ewma50_1mvalue=%s" % self.ewma50_1mvalue)
 
     def settlementLogWrite(self, profit, base_time, stl_price, stl_method):
         self.result_logger.info("# %s at %s" % (stl_method, base_time))
