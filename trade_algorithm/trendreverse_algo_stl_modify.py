@@ -152,20 +152,11 @@ class TrendReverseAlgo(SuperAlgo):
                     if (self.end_price_1m - self.order_price) > original_stoploss:
                         stl_flag = True
 
-#                if self.order_kind == "buy" and self.max_price_1m > self.upper_sigma_1m2:
-#                    self.stl_first_flag = True
-#    
-#                elif self.order_kind == "sell" and self.min_price_1m < self.lower_sigma_1m2:
-#                    self.stl_first_flag = True
-#
-#                if self.order_kind == "buy" and self.stl_first_flag:
-#                    #if self.end_price_1m < self.upper_sigma_1m2:
-#                    if self.end_price_1m < self.upper_sigma_1m15:
-#                        stl_flag = True
-#                elif self.order_kind == "sell" and self.stl_first_flag:
-#                    #if self.end_price_1m > self.lower_sigma_1m2:
-#                    if self.end_price_1m > self.lower_sigma_1m15:
-#                        stl_flag = True
+            if self.order_kind == "buy" and current_price > self.upper_sigma_1m25:
+                stl_flag = True
+ 
+            elif self.order_kind == "sell" and current_price < self.lower_sigma_1m25:
+               stl_flag = True
 
         return stl_flag
 
@@ -265,6 +256,11 @@ class TrendReverseAlgo(SuperAlgo):
         self.upper_sigma_1m2 = dataset["upper_sigmas"][-1]
         self.lower_sigma_1m2 = dataset["lower_sigmas"][-1]
         self.base_line_1m2 = dataset["base_lines"][-1]
+
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1m", window_size=28, connector=self.mysql_connector, sigma_valiable=2.5, length=0)
+        self.upper_sigma_1m25 = dataset["upper_sigmas"][-1]
+        self.lower_sigma_1m25 = dataset["lower_sigmas"][-1]
+        self.base_line_1m25 = dataset["base_lines"][-1]
 
 
         sql = "select start_price, end_price, max_price, min_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 1" % (self.instrument, "1m", target_time)
