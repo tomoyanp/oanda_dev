@@ -1,5 +1,5 @@
 # coding: utf-8
-# ema30, ema50のやつと、ema20_5mのロジックとトレールを組み合わせたやつ
+# ema30, ema50のやつと、ema20_5mのロジック組み合わせたやつ
 ####################################################
 # Trade Decision
 # if trade timing is between 14:00 - 04:00
@@ -124,7 +124,7 @@ class TrendReverseAlgo(SuperAlgo):
 
                     else:
                         stl_flag = self.decideReverseStl(stl_flag, base_time)
-                        stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, base_time)
+#                        stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, base_time)
 
             else:
                 pass
@@ -144,7 +144,8 @@ class TrendReverseAlgo(SuperAlgo):
 
             self.setReverseIndicator(base_time)
             if seconds < 10:
-                original_stoploss = 0.04
+                original_stoploss = 0.05
+                #original_stoploss = 0.1
                 if self.order_kind == "buy":
                     if (self.order_price - self.end_price_1m) > original_stoploss:
                         stl_flag = True
@@ -344,7 +345,7 @@ class TrendReverseAlgo(SuperAlgo):
 
         if minutes % 5 == 0 and seconds < 10:
             order_price = self.getOrderPrice()
-            first_take_profit = 0.03
+            first_take_profit = 0.02
             second_take_profit = 1.0
 
             # update the most high and low price
@@ -366,11 +367,11 @@ class TrendReverseAlgo(SuperAlgo):
                     self.trail_flag = True
 
             if self.trail_flag == True and self.order_kind == "buy":
-                if (self.most_high_price - 0.03) > current_bid_price:
+                if (self.most_high_price - 0.02) > current_bid_price:
                     self.result_logger.info("# Execute FirstTrail Stop")
                     stl_flag = True
             elif self.trail_flag == True and self.order_kind == "sell":
-                if (self.most_low_price + 0.03) < current_ask_price :
+                if (self.most_low_price + 0.02) < current_ask_price :
                     self.result_logger.info("# Execute FirstTrail Stop")
                     stl_flag = True
 
