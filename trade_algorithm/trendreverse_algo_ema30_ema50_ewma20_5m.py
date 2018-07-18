@@ -221,10 +221,10 @@ class TrendReverseAlgo(SuperAlgo):
                                 self.algorithm = "crossover_base_line"
 
                     if seconds < 10:
-                        if self.end_price_5m_list[0] < self.ewma20_5mvalue and self.end_price_5m_list[-1] > self.ewma20_5mvalue:
+                        if self.end_price_5m_list[0] < self.ewma20_5mvalue and self.end_price_5m_list[-1] > self.ewma20_5mvalue and (self.ask_price - self.bid_price) < 0.01 and (self.upper_sigma_5m2 - self.lower_sigma_5m2) > 0.1:
                             trade_flag = "buy"
                             self.algorithm = "ewma5m_break"
-                        elif self.end_price_5m_list[0] > self.ewma20_5mvalue and self.end_price_5m_list[-1] < self.ewma20_5mvalue:
+                        elif self.end_price_5m_list[0] > self.ewma20_5mvalue and self.end_price_5m_list[-1] < self.ewma20_5mvalue and (self.ask_price - self.bid_price) < 0.01 and (self.upper_sigma_5m2 - self.lower_sigma_5m2) > 0.1:
                             trade_flag = "sell"
                             self.algorithm = "ewma5m_break"
 
@@ -415,7 +415,8 @@ class TrendReverseAlgo(SuperAlgo):
         self.result_logger.info("# self.end_price_1m=%s" % self.end_price_1m)
         self.result_logger.info("# self.max_price_1m=%s" % self.max_price_1m)
         self.result_logger.info("# self.min_price_1m=%s" % self.min_price_1m)
-        self.result_logger.info("# self.ewma20_1mvalue=%s" % self.ewma20_1mvalue)
+        self.result_logger.info("# self.ewma30_1mvalue=%s" % self.ewma30_1mvalue)
+        self.result_logger.info("# self.ewma50_1mvalue=%s" % self.ewma50_1mvalue)
 
     def settlementLogWrite(self, profit, base_time, stl_price, stl_method):
         self.result_logger.info("# %s at %s" % (stl_method, base_time))
