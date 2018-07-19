@@ -14,9 +14,6 @@
 # if current profit is higher than 50Pips, 50Pips trail mode
 # if current profit is higher than 100Pips, 30Pips trail mode
 ####################################################
-# 1. decide perfect order and current_price <-> 5m_sma40
-# 2. touch bolligner 2sigma 5m
-# 3. break ewma20 1m value
 
 from super_algo import SuperAlgo
 from common import instrument_init, account_init, decideMarket, getSlope, getEWMA
@@ -194,38 +191,29 @@ class TrendReverseAlgo(SuperAlgo):
                 if 1 == 1:
                     #if self.first_trade_flag == "pass":
                     if 1 == 1:
-                        if (self.sma5m20 > self.sma5m40 > self.sma5m80)  and (self.ask_price - self.bid_price) < 0.1 and current_price > self.sma5m40:
+                        if (self.sma5m20 > self.sma5m40 > self.sma5m80)  and (self.ask_price - self.bid_price) < 0.1:
                             self.first_trade_flag = "buy"
                             self.first_trade_time = base_time
     
-                        elif (self.sma5m20 < self.sma5m40 < self.sma5m80) and (self.ask_price - self.bid_price) < 0.1 and current_price < self.sma5m40:
+                        elif (self.sma5m20 < self.sma5m40 < self.sma5m80) and (self.ask_price - self.bid_price) < 0.1:
                             self.first_trade_flag = "sell"
                             self.first_trade_time = base_time
                         else:
                             self.first_trade_flag = "pass"
-                            self.sell_flag = False
-                            self.buy_flag = False
                    
                     #if seconds < 10:
                     if 1 == 1:
                         #if self.first_trade_flag == "buy" and self.first_trade_time + timedelta(minutes=1) < base_time:
-                        if self.first_trade_flag == "buy" and self.buy_flag == False and self.sell_flag == False:
+                        if self.first_trade_flag == "buy":
                             if current_price < self.lower_sigma_1m25:
-                                self.buy_flag = True
-
-#                                trade_flag = "buy"
-#                                self.algorithm = "cross over base_line"
+                                trade_flag = "buy"
+                                self.algorithm = "cross over base_line"
                         #elif self.first_trade_flag == "sell" and self.first_trade_time + timedelta(minutes=1) < base_time:
-                        elif self.first_trade_flag == "sell" and self.buy_flag == False and self.sell_flag == False:
+                        elif self.first_trade_flag == "sell":
                             if current_price > self.upper_sigma_1m25:
-                                self.sell_flag = True
-#                                trade_flag = "sell"
-#                                self.algorithm = "cross over base_line"
+                                trade_flag = "sell"
+                                self.algorithm = "cross over base_line"
 
-                    if self.buy_flag and current_price > self.ewma20_1mvalue:
-                        trade_flag = "buy"
-                    elif self.sell_flag and current_price < self.ewma20_1mvalue:
-                        trade_flag = "sell"
 #                if self.first_trade_time + timedelta(minutes=10) < base_time and self.first_trade_flag != "pass":
 #                    self.debug_logger.info("reset first trade time: %s" % self.first_trade_time)
 #                    self.debug_logger.info("reset first trade flag: %s" % self.first_trade_flag)
