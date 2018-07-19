@@ -189,32 +189,36 @@ class TrendReverseAlgo(SuperAlgo):
                 self.setReverseIndicator(base_time)
             if 1 == 1:
                 if 1 == 1:
-                    if self.first_trade_flag == "pass":
-                        #if self.slope_1m > 0 and (current_price > self.sma5m20 > self.sma5m40 > self.sma5m80) and current_price < self.ewma20_1mvalue and (self.ask_price - self.bid_price) < 0.1 and (self.upper_sigma_5m2 - self.lower_sigma_5m2) > 0.1:
-                        if (current_price > self.sma5m20 > self.sma5m40 > self.sma5m80) and current_price < self.ewma20_1mvalue and (self.ask_price - self.bid_price) < 0.1:
+                    #if self.first_trade_flag == "pass":
+                    if 1 == 1:
+                        if (self.sma5m20 > self.sma5m40 > self.sma5m80)  and (self.ask_price - self.bid_price) < 0.1:
                             self.first_trade_flag = "buy"
                             self.first_trade_time = base_time
     
-                        #elif self.slope_1m < 0 and (current_price < self.sma5m20 < self.sma5m40 < self.sma5m80) and current_price > self.ewma20_1mvalue and (self.ask_price - self.bid_price) < 0.1 and (self.upper_sigma_5m2 - self.lower_sigma_5m2) > 0.1:
-                        elif (current_price < self.sma5m20 < self.sma5m40 < self.sma5m80) and current_price > self.ewma20_1mvalue and (self.ask_price - self.bid_price) < 0.1:
+                        elif (self.sma5m20 < self.sma5m40 < self.sma5m80) and (self.ask_price - self.bid_price) < 0.1:
                             self.first_trade_flag = "sell"
                             self.first_trade_time = base_time
+                        else:
+                            self.first_trade_flag = "pass"
                    
-                    if seconds < 10:
-                        if self.first_trade_flag == "buy" and self.first_trade_time + timedelta(minutes=1) < base_time:
-                            if self.end_price_1m > self.ewma20_1mvalue:
+                    #if seconds < 10:
+                    if 1 == 1:
+                        #if self.first_trade_flag == "buy" and self.first_trade_time + timedelta(minutes=1) < base_time:
+                        if self.first_trade_flag == "buy":
+                            if current_price < self.lower_sigma_1m25:
                                 trade_flag = "buy"
                                 self.algorithm = "cross over base_line"
-                        elif self.first_trade_flag == "sell" and self.first_trade_time + timedelta(minutes=1) < base_time:
-                            if self.end_price_1m < self.ewma20_1mvalue:
+                        #elif self.first_trade_flag == "sell" and self.first_trade_time + timedelta(minutes=1) < base_time:
+                        elif self.first_trade_flag == "sell":
+                            if current_price > self.upper_sigma_1m25:
                                 trade_flag = "sell"
                                 self.algorithm = "cross over base_line"
 
-                if self.first_trade_time + timedelta(minutes=10) < base_time and self.first_trade_flag != "pass":
-                    self.debug_logger.info("reset first trade time: %s" % self.first_trade_time)
-                    self.debug_logger.info("reset first trade flag: %s" % self.first_trade_flag)
-                    self.debug_logger.info("reset first trade: %s" % base_time)
-                    self.resetFlag()
+#                if self.first_trade_time + timedelta(minutes=10) < base_time and self.first_trade_flag != "pass":
+#                    self.debug_logger.info("reset first trade time: %s" % self.first_trade_time)
+#                    self.debug_logger.info("reset first trade flag: %s" % self.first_trade_flag)
+#                    self.debug_logger.info("reset first trade: %s" % base_time)
+#                    self.resetFlag()
 
         return trade_flag
 
@@ -398,6 +402,8 @@ class TrendReverseAlgo(SuperAlgo):
         self.result_logger.info("# self.slope_1m=%s" % self.slope_1m)
         self.result_logger.info("# self.upper_sigma_1m2=%s" % self.upper_sigma_1m2)
         self.result_logger.info("# self.lower_sigma_1m2=%s" % self.lower_sigma_1m2)
+        self.result_logger.info("# self.upper_sigma_5m2=%s" % self.upper_sigma_1m2)
+        self.result_logger.info("# self.lower_sigma_5m2=%s" % self.lower_sigma_1m2)
         self.result_logger.info("# self.start_price_1m=%s" % self.start_price_1m)
         self.result_logger.info("# self.end_price_1m=%s" % self.end_price_1m)
         self.result_logger.info("# self.max_price_1m=%s" % self.max_price_1m)
