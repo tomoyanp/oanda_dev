@@ -190,24 +190,22 @@ class TrendReverseAlgo(SuperAlgo):
             if 1 == 1:
                 if 1 == 1:
                     if self.first_trade_flag == "pass":
-                        #if self.slope_1m > 0 and current_price > self.ewma20_5mvalue and current_price < self.ewma20_1mvalue and (self.ask_price - self.bid_price) < 0.01 and (self.upper_sigma_5m2 - self.lower_sigma_5m2) > 0.1:
-                        if self.slope_1m > 0 and (current_price > self.sma5m20 > self.sma5m40 > self.sma5m80) and current_price < self.ewma20_1mvalue and (self.ask_price - self.bid_price) < 0.1 and (self.upper_sigma_5m2 - self.lower_sigma_5m2) > 0.1:
+                        #if self.slope_1m > 0 and (current_price > self.sma5m20 > self.sma5m40 > self.sma5m80) and current_price < self.ewma20_1mvalue and (self.ask_price - self.bid_price) < 0.1 and (self.upper_sigma_5m2 - self.lower_sigma_5m2) > 0.1:
+                        if (current_price > self.sma5m20 > self.sma5m40 > self.sma5m80) and current_price < self.ewma20_1mvalue and (self.ask_price - self.bid_price) < 0.1:
                             self.first_trade_flag = "buy"
                             self.first_trade_time = base_time
     
-                        #elif self.slope_1m < 0 and current_price < self.ewma20_5mvalue and current_price > self.ewma20_1mvalue and (self.ask_price - self.bid_price) < 0.01 and (self.upper_sigma_5m2 - self.lower_sigma_5m2) > 0.1:
-                        elif self.slope_1m < 0 and (current_price < self.sma5m20 < self.sma5m40 < self.sma5m80) and current_price > self.ewma20_1mvalue and (self.ask_price - self.bid_price) < 0.1 and (self.upper_sigma_5m2 - self.lower_sigma_5m2) > 0.1:
+                        #elif self.slope_1m < 0 and (current_price < self.sma5m20 < self.sma5m40 < self.sma5m80) and current_price > self.ewma20_1mvalue and (self.ask_price - self.bid_price) < 0.1 and (self.upper_sigma_5m2 - self.lower_sigma_5m2) > 0.1:
+                        elif (current_price < self.sma5m20 < self.sma5m40 < self.sma5m80) and current_price > self.ewma20_1mvalue and (self.ask_price - self.bid_price) < 0.1:
                             self.first_trade_flag = "sell"
                             self.first_trade_time = base_time
                    
                     if seconds < 10:
-                        #if self.first_trade_flag == "buy" and self.first_trade_time + timedelta(minutes=1) < base_time:
-                        if self.first_trade_flag == "buy":
+                        if self.first_trade_flag == "buy" and self.first_trade_time + timedelta(minutes=1) < base_time:
                             if self.end_price_1m > self.ewma20_1mvalue:
                                 trade_flag = "buy"
                                 self.algorithm = "cross over base_line"
-                        #elif self.first_trade_flag == "sell" and self.first_trade_time + timedelta(minutes=1) < base_time:
-                        elif self.first_trade_flag == "sell":
+                        elif self.first_trade_flag == "sell" and self.first_trade_time + timedelta(minutes=1) < base_time:
                             if self.end_price_1m < self.ewma20_1mvalue:
                                 trade_flag = "sell"
                                 self.algorithm = "cross over base_line"
