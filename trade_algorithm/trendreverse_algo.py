@@ -61,6 +61,7 @@ class TrendReverseAlgo(SuperAlgo):
 
     # decide trade entry timing
     def decideTrade(self, base_time):
+        self.debug_logger.info("decide Trade Logic Start at %s" % base_time.strftime("%Y-%m-%d %H:%M:%S"))
         trade_flag = "pass"
         try:
 #            if self.order_flag:
@@ -82,25 +83,20 @@ class TrendReverseAlgo(SuperAlgo):
                 else:
                     # if spread rate is greater than 0.5, we will have no entry
                     if (self.ask_price - self.bid_price) >= 0.05:
-                        pass
+                        self.debug_logger.info("spread logic: NG, ask=%s, bid=%s" % (self.ask_price, self.bid_price))
+
                     else:
+                        self.debug_logger.info("spread logic: OK, ask=%s, bid=%s" % (self.ask_price, self.bid_price))
                         trade_flag = self.decideReverseTrade(trade_flag, current_price, base_time)
-                        self.debug_logger.info("# self.order_flag=%s" % self.order_flag)
-                        self.debug_logger.info("# trade_flag=%s" % trade_flag)
 
                 if trade_flag != "pass" and self.order_flag:
-                    self.debug_logger.info("# allovertheworld logic")
-                    self.debug_logger.info("# trade_flag=%s" % trade_flag)
-                    self.debug_logger.info("# self.order_flag=%s" % self.order_flag)
                     if trade_flag == "buy" and self.order_kind == "buy":
                         trade_flag = "pass"
                     elif trade_flag == "sell" and self.order_kind == "sell":
                         trade_flag = "pass"
                     else:
                         self.algorithm = self.algorithm + " by allovertheworld"
-                        #self.result_logger.info("# execute all over the world at TrendReverseAlgo")
 
-                self.writeDebugLog(base_time, mode="trade")
 
             return trade_flag
         except:
@@ -182,7 +178,33 @@ class TrendReverseAlgo(SuperAlgo):
             raise
 
         return state
-            
+
+
+    def decidePerfectOrder(self):
+        direct = "pass"
+        if (self.sma5m20 > self.sma5m40 > self.sma5m80):
+            self.debug_logger.info("perfect order logic: buy")
+            direct = "buy"
+
+        elif (self.sma5m20 < self.sma5m40 < self.sma5m80):
+            self.debug_logger.info("perfect order logic: sell")
+            direct = "sell"
+        else:
+            self.debug_logger.info("perfect order logic: NG")
+
+        return direct
+
+    def decideSma(self, sma_value, current_price):
+        direct = "pass"
+        if current_price > sma_value:
+            self.debug_logger.info("sma logic: buy")
+            direct = "buy"
+
+        elif current_price < sma_value:
+            self.debug_logger.info("sma logic: sell")
+            direct = "sell"
+
+        return direct
 
     def decideReverseTrade(self, trade_flag, current_price, base_time):
 #        if trade_flag == "pass" and self.order_flag != True:
@@ -194,49 +216,43 @@ class TrendReverseAlgo(SuperAlgo):
                 self.setReverseIndicator(base_time)
             if 1 == 1:
                 if 1 == 1:
-                    #if self.first_trade_flag == "pass":
                     if 1 == 1:
-                        if (self.sma5m20 > self.sma5m40 > self.sma5m80)  and (self.ask_price - self.bid_price) < 0.1 and current_price > self.sma5m40:
+                        if self.decidePerfectOrder() == self.decideSma(self.sma5m40, current_price) == "buy":
+                            self.debug_logger.info("first trade flag: buy")
                             self.first_trade_flag = "buy"
                             self.perfect_order_buycount = self.perfect_order_buycount + 1
                             self.first_trade_time = base_time
     
-                        elif (self.sma5m20 < self.sma5m40 < self.sma5m80) and (self.ask_price - self.bid_price) < 0.1 and current_price < self.sma5m40:
+                        elif self.decidePerfectOrder() ==  self.decideSma(self.sma5m40, current_price) == "sell":
+                            self.debug_logger.info("first trade flag: sell")
                             self.perfect_order_sellcount = self.perfect_order_sellcount + 1
                             self.first_trade_flag = "sell"
                             self.first_trade_time = base_time
                         else:
+                            self.debug_logger.info("first trade flag: reset")
                             self.first_trade_flag = "pass"
                             self.sell_flag = False
                             self.buy_flag = False
                             self.perfect_order_buycount = 0
                             self.perfect_order_sellcount = 0
                    
-                    #if seconds < 10:
                     if 1 == 1:
-                        #if self.first_trade_flag == "buy" and self.first_trade_time + timedelta(minutes=1) < base_time:
                         if self.first_trade_flag == "buy" and self.buy_flag == False and self.sell_flag == False:
                             if current_price < self.lower_sigma_1m25:
+                                self.debug_logger.info("current_price touch bollinger: lower")
                                 self.buy_flag = True
 
-#                                trade_flag = "buy"
-#                                self.algorithm = "cross over base_line"
-                        #elif self.first_trade_flag == "sell" and self.first_trade_time + timedelta(minutes=1) < base_time:
                         elif self.first_trade_flag == "sell" and self.buy_flag == False and self.sell_flag == False:
                             if current_price > self.upper_sigma_1m25:
+                                self.debug_logger.info("current_price touch bollinger: upper")
                                 self.sell_flag = True
-#                                trade_flag = "sell"
-#                                self.algorithm = "cross over base_line"
 
                     if self.buy_flag and current_price > self.ewma20_1mvalue:
+                        self.debug_logger.info("current_price touch bollinger: lower")
                         trade_flag = "buy"
                     elif self.sell_flag and current_price < self.ewma20_1mvalue:
                         trade_flag = "sell"
-#                if self.first_trade_time + timedelta(minutes=10) < base_time and self.first_trade_flag != "pass":
-#                    self.debug_logger.info("reset first trade time: %s" % self.first_trade_time)
-#                    self.debug_logger.info("reset first trade flag: %s" % self.first_trade_flag)
-#                    self.debug_logger.info("reset first trade: %s" % base_time)
-#                    self.resetFlag()
+
 
         return trade_flag
 
