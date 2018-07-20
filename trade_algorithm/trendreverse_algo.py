@@ -55,6 +55,8 @@ class TrendReverseAlgo(SuperAlgo):
         self.stl_first_flag = False
         self.buy_flag = False
         self.sell_flag = False
+        self.perfect_order_buycount = 0
+        self.perfect_order_sellcount = 0
         self.setReverseIndicator(base_time)
 
     # decide trade entry timing
@@ -196,15 +198,19 @@ class TrendReverseAlgo(SuperAlgo):
                     if 1 == 1:
                         if (self.sma5m20 > self.sma5m40 > self.sma5m80)  and (self.ask_price - self.bid_price) < 0.1 and current_price > self.sma5m40:
                             self.first_trade_flag = "buy"
+                            self.perfect_order_buycount = self.perfect_order_buycount + 1
                             self.first_trade_time = base_time
     
                         elif (self.sma5m20 < self.sma5m40 < self.sma5m80) and (self.ask_price - self.bid_price) < 0.1 and current_price < self.sma5m40:
+                            self.perfect_order_sellcount = self.perfect_order_sellcount + 1
                             self.first_trade_flag = "sell"
                             self.first_trade_time = base_time
                         else:
                             self.first_trade_flag = "pass"
                             self.sell_flag = False
                             self.buy_flag = False
+                            self.perfect_order_buycount = 0
+                            self.perfect_order_sellcount = 0
                    
                     #if seconds < 10:
                     if 1 == 1:
@@ -261,6 +267,8 @@ class TrendReverseAlgo(SuperAlgo):
         self.stl_first_flag = False
         self.buy_flag = False
         self.sell_flag = False
+        self.perfect_order_buycount = 0
+        self.perfect_order_sellcount = 0
         super(TrendReverseAlgo, self).resetFlag()
 
 
@@ -414,8 +422,8 @@ class TrendReverseAlgo(SuperAlgo):
         self.result_logger.info("# self.slope_1m=%s" % self.slope_1m)
         self.result_logger.info("# self.upper_sigma_1m2=%s" % self.upper_sigma_1m2)
         self.result_logger.info("# self.lower_sigma_1m2=%s" % self.lower_sigma_1m2)
-        self.result_logger.info("# self.upper_sigma_5m2=%s" % self.upper_sigma_1m2)
-        self.result_logger.info("# self.lower_sigma_5m2=%s" % self.lower_sigma_1m2)
+        self.result_logger.info("# self.upper_sigma_5m2=%s" % self.upper_sigma_5m2)
+        self.result_logger.info("# self.lower_sigma_5m2=%s" % self.lower_sigma_5m2)
         self.result_logger.info("# self.start_price_1m=%s" % self.start_price_1m)
         self.result_logger.info("# self.end_price_1m=%s" % self.end_price_1m)
         self.result_logger.info("# self.max_price_1m=%s" % self.max_price_1m)
@@ -423,6 +431,8 @@ class TrendReverseAlgo(SuperAlgo):
         self.result_logger.info("# self.sma5m20=%s" % self.sma5m20)
         self.result_logger.info("# self.sma5m40=%s" % self.sma5m40)
         self.result_logger.info("# self.sma5m80=%s" % self.sma5m80)
+        self.result_logger.info("# self.perfect_order_buycount=%s" % self.perfect_order_buycount)
+        self.result_logger.info("# self.perfect_order_sellcount=%s" % self.perfect_order_sellcount)
 
     def settlementLogWrite(self, profit, base_time, stl_price, stl_method):
         self.result_logger.info("# %s at %s" % (stl_method, base_time))
