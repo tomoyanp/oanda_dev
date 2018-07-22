@@ -96,6 +96,7 @@ class TrendReverseAlgo(SuperAlgo):
                     elif trade_flag == "sell" and self.order_kind == "sell":
                         trade_flag = "pass"
                     else:
+                        self.stl_logic = "allovertheworld settlement"
                         self.algorithm = self.algorithm + " by allovertheworld"
 
 
@@ -154,14 +155,14 @@ class TrendReverseAlgo(SuperAlgo):
 #                elif self.order_kind == "sell":
 #                    if (self.end_price_1m - self.order_price) > original_stoploss:
 #                        stl_flag = True
-
-            if self.order_kind == "buy" and self.decidePerfectOrder() == "sell":
-                stl_flag = True
-                self.stl_logic = "reverse_perfect_order"
-            elif self.order_kind == "sell" and self.decidePerfectOrder() == "buy":
-                stl_flag = True
-                self.stl_logic = "reverse_perfect_order"
-
+#
+#            if self.order_kind == "buy" and self.decidePerfectOrder() == "sell":
+#                stl_flag = True
+#                self.stl_logic = "reverse_perfect_order"
+#            elif self.order_kind == "sell" and self.decidePerfectOrder() == "buy":
+#                stl_flag = True
+#                self.stl_logic = "reverse_perfect_order"
+#
         #    if self.order_kind == "buy" and current_price > self.upper_sigma_1m25:
         #        stl_flag = True
   
@@ -217,7 +218,8 @@ class TrendReverseAlgo(SuperAlgo):
 
     def decideReverseTrade(self, trade_flag, current_price, base_time):
 #        if trade_flag == "pass" and self.order_flag != True:
-        if trade_flag == "pass" and self.order_flag == False:
+#        if trade_flag == "pass" and self.order_flag == False:
+        if trade_flag == "pass":
             hour = base_time.hour
             minutes = base_time.minute
             seconds = base_time.second
