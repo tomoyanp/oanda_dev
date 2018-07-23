@@ -96,7 +96,6 @@ class TrendReverseAlgo(SuperAlgo):
                     elif trade_flag == "sell" and self.order_kind == "sell":
                         trade_flag = "pass"
                     else:
-                        self.stl_logic = "allovertheworld settlement"
                         self.algorithm = self.algorithm + " by allovertheworld"
 
 
@@ -146,23 +145,23 @@ class TrendReverseAlgo(SuperAlgo):
             current_price = (self.ask_price + self.bid_price) / 2
 
             self.setReverseIndicator(base_time)
-#            if seconds < 10:
-#                original_stoploss = 0.5
-#                #original_stoploss = 0.1
-#                if self.order_kind == "buy":
-#                    if (self.order_price - self.end_price_1m) > original_stoploss:
-#                        stl_flag = True
-#                elif self.order_kind == "sell":
-#                    if (self.end_price_1m - self.order_price) > original_stoploss:
-#                        stl_flag = True
-#
-#            if self.order_kind == "buy" and self.decidePerfectOrder() == "sell":
-#                stl_flag = True
-#                self.stl_logic = "reverse_perfect_order"
-#            elif self.order_kind == "sell" and self.decidePerfectOrder() == "buy":
-#                stl_flag = True
-#                self.stl_logic = "reverse_perfect_order"
-#
+            if seconds < 10:
+                original_stoploss = 0.5
+                #original_stoploss = 0.1
+                if self.order_kind == "buy":
+                    if (self.order_price - self.end_price_1m) > original_stoploss:
+                        stl_flag = True
+                elif self.order_kind == "sell":
+                    if (self.end_price_1m - self.order_price) > original_stoploss:
+                        stl_flag = True
+
+            if self.order_kind == "buy" and self.decidePerfectOrder() == "sell":
+                stl_flag = True
+                self.stl_logic = "reverse_perfect_order"
+            elif self.order_kind == "sell" and self.decidePerfectOrder() == "buy":
+                stl_flag = True
+                self.stl_logic = "reverse_perfect_order"
+
         #    if self.order_kind == "buy" and current_price > self.upper_sigma_1m25:
         #        stl_flag = True
   
@@ -218,8 +217,7 @@ class TrendReverseAlgo(SuperAlgo):
 
     def decideReverseTrade(self, trade_flag, current_price, base_time):
 #        if trade_flag == "pass" and self.order_flag != True:
-#        if trade_flag == "pass" and self.order_flag == False:
-        if trade_flag == "pass":
+        if trade_flag == "pass" and self.order_flag == False:
             hour = base_time.hour
             minutes = base_time.minute
             seconds = base_time.second
@@ -260,10 +258,10 @@ class TrendReverseAlgo(SuperAlgo):
                                 self.debug_logger.info("current_price touch bollinger: upper")
                                 self.sell_flag = True
 
-                    if self.buy_flag and current_price > self.ewma40_1mvalue:
+                    if self.buy_flag and current_price > self.ewma20_1mvalue:
                         self.debug_logger.info("current_price touch bollinger: lower")
                         trade_flag = "buy"
-                    elif self.sell_flag and current_price < self.ewma40_1mvalue:
+                    elif self.sell_flag and current_price < self.ewma20_1mvalue:
                         trade_flag = "sell"
 
 
@@ -306,29 +304,41 @@ class TrendReverseAlgo(SuperAlgo):
         target_time = base_time - timedelta(minutes=1)
 
         ### get 1m dataset
-#        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1m", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=0)
-#        self.upper_sigma_1m2 = dataset["upper_sigmas"][-1]
-#        self.lower_sigma_1m2 = dataset["lower_sigmas"][-1]
-#        self.base_line_1m2 = dataset["base_lines"][-1]
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1m", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=0)
+        self.upper_sigma_1m2 = dataset["upper_sigmas"][-1]
+        self.lower_sigma_1m2 = dataset["lower_sigmas"][-1]
+        self.base_line_1m2 = dataset["base_lines"][-1]
 
         dataset = getBollingerWrapper(target_time, self.instrument, table_type="1m", window_size=28, connector=self.mysql_connector, sigma_valiable=2.5, length=0)
         self.upper_sigma_1m25 = dataset["upper_sigmas"][-1]
         self.lower_sigma_1m25 = dataset["lower_sigmas"][-1]
         self.base_line_1m25 = dataset["base_lines"][-1]
 
-#        sql = "select start_price, end_price, max_price, min_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 1" % (self.instrument, "1m", target_time)
-#        response = self.mysql_connector.select_sql(sql)
-#        self.start_price_1m = response[0][0]
-#        self.end_price_1m = response[0][1]
-#        self.max_price_1m = response[0][2]
-#        self.min_price_1m = response[0][3]
+        sql = "select start_price, end_price, max_price, min_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 1" % (self.instrument, "1m", target_time)
+        response = self.mysql_connector.select_sql(sql)
+        self.start_price_1m = response[0][0]
+        self.end_price_1m = response[0][1]
+        self.max_price_1m = response[0][2]
+        self.min_price_1m = response[0][3]
 
 
-#        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1m", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=9)
-#        base_line_1m2_list = dataset["base_lines"][-10:]
-#        self.slope_1m = getSlope(base_line_1m2_list)
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1m", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=9)
+        base_line_1m2_list = dataset["base_lines"][-10:]
+        self.slope_1m = getSlope(base_line_1m2_list)
 
         target_time = base_time
+
+#        width = 60*20
+#        sql = "select ask_price, bid_price from %s_TABLE where insert_time < \'%s\' order by insert_time desc limit %s" % (self.instrument, target_time, width)
+#        response = self.mysql_connector.select_sql(sql)
+#        tmp = []
+#        for res in response:
+#            tmp.append((res[0]+res[1])/2)
+#        tmp.reverse()
+#
+#        ewma20_rawdata = tmp[-1*60*20:]
+#        self.ewma20_1mvalue = getEWMA(ewma20_rawdata, len(ewma20_rawdata))[-1]
+
         width = 60*40
         sql = "select ask_price, bid_price from %s_TABLE where insert_time < \'%s\' order by insert_time desc limit %s" % (self.instrument, target_time, width)
         response = self.mysql_connector.select_sql(sql)
@@ -337,27 +347,27 @@ class TrendReverseAlgo(SuperAlgo):
             tmp.append((res[0]+res[1])/2)
         tmp.reverse()
 
-        ewma40_rawdata = tmp[-1*60*40:]
-        self.ewma40_1mvalue = getEWMA(ewma40_rawdata, len(ewma40_rawdata))[-1]
+        ewma20_rawdata = tmp[-1*60*40:]
+        self.ewma20_1mvalue = getEWMA(ewma20_rawdata, len(ewma20_rawdata))[-1]
 
 
 
         ### get 5m dataset
         target_time = base_time - timedelta(minutes=5)
 
-#        width = 20
-#        sql = "select end_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit %s" % (self.instrument, "5m", target_time, width)
-#        response = self.mysql_connector.select_sql(sql)
-#        tmp = []
-#        for res in response:
-#            tmp.append(res[0])
-#        tmp.reverse()
-#        self.ewma20_5mvalue = getEWMA(tmp, len(tmp))[-1]
-#
-#        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=0)
-#        self.base_line_5m2 = dataset["base_lines"][-1]
-#        self.upper_sigma_5m2 = dataset["upper_sigmas"][-1]
-#        self.lower_sigma_5m2 = dataset["lower_sigmas"][-1]
+        width = 20
+        sql = "select end_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit %s" % (self.instrument, "5m", target_time, width)
+        response = self.mysql_connector.select_sql(sql)
+        tmp = []
+        for res in response:
+            tmp.append(res[0])
+        tmp.reverse()
+        self.ewma20_5mvalue = getEWMA(tmp, len(tmp))[-1]
+
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=0)
+        self.base_line_5m2 = dataset["base_lines"][-1]
+        self.upper_sigma_5m2 = dataset["upper_sigmas"][-1]
+        self.lower_sigma_5m2 = dataset["lower_sigmas"][-1]
 
         dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=20, connector=self.mysql_connector, sigma_valiable=2, length=0)
         self.sma5m20 = dataset["base_lines"][-1]
@@ -437,15 +447,15 @@ class TrendReverseAlgo(SuperAlgo):
         self.result_logger.info("# First trade time at %s" % self.first_trade_time)
         self.result_logger.info("# EXECUTE ORDER at %s" % base_time)
         self.result_logger.info("# ORDER_PRICE=%s, TRADE_FLAG=%s" % (self.order_price, self.order_kind))
-#        self.result_logger.info("# self.slope_1m=%s" % self.slope_1m)
-        self.result_logger.info("# self.upper_sigma_1m25=%s" % self.upper_sigma_1m25)
-        self.result_logger.info("# self.lower_sigma_1m25=%s" % self.lower_sigma_1m25)
-#        self.result_logger.info("# self.upper_sigma_5m2=%s" % self.upper_sigma_5m2)
-#        self.result_logger.info("# self.lower_sigma_5m2=%s" % self.lower_sigma_5m2)
-#        self.result_logger.info("# self.start_price_1m=%s" % self.start_price_1m)
-#        self.result_logger.info("# self.end_price_1m=%s" % self.end_price_1m)
-#        self.result_logger.info("# self.max_price_1m=%s" % self.max_price_1m)
-#        self.result_logger.info("# self.min_price_1m=%s" % self.min_price_1m)
+        self.result_logger.info("# self.slope_1m=%s" % self.slope_1m)
+        self.result_logger.info("# self.upper_sigma_1m2=%s" % self.upper_sigma_1m2)
+        self.result_logger.info("# self.lower_sigma_1m2=%s" % self.lower_sigma_1m2)
+        self.result_logger.info("# self.upper_sigma_5m2=%s" % self.upper_sigma_5m2)
+        self.result_logger.info("# self.lower_sigma_5m2=%s" % self.lower_sigma_5m2)
+        self.result_logger.info("# self.start_price_1m=%s" % self.start_price_1m)
+        self.result_logger.info("# self.end_price_1m=%s" % self.end_price_1m)
+        self.result_logger.info("# self.max_price_1m=%s" % self.max_price_1m)
+        self.result_logger.info("# self.min_price_1m=%s" % self.min_price_1m)
         self.result_logger.info("# self.sma5m20=%s" % self.sma5m20)
         self.result_logger.info("# self.sma5m40=%s" % self.sma5m40)
         self.result_logger.info("# self.sma5m80=%s" % self.sma5m80)
