@@ -359,14 +359,26 @@ class TrendReverseAlgo(SuperAlgo):
 #        self.upper_sigma_5m2 = dataset["upper_sigmas"][-1]
 #        self.lower_sigma_5m2 = dataset["lower_sigmas"][-1]
 
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=20, connector=self.mysql_connector, sigma_valiable=2, length=0)
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=20, connector=self.mysql_connector, sigma_valiable=2, length=5)
         self.sma5m20 = dataset["base_lines"][-1]
+        self.sma5m20_before = dataset["base_lines"][-5]
 
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=40, connector=self.mysql_connector, sigma_valiable=2, length=0)
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=40, connector=self.mysql_connector, sigma_valiable=2, length=5)
         self.sma5m40 = dataset["base_lines"][-1]
+        self.sma5m40_before = dataset["base_lines"][-5]
 
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=80, connector=self.mysql_connector, sigma_valiable=2, length=0)
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=80, connector=self.mysql_connector, sigma_valiable=2, length=5)
         self.sma5m80 = dataset["base_lines"][-1]
+        self.sma5m80_before = dataset["base_lines"][-5]
+
+        self.sma5m20_slope = getSlope([self.sma5m20_before, self.sma5m20])
+        self.sma5m40_slope = getSlope([self.sma5m40_before, self.sma5m40])
+        self.sma5m80_slope = getSlope([self.sma5m80_before, self.sma5m80])
+
+
+        target_time = base_time - timedelta(hours=1)
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=80, connector=self.mysql_connector, sigma_valiable=2, length=0)
+        self.sma1h80 = dataset["base_lines"][-1]
 
     def decideTrailLogic(self, stl_flag, current_ask_price, current_bid_price, base_time):
         minutes = base_time.minute
@@ -437,18 +449,14 @@ class TrendReverseAlgo(SuperAlgo):
         self.result_logger.info("# First trade time at %s" % self.first_trade_time)
         self.result_logger.info("# EXECUTE ORDER at %s" % base_time)
         self.result_logger.info("# ORDER_PRICE=%s, TRADE_FLAG=%s" % (self.order_price, self.order_kind))
-#        self.result_logger.info("# self.slope_1m=%s" % self.slope_1m)
         self.result_logger.info("# self.upper_sigma_1m25=%s" % self.upper_sigma_1m25)
-        self.result_logger.info("# self.lower_sigma_1m25=%s" % self.lower_sigma_1m25)
-#        self.result_logger.info("# self.upper_sigma_5m2=%s" % self.upper_sigma_5m2)
-#        self.result_logger.info("# self.lower_sigma_5m2=%s" % self.lower_sigma_5m2)
-#        self.result_logger.info("# self.start_price_1m=%s" % self.start_price_1m)
-#        self.result_logger.info("# self.end_price_1m=%s" % self.end_price_1m)
-#        self.result_logger.info("# self.max_price_1m=%s" % self.max_price_1m)
-#        self.result_logger.info("# self.min_price_1m=%s" % self.min_price_1m)
+        self.result_logger.info("# self.sma5m20_slope=%s" % self.sma5m20_slope)
+        self.result_logger.info("# self.sma5m40_slope=%s" % self.sma5m40_slope)
+        self.result_logger.info("# self.sma5m80_slope=%s" % self.sma5m80_slope)
         self.result_logger.info("# self.sma5m20=%s" % self.sma5m20)
         self.result_logger.info("# self.sma5m40=%s" % self.sma5m40)
         self.result_logger.info("# self.sma5m80=%s" % self.sma5m80)
+        self.result_logger.info("# self.sma1h80=%s" % self.sma1h80)
         self.result_logger.info("# self.perfect_order_buycount=%s" % self.perfect_order_buycount)
         self.result_logger.info("# self.perfect_order_sellcount=%s" % self.perfect_order_sellcount)
 
