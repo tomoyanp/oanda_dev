@@ -129,7 +129,7 @@ class TrendReverseAlgo(SuperAlgo):
 #                    else:
                     if 1==1:
                         stl_flag = self.decideReverseStl(stl_flag, base_time)
-                        #stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, base_time)
+                        stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, base_time)
 
             else:
                 pass
@@ -147,7 +147,13 @@ class TrendReverseAlgo(SuperAlgo):
             seconds = base_time.second
             current_price = (self.ask_price + self.bid_price) / 2
 
-            self.setReverseIndicator(base_time)
+            if seconds < 10 and minutes == 0:
+#                self.setReverseIndicator(base_time)
+                if self.order_kind == "buy" and self.sma1h20 < self.sma1h100:
+                    stl_flag = True
+                elif self.order_kind == "sell" and self.sma1h20 > self.sma1h100:
+                    stl_flag = True
+
 #            if seconds < 10:
 #                original_stoploss = 0.5
 #                #original_stoploss = 0.1
@@ -388,8 +394,8 @@ class TrendReverseAlgo(SuperAlgo):
 
         if minutes % 5 == 0 and seconds < 10:
             order_price = self.getOrderPrice()
-            first_take_profit = 0.05
-            second_take_profit = 0.05
+            first_take_profit = 0.5
+            second_take_profit = 1.0
 
             # update the most high and low price
             if self.most_high_price == 0 and self.most_low_price == 0:
@@ -410,13 +416,23 @@ class TrendReverseAlgo(SuperAlgo):
                     self.trail_flag = True
 
             if self.trail_flag == True and self.order_kind == "buy":
-                if (self.most_high_price - 0.02) > current_bid_price:
+                if self.order_price > current_bid_price:
                     self.result_logger.info("# Execute FirstTrail Stop")
                     stl_flag = True
             elif self.trail_flag == True and self.order_kind == "sell":
-                if (self.most_low_price + 0.02) < current_ask_price :
+                if self.order_price < current_ask_price :
                     self.result_logger.info("# Execute FirstTrail Stop")
                     stl_flag = True
+
+             
+#            if self.trail_flag == True and self.order_kind == "buy":
+#                if (self.most_high_price - 0.5) > current_bid_price:
+#                    self.result_logger.info("# Execute FirstTrail Stop")
+#                    stl_flag = True
+#            elif self.trail_flag == True and self.order_kind == "sell":
+#                if (self.most_low_price + 0.5) < current_ask_price :
+#                    self.result_logger.info("# Execute FirstTrail Stop")
+#                    stl_flag = True
 
             # second trailing stop logic
             if self.order_kind == "buy":
@@ -426,11 +442,11 @@ class TrendReverseAlgo(SuperAlgo):
                 if (order_price - current_ask_price) > second_take_profit:
                     self.trail_second_flag = True
             if self.trail_second_flag == True and self.order_kind == "buy":
-                if (self.most_high_price - 0.02) > current_bid_price:
+                if (self.most_high_price - 0.5) > current_bid_price:
                     self.result_logger.info("# Execute SecondTrail Stop")
                     stl_flag = True
             elif self.trail_second_flag == True and self.order_kind == "sell":
-                if (self.most_low_price + 0.02) < current_ask_price :
+                if (self.most_low_price + 0.5) < current_ask_price :
                     self.result_logger.info("# Execute SecondTrail Stop")
                     stl_flag = True
 
