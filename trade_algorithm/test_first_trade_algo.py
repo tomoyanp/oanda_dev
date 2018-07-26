@@ -247,14 +247,14 @@ class TrendReverseAlgo(SuperAlgo):
                 if 1 == 1:
                     if 1 == 1:
                         #if self.sma1h100 < self.sma1h20 and self.decidePerfectOrder() == "buy" and current_price < (self.sma1h100 + 2.0) and self.max_price_1d < self.upper_sigma_1d2 and self.decideEwma():
-                        if self.sma1h100 < self.sma1h20 and self.decidePerfectOrder() == "buy" and current_price < (self.sma1h100 + 2.0) and self.decideEwma() and self.sma1h20_slope > 0 and self.first_trade_flag != "buy":
+                        if self.sma1h100 < self.sma1h20 and self.decidePerfectOrder() == "buy" and current_price < (self.sma1h100 + 2.0) and self.decideEwma() and self.first_trade_flag != "buy":
                             self.debug_logger.info("first trade flag: buy")
                             self.first_trade_flag = "buy"
                             self.perfect_order_buycount = self.perfect_order_buycount + 1
                             self.first_trade_time = base_time
     
                         #elif self.sma1h100 > self.sma1h20 and self.decidePerfectOrder() == "sell" and current_price > (self.sma1h100 - 2.0) and self.min_price_1d > self.lower_sigma_1d2 and self.decideEwma():
-                        elif self.sma1h100 > self.sma1h20 and self.decidePerfectOrder() == "sell" and current_price > (self.sma1h100 - 2.0) and self.decideEwma() and self.sma1h20_slope < 0 and self.first_trade_flag != "sell":
+                        elif self.sma1h100 > self.sma1h20 and self.decidePerfectOrder() == "sell" and current_price > (self.sma1h100 - 2.0) and self.decideEwma() and self.first_trade_flag != "sell":
                             self.debug_logger.info("first trade flag: sell")
                             self.perfect_order_sellcount = self.perfect_order_sellcount + 1
                             self.first_trade_flag = "sell"
