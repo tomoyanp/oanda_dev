@@ -1,0 +1,504 @@
+#########################
+# ../main.py GBP_JPY demo trendreverse trendreverse_test test 
+# enable_time = [u'00:00:00', u'01:00:00', u'02:00:00', u'03:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00', u'21:00:00', u'22:00:00', u'23:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# first_trail_mode = on
+# second_trail_mode = on
+# sleep_time = 10
+# stl_sleep_ltime = 0
+# stl_sleep_time = 10
+# stl_sleep_vtime = 0
+# stl_time_width = 720000
+# stop_loss = 0.5
+# take_profit = 5.0
+# time_width = 720000
+# trade_sleep_time = 60
+# units = 15000
+#######################################################
+# in  Algorithm
+# first_trade_time=2018-05-01 01:01:00
+# second_trade_time= 2018-05-01 07:08:00
+# third_trade_time= 2018-05-01 14:41:00
+# EXECUTE ORDER at 2018-05-01 14:41:00
+# first_trade_price=150.2775
+# second_trade_price= 150.4515
+# third_trade_price= 150.4715
+# ORDER_PRICE=150.458, TRADE_FLAG=sell
+# self.upper_sigma_5m25=150.555399438
+# self.lower_sigma_5m25=150.458493419
+# self.upper_sigma_1h3=150.869447662
+# self.lower_sigma_1h3=149.866266624
+# self.sma5m20=150.4982
+# self.sma5m40=150.5096375
+# self.sma5m80=150.51111875
+# self.sma5m20_slope=-0.0259999999995
+# self.sma5m40_slope=-0.00587499999929
+# self.sma5m80_slope=-0.000999999999539
+# self.sma1h100=151.435225
+# self.sma1h20=150.38025
+# self.sma1h40=150.3588375
+# self.sma1h80=151.21774375
+# self.sma1h20_slope=0.17875
+# self.sma1h40_slope=0.0193750000005
+# self.sma1h80_slope=-0.243875
+# EXECUTE all over the world SETTLEMENT at 2018-05-11 05:41:00
+# self.ask_price=147.909
+# self.bid_price=147.881
+# self.log_max_price=150.6325
+# self.log_min_price=147.0575
+# self.stl_logic=allovertheworld settlement
+# STL_PRICE=147.895
+# PROFIT=2.549
+#######################################################
+# in  by allovertheworld Algorithm
+# first_trade_time=2018-05-09 19:01:00
+# second_trade_time= 2018-05-10 20:02:30
+# third_trade_time= 2018-05-11 05:41:00
+# EXECUTE ORDER at 2018-05-11 05:41:00
+# first_trade_price=148.4515
+# second_trade_price= 148.524
+# third_trade_price= 147.895
+# ORDER_PRICE=147.909, TRADE_FLAG=buy
+# self.upper_sigma_5m25=147.940026727
+# self.lower_sigma_5m25=147.812580416
+# self.upper_sigma_1h3=149.879030231
+# self.lower_sigma_1h3=147.14689834
+# self.sma5m20=147.884325
+# self.sma5m40=147.8726625
+# self.sma5m80=147.80071875
+# self.sma5m20_slope=0.0255000000003
+# self.sma5m40_slope=0.0438750000005
+# self.sma5m80_slope=0.00725000000015
+# self.sma1h100=148.089305
+# self.sma1h20=148.44355
+# self.sma1h40=148.5525125
+# self.sma1h80=148.17156875
+# self.sma1h20_slope=-0.43175
+# self.sma1h40_slope=-0.0642499999998
+# self.sma1h80_slope=0.00406250000034
+# Execute SecondTrail Stop
+# EXECUTE stl logic SETTLEMENT at 2018-05-22 01:45:00
+# self.ask_price=148.918
+# self.bid_price=148.893
+# self.log_max_price=150.009
+# self.log_min_price=147.594
+# self.stl_logic=none
+# STL_PRICE=148.9055
+# PROFIT=0.984
+#######################################################
+# in  by allovertheworld Algorithm
+# first_trade_time=2018-05-22 13:01:00
+# second_trade_time= 2018-05-22 16:00:20
+# third_trade_time= 2018-05-22 22:41:00
+# EXECUTE ORDER at 2018-05-22 22:41:00
+# first_trade_price=148.863
+# second_trade_price= 149.176
+# third_trade_price= 149.1365
+# ORDER_PRICE=149.125, TRADE_FLAG=sell
+# self.upper_sigma_5m25=149.292879647
+# self.lower_sigma_5m25=148.933084639
+# self.upper_sigma_1h3=149.67702155
+# self.lower_sigma_1h3=148.55272845
+# self.sma5m20=149.07735
+# self.sma5m40=149.1769875
+# self.sma5m80=149.299225
+# self.sma5m20_slope=-0.0274999999998
+# self.sma5m40_slope=-0.0693749999994
+# self.sma5m80_slope=-0.00118749999953
+# self.sma1h100=149.286185
+# self.sma1h20=149.087425
+# self.sma1h40=149.1892125
+# self.sma1h80=149.37898125
+# self.sma1h20_slope=0.0917500000005
+# self.sma1h40_slope=-0.0318749999996
+# self.sma1h80_slope=-0.0443124999996
+# EXECUTE stl logic SETTLEMENT at 2018-05-29 16:51:10
+# self.ask_price=144.113
+# self.bid_price=144.089
+# self.log_max_price=149.2595
+# self.log_min_price=144.101
+# self.stl_logic=none
+# STL_PRICE=144.101
+# PROFIT=5.012
+#######################################################
+# in  by allovertheworld Algorithm
+# first_trade_time=2018-05-29 16:51:10
+# second_trade_time= 2018-05-30 17:02:50
+# third_trade_time= 2018-05-31 04:26:00
+# EXECUTE ORDER at 2018-05-31 04:26:00
+# first_trade_price=144.113
+# second_trade_price= 144.606
+# third_trade_price= 144.628
+# ORDER_PRICE=144.616, TRADE_FLAG=sell
+# self.upper_sigma_5m25=144.858742152
+# self.lower_sigma_5m25=144.410614991
+# self.upper_sigma_1h3=145.429716152
+# self.lower_sigma_1h3=143.026033848
+# self.sma5m20=144.5935
+# self.sma5m40=144.671
+# self.sma5m80=144.6929625
+# self.sma5m20_slope=-0.0414999999994
+# self.sma5m40_slope=-0.0737499999997
+# self.sma5m80_slope=-0.0137499999993
+# self.sma1h100=145.2655
+# self.sma1h20=144.355325
+# self.sma1h40=144.3389875
+# self.sma1h80=145.00679375
+# self.sma1h20_slope=0.284
+# self.sma1h40_slope=-0.1535
+# self.sma1h80_slope=-0.170625
+# EXECUTE stl logic SETTLEMENT at 2018-05-31 17:12:30
+# self.ask_price=145.125
+# self.bid_price=145.101
+# self.log_max_price=145.113
+# self.log_min_price=144.135
+# self.stl_logic=none
+# STL_PRICE=145.113
+# PROFIT=-0.509
+#######################################################
+# in  by allovertheworld Algorithm
+# first_trade_time=2018-06-01 20:01:00
+# second_trade_time= 2018-06-05 00:26:50
+# third_trade_time= 2018-06-05 07:06:00
+# EXECUTE ORDER at 2018-06-05 07:06:00
+# first_trade_price=145.457
+# second_trade_price= 145.916
+# third_trade_price= 146.2375
+# ORDER_PRICE=146.254, TRADE_FLAG=buy
+# self.upper_sigma_5m25=146.243930392
+# self.lower_sigma_5m25=146.16092675
+# self.upper_sigma_1h3=146.97963398
+# self.lower_sigma_1h3=145.755794592
+# self.sma5m20=146.1947
+# self.sma5m40=146.17765
+# self.sma5m80=146.129925
+# self.sma5m20_slope=0.00875000000041
+# self.sma5m40_slope=0.0331250000003
+# self.sma5m80_slope=0.0284375000003
+# self.sma1h100=145.177775
+# self.sma1h20=146.38165
+# self.sma1h40=146.1712
+# self.sma1h80=145.4348875
+# self.sma1h20_slope=-0.191
+# self.sma1h40_slope=0.35825
+# self.sma1h80_slope=0.19125
+# Execute FirstTrail Stop
+# EXECUTE stl logic SETTLEMENT at 2018-06-08 20:05:00
+# self.ask_price=146.264
+# self.bid_price=146.24
+# self.log_max_price=148.115
+# self.log_min_price=146.046
+# self.stl_logic=none
+# STL_PRICE=146.252
+# PROFIT=-0.014
+#######################################################
+# in  by allovertheworld Algorithm
+# first_trade_time=2018-06-09 03:01:00
+# second_trade_time= 2018-06-11 11:47:50
+# third_trade_time= 2018-06-11 19:26:00
+# EXECUTE ORDER at 2018-06-11 19:26:00
+# first_trade_price=146.7585
+# second_trade_price= 147.029
+# third_trade_price= 146.921
+# ORDER_PRICE=146.909, TRADE_FLAG=sell
+# self.upper_sigma_5m25=147.723739909
+# self.lower_sigma_5m25=146.560117234
+# self.upper_sigma_1h3=147.822665776
+# self.lower_sigma_1h3=145.896477081
+# self.sma5m20=147.0312
+# self.sma5m40=147.31845
+# self.sma5m80=147.330775
+# self.sma5m20_slope=-0.0019999999999
+# self.sma5m40_slope=-0.195
+# self.sma5m80_slope=-0.0172499999997
+# self.sma1h100=147.222875
+# self.sma1h20=146.961375
+# self.sma1h40=146.9766625
+# self.sma1h80=147.3199
+# self.sma1h20_slope=0.285250000001
+# self.sma1h40_slope=-0.0149999999998
+# self.sma1h80_slope=-0.0286249999997
+# EXECUTE stl logic SETTLEMENT at 2018-06-12 08:04:00
+# self.ask_price=147.411
+# self.bid_price=147.387
+# self.log_max_price=147.399
+# self.log_min_price=146.8285
+# self.stl_logic=none
+# STL_PRICE=147.399
+# PROFIT=-0.502
+#######################################################
+# in  by allovertheworld Algorithm
+# first_trade_time=2018-06-12 20:01:00
+# second_trade_time= 2018-06-12 22:29:30
+# third_trade_time= 2018-06-13 01:51:00
+# EXECUTE ORDER at 2018-06-13 01:51:00
+# first_trade_price=147.638
+# second_trade_price= 147.253
+# third_trade_price= 147.821
+# ORDER_PRICE=147.833, TRADE_FLAG=buy
+# self.upper_sigma_5m25=148.309204255
+# self.lower_sigma_5m25=146.953045745
+# self.upper_sigma_1h3=148.015904423
+# self.lower_sigma_1h3=146.747345577
+# self.sma5m20=147.770475
+# self.sma5m40=147.5337125
+# self.sma5m80=147.52906875
+# self.sma5m20_slope=0.268000000001
+# self.sma5m40_slope=0.14325
+# self.sma5m80_slope=0.0327500000004
+# self.sma1h100=147.304985
+# self.sma1h20=147.468325
+# self.sma1h40=147.3112125
+# self.sma1h80=147.19075
+# self.sma1h20_slope=0.322
+# self.sma1h40_slope=0.26675
+# self.sma1h80_slope=-0.0151249999997
+# EXECUTE stl logic SETTLEMENT at 2018-06-13 17:30:20
+# self.ask_price=147.369
+# self.bid_price=147.311
+# self.log_max_price=147.897
+# self.log_min_price=147.34
+# self.stl_logic=none
+# STL_PRICE=147.34
+# PROFIT=-0.522
+#######################################################
+# in  by allovertheworld Algorithm
+# first_trade_time=2018-06-13 17:30:20
+# second_trade_time= 2018-06-13 17:30:20
+# third_trade_time= 2018-06-13 23:51:00
+# EXECUTE ORDER at 2018-06-13 23:51:00
+# first_trade_price=147.4715
+# second_trade_price= 147.4715
+# third_trade_price= 147.644
+# ORDER_PRICE=147.656, TRADE_FLAG=buy
+# self.upper_sigma_5m25=147.634640608
+# self.lower_sigma_5m25=147.312466535
+# self.upper_sigma_1h3=148.117407263
+# self.lower_sigma_1h3=147.090592737
+# self.sma5m20=147.471025
+# self.sma5m40=147.4447625
+# self.sma5m80=147.4387625
+# self.sma5m20_slope=0.0635000000003
+# self.sma5m40_slope=0.0670000000003
+# self.sma5m80_slope=0.0135000000003
+# self.sma1h100=147.27164
+# self.sma1h20=147.6175
+# self.sma1h40=147.5657875
+# self.sma1h80=147.25529375
+# self.sma1h20_slope=-0.1615
+# self.sma1h40_slope=0.0375000000005
+# self.sma1h80_slope=0.0216250000006
+# EXECUTE stl logic SETTLEMENT at 2018-06-14 21:52:10
+# self.ask_price=147.171
+# self.bid_price=147.147
+# self.log_max_price=147.852
+# self.log_min_price=147.159
+# self.stl_logic=none
+# STL_PRICE=147.159
+# PROFIT=-0.509
+#######################################################
+# in  by allovertheworld Algorithm
+# first_trade_time=2018-06-15 05:01:00
+# second_trade_time= 2018-06-16 05:30:10
+# third_trade_time= 2018-06-18 09:06:00
+# EXECUTE ORDER at 2018-06-18 09:06:00
+# first_trade_price=146.875
+# second_trade_price= 146.9685
+# third_trade_price= 146.8065
+# ORDER_PRICE=146.793, TRADE_FLAG=sell
+# self.upper_sigma_5m25=146.986004724
+# self.lower_sigma_5m25=146.730316705
+# self.upper_sigma_1h3=147.202125224
+# self.lower_sigma_1h3=146.348160491
+# self.sma5m20=146.838375
+# self.sma5m40=146.8945375
+# self.sma5m80=146.89563125
+# self.sma5m20_slope=-0.0304999999992
+# self.sma5m40_slope=-0.0443749999997
+# self.sma5m80_slope=-0.0053749999994
+# self.sma1h100=147.292535
+# self.sma1h20=146.8218
+# self.sma1h40=146.9012
+# self.sma1h80=147.2485875
+# self.sma1h20_slope=0.116
+# self.sma1h40_slope=-0.109
+# self.sma1h80_slope=-0.12575
+# EXECUTE all over the world SETTLEMENT at 2018-06-25 07:07:00
+# self.ask_price=145.88
+# self.bid_price=145.849
+# self.log_max_price=146.858
+# self.log_min_price=144.392
+# self.stl_logic=allovertheworld settlement
+# STL_PRICE=145.8645
+# PROFIT=0.913
+#######################################################
+# in  by allovertheworld by allovertheworld Algorithm
+# first_trade_time=2018-06-22 17:01:00
+# second_trade_time= 2018-06-22 23:27:50
+# third_trade_time= 2018-06-25 07:07:00
+# EXECUTE ORDER at 2018-06-25 07:07:00
+# first_trade_price=146.385
+# second_trade_price= 145.731
+# third_trade_price= 145.8645
+# ORDER_PRICE=145.88, TRADE_FLAG=buy
+# self.upper_sigma_5m25=145.946975208
+# self.lower_sigma_5m25=145.734310506
+# self.upper_sigma_1h3=146.785980951
+# self.lower_sigma_1h3=145.081090478
+# self.sma5m20=145.8476
+# self.sma5m40=145.8196
+# self.sma5m80=145.8035375
+# self.sma5m20_slope=0.0190000000006
+# self.sma5m40_slope=0.0410000000004
+# self.sma5m80_slope=0.00737500000025
+# self.sma1h100=145.49098
+# self.sma1h20=146.035475
+# self.sma1h40=145.8177875
+# self.sma1h80=145.485775
+# self.sma1h20_slope=-0.0184999999995
+# self.sma1h40_slope=0.0682500000003
+# self.sma1h80_slope=0.147125
+# EXECUTE stl logic SETTLEMENT at 2018-06-25 09:31:00
+# self.ask_price=145.386
+# self.bid_price=145.357
+# self.log_max_price=145.884
+# self.log_min_price=145.3715
+# self.stl_logic=none
+# STL_PRICE=145.3715
+# PROFIT=-0.523
+#######################################################
+# in  by allovertheworld by allovertheworld Algorithm
+# first_trade_time=2018-06-27 13:01:00
+# second_trade_time= 2018-06-27 20:51:30
+# third_trade_time= 2018-06-28 02:01:00
+# EXECUTE ORDER at 2018-06-28 02:01:00
+# first_trade_price=145.399
+# second_trade_price= 145.4445
+# third_trade_price= 144.996
+# ORDER_PRICE=144.984, TRADE_FLAG=sell
+# self.upper_sigma_5m25=145.290912254
+# self.lower_sigma_5m25=144.84487346
+# self.upper_sigma_1h3=145.97458007
+# self.lower_sigma_1h3=144.669991359
+# self.sma5m20=145.0243
+# self.sma5m40=145.1258
+# self.sma5m80=145.12854375
+# self.sma5m20_slope=-0.0674999999999
+# self.sma5m40_slope=-0.0554999999998
+# self.sma5m80_slope=-0.0228749999997
+# self.sma1h100=145.54226
+# self.sma1h20=145.2455
+# self.sma1h40=145.33925
+# self.sma1h80=145.46444375
+# self.sma1h20_slope=-0.245
+# self.sma1h40_slope=-0.11325
+# self.sma1h80_slope=-0.197
+# Execute FirstTrail Stop
+# EXECUTE stl logic SETTLEMENT at 2018-06-29 11:50:00
+# self.ask_price=145.088
+# self.bid_price=145.064
+# self.log_max_price=145.076
+# self.log_min_price=143.7845
+# self.stl_logic=none
+# STL_PRICE=145.076
+# PROFIT=-0.104
+#######################################################
+# in  by allovertheworld by allovertheworld Algorithm
+# first_trade_time=2018-07-02 08:01:00
+# second_trade_time= 2018-07-02 20:51:00
+# third_trade_time= 2018-07-03 03:41:00
+# EXECUTE ORDER at 2018-07-03 03:41:00
+# first_trade_price=146.1755
+# second_trade_price= 145.569
+# third_trade_price= 145.517
+# ORDER_PRICE=145.529, TRADE_FLAG=buy
+# self.upper_sigma_5m25=145.634520168
+# self.lower_sigma_5m25=145.37155126
+# self.upper_sigma_1h3=146.905413127
+# self.lower_sigma_1h3=144.917586873
+# self.sma5m20=145.51625
+# self.sma5m40=145.4702125
+# self.sma5m80=145.404275
+# self.sma5m20_slope=0.0205000000003
+# self.sma5m40_slope=0.0507500000002
+# self.sma5m80_slope=0.00200000000048
+# self.sma1h100=145.204285
+# self.sma1h20=145.8116
+# self.sma1h40=145.7373375
+# self.sma1h80=145.1589875
+# self.sma1h20_slope=-0.249
+# self.sma1h40_slope=0.296500000001
+# self.sma1h80_slope=0.0442500000005
+# Execute SecondTrail Stop
+# EXECUTE stl logic SETTLEMENT at 2018-07-10 00:55:00
+# self.ask_price=146.44
+# self.bid_price=146.416
+# self.log_max_price=147.616
+# self.log_min_price=145.297
+# self.stl_logic=none
+# STL_PRICE=146.428
+# PROFIT=0.887
+#######################################################
+# in  by allovertheworld by allovertheworld Algorithm
+# first_trade_time=2018-07-10 00:55:00
+# second_trade_time= 2018-07-10 00:55:00
+# third_trade_time= 2018-07-10 07:11:00
+# EXECUTE ORDER at 2018-07-10 07:11:00
+# first_trade_price=146.424
+# second_trade_price= 146.424
+# third_trade_price= 146.9235
+# ORDER_PRICE=146.936, TRADE_FLAG=buy
+# self.upper_sigma_5m25=146.976962029
+# self.lower_sigma_5m25=146.788466542
+# self.upper_sigma_1h3=147.816953035
+# self.lower_sigma_1h3=146.053796965
+# self.sma5m20=146.89945
+# self.sma5m40=146.8752875
+# self.sma5m80=146.7594125
+# self.sma5m20_slope=0.0195000000004
+# self.sma5m40_slope=0.0177500000005
+# self.sma5m80_slope=0.0286250000006
+# self.sma1h100=146.401685
+# self.sma1h20=147.00035
+# self.sma1h40=146.7988125
+# self.sma1h80=146.5361
+# self.sma1h20_slope=0.0300000000006
+# self.sma1h40_slope=0.10475
+# self.sma1h80_slope=0.106875000001
+# Execute SecondTrail Stop
+# EXECUTE stl logic SETTLEMENT at 2018-07-18 06:05:00
+# self.ask_price=148.064
+# self.bid_price=147.92
+# self.log_max_price=149.316
+# self.log_min_price=146.813
+# self.stl_logic=none
+# STL_PRICE=147.992
+# PROFIT=0.984
+#######################################################
+# in  by allovertheworld by allovertheworld Algorithm
+# first_trade_time=2018-07-18 13:01:00
+# second_trade_time= 2018-07-24 22:37:40
+# third_trade_time= 2018-07-25 14:21:00
+# EXECUTE ORDER at 2018-07-25 14:21:00
+# first_trade_price=148.072
+# second_trade_price= 145.897
+# third_trade_price= 146.19
+# ORDER_PRICE=146.176, TRADE_FLAG=sell
+# self.upper_sigma_5m25=146.322996202
+# self.lower_sigma_5m25=146.203360941
+# self.upper_sigma_1h3=146.710482432
+# self.lower_sigma_1h3=145.333553283
+# self.sma5m20=146.26055
+# self.sma5m40=146.278975
+# self.sma5m80=146.289125
+# self.sma5m20_slope=-0.0254999999997
+# self.sma5m40_slope=-0.0292499999997
+# self.sma5m80_slope=-0.00393749999928
+# self.sma1h100=146.254485
+# self.sma1h20=146.128675
+# self.sma1h40=146.000525
+# self.sma1h80=146.09996875
+# self.sma1h20_slope=0.183500000001
+# self.sma1h40_slope=0.0337499999999
+# self.sma1h80_slope=-0.0153749999995
