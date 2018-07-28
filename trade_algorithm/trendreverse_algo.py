@@ -63,7 +63,9 @@ class TrendReverseAlgo(SuperAlgo):
         self.stl_logic = "none"
         self.perfect_order_buycount = 0
         self.perfect_order_sellcount = 0
-        self.setReverseIndicator(base_time)
+        self.setReverse5mIndicator(base_time)
+        self.setReverse1hIndicator(base_time)
+        self.setReverseDailyIndicator(base_time)
 
     # decide trade entry timing
     def decideTrade(self, base_time):
@@ -256,8 +258,13 @@ class TrendReverseAlgo(SuperAlgo):
             hour = base_time.hour
             minutes = base_time.minute
             seconds = base_time.second
-            if seconds < 10 and hour != 6:
-                self.setReverseIndicator(base_time)
+            if seconds < 10 and minutes % 5 == 0:
+                self.setReverse5mIndicator(base_time)
+            if seconds < 10 and minutes == 0:
+                self.setReverse1hIndicator(base_time)
+            if seconds < 10 and hour == 7:
+                self.setReverseDailyIndicator(base_time)
+
             if 1 == 1:
                 if 1 == 1:
                     if 1 == 1:
@@ -357,8 +364,7 @@ class TrendReverseAlgo(SuperAlgo):
         super(TrendReverseAlgo, self).resetFlag()
 
 
-    def setReverseIndicator(self, base_time):
-
+    def setReverse5mIndicator(self, base_time):
         ### get 5m dataset
         target_time = base_time - timedelta(minutes=5)
 
@@ -382,6 +388,7 @@ class TrendReverseAlgo(SuperAlgo):
         self.sma5m40_slope = getSlope([self.sma5m40_before, self.sma5m40])
         self.sma5m80_slope = getSlope([self.sma5m80_before, self.sma5m80])
 
+    def setReverse1hIndicator(self, base_time):
         ### get 1h dataset
         target_time = base_time - timedelta(hours=1)
         dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=28, connector=self.mysql_connector, sigma_valiable=3, length=0)
@@ -408,6 +415,7 @@ class TrendReverseAlgo(SuperAlgo):
         self.sma1h80_before = dataset["base_lines"][-2]
         self.sma1h80_slope = getSlope([self.sma1h80_before, self.sma1h80])
 
+    def setReverseDailyIndicator(self, base_time):
         ### get daily dataset
         target_time = base_time - timedelta(days=1)
         sql = "select max_price, min_price, start_price, end_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 1" % (self.instrument, "day", target_time) 
