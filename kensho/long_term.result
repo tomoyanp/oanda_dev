@@ -1,0 +1,782 @@
+#########################
+# ../main.py GBP_JPY demo trendreverse trendreverse_test test 
+# enable_time = [u'00:00:00', u'01:00:00', u'02:00:00', u'03:00:00', u'08:00:00', u'09:00:00', u'10:00:00', u'11:00:00', u'12:00:00', u'13:00:00', u'14:00:00', u'15:00:00', u'16:00:00', u'17:00:00', u'18:00:00', u'19:00:00', u'20:00:00', u'21:00:00', u'22:00:00', u'23:00:00']
+# enable_time_mode = off
+# ex_stlmode = on
+# first_trail_mode = on
+# second_trail_mode = on
+# sleep_time = 10
+# stl_sleep_ltime = 0
+# stl_sleep_time = 10
+# stl_sleep_vtime = 0
+# stl_time_width = 720000
+# stop_loss = 0.5
+# take_profit = 5.0
+# time_width = 720000
+# trade_sleep_time = 60
+# units = 15000
+#######################################################
+# in  Algorithm
+# first_trade_time=2018-01-02 08:11:40
+# second_trade_time= 2018-01-02 18:58:30
+# third_trade_time= 2018-01-03 01:21:00
+# EXECUTE ORDER at 2018-01-03 01:21:00
+# first_trade_price=152.235
+# second_trade_price= 152.043
+# third_trade_price= 152.3595
+# ORDER_PRICE=152.371, TRADE_FLAG=buy
+# self.upper_sigma_5m25=152.379365576
+# self.lower_sigma_5m25=151.779991567
+# self.upper_sigma_1h3=152.626735406
+# self.lower_sigma_1h3=151.867836022
+# self.sma5m20=152.12225
+# self.sma5m40=152.0770125
+# self.sma5m80=152.0767
+# self.sma5m20_slope=0.19475
+# self.sma5m40_slope=0.0695000000003
+# self.sma5m80_slope=0.0116875000008
+# self.sma1h100=151.839885
+# self.sma1h20=152.236275
+# self.sma1h40=152.11975
+# self.sma1h80=151.944275
+# self.sma1h20_slope=0.0140000000005
+# self.sma1h40_slope=0.1435
+# self.sma1h80_slope=0.095625
+# EXECUTE stl logic SETTLEMENT at 2018-01-03 23:48:00
+# self.ask_price=151.893
+# self.bid_price=151.863
+# self.log_max_price=152.8245
+# self.log_min_price=151.878
+# self.stl_logic=none
+# STL_PRICE=151.878
+# PROFIT=-0.508
+#######################################################
+# in  Algorithm
+# first_trade_time=2018-01-05 04:01:00
+# second_trade_time= 2018-01-08 18:07:20
+# third_trade_time= 2018-01-09 01:46:00
+# EXECUTE ORDER at 2018-01-09 01:46:00
+# first_trade_price=152.7745
+# second_trade_price= 153.288
+# third_trade_price= 153.452
+# ORDER_PRICE=153.465, TRADE_FLAG=buy
+# self.upper_sigma_5m25=153.677168205
+# self.lower_sigma_5m25=152.82636751
+# self.upper_sigma_1h3=153.950232813
+# self.lower_sigma_1h3=152.888195759
+# self.sma5m20=153.32645
+# self.sma5m40=153.1652875
+# self.sma5m80=153.161325
+# self.sma5m20_slope=0.141
+# self.sma5m40_slope=0.1365
+# self.sma5m80_slope=0.0440000000003
+# self.sma1h100=152.80898
+# self.sma1h20=153.380475
+# self.sma1h40=153.35065
+# self.sma1h80=152.8717125
+# self.sma1h20_slope=-0.0349999999998
+# self.sma1h40_slope=0.137250000001
+# self.sma1h80_slope=0.0849375000004
+# EXECUTE stl logic SETTLEMENT at 2018-01-09 10:39:10
+# self.ask_price=152.973
+# self.bid_price=152.941
+# self.log_max_price=153.5745
+# self.log_min_price=152.957
+# self.stl_logic=none
+# STL_PRICE=152.957
+# PROFIT=-0.524
+#######################################################
+# in  Algorithm
+# first_trade_time=2018-01-10 02:01:00
+# second_trade_time= 2018-01-12 01:26:00
+# third_trade_time= 2018-01-12 04:06:00
+# EXECUTE ORDER at 2018-01-12 04:06:00
+# first_trade_price=152.1705
+# second_trade_price= 150.932
+# third_trade_price= 150.3675
+# ORDER_PRICE=150.355, TRADE_FLAG=sell
+# self.upper_sigma_5m25=151.093140333
+# self.lower_sigma_5m25=150.213752524
+# self.upper_sigma_1h3=151.168741471
+# self.lower_sigma_1h3=150.152615672
+# self.sma5m20=150.601925
+# self.sma5m40=150.72065
+# self.sma5m80=150.7210375
+# self.sma5m20_slope=-0.21725
+# self.sma5m40_slope=-0.114874999999
+# self.sma5m80_slope=-0.000374999999859
+# self.sma1h100=152.13933
+# self.sma1h20=150.69715
+# self.sma1h40=150.8262
+# self.sma1h80=151.80643125
+# self.sma1h20_slope=-0.0619999999996
+# self.sma1h40_slope=-0.40475
+# self.sma1h80_slope=-0.361812499999
+# EXECUTE stl logic SETTLEMENT at 2018-01-12 16:10:00
+# self.ask_price=150.862
+# self.bid_price=150.834
+# self.log_max_price=150.848
+# self.log_min_price=150.2715
+# self.stl_logic=none
+# STL_PRICE=150.848
+# PROFIT=-0.507
+#######################################################
+# in  Algorithm
+# first_trade_time=2018-01-15 10:01:00
+# second_trade_time= 2018-01-16 17:45:00
+# third_trade_time= 2018-01-17 00:31:00
+# EXECUTE ORDER at 2018-01-17 00:31:00
+# first_trade_price=152.285
+# second_trade_price= 152.5015
+# third_trade_price= 152.5075
+# ORDER_PRICE=152.52, TRADE_FLAG=buy
+# self.upper_sigma_5m25=152.570414639
+# self.lower_sigma_5m25=152.219049647
+# self.upper_sigma_1h3=153.268439958
+# self.lower_sigma_1h3=151.872202899
+# self.sma5m20=152.40755
+# self.sma5m40=152.3569
+# self.sma5m80=152.33715625
+# self.sma5m20_slope=0.0792500000002
+# self.sma5m40_slope=0.116625
+# self.sma5m80_slope=0.0045625000001
+# self.sma1h100=151.611355
+# self.sma1h20=152.58595
+# self.sma1h40=152.4875125
+# self.sma1h80=151.8420875
+# self.sma1h20_slope=0.0300000000002
+# self.sma1h40_slope=-0.0552499999993
+# self.sma1h80_slope=0.1995625
+# Execute SecondTrail Stop
+# EXECUTE stl logic SETTLEMENT at 2018-01-19 20:40:00
+# self.ask_price=153.543
+# self.bid_price=153.516
+# self.log_max_price=154.5775
+# self.log_min_price=152.0785
+# self.stl_logic=none
+# STL_PRICE=153.5295
+# PROFIT=0.996
+#######################################################
+# in  Algorithm
+# first_trade_time=2018-01-23 01:01:00
+# second_trade_time= 2018-01-23 18:12:20
+# third_trade_time= 2018-01-24 00:41:00
+# EXECUTE ORDER at 2018-01-24 00:41:00
+# first_trade_price=154.732
+# second_trade_price= 154.319
+# third_trade_price= 154.613
+# ORDER_PRICE=154.625, TRADE_FLAG=buy
+# self.upper_sigma_5m25=154.803637934
+# self.lower_sigma_5m25=153.855326351
+# self.upper_sigma_1h3=156.119279262
+# self.lower_sigma_1h3=153.364506453
+# self.sma5m20=154.412425
+# self.sma5m40=154.2363125
+# self.sma5m80=154.23149375
+# self.sma5m20_slope=0.28925
+# self.sma5m40_slope=0.174625
+# self.sma5m80_slope=0.0163125000007
+# self.sma1h100=154.061455
+# self.sma1h20=154.815275
+# self.sma1h40=154.443475
+# self.sma1h80=154.186
+# self.sma1h20_slope=-0.345249999999
+# self.sma1h40_slope=0.183
+# self.sma1h80_slope=0.0593125000004
+# EXECUTE stl logic SETTLEMENT at 2018-01-24 14:14:30
+# self.ask_price=154.152
+# self.bid_price=154.124
+# self.log_max_price=154.7275
+# self.log_min_price=154.138
+# self.stl_logic=none
+# STL_PRICE=154.138
+# PROFIT=-0.501
+#######################################################
+# in  Algorithm
+# first_trade_time=2018-01-25 04:01:00
+# second_trade_time= 2018-01-26 01:19:40
+# third_trade_time= 2018-01-26 08:56:00
+# EXECUTE ORDER at 2018-01-26 08:56:00
+# first_trade_price=155.0725
+# second_trade_price= 155.119
+# third_trade_price= 155.1745
+# ORDER_PRICE=155.191, TRADE_FLAG=buy
+# self.upper_sigma_5m25=155.233494417
+# self.lower_sigma_5m25=154.50964844
+# self.upper_sigma_1h3=156.557260669
+# self.lower_sigma_1h3=154.110346474
+# self.sma5m20=154.922175
+# self.sma5m40=154.8044875
+# self.sma5m80=154.803375
+# self.sma5m20_slope=0.2015
+# self.sma5m40_slope=0.1435
+# self.sma5m80_slope=0.00118750000023
+# self.sma1h100=154.696755
+# self.sma1h20=155.29845
+# self.sma1h40=155.1969625
+# self.sma1h80=154.92493125
+# self.sma1h20_slope=-0.43825
+# self.sma1h40_slope=0.113125000001
+# self.sma1h80_slope=0.0430000000004
+# EXECUTE stl logic SETTLEMENT at 2018-01-26 23:47:30
+# self.ask_price=154.633
+# self.bid_price=154.601
+# self.log_max_price=155.848
+# self.log_min_price=154.617
+# self.stl_logic=none
+# STL_PRICE=154.617
+# PROFIT=-0.59
+#######################################################
+# in  Algorithm
+# first_trade_time=2018-01-29 10:01:00
+# second_trade_time= 2018-01-30 20:47:40
+# third_trade_time= 2018-01-31 17:56:00
+# EXECUTE ORDER at 2018-01-31 17:56:00
+# first_trade_price=153.814
+# second_trade_price= 153.3285
+# third_trade_price= 154.0795
+# ORDER_PRICE=154.065, TRADE_FLAG=sell
+# self.upper_sigma_5m25=154.442487122
+# self.lower_sigma_5m25=154.055977164
+# self.upper_sigma_1h3=155.473723963
+# self.lower_sigma_1h3=151.701061752
+# self.sma5m20=154.21985
+# self.sma5m40=154.238975
+# self.sma5m80=154.24531875
+# self.sma5m20_slope=-0.114999999999
+# self.sma5m40_slope=-0.0381249999995
+# self.sma5m80_slope=-0.0026249999992
+# self.sma1h100=154.153485
+# self.sma1h20=153.935775
+# self.sma1h40=153.4967125
+# self.sma1h80=153.8749625
+# self.sma1h20_slope=0.38725
+# self.sma1h40_slope=0.220875
+# self.sma1h80_slope=-0.126625
+# EXECUTE stl logic SETTLEMENT at 2018-02-01 00:29:00
+# self.ask_price=154.574
+# self.bid_price=154.551
+# self.log_max_price=154.5625
+# self.log_min_price=153.573
+# self.stl_logic=none
+# STL_PRICE=154.5625
+# PROFIT=-0.509
+#######################################################
+# in  Algorithm
+# first_trade_time=2018-02-01 08:01:00
+# second_trade_time= 2018-02-03 00:09:20
+# third_trade_time= 2018-02-05 14:46:00
+# EXECUTE ORDER at 2018-02-05 14:46:00
+# first_trade_price=155.016
+# second_trade_price= 155.9085
+# third_trade_price= 155.333
+# ORDER_PRICE=155.349, TRADE_FLAG=buy
+# self.upper_sigma_5m25=155.410100917
+# self.lower_sigma_5m25=155.139470512
+# self.upper_sigma_1h3=157.257088201
+# self.lower_sigma_1h3=154.519626085
+# self.sma5m20=155.295575
+# self.sma5m40=155.2394375
+# self.sma5m80=155.1959625
+# self.sma5m20_slope=0.0742500000003
+# self.sma5m40_slope=0.0562500000004
+# self.sma5m80_slope=0.00287500000036
+# self.sma1h100=154.92269
+# self.sma1h20=155.715125
+# self.sma1h40=155.9048375
+# self.sma1h80=155.34899375
+# self.sma1h20_slope=-0.4125
+# self.sma1h40_slope=-0.142
+# self.sma1h80_slope=0.171750000001
+# EXECUTE stl logic SETTLEMENT at 2018-02-05 16:59:40
+# self.ask_price=154.876
+# self.bid_price=154.847
+# self.log_max_price=155.375
+# self.log_min_price=154.8615
+# self.stl_logic=none
+# STL_PRICE=154.8615
+# PROFIT=-0.502
+#######################################################
+# in  Algorithm
+# first_trade_time=2018-02-06 05:01:00
+# second_trade_time= 2018-02-07 08:05:00
+# third_trade_time= 2018-02-07 11:51:00
+# EXECUTE ORDER at 2018-02-07 11:51:00
+# first_trade_price=153.555
+# second_trade_price= 153.08
+# third_trade_price= 152.6415
+# ORDER_PRICE=152.628, TRADE_FLAG=sell
+# self.upper_sigma_5m25=152.976716988
+# self.lower_sigma_5m25=152.57617587
+# self.upper_sigma_1h3=153.715962957
+# self.lower_sigma_1h3=150.8636799
+# self.sma5m20=152.782275
+# self.sma5m40=152.806825
+# self.sma5m80=152.83808125
+# self.sma5m20_slope=-0.0444999999999
+# self.sma5m40_slope=-0.0862499999993
+# self.sma5m80_slope=-0.0178749999998
+# self.sma1h100=154.554835
+# self.sma1h20=152.434125
+# self.sma1h40=152.7835125
+# self.sma1h80=154.30395625
+# self.sma1h20_slope=0.38575
+# self.sma1h40_slope=-0.56675
+# self.sma1h80_slope=-0.382249999999
+# EXECUTE stl logic SETTLEMENT at 2018-02-08 21:00:30
+# self.ask_price=153.24
+# self.bid_price=153.031
+# self.log_max_price=153.1355
+# self.log_min_price=151.334
+# self.stl_logic=none
+# STL_PRICE=153.1355
+# PROFIT=-0.612
+#######################################################
+# in  Algorithm
+# first_trade_time=2018-02-09 21:01:00
+# second_trade_time= 2018-02-13 08:12:10
+# third_trade_time= 2018-02-13 13:11:00
+# EXECUTE ORDER at 2018-02-13 13:11:00
+# first_trade_price=150.753
+# second_trade_price= 150.502
+# third_trade_price= 150.2585
+# ORDER_PRICE=150.246, TRADE_FLAG=sell
+# self.upper_sigma_5m25=150.57291634
+# self.lower_sigma_5m25=150.262690803
+# self.upper_sigma_1h3=150.987470267
+# self.lower_sigma_1h3=149.772101162
+# self.sma5m20=150.396475
+# self.sma5m40=150.4220375
+# self.sma5m80=150.4245875
+# self.sma5m20_slope=-0.0794999999997
+# self.sma5m40_slope=-0.0408749999996
+# self.sma5m80_slope=-0.00649999999967
+# self.sma1h100=151.350085
+# self.sma1h20=150.33895
+# self.sma1h40=150.3118375
+# self.sma1h80=151.151975
+# self.sma1h20_slope=0.0359999999999
+# self.sma1h40_slope=-0.148875
+# self.sma1h80_slope=-0.1940625
+# Execute FirstTrail Stop
+# EXECUTE stl logic SETTLEMENT at 2018-02-21 02:00:00
+# self.ask_price=150.365
+# self.bid_price=150.335
+# self.log_max_price=150.3585
+# self.log_min_price=148.0125
+# self.stl_logic=none
+# STL_PRICE=150.35
+# PROFIT=-0.119
+#######################################################
+# in  Algorithm
+# first_trade_time=2018-02-21 04:01:00
+# second_trade_time= 2018-02-21 18:31:40
+# third_trade_time= 2018-02-22 00:41:00
+# EXECUTE ORDER at 2018-02-22 00:41:00
+# first_trade_price=150.1065
+# second_trade_price= 149.8175
+# third_trade_price= 150.217
+# ORDER_PRICE=150.229, TRADE_FLAG=buy
+# self.upper_sigma_5m25=150.596035851
+# self.lower_sigma_5m25=149.259607006
+# self.upper_sigma_1h3=151.284589902
+# self.lower_sigma_1h3=149.124945812
+# self.sma5m20=150.03785
+# self.sma5m40=149.8626
+# self.sma5m80=149.85918125
+# self.sma5m20_slope=0.29325
+# self.sma5m40_slope=0.1325
+# self.sma5m80_slope=0.0150000000002
+# self.sma1h100=149.6093
+# self.sma1h20=150.278425
+# self.sma1h40=149.9663
+# self.sma1h80=149.5859
+# self.sma1h20_slope=-0.0762499999995
+# self.sma1h40_slope=0.180125
+# self.sma1h80_slope=0.0606250000006
+# EXECUTE stl logic SETTLEMENT at 2018-02-22 08:18:50
+# self.ask_price=149.759
+# self.bid_price=149.725
+# self.log_max_price=150.499
+# self.log_min_price=149.742
+# self.stl_logic=none
+# STL_PRICE=149.742
+# PROFIT=-0.504
+#######################################################
+# in  Algorithm
+# first_trade_time=2018-02-23 05:01:00
+# second_trade_time= 2018-02-23 17:36:30
+# third_trade_time= 2018-02-24 01:16:00
+# EXECUTE ORDER at 2018-02-24 01:16:00
+# first_trade_price=148.879
+# second_trade_price= 149.3595
+# third_trade_price= 149.0605
+# ORDER_PRICE=149.047, TRADE_FLAG=sell
+# self.upper_sigma_5m25=149.601265054
+# self.lower_sigma_5m25=148.920234946
+# self.upper_sigma_1h3=149.681733929
+# self.lower_sigma_1h3=148.512408928
+# self.sma5m20=149.226875
+# self.sma5m40=149.277575
+# self.sma5m80=149.27988125
+# self.sma5m20_slope=-0.162
+# self.sma5m40_slope=-0.0669999999995
+# self.sma5m80_slope=-0.0401874999998
+# self.sma1h100=149.56092
+# self.sma1h20=149.165025
+# self.sma1h40=149.1387375
+# self.sma1h80=149.6448875
+# self.sma1h20_slope=0.0590000000004
+# self.sma1h40_slope=-0.174
+# self.sma1h80_slope=-0.0351249999997
+# EXECUTE stl logic SETTLEMENT at 2018-02-26 07:00:10
+# self.ask_price=150.029
+# self.bid_price=149.902
+# self.log_max_price=149.9655
+# self.log_min_price=148.877
+# self.stl_logic=none
+# STL_PRICE=149.9655
+# PROFIT=-0.982
+#######################################################
+# in  Algorithm
+# first_trade_time=2018-02-28 15:01:00
+# second_trade_time= 2018-03-05 17:54:00
+# third_trade_time= 2018-03-06 14:31:00
+# EXECUTE ORDER at 2018-03-06 14:31:00
+# first_trade_price=148.825
+# second_trade_price= 145.8135
+# third_trade_price= 146.952
+# ORDER_PRICE=146.939, TRADE_FLAG=sell
+# self.upper_sigma_5m25=147.452202973
+# self.lower_sigma_5m25=146.954547027
+# self.upper_sigma_1h3=148.531337458
+# self.lower_sigma_1h3=144.210983971
+# self.sma5m20=147.159475
+# self.sma5m40=147.2441
+# self.sma5m80=147.25094375
+# self.sma5m20_slope=-0.14175
+# self.sma5m40_slope=-0.0933749999998
+# self.sma5m80_slope=-0.00187500000018
+# self.sma1h100=146.64704
+# self.sma1h20=146.722775
+# self.sma1h40=146.115675
+# self.sma1h80=146.26994375
+# self.sma1h20_slope=0.69125
+# self.sma1h40_slope=0.448875
+# self.sma1h80_slope=0.0274375000003
+# EXECUTE stl logic SETTLEMENT at 2018-03-06 20:28:40
+# self.ask_price=147.44
+# self.bid_price=147.414
+# self.log_max_price=147.427
+# self.log_min_price=146.56
+# self.stl_logic=none
+# STL_PRICE=147.427
+# PROFIT=-0.501
+#######################################################
+# in  Algorithm
+# first_trade_time=2018-03-06 20:01:00
+# second_trade_time= 2018-03-07 08:05:40
+# third_trade_time= 2018-03-07 23:06:00
+# EXECUTE ORDER at 2018-03-07 23:06:00
+# first_trade_price=146.8255
+# second_trade_price= 146.65
+# third_trade_price= 146.827
+# ORDER_PRICE=146.838, TRADE_FLAG=buy
+# self.upper_sigma_5m25=147.018257066
+# self.lower_sigma_5m25=146.362064363
+# self.upper_sigma_1h3=148.220721254
+# self.lower_sigma_1h3=145.824671603
+# self.sma5m20=146.753375
+# self.sma5m40=146.60515
+# self.sma5m80=146.603025
+# self.sma5m20_slope=0.15575
+# self.sma5m40_slope=0.0668750000006
+# self.sma5m80_slope=0.0232500000007
+# self.sma1h100=146.43682
+# self.sma1h20=146.87475
+# self.sma1h40=147.0262
+# self.sma1h80=146.428175
+# self.sma1h20_slope=-0.2525
+# self.sma1h40_slope=-0.0406249999993
+# self.sma1h80_slope=0.125812500001
+# EXECUTE stl logic SETTLEMENT at 2018-03-09 04:50:20
+# self.ask_price=146.508
+# self.bid_price=146.283
+# self.log_max_price=147.665
+# self.log_min_price=146.3955
+# self.stl_logic=none
+# STL_PRICE=146.3955
+# PROFIT=-0.555
+#######################################################
+# in  Algorithm
+# first_trade_time=2018-03-10 00:01:00
+# second_trade_time= 2018-03-12 13:51:30
+# third_trade_time= 2018-03-12 22:31:00
+# EXECUTE ORDER at 2018-03-12 22:31:00
+# first_trade_price=148.1275
+# second_trade_price= 147.4575
+# third_trade_price= 148.0235
+# ORDER_PRICE=148.037, TRADE_FLAG=buy
+# self.upper_sigma_5m25=148.310523763
+# self.lower_sigma_5m25=147.318726237
+# self.upper_sigma_1h3=148.472525402
+# self.lower_sigma_1h3=147.273117455
+# self.sma5m20=147.9118
+# self.sma5m40=147.7745125
+# self.sma5m80=147.7725375
+# self.sma5m20_slope=0.246000000001
+# self.sma5m40_slope=0.0966250000003
+# self.sma5m80_slope=0.0229375000002
+# self.sma1h100=147.337775
+# self.sma1h20=147.8625
+# self.sma1h40=147.6859875
+# self.sma1h80=147.377975
+# self.sma1h20_slope=0.0707500000003
+# self.sma1h40_slope=0.348250000001
+# self.sma1h80_slope=0.179625
+# Execute FirstTrail Stop
+# EXECUTE stl logic SETTLEMENT at 2018-03-15 00:25:00
+# self.ask_price=148.035
+# self.bid_price=148.009
+# self.log_max_price=149.367
+# self.log_min_price=147.7745
+# self.stl_logic=none
+# STL_PRICE=148.022
+# PROFIT=-0.028
+#######################################################
+# in  Algorithm
+# first_trade_time=2018-03-16 10:01:00
+# second_trade_time= 2018-03-17 01:42:20
+# third_trade_time= 2018-03-19 08:21:00
+# EXECUTE ORDER at 2018-03-19 08:21:00
+# first_trade_price=147.8925
+# second_trade_price= 147.86
+# third_trade_price= 147.7725
+# ORDER_PRICE=147.757, TRADE_FLAG=sell
+# self.upper_sigma_5m25=147.904662472
+# self.lower_sigma_5m25=147.695587528
+# self.upper_sigma_1h3=148.486146653
+# self.lower_sigma_1h3=147.047924776
+# self.sma5m20=147.81015
+# self.sma5m40=147.8155125
+# self.sma5m80=147.8422125
+# self.sma5m20_slope=-0.0159999999996
+# self.sma5m40_slope=-0.0209999999999
+# self.sma5m80_slope=-0.00281249999945
+# self.sma1h100=148.250915
+# self.sma1h20=147.6802
+# self.sma1h40=147.8136875
+# self.sma1h80=148.21459375
+# self.sma1h20_slope=0.133
+# self.sma1h40_slope=-0.103875
+# self.sma1h80_slope=-0.19025
+# EXECUTE stl logic SETTLEMENT at 2018-03-19 19:03:30
+# self.ask_price=148.404
+# self.bid_price=148.375
+# self.log_max_price=148.3895
+# self.log_min_price=147.055
+# self.stl_logic=none
+# STL_PRICE=148.3895
+# PROFIT=-0.647
+#######################################################
+# in  Algorithm
+# first_trade_time=2018-03-20 09:01:00
+# second_trade_time= 2018-03-21 15:10:30
+# third_trade_time= 2018-03-21 18:51:00
+# EXECUTE ORDER at 2018-03-21 18:51:00
+# first_trade_price=148.7145
+# second_trade_price= 149.0395
+# third_trade_price= 149.543
+# ORDER_PRICE=149.555, TRADE_FLAG=buy
+# self.upper_sigma_5m25=149.550746115
+# self.lower_sigma_5m25=148.855361028
+# self.upper_sigma_1h3=149.614168139
+# self.lower_sigma_1h3=148.695331861
+# self.sma5m20=149.21685
+# self.sma5m40=149.181275
+# self.sma5m80=149.1802375
+# self.sma5m20_slope=0.1855
+# self.sma5m40_slope=0.12975
+# self.sma5m80_slope=0.0481875000007
+# self.sma1h100=148.369335
+# self.sma1h20=149.110625
+# self.sma1h40=149.0792875
+# self.sma1h80=148.46129375
+# self.sma1h20_slope=0.11875
+# self.sma1h40_slope=0.127125000001
+# self.sma1h80_slope=0.157375
+# EXECUTE stl logic SETTLEMENT at 2018-03-22 21:39:40
+# self.ask_price=149.082
+# self.bid_price=149.054
+# self.log_max_price=150.308
+# self.log_min_price=149.068
+# self.stl_logic=none
+# STL_PRICE=149.068
+# PROFIT=-0.501
+#######################################################
+# in  Algorithm
+# first_trade_time=2018-03-23 15:01:00
+# second_trade_time= 2018-03-23 22:32:40
+# third_trade_time= 2018-03-24 04:11:00
+# EXECUTE ORDER at 2018-03-24 04:11:00
+# first_trade_price=147.9275
+# second_trade_price= 148.8585
+# third_trade_price= 148.1295
+# ORDER_PRICE=148.114, TRADE_FLAG=sell
+# self.upper_sigma_5m25=148.776826209
+# self.lower_sigma_5m25=148.156459505
+# self.upper_sigma_1h3=149.474373059
+# self.lower_sigma_1h3=147.202876941
+# self.sma5m20=148.438325
+# self.sma5m40=148.449625
+# self.sma5m80=148.59653125
+# self.sma5m20_slope=-0.20925
+# self.sma5m40_slope=-0.0836249999996
+# self.sma5m80_slope=-0.066
+# self.sma1h100=149.00772
+# self.sma1h20=148.2107
+# self.sma1h40=148.6740125
+# self.sma1h80=149.0106125
+# self.sma1h20_slope=0.128750000001
+# self.sma1h40_slope=-0.35875
+# self.sma1h80_slope=-0.1211875
+# EXECUTE stl logic SETTLEMENT at 2018-03-26 09:54:30
+# self.ask_price=148.618
+# self.bid_price=148.59
+# self.log_max_price=148.604
+# self.log_min_price=147.914
+# self.stl_logic=none
+# STL_PRICE=148.604
+# PROFIT=-0.504
+#######################################################
+# in  Algorithm
+# first_trade_time=2018-03-27 11:01:00
+# second_trade_time= 2018-03-27 18:42:40
+# third_trade_time= 2018-03-27 23:56:00
+# EXECUTE ORDER at 2018-03-27 23:56:00
+# first_trade_price=150.37
+# second_trade_price= 149.313
+# third_trade_price= 149.517
+# ORDER_PRICE=149.528, TRADE_FLAG=buy
+# self.upper_sigma_5m25=149.787277832
+# self.lower_sigma_5m25=148.995900739
+# self.upper_sigma_1h3=151.069727187
+# self.lower_sigma_1h3=148.485629956
+# self.sma5m20=149.467625
+# self.sma5m40=149.3087125
+# self.sma5m80=149.30523125
+# self.sma5m20_slope=0.155250000001
+# self.sma5m40_slope=0.0932500000005
+# self.sma5m80_slope=0.0283125000002
+# self.sma1h100=149.136695
+# self.sma1h20=149.8953
+# self.sma1h40=149.458425
+# self.sma1h80=149.005175
+# self.sma1h20_slope=0.0135000000002
+# self.sma1h40_slope=0.38125
+# self.sma1h80_slope=-0.0231249999992
+# EXECUTE stl logic SETTLEMENT at 2018-03-28 06:01:40
+# self.ask_price=149.112
+# self.bid_price=148.962
+# self.log_max_price=149.8665
+# self.log_min_price=149.037
+# self.stl_logic=none
+# STL_PRICE=149.037
+# PROFIT=-0.566
+#######################################################
+# in  Algorithm
+# first_trade_time=2018-03-29 03:01:00
+# second_trade_time= 2018-03-29 16:00:30
+# third_trade_time= 2018-03-30 07:56:00
+# EXECUTE ORDER at 2018-03-30 07:56:00
+# first_trade_price=150.503
+# second_trade_price= 149.8175
+# third_trade_price= 149.3965
+# ORDER_PRICE=149.421, TRADE_FLAG=buy
+# self.upper_sigma_5m25=149.521001942
+# self.lower_sigma_5m25=149.185462343
+# self.upper_sigma_1h3=151.146237762
+# self.lower_sigma_1h3=148.510869381
+# self.sma5m20=149.392675
+# self.sma5m40=149.33215
+# self.sma5m80=149.320675
+# self.sma5m20_slope=0.0422500000004
+# self.sma5m40_slope=0.0218750000001
+# self.sma5m80_slope=0.0391875000007
+# self.sma1h100=149.566165
+# self.sma1h20=149.61925
+# self.sma1h40=149.8250875
+# self.sma1h80=149.7706875
+# self.sma1h20_slope=-0.30425
+# self.sma1h40_slope=-0.119999999999
+# self.sma1h80_slope=-0.00149999999912
+# EXECUTE stl logic SETTLEMENT at 2018-03-30 09:55:00
+# self.ask_price=148.959
+# self.bid_price=148.913
+# self.log_max_price=149.4625
+# self.log_min_price=148.936
+# self.stl_logic=none
+# STL_PRICE=148.936
+# PROFIT=-0.508
+#######################################################
+# in  Algorithm
+# first_trade_time=2018-03-30 15:26:00
+# second_trade_time= 2018-04-02 07:27:00
+# third_trade_time= 2018-04-03 00:16:00
+# EXECUTE ORDER at 2018-04-03 00:16:00
+# first_trade_price=149.1635
+# second_trade_price= 149.276
+# third_trade_price= 149.0085
+# ORDER_PRICE=148.994, TRADE_FLAG=sell
+# self.upper_sigma_5m25=149.771923744
+# self.lower_sigma_5m25=149.051290541
+# self.upper_sigma_1h3=149.840980252
+# self.lower_sigma_1h3=148.707769748
+# self.sma5m20=149.3465
+# self.sma5m40=149.472825
+# self.sma5m80=149.47825625
+# self.sma5m20_slope=-0.20825
+# self.sma5m40_slope=-0.10775
+# self.sma5m80_slope=-0.0478749999993
+# self.sma1h100=149.520725
+# self.sma1h20=149.34495
+# self.sma1h40=149.224325
+# self.sma1h80=149.5211
+# self.sma1h20_slope=0.10375
+# self.sma1h40_slope=-0.0399999999997
+# self.sma1h80_slope=-0.0560624999996
+# EXECUTE stl logic SETTLEMENT at 2018-04-03 17:11:20
+# self.ask_price=149.495
+# self.bid_price=149.471
+# self.log_max_price=149.483
+# self.log_min_price=148.399
+# self.stl_logic=none
+# STL_PRICE=149.483
+# PROFIT=-0.501
+#######################################################
+# in  Algorithm
+# first_trade_time=2018-04-04 07:02:00
+# second_trade_time= 2018-04-04 17:06:00
+# third_trade_time= 2018-04-04 23:31:00
+# EXECUTE ORDER at 2018-04-04 23:31:00
+# first_trade_price=149.8815
+# second_trade_price= 149.361
+# third_trade_price= 149.715
+# ORDER_PRICE=149.727, TRADE_FLAG=buy
+# self.upper_sigma_5m25=150.129897693
+# self.lower_sigma_5m25=148.723352307
+# self.upper_sigma_1h3=150.634576015
+# self.lower_sigma_1h3=148.686173985
+# self.sma5m20=149.58635
+# self.sma5m40=149.3236375
+# self.sma5m80=149.27576875
+# self.sma5m20_slope=0.171250000001
+# self.sma5m40_slope=0.151625
+# self.sma5m80_slope=0.0179375000002
+# self.sma1h100=149.30563
+# self.sma1h20=149.729625
+# self.sma1h40=149.4553375
+# self.sma1h80=149.307675
+# self.sma1h20_slope=-0.0319999999999
+# self.sma1h40_slope=0.241375
+# self.sma1h80_slope=0.0975625000001
