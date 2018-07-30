@@ -290,14 +290,14 @@ class TrendReverseAlgo(SuperAlgo):
                    
                     if 1 == 1:
                         if self.first_trade_flag == "buy":
-                            if self.decidePerfectOrder("5m") != "buy" and self.second_trade_flag == False:
+                            if current_price < self.sma1h20 and  self.second_trade_flag == False:
                                 self.debug_logger.info("second trade flag: True at %s" % base_time)
                                 self.second_trade_time = base_time
                                 self.second_trade_flag = True
                                 self.second_trade_price = current_price
 
                         elif self.first_trade_flag == "sell":
-                            if self.decidePerfectOrder("5m") != "sell" and self.second_trade_flag == False:
+                            if current_price > self.sma1h20 and  self.second_trade_flag == False:
                                 self.debug_logger.info("second trade flag: True at %s" % base_time)
                                 self.second_trade_time = base_time
                                 self.second_trade_flag = True
