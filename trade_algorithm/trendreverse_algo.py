@@ -82,14 +82,13 @@ class TrendReverseAlgo(SuperAlgo):
                 seconds = base_time.second
                 current_price = self.getCurrentPrice()
 
-#                # if weekday == Saturday, we will have no entry.
-#                if weekday == 5 and hour >= 5:
-#                    trade_flag = "pass"
-#                    self.buy_count = 0
-#                    self.sell_count = 0
-#
-#                else:
-                if 1 == 1:
+                # if weekday == Saturday, we will have no entry.
+                if weekday == 5 and hour >= 5:
+                    trade_flag = "pass"
+                    self.buy_count = 0
+                    self.sell_count = 0
+
+                else:
                     # if spread rate is greater than 0.5, we will have no entry
                     if (self.ask_price - self.bid_price) >= 0.05:
                         self.debug_logger.info("spread logic: NG, ask=%s, bid=%s" % (self.ask_price, self.bid_price))
@@ -129,14 +128,14 @@ class TrendReverseAlgo(SuperAlgo):
                     self.updatePrice(current_price)
 
                     # if weekday == Saturday, we will settle one's position.
-#                    if weekday == 5 and hour >= 5:
-#                        self.result_logger.info("# weekend stl logic")
-#                        stl_flag = True
-#
-#                    else:
-                    if 1==1:
+                    if weekday == 5 and hour >= 5:
+                        self.result_logger.info("# weekend stl logic")
+                        stl_flag = True
+
+                    else:
+                        pass
 #                        stl_flag = self.decideReverseStl(stl_flag, base_time)
-                        stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, base_time)
+#                        stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, base_time)
 
             else:
                 pass
