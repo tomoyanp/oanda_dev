@@ -222,16 +222,19 @@ class TrendReverseAlgo(SuperAlgo):
     def decidePerfectOrder(self, span):
         direct = "pass"
         if span == "5m":
-            if (self.sma5m20 > self.sma5m40 > self.sma5m80) and self.sma5m20_slope > 0 and self.sma5m40_slope > 0 and self.sma5m80_slope > 0:
+            #if (self.sma5m20 > self.sma5m40 > self.sma5m80) and self.sma5m20_slope > 0 and self.sma5m40_slope > 0 and self.sma5m80_slope > 0:
+            if (self.sma5m20 > self.sma5m40 > self.sma5m80):
                 direct = "buy"
-            elif (self.sma5m20 < self.sma5m40 < self.sma5m80) and self.sma5m20_slope < 0 and self.sma5m40_slope < 0 and self.sma5m80_slope < 0:
+            #elif (self.sma5m20 < self.sma5m40 < self.sma5m80) and self.sma5m20_slope < 0 and self.sma5m40_slope < 0 and self.sma5m80_slope < 0:
+            elif (self.sma5m20 < self.sma5m40 < self.sma5m80):
                 direct = "sell"
 
         elif span == "1h":
-            if (self.sma1h20 > self.sma1h40 > self.sma1h80) and self.sma1h20_slope > 0 and self.sma1h40_slope > 0 and self.sma1h80_slope > 0:
+            #if (self.sma1h20 > self.sma1h40 > self.sma1h80) and self.sma1h20_slope > 0 and self.sma1h40_slope > 0 and self.sma1h80_slope > 0:
+            if (self.sma1h20 > self.sma1h40 > self.sma1h80):
                 direct = "buy"
-            elif (self.sma1h20 < self.sma1h40 < self.sma1h80) and self.sma1h20_slope < 0 and self.sma1h40_slope < 0 and self.sma1h80_slope < 0:
-                self.debug_logger.info("1h sell perfect_order")
+            #elif (self.sma1h20 < self.sma1h40 < self.sma1h80) and self.sma1h20_slope < 0 and self.sma1h40_slope < 0 and self.sma1h80_slope < 0:
+            elif (self.sma1h20 < self.sma1h40 < self.sma1h80):
                 direct = "sell"
 
         return direct
@@ -317,7 +320,7 @@ class TrendReverseAlgo(SuperAlgo):
 
                     #if self.first_trade_flag == "buy" and self.second_trade_flag and self.third_trade_flag == "buy":
                     if self.first_trade_flag == "buy" and self.second_trade_flag and self.third_trade_flag == "buy":
-                        if (self.max_price + 0.1) < current_price or (self.max_price - 0.5) > current_price:
+                        if ((self.max_price + 0.1) < current_price or (self.max_price - 0.5) > current_price) and self.sma1h20 > self.sma1h100:
                             trade_flag = "buy"
                         else:
                             pass
@@ -327,7 +330,7 @@ class TrendReverseAlgo(SuperAlgo):
 
                     #elif self.first_trade_flag == "sell" and self.second_trade_flag and self.third_trade_flag == "sell" and current_price > self.upper_sigma_5m25:
                     elif self.first_trade_flag == "sell" and self.second_trade_flag and self.third_trade_flag == "sell":
-                        if (self.min_price + 0.5) < current_price or (self.min_price - 0.1) > current_price:
+                        if ((self.min_price + 0.5) < current_price or (self.min_price - 0.1) > current_price) and self.sma1h20 < self.sma1h100:
                             trade_flag = "sell"
                         else:
                             pass
@@ -396,6 +399,24 @@ class TrendReverseAlgo(SuperAlgo):
         self.sma5m40_slope = getSlope([self.sma5m40_before, self.sma5m40])
         self.sma5m80_slope = getSlope([self.sma5m80_before, self.sma5m80])
 
+    def getStartTime(self, base_time):
+        hour = base_time.hour
+        week = base_time.weekday()
+
+        base_ftime = base_time.strftime("%Y-%m-%d 07:00:00")
+        base_time = datetime.strptime(base_ftime, "%Y-%m-%d %H:%M:%S")
+
+        if hour < 9: 
+            for i in range(1, 5):
+                tmp_time = base_time - timedelta(days=i)
+                if decideMarket(tmp_time):
+                    break
+            base_time = tmp_time
+
+        else:
+            pass
+
+        return base_time
 
     def setReverse1hIndicator(self, base_time):
         ### get 1h dataset
@@ -425,6 +446,18 @@ class TrendReverseAlgo(SuperAlgo):
         self.sma1h80_slope = getSlope([self.sma1h80_before, self.sma1h80])
 
 
+        start_time = self.getStartTime(base_time)
+        sql = "select max_price, min_price from %s_%s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, "1h", start_time, base_time)
+        response = self.mysql_connector.select_sql(sql)
+        tmp_max = []
+        tmp_min = []
+        for res in response:
+            tmp_max.append(res[0])
+            tmp_min.append(res[1])
+        
+        self.thisday_max = max(tmp_max)
+        self.thisday_min = min(tmp_min)
+
     def setReverseDailyIndicator(self, base_time):
         ### get daily dataset
         target_time = base_time - timedelta(days=1)
@@ -441,7 +474,7 @@ class TrendReverseAlgo(SuperAlgo):
 
         dataset = getBollingerWrapper(target_time, self.instrument, table_type="day", window_size=20, connector=self.mysql_connector, sigma_valiable=2, length=0)
 
-        self.sma20_1d = dataset["base_lines"][-1]
+        self.sma1d20 = dataset["base_lines"][-1]
 
         sql = "select max_price, min_price from %s_%s_TABLE where insert_time < '%s' order by insert_time desc limit 1" % (self.instrument, "day", target_time)
         response = self.mysql_connector.select_sql(sql)
@@ -558,8 +591,23 @@ class TrendReverseAlgo(SuperAlgo):
         self.result_logger.info("# self.sma1h20_slope=%s" % self.sma1h20_slope)
         self.result_logger.info("# self.sma1h40_slope=%s" % self.sma1h40_slope)
         self.result_logger.info("# self.sma1h80_slope=%s" % self.sma1h80_slope)
-        self.result_logger.info("# self.max_price=%s" % self.max_price)
-        self.result_logger.info("# self.min_price=%s" % self.min_price)
+        self.result_logger.info("# self.before_max=%s" % self.max_price)
+        self.result_logger.info("# self.before_min=%s" % self.min_price)
+        self.result_logger.info("# self.thisday_max=%s" % self.thisday_max)
+        self.result_logger.info("# self.thisday_min=%s" % self.thisday_min)
+        self.result_logger.info("# self.sma1d20=%s" % self.sma1d20)
+
+        if self.min_price < self.sma1d20 < self.max_price:
+            self.result_logger.info("self.before_sma1d20_logic=FALSE")
+        else:
+            self.result_logger.info("self.before_sma1d20_logic=TRUE")
+             
+        if self.thisday_min < self.sma1d20 < self.thisday_max:
+            self.result_logger.info("self.thisday_sma1d20_logic=FALSE")
+        else:
+            self.result_logger.info("self.thisday_sma1d20_logic=TRUE")
+        
+        
 
     def settlementLogWrite(self, profit, base_time, stl_price, stl_method):
         self.result_logger.info("# %s at %s" % (stl_method, base_time))
