@@ -231,10 +231,10 @@ class TrendReverseAlgo(SuperAlgo):
 
         elif span == "1h":
             #if (self.sma1h20 > self.sma1h40 > self.sma1h80) and self.sma1h20_slope > 0 and self.sma1h40_slope > 0 and self.sma1h80_slope > 0:
-            if (self.sma1h20 > self.sma1h40 > self.sma1h80 > self.sma1h100):
+            if (self.sma1h20 > self.sma1h40 > self.sma1h80):
                 direct = "buy"
             #elif (self.sma1h20 < self.sma1h40 < self.sma1h80) and self.sma1h20_slope < 0 and self.sma1h40_slope < 0 and self.sma1h80_slope < 0:
-            elif (self.sma1h20 < self.sma1h40 < self.sma1h80 < self.sma1h100):
+            elif (self.sma1h20 < self.sma1h40 < self.sma1h80):
                 direct = "sell"
 
         return direct
