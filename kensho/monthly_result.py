@@ -35,7 +35,7 @@ for rf in file_list:
     if month == bef_month or bef_month == 0:
       profit = profit + pf
     else:
-      write_file.write("%s/%s, %s\n" % (year, month, profit))
+      write_file.write("%s/%s, %s\n" % (year, bef_month, profit))
       profit = pf
 
     bef_month = month
