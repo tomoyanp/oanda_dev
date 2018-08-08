@@ -337,7 +337,8 @@ class TrendReverseAlgo(SuperAlgo):
                         self.forth_trade_price = current_price
 
                     if self.first_trade_flag == "buy" and self.second_trade_flag and self.third_trade_flag == "buy" and self.forth_trade_flag == "buy":
-                        if ((self.max_price + 0.1) < current_price or (self.max_price - 0.5) > current_price) and self.sma1h20 > self.sma1h100:
+#                        if ((self.max_price + 0.1) < current_price or (self.max_price - 0.5) > current_price) and self.sma1h20 > self.sma1h100:
+                        if (self.max_price + 0.1) < current_price and self.sma1h20 > self.sma1h100:
                             trade_flag = "buy"
                             self.first_trade_flag = "pass"
                             self.second_trade_flag = False
@@ -346,7 +347,8 @@ class TrendReverseAlgo(SuperAlgo):
 
                     #elif self.first_trade_flag == "sell" and self.second_trade_flag and self.third_trade_flag == "sell" and current_price > self.upper_sigma_5m25:
                     elif self.first_trade_flag == "sell" and self.second_trade_flag and self.third_trade_flag == "sell" and self.forth_trade_flag == "sell":
-                        if ((self.min_price + 0.5) < current_price or (self.min_price - 0.1) > current_price) and self.sma1h20 < self.sma1h100:
+#                        if ((self.min_price + 0.5) < current_price or (self.min_price - 0.1) > current_price) and self.sma1h20 < self.sma1h100:
+                        if (self.min_price - 0.1) > current_price and self.sma1h20 < self.sma1h100:
                             trade_flag = "sell"
                             self.first_trade_flag = "pass"
                             self.second_trade_flag = False
