@@ -350,7 +350,7 @@ class TrendReverseAlgo(SuperAlgo):
         ### get 5m dataset
         target_time = base_time - timedelta(minutes=5)
 
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=28, connector=self.mysql_connector, sigma_valiable=2.5, length=0)
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=21, connector=self.mysql_connector, sigma_valiable=2.5, length=0)
         self.upper_sigma_5m25 = dataset["upper_sigmas"][-1]
         self.lower_sigma_5m25 = dataset["lower_sigmas"][-1]
 
@@ -398,7 +398,7 @@ class TrendReverseAlgo(SuperAlgo):
         self.lower_sigma_1h1 = dataset["lower_sigmas"][-1]
 
 
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=28, connector=self.mysql_connector, sigma_valiable=3, length=0)
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=21, connector=self.mysql_connector, sigma_valiable=3, length=0)
         self.upper_sigma_1h3 = dataset["upper_sigmas"][-1]
         self.lower_sigma_1h3 = dataset["lower_sigmas"][-1]
 
@@ -445,9 +445,9 @@ class TrendReverseAlgo(SuperAlgo):
         self.start_price_1d = response[0][2]
         self.end_price_1d = response[0][3]
 
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="day", window_size=28, connector=self.mysql_connector, sigma_valiable=2, length=0)
-        self.upper_sigma_1d2 = dataset["upper_sigmas"][-1]
-        self.lower_sigma_1d2 = dataset["lower_sigmas"][-1]
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="day", window_size=21, connector=self.mysql_connector, sigma_valiable=3, length=0)
+        self.upper_sigma_1d3 = dataset["upper_sigmas"][-1]
+        self.lower_sigma_1d3 = dataset["lower_sigmas"][-1]
 
         dataset = getBollingerWrapper(target_time, self.instrument, table_type="day", window_size=20, connector=self.mysql_connector, sigma_valiable=2, length=0)
 
@@ -581,6 +581,8 @@ class TrendReverseAlgo(SuperAlgo):
         self.result_logger.info("# self.thisday_max=%s" % self.thisday_max)
         self.result_logger.info("# self.thisday_min=%s" % self.thisday_min)
         self.result_logger.info("# self.sma1d20=%s" % self.sma1d20)
+        self.result_logger.info("# self.upper_sigma_1d3=%s" % self.upper_sigma_1d3)
+        self.result_logger.info("# self.lower_sigma_1d3=%s" % self.lower_sigma_1d3)
 
         if self.min_price < self.sma1d20 < self.max_price:
             self.result_logger.info("self.before_sma1d20_logic=FALSE")
