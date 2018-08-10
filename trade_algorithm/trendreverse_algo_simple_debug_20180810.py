@@ -242,9 +242,8 @@ class TrendReverseAlgo(SuperAlgo):
             hour = base_time.hour
             minutes = base_time.minute
             seconds = base_time.second
-            if ((self.min_price < self.sma1d20 < self.max_price) == True and (self.thisday_min < self.sma1d20 < self.thisday_max) == True) or (40 < self.rsi_value < 70 and (self.upper_sigma_1d3 - self.lower_sigma_1d3) < 10):
-                pass
-            else:
+            #if (self.min_price < self.sma1d20 < self.max_price) == False or (self.thisday_min < self.sma1d20 < self.thisday_max) == False:
+            if 1==1:
                 if self.decidePerfectOrder("1h") == "buy" and self.first_trade_flag != "buy" and self.order_kind != "buy":
                     self.first_trade_flag = "buy"
                     self.perfect_order_buycount = self.perfect_order_buycount + 1
