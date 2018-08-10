@@ -452,8 +452,12 @@ class TrendReverseAlgo(SuperAlgo):
         self.upper_sigma_1d3 = dataset["upper_sigmas"][-1]
         self.lower_sigma_1d3 = dataset["lower_sigmas"][-1]
 
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="day", window_size=20, connector=self.mysql_connector, sigma_valiable=2, length=0)
 
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="day", window_size=21, connector=self.mysql_connector, sigma_valiable=1, length=0)
+        self.upper_sigma_1d1 = dataset["upper_sigmas"][-1]
+        self.lower_sigma_1d1 = dataset["lower_sigmas"][-1]
+
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="day", window_size=20, connector=self.mysql_connector, sigma_valiable=2, length=0)
         self.sma1d20 = dataset["base_lines"][-1]
 
         sql = "select max_price, min_price from %s_%s_TABLE where insert_time < '%s' order by insert_time desc limit 1" % (self.instrument, "day", target_time)
@@ -588,6 +592,8 @@ class TrendReverseAlgo(SuperAlgo):
         self.result_logger.info("# self.sma1d20=%s" % self.sma1d20)
         self.result_logger.info("# self.upper_sigma_1d3=%s" % self.upper_sigma_1d3)
         self.result_logger.info("# self.lower_sigma_1d3=%s" % self.lower_sigma_1d3)
+        self.result_logger.info("# self.upper_sigma_1d1=%s" % self.upper_sigma_1d1)
+        self.result_logger.info("# self.lower_sigma_1d1=%s" % self.lower_sigma_1d1)
         self.result_logger.info("# self.rsi_value=%s" % self.rsi_value)
 
         if self.min_price < self.sma1d20 < self.max_price:
