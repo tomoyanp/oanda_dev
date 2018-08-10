@@ -159,19 +159,38 @@ class TrendReverseAlgo(SuperAlgo):
             seconds = base_time.second
             current_price = (self.ask_price + self.bid_price) / 2
 
-            if self.order_kind == "buy" and current_price > self.upper_sigma_1h1 and self.stl_first_flag == False:
-                self.stl_first_flag = True
-                self.writeDebugStlLog(base_time, stl_flag)
-            elif self.order_kind == "sell" and current_price < self.lower_sigma_1h1 and self.stl_first_flag == False:
-                self.stl_first_flag = True
-                self.writeDebugStlLog(base_time, stl_flag)
-           
-            if self.order_kind == "buy" and self.stl_first_flag and current_price < self.sma1h40:
-                stl_flag = True
-                self.writeDebugStlLog(base_time, stl_flag)
-            elif self.order_kind == "sell" and self.stl_first_flag and current_price > self.sma1h40:
-                stl_flag = True
-                self.writeDebugStlLog(base_time, stl_flag)
+            if self.algorithm == "perfect_order":
+                if self.order_kind == "buy" and current_price > self.upper_sigma_1h1 and self.stl_first_flag == False:
+                    self.stl_first_flag = True
+                    self.writeDebugStlLog(base_time, stl_flag)
+                elif self.order_kind == "sell" and current_price < self.lower_sigma_1h1 and self.stl_first_flag == False:
+                    self.stl_first_flag = True
+                    self.writeDebugStlLog(base_time, stl_flag)
+               
+                if self.order_kind == "buy" and self.stl_first_flag and current_price < self.sma1h40:
+                    stl_flag = True
+                    self.writeDebugStlLog(base_time, stl_flag)
+                elif self.order_kind == "sell" and self.stl_first_flag and current_price > self.sma1h40:
+                    stl_flag = True
+                    self.writeDebugStlLog(base_time, stl_flag)
+
+            elif self.algorithm == "reverse_order":         
+                reverse_stoploss_rate = 0.3
+
+                if self.order_kind == "buy" and current_price > self.upper_sigma_1h3:
+                    stl_flag = True
+                    self.writeDebugStlLog(base_time, stl_flag)
+                elif self.order_kind == "sell" and current_price < self.lower_sigma_1h3:
+                    stl_flag = True
+                    self.writeDebugStlLog(base_time, stl_flag)
+               
+                if self.order_kind == "buy" and current_price < (self.order_price - reverse_stoploss_rate):
+                    stl_flag = True
+                    self.writeDebugStlLog(base_time, stl_flag)
+                elif self.order_kind == "sell" and current_price > (self.order_price + reverse_stoploss_rate):
+                    stl_flag = True
+                    self.writeDebugStlLog(base_time, stl_flag)
+
 
         return stl_flag
 
@@ -198,18 +217,14 @@ class TrendReverseAlgo(SuperAlgo):
     def decidePerfectOrder(self, span):
         direct = "pass"
         if span == "5m":
-            #if (self.sma5m20 > self.sma5m40 > self.sma5m80) and self.sma5m20_slope > 0 and self.sma5m40_slope > 0 and self.sma5m80_slope > 0:
             if (self.sma5m20 > self.sma5m40 > self.sma5m80):
                 direct = "buy"
-            #elif (self.sma5m20 < self.sma5m40 < self.sma5m80) and self.sma5m20_slope < 0 and self.sma5m40_slope < 0 and self.sma5m80_slope < 0:
             elif (self.sma5m20 < self.sma5m40 < self.sma5m80):
                 direct = "sell"
 
         elif span == "1h":
-            #if (self.sma1h20 > self.sma1h40 > self.sma1h80) and self.sma1h20_slope > 0 and self.sma1h40_slope > 0 and self.sma1h80_slope > 0:
             if (self.sma1h20 > self.sma1h40 > self.sma1h80):
                 direct = "buy"
-            #elif (self.sma1h20 < self.sma1h40 < self.sma1h80) and self.sma1h20_slope < 0 and self.sma1h40_slope < 0 and self.sma1h80_slope < 0:
             elif (self.sma1h20 < self.sma1h40 < self.sma1h80):
                 direct = "sell"
 
@@ -243,7 +258,39 @@ class TrendReverseAlgo(SuperAlgo):
             minutes = base_time.minute
             seconds = base_time.second
             if ((self.min_price < self.sma1d20 < self.max_price) == True and (self.thisday_min < self.sma1d20 < self.thisday_max) == True) or (40 < self.rsi_value < 70 and (self.upper_sigma_1d3 - self.lower_sigma_1d3) < 10):
-                pass
+                if current_price < self.lower_sigma_1h25 and self.first_trade_flag != "buy" and self.order_kind != "buy":
+                    self.first_trade_flag = "buy"
+                    self.first_trade_time = base_time
+                    self.first_trade_price = current_price
+                    self.second_trade_flag = False
+                    self.third_trade_flag = "pass"
+                    self.writeDebugTradeLog(base_time, trade_flag)
+                elif current_price > self.upper_sigma_1h25 and self.first_trade_flag != "sell" and self.order_kind != "sell":
+                    self.first_trade_flag = "sell"
+                    self.first_trade_time = base_time
+                    self.first_trade_price = current_price
+                    self.second_trade_flag = False
+                    self.third_trade_flag = "pass"
+                    self.writeDebugTradeLog(base_time, trade_flag)
+
+                if self.first_trade_flag == "buy" and self.decidePerfectOrder("5m") == "buy":
+                    trade_flag = "buy"
+                    self.algorithm = "reverse_order"
+                    self.writeDebugTradeLog(base_time, trade_flag)
+
+                    self.first_trade_flag = "pass"
+                    self.second_trade_flag = False
+                    self.third_trade_flag = "pass"
+
+                elif self.first_trade_flag == "sell" and self.decidePerfectOrder("5m") == "sell":
+                    trade_flag = "sell"
+                    self.algorithm = "reverse_order"
+                    self.writeDebugTradeLog(base_time, trade_flag)
+
+                    self.first_trade_flag = "pass"
+                    self.second_trade_flag = False
+                    self.third_trade_flag = "pass"
+
             else:
                 if self.decidePerfectOrder("1h") == "buy" and self.first_trade_flag != "buy" and self.order_kind != "buy":
                     self.first_trade_flag = "buy"
@@ -292,25 +339,19 @@ class TrendReverseAlgo(SuperAlgo):
 
 
                 if self.first_trade_flag == "buy" and self.second_trade_flag and self.third_trade_flag == "buy":
-                    #if ((self.max_price + 0.1) < current_price or (self.max_price - 0.5) > current_price) and self.sma1h20 > self.sma1h100:
-                    if 1==1:
-                        trade_flag = "buy"
-                    else:
-                        pass
+                    trade_flag = "buy"
                     self.first_trade_flag = "pass"
                     self.second_trade_flag = False
                     self.third_trade_flag = "pass"
+                    self.algorithm = "perfect_order"
                     self.writeDebugTradeLog(base_time, trade_flag)
 
                 elif self.first_trade_flag == "sell" and self.second_trade_flag and self.third_trade_flag == "sell":
-                    #if ((self.min_price + 0.5) < current_price or (self.min_price - 0.1) > current_price) and self.sma1h20 < self.sma1h100:
-                    if 1==1:
-                        trade_flag = "sell"
-                    else:
-                        pass
+                    trade_flag = "sell"
                     self.first_trade_flag = "pass"
                     self.second_trade_flag = False
                     self.third_trade_flag = "pass"
+                    self.algorithm = "perfect_order"
                     self.writeDebugTradeLog(base_time, trade_flag)
 
         return trade_flag
@@ -401,6 +442,9 @@ class TrendReverseAlgo(SuperAlgo):
         self.upper_sigma_1h1 = dataset["upper_sigmas"][-1]
         self.lower_sigma_1h1 = dataset["lower_sigmas"][-1]
 
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=21, connector=self.mysql_connector, sigma_valiable=2.5, length=0)
+        self.upper_sigma_1h25 = dataset["upper_sigmas"][-1]
+        self.lower_sigma_1h25 = dataset["lower_sigmas"][-1]
 
         dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=21, connector=self.mysql_connector, sigma_valiable=3, length=0)
         self.upper_sigma_1h3 = dataset["upper_sigmas"][-1]
