@@ -242,8 +242,7 @@ class TrendReverseAlgo(SuperAlgo):
             hour = base_time.hour
             minutes = base_time.minute
             seconds = base_time.second
-            #if (self.min_price < self.sma1d20 < self.max_price) == False or (self.thisday_min < self.sma1d20 < self.thisday_max) == False:
-            if 1==1:
+            if (self.min_price < self.sma1d20 < self.max_price) == False or (self.thisday_min < self.sma1d20 < self.thisday_max) == False:
                 if self.decidePerfectOrder("1h") == "buy" and self.first_trade_flag != "buy" and self.order_kind != "buy":
                     self.first_trade_flag = "buy"
                     self.perfect_order_buycount = self.perfect_order_buycount + 1
@@ -291,8 +290,7 @@ class TrendReverseAlgo(SuperAlgo):
 
 
                 if self.first_trade_flag == "buy" and self.second_trade_flag and self.third_trade_flag == "buy":
-                    #if ((self.max_price + 0.1) < current_price or (self.max_price - 0.5) > current_price) and self.sma1h20 > self.sma1h100:
-                    if 1==1:
+                    if ((self.max_price + 0.1) < current_price or (self.max_price - 0.5) > current_price) and self.sma1h20 > self.sma1h100:
                         trade_flag = "buy"
                     else:
                         pass
@@ -302,8 +300,7 @@ class TrendReverseAlgo(SuperAlgo):
                     self.writeDebugTradeLog(base_time, trade_flag)
 
                 elif self.first_trade_flag == "sell" and self.second_trade_flag and self.third_trade_flag == "sell":
-                    #if ((self.min_price + 0.5) < current_price or (self.min_price - 0.1) > current_price) and self.sma1h20 < self.sma1h100:
-                    if 1==1:
+                    if ((self.min_price + 0.5) < current_price or (self.min_price - 0.1) > current_price) and self.sma1h20 < self.sma1h100:
                         trade_flag = "sell"
                     else:
                         pass

@@ -22,6 +22,28 @@ def getBollingerWrapper(base_time, instrument, table_type, window_size, connecto
 
     return data_set
 
+def getRsiWrapper(base_time, instrument, table_type, connector, span):
+    sql = "select end_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time DESC limit %s" % (instrument, table_type, base_time, span)
+    print sql
+    response = connector.select_sql(sql)
+    price_list = []
+    for res in response:
+        price_list.append(res[0])
+    price_list.reverse()
+
+    up_value = 0
+    down_value = 0
+
+    for i in range(1, price_list):
+        if price_list[i-1] < price_list[i]:
+            up_value = up_value + (price_list[i] - price_list[i-1])
+        else:
+            down_value = down_value + (price_list[i-1] - price_list[i])
+
+    rsi_value = (up_value/(up_value + down_value))*100
+
+    return rsi_value
+
 
 def getEwmaWrapper(instrument, base_time, ind_type, span, connector):
     sql = "select ewma_value from INDICATOR_TABLE where instrument = \'%s\' and insert_time <= \'%s\' and type = \'%s\' order by insert_time DESC limit %s" % (instrument, base_time, ind_type, span)
