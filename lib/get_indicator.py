@@ -34,7 +34,7 @@ def getRsiWrapper(base_time, instrument, table_type, connector, span):
     up_value = 0
     down_value = 0
 
-    for i in range(1, price_list):
+    for i in range(1, len(price_list)):
         if price_list[i-1] < price_list[i]:
             up_value = up_value + (price_list[i] - price_list[i-1])
         else:

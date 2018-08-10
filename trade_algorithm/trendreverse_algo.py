@@ -461,7 +461,7 @@ class TrendReverseAlgo(SuperAlgo):
         self.max_price = response[0][0]
         self.min_price = response[0][1]
 
-        self.rsi_value = getRsiWrapper(base_time, self.instrument, "day", 14)
+        self.rsi_value = getRsiWrapper(target_time, self.instrument, "day", self.mysql_connector, 14)
 
     def decideTrailLogic(self, stl_flag, current_ask_price, current_bid_price, base_time):
         minutes = base_time.minute
