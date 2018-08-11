@@ -258,38 +258,42 @@ class TrendReverseAlgo(SuperAlgo):
             minutes = base_time.minute
             seconds = base_time.second
             if ((self.min_price < self.sma1d20 < self.max_price) == True and (self.thisday_min < self.sma1d20 < self.thisday_max) == True) or (40 < self.rsi_value < 70 and (self.upper_sigma_1d3 - self.lower_sigma_1d3) < 10):
-                if current_price < self.lower_sigma_1h25 and self.first_trade_flag != "buy" and self.order_kind != "buy":
-                    self.first_trade_flag = "buy"
-                    self.first_trade_time = base_time
-                    self.first_trade_price = current_price
-                    self.second_trade_flag = False
-                    self.third_trade_flag = "pass"
-                    self.writeDebugTradeLog(base_time, trade_flag)
-                elif current_price > self.upper_sigma_1h25 and self.first_trade_flag != "sell" and self.order_kind != "sell":
-                    self.first_trade_flag = "sell"
-                    self.first_trade_time = base_time
-                    self.first_trade_price = current_price
-                    self.second_trade_flag = False
-                    self.third_trade_flag = "pass"
-                    self.writeDebugTradeLog(base_time, trade_flag)
-
-                if self.first_trade_flag == "buy" and self.decidePerfectOrder("5m") == "buy":
-                    trade_flag = "buy"
-                    self.algorithm = "reverse_order"
-                    self.writeDebugTradeLog(base_time, trade_flag)
-
-                    self.first_trade_flag = "pass"
-                    self.second_trade_flag = False
-                    self.third_trade_flag = "pass"
-
-                elif self.first_trade_flag == "sell" and self.decidePerfectOrder("5m") == "sell":
-                    trade_flag = "sell"
-                    self.algorithm = "reverse_order"
-                    self.writeDebugTradeLog(base_time, trade_flag)
-
-                    self.first_trade_flag = "pass"
-                    self.second_trade_flag = False
-                    self.third_trade_flag = "pass"
+#                if self.order_flag:
+                if 1 == 1:
+                    pass
+                else:
+                    if current_price < self.lower_sigma_1h25 and self.first_trade_flag != "buy" and self.order_kind != "buy":
+                        self.first_trade_flag = "buy"
+                        self.first_trade_time = base_time
+                        self.first_trade_price = current_price
+                        self.second_trade_flag = False
+                        self.third_trade_flag = "pass"
+                        self.writeDebugTradeLog(base_time, trade_flag)
+                    elif current_price > self.upper_sigma_1h25 and self.first_trade_flag != "sell" and self.order_kind != "sell":
+                        self.first_trade_flag = "sell"
+                        self.first_trade_time = base_time
+                        self.first_trade_price = current_price
+                        self.second_trade_flag = False
+                        self.third_trade_flag = "pass"
+                        self.writeDebugTradeLog(base_time, trade_flag)
+    
+                    if self.first_trade_flag == "buy" and self.decidePerfectOrder("5m") == "buy":
+                        trade_flag = "buy"
+                        self.algorithm = "reverse_order"
+                        self.writeDebugTradeLog(base_time, trade_flag)
+    
+                        self.first_trade_flag = "pass"
+                        self.second_trade_flag = False
+                        self.third_trade_flag = "pass"
+    
+                    elif self.first_trade_flag == "sell" and self.decidePerfectOrder("5m") == "sell":
+                        trade_flag = "sell"
+                        self.algorithm = "reverse_order"
+                        self.writeDebugTradeLog(base_time, trade_flag)
+    
+                        self.first_trade_flag = "pass"
+                        self.second_trade_flag = False
+                        self.third_trade_flag = "pass"
 
             else:
                 if self.decidePerfectOrder("1h") == "buy" and self.first_trade_flag != "buy" and self.order_kind != "buy":
@@ -641,16 +645,15 @@ class TrendReverseAlgo(SuperAlgo):
         self.result_logger.info("# self.lower_sigma_1d1=%s" % self.lower_sigma_1d1)
         self.result_logger.info("# self.rsi_value=%s" % self.rsi_value)
 
-        if self.min_price < self.sma1d20 < self.max_price:
-            self.result_logger.info("self.before_sma1d20_logic=FALSE")
+        if ((self.min_price < self.sma1d20 < self.max_price) == True and (self.thisday_min < self.sma1d20 < self.thisday_max) == True):
+            self.result_logger.info("self.sma1d20_logic=TRUE")
         else:
-            self.result_logger.info("self.before_sma1d20_logic=TRUE")
-             
-        if self.thisday_min < self.sma1d20 < self.thisday_max:
-            self.result_logger.info("self.thisday_sma1d20_logic=FALSE")
+            self.result_logger.info("self.sma1d20_logic=FALSE")
+
+        if (40 < self.rsi_value < 70 and (self.upper_sigma_1d3 - self.lower_sigma_1d3) < 10):
+            self.result_logger.info("self.rsi_bollinger_logic=TRUE")
         else:
-            self.result_logger.info("self.thisday_sma1d20_logic=TRUE")
-        
+            self.result_logger.info("self.rsi_bollinger_logic=FALSE")
 
     def settlementLogWrite(self, profit, base_time, stl_price, stl_method):
         self.result_logger.info("# %s at %s" % (stl_method, base_time))
