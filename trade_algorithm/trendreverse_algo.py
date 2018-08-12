@@ -53,10 +53,13 @@ class TrendReverseAlgo(SuperAlgo):
         self.log_min_price = 0
         self.first_trade_flag = "pass"
         self.second_trade_flag = False
+        self.first_trade_price = 0
+        self.second_trade_price = 0
         self.first_trade_time = base_time
         self.second_trade_time = base_time
         self.third_trade_flag = "pass"
         self.third_trade_time = base_time
+        self.third_trade_price = 0
         self.first_reverse_flag = "pass"
         self.second_reverse_flag = False
         self.stl_first_flag = False
