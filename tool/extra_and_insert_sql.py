@@ -37,8 +37,8 @@ env = account_data["env"]
 mysql_connector = MysqlConnector()
 now = datetime.now()
 
-start_time = "2018-01-10 00:00:00"
-end_time = "2018-07-15 00:00:00"
+start_time = "2015-01-10 00:00:00"
+end_time = "2018-08-01 00:00:00"
 
 end_time = datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
 start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
@@ -70,10 +70,7 @@ while start_time < end_time:
                 insert_time = datetime.strptime(time, "%Y-%m-%dT%H:%M:%S")
                 insert_time = insert_time + timedelta(hours=9)
                 ask_price = candle["openAsk"]
-                if instrument == "USD_JPY":
-                    bid_price = ask_price - 0.008
-                else:
-                    bid_price = candle["openBid"]
+                bid_price = candle["openBid"]
                 sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\')" % (instrument, ask_price, bid_price, insert_time)
                 mysql_connector.insert_sql(sql)
                 sql_file.write("%s\n" % sql)
