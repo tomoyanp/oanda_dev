@@ -179,6 +179,13 @@ class TrendReverseAlgo(SuperAlgo):
                     stl_flag = True
                     self.writeDebugStlLog(base_time, stl_flag)
 
+                if self.order_kind == "buy" and current_price < self.lower_sigma_1h25:
+                    stl_flag = True
+                    self.writeDebugStlLog(base_time, stl_flag)
+                elif self.order_kind == "sell" and current_price > self.upper_sigma_1h25:
+                    stl_flag = True
+                    self.writeDebugStlLog(base_time, stl_flag)
+
             elif self.algorithm == "reverse_order":         
                 reverse_stoploss_rate = 0.3
 
@@ -321,13 +328,13 @@ class TrendReverseAlgo(SuperAlgo):
                         self.second_trade_price = current_price
                         self.writeDebugTradeLog(base_time, trade_flag)
 
-                    elif current_price > (self.max_price + 0.1):
-                        trade_flag = "buy"
-                        self.first_trade_flag = "pass"
-                        self.second_trade_flag = False
-                        self.third_trade_flag = "pass"
-                        self.algorithm = "perfect_order_break"
-                        self.writeDebugTradeLog(base_time, trade_flag)
+#                    elif current_price > (self.max_price + 0.1):
+#                        trade_flag = "buy"
+#                        self.first_trade_flag = "pass"
+#                        self.second_trade_flag = False
+#                        self.third_trade_flag = "pass"
+#                        self.algorithm = "perfect_order_break"
+#                        self.writeDebugTradeLog(base_time, trade_flag)
 
                 elif self.first_trade_flag == "sell":
                     if current_price > self.sma1h20 and self.second_trade_flag == False:
@@ -336,13 +343,13 @@ class TrendReverseAlgo(SuperAlgo):
                         self.second_trade_price = current_price
                         self.writeDebugTradeLog(base_time, trade_flag)
 
-                    elif current_price < (self.min_price - 0.1):
-                        trade_flag = "sell"
-                        self.first_trade_flag = "pass"
-                        self.second_trade_flag = False
-                        self.third_trade_flag = "pass"
-                        self.algorithm = "perfect_order_break"
-                        self.writeDebugTradeLog(base_time, trade_flag)
+#                    elif current_price < (self.min_price - 0.1):
+#                        trade_flag = "sell"
+#                        self.first_trade_flag = "pass"
+#                        self.second_trade_flag = False
+#                        self.third_trade_flag = "pass"
+#                        self.algorithm = "perfect_order_break"
+#                        self.writeDebugTradeLog(base_time, trade_flag)
 
 
 
