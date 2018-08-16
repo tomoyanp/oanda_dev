@@ -214,19 +214,35 @@ class TrendReverseAlgo(SuperAlgo):
         return state
 
 
-    def decidePerfectOrder(self, span):
+    def decidePerfectOrder(self, span, slope_flag):
         direct = "pass"
         if span == "5m":
             if (self.sma5m20 > self.sma5m40 > self.sma5m80):
-                direct = "buy"
+                if slope_flag:
+                    if (self.slope_sma5m20 > 0 and self.slope_sma5m40 > 0 and self.slope_sma5m80 > 0):
+                        direct = "buy"
+                else:
+                    direct = "buy"
             elif (self.sma5m20 < self.sma5m40 < self.sma5m80):
-                direct = "sell"
+                if slope_flag:
+                    if (self.slope_sma5m20 < 0 and self.slope_sma5m40 < 0 and self.slope_sma5m80 < 0):
+                        direct = "sell"
+                else:
+                    direct = "sell"
 
         elif span == "1h":
             if (self.sma1h20 > self.sma1h40 > self.sma1h80):
-                direct = "buy"
+                if slope_flag:
+                    if (self.slope_sma1h20 > 0 and self.slope_sma1h40 > 0 and self.slope_sma1h80 > 0):
+                        direct = "buy"
+                else:
+                    direct = "buy"
             elif (self.sma1h20 < self.sma1h40 < self.sma1h80):
-                direct = "sell"
+                if slope_flag:
+                    if (self.slope_sma1h20 < 0 and self.slope_sma1h40 < 0 and self.slope_sma1h80 < 0):
+                        direct = "sell"
+                else:
+                    direct = "sell"
 
         return direct
 
@@ -277,7 +293,7 @@ class TrendReverseAlgo(SuperAlgo):
                         self.third_trade_flag = "pass"
                         self.writeDebugTradeLog(base_time, trade_flag)
     
-                    if self.first_trade_flag == "buy" and self.decidePerfectOrder("5m") == "buy":
+                    if self.first_trade_flag == "buy" and self.decidePerfectOrder("5m", slope_flag=True) == "buy":
                         trade_flag = "buy"
                         self.algorithm = "reverse_order"
                         self.writeDebugTradeLog(base_time, trade_flag)
@@ -286,7 +302,7 @@ class TrendReverseAlgo(SuperAlgo):
                         self.second_trade_flag = False
                         self.third_trade_flag = "pass"
     
-                    elif self.first_trade_flag == "sell" and self.decidePerfectOrder("5m") == "sell":
+                    elif self.first_trade_flag == "sell" and self.decidePerfectOrder("5m", slope_flag=True) == "sell":
                         trade_flag = "sell"
                         self.algorithm = "reverse_order"
                         self.writeDebugTradeLog(base_time, trade_flag)
@@ -296,7 +312,7 @@ class TrendReverseAlgo(SuperAlgo):
                         self.third_trade_flag = "pass"
 
             else:
-                if self.decidePerfectOrder("1h") == "buy" and self.first_trade_flag != "buy" and self.order_kind != "buy":
+                if self.decidePerfectOrder("1h", slope_flag=False) == "buy" and self.first_trade_flag != "buy" and self.order_kind != "buy":
                     self.first_trade_flag = "buy"
                     self.perfect_order_buycount = self.perfect_order_buycount + 1
                     self.first_trade_time = base_time
@@ -305,7 +321,7 @@ class TrendReverseAlgo(SuperAlgo):
                     self.third_trade_flag = "pass"
                     self.writeDebugTradeLog(base_time, trade_flag)
 
-                elif self.decidePerfectOrder("1h") == "sell" and self.first_trade_flag != "sell" and self.order_kind != "sell":
+                elif self.decidePerfectOrder("1h", slope_flag=False) == "sell" and self.first_trade_flag != "sell" and self.order_kind != "sell":
                     self.perfect_order_sellcount = self.perfect_order_sellcount + 1
                     self.first_trade_flag = "sell"
                     self.first_trade_time = base_time
@@ -329,13 +345,13 @@ class TrendReverseAlgo(SuperAlgo):
                         self.writeDebugTradeLog(base_time, trade_flag)
 
 
-                if self.first_trade_flag == "buy" and self.second_trade_flag and self.decidePerfectOrder("5m") == "buy":
+                if self.first_trade_flag == "buy" and self.second_trade_flag and self.decidePerfectOrder("5m", slope_flag=True) == "buy":
                     self.third_trade_flag = "buy"
                     self.third_trade_time = base_time
                     self.third_trade_price = current_price
                     self.writeDebugTradeLog(base_time, trade_flag)
 
-                elif self.first_trade_flag == "sell" and self.second_trade_flag and self.decidePerfectOrder("5m") == "sell":
+                elif self.first_trade_flag == "sell" and self.second_trade_flag and self.decidePerfectOrder("5m", slope_flag=True) == "sell":
                     self.third_trade_flag = "sell"
                     self.third_trade_time = base_time
                     self.third_trade_price = current_price
