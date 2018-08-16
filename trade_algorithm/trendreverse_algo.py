@@ -219,13 +219,13 @@ class TrendReverseAlgo(SuperAlgo):
         if span == "5m":
             if (self.sma5m20 > self.sma5m40 > self.sma5m80):
                 if slope_flag:
-                    if (self.slope_sma5m20 > 0 and self.slope_sma5m40 > 0 and self.slope_sma5m80 > 0):
+                    if (self.sma5m20_slope > 0 and self.sma5m40_slope > 0 and self.sma5m80_slope > 0):
                         direct = "buy"
                 else:
                     direct = "buy"
             elif (self.sma5m20 < self.sma5m40 < self.sma5m80):
                 if slope_flag:
-                    if (self.slope_sma5m20 < 0 and self.slope_sma5m40 < 0 and self.slope_sma5m80 < 0):
+                    if (self.sma5m20_slope < 0 and self.sma5m40_slope < 0 and self.sma5m80_slope < 0):
                         direct = "sell"
                 else:
                     direct = "sell"
@@ -233,13 +233,13 @@ class TrendReverseAlgo(SuperAlgo):
         elif span == "1h":
             if (self.sma1h20 > self.sma1h40 > self.sma1h80):
                 if slope_flag:
-                    if (self.slope_sma1h20 > 0 and self.slope_sma1h40 > 0 and self.slope_sma1h80 > 0):
+                    if (self.sma1h20_slope > 0 and self.sma1h40_slope > 0 and self.sma1h80_slope > 0):
                         direct = "buy"
                 else:
                     direct = "buy"
             elif (self.sma1h20 < self.sma1h40 < self.sma1h80):
                 if slope_flag:
-                    if (self.slope_sma1h20 < 0 and self.slope_sma1h40 < 0 and self.slope_sma1h80 < 0):
+                    if (self.sma1h20_slope < 0 and self.sma1h40_slope < 0 and self.sma1h80_slope < 0):
                         direct = "sell"
                 else:
                     direct = "sell"
