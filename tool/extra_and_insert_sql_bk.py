@@ -37,28 +37,29 @@ env = account_data["env"]
 mysql_connector = MysqlConnector()
 now = datetime.now()
 
-start_time = "2018-08-19 00:00:00"
-end_time = "2018-08-20 00:00:00"
+start_time = "2015-01-10 00:00:00"
+end_time = "2018-08-01 00:00:00"
 
 end_time = datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
 start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
+
 sql_file = open("%s_record.sql" % instrument, "w")
 
-
-
-
 while start_time < end_time:
-    start_ftime = start_time - timedelta(hours=9)
-    start_ftime = start_ftime.strftime("%Y-%m-%dT%H:%M:%S")
+    if decideMarket(start_time):
+        start_ftime = start_time - timedelta(hours=9)
+        start_ftime = start_ftime.strftime("%Y-%m-%dT%H:%M:%S")
     
-    oanda = oandapy.API(environment=env, access_token=token)
-    response = {}
-    try :
-        response = oanda.get_history(
-            instrument=instrument,
-            start=start_ftime,
-            granularity="S5"
-        )
+        oanda = oandapy.API(environment=env, access_token=token)
+        response = {}
+        try :
+            response = oanda.get_history(
+                instrument=instrument,
+                start=start_ftime,
+                granularity="S5"
+            )
+        except ValueError as e:
+            print e
     
         if len(response) > 0:
             instrument = response["instrument"]
@@ -71,17 +72,18 @@ while start_time < end_time:
                 ask_price = candle["openAsk"]
                 bid_price = candle["openBid"]
                 sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\')" % (instrument, ask_price, bid_price, insert_time)
-                #mysql_connector.insert_sql(sql)
+                mysql_connector.insert_sql(sql)
+                sql_file.write("%s\n" % sql)
                 print sql
             print "============================================================="
-            start_time =  insert_time
+            start_time = insert_time
     
         else:
             print "response length <= 0"
 
-    except Exception as e:
-        print e
+    else:
+        print "Market closed %s" % start_time
 
-    print type(start_time)
     start_time = start_time + timedelta(seconds=5)
 
+sql_file.close()
