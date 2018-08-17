@@ -37,8 +37,8 @@ env = account_data["env"]
 mysql_connector = MysqlConnector()
 now = datetime.now()
 
-start_time = "2015-01-10 00:00:00"
-end_time = "2018-08-01 00:00:00"
+start_time = "2018-08-19 00:00:00"
+end_time = "2018-08-20 00:00:00"
 
 end_time = datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
 start_time = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
@@ -68,17 +68,17 @@ while start_time < end_time:
                 ask_price = candle["openAsk"]
                 bid_price = candle["openBid"]
                 sql = u"insert into %s_TABLE(ask_price, bid_price, insert_time) values(%s, %s, \'%s\')" % (instrument, ask_price, bid_price, insert_time)
-                mysql_connector.insert_sql(sql)
-                end_time = time
+                #mysql_connector.insert_sql(sql)
                 print sql
             print "============================================================="
-            start_ftime =  end_time + timedelta(hours=9)
+            start_time =  insert_time
     
         else:
             print "response length <= 0"
 
-        except ValueError as e:
-            print e
+    except Exception as e:
+        print e
 
+    print type(start_time)
     start_time = start_time + timedelta(seconds=5)
 
