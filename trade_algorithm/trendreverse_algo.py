@@ -492,6 +492,10 @@ class TrendReverseAlgo(SuperAlgo):
         self.upper_sigma_1h1 = dataset["upper_sigmas"][-1]
         self.lower_sigma_1h1 = dataset["lower_sigmas"][-1]
 
+        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=21, connector=self.mysql_connector, sigma_valiable=2, length=0)
+        self.upper_sigma_1h2 = dataset["upper_sigmas"][-1]
+        self.lower_sigma_1h2 = dataset["lower_sigmas"][-1]
+
         dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=21, connector=self.mysql_connector, sigma_valiable=2.5, length=0)
         self.upper_sigma_1h25 = dataset["upper_sigmas"][-1]
         self.lower_sigma_1h25 = dataset["lower_sigmas"][-1]
