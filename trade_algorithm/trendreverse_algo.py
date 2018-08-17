@@ -594,11 +594,11 @@ class TrendReverseAlgo(SuperAlgo):
                     self.trail_flag = True
 
             if self.trail_flag == True and self.order_kind == "buy":
-                if self.order_price > (current_bid_price + 0.1):
+                if self.order_price > (current_bid_price - 0.1):
                     self.result_logger.info("# Execute FirstTrail Stop")
                     stl_flag = True
             elif self.trail_flag == True and self.order_kind == "sell":
-                if self.order_price < (current_ask_price - 0.1):
+                if self.order_price < (current_ask_price + 0.1):
                     self.result_logger.info("# Execute FirstTrail Stop")
                     stl_flag = True
              
