@@ -312,8 +312,8 @@ class TrendReverseAlgo(SuperAlgo):
                         self.third_trade_flag = "pass"
 
             else:
-                #if self.decidePerfectOrder("1h", slope_flag=False) == "buy" and self.first_trade_flag != "buy" and self.order_kind != "buy":
-                if self.decidePerfectOrder("1h", slope_flag=True) == "buy" and self.first_trade_flag != "buy" and self.order_kind != "buy":
+                if self.decidePerfectOrder("1h", slope_flag=False) == "buy" and self.first_trade_flag != "buy" and self.order_kind != "buy":
+                #if self.decidePerfectOrder("1h", slope_flag=True) == "buy" and self.first_trade_flag != "buy" and self.order_kind != "buy":
                     self.first_trade_flag = "buy"
                     self.perfect_order_buycount = self.perfect_order_buycount + 1
                     self.first_trade_time = base_time
@@ -322,8 +322,8 @@ class TrendReverseAlgo(SuperAlgo):
                     self.third_trade_flag = "pass"
                     self.writeDebugTradeLog(base_time, trade_flag)
 
-                #elif self.decidePerfectOrder("1h", slope_flag=False) == "sell" and self.first_trade_flag != "sell" and self.order_kind != "sell":
-                elif self.decidePerfectOrder("1h", slope_flag=True) == "sell" and self.first_trade_flag != "sell" and self.order_kind != "sell":
+                elif self.decidePerfectOrder("1h", slope_flag=False) == "sell" and self.first_trade_flag != "sell" and self.order_kind != "sell":
+                #elif self.decidePerfectOrder("1h", slope_flag=True) == "sell" and self.first_trade_flag != "sell" and self.order_kind != "sell":
                     self.perfect_order_sellcount = self.perfect_order_sellcount + 1
                     self.first_trade_flag = "sell"
                     self.first_trade_time = base_time
@@ -347,13 +347,15 @@ class TrendReverseAlgo(SuperAlgo):
                         self.writeDebugTradeLog(base_time, trade_flag)
 
 
-                if self.first_trade_flag == "buy" and self.second_trade_flag and self.decidePerfectOrder("5m", slope_flag=True) == "buy":
+                #if self.first_trade_flag == "buy" and self.second_trade_flag and self.decidePerfectOrder("5m", slope_flag=True) == "buy":
+                if self.first_trade_flag == "buy" and self.second_trade_flag and self.decidePerfectOrder("5m", slope_flag=False) == "buy":
                     self.third_trade_flag = "buy"
                     self.third_trade_time = base_time
                     self.third_trade_price = current_price
                     self.writeDebugTradeLog(base_time, trade_flag)
 
-                elif self.first_trade_flag == "sell" and self.second_trade_flag and self.decidePerfectOrder("5m", slope_flag=True) == "sell":
+                #elif self.first_trade_flag == "sell" and self.second_trade_flag and self.decidePerfectOrder("5m", slope_flag=True) == "sell":
+                elif self.first_trade_flag == "sell" and self.second_trade_flag and self.decidePerfectOrder("5m", slope_flag=False) == "sell":
                     self.third_trade_flag = "sell"
                     self.third_trade_time = base_time
                     self.third_trade_price = current_price
@@ -414,28 +416,34 @@ class TrendReverseAlgo(SuperAlgo):
 
 
     def setReverse5mIndicator(self, base_time):
-        ### get 5m dataset
-        target_time = base_time - timedelta(minutes=5)
-
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=21, connector=self.mysql_connector, sigma_valiable=2.5, length=0)
-        self.upper_sigma_5m25 = dataset["upper_sigmas"][-1]
-        self.lower_sigma_5m25 = dataset["lower_sigmas"][-1]
-
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=20, connector=self.mysql_connector, sigma_valiable=2, length=5)
-        self.sma5m20 = dataset["base_lines"][-1]
-        self.sma5m20_before = dataset["base_lines"][-5]
-
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=40, connector=self.mysql_connector, sigma_valiable=2, length=5)
-        self.sma5m40 = dataset["base_lines"][-1]
-        self.sma5m40_before = dataset["base_lines"][-5]
-
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=80, connector=self.mysql_connector, sigma_valiable=2, length=5)
-        self.sma5m80 = dataset["base_lines"][-1]
-        self.sma5m80_before = dataset["base_lines"][-5]
-
-        self.sma5m20_slope = getSlope([self.sma5m20_before, self.sma5m20])
-        self.sma5m40_slope = getSlope([self.sma5m40_before, self.sma5m40])
-        self.sma5m80_slope = getSlope([self.sma5m80_before, self.sma5m80])
+        try:
+            ### get 5m dataset
+            target_time = base_time - timedelta(minutes=5)
+    
+            dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=21, connector=self.mysql_connector, sigma_valiable=2.5, length=0)
+            self.upper_sigma_5m25 = dataset["upper_sigmas"][-1]
+            self.lower_sigma_5m25 = dataset["lower_sigmas"][-1]
+    
+            dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=20, connector=self.mysql_connector, sigma_valiable=2, length=5)
+            self.sma5m20 = dataset["base_lines"][-1]
+            self.sma5m20_before = dataset["base_lines"][-5]
+    
+            dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=40, connector=self.mysql_connector, sigma_valiable=2, length=5)
+            self.sma5m40 = dataset["base_lines"][-1]
+            self.sma5m40_before = dataset["base_lines"][-5]
+    
+            dataset = getBollingerWrapper(target_time, self.instrument, table_type="5m", window_size=80, connector=self.mysql_connector, sigma_valiable=2, length=5)
+            self.sma5m80 = dataset["base_lines"][-1]
+            self.sma5m80_before = dataset["base_lines"][-5]
+    
+    #        self.sma5m20_slope = getSlope([self.sma5m20_before, self.sma5m20])
+    #        self.sma5m40_slope = getSlope([self.sma5m40_before, self.sma5m40])
+    #        self.sma5m80_slope = getSlope([self.sma5m80_before, self.sma5m80])
+    
+        except Exception as e:
+            message = traceback.format_exc()
+            self.debug_logger.info("# %s" % base_time)
+            self.debug_logger.info("# %s" % message)
 
     def getStartTime(self, base_time):
         hour = base_time.hour
@@ -457,82 +465,95 @@ class TrendReverseAlgo(SuperAlgo):
         return base_time
 
     def setReverse1hIndicator(self, base_time):
-        ### get 1h dataset
-        target_time = base_time - timedelta(hours=1)
-
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=21, connector=self.mysql_connector, sigma_valiable=1, length=0)
-        self.upper_sigma_1h1 = dataset["upper_sigmas"][-1]
-        self.lower_sigma_1h1 = dataset["lower_sigmas"][-1]
-
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=21, connector=self.mysql_connector, sigma_valiable=2.5, length=0)
-        self.upper_sigma_1h25 = dataset["upper_sigmas"][-1]
-        self.lower_sigma_1h25 = dataset["lower_sigmas"][-1]
-
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=21, connector=self.mysql_connector, sigma_valiable=3, length=0)
-        self.upper_sigma_1h3 = dataset["upper_sigmas"][-1]
-        self.lower_sigma_1h3 = dataset["lower_sigmas"][-1]
-
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=100, connector=self.mysql_connector, sigma_valiable=2, length=0)
-        self.sma1h100 = dataset["base_lines"][-1]
-
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=20, connector=self.mysql_connector, sigma_valiable=2, length=5)
-        self.sma1h20 = dataset["base_lines"][-1]
-        self.sma1h20_before = dataset["base_lines"][-5]
-        self.sma1h20_slope = getSlope([self.sma1h20_before, self.sma1h20])
-
-
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=40, connector=self.mysql_connector, sigma_valiable=2, length=5)
-        self.sma1h40 = dataset["base_lines"][-1]
-        self.sma1h40_before = dataset["base_lines"][-5]
-        self.sma1h40_slope = getSlope([self.sma1h40_before, self.sma1h40])
-
-
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=80, connector=self.mysql_connector, sigma_valiable=2, length=5)
-        self.sma1h80 = dataset["base_lines"][-1]
-        self.sma1h80_before = dataset["base_lines"][-5]
-        self.sma1h80_slope = getSlope([self.sma1h80_before, self.sma1h80])
-
-
-        start_time = self.getStartTime(base_time)
-        sql = "select max_price, min_price from %s_%s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, "1h", start_time, base_time)
-        response = self.mysql_connector.select_sql(sql)
-        tmp_max = []
-        tmp_min = []
-        for res in response:
-            tmp_max.append(res[0])
-            tmp_min.append(res[1])
-        
-        self.thisday_max = max(tmp_max)
-        self.thisday_min = min(tmp_min)
+        try:
+            ### get 1h dataset
+            target_time = base_time - timedelta(hours=1)
+    
+            dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=21, connector=self.mysql_connector, sigma_valiable=1, length=0)
+            self.upper_sigma_1h1 = dataset["upper_sigmas"][-1]
+            self.lower_sigma_1h1 = dataset["lower_sigmas"][-1]
+    
+            dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=21, connector=self.mysql_connector, sigma_valiable=2.5, length=0)
+            self.upper_sigma_1h25 = dataset["upper_sigmas"][-1]
+            self.lower_sigma_1h25 = dataset["lower_sigmas"][-1]
+    
+            dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=21, connector=self.mysql_connector, sigma_valiable=3, length=0)
+            self.upper_sigma_1h3 = dataset["upper_sigmas"][-1]
+            self.lower_sigma_1h3 = dataset["lower_sigmas"][-1]
+    
+            dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=100, connector=self.mysql_connector, sigma_valiable=2, length=0)
+            self.sma1h100 = dataset["base_lines"][-1]
+    
+            dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=20, connector=self.mysql_connector, sigma_valiable=2, length=5)
+            self.sma1h20 = dataset["base_lines"][-1]
+            self.sma1h20_before = dataset["base_lines"][-5]
+    #        self.sma1h20_slope = getSlope([self.sma1h20_before, self.sma1h20])
+    
+    
+            dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=40, connector=self.mysql_connector, sigma_valiable=2, length=5)
+            self.sma1h40 = dataset["base_lines"][-1]
+            self.sma1h40_before = dataset["base_lines"][-5]
+    #        self.sma1h40_slope = getSlope([self.sma1h40_before, self.sma1h40])
+    
+    
+            dataset = getBollingerWrapper(target_time, self.instrument, table_type="1h", window_size=80, connector=self.mysql_connector, sigma_valiable=2, length=5)
+            self.sma1h80 = dataset["base_lines"][-1]
+            self.sma1h80_before = dataset["base_lines"][-5]
+    #        self.sma1h80_slope = getSlope([self.sma1h80_before, self.sma1h80])
+    
+    
+            start_time = self.getStartTime(base_time)
+            sql = "select max_price, min_price from %s_%s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (self.instrument, "1h", start_time, base_time)
+            response = self.mysql_connector.select_sql(sql)
+            tmp_max = []
+            tmp_min = []
+            for res in response:
+                tmp_max.append(res[0])
+                tmp_min.append(res[1])
+            
+            self.thisday_max = max(tmp_max)
+            self.thisday_min = min(tmp_min)
+    
+        except Exception as e:
+            message = traceback.format_exc()
+            self.debug_logger.info("# %s" % base_time)
+            self.debug_logger.info("# %s" % message)
 
     def setReverseDailyIndicator(self, base_time):
-        ### get daily dataset
-        target_time = base_time - timedelta(days=1)
-        sql = "select max_price, min_price, start_price, end_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 1" % (self.instrument, "day", target_time) 
-        response = self.mysql_connector.select_sql(sql)
-        self.max_price_1d = response[0][0]
-        self.min_price_1d = response[0][1]
-        self.start_price_1d = response[0][2]
-        self.end_price_1d = response[0][3]
+        try:
+            ### get daily dataset
+            target_time = base_time - timedelta(days=1)
+            sql = "select max_price, min_price, start_price, end_price from %s_%s_TABLE where insert_time < \'%s\' order by insert_time desc limit 1" % (self.instrument, "day", target_time) 
+            response = self.mysql_connector.select_sql(sql)
+            self.max_price_1d = response[0][0]
+            self.min_price_1d = response[0][1]
+            self.start_price_1d = response[0][2]
+            self.end_price_1d = response[0][3]
+    
+            dataset = getBollingerWrapper(target_time, self.instrument, table_type="day", window_size=21, connector=self.mysql_connector, sigma_valiable=3, length=0)
+            self.upper_sigma_1d3 = dataset["upper_sigmas"][-1]
+            self.lower_sigma_1d3 = dataset["lower_sigmas"][-1]
+    
+    
+            dataset = getBollingerWrapper(target_time, self.instrument, table_type="day", window_size=21, connector=self.mysql_connector, sigma_valiable=1, length=0)
+            self.upper_sigma_1d1 = dataset["upper_sigmas"][-1]
+            self.lower_sigma_1d1 = dataset["lower_sigmas"][-1]
+    
+            dataset = getBollingerWrapper(target_time, self.instrument, table_type="day", window_size=20, connector=self.mysql_connector, sigma_valiable=2, length=0)
+            self.sma1d20 = dataset["base_lines"][-1]
+    
+            sql = "select max_price, min_price from %s_%s_TABLE where insert_time < '%s' order by insert_time desc limit 1" % (self.instrument, "day", target_time)
+            response = self.mysql_connector.select_sql(sql)
+            self.max_price = response[0][0]
+            self.min_price = response[0][1]
+    
+            self.rsi_value = getRsiWrapper(target_time, self.instrument, "day", self.mysql_connector, 14)
 
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="day", window_size=21, connector=self.mysql_connector, sigma_valiable=3, length=0)
-        self.upper_sigma_1d3 = dataset["upper_sigmas"][-1]
-        self.lower_sigma_1d3 = dataset["lower_sigmas"][-1]
-
-
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="day", window_size=21, connector=self.mysql_connector, sigma_valiable=1, length=0)
-        self.upper_sigma_1d1 = dataset["upper_sigmas"][-1]
-        self.lower_sigma_1d1 = dataset["lower_sigmas"][-1]
-
-        dataset = getBollingerWrapper(target_time, self.instrument, table_type="day", window_size=20, connector=self.mysql_connector, sigma_valiable=2, length=0)
-        self.sma1d20 = dataset["base_lines"][-1]
-
-        sql = "select max_price, min_price from %s_%s_TABLE where insert_time < '%s' order by insert_time desc limit 1" % (self.instrument, "day", target_time)
-        response = self.mysql_connector.select_sql(sql)
-        self.max_price = response[0][0]
-        self.min_price = response[0][1]
-
-        self.rsi_value = getRsiWrapper(target_time, self.instrument, "day", self.mysql_connector, 14)
+        except Exception as e:
+            message = traceback.format_exc()
+            self.debug_logger.info("# %s" % base_time)
+            self.debug_logger.info("# %s" % message)
+            
 
     def decideTrailLogic(self, stl_flag, current_ask_price, current_bid_price, base_time):
         minutes = base_time.minute
@@ -642,16 +663,16 @@ class TrendReverseAlgo(SuperAlgo):
         self.result_logger.info("# self.sma5m20=%s" % self.sma5m20)
         self.result_logger.info("# self.sma5m40=%s" % self.sma5m40)
         self.result_logger.info("# self.sma5m80=%s" % self.sma5m80)
-        self.result_logger.info("# self.sma5m20_slope=%s" % self.sma5m20_slope)
-        self.result_logger.info("# self.sma5m40_slope=%s" % self.sma5m40_slope)
-        self.result_logger.info("# self.sma5m80_slope=%s" % self.sma5m80_slope)
+#        self.result_logger.info("# self.sma5m20_slope=%s" % self.sma5m20_slope)
+#        self.result_logger.info("# self.sma5m40_slope=%s" % self.sma5m40_slope)
+#        self.result_logger.info("# self.sma5m80_slope=%s" % self.sma5m80_slope)
         self.result_logger.info("# self.sma1h100=%s" % self.sma1h100)
         self.result_logger.info("# self.sma1h20=%s" % self.sma1h20)
         self.result_logger.info("# self.sma1h40=%s" % self.sma1h40)
         self.result_logger.info("# self.sma1h80=%s" % self.sma1h80)
-        self.result_logger.info("# self.sma1h20_slope=%s" % self.sma1h20_slope)
-        self.result_logger.info("# self.sma1h40_slope=%s" % self.sma1h40_slope)
-        self.result_logger.info("# self.sma1h80_slope=%s" % self.sma1h80_slope)
+#        self.result_logger.info("# self.sma1h20_slope=%s" % self.sma1h20_slope)
+#        self.result_logger.info("# self.sma1h40_slope=%s" % self.sma1h40_slope)
+#        self.result_logger.info("# self.sma1h80_slope=%s" % self.sma1h80_slope)
         self.result_logger.info("# self.before_max=%s" % self.max_price)
         self.result_logger.info("# self.before_min=%s" % self.min_price)
         self.result_logger.info("# self.thisday_max=%s" % self.thisday_max)
