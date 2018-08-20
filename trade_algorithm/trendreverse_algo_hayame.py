@@ -346,13 +346,13 @@ class TrendReverseAlgo(SuperAlgo):
                         self.writeDebugTradeLog(base_time, trade_flag)
 
 
-                if self.first_trade_flag == "buy" and self.second_trade_flag and self.sma5m40_value < current_price and self.decidePerfectOrder("1h", slope_flag=False) == "buy":
+                if self.first_trade_flag == "buy" and self.second_trade_flag and self.sma5m40 < current_price and self.decidePerfectOrder("1h", slope_flag=False) == "buy":
                     self.third_trade_flag = "buy"
                     self.third_trade_time = base_time
                     self.third_trade_price = current_price
                     self.writeDebugTradeLog(base_time, trade_flag)
 
-                elif self.first_trade_flag == "sell" and self.second_trade_flag and self.sma5m40_value > current_price and self.decidePerfectOrder("1h", slope_flag=False) == "sell":
+                elif self.first_trade_flag == "sell" and self.second_trade_flag and self.sma5m40 > current_price and self.decidePerfectOrder("1h", slope_flag=False) == "sell":
                     self.third_trade_flag = "sell"
                     self.third_trade_time = base_time
                     self.third_trade_price = current_price
