@@ -141,8 +141,8 @@ class TrendReverseAlgo(SuperAlgo):
 
                     else:
                         pass
-                        stl_flag = self.decideReverseStl(stl_flag, base_time)
-                        stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, base_time)
+                        #stl_flag = self.decideReverseStl(stl_flag, base_time)
+                        #stl_flag = self.decideTrailLogic(stl_flag, self.ask_price, self.bid_price, base_time)
 
             else:
                 pass
